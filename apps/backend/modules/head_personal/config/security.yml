@@ -1,0 +1,23 @@
+index:
+  credentials: [show_head_personal]
+
+new:
+  credentials: [edit_head_personal]
+
+create:
+  credentials: [edit_head_personal]
+
+edit:
+  credentials: [edit_head_personal]
+
+update:
+  credentials: [edit_head_personal]
+
+show:
+  credentials: [show_head_personal]
+
+delete:
+  credentials: [edit_head_personal]
+
+personActivation:
+  credentials: [edit_head_personal]

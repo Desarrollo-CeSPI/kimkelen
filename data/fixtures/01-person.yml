@@ -1,0 +1,25 @@
+Person:
+  PreceptorPerson:
+    lastname: Preceptor
+    firstname:  Preceptor
+    identification_type:  1
+    identification_number: "25555555"
+    sex:  1
+    birthdate:  1950-06-30
+    user_id: sfGuardUser_2
+  TeacherPerson:
+    lastname: Profesor
+    firstname:  Profesor
+    identification_type:  1
+    identification_number: "255556"
+    sex:  1
+    birthdate:  1950-06-29
+    user_id: sfGuardUser_3
+
+Teacher:
+  Teacher1:
+    person_id: TeacherPerson
+
+Personal:
+  Personal1:
+    person_id: PreceptorPerson

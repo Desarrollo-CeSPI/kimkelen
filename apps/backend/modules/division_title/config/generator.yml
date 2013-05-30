@@ -1,0 +1,50 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           DivisionTitle
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          division_title
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        batch_actions: []
+        title: Listado de nombres de divisiones
+        display: [name]
+        object_actions:
+          _edit:
+            credentials: [edit_division_title]
+          _delete:
+            credentials: [edit_division_title]
+            condition:   canBeDeleted
+
+        actions:
+          _new:
+            label: Nuevo nombre de división
+            credentials: [show_division_title]
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title: Editar nombre de división
+        actions:
+          _list:
+            label: Volver al listado de nombres de divisiones
+          _save_and_list:
+            label: Guardar nombre de división
+
+      new:
+        title: Nuevo nombre de división
+        actions:
+          _list:
+            label: Volver al listado de nombres de divisiones
+          _save_and_list:
+            label: Guardar nombre de división
+          _save_and_add:
+            label: Guardar y agregar otro nombre de división

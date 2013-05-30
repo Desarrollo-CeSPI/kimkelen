@@ -1,0 +1,32 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           JustificationType
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          justification_type
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display:  [=name]
+        batch_actions: []
+        object_actions:
+          _edit:
+            credentials: [edit_justification_type]
+          _delete:
+            credentials: [edit_justification_type]
+            condition: canBeDeleted
+      filter:
+        class:  false
+      form:    ~
+      edit:
+        actions:
+          _list:
+          _save_and_list:
+      new:     ~

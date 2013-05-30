@@ -1,0 +1,17 @@
+index:
+  credentials: [show_subject]
+
+new:
+  credentials: [edit_subject]
+
+create:
+  credentials: [edit_subject]
+
+edit:
+  credentials: [edit_subject]
+
+show:
+  credentials: [show_subject]
+
+delete:
+  credentials: [edit_subject]

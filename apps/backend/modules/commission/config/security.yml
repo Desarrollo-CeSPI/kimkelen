@@ -1,0 +1,44 @@
+index:
+  credentials: [show_course]
+
+new:
+  credentials: [new_course]
+
+create:
+  credentials: [new_course]
+
+edit:
+  credentials: [edit_course]
+
+update:
+  credentials: [edit_course]
+
+show:
+  credentials: [show_course]
+
+delete:
+  credentials: [edit_course]
+
+close:
+  credentials:  [edit_course]
+
+manageCourseDays:
+  credentials:  [edit_course_day]
+
+students:
+  credentials:  [edit_course]
+
+courseTeachers:
+  credentials:  [edit_course]
+
+preceptors:
+  credentials:  [edit_course]
+
+courseSubjectStudent:
+  credentials:  [edit_course]
+
+commissionSubjectStudentsRegularity:
+  credentials:  [edit_course]
+
+califications:
+  credentials:  [[edit_course, edit_commission]]

@@ -1,0 +1,19 @@
+AbsenceType:
+  absence_type_1:
+    name: 'Presente'
+    value: 0
+  absence_type_2:
+    name: '1 falta'
+    value: 1
+  absence_type_3:
+    name: '1/2 falta'
+    value: 0.5
+  absence_type_4:
+    name: '1/4 falta'
+    value: 0.25
+  absence_type_5:
+    name: '1/5 falta'
+    value: 0.2
+  absence_type_6:
+    name: '1/6 falta'
+    value: 0.17

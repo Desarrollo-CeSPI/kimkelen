@@ -1,0 +1,23 @@
+index:
+  credentials: [show_examination_repproved_subjects]
+
+new:
+  credentials: [edit_examination_repproved_subject]
+
+create:
+  credentials: [edit_examination_repproved_subject]
+
+edit:
+  credentials: [edit_examination_repproved_subject]
+
+update:
+  credentials: [edit_examination_repproved_subject]
+
+delete:
+  credentials: [edit_examination_repproved_subject]
+
+students:
+  credentials: [edit_examination_repproved_subject_students]
+
+califications:
+  credentials: [edit_examination_repproved_subject_califications]

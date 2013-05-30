@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:         Liceo Víctor Mercante - UNLP
+    description:   Liceo Víctor Mercante - UNLP
+    keywords:      liceo, victor, mercante, unlp
+    language:      es_AR
+    #robots:       index, follow
+
+  stylesheets:    [main.css, smoothness/jquery-ui-1.7.2.custom.css, /pmJSCookMenuPlugin/css/ThemePanel/theme.css]
+
+  javascripts:    [jquery.js, jquery-ui.js, jquery.cookie.js, no-conflict.js, /sfProtoculousPlugin/js/prototype.js, main.js, jquery.notification.js, i18n/ui.datepicker-es.js, /pmJSCookMenuPlugin/js/JSCookMenu.js, /pmJSCookMenuPlugin/js/ThemePanel/theme.js]
+
+  has_layout:     on
+  layout:         layout

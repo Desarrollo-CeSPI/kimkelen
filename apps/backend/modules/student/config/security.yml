@@ -1,0 +1,35 @@
+index:
+  credentials: [show_student]
+
+new:
+  credentials: [edit_student]
+
+create:
+  credentials: [edit_student]
+
+edit:
+  credentials: [edit_student]
+
+update:
+  credentials: [edit_student]
+
+show:
+  credentials: [show_student]
+
+delete:
+  credentials: [edit_student]
+
+personActivation:
+  credentials: [edit_student]
+
+registerForCareer:
+  credentials: [edit_student]
+
+registerForCurrentSchoolYear:
+  credentials: [edit_student]
+
+canBeManagedForCareerSubjectAllowed:
+  credentials: [edit_student]
+  
+free:
+  credentials: [set_free]

@@ -1,0 +1,218 @@
+connection: propel
+description: Modelo de datos del Sistema de alumnos
+
+classes:
+  City:
+    tableName:            city
+    description:          Representa una ciudad
+    columns:
+      id:
+      zip_code:
+        type: varchar(255)
+        required: true
+      name:
+        type: varchar(255)
+        required: true
+      state_id:
+        type: integer
+        foreignTable: state
+        foreignReference: id
+        required: true
+      _indexes:
+        state: [state_id]
+        name: [name]
+
+  State:
+    tableName:            state
+    description:          Representa una provincia
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      country_id:
+        type: integer
+        foreignTable: country
+        foreignReference: id
+        required: true
+      _indexes:
+        country: [country_id]
+
+  Country:
+    tableName:            country
+    description:          Representa un País
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+
+  Orientation:
+    tableName:  orientation
+    description: Define una orientacion que podra asociarse a una carrera
+    columns:
+      id:
+      name:
+        description:      Nombre de la materia
+        type:             varchar(255)
+        required:         true
+
+  SubOrientation:
+    tableName: sub_orientation
+    description: Define una sub orientacion que podra asociarse a una carrera
+    columns:
+      id:
+      name:
+        description:      Nombre de la materia
+        type:             varchar(255)
+        required:         true
+      orientation_id:
+        type: integer
+        foreignTable: orientation
+        foreignReference: id
+        required: true
+        onDelete: cascade
+        onUpdate: cascade
+
+  Shift:
+    tablename:            shift
+    description:          Representa un turno elegible por alumnos
+    columns:
+      id:
+      name:
+        type:             varchar(255)
+        required:         true
+
+  StudentStudy:
+    tableName:            student_study
+    description:          Representa un estudio cursado por el alumno
+    columns:
+      id:
+      student_id:
+        type: integer
+        foreignTable: student
+        foreignReference: id
+        required: true
+        primaryKey: true,
+        onDelete: cascade
+      study_id:
+        type: integer
+        foreignTable: study
+        foreignReference: id
+        required: true
+        primaryKey: true
+        onDelete: cascade
+
+  Study:
+    tableName:            study
+    description:          Representa un estudio cursado
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+        index: unique
+
+  Occupation:
+    columns:
+      id:
+      name:
+        type: varchar(256)
+        required: true
+        index: unique
+
+  OccupationCategory:
+    columns:
+      id:
+      name:
+        type: varchar(256)
+        required: true
+        index: unique
+
+  Classroom:
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+        index: unique
+      seat_number:
+        type: integer
+        required: false
+
+  Resources:
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+        index: unique
+
+  ClassroomResources:
+    columns:
+      id:
+      resource_id:
+        type: integer
+        foreignClass: Resources
+        foreignReference: id
+        required: true
+        primaryKey: true,
+        onDelete: cascade
+      classroom_id:
+        type: integer
+        foreignTable: classroom
+        foreignReference: id
+        required: true
+        primaryKey: true,
+        onDelete: cascade
+
+
+
+  Tag:
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+        index: unique
+
+  sfGuardUserProfile:
+    tablename:      sf_guard_user_profile
+    description:    Representa el perfil de un usuario
+    columns:
+      id:
+      user_id:
+        type: integer
+        foreignTable: sf_guard_user
+        foreignReference: id
+        required: true
+        onDelete: restrict
+      first_name:
+        type: varchar(255)
+      last_name:
+        type: varchar(255)
+      identification_type:
+        type: 		   integer
+        required: 	   true
+      identification_number:
+        type: 		   varchar(20)
+        required: 	   true
+      email:
+        type: varchar(255)
+      phone:
+        type: varchar(255)
+      observations:
+        type: longvarchar
+        required:     false
+
+  Conduct:
+    tablename:      conduct
+    description:    Representa la conducta (muy buena, buena, regular, mala)
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      short_name:
+        type: varchar(255)
+        required: true

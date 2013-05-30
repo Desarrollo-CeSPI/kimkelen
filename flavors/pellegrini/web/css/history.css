@@ -1,0 +1,20 @@
+.history_school_year h2,
+.history_details h2
+{
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+
+.history_school_year table,
+.history_details table
+{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.history_school_year,
+.history_details
+{
+  margin-bottom: 30px !important;
+}

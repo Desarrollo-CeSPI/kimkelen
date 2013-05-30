@@ -1,0 +1,200 @@
+connection: propel
+description: Modelo de datos de la representacion de asistencias por dia y por materia en el sistema en el sistema
+
+classes:
+  StudentAttendance:
+    tableName:              student_attendance
+    description:            Representa las asistencias de un alumno en un dia/materia
+    columns:
+      career_school_year_id:
+        description:      Referencia al año lectivo
+        type:             integer
+        foreignTable:     career_school_year
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      day:
+        type:             date
+        required:         true
+      absence_type_id:
+        description:      Referencia al tipo de asistencia
+        type:             integer
+        foreignTable:     absence_type
+        foreignReference: id
+        default:          null
+        required:         false
+        onDelete:         restrict
+      value:
+        type:             decimal
+        required:         false
+        size:             3
+        scale:            2
+        default:          0
+      course_subject_id:
+        description:      Referencia a la cursada de una materia
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        default:          null
+        required:         false
+        onUpdate:         cascade
+        onDelete:         cascade
+      student_attendance_justification_id:
+        default:          null
+        description:      Referencia a la justificacion de la asistencia
+        type:             integer
+        foreignTable:     student_attendance_justification
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         set null
+      _uniques:
+        student_attendance_unique:  [student_id, day, course_subject_id]
+      _indexes:
+        student_career: [student_id, career_school_year_id ]
+        student_course: [student_id, course_subject_id]
+
+
+  StudentReincorporation:
+    tableName:              student_reincorporation
+    description:            Representa una reincorporacion de un alumno que se quedo libre
+    columns:
+      career_school_year_period_id:
+        type:             integer
+        foreignTable:     career_school_year_period
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      reincorporation_days:
+        type:             integer
+        required:         true
+      course_subject_id:
+        description:      Referencia a la cursada de una materia
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        default:          null
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      observation:
+        type:             longvarchar
+        required:         false
+      created_at:
+      _indexes:
+        student_course_subject_career_school_year_period_id: [student_id, course_subject_id, career_school_year_period_id ]
+        student_career_school_year_period_id: [student_id, career_school_year_period_id ]
+        student_course: [student_id, course_subject_id]
+
+  StudentAttendanceJustification:
+    tableName: student_attendance_justification
+    columns:
+      justification_type_id:
+        description:      Referencia al tipo de justificacion
+        type:             integer
+        foreignTable:     justification_type
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      observation:
+        type:             longvarchar
+        required:         false
+      document:
+        type:             varchar(255)
+        required:         false
+
+
+  JustificationType:
+    tableName:            justification_type
+    columns:
+      name:
+        type:             varchar(255)
+        required:         true
+      _uniques:
+        justification_name:  [name]
+      _indexes:
+        name: [name]
+
+  AbsenceType:
+    tableName:            absence_type
+    columns:
+      name:
+        type:             varchar(255)
+        required:         true
+      value:
+        type:             decimal
+        required:         true
+        size:             3
+        scale:            2
+        default:          0
+      method:
+        type: integer
+        required: true
+        default: 0
+      order:
+        type: integer
+        required: true
+      description:
+        type: longvarchar
+        required: false
+      _indexes:
+        name: [name]
+
+  StudentFree:
+    tableName:            student_free
+    columns:
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      career_school_year_period_id:
+        type:             integer
+        foreignTable:     career_school_year_period
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      career_school_year_id:
+        type:             integer
+        foreignTable:     career_school_year
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      course_subject_id:
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        default:          null
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      is_free:
+        type:             boolean
+        default:          true
+      _indexes:
+        student_course_subject_career_school_year_period_id: [student_id, course_subject_id, career_school_year_period_id]
+        student_career_school_year_period_id: [student_id, career_school_year_period_id]
+        student_course_subject_id: [student_id, course_subject_id]

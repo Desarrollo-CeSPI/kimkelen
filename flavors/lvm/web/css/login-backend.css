@@ -1,0 +1,154 @@
+body {
+ font-family:trebuchet ms,sans-serif;
+ font-size:11px;
+ color:#000;
+ margin:0;
+ padding:0;
+ background-color:#003F2D;
+}
+
+#login {
+ border:1px solid #003F2D;
+ position: absolute;
+ width: auto; /* ancho de la capa a centrar */
+ height: auto; /* alto de la capa a centrar */
+ top: 25%;
+ left: 50%;
+ margin-left: -200px; /* mitad del ancho de la capa a centrar */
+ margin-top: -100px; /* mitad del alto de la capa a centrar */
+}
+
+#login .right {
+ border:0px solid #fff;
+ background-color:#003F2D;
+ width: 250px;
+ height:300px;
+ padding:5px 0 0 0px;
+ float:left;
+}
+
+#login .logo {
+ font-family:georgia,serif;
+ font-size:14.5px;
+ color:#fff;
+ width: 250px;
+ height:60px;
+ margin:0px 0px 0px 0px;
+ background-image:url(../images/logologin.gif);
+ background-repeat:no-repeat;
+ border:0px solid #fff;
+}
+
+#login .logo_subtitle{
+ font-family:Trebuchet MS, sans-serif !important;
+ font-size:20px;
+ color:#fff;
+ margin: 5px 0px 0px 22px;
+ padding-bottom:5px;
+ text-align: left;
+}
+
+#login .title_login {
+ font-size:18px;
+ font-weight:bold;
+ color:#fff;
+ margin:23px 12px 5px 12px;
+ text-align:left;
+}
+
+#login .form_row {
+ margin:5px 12px;
+ border:0px solid red;
+ text-align:left;
+}
+
+#login .name {
+ font-size:12px;
+ color:#fff;
+ margin-top:5px;
+}
+
+#login .password {
+ font-size:12px;
+ color:#fff;
+
+}
+
+#login .remember {
+ font-size:12px;
+ color:#fff;
+ margin-top:5px;
+
+}
+
+#signin_password, #signin_username {
+ border:0px solid #fff;
+ margin:0px;
+ padding:2px;
+ height:18px;
+ width:220px;
+ font-family:trebuchet ms,sans-serif;
+ font-size:11px;
+}
+
+
+
+#login .link_login {
+ font-size:12px;
+ font-weight:bold;
+ color:#fff;
+}
+
+#login .button {
+ margin-top:10px;
+ font-weight:bold;
+ font-size:12px;
+ color:#fff;
+ text-decoration:none;
+ background:none;
+ padding:0;
+ float:right;
+ text-align:right;
+ width:220px;
+ border:0px solid #fff;
+}
+
+#login .form_footer {
+ margin:5px 0px 5px 0px;
+ border-bottom:2px solid #003F2D;
+ text-align:left;
+ color:#ccc;
+ clear:both;
+ width:300px;
+ margin-left:15px;
+}
+
+#login .error_list {
+  color:red;
+  list-style:none;
+  padding:0;
+  margin:0;
+  font-size: 10px;
+}
+
+#signin_captcha {
+ border:0px solid #f37321;
+ padding:2px;
+ height:24px;
+ width:80px;
+ margin-right:20px;
+ float:left;
+
+}
+
+.captcha {
+  float:right;
+}
+
+label {
+ float:left;
+ width:220px;
+ margin-top:10px;
+ margin-bottom:2px;
+ color:#fff;
+}

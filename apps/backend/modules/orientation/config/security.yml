@@ -1,0 +1,14 @@
+index:
+  credentials: [show_orientation]
+
+new:
+  credentials: [edit_orientation]
+
+edit:
+  credentials: [edit_orientation]
+
+delete:
+  credentials: [edit_orientation]
+
+show:
+  credentials: [show_orientation]

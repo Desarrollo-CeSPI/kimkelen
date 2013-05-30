@@ -1,0 +1,32 @@
+index:
+  credentials: [show_course]
+
+new:
+  credentials: [new_division]
+
+create:
+  credentials: [new_division]
+
+edit:
+  credentials: [edit_course]
+
+update:
+  credentials: [edit_course]
+
+show:
+  credentials: [show_course]
+
+delete:
+  credentials: [delete_division]
+
+division_preceptors:
+  credentials:  [edit_division_preceptors]
+
+update_division_preceptors:
+  credentials:  [edit_division_preceptors]
+
+division_students:
+  credentials:  [edit_course]
+
+update_division_students:
+  credentials:  [edit_course]

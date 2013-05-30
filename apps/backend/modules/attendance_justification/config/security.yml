@@ -1,0 +1,12 @@
+index:
+  credentials: [edit_attendance_justification]
+
+justificate:
+  credentials: [edit_attendance_justification]
+
+save_justification:
+  credentials: [edit_attendance_justification]
+
+delete:
+  credentials: [edit_attendance_justification]
+
