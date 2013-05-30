@@ -1,0 +1,50 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           License
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          license
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        license_type_id:
+          label: License type
+      list:
+        batch_actions: []
+        display:       [license_type, date_from,  date_to, is_active]
+        object_actions:
+          activate:
+            label: Set active
+            credentials: [edit_license]
+            action: licenseActivation
+            condition: canBeActivated
+          deactivate:
+            label: Set inactive
+            credentials: [edit_license]
+            action: licenseActivation
+            condition: canBeDeactivated
+          _edit:
+            credentials: [edit_license]
+          _delete:
+            credentials: [edit_license]
+        actions:
+          _back:
+            action: back
+          _new:
+      filter:
+        class:  false
+      form:    ~
+      edit:
+         actions:
+          _list:
+          _save_and_list:
+      new:
+        actions:
+          _list:
+          _save_and_list:

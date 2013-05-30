@@ -1,0 +1,1 @@
+../../student/templates/_student_info.php

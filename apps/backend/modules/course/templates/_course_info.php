@@ -1,0 +1,1 @@
+../../division_course/templates/_course_info.php

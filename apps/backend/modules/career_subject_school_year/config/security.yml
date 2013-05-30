@@ -1,0 +1,8 @@
+index:
+  credentials:   [show_school_year]
+
+configuration:
+  credentials:  [edit_school_year]
+
+updateConfiguration:
+  credentials:  [edit_school_year]

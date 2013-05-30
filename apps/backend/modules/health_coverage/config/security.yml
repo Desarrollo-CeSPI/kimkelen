@@ -1,0 +1,20 @@
+index:
+  credentials: [new_health_coverage]
+
+new:
+  credentials: [new_health_coverage]
+
+create:
+  credentials: [new_health_coverage]
+
+edit:
+  credentials: [new_health_coverage]
+
+update:
+  credentials: [new_health_coverage]
+
+show:
+  credentials: [new_health_coverage]
+
+delete:
+  credentials: [new_health_coverage]

@@ -1,0 +1,93 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Student
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          shared_student
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      exportation:
+        enabled: true
+        title: Student list
+        type: xls
+        fieldSelection:
+          lastname:
+            label: Lastname
+            method: getPersonLastname
+            decorator: text
+          person_firstname:
+            label: Firstname
+            method: getPersonFirstname
+            decorator: text
+          person_identification_type:
+            label: Identification type
+            method: getPersonIdentificationTypeString
+            decorator: text
+          person_identification_number:
+            label: Identification number
+            method: getPersonIdentificationNumber
+            decorator: text
+          person_email:
+            label: Email
+            method: getPersonEmail
+            decorator: text
+          person_phone:
+            label: Phone
+            method: getPersonPhone
+            decorator: text
+          person_address:
+            label: Address
+            method: getPersonAddress
+            decorator: text
+          person_is_active:
+            label: Is Active?
+            method: getPersonIsActive
+            decorator: boolean
+          is_registered:
+            label: School year registered?
+            method: getIsRegistered
+            decorator: boolean
+          division:
+            label: Division
+            method: getCurrentDivisionsString
+            decorator: text
+      fields:
+        person:
+        person_lastname:  { label: Lastname, column_name: PersonPeer::LASTNAME }
+        person_firstname: { label: Firstname, column_name: PersonPeer::FIRSTNAME }
+        careers:          { label: Careers}
+        person_is_active:    { label: Is Active?, type: Boolean }
+        is_registered:    { label: School year registered? }
+        person_full_identification:       { label: Identification number, column_name: PersonPeer::IDENTIFICATION_NUMBER }
+        person_sf_guard_user:             { label: Username }
+
+      list:
+        title:              Student list
+        actions:
+          _new:
+#          _export:
+#          _user_export:
+        batch_actions: []
+        display: [person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, _is_registered, _careers]
+        layout: stacked
+        params: |
+          %%_student_info%%
+        sort: [ person_lastname ]
+        object_actions: []
+        actions:
+          back:
+            label: Volver al listado de años lectivos
+            action: back
+          _user_export:
+
+      filter:  ~
+
+      form:    ~
+      edit:    ~
+      new:     ~

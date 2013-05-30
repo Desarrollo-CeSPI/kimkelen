@@ -1,0 +1,49 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           TutorType
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tutor_type
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields: ~
+      list:
+        title: Listado de tipos de tutores
+        display:           [=name]
+        actions:
+          _new:
+            credentials: [new_tutor_type]
+            label: Nuevo tipo de tutor
+        batch_actions: []
+        object_actions:
+          _edit:
+            credentials: [new_tutor_type]
+          _delete:
+            credentials: [new_tutor_type]
+            condition: canBeDeleted
+      filter:
+        class:  false
+      form: ~
+      edit:
+        title: Editar tipo de tutor
+        actions:
+          _list:
+            label: Volver al listado de tipos de tutores
+          _save_and_list:
+            label:        Guardar y volver al listado de tipos de tutores
+      new:
+        title: Nueva tipo de tutor
+        actions:
+          _list:
+            label: Volver al listado de tipos de tutores
+          _save_and_list:
+            label:        Guardar y volver al listado de tipos de tutores
+          _save_and_add:
+            label:        Guardar y agregar otro tipo de tutor
+      show: ~

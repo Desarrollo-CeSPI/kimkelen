@@ -1,0 +1,20 @@
+index:
+  credentials: [show_group]
+
+new:
+  credentials: [edit_group]
+
+create:
+  credentials: [edit_group]
+
+edit:
+  credentials: [edit_group]
+
+update:
+  credentials: [edit_group]
+
+show:
+  credentials: [show_group]
+
+delete:
+  credentials: [edit_group]

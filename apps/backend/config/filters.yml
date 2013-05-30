@@ -1,0 +1,17 @@
+rendering: ~
+security:  ~
+change_password:
+  class: sfGuardChangePasswordFilter
+# insert your own filters here
+
+state:
+  class:  dcStatefulSecurityFilter
+  param:
+    default_policy: allow
+
+pm_pdfkit:
+  class: pmPDFKitFilter
+
+cache:     ~
+common:    ~
+execution: ~

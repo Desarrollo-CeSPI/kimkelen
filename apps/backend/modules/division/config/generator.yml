@@ -1,0 +1,176 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Division
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          division
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        id:
+          label:  División
+        division_courses:
+          label: Crear cursos
+      list:
+        title: Listado de divisiones
+        display:           [id]
+        layout:             stacked
+        params:             |
+          <div class='info_div'><strong>%%name%%</strong>
+          <div class='info_div'><em><strong>Año lectivo:</strong> %%school_year%% </em></div>
+          <div class='info_div'><em><strong>Carrera:</strong> %%career_school_year%%</em></div>
+          <div class='info_div'>%%_division_info%%</div>
+        actions:
+          _new:
+            credentials: [new_division]
+            label: Nueva división
+          _user_export:
+        batch_actions: []
+        object_actions:
+
+          _show:
+            credentials: [show_course]
+
+          students:
+            label:          Listado de estudiantes
+            action:         students
+            condition:      canListStudents
+            credentials:    [show_course]
+
+          show_calendar:
+            action: showCalendar
+            credentials:   [show_course]
+
+          division_configure:
+            action: courseConfiguration
+            credentials:  [course_configuration]
+
+          division_preceptors:
+            action: divisionPreceptors
+            label:  Preceptors
+            condition: canDivisionPreceptors
+            credentials:  [edit_division_preceptors]
+
+          division_students:
+            action: divisionStudents
+            label:  Students
+            condition: canDivisionStudents
+            credentials:  [edit_course]
+
+          student_conduct:
+            action: studentConduct
+            label: Student conduct
+            condition: canManageConduct
+            credentials: [edit_division_preceptors]
+
+          division_courses:
+            action: divisionCourses
+            credentils: [show_course]
+
+          seeAttendanceSheet:
+            label:   Show attendance sheet
+            action:  attendanceSheetByDay
+            credentials:    [show_course]
+            condition: canManageAttendance
+
+          boletines:
+            action: printReportCard
+            label:  Imprimir boletines division
+            credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
+            condition: canPrintReportCards
+
+          printCalification:
+            label:   Print califications
+            action:  printCalification
+            credentials:    [[edit_division_course_califications, show_division_course_califications]]
+            condition: canPrintCalification
+
+          attendanceDay:
+            label: Load Attendances
+            action: attendanceDay
+            credentials:  [edit_course]
+            condition: canLoadAttendances
+
+          _delete:
+            credentials: [delete_division]
+            condition: canBeDeleted
+
+
+
+      filter:
+        class:  ~
+
+      form:
+      edit:
+        title: Editar división
+        actions:
+          _list:
+            label: Volver al listado de divisiones
+          _save_and_list:
+            label:        Guardar y volver al listado de divisiones
+      new:
+        title: Nueva división
+        actions:
+          _list:
+            label: Volver al listado de divisiones
+          _save_and_list:
+            label:        Guardar y volver al listado de divisiones
+          _save_and_add:
+            label:        Guardar y agregar otra división
+      show:
+        title: Ver división
+        display: [_division_show_tabs]
+        actions:
+          _list:
+            label: Volver al listado de divisiones
+
+          students:
+            label:          Listado de estudiantes
+            action:         students
+            condition:      canListStudents
+            credentials:    [show_course]
+
+          show_calendar:
+            action: showCalendar
+            credentials:   [show_course]
+          division_preceptors:
+            action: divisionPreceptors
+            label:  Preceptors
+            credentials:  [edit_division_preceptors]
+
+          division_students:
+            action: divisionStudents
+            label:  Students
+            credentials:  [edit_course]
+
+          division_courses:
+            action: divisionCourses
+            label:  Cursos
+            credentils: [show_course]
+
+          _delete:
+            credentials: [delete_division]
+            condition: canBeDeleted
+      exportation:
+        enabled: true
+        title: Divisiones
+        type: xls
+        fieldSelection:
+          title:
+            label: Titulo de división
+            method: getDivisionTitle
+            decorator: text
+          career:
+            label: Career
+            method: getCareer
+            decorator: text
+          count_students:
+            label: Count students
+            method: countStudents
+            decorator: text

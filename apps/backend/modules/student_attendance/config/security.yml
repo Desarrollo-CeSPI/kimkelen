@@ -1,0 +1,9 @@
+student_attendance_day:
+  credentials: [edit_student_attendance]
+
+student_attendance_subject:
+  credentials: [edit_student_attendance]
+
+set_free:
+  credentials: [set_free]
+

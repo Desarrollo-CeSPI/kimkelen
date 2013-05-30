@@ -1,0 +1,14 @@
+index:
+  credentials: [show_division_title]
+
+new:
+  credentials: [edit_division_title]
+
+edit:
+  credentials: [edit_division_title]
+
+delete:
+  credentials: [edit_division_title]
+
+show:
+  credentials: [show_division_title]
