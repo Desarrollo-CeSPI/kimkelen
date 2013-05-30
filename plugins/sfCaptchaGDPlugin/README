@@ -1,0 +1,95 @@
+# sfCaptchaGD plugin #
+
+The `sfCaptchaGDPlugin` is a symfony plugin that provides captcha functionality based on GD library.
+
+It gives you the lib with Captcha class and the module to secure your symfony forms in a minute with a good captcha.
+
+## Installation ##
+
+### Install the plugin for sf >= 1.2 ###
+  
+    php symfony plugin:install sfCaptchaGDPlugin
+
+### Install the plugin for sf 1.1 ###
+  
+    php symfony plugin:install sfCaptchaGDPlugin --release=1.0.7
+
+
+### Install the plugin for sf 1.0 ###
+  
+    php symfony plugin-install http://plugins.symfony-project.com/sfCaptchaGDPlugin
+
+### Activate
+Enable one or more modules, add I18N helper and enable internationalization in your `settings.yml`
+
+    all:
+      .settings:
+        enabled_modules:      [default, sfCaptchaGD]
+        standard_helpers:     [Partial, Cache, I18N]
+        i18n:                 true
+
+### Clear your cache
+  
+    symfony cc
+
+## Secure your form ##
+
+### To secure a symfony form for sf >= 1.2 ###
+Add captcha field in your form class:
+
+    $this->setWidgets(array(
+      'captcha' => new sfWidgetCaptchaGD(),
+    ));
+
+    $this->setValidators(array(
+      'captcha' => new sfCaptchaGDValidator(array('length' => 4)),
+    ));
+
+Length - captcha length, optional.
+
+Don't forget to bind captcha value to form like this:
+
+    $this->form->bind(array(
+      'captcha'   => $request->getParameter('captcha'),
+    ));
+
+### To secure a symfony form for sf 1.0 & 1.1 ###
+Put the following lines inside of your form
+
+    <?php if ($sf_request->hasError('captcha')) echo form_error('captcha') ?>
+    <?php echo input_tag('captcha', $sf_params->get('captcha')) ?><br>
+    <a href='' onClick='return false' title='Reload image'><img src='/captcha?<?php echo time(); ?>' onClick='this.src="/captcha?r=" + Math.random() + "&amp;reload=1"'></a>
+
+Put the following code into your form's validator yml file:
+
+    fields:
+      captcha:
+        required:
+          msg:            Enter characters from image
+        sfCaptchaGDValidator:
+          captcha_error:  Entered characters are wrong, try again
+
+## Configuration options ##
+These options are default for captcha, you can change any of them, putting in app.yml
+
+    all:
+        sf_captchagd:
+            image_width:                100 # image width in pixels
+            image_height:               30 # image height in pixels
+            chars:                      "123456789" # possible chars in captcha
+            length:                     4 # length of captcha
+            font_size:                  18 # font size
+            force_new_captcha:          false # if true - captcha regenerated EVERY request, even if user input true value before
+            
+            # possible chars colors
+            font_color:                 ["252525", "8b8787", "550707", "3526E6", "88531E"]
+            
+            # chars fonts
+            fonts:                      ["akbar/akbar.ttf", "brushcut/BRUSHCUT.TTF", "molten/molten.ttf", "planet_benson/Planetbe.ttf", "whoobub/WHOOBUB_.TTF"] 
+            background_color:           DDDDDD # image background color
+            border_color:               000000 # image border color
+
+
+== TODO ==
+
+None at this moment.

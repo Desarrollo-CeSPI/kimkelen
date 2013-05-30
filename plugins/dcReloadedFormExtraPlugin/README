@@ -1,0 +1,310 @@
+# dcReloadedFormExtraPlugin
+
+The `dcReloadedFormExtraPlugin` adds some useful extra widgets, validators, modules,
+etc.
+
+## Installation
+
+  * svn installation:
+
+        [bash]
+        $ svn co http://svn.symfony-project.com/plugins/dcReloadedFormExtraPlugin/trunk plugins/dcReloadedFormExtraPlugin
+
+  * install as a plugin:
+  
+        [bash]
+        $ ./symfony pl:i dcReloadedFormExtraPlugin
+
+  * Enable the plugin in your proyect configuration (only if installed through svn)
+
+        [php]
+        // in config/ProjectConfiguration.class.php add:
+        $this->enablePlugin("dcReloadedFormExtraPlugin");
+
+  * clear the cache
+
+        [bash]
+        $ ./symfony cc
+
+## Widgets
+
+### pmWidgetFormPropelChoiceOrCreate
+
+The `pmWidgetFormPropelChoiceOrCreate` extends the functionality provided by
+the `sfWidgetFormPropelChoice`, adding a link that opens a new window, allowing
+the user to create an object of the widget's model. Then, that object is
+available for being selected.
+
+##### Usage
+
+Use it as you use the `sfWidgetFormPropelChoice`, except for the following new
+parameters:
+
+  * **url**
+  * **new_label**: The link's label. Defaults to *New*
+  * **ws_url**
+
+Enable the `dc_ajax` module.
+
+**Note**: [jQuery](http://jquery.com) is required.
+
+### pmWidgetFormDoctrineChoiceOrCreate
+
+The `pmWidgetFormDoctrineChoiceOrCreate` is the doctrine version of the
+`pmWidgetFormPropelChoiceOrCreate`. So, use it as you use the
+`pmWidgetFormPropelChoiceOrCreate`.
+
+### mtWidgetFormPlain
+
+The `mtWidgetFormPlain` provides a way for showing plain values in the forms.
+
+##### Usage
+
+    [php]
+    $this->widgetSchema["some_field"] = new mtWidgetFormPlain(array("add_hidden_input" => true));
+    
+For more options, take a look at the widget's doc comments.
+
+### dcWidgetFormAjaxDependence
+
+This widget is used with select widgets filtering values depending on the
+selection made in observed widget. Supose widget A11 observing A1 widget
+changes, that observes A widget changes.
+In this case, you can have the following scenarios:
+ * The form will save A, A1 and A11 values
+ * The form will only sava A11 values (A and A1 will be used only for filtering purpose)
+
+For the first case, just use the widget as it is. But for the second case, you
+will need to do some trick inside the form implementation:
+  if (!$this->getObject()->isNew())
+  {
+      $a11Object=$this->getObject()->getA11();
+      $this->setDefault('a1_id',$a11Object->getA1Id());
+      $this->setDefault('a_id',$b111->getB11()->getA1()->getAId());
+  }
+
+##### Usage
+
+    [php]
+    $w = new sfWidgetFormInput();
+    $this->widgetSchema["some_field"] = new dcWidgetFormAjaxDependence(array(
+      "dependant_widget" => $w,
+      "observe_widget_id" => "some_form_some_field",
+      "get_observed_value_callback" => array(get_class($this), "getValueForUpdate")
+    ));
+    
+And then you must implement the getValueForUpdate method.
+
+### dcWidgetFormPropelAjaxDependence
+
+Same as dcWidgetFormAjaxDependence, except that retrieves objects from Propel
+classes.
+
+
+### dcWidgetFormJQueryActivator
+
+Based on dcWidgetFormJQueryDependence. It enables or disables the widget when another changes
+and a given condition evaluates to true.
+
+### mtWidgetFormPlain
+
+The `mtWidgetFormPlain` displays a plain value.
+
+##### Usage 
+
+    [php]
+    $this->setWidget("some_field", new mtWidgetFormPlain());
+
+### dcWidgetFormChangeForCredentials
+
+The `dcWidgetFormChangeForCredentials` displays one of two widgets depending on
+user's credentials.
+
+##### Usage
+
+    [php]
+    $this->setWidget("some_field", new dcWidgetFormChangeForCredentials(new array(
+      "credentials" => array(array("admin", "some_credential")),
+      "widget_without_credentials" => new mtWidgetFormPlain(),
+      "widget_with_credentials" => new sfWidgetFormInput()
+    )));
+
+### mtWidgetFormPartial
+
+The `mtWidgetFormPartial` displays a partial.
+
+##### Usage
+
+    [php]
+    $this->setWidget("partial", new mtWidgetFormPartial(array(
+      "module" => "some_module",
+      "partial" => "some_partial",
+      "form" => $this
+    ));
+
+
+### pmWidgetFormSelectJQueryAutocomplete
+
+The `pmWidgetFormSelectJQueryAutocomplete` displays an autocomplete based on a
+select tag. This widget is basically a renderer, so it can be used as the
+renderer of a sfWidgetFormChoice, sfWidgetFormPropelChoice, etc.
+
+jquery ui is required.
+
+##### Usage
+
+    [php]
+    $this->getWidget("city_id")->setOption("renderer_class", "pmWidgetFormSelectJQueryAutocomplete");
+
+### pmWidgetFormJQuerySearch
+
+The `pmWidgetFormJQuerySearch` displays an input text with search capabilities.
+
+##### Usage
+
+    [php]
+    $this->setWidget("some_field") = new pmWidgetFormJQuerySearch(array(
+      "url" => "@url_that_performs_the_search"
+    ));
+    
+The jquery_search.js provides a javascript class with functions for displaying
+the results. See the example of a pmWidgetFormPropelJQuerySearch.
+
+### pmWidgetFormPropelJQuerySearch
+
+The `pmWidgetFormJQuerySearch` displays an input text with search capabilities
+over propel objects.
+
+##### Usage
+
+    [php]
+    $this->setWidget("some_field_id", new pmWidgetFormPropelJQuerySearch(array(
+      "model" => "SomeField",
+      "column" => "some_column"
+    )));
+    
+### mtWidgetFormInputDate
+
+The `mtWidgetFormInputDate` displays an input text for selecting dates.
+Must be validated with mtValidatorDateString and jquery and jqueryui are
+REQUIRED.
+
+##### Usage
+
+    [php]
+    $this->setWidget("date", new mtWidgetFormInputDate());
+
+### mtWidgetFormEmbed
+
+Widgets that embeds a dinamic number of forms. This widget only does the 'view' part. The saving and deleting of new and previous object has to be done manually.
+
+### mtWidgetFormCuil
+
+Represents an Argetine CUIL/CUIT
+
+### alWdigetFormTimepicker
+
+Represents an Hour or also an Hour range.
+
+This widget is a wrapper for a jQueryUITimepicker (http://fgelinas.com/code/timepicker/).
+
+##### Usage
+
+The javascript widget can be configured in many ways, so you could define an
+associative array of key -> value (available options defined on author page or
+on this widget implementantion) to give values to it. Also, it allows to create
+ingle or range time values.
+
+    For a single time value all you need is:
+
+    [php]
+    $this->setWidget("single_hour", new alWidgetFormTimepicker(array('config' => array('jquery_widget_option_key' => 'jquery_widget_option_value')
+    )));
+    
+    For a range time value:
+
+    [php]
+    $this->setWidget("range_hour", new alWidgetFormTimepicker(array('config' => array('jquery_widget_option_key' => 'jquery_widget_option_value'),
+                                                              'enable_timerange' => true
+    )));
+
+    Note: remember than this widget uses the alValidatorTimepicker validator, and it should be configured wheter the value is single or range. 
+    Check for in the validator section for further explanation on this matters.
+
+## Validators
+
+### mtValidatorDateString
+
+Validates dates represented as strings.
+
+### alValidatorTimepicker
+
+Validates single or range hour as strings.
+
+It accepts an option called enable_timerange (by default set to false), that when its set to true, will be expecting a string
+that looks like this: "HH:MM-HH:MM". Otherwise, it will validate a single value like "HH:MM".
+
+  Ex:
+    Range value
+    [php]
+    $this->setValidator("range_hour", new alValidatorTimepicker(array('enable_timerange' => true)));
+
+    Single value
+    [php]
+    $this->setValidator("single_hour", new alValidatorTimepicker(array('enable_timerange' => false)));
+
+    or
+
+    $this->setValidator("single_hour", new alValidatorTimepicker());
+
+
+### mtValidatorCuil
+
+Validates a CUIL/CUIT from a String
+
+### mtValidatorCuilExtended
+
+Validates a CUIL/CUIT from a string made by mtWidgetFormCuil
+
+##### Usage
+
+    [php]
+    $this->setValidator("date", new mtValidatorDateString());
+
+## Form auto-initialization
+
+This plugin provides form classes (which extends sfFormPropel and sfFormFilterPropel) that auto-initializes forms.
+
+You just have to change the super class of the BaseFormPropel (and BaseFormFilterPropel) in order to use this functionality.
+
+    [php]
+    abstract class BaseFormPropel extends pmFormPropel
+    {
+    }
+    
+and
+
+    [php]
+    abstract class BaseFormPropel extends pmFormFilterPropel
+    {
+    }
+
+These clases uses the plugin's widgets and validators to initialize widgets and validators automatically:
+  * unsets created_at and updated_at fields
+  * uses mtWidgetFormInputDate for date widgets
+  * replaces fields named "attachment" with sfWidgetFormInputFile
+  * hides created_by and updated_by fields
+  
+  * uses mtValidatorDateString for date validators
+  * uses sfValidatorFile for fields named "attachment"
+
+## For developers
+
+  * If you need to create ajax actions use the `dc_ajax` module.
+
+## TODO
+
+### pmWidgetFormPropelChoiceOrCreate
+
+  * Add more of the sfWidgetFormPropelChoice parameters to the getPropelChoices
+    action (and getDoctrineChoices).

@@ -1,0 +1,72 @@
+dcFormExtraPlugin
+=================
+
+The `dcFormExtraPlugin` packages useful validators, widgets, and forms used by Desarrollo CeSPI.
+
+This collection holds validators, widgets, and forms which we don't want to include with the main symfony package
+because they are too specific or have external dependencies.
+
+Installation
+------------
+
+  * Install the plugin
+
+        $ symfony plugin:install dcFormExtraPlugin
+
+  * Add "dcFormExtraPlugin/dcFormExtraPlugin.css"
+
+  * Enable the module "dcFormExtraPlugin"
+
+  * Clear the cache
+
+        $ symfony cache:clear
+
+  * Publish assets
+
+        $ symfony plugin:publish-assets
+
+Documentation
+-------------
+
+All classes have full API and usage documentation. The best way to learn each widget or validator
+is to read the API.
+
+Validators
+----------
+
+  * dcChangeForCredentialsValidator: Validates dcWidgetChangeForCredentials
+  * mtValidatorDateExtended: Subclass of sfValidatorDate. Adds the posibility to validate agains day names.
+
+Widgets
+-------
+
+  * dcWidgetChangeForCredentials: different widget show depending on users credentials
+  * mtWidgetFormAdder: Adds a 'Add' and 'Refresh' button next to a select tag.
+  * mtWidgetFormWrapper: Wraps a widget with some id and an optional ajax loader image
+  * mtWidgetFormPartial: Draws a partial.
+  * mtWidgetFormPlain: Print plain values with an optional 'hidden_tag'. Can fetch values from an object.
+  * ncWidgetFormReadOnly: Print plain values with an optional 'hidden_tag'
+  * dcWidgetAjaxDependence: widget that renders depending on other widgets value. See documentation
+  * dcWidgetAjaxDependencePropel: subclass of dcWidgetAjaxDependence that implements a generic handler for propel widgets
+  * dcWidgetFormAutocompleteList: subclass of sfWidgetFormJQueryAutocompleter adds a button and a small list on the bottom with the added items
+
+Sample dcWidgetAjaxDependence* usage
+------------------------------------
+Generally this widget is used with select widgets filtering values depending on the selection made in observed widget. Supose widget 
+A11 observing A1 widget changes, that observes A widget changes.
+In this case, you can have the following scenarios:
+ * The form will save A, A1 and A11 values
+ * The form will only sava A11 values (A and A1 will be used only for filtering puprose)
+
+For the first case, just use the widget as it is. But for the second case, you will need to 
+do some trick inside the form implementation:
+  if (!$this->getObject()->isNew())
+  {
+      $a11Object=$this->getObject()->getA11();
+      $this->setDefault('a1_id',$a11Object->getA1Id());
+      $this->setDefault('a_id',$b111->getB11()->getA1()->getAId());
+  }
+
+
+
+

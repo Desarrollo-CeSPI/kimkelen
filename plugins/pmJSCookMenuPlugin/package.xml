@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>pmJSCookMenuPlugin</name>
+ <channel>plugins.symfony-project.org</channel>
+ <summary>A very simple menu for symfony backend applications</summary>
+ <description>A very simple menu for symfony backend applications</description>
+ <lead>
+  <name>Patricio Mac Adden</name>
+  <user>pmacadden</user>
+  <email>pmacadden@cespi.unlp.edu.ar</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-12-29</date>
+ <version>
+   <release>1.1.0</release>
+   <api>1.1.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+   <dir name="/">
+     <file role="data" name="LICENSE" />
+     <file role="data" name="LICENSE.JSCookMenu" />
+     <file role="data" name="README" />
+     
+     <dir name="lib">
+       <file role="data" name="pmJSCookMenu.class.php" />
+       <file role="data" name="pmJSCookMenuComponent.class.php" />
+       <file role="data" name="pmJSCookMenuItem.class.php" />
+       <file role="data" name="pmJSCookMenuSeparator.class.php" />
+     </dir>
+     
+     <dir name="web">
+       <dir name="css">
+         <dir name="ThemeGray">
+           <file role="data" name="theme.css" />
+         </dir>
+         <dir name="ThemeIE">
+           <file role="data" name="theme.css" />
+         </dir>
+         <dir name="ThemeMiniBlack">
+           <file role="data" name="theme.css" />
+         </dir>
+         <dir name="ThemeOffice">
+           <file role="data" name="theme.css" />
+         </dir>
+         <dir name="ThemeOffice2003">
+           <file role="data" name="theme.css" />
+         </dir>
+         <dir name="ThemePanel">
+           <file role="data" name="theme.css" />
+         </dir>
+       </dir>
+       <dir name="images">
+         <dir name="ThemeIE">
+           <file role="data" name="arrow.gif" />
+           <file role="data" name="folder.gif" />
+           <file role="data" name="link.gif" />
+         </dir>
+         <dir name="ThemeOffice">
+           <file role="data" name="arrow.gif" />
+           <file role="data" name="arrowdown.gif" />
+           <file role="data" name="blank.gif" />
+           <file role="data" name="copy.gif" />
+           <file role="data" name="copyshadow.gif" />
+           <file role="data" name="cut.gif" />
+           <file role="data" name="cutshadow.gif" />
+           <file role="data" name="help.gif" />
+           <file role="data" name="helpshadow.gif" />
+           <file role="data" name="new.gif" />
+           <file role="data" name="open.gif" />
+           <file role="data" name="openshadow.gif" />
+           <file role="data" name="paste.gif" />
+           <file role="data" name="pasteshadow.gif" />
+           <file role="data" name="save.gif" />
+           <file role="data" name="saveshadow.gif" />
+           <file role="data" name="spacer.gif" />
+         </dir>
+         <dir name="ThemeOffice2003">
+           <file role="data" name="arrow.gif" />
+           <file role="data" name="arrowdown.gif" />
+           <file role="data" name="blank.gif" />
+           <file role="data" name="mainmenubg.gif" />
+           <file role="data" name="mainmenubg.png" />
+           <file role="data" name="menubg.gif" />
+           <file role="data" name="menubg.png" />
+           <file role="data" name="spacer.gif" />
+         </dir>
+         <dir name="ThemePanel">
+           <file role="data" name="arrow.gif" />
+           <file role="data" name="arrowdown.gif" />
+           <file role="data" name="blank.gif" />
+         </dir>
+       </dir>
+       <dir name="js">
+         <dir name="ThemeGray">
+           <file role="data" name="theme.js" />
+         </dir>
+         <dir name="ThemeIE">
+           <file role="data" name="theme.js" />
+         </dir>
+         <dir name="ThemeMiniBlack">
+           <file role="data" name="theme.js" />
+         </dir>
+         <dir name="ThemeOffice">
+           <file role="data" name="theme.js" />
+         </dir>
+         <dir name="ThemeOffice2003">
+           <file role="data" name="theme.js" />
+         </dir>
+         <dir name="ThemePanel">
+           <file role="data" name="theme.js" />
+         </dir>
+         <file role="data" name="JSCookMenu.js" />
+       </dir>
+     </dir>
+   </dir>
+ </contents>
+
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.4</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.3.0</min>
+    <max>2.0.0</max>
+    <exclude>2.0.0</exclude>
+   </package>
+  </required>
+ </dependencies>
+
+ <phprelease>
+ </phprelease>
+
+ <changelog>
+   <release>
+     <version>
+       <release>1.1.0</release>
+       <api>1.1.0</api>
+     </version>
+     <stability>
+       <release>stable</release>
+       <api>stable</api>
+     </stability>
+     <license uri="http://www.symfony-project.com/license">MIT license</license>
+     <date>2010-12-29</date>
+     <license>MIT</license>
+     <notes>-</notes>
+   </release>
+ </changelog>
+</package>

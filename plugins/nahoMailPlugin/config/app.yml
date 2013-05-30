@@ -1,0 +1,39 @@
+all:
+  mailer: 
+    defaults: 
+      connection: # default connection uses mail() native function
+        type: native
+        params: []
+      # from: you@mail.com # define your default sender's email
+      reply-to: ~
+      return-path: ~
+      cc: ~
+      bcc: ~
+      subject-template: "%s" # Change this to customize all your subjects, exemple "[My Company] %s"
+      # About I18N : note that the subject_template AND the subject will be individually passed into the i18n process.
+      i18n-catalogue: messages # Whenever you would like to put your mail translations in a separate catalogue
+      
+      #parts: 
+      #  - 
+      #    content-type: text/plain
+      #    content: Hello, world
+      #    encoding: UTF-8
+      #    charset: UTF-8
+      #  - 
+      #    content-type: text/html
+      #    content:
+      #      type: component
+      #      name: myModule/myComponent
+      #      vars: { varName: "this variable will be available in the view" }
+      
+      #attachments: 
+      #  - 
+      #    "/path/to/file"
+      #  - 
+      #    path: "/path/to/another_file"
+      #    filename: "another_name"
+      #    mime-type: ~ # can be guessed
+      
+      #embed-images:
+      #  name-of-image1: "myImage" # "/path/to/symfony-project/web/images/myImage.png" will be attached in your mail, and
+      #  # any reference to %%IMG_name-of-image1%% in your body or parts will be replaced by the corresponding CID.

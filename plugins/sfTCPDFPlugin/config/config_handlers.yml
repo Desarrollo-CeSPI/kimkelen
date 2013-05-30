@@ -1,0 +1,3 @@
+config/pdf_configs.yml:
+  class: sfTCPDFPluginConfigHandler
+  file:   <?php echo realpath(dirname(__FILE__).'/..') ?>/lib/config/sfTCPDFPluginConfigHandler.class.php

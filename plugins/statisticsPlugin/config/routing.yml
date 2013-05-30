@@ -1,0 +1,26 @@
+disapproved_student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               disapproved_student
+    prefix_path:          estadistica-de-alumnos-desaprobados
+    column:               id
+    with_wildcard_routes: true
+
+deserter_student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               deserter_student
+    prefix_path:          estadistica-de-alumnos-desertores
+    column:               id
+    with_wildcard_routes: true
+
+repeater_student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               repeater_student
+    prefix_path:          estadistica-de-alumnos-repitentes
+    column:               id
+    with_wildcard_routes: true

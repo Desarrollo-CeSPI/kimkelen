@@ -1,0 +1,3 @@
+bi_report:
+  url: /bi/report/*
+  param: { module: bi, action: report }

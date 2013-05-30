@@ -1,0 +1,5 @@
+index:
+  credentials:  [show_deserter_students]
+
+show:
+  credentials:  [show_deserter_students]

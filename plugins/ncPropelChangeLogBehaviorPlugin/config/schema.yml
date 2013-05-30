@@ -1,0 +1,23 @@
+connection:         propel
+package:            plugins.ncPropelChangeLogBehaviorPlugin.lib.model
+
+classes:
+  ncChangeLogEntry:
+    tableName:      nc_change_log_entry
+    columns:
+      id:
+      class_name:
+        type:       varchar(255)
+        required:   true
+      object_pk:
+        type:       integer
+        required:   true
+      changes_detail:
+        type:       longvarchar
+        required:   true
+      username:
+        type:       varchar(255)
+      operation_type:
+        type:       integer
+        required:   true
+      created_at:

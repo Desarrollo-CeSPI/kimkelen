@@ -1,0 +1,7 @@
+--
+all:
+  nc_bi_plugin:
+    bi_server_url: http://localhost:8080/pentaho
+    report_suffix: content/reporting
+    timeout:       30
+    probe_timeout: 5

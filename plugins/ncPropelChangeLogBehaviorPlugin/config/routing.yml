@@ -1,0 +1,14 @@
+## Copyright: 2009 - José Nahuel Cuesta Luengo <ncuesta@cespi.unlp.edu.ar>
+##
+## ncPropelChangeLogBehaviorPlugin routing file.
+##
+
+## Details for an entry
+nc_change_log_detail:
+  url:   /change_log/show/:id
+  param: { module: ncchangelogentry, action: show }
+
+## Change Log for a specific object
+nc_change_log:
+  url:   /change_log/:class/:pk
+  param: { module: ncchangelogentry, action: index }

@@ -1,0 +1,61 @@
+pmModuleEnabler plugin
+=========================
+
+The `pmModuleEnablerPlugin` is a symfony plugin that provides dynamic module
+enabling for your plugins. You can develop plugins that can act as "addons"
+(so, for now on, let's call your application plugins as "addons"). In this
+way, you can enable/disable your addons.
+
+Installation
+------------
+
+  * Install the plugin
+
+    * Subversion
+
+            $ svn co http://svn.symfony-project.com/plugins/pmModuleEnablerPlugin/trunk pmModuleEnablerPlugin
+
+  * Insert the filter
+
+        [yml]
+        rendering: ~
+        security:  ~
+
+        # insert your own filters here
+        module_enabler:
+          class: pmModuleEnablerFilter
+
+        cache:     ~
+        common:    ~
+        execution: ~
+
+  * Enable the pmconfiguration module and all your addon modules
+
+        [yml]
+        # in apps/<app>/backend/config/settings.yml
+        enabled_modules: [default, ..., pmconfiguration, coolModule, anotherCoolModule]
+
+  * Configure the plugin
+
+        [yml]
+        # in apps/<app>/config/app.yml
+        all:
+          # ...
+          pm_module_enabler:
+            always_enabled: [default, pmconfiguration] # this means that default and pmconfiguration modules will be always enabled
+            modules_names:
+              coolModule: Cool module                  # label to show in the checkbox
+              anotherCoolModule: Another cool module   # label to show in the checkbox
+            dependencies:
+              anotherCoolModule: [coolModule]          # this means that if you enable anotherCoolModule, coolModule will be enabled
+
+
+  * Rebuild the model
+
+        $ symfony propel:build-all
+
+  * Clear your cache
+
+        $ symfony cc
+
+  * Enable your modules in /<app>.php/pmconfiguration

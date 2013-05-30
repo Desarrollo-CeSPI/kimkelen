@@ -1,0 +1,5 @@
+index:
+  credentials:  [show_repeater_students]
+
+show:
+  credentials:   [show_repeater_students]

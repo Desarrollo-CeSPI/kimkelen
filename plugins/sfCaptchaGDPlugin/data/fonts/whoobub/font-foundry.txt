@@ -1,0 +1,63 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                           THE FONT FOUNDRY
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+This font has been in the http://www.fontfoundry.com Public Library.
+This file is included within any font originating from The Font Foundry, a
+free online type resource with one of the largest collections of freeware 
+and shareware fonts available. The Font Foundry Provides high quality type
+by skilled designers, including insights into the background of typography 
+and elements of design. 
+
+For the latest information please visit: - http://www.fontfoundry.com
+
+
+Notes on installation
+----------------------
+
+- Installing TrueType fonts under Windows95/98 and NT
+  
+ 1. Click on start > settings > then the control panel icon.  
+
+ 2. Double-click on the "Fonts" icon.  
+
+ 3. Select File, then click "install new font"
+
+ 4. In the dialog window select the drive and directory with the 
+    fonts you want to install.  
+
+ 5. Select the fonts you would like to install and hit »ok«.  
+
+ 6. The newly installed fonts are immediately available for all 
+    application programs.  
+
+
+Copyright Considerations
+------------------------
+
+Please consult the readme file in the font package to make sure 
+you comply with any specific license terms the author requests.
+Note that though this material may have been in a public depository, 
+certain author copyright restrictions may apply.
+
+Before installing any typefaces we ask you to respect the shareware 
+concept and support the authors by paying for the typefaces. Many 
+authors only request a few dollars for their work, this isn't much 
+to ask in exchange for hours of a designers' time. 
+
+
+
+
+================================================
+The Font Foundry
+http://www.fontfoundry.com
+-------------------------------------------------
+Free online type archive
+-------------------------------------------------
+" No other design discipline requires so much 
+  learning and training as typography, and by 
+  no other aspect can amateurs be so easily 
+  distinguished from professionals. To be font 
+  literate, a designer has to study the history 
+  and the principles of font design. "
+=================================================

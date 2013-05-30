@@ -1,0 +1,3 @@
+#sfTCPDF:
+  #url:   /sfTCPDF/:action
+  #param: { module: sfTCPDF, action: test }
