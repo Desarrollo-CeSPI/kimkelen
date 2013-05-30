@@ -1,0 +1,72 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Personal
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          head_personal
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        person:
+        person_lastname:                    { label: Lastname, column_name: PersonPeer::LASTNAME }
+        person_firstname:                   { label: Firstname, column_name: PersonPeer::FIRSTNAME }
+        person_full_identification:       { label: Identification number, column_name: PersonPeer::IDENTIFICATION_NUMBER }
+        person_sf_guard_user:             { label: Username}
+        person_is_active:    { label: Activo, type: Boolean }
+      list:
+        peer_method:       doSelectJoinAll
+        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, telefon, email  ]
+        sort: [ person_lastname ]
+        batch_actions:     []
+        object_actions:
+
+          _show:
+            credentials:   [show_head_personal]
+
+          _edit:
+            credentials:   [edit_head_personal]
+
+          _delete:
+            credentials:   [edit_head_personal]
+
+          preceptors:
+            label:  Asignar preceptores
+            credentials:   [edit_head_personal]
+            action: preceptors
+
+          activate:
+            label: Set active
+            credentials: [edit_head_personal]
+            action: personActivation
+            condition: canPersonBeActivated
+            params: confirm='Are you sure?'
+
+          deactivate:
+            label: Set inactive
+            credentials: [edit_head_personal]
+            action: personActivation
+            condition: canPersonBeDeactivated
+            params: confirm='Are you sure?'
+
+        actions:
+          _new:
+            credentials:   [edit_personal]
+      filter:
+       class: false
+      form:    ~
+      edit:    ~
+      new:     ~
+      show:
+        display:
+          Datos personales:           [_person]
+          Datos postales:             [_address]
+          Datos institucionales:      [file_number, salary, aging_institution]
+        actions:
+          _list:
+            label:               Volver al listado de preceptores

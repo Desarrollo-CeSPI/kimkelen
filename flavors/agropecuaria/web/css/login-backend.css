@@ -1,0 +1,159 @@
+body {
+ font-family:trebuchet ms,sans-serif;
+ font-size:11px;
+ color:#000;
+ margin:0;
+ padding:0;
+ background: #006b66;
+}
+
+#login {
+ position: absolute;
+ width: auto; /* ancho de la capa a centrar */
+ height: auto; /* alto de la capa a centrar */
+ top: 25%;
+ left: 52%;
+ margin-left: -200px; /* mitad del ancho de la capa a centrar */
+ margin-top: -100px; /* mitad del alto de la capa a centrar */
+}
+
+#login .left {
+ padding:0px;
+ width: 310px;
+ padding:5px 5px;
+}
+
+#login .right {
+ width: 310px;
+ height:220px;
+ padding:2px 0 0 0px;
+background-color: white;
+ text-align:left;
+}
+
+#login .logo {
+ font-family:arial,sans-serif;
+ font-size:14.5px;
+ color:#fff;
+ width: 320px;
+ height:100px;
+ margin:0px 0px 0px 0px;
+ background-image:url(../images/EA_logo.png);
+ background-repeat:no-repeat;
+}
+
+#login .logo_subtitle{
+ font-family:trebuchet ms, serif;
+ font-size:10px;
+ color:#fff;
+ margin:5px 0px 0px 40px;
+ padding-bottom:5px;
+ text-align:left;
+}
+
+#login .title_login {
+ font-size:18px;
+ font-weight:bold;
+ color:#000;
+ padding-bottom:10px;
+ margin:23px 25px 10px 25px;
+ text-align:left;
+}
+
+#login .form_row {
+ margin:5px 25px 5px 25px;
+ border:0px solid red;
+}
+
+#login .name {
+ font-size:12px;
+ color:#000;
+ margin-top:5px;
+ text-align:left;
+}
+
+#login .password {
+ font-size:12px;
+ color:#000;
+ text-align:left;
+}
+
+#login .remember {
+ font-size:12px;
+ color:#000;
+ margin-top:5px;
+ text-align:left;
+}
+
+#signin_password, #signin_username {
+ border:1px solid #000;
+ margin:0px;
+ padding:2px;
+ height:25px;
+ width:250px;
+ font-size:11px;
+ text-align:left;
+}
+
+#login .link_login {
+ font-size:12px;
+ font-weight:bold;
+ color:#fff;
+}
+
+#login .button {
+ margin-top:10px;
+ border:0px solid red;
+ font-weight:bold;
+ font-size:12px;
+ color:#fff;
+ height:auto;
+ width:auto;
+ text-decoration:none;
+ outline:none;
+ background:none;
+ padding:5px 10px;
+ background:#000;
+ float:right;
+ -moz-border-radius: 5px 5px 5px 5px;
+}
+
+#login .form_footer {
+ margin:5px 0px 5px 0px;
+ text-align:center;
+ color:#000;
+ clear:both;
+ width:300px;
+}
+
+#login .error_list {
+  color:red;
+  list-style:none;
+  padding:0;
+  margin:0;
+  font-size: 10px;
+}
+
+.captcha_label {
+ font-size:11px;
+ float:left;
+}
+
+#signin_captcha {
+ border:1px solid #000;
+ padding:2px;
+ height:26px;
+ width:80px;
+ font-size:11px;
+ margin-top:10px;
+ margin-right:20px;
+}
+
+.captcha {
+  margin-top:10px;
+  float:left;
+}
+
+.form_footer .logo-footer {
+ background-image:url(../images/logo-kimkelen-footer.png);
+}

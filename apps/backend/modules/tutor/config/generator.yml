@@ -1,0 +1,68 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Tutor
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          tutor
+    with_propel_route:     1
+
+    config:
+      actions:
+      fields:
+        #necesario para que no se cuelque el list
+        person:
+        person_lastname:                  { label: Lastname, column_name: PersonPeer::LASTNAME }
+        person_firstname:                 { label: Firstname, column_name: PersonPeer::FIRSTNAME }
+        person_full_identification:       { label: Identification number, column_name: PersonPeer::IDENTIFICATION_NUMBER }
+        person_sf_guard_user:             { label: Username }
+        # person_is_active:    { label: Activo, type: Boolean }
+        student_tutor:  { label: In charge of}
+
+      list:
+        peer_method:       doSelectJoinAll
+        display:           [ person_lastname, person_firstname, person_full_identification, _is_alive, person_phone, _student_tutor ]
+        sort: [ person_lastname ]
+        batch_actions:     []
+        actions:
+          _new:
+            credentials:   [edit_tutor]
+        object_actions:
+          _show:
+            credentials:   [show_tutor]
+          _edit:
+            credentials:   [edit_tutor]
+          _delete:
+            credentials:   [edit_tutor]
+      filter:
+
+      form:
+      edit:
+        actions:
+          _list:
+            label:            Volver al listado de tutores
+          _save_and_list:
+            label:            Guardar y volver al listado de tutores
+
+      new:
+        actions:
+          _list:
+            label:            Volver al listado de tutores
+          _save_and_list:
+            label:            Guardar y volver al listado de tutores
+          _save_and_add:
+            label:            Guardar y agregar otro tutor
+
+      show:
+        title:              Detalle del tutor "%%person%%"
+        display:
+          'Personal data': [ _person ]
+          'Contact data':  [ _address ]
+          'In charge of':  [ _students ]
+
+        actions:
+          _list:
+            label:            Volver al listado de tutores

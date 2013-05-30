@@ -1,0 +1,258 @@
+root:
+  root: true
+  theme: ThemePanel
+  orientation: hbr
+  start:
+    title: Inicio
+    url: mainBackend/index
+
+  administration:
+    title: Administración
+    credentials: [[show_occupation, show_absence_reason, show_justification_type, show_division_title, show_user, show_group, edit_modules, backup, show_orientation, show_classroom, show_tag]]
+    menu:
+      reference_data:
+        title: Datos de referencia
+        menu:
+          occupations:
+            title: Ocupaciones
+            url: @occupation
+            credentials: [show_occupation]
+          occupation_category:
+            title: Categorias ocupacionales
+            url: @occupation_category
+            credentials: [show_occupation]
+          study:
+            title: Estudios cursados
+            url: @study
+            credentials: [show_study]
+          division_title:
+            title:       Nombres de división
+            url:         division_title/index
+            credentials: [show_division_title]
+          turnos:
+            title:       Turnos
+            url:         @shift
+            credentials: [show_shift]
+          orientations:
+            title:       Orientation
+            url:         @orientation
+            credentials: [show_orientation]
+          classroom:
+            title:       Aulas
+            url:         @classroom
+            credentials: [show_classroom]
+          tags:
+            title: Etiquetas
+            url: @tag
+            credentials: [show_tag]
+          justification:
+            title:  Justification type
+            url:  @justification_type
+            credentials:  [show_justification_type]
+          health_coverage:
+            title:  Obras sociales
+            url:  @health_coverage
+            credentials:  [new_health_coverage]
+          tutor_type:
+            title:  Tipos de tutor
+            url:  @tutor_type
+            credentials:  [new_tutor_type]
+          absence_types:
+            title:  Tipos de ausencias
+            url:  @absence_type
+            credentials:  [[new_absence_type, edit_absence_type]]
+          disciplinary_sanction_types:
+            title:  Motivos de sancion
+            url:  @disciplinary_sanction_type
+            credentials:  [[new_disciplinary_sanction_type, edit_disciplinary_sanction_type]]
+          sanction_types:
+            title:  Tipos de sanciones
+            url:  @sanction_type
+            credentials:  [[new_disciplinary_sanction_type, edit_disciplinary_sanction_type]]
+          resources:
+            title: Recurso para aulas
+            url: @resources
+            credentials: admin
+      separator:
+      users:
+        title: Usuarios
+        credentials: [[show_user, show_group]]
+        menu:
+          users:
+            title: Listado de usuarios
+            url: sfGuardUser/index
+            credentials: [show_user]
+          groups:
+            title: Grupos de usuarios
+            url: sfGuardGroup/index
+            credentials: [show_group]
+      backup:
+        title: Respaldo de datos (backup)
+        credentials: [backup]
+        url: @generate_backup
+
+  academics:
+    title: Académica
+    credentials: [[show_school_year, edit_school_year, show_career, edit_career, show_subject, edit_subject, show_personal, edit_personal, show_teacher, edit_teacher]]
+    menu:
+      reports:
+        title: Reportes
+        credentials: [show_school_year]
+        menu:
+          student_reports:
+            title: Reportes de estudiantes
+            url: student_stats/filterForStudentStats
+          division_rating_reports:
+            title: Planillon de calificaciones por división
+            url: rating_report/filterForDivision
+          subject_rating_reports:
+            title: Planillon de calificaciones por materia
+            url: rating_report/filterForSubject
+
+      school_years:
+        title: Años lectivos
+        credentials: [show_school_year]
+        menu:
+          list:
+            title: Listado de años lectivos
+            url: schoolyear/index
+            credentials: [show_school_year]
+          new:
+            title: Nuevo año lectivo
+            url: schoolyear/new
+            credentials: [edit_school_year]
+      study_plan:
+        title: Plan de estudios
+        credentials: [show_career]
+        menu:
+          list:
+            title: Listado de planes de estudio
+            url: career/index
+            credentials: [show_career]
+          new:
+            title: Nuevo plan de estudio
+            url: career/new
+            credentials: [edit_career]
+      subjects:
+        title: Materias
+        credentials: [show_subject]
+        menu:
+          list:
+            title: Listado de materias
+            url: subject/index
+            credentials: [show_subject]
+          new:
+            title: Nueva materia
+            url: subject/new
+            credentials: [edit_subject]
+      personal:
+        title: Personal del colegio
+        credentials: [[show_head_personal , show_personal, show_teacher]]
+        menu:
+          teachers:
+            title: Docentes
+            credentials: [show_teacher]
+            menu:
+              list:
+                title: Listado de docentes
+                url: teacher/index
+                credentials: [show_teacher]
+              new:
+                title: Nuevo docente
+                url: teacher/new
+                credentials: [edit_teacher]
+          head_personal:
+            title: Jefe de preceptores
+            credentials: [show_head_personal]
+            menu:
+              head_personal_list:
+                title: Listado de jefes de preceptores
+                url: head_personal/index
+                credentials: [show_head_personal]
+              head_personal_new:
+                title: Nuevo Jefe de preceptor
+                url: head_personal/new
+                credentials: [edit_head_personal]
+          personal:
+            title: Preceptores
+            credentials: [[show_personal , edit_personal]]
+            menu:
+              personal_list:
+                title: Listado de preceptores
+                url: personal/index
+                credentials: [show_personal]
+              personal_new:
+                title: Nuevo preceptor
+                url: personal/new
+                credentials: [edit_personal]
+          student_office:
+            title: Personal de la oficina de alumnos
+            credentials: [show_student_office]
+            menu:
+              student_office_list:
+                title: Personal de la oficina de alumnos
+                url: student_office/index
+                credentials: [show_student_office]
+              student_office_new:
+                title: Nuevo personal de la oficina de alumnos
+                url: student_office/new
+                credentials: [edit_student_office]
+
+  students:
+    title: Alumnos
+    credentials: [show_student]
+    menu:
+      list:
+        title: Listado de alumnos
+        url: student/index
+        credentials: [show_student]
+      divisions:
+        title: Divisiones
+        credentials: [show_course]
+        menu:
+          list:
+            title: Listado de divisiones
+            url: division/index
+            credentials: [show_course]
+          new:
+            title: Nueva división
+            url: division/new
+            credentials: [edit_course]
+      commissions:
+        title: Comisiones
+        credentials: [show_course]
+        url: commission/index
+      student_attendance:
+        title: Attendance
+        url: @student_attendance_day
+        credentials: [edit_student_attendance, edit_student_attendance_history]
+      student_attendance_subject:
+        title: Attendance (subject)
+        url: @student_attendance_subject
+        credentials: [edit_student_attendance, edit_student_attendance_history]
+      attendance_justification:
+        title: Attendance justification
+        url: @attendance_justification
+        credentials: [edit_attendance_justification]
+      tutors:
+        title: Listado de tutores
+        url: tutor/index
+        credentials: [show_tutor]
+
+  help:
+    title: Ayuda
+    credentials: []
+    menu:
+      glpi:
+        title: Mesa de ayuda
+        url: http://glpi.desarrollo.cespi.unlp.edu.ar
+        target: _blank
+        icon: external
+      manual:
+        title: Manual de usuario
+        url: @manual_administracion
+
+  password:
+    title:                  Cambiar contraseña
+    url:                    @change_password
+

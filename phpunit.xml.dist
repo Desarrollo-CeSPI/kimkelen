@@ -1,0 +1,34 @@
+<phpunit
+  backupGlobals="false"
+  backupStaticAttributes="false"
+  colors="true"
+  convertErrorsToExceptions="true"
+  convertNoticesToExceptions="true"
+  convertWarningsToExceptions="true"
+  stopOnFailure="true"
+  processIsolation="true"
+>
+  <filter>
+    <blacklist>
+      <directory>cache</directory>
+      <directory>data</directory>
+      <directory>log</directory>
+      <directory>lib/vendor</directory>
+      <directory>plugins</directory>
+      <directory>web</directory>
+    </blacklist>
+  </filter>
+
+  <testsuites>
+    <testsuite name="Unit Tests">
+      <directory>test/phpunit/unit/</directory>
+    </testsuite>
+     <testsuite name="Functional Tests">
+       <directory>test/phpunit/functional/</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <log type="junit" target="/tmp/phpunit.xml" logIncompleteSkipped="false"/>
+    <log type="testdox-html" target="/var/www/testing.html"/>
+  </logging>
+</phpunit>

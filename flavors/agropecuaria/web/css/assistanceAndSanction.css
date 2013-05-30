@@ -1,0 +1,154 @@
+body {
+    text-align:center;
+    font-family:Trebuchet MS, sans-serif;
+    font-size:12px;
+    color:#333;
+    background-color: #FFF !important;
+}
+
+/* wrapper */
+
+.report-wrapper
+{
+    background-color: white !important;
+    text-align:left;
+    width:1000px;
+    margin:30px auto;
+}
+
+.report-header {
+    float:left;
+    width:100%;
+}
+
+.report-date {
+    float:right;
+}
+
+.rowfirm_authority
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-right: 5px;
+    padding:0px 40px;
+    height:110px;
+    float: right;
+}
+
+.colsbottom
+{
+    float: left;
+    width: 50%;
+}
+
+.rowfirm_responsible
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-left:5px;
+    padding:0px 15px;
+    height:110px;
+    float: right;
+}
+
+.cols
+{
+    width: 25%;
+    float: left;
+    margin-left: 10px;
+}
+
+.print_table
+{
+    width:100% !important;
+    font-size: 13px;
+}
+
+.header_row {
+    float:left;
+    width:100%;
+}
+
+.header_row .header_right
+{
+    float:right;
+}
+
+.header_row .title
+{
+    float:left;
+    font-weight:bold;
+    font-size:13px;
+    padding-top:3px;
+    padding-right:5px;
+    margin-left: 3px;
+}
+
+.header_row .name
+{
+    float:left;
+    font-size:16px;
+}
+
+.header_row .course
+{
+    float:left;
+    font-size:13px;
+    padding:3px;
+    width:20px;
+}
+
+.header_row .division
+{
+    float:left;
+    font-size:13px;
+    padding:3px;
+    width:100px;
+}
+
+.header_row .school_year
+{
+    float:left;
+    font-size:12px;
+    padding:3px;
+    width:92px;
+}
+
+.report-title
+{
+    font-size: 12px;
+    font-weight: bold;
+    padding:5px;
+    text-transform: uppercase;
+    background:#f2f2f2;
+    border:1px solid #ccc !important;
+    margin: 4px;
+}
+
+.report-total
+{
+  text-transform: uppercase;
+   padding:5px;
+   text-align: right;
+   border-bottom:1px solid #ccc;
+}
+
+.titletable {
+    font-size:12px;
+    font-weight:bold;
+    display:block;
+    padding:3px;
+}
+
+.report-notice {
+    float: left;
+    margin-left: 5px;
+}
+
+.print_sanctions {
+    float: left;
+}
+
+.colsright {
+  padding-top: 20px;
+}

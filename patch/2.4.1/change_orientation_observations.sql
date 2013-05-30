@@ -1,0 +1,1 @@
+ALTER TABLE `career_student` ADD `orientation_change_observations` TEXT;

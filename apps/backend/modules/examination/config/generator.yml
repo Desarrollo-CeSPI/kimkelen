@@ -1,0 +1,55 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Examination
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          examination
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Examinations
+        batch_actions: []
+        layout: stacked
+        params: |
+          %%_information%%
+        display: [examination]
+        object_actions:
+          _edit:
+            credentials: [edit_examination]
+          examination_subjects:
+            label: Subjects
+            action: examinationSubjects
+            credentials: [show_examination_subject]
+            condition: canShowExaminationSubjects
+          _delete:
+            credentials: [edit_examination]
+        actions:
+          back:
+            action: back
+            label:      Volver a listado de años lectivos
+          _new:
+            condition: canCreateExamination
+            credentials: [edit_examination]
+            label:      Nueva mesa de exámen
+      filter:
+        class: false
+      form:    ~
+      edit:
+        actions:
+          _list:           { label: Volver al listado de mesas de exámen }
+          _save_and_list:
+            label:          Guardar mesa de exámen
+          _save_and_add:
+            label:          Guardar y agregar otra mesa de exámen
+      new:
+        actions:
+          _list:           { label: Volver al listado de mesas de exámen }
+          _save_and_list:
+            label:          Guardar mesa de exámen

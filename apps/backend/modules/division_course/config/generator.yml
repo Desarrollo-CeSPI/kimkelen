@@ -1,0 +1,129 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Course
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          division_course
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        display:           [name]
+        layout:             stacked
+        params:             |
+          %%_course_info%%
+        object_actions:
+
+          _show:
+            credentials:    [show_course]
+
+          _edit:
+            condition:      canBeEdited
+            credentials:    [edit_course]
+
+          students:
+            label:          Listado de estudiantes
+            action:         students
+            condition:      canListStudents
+            credentials:    [show_course]
+
+          manage_course_days:
+            action:         manageCourseDays
+            label:          Manage course days
+            condition:      canManageCourseDays
+            credentials:    [edit_course_day]
+
+          manage_students:
+            action:         courseSubjectStudent
+            credentials:    [edit_course]
+            condition:  canManageStudents
+
+          califications:
+            action:      califications
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
+
+          teachers:
+            action:       courseTeachers
+            condition:    canTeachers
+            credentials:  [edit_course]
+
+          division_students:
+            action:       copyStudentsFromDivision
+            label:        Add division students
+            credentials:  [edit_course]
+            condition:    canCopyStudentsFromDivision
+
+          printCalification:
+            label:   Print califications
+            action:  printCalification
+            credentials:    [edit_division_course_califications]
+
+          close:
+            label:        Close period
+            action:       close
+            credentials:  [close_course]
+            condition:    canBeClosed
+
+          revert_period:
+            label:        Back to period
+            action:       backPeriod
+            credentials:   [back_period_course]
+            condition:    canBackPeriod
+            params: confirm='Are you sure?'
+
+          configuration:
+            label: Configuration course
+            action: courseConfiguration
+            credentials: [course_configuration]
+            condition:  canConfigurate
+
+          seeAttendanceSheet:
+            label:   Show attendance sheet
+            action:  attendanceSheetByCourseSubject
+            credentials:    [show_course]
+            condition: canSeeAttendanceSheet
+
+          attendanceSubject:
+            label: Load Attendances
+            action: attendanceSubject
+            condition: hasAttendanceForSubject
+            credentials: [edit_absense_per_subject]
+
+          _delete:
+            condition:      canBeDeleted
+            credentials:    [delete_division]
+
+        actions: []
+        batch_actions:  []
+      filter:
+      form:    ~
+      edit:
+        actions:
+          _list:
+            label:        Volver al listado de cursos
+          _save_and_list:
+            label:        Guardar y volver al listado de cursos
+      new:
+        actions:
+          _delete:
+            condition:      canBeDeleted
+          _list:
+            label:        Volver al listado de cursos
+          _save_and_list:
+            label:        Guardar y volver al listado de cursos
+          _save_and_add:
+            label:        Guardar y agregar otro curso
+        actions:
+          _list:
+          _delete:
+            condition:    canBeDeleted
+            credentials:  [edit_course]
+      show:
+

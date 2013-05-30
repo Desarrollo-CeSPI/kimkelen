@@ -1,0 +1,20 @@
+index:
+  credentials: [edit_license_type]
+
+new:
+  credentials: [edit_license_type]
+
+create:
+  credentials: [edit_license_type]
+
+edit:
+  credentials: [edit_license_type]
+
+update:
+  credentials: [edit_license_type]
+
+show:
+  credentials: [edit_license_type]
+
+delete:
+  credentials: [edit_license_type]

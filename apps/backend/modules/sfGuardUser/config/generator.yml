@@ -1,0 +1,82 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           sfGuardUser
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_user
+    with_propel_route:     1
+
+    config:
+      fields:
+      list:
+        title:          Listado de usuarios
+        display:        [=username, is_active, last_login, _groups]
+        actions:
+          _new:
+            label: Nuevo usuario
+            credentials: [admin]
+        batch_actions:  []
+        object_actions:
+
+          activate:
+            label: Set active
+            credentials: [admin]
+            action: activation
+            condition: canActive
+
+          inactive:
+            label: Set inactive
+            credentials: [admin]
+            action: activation
+            condition: canInactive
+
+          _show:
+            credentials: [admin]
+          _edit:
+            credentials: [admin]
+            condition: canEdit
+          _delete:
+            credentials: [admin]
+            condition: canEdit
+
+      filter:
+        class:  sfGuardUserCustomFormFilter
+        fields:
+          sf_guard_user_group_list:
+            label:                   Perteneciente al grupo
+
+      form:
+        class: sfGuardUserCustomForm
+        display:
+      edit:
+        title:                       Edición de usuario "%%username%%"
+        actions:
+          _delete:
+          _list:
+            label:                     Volver al listado de usuarios
+          _save_and_list:
+            label:                     Guardar usuario
+
+      new:
+        title: Crear Usuario
+        actions:
+          _list:
+            label:                     Volver al listado de usuarios
+          _save_and_list:
+            label:                     Guardar usuario
+          _save_and_add:
+            label:                     Guardar y agregar otro usuario
+
+      show:
+        title: Vista de usuario "%%username%%"
+        display:
+          "Información de usuario":    [username, is_active, created_at]
+          "Perteneciente al grupo":    [_show_groups]
+        actions:
+          _list:
+            label:                     Volver al listado de usuarios
+

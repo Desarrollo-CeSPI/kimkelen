@@ -1,0 +1,61 @@
+a
+{
+  text-decoration: none;
+}
+
+#registration
+{
+
+}
+
+#registration h1
+{
+  color: #111;
+  border-bottom: 3px solid #bbb;
+  margin-bottom: 8px;
+}
+
+#registration form
+{
+  margin: 0 auto;
+  width: 50%;
+}
+
+#registration form input[type=text],
+#registration form input[type=password],
+#registration form input[type=file]
+{
+  border: 1px solid #ccc;
+  color: #222;
+}
+
+#registration td
+{
+  color: #999;
+  padding: 3px;
+}
+
+#registration ul.error_list
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #e43;
+  font-weight: bold;
+}
+
+#registration ul.error_list li
+{
+  padding: 0;
+}
+
+#registration .cancel
+{
+}
+
+#registration table .actions
+{
+  border-top: 2px solid #ddd;
+  text-align: right;
+  padding-top: 12px;
+}

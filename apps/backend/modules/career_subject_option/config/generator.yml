@@ -1,0 +1,60 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           CareerSubject
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          career_subject_option
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        year:             {label: Año de la carrera}
+        orientation_id:   {label: Orientación}
+        orientation:      {label: Orientación, column_name: OrientationPeer::NAME }
+        career:           {label: Carrera}
+        subject_id:       {label: Materia}
+        subject:          {label: Materia, column_name: SubjectPeer::NAME  }
+      list:
+
+        title:  Listado de materias que son opción para optativas
+        peer_method:      doSelectJoinAll
+        sort:              [ year, asc]
+        display:           [ year, orientation, sub_orientation, subject ]
+        object_actions:
+          _edit:
+
+          _delete:
+            condition:    canBeDeleted
+            credentials: [edit_career_subject]
+        actions:
+          go_back:           {label: Volver al listado de carreras, action: back}
+          _new:
+            label: Nueva opción de materia
+            credentials: [edit_career_subject]
+        batch_actions:
+          []
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title:              Editar opción de materia
+        display:            [career_id, year, subject_id, orientation_id, sub_orientation_id]
+        actions:
+          _list:
+            label:          Volver al listado de opciones de materias
+          _save_and_list:
+          _save:
+
+      new:
+        title:              Agregar opción de materia a %%career%%
+        display:            [career_id, year, subject_id, orientation_id, sub_orientation_id]
+        actions:
+          _list:
+            label:          Volver al listado de opciones de materias
+          _save_and_list:
+          _save_and_add:

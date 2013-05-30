@@ -1,0 +1,119 @@
+Instalación del proyecto:
+
+Requisitos mínimos:
+
+  * Servidor Web con soporte de PHP. Apache 2.x recomendado.
+  * PHP versión 5.2.4 o superior.
+  * Servidor de base de datos Mysql. Es posible utilizar otro motor pero debe modificar la configuración de la aplicación Propel ORM.
+  * Que se cumplan todos los requisitos que controla el script: php BASE_APLICACION/data/symfony/bin/check_configuration.php
+  * Instalar [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/). Debe estar
+    instalado en /usr/bin/wkhtmltopdf o especificarse la ruta en el archivo
+    apps/frontend/config/app.yml
+    Ejemplo de instalación:
+
+    (para ubuntu 32bits OS)
+    wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.9-static-i386.tar.bz2
+    tar xvjf wkhtmltopdf-0.9.9-static-i386.tar.bz2
+    mv wkhtmltopdf-i386 /usr/local/bin/wkhtmltopdf
+    chmod +x /usr/local/bin/wkhtmltopdf
+
+* Para editar la conexión de las bases, editar los archivos dentro del directorio BASE_APLICACION/config, donde se edita el dsn, usuario y contraseña.
+  Si no se quieren editar estos archivos, existe un script que va solicitando los datos de a uno:
+  *** Para poder lograrlo hay que ejecutar el script:  ./lib/vendor/eztools/bin/ezconfigure.sh que va pidiendo paso a paso los hooks de conexion a la 
+
+  * BASE_APLICACION/databases.yml
+
+
+all:
+  propel:
+    class:        sfPropelDatabase
+    param:
+      classname:  PropelPDO
+      dsn:        mysql:dbname=#db_name#;host=#db_host#
+      username:   #db_user#
+      password:   #db_pass#
+      encoding:   utf8
+      persistent: true
+      pooling:    true
+
+
+
+  * BASE_APLICACION/propel.ini
+
+      Especificar el dns
+        propel.database.url        = mysql:dbname=#db_name#;host=#db_host#
+      Especificar nombre de usuario y contraseña
+        propel.database.user       = #db_user#
+        propel.database.password   = #db_pass#
+
+
+
+* Ejecutar los siguientes comandos dentro del directorio BASE_APLICACION/:
+*
+    * ./symfony propel:build-all-load --no-confirmation
+
+    * ./symfony project:permissions
+      Actualiza los permisos dentro del directorio del proyecto, para que el web server pueda escribir datos en el proyecto.
+
+    * ./symfony plugin:publish-assets
+      Actualiza referencias javascript y estilos visuales de todo el proyecto en general.
+
+ln -s
+* Editar el archivo BASE_APLICACION/config/app.yml la linea que dice school_behavior: #comportamient# Poner el comportamiento correspondiente (Por defecto poner Demo)
+
+  Una vez editado ese archivo correr el comando ./emulate.sh #comportamiento# (Por defecto demo)
+
+
+Consideraciones del Web Server
+Debido a que el sistema se ha desarrollado utilizando el Framework symfony, que emplea URLs que ocultan la extensión de los scripts, se recomienda:
+Habilitar el módulo de reescritura: mod_rewrite
+
+Permitir al directorio publicado en el DocumentRoot que se corresponde al BASE_APLICACION/web la redefinición de condiciones mediante .htaccess
+Por ejemplo, en Apache 2, asumiendo ya se encuentra habilitado el mod_rewrite, la configuración correcta sería:
+
+Links simbolicos necesarios
+jquery.js -> jquery-1.6.2.min.js  o la version correspondiente
+jquery-ui.js -> jquery-ui-1.7.2.custom.min.js
+
+<VirtualHost *:80>
+  DocumentRoot /BASE_APLICACION/web
+  <Directory /BASE_APLICACION/web >
+    Options -Indexes FollowSymLinks -MultiViews
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+</VirtualHost>
+
+
+
+Quitar ejecución de archivos php en uploads:
+
+<LocationMatch /uploads/.*>
+     php_flag engine off
+</LocationMatch>
+
+
+
+* REMOVER EL .htaccess y en su lugar se agrega en la configuracion de apache:
+
+
+<Directory /BASE_APLICACION/web >
+  RewriteEngine On
+  # uncomment the following line, if you are having trouble
+  # getting no_script_name to work
+  #RewriteBase /
+
+  # we skip all files with .something
+  #RewriteCond %{REQUEST_URI} \..+$
+  #RewriteCond %{REQUEST_URI} !\.html$
+  #RewriteRule .* - [L]
+
+  # we check if the .html version is here (caching)
+  RewriteRule ^$ index.html [QSA]
+  RewriteRule ^([^.]+)$ $1.html [QSA]
+  RewriteCond %{REQUEST_FILENAME} !-f
+
+  # no, so we redirect to our front web controller
+  RewriteRule ^(.*)$ index.php [QSA,L]
+</Directory>

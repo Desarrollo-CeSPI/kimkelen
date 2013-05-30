@@ -1,0 +1,14 @@
+index:
+  credentials: [show_occupation]
+
+new:
+  credentials: [edit_occupation]
+
+edit:
+  credentials: [edit_occupation]
+
+delete:
+  credentials: [edit_occupation]
+
+show:
+  credentials: [show_occupation]

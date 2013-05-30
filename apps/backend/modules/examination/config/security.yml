@@ -1,0 +1,14 @@
+edit:
+  credentials:  [edit_examination]
+
+new:
+  credentials:  [edit_examination]
+
+delete:
+  credentials:  [edit_examination]
+
+index:
+  credentials:  [show_examination]
+
+examinationSubjects:
+  credentials:  [show_examination_subject]
