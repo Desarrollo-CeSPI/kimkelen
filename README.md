@@ -1,9 +1,9 @@
 # Qué es Kimkëlen
 
 **Kimkëlen** es un sistema de gestión integrada de colegios secundarios realizado por la [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/).
-El sistema permite personalización a través de comportamientos o behaviors; cada comportamiento permite definir formas de evaluación según lo resuelva el colegio, seguimiento de inasistencias sanciones disciplinarias, impresión de boletines, generación de reportes, etcétera.
+El sistema permite personalización a través de comportamientos o _behaviors_; cada comportamiento permite definir formas de evaluación según lo resuelva el colegio, seguimiento de inasistencias, sanciones disciplinarias, impresión de boletines, generación de reportes, etcétera.
 
-# Instalacion con capistrano
+# Instalación con capistrano
 
 Editar el Gemfile agregando
 ```
