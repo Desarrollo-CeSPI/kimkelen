@@ -114,7 +114,7 @@ EOF;
       $this->logSection('Flavor', 'Successfully updated flavor configuration file');
     }
 
-    $school_behavior = '<?php echo ucwords(' . $arguments['flavor'] . '); ?>';
+    $school_behavior = '<?php echo ucwords("' . $arguments['flavor'] . '"); ?>';
     $updated = @file_put_contents($cfg_dir . '/school_behaviour', $school_behavior);
 
     if ($updated === false)

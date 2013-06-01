@@ -3,13 +3,116 @@
 **Kimkëlen** es un sistema de gestión integrada de colegios secundarios realizado por el [CeSPI](http://www.cespi.unlp.edu.ar/) perteneciente a la  [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/).
 El sistema permite personalización a través de comportamientos o _behaviors_; cada comportamiento permite definir formas de evaluación según lo resuelva el colegio, seguimiento de inasistencias, sanciones disciplinarias, impresión de boletines, generación de reportes, etcétera.
 
+# Instalacion
+
+## Editar la configuracion de la base de datos
+
+La configuración de la base de datos se realiza por medio de los archivos
+`databases.yml` y `propel.ini`. Se proveen estos archivos a modo de ejemplo en
+el directorio `config/`
+
+```
+cp config/databases.yml-default config/databases.yml
+cp config/propel.ini-default config/propel.ini
+```
+
+Edite estos archivos según la configuración de su entorno.
+
+### Ejemplo de `databases.yml`
+
+```yml
+....
+all:
+  propel:
+    class:        sfPropelDatabase
+    param:
+      classname:  PropelPDO
+      dsn:        mysql:dbname=kimkelen;host=localhost
+      username:   root
+      password:   
+      encoding:   utf8
+      persistent: true
+      pooling:    true
+```
+
+### Ejemplo de `propel.ini`
+
+```yml
+propel.targetPackage       = lib.model
+propel.packageObjectModel  = true
+propel.project             = conservatorio
+propel.database            = mysql
+propel.database.driver     = mysql
+propel.database.url        = mysql:dbname=kimkelen;host=localhost
+propel.database.creole.url = ${propel.database.url}
+propel.database.user       = root
+propel.database.password   = 
+propel.database.encoding   = utf8
+...
+```
+
+*Es importante destacar que la base de datos debe crearla manualmente, no es
+creada por ninguno de los pasos siguientes*
+
+## Correr los siguientes comandos
+
+```
+php symfony kimkelen:flavor <COMPORTAMIENTO>
+php symfony propel:build-all-load 
+php symfony plugin:publish
+php symfony project:permissions
+```
+
+### ¿Qué es el **comportamiento** o **sabor**?
+
+Cada colegio tiene su propio esquema de enseñanza siguiendo reglas diferentes.
+Kimelen provee una forma desacoplada de programar esta lógica en lo que llamamos
+*sabores* o *comportamientos*
+
+El primer comando de la lista anterior setea el *comportamiento* del colegio.
+Considere que los comportamientos disponibles son los que se encuentran bajo el
+directorio `flavors/`
+
+Un ejemplo entonces, sería:
+
+```
+php symfony kimkelen:flavor demo
+```
+
+## Datos iniciales
+
+El sistema se instala con algunos datos cargados a decir:
+
+* *Usuarios:* usuarios del sistema
+  * Administrador:
+    * `username:` admin
+    * `password:` @dm1n1strad0r
+  * Precetor:
+    * `username:` preceptor
+    * `password:` @pr3c3pt0r
+  * Profesort:
+    * `username:` profesor
+    * `password:` @pr0f3s0r
+
+* *Año lectivo:* se creará un año lectivo vigente para el año corriente
+
+* *Plan de estudios:* **No se crean años lectivos** Esto debe crearlo cada
+  colegio. Queremos permitir que cada colegio *done* su plan de estudios, así lo
+pueden compartir con otros colegios.
+
+
 # Instalación con capistrano
+
+Recomendamos darle una oportunidad a este excelente producto. Leer más
+[aqui](https://github.com/capistrano/capistrano)
 
 Editar el Gemfile agregando
 ```
 source "https://rubygems.org"
 gem "capifony"
 ```
+
+Correr el comando `bundle update` en la raiz del proyecto
 
 Luego capificar la aplicación:
 
@@ -29,7 +132,7 @@ set :user, application
 set :domain,      "desarrollo.cespi.unlp.edu.ar"
 set :deploy_to,   "/opt/applications/#{application}"
 
-set :repository,  "git@gitlab.desarrollo.cespi.unlp.edu.ar:desarrollo/kimkelen.git"
+set :repository,  "https://github.com/Desarrollo-CeSPI/kimkelen.git"
 set :scm,         :git
 
 role :web,        domain                         # Your HTTP server, Apache/etc
@@ -55,9 +158,15 @@ cap deploy:setup
 cap deploy
 ```
 
-Resta conectarse y correr los comandos de emulate.sh segun el sabor elegido
+Resta conectarse y correr el comando:
 
-# TODO
+```
+php symfony kimkelen:flavor <comportamiento>
+```
+
+Los comportamientos se definen en el directorio `flavors`. El comportamiento por
+defecto sería *demo*
+
+## TODO
 
 * El `app.yml` queda vacío por lo que hay que copiarlo manualmente. Deberíamos hacer que en el primer deploy se copie
-* Usar tags para los deploys. Hoy solo se hace del master

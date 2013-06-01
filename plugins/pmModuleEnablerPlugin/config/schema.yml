@@ -13,7 +13,8 @@ propel:
     name:
       type: varchar(256)
       required: true
-      index: unique
+    _uniques:
+      name: [name(20)]
     is_enabled:
       type: boolean
       default: false

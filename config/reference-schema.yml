@@ -119,7 +119,8 @@ classes:
       name:
         type: varchar(256)
         required: true
-        index: unique
+      _uniques:
+        name: [name(20)]
 
   OccupationCategory:
     columns:
@@ -127,7 +128,8 @@ classes:
       name:
         type: varchar(256)
         required: true
-        index: unique
+      _uniques:
+        name: [name(20)]
 
   Classroom:
     columns:

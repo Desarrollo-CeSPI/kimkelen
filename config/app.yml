@@ -7,6 +7,6 @@ all:
     max_quantity_years: 10
   revisited_generator:
     show_disabled_actions: true
-  school_behaviour: <?php include sfConfig::get('sf_root_dir').'/config/school_behaviour' ?>
+  school_behaviour: "<?php include sfConfig::get('sf_root_dir').'/config/school_behaviour' ?>"
 
   close_course_subject_schol_year_max_error: 50
