@@ -87,7 +87,7 @@ El sistema se instala con algunos datos cargados a decir:
   * Administrador:
     * `username:` admin
     * `password:` @dm1n1strad0r
-  * Precetor:
+  * Preceptor:
     * `username:` preceptor
     * `password:` @pr3c3pt0r
   * Profesor:
@@ -101,7 +101,7 @@ El sistema se instala con algunos datos cargados a decir:
 pueden compartir con otros colegios.
 
 
-# Instalación con capistrano
+# Instalación con Capistrano
 
 Recomendamos darle una oportunidad a este excelente producto. Leer más
 [aqui](https://github.com/capistrano/capistrano)
