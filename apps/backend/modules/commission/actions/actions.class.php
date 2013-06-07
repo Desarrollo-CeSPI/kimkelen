@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -312,6 +312,7 @@ class commissionActions extends autoCommissionActions
 
   public function executeAttendanceSubject(sfWebRequest $request)
   {
+    $this->redirectIf($this->getUser()->isTeacher());
     $course = $this->getRoute()->getObject();
     $career_school_year_id = $course->getCareerSchoolYear()->getId();
     $course_subject_id = array_shift($course->getCourseSubjectIds());

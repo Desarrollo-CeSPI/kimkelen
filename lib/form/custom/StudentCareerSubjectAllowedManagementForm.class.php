@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -137,17 +137,19 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
         $obj->setCareerSubject($career_subject);
         $obj->save($con);
       }
-      
+
       $prev_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($career_school_year->getSchoolYear());
       $prev_student_career_school_year = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this->getObject(), $prev_school_year);
-      if (is_array($prev_student_career_school_year))
+     
+      if (!empty($prev_student_career_school_year))
       {
         $prev_student_career_school_year = array_shift($prev_student_career_school_year);
-      }
-      if ($year <= $prev_student_career_school_year->getYear())
-      {
-        $prev_student_career_school_year->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
-        $prev_student_career_school_year->save($con);
+
+        if ($year <= $prev_student_career_school_year->getYear())
+        {
+          $prev_student_career_school_year->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
+          $prev_student_career_school_year->save($con);
+        }
       }
       $con->commit();
     }
