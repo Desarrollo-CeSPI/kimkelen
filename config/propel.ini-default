@@ -30,7 +30,7 @@ propel.emulateForeignKeyConstraints = true
 
 ; directories
 propel.home                    = .
-propel.output.dir              = /home/patricio/desarrollo/conservatorio
+propel.output.dir              = 
 propel.schema.dir              = ${propel.output.dir}/config
 propel.conf.dir                = ${propel.output.dir}/config
 propel.phpconf.dir             = ${propel.output.dir}/config
