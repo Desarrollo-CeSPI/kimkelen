@@ -251,8 +251,10 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     StudentApprovedCourseSubjectPeer::clearInstancePool();
     StudentDisapprovedCourseSubjectPeer::clearInstancePool();
     ################################
-    $this->evaluateHistoriaDelArteCareerSchoolYearStudent($career_school_year, $student, $con);
-
+    if ($this->getCurrentHistoriaDelArte())
+    {
+      $this->evaluateHistoriaDelArteCareerSchoolYearStudent($career_school_year, $student, $con);
+    }
   }
 
   private function evaluateHistoriaDelArteCareerSchoolYearStudent(CareerSchoolYear $career_school_year, Student $student, PropelPDO $con)
@@ -260,11 +262,8 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     $c = new Criteria();
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID, Criteria::INNER_JOIN);
-    if ($this->getCurrentHistoriaDelArte())
-    {
-      $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getCurrentHistoriaDelArte()->getId());
-    }
-
+    $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getCurrentHistoriaDelArte()->getId());
+    
     $course_subject_students = CourseSubjectStudentPeer::doSelect($c);
 
 
