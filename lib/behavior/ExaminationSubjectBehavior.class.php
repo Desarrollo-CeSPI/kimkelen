@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -32,8 +32,13 @@ class ExaminationSubjectBehavior
    */
   public function updateCourseSubjectStudentExaminations($examination_subject, PropelPDO $con)
   {
+    //this is done for manual examinations
+    if ($examination_subject->isNew()) {
+      return;
+    }
+
     $course_subject_student_examinations = CourseSubjectStudentExaminationPeer::retrieveForExaminationSubject($examination_subject);
-    
+
     foreach ($course_subject_student_examinations as $course_subject_student_examination)
     {
       $examination_subject->addCourseSubjectStudentExamination($course_subject_student_examination);

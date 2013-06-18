@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -74,7 +74,7 @@ class ExaminationSubjectStudentForm extends sfFormPropel
     $this->validatorSchema->setOption('allow_extra_fields', true);
 
     $this->widgetSchema->setNameFormat('examination_subject[%s]');
-    
+
     $this->getWidgetSchema()->setHelp('examination_subject_student_list', 'If you delete from the examination a student who already has marks, these will also be eliminated.');
   }
 

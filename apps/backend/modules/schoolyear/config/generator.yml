@@ -53,6 +53,11 @@ generator:
             credentials: [show_examination]
             condition:    canExamination
 
+          manual_examinations:
+            action: manualExaminations
+            label: Mesas de examen (manejo manual)
+            credentials: [show_examination]
+
           examination_repproved:
             action: examinationRepproved
             label: Examination repproved

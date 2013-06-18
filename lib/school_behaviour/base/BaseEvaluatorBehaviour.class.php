@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -267,20 +267,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       $result->setStudentApprovedCareerSubject($student_approved_career_subject);
 
-      /* para el caso de que se aprueba por mesa de examen, se debe asociar el student_approved_career_subject
-       * con el student_disapproved_course_subject
-       */
-//      ESTE METODO NO TIENE PORQUE EXISTIR
-//      $disapproved = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCourseSubject($result, $con);
-//      if (!is_null($disapproved))
-//      {
-//        $disapproved->setStudentApprovedCareerSubject($student_approved_career_subject);
-//        $disapproved->save($con);
-//      }
-
-
-      //$crit = $student_approved_career_subject->buildCriteria();
-      //StudentApprovedCareerSubjectPeer::doInsert($crit, $con);
       $student_approved_career_subject->save($con);
       $result->save($con);
 
@@ -293,7 +279,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
     else
     {
-      $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
+      $c = new Criteria();
+      $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $result->getExaminationNumber());
+      $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
+      if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
+      {
+        $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -37,14 +37,14 @@ class ExaminationBehavior
     {
       return;
     }
-    
+
     $career_subject_school_years = CareerSubjectSchoolYearPeer::retrieveForExamination($examination, $con);
-    
+
     foreach ($career_subject_school_years as $career_subject_school_year)
     {
       $examination_subject = new ExaminationSubject();
       $examination_subject->setCareerSubjectSchoolYearId($career_subject_school_year->getId());
-      
+
       $examination->addExaminationSubject($examination_subject);
     }
   }

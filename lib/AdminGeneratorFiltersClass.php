@@ -152,7 +152,7 @@ class AdminGeneratorFiltersClass
       $criteria->add(PersonPeer::IS_ACTIVE,true);
 
     }
-    else if ($event->getSubject() instanceOf examinationActions)
+    else if (($event->getSubject() instanceOf examinationActions) || ($event->getSubject() instanceOf manual_examinationActions))
     {
       $school_year_id = sfContext::getInstance()->getUser()->getReferenceFor("schoolyear");
 
@@ -171,6 +171,21 @@ class AdminGeneratorFiltersClass
     else if ($event->getSubject() instanceOf examination_subjectActions)
     {
       $examination_id = sfContext::getInstance()->getUser()->getReferenceFor("examination");
+
+      $criteria->add(ExaminationSubjectPeer::EXAMINATION_ID, $examination_id);
+
+      if ($user->isTeacher())
+      {
+        $criteria->addJoin(ExaminationSubjectPeer::ID, ExaminationSubjectTeacherPeer::EXAMINATION_SUBJECT_ID);
+        $criteria->addJoin(ExaminationSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
+        $criteria->addJoin(TeacherPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->add(PersonPeer::IS_ACTIVE,true);
+        $criteria->add(PersonPeer::USER_ID, $user->getGuardUser()->getId());
+      }
+    }
+    else if ($event->getSubject() instanceOf manual_examination_subjectActions)
+    {
+      $examination_id = sfContext::getInstance()->getUser()->getReferenceFor("manual_examination");
 
       $criteria->add(ExaminationSubjectPeer::EXAMINATION_ID, $examination_id);
 
