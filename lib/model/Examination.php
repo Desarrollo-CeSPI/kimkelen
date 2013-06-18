@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -38,6 +38,10 @@ class Examination extends BaseExamination
 
   public function isClosed()
   {
+    if (count($this->getExaminationSubjects())== 0) {
+      return false;
+    }
+    
     foreach ($this->getExaminationSubjects() as $examination_subject)
     {
       if (!$examination_subject->getIsClosed())
