@@ -348,7 +348,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       $average = sprintf('%.4s', $average);
       // se guarda la NOTA FINAL de la materia
-      if ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYearId() == $this->getCurrentHistoriaDelArte()->getId())
+      if ($this->getCurrentHistoriaDelArte() && $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYearId() == $this->getCurrentHistoriaDelArte()->getId())
       {
         $average = $course_subject_student_examination->getMark();
       }
