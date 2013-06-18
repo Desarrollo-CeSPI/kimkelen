@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -28,7 +28,7 @@
  */
 class CareerSubjectConfigurationForm extends SubjectConfigurationForm
 {
-  
+
   public function configure()
   {
     parent::configure();
@@ -42,7 +42,6 @@ class CareerSubjectConfigurationForm extends SubjectConfigurationForm
     if ($this->getObject()->isNew())
     {
       $this->getWidget('course_type')->setDefault($this->getObject()->getCourseType());
-//      var_dump($this->getWidget('course_type')->getDefault());
     }
     $this->getWidgetSchema('attendance_type')->setHelp('attendance_type', 'Se define el tipo de asistencia que tendrán las materias. Si se cambia de "por materia" a "por día", se perderán los valores de los cursos existentes.');
 

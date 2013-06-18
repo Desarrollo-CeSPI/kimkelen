@@ -347,12 +347,30 @@ examination_subject:
     column:               id
     with_wildcard_routes: true
 
+manual_examination_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                ExaminationSubject
+    module:               manual_examination_subject
+    prefix_path:          manual_examination_subject
+    column:               id
+    with_wildcard_routes: true
+
 examination:
   class: sfPropelRouteCollection
   options:
     model:                Examination
     module:               examination
     prefix_path:          examination
+    column:               id
+    with_wildcard_routes: true
+
+manual_examination:
+  class: sfPropelRouteCollection
+  options:
+    model:                Examination
+    module:               manual_examination
+    prefix_path:          manual_examination
     column:               id
     with_wildcard_routes: true
 
