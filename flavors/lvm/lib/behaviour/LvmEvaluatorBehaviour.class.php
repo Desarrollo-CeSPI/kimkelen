@@ -260,7 +260,10 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     $c = new Criteria();
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID, Criteria::INNER_JOIN);
-    $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getCurrentHistoriaDelArte()->getId());
+    if ($this->getCurrentHistoriaDelArte())
+    {
+      $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getCurrentHistoriaDelArte()->getId());
+    }
 
     $course_subject_students = CourseSubjectStudentPeer::doSelect($c);
 
