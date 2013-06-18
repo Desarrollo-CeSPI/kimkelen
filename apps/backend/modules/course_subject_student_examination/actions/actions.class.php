@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -33,18 +33,29 @@ require_once dirname(__FILE__).'/../lib/course_subject_student_examinationGenera
 class course_subject_student_examinationActions extends autoCourse_subject_student_examinationActions
 {
   /**
-   * redefines preExecute because this action CANT BE RISED WITHOUT A REFERENCE
+   * Redefines preExecute because this action CANT BE RISED WITHOUT A REFERENCE
    *
    */
   public function preExecute()
   {
-    if (!$this->getUser()->getReferenceFor('examination_subject'))
+    if ($this->getUser()->getAttribute('is_manual_examination_subject', false))
     {
-      $this->getUser()->setFlash('warning', 'Debe seleccionar mesa para ver sus alumnos');
-      $this->redirect("@examination_subject");
+      if (!$this->getUser()->getReferenceFor('manual_examination_subject'))
+      {
+        $this->getUser()->setFlash('warning', 'Debe seleccionar mesa para ver sus alumnos');
+        $this->redirect("@manual_examination_subject");
+      }
     }
-    parent::preExecute();
+    else
+    {
+      if (!$this->getUser()->getReferenceFor('examination_subject'))
+      {
+        $this->getUser()->setFlash('warning', 'Debe seleccionar mesa para ver sus alumnos');
+        $this->redirect("@examination_subject");
+      }
+    }
 
+    parent::preExecute();
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -74,6 +85,14 @@ class course_subject_student_examinationActions extends autoCourse_subject_stude
 
   public function executeBack(sfWebRequest $request)
   {
-    $this->redirect("@examination_subject");
+    if ($this->getUser()->getAttribute('is_manual_examination_subject', false))
+    {
+      $this->getUser()->getAttributeHolder()->remove('is_manual_examination_subject');
+      $this->redirect("@manual_examination_subject");
+    }
+    else
+    {
+      $this->redirect("@examination_subject");
+    }
   }
 }

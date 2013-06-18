@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -17,24 +17,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
-
-class ExaminationPeer extends BaseExaminationPeer
-{
-  /**
-   * Returns the next examination number for the given school year.
-   *
-   * @param SchoolYear $school_year A school year.
-   * @return integer The next examation number.
-   */
-  public static function getNextExaminationNumberFor(SchoolYear $school_year)
-  {
-    $c = new Criteria();
-    $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
-    $c->addDescendingOrderByColumn(self::EXAMINATION_NUMBER);
-
-    $obj = self::doSelectOne($c);
-
-    return $obj->getExaminationNumber() + 1;
-  }
-}
+<h2>Año lectivo: <?php echo $pager->getParameter('school_year')?></h2>

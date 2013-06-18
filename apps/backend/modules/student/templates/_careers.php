@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -17,19 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_helper('I18N')?>
+<?php use_helper('I18N') ?>
 
-<?php echo __('Career')?>
+<?php echo __('Career') ?>
 <div class="student_careers">
-  <?php $cs = $student->getLastCareerStudent(); ?>
+  <?php if ($cs = $student->getLastCareerStudent()): ?>
     <div><?php echo $cs->getCareer() ?></div>
     <div class="student_career_orientation"><?php $cs->getOrientation() != '' and print __('Orientation: %orientation%', array('%orientation%' => $cs->getOrientation())) ?></div>
     <div class="student_career_orientation"><?php $cs->getSubOrientation() != '' and print __('Sub orientation: %sub_orientation%', array('%sub_orientation%' => $cs->getSubOrientation())) ?></div>
     <?php if ($cs->isRegular() && ($cs->getCurrentStudentCareerSchoolYear())): ?>
-      <div class="student_year"><?php echo __('Year: %year%', array('%year%' => $cs->getCurrentStudentCareerSchoolYear()->getYear()))?></div>
+      <div class="student_year"><?php echo __('Year: %year%', array('%year%' => $cs->getCurrentStudentCareerSchoolYear()->getYear())) ?></div>
       <div class="student_career_repproved"><?php $cs->getCurrentStudentCareerSchoolYear()->getIsRepproved() and print __('Repproved') ?></div>
     <?php elseif ($cs->isGraduate()): ?>
-      <div class="student_career_graduate"><strong><?php echo __('Graduate')?></div>
+      <div class="student_career_graduate"><strong><?php echo __('Graduate') ?></div>
     <?php endif ?>
+  <?php endif ?>
 
 </div>

@@ -19,22 +19,14 @@
  */ ?>
 <?php
 
-class ExaminationPeer extends BaseExaminationPeer
+/**
+ * examination_subject module configuration.
+ *
+ * @package    sistema de alumnos
+ * @subpackage examination_subject
+ * @author     Your name here
+ * @version    SVN: $Id: configuration.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class manual_examination_subjectGeneratorConfiguration extends BaseManual_examination_subjectGeneratorConfiguration
 {
-  /**
-   * Returns the next examination number for the given school year.
-   *
-   * @param SchoolYear $school_year A school year.
-   * @return integer The next examation number.
-   */
-  public static function getNextExaminationNumberFor(SchoolYear $school_year)
-  {
-    $c = new Criteria();
-    $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
-    $c->addDescendingOrderByColumn(self::EXAMINATION_NUMBER);
-
-    $obj = self::doSelectOne($c);
-
-    return $obj->getExaminationNumber() + 1;
-  }
 }

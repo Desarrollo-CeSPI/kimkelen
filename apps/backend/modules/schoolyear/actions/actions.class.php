@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -109,5 +109,13 @@ class schoolyearActions extends autoSchoolyearActions
 
     $this->getUser()->setFlash('notice', 'The school year has been closed succesfully.');
     $this->redirect('@school_year');
+  }
+
+  public function executeManualExaminations(sfWebRequest $request)
+  {
+    $school_year = $this->getRoute()->getObject();
+    $this->getUser()->setReferenceFor($this);
+
+    $this->redirect('@manual_examination');
   }
 }

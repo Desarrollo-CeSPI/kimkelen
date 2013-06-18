@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -530,7 +530,8 @@ class myUser extends sfGuardSecurityUser
 
     $not_closed_examination_subjects_count = ExaminationSubjectPeer::countNotClosedExaminationSubjectsFor($school_year);
 
-    return $school_year->countExaminations() < $school_year->getMaxCourseExaminationCount() && $not_closed_examination_subjects_count == 0;
+   // return $school_year->countExaminations() < $school_year->getMaxCourseExaminationCount() && $not_closed_examination_subjects_count == 0;
+    return $not_closed_examination_subjects_count == 0;
   }
 
   public function canCreateExaminationRepproved()
@@ -551,7 +552,7 @@ class myUser extends sfGuardSecurityUser
     $this->attributeHolder->remove($name);
 
   }
-  
+
   public function canStudentAttendanceStudentAttendance()
   {
     return $this->hasCredential(array(array('edit_absense_per_subject', 'edit_absense_per_day')));
