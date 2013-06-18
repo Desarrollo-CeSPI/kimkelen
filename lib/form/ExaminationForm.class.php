@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -30,15 +30,15 @@ class ExaminationForm extends BaseExaminationForm
 {
   public function configure()
   {
-    $this->widgetSchema["examination_number"] = new sfWidgetFormInputHidden();
+   // $this->widgetSchema["examination_number"] = new sfWidgetFormInputHidden();
     $this->widgetSchema["school_year_id"] = new sfWidgetFormInputHidden();
-    
+
     $this->setWidget('date_from', new csWidgetFormDateInput());
     $this->setWidget('date_to', new csWidgetFormDateInput());
-    
+
     $this->setValidator('date_from', new mtValidatorDateString());
     $this->setValidator('date_to', new mtValidatorDateString());
-    
+
     $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare(
       "date_from",
       sfValidatorSchemaCompare::LESS_THAN_EQUAL,
@@ -46,5 +46,9 @@ class ExaminationForm extends BaseExaminationForm
       array(),
       array("invalid" => "Date from must be lesser than date to.")
     ));
+
+    $school_year = SchoolYearPeer::retrieveByPK(sfContext::getInstance()->getUser()->getReferenceFor("schoolyear"));
+    $this->getValidator('examination_number')->setOption('max', $school_year->getMaxCourseExaminationCount());
+    $this->getValidator('examination_number')->setMessage('max', 'El número de instancia de mesa no puede ser mayor que %max%');
   }
 }

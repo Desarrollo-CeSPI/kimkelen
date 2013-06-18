@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -912,6 +912,11 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(CourseSubjectStudentPeer::STUDENT_APPROVED_COURSE_SUBJECT_ID, null, Criteria::ISNULL);
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
 
+    $c->addJoin(CourseSubjectStudentPeer::ID, CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, Criteria::INNER_JOIN);
+    $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $examination_subject->getExamination()->getExaminationNumber());
+
+    $c->add(CourseSubjectStudentExaminationPeer::IS_ABSENT, false);
+    $c->addAnd(CourseSubjectStudentExaminationPeer::MARK, null, Criteria::ISNULL);
 
     //Quito los que ya la aprobaron
     $approved_criteria = new Criteria();

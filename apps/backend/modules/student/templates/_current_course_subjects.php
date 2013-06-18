@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -35,7 +35,7 @@
           <?php echo __(CourseType::getInstance('CourseType')->getStringFor($course_type))?>
         </th>
       <tr>
-    
+
       <tr>
         <th id="subject"><?php echo __("Subject") ?></th>
         <?php for($i = 1; $i <= $marks; $i++):?>
@@ -81,7 +81,7 @@
             <div>
               <?php echo link_to(__("Details"), "student/historyDetails?career_student_id=".$career_student->getId()."&course_subject_student_id=".$course_subject_student->getId() . '&back_url=' .$back_url ) ?>
             </div>
-            <?php if ($sf_user->hasCredential('admin')):?>
+            <?php if ($sf_user->hasCredential('edit_closed_examination') && $sf_user->hasCredential('edit_examination_subject_califications')):?>
               </div>
                 <?php echo link_to(__('Edit'), 'student/editCourseSubjectStudentHistory?course_subject_student_id=' . $course_subject_student->getId());?>
               </div>

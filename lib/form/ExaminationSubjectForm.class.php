@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -35,7 +35,7 @@ class ExaminationSubjectForm extends BaseExaminationSubjectForm
       $this["career_subject_school_year_id"],
       $this["is_closed"]
     );
-    
+
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("multiple", true);
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("peer_method", 'doSelectActive');
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("renderer_class", "csWidgetFormSelectDoubleList");
