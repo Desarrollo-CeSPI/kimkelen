@@ -55,16 +55,12 @@ class manual_examinationActions extends autoManual_examinationActions
     parent::preExecute();
   }
 
-  /*
   public function executeNew(sfWebRequest $request)
   {
     parent::executeNew($request);
 
     $this->form->setDefault("school_year_id", $this->school_year->getId());
-    $examination_number = ExaminationPeer::getNextExaminationNumberFor($this->school_year);
-    $this->form->setDefault("examination_number", $examination_number);
   }
-   */
 
   public function executeExaminationSubjects(sfWebRequest $request)
   {

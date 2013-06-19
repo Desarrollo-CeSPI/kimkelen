@@ -12,13 +12,21 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
     parent::configure();
 
     unset($this['is_closed']);
+
     $this->setWidget("examination_id", new sfWidgetFormInputHidden());
-    $this->setWidget("career_subject_school_year_id", new sfWidgetFormPropelChoice(array('model' => 'CareerSubjectSchoolYear', 'add_empty' => false)));
+
+    $c = new Criteria();
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID, Criteria::INNER_JOIN);
+    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+
+    $this->setWidget("career_subject_school_year_id", new sfWidgetFormPropelChoice(array(
+      'model' => 'CareerSubjectSchoolYear',
+      'add_empty' => false,
+      'criteria' => $c
+    )));
+
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("multiple", true);
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("peer_method", 'doSelectActive');
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("renderer_class", "csWidgetFormSelectDoubleList");
-
-   
-    }
-
+  }
 }
