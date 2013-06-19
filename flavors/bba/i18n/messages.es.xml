@@ -4172,6 +4172,26 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>Copy students from another course to %course%</source>
               <target>Copiar alumnos de otra comisión en %course%</target>
             </trans-unit>
+            <trans-unit>
+              <source>Examinations (manual)</source>
+              <target>Mesas de examen (manejo manual)</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Examination number</source>
+              <target>Instancia</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New Manual examination subject</source>
+              <target>Nueva mesa de examen (manejo manual)</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Edit Manual examination subject</source>
+              <target>Editar mesa de examen (manejo manual)</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Subjects (manual)</source>
+              <target>Materias (manejo manual)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

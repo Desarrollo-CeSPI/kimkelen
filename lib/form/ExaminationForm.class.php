@@ -30,7 +30,6 @@ class ExaminationForm extends BaseExaminationForm
 {
   public function configure()
   {
-   // $this->widgetSchema["examination_number"] = new sfWidgetFormInputHidden();
     $this->widgetSchema["school_year_id"] = new sfWidgetFormInputHidden();
 
     $this->setWidget('date_from', new csWidgetFormDateInput());

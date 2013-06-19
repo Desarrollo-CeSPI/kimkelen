@@ -14,7 +14,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        title: Examinations
+        title: Examinations (manual)
         batch_actions: []
         layout: stacked
         params: |

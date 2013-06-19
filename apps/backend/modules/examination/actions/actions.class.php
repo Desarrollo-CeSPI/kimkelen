@@ -60,9 +60,6 @@ class examinationActions extends autoExaminationActions
     parent::executeNew($request);
       
     $this->form->setDefault("school_year_id", $this->school_year->getId());
-    
-    $examination_number = ExaminationPeer::getNextExaminationNumberFor($this->school_year);
-    $this->form->setDefault("examination_number", $examination_number);
   }
   
   public function executeExaminationSubjects(sfWebRequest $request)

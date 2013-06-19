@@ -37,7 +37,15 @@ class SchoolYear extends BaseSchoolYear
     $c->add(CareerSchoolYearPeer::IS_PROCESSED, true);
     $count_procesed = $this->countCareerSchoolYears($c);
     return ($count_careers == $count_procesed);
-
+  }
+  
+  public function canManualExamination(PropelPDO $con = null)
+  {
+    $count_careers = $this->countCareerSchoolYears();
+    if ($count_careers == 0)
+      return false;
+    
+    return $this->getId() == SchoolYearPeer::retrieveCurrent()->getId();
   }
 
   public function getMessageCantExamination()

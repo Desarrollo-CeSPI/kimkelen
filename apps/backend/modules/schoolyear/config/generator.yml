@@ -57,6 +57,7 @@ generator:
             action: manualExaminations
             label: Mesas de examen (manejo manual)
             credentials: [show_examination]
+            condition: canManualExamination
 
           examination_repproved:
             action: examinationRepproved
