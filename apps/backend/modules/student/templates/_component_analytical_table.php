@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -47,7 +47,7 @@
             <tr>
               <td><?php echo $subject->getCareerSubject()->getSubject() ?></td>
               <td><?php echo $subject->getSchoolYear() ?></td>
-              <td><?php echo format_date($subject->getApprovationDate(), "MMMM") ?></td>
+              <td><?php  // echo format_date($subject->getApprovationDate(), "MMMM") ?></td>
               <td><?php echo $subject->getResult(false) ?></td>
               <td><?php echo $subject->getMark() ?></td>
               <td><?php echo $subject->getMethod() ?></td>
