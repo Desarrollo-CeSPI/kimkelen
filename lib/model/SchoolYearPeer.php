@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -69,5 +69,14 @@ class SchoolYearPeer extends BaseSchoolYearPeer
     $c->add(self::ID, $school_year->getId(), Criteria::LESS_THAN);
 
     return self::doSelectOne($c);
+  }
+
+  static public function retrieveLastYearSchoolYears($school_year)
+  {
+    $c = new Criteria();
+    $c->addDescendingOrderByColumn(self::YEAR);
+    $c->add(self::ID, $school_year->getId(), Criteria::LESS_THAN);
+
+    return self::doSelect($c);
   }
 }
