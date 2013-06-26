@@ -300,21 +300,21 @@ classes:
         type:             integer
         foreignTable:     career_subject
         foreignReference: id
-        required:         true        
+        required:         true
         onDelete:         restrict
       student_id:
         description:      Referencia al estudiante
         type:             integer
         foreignTable:     student
         foreignReference: id
-        required:         true        
+        required:         true
         onDelete:         restrict
       school_year_id:
         description:      Referencia al school_year en que se asento la nota
         type:             integer
         foreignTable:     school_year
         foreignReference: id
-        required:         true        
+        required:         true
         onDelete:         restrict
       mark:
         description:      Nota que obtuvo el alumno
@@ -346,7 +346,7 @@ classes:
         type:             integer
         foreignTable:     course_subject
         foreignReference: id
-        required:         true        
+        required:         true
         onDelete:         restrict
       student_id:
         description:      Referencia al estudiante
@@ -396,7 +396,7 @@ classes:
         type:             integer
         foreignTable:     course_subject_student
         foreignReference: id
-        required:         true        
+        required:         true
         onDelete:         restrict
       examination_number:
         description:      Representa el numero de mesa en que rinde (Refiriendose a Diciembre, Marzo , etc)
@@ -410,7 +410,7 @@ classes:
         required:         false
         onDelete:         setnull
         onUpdate:         setnull
-      _indexes:        
+      _indexes:
         course_subject: [course_subject_student_id]
         student_approved_career_subject: [student_approved_career_subject_id]
 
@@ -547,6 +547,8 @@ classes:
     description:          Representa a un alumno que se llevo una previa de la materia de un curso
     columns:
       id:
+      created_at:
+      updated_at:
       course_subject_student_id:
         description:      Referencia a un alumno en una materia de un curso
         type:             integer
