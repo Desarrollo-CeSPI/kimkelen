@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -30,12 +30,14 @@
 
   </tr>
   <?php $avg_mark = 0 ?>
-  <?php $all_approved = true; ?>
+  <?php $count_approved = 0 ?>
+  <?php $approved = true; ?>
   <?php foreach ($course_subject_students as $course_subject_student): ?>
     <?php $course_result = $course_subject_student->getCourseResult() ?>
     <?php if ($course_result): ?>
-      <?php $all_approved = ($all_approved && $course_result->isApproved()) ?>
-      <?php if ($all_approved): ?>
+      <?php $approved = ($approved && $course_result->isApproved()) ?>
+      <?php if ($approved): ?>
+  <?php $count_approved++; ?>
         <?php $avg_mark += $course_result->getFinalMark() ?>
       <?php endif ?>
     <?php endif; ?>
@@ -56,7 +58,7 @@
       <?php if ($first): ?>
         <?php $first = false; ?>
         <td rowspan="3">
-          <?php if ($all_approved): ?>
+          <?php if ($count_approved == 3): ?>
             <?php echo sprintf('%.4s', ($avg_mark / 3)); ?>
           <?php endif ?>
         </td>
