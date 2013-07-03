@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -26,12 +26,11 @@ class ExaminationRepproved extends BaseExaminationRepproved
     return $this->getName();
   }
 
-
   public function canDelete()
   {
     $can_delete = true;
 
-    foreach ($this->getExaminationRepprovedSubjects() as $examination_repproved_subject) 
+    foreach ($this->getExaminationRepprovedSubjects() as $examination_repproved_subject)
     {
       $can_delete = $can_delete && $examination_repproved_subject->canDelete();
     }
@@ -42,5 +41,10 @@ class ExaminationRepproved extends BaseExaminationRepproved
   public function getExaminationRepprovedTypeStr()
   {
   	return BaseCustomOptionsHolder::getInstance('ExaminationRepprovedType')->getStringFor($this->getExaminationType());
+  }
+
+  public function canEdit()
+  {
+    return $this->getSchoolYear()->getIsActive();
   }
 }

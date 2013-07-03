@@ -541,6 +541,14 @@ class myUser extends sfGuardSecurityUser
     return  ExaminationRepprovedSubjectPeer::canCreateExaminationRepprovedFor($school_year) && $school_year->getIsActive();
   }
 
+  public function canCreateExaminationRepprovedSubject()
+  {
+    $school_year = SchoolYearPeer::retrieveByPK($this->getReferenceFor("schoolyear"));
+
+    return  $school_year->getIsActive() && StudentRepprovedCourseSubjectPeer::doCount(new Criteria()) > 0;
+
+  }
+
   public function canCreateFinalExamination()
   {
     $school_year = SchoolYearPeer::retrieveByPK($this->getReferenceFor("schoolyear"));

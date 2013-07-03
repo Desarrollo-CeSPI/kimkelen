@@ -1825,3 +1825,8 @@ div.wc-cal-event{
 {
   background-image: url('../images/report.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_manual_examinations a
+{
+  background-image: url('../images/handmade.png') !important;
+}

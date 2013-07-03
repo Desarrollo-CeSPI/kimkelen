@@ -63,7 +63,6 @@ generator:
             action: examinationRepproved
             label: Examination repproved
             credentials: [show_examination_repproved]
-            condition:  canExaminationRepproved
 
           close_year:
             action: closeSchoolYear
