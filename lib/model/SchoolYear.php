@@ -38,13 +38,13 @@ class SchoolYear extends BaseSchoolYear
     $count_procesed = $this->countCareerSchoolYears($c);
     return ($count_careers == $count_procesed);
   }
-  
+
   public function canManualExamination(PropelPDO $con = null)
   {
     $count_careers = $this->countCareerSchoolYears();
     if ($count_careers == 0)
       return false;
-    
+
     return $this->getId() == SchoolYearPeer::retrieveCurrent()->getId();
   }
 
@@ -110,8 +110,8 @@ class SchoolYear extends BaseSchoolYear
   public function canChangedState()
   {
     $current = SchoolYearPeer::retrieveCurrent();
-    return !$this->getIsActive() && $current->getIsClosed();
 
+    return !$this->getIsActive() && $current->getIsClosed() && !$this->getIsClosed();
   }
 
   /**

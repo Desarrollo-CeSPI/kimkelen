@@ -4082,6 +4082,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>Subjects (manual)</source>
               <target>Materias (manejo manual)</target>
             </trans-unit>
+            <trans-unit>
+              <source>Last year school year is still open</source>
+              <target>No puede matricular alumnos en al año lectivo cuando aún está abierto el año lectivo anterior.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

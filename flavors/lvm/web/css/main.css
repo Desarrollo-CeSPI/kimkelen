@@ -1782,3 +1782,13 @@ div.wc-cal-event{
 {
   background-image: url('../images/handmade.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_close_year a
+{
+  background-image: url('../images/school_year_close.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
+{
+  background-image: url('../images/enrolment.png') !important;
+}
