@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -383,14 +383,22 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
   public function canMatriculateStudentsFromLastYear()
   {
-    return $this->countStudentCareerSchoolYears() == 0;
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
 
+    return $last_school_year->getIsClosed() && $this->countStudentCareerSchoolYears() == 0;
   }
 
   public function getMessageCantMatriculateStudentsFromLastYear()
   {
-    return 'No previous school year';
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
 
+     if (!$last_school_year->getIsClosed())
+    {
+      return 'Last year school year is still open';
+    }
+    else{
+      return 'No previous school year';
+    }
   }
 
   public function matriculateLastYearStudents()
