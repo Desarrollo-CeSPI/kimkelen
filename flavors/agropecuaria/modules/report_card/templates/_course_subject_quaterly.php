@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -36,7 +36,7 @@
         <?php if ($course_subject_student->getCourseSubject()->getCourseType() == CourseType::BIMESTER): ?>
           <?php $configs = $course_subject_student->getCourseSubject()->getCourseSubjectConfigurations(); ?>
           <?php $config = array_shift($configs); ?>
-          <?php if ($config->parentIsFirst()): ?>
+          <?php if ($config && $config->parentIsFirst()): ?>
             <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
             <td>--</td>
           <?php else: ?>

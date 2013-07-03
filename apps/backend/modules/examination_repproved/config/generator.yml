@@ -23,6 +23,7 @@ generator:
 
           _edit:
             credentials:  [edit_examination_repproved]
+            condition: canEdit
 
           subjects:
             label: Subjects
@@ -32,7 +33,7 @@ generator:
           _delete:
             credentials:  [edit_examination_repproved]
             condition: canDelete
-            
+
         actions:
 
           back:
