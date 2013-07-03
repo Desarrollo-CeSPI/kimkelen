@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -115,28 +115,31 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
 
 
   /**
-  * This method returns the average of marks for the mark_number and de course_type
-  *
-  * @return string
-  */
+   * This method returns the average of marks for the mark_number and course_type
+   *
+   * @return string
+   */
   public function getAverageFor($mark_number, $course_type)
-  {        
+  {
     $course_subject_students = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForCourseType($this->getStudent(), $course_type, $this->getSchoolYear());
     $avg = 0;
+    $count = 0;
 
-    foreach ($course_subject_students as $course_subject_student) 
+    foreach ($course_subject_students as $course_subject_student)
     {
       $course_subject_student_mark = $course_subject_student->getMarkFor($mark_number);
-
-      if (!$course_subject_student_mark->getIsClosed())
+      if (!is_null($course_subject_student_mark))
       {
-        return '';
+        $count++;
+        if (!$course_subject_student_mark->getIsClosed())
+        {
+          return '';
+        }
+
+        $avg = $course_subject_student_mark->getMark() + $avg;
       }
-
-      $avg = $course_subject_student_mark->getMark() + $avg;
-    }   
-
-    $avg = $avg / count($course_subject_students);
+    }
+    $avg = $avg / $count;
 
     $avg = sprintf('%.4s', $avg);
     return $avg;

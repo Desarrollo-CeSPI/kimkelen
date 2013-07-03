@@ -41,14 +41,19 @@ generator:
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
-            
+
         batch_actions: []
         actions:
           back:
             action: back
           _new:
+            condition: canCreateExaminationRepprovedSubject
+
       filter:
         class:  false
       form:    ~
-      edit:    ~
+      edit:
+        actions:
+          _list:
+          _save:
       new:     ~

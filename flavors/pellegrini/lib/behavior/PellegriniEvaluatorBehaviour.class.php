@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -140,6 +140,42 @@ class PellegriniEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $average = 7;
     parent::createStudentApprovedCourseSubject($course_subject_student, $average, $con);
 
+  }
+
+    /**
+   * If the student approves the previous, then it creates a student_approved_career_subject for this student
+   *
+   * @param StudentExaminationRepprovedSubject $student_examination_repproved_subject
+   * @param PropelPDO $con
+   */
+  public function closeStudentExaminationRepprovedSubject(StudentExaminationRepprovedSubject $student_examination_repproved_subject, PropelPDO $con)
+  {
+    if ($student_examination_repproved_subject->getMark() >= self::EXAMINATION_NOTE)
+    {
+      $student_approved_career_subject = new StudentApprovedCareerSubject();
+      $student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
+      $student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
+      $student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());
+
+      //Final average is directly student_examination_repproved_subject mark
+      $mark = (string) ($student_examination_repproved_subject->getMark());
+
+      $mark = sprintf('%.4s', $mark);
+      if ($mark < self::MIN_NOTE)
+      {
+        $mark = self::MIN_NOTE;
+      }
+      $student_approved_career_subject->setMark($mark);
+
+      $student_repproved_course_subject = $student_examination_repproved_subject->getStudentRepprovedCourseSubject();
+      $student_repproved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
+      $student_repproved_course_subject->save($con);
+
+
+      $student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
+
+      $student_approved_career_subject->save($con);
+    }
   }
 
 }
