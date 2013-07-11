@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -160,7 +160,7 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
   static public function retrieveByDay($day,$course_type)
   {
     $date = date('Y-m-d' ,$day);
-    self::retrieveByDateAndCourseType($date, $course_type);
+    return self::retrieveByDateAndCourseType($date, $course_type);
   }
 
   static public function retrieveByDateAndCourseType($date, $course_type)
@@ -170,7 +170,7 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
     $c->add(self::END_AT, $date, Criteria::GREATER_EQUAL);
 
     $c->add(self::COURSE_TYPE,$course_type);
-     
+
     return self::doSelectOne($c);
   }
 

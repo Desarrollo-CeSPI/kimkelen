@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -41,7 +40,7 @@
       <span><strong><?php echo 'Condición'; ?></strong>:
         <?php if ($examination_subject->getExamination()->getExaminationNumber() == 1): ?>
           <?php echo 'Regulares'; ?>
-        <? elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
+        <?php elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
           <?php echo 'Febrero/Marzo'; ?>
         <?php else: echo 'Previas'; ?>
         <?php endif; ?></span>
@@ -68,7 +67,12 @@
             <td><?php echo $student ?> </td>
             <td><?php echo $student->getPerson()->getIdentificationNumber() ?> </td>
             <td><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear(), $student)); ?> </td>
-            <td> <?php echo $examination_subject->getExaminationNoteForStudent($student)->getMark() ?> </td>
+            <?php $csse = $examination_subject->getExaminationNoteForStudent($student); ?>
+            <?php if ($csse->getIsAbsent()): ?>
+              <td><?php echo __('Is absent') ?></td>
+            <?php else: ?>
+              <td> <?php echo $examination_subject->getExaminationNoteForStudent($student)->getMark() ?> </td>
+            <?php endif; ?>
           </tr>
           <?php $i++; ?>
         <?php endforeach; ?>

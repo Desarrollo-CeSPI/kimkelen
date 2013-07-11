@@ -3150,7 +3150,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Justificated absences</source>
-                <target>Ausencia justificadas</target>
+                <target>Ausencias justificadas</target>
             </trans-unit>
             <trans-unit>
                 <source>Change Password for user %user%</source>
@@ -4085,6 +4085,26 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Last year school year is still open</source>
               <target>No puede matricular alumnos en al año lectivo cuando aún está abierto el año lectivo anterior.</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Withdraw</source>
+              <target>Retirado</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Withdraw student</source>
+              <target>Retirar del establecimiento</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Undo withdraw student</source>
+              <target>Deshacer retirar del establecimiento</target>
+            </trans-unit>
+            <trans-unit>
+              <source>The student cant be withdrawn because it is still matriculated.</source>
+              <target>El estudiante no puede ser retirado porque aún está matriculado en el año lectivo.</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Undo withdraw can be done only if student is withdrawn.</source>
+              <target>El estudiante no está en estado retirado.</target>
             </trans-unit>
         </body>
     </file>
