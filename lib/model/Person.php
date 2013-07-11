@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -199,6 +199,10 @@ class Person extends BasePerson
 
   }
 
+   public function getIsActiveString()
+  {
+    return $this->getIsActive()? 'Sí': 'No';
+  }
 }
 
 sfPropelBehavior::add('Person', array('changelog'));

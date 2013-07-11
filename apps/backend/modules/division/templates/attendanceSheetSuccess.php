@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -57,24 +57,21 @@
               <th  class="student_fix"><?php echo $student ?></th>
               <?php foreach ($days as $day): ?>
 
-
-
-
                 <?php if ($user_course_subject): ?>
                   <?php if (is_null($period)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $course_subject->getCourseType()); ?>
                     <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period) ?>
                   <?php elseif ($period->getEndAt() < date('Y-m-d', $day)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $course_subject->getCourseType()); ?>
-                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period) ?>
+                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
                   <?php endif ?>
                 <?php else: ?>
                   <?php if (is_null($period)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $division->getCourseType()); ?>
-                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period) ?>
+                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
                   <?php elseif ($period->getEndAt() < date('Y-m-d', $day)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $division->getCourseType()); ?>
-                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period) ?>
+                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
                   <?php endif ?>
                 <?php endif ?>
 
@@ -85,7 +82,7 @@
 
                   <?php $total = $total + $student_attendance->getValue(); ?>
                   <td  class="<?php echo ($student_attendance->getStudentAttendanceJustification()) ? 'box_justificated' : $clasz ?>"  style="text-align:center">
-                    <?php echo SchoolBehaviourFactory::getInstance()->getFormattedAssistanceValue($student_attendance) ?>
+                    <?php echo SchoolBehaviourFactory::getInstance()->getFormattedAssistanceValue($student_attendance); ?>
                   </td>
 
                 <?php else: ?>
