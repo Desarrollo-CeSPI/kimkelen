@@ -55,18 +55,22 @@ generator:
             decorator: text
           person_is_active:
             label: Is Active?
-            method: getPersonIsActive
-            decorator: integer
+            method: getPersonIsActiveString
+            decorator: text
           is_registered:
             label: School year registered?
-            method: getIsRegistered
-            decorator: integer
+            method: getIsRegisteredString
+            decorator: text
+          division:
+            label:  División/es
+            method: getCurrentDivisionsString
+            decorator:  text
           current_year:
             label:  Año de cursada
             method: getCurrentCourseYear
             decorator:  integer
           repetitive_curse_subject:
-            label:  Materias que desaprobo
+            label:  Materias que desaprobó
             method: getStudentDisapprovedCourseSubjectString
             decorator:  text
           speciality:
@@ -74,7 +78,7 @@ generator:
             method: getStudentSpecialityString
             decorator:  text
           orientation:
-            label:  Orientacion
+            label:  Orientación
             method: getStudentOrientationString
             decorator:  text
       fields:
@@ -130,7 +134,6 @@ generator:
             label: School year register
             credentials: [edit_student]
             action: registerForCurrentSchoolYear
-            credentials: [edit_student]
 
           manage_orientation:
             label:  Cambiar orientacion
@@ -157,8 +160,8 @@ generator:
           deactivate:
             label: Set inactive
             credentials: [edit_student]
-            action: personActivation
-            condition: canPersonBeDeactivated
+            action: deactivate
+            condition: canBeDeactivated
 
           brothers:
             credentials: [edit_student]
@@ -197,6 +200,18 @@ generator:
           print_details:
             label: print details of student
             action: printDetails
+
+          withdraw:
+            label: Withdraw student
+            credentials: [edit_student]
+            action: withdrawStudent
+            condition: canBeWithdrawn
+
+          undo_withdraw:
+            label: Undo withdraw student
+            credentials: [edit_student]
+            action: undoWithdrawStudent
+            condition: canUndoWithdrawn
       filter:
 
       form:    ~
@@ -267,7 +282,7 @@ generator:
           deactivate:
             label: Set inactive
             credentials: [edit_student]
-            action: personActivation
+            action: personDeactivation
             condition: canPersonBeDeactivated
           print_report_card:
             label:  print report card

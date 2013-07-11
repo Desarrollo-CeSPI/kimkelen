@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -37,13 +37,12 @@
       <span><strong><?php echo 'Condición'; ?></strong>:
         <?php if ($examination_subject->getExamination()->getExaminationNumber() == 1): ?>
           <?php echo 'Regulares'; ?>
-        <? elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
+        <? else: ?>
           <?php echo 'Febrero/Marzo'; ?>
-        <?php else: echo 'Previas'; ?>
         <?php endif; ?></span>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
     </div>
-    <p>Acta de los examenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
+    <p>Acta de exámenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
     <p>Examinados los alumnos que se mencionan a continuación, han merecido las calificaciones consignadas en la presente Acta,
       que firman los señores profesores <strong><?php echo $examination_subject->getTeachersToString(); ?></strong>.
 

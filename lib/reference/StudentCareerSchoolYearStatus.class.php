@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -25,13 +25,15 @@ class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
     IN_COURSE       = 0,
     APPROVED        = 1,
     REPPROVED       = 2,
-    LAST_YEAR_REPPROVED       = 3;
+    LAST_YEAR_REPPROVED       = 3,
+    WITHDRAWN        = 4;
 
   protected
     $_options = array(
         self::IN_COURSE       => 'Cursando',
         self::APPROVED        => 'Aprobado',
         self::REPPROVED       => 'Repitio este año',
-        self::LAST_YEAR_REPPROVED => 'Repetidor del año pasado, pero cursando año lectivo actual'
+        self::LAST_YEAR_REPPROVED => 'Repetidor del año pasado, pero cursando año lectivo actual',
+        self::WITHDRAWN => 'Retirado de la institución'
       );
 }

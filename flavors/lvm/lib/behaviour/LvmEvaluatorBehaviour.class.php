@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -263,7 +263,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID, Criteria::INNER_JOIN);
     $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getCurrentHistoriaDelArte()->getId());
-    
+
     $course_subject_students = CourseSubjectStudentPeer::doSelect($c);
 
 
@@ -478,57 +478,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
          return false;
     }
 
-   #Si se incluye esta linea  y un alumno aprueba una materia como provia se setea el schoolyear que rindio, y no el actual!
-   # $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $this->getHistoriaDelArteForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear())->getId());
-//    var_dump($cant);
-//    $is_coursing_historia = CourseSubjectStudentPeer::doCount($c);
-
-    //SOLO SI CURSO HISTORIA DEL ARTE VISUAL Y MUSICAL SE DEBE RESTAR UNO
-//    if ($student_career_school_year->getYear() == 6 && $is_coursing_historia)
-//    {
-//      $cant--;
-//    }
-
-    #aca se cuentan todas las materias que tiene aprobadas en el año
     return true;
-//    return $cant <= CourseSubjectStudentPeer::doCount(StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year));
-
-  }
-
-  /**
-   * If the student approves the previous, then it creates a student_approved_career_subject for this student
-   *
-   * @param StudentExaminationRepprovedSubject $student_examination_repproved_subject
-   * @param PropelPDO $con
-   */
-  public function closeStudentExaminationRepprovedSubject(StudentExaminationRepprovedSubject $student_examination_repproved_subject, PropelPDO $con)
-  {
-    if ($student_examination_repproved_subject->getMark() >= self::EXAMINATION_NOTE)
-    {
-      $student_approved_career_subject = new StudentApprovedCareerSubject();
-      $student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
-      $student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
-      $student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());
-
-      //Final average is directly student_examination_repproved_subject mark
-      $mark = (string) ($student_examination_repproved_subject->getMark());
-
-      $mark = sprintf('%.4s', $mark);
-      if ($mark < self::MIN_NOTE)
-      {
-        $mark = self::MIN_NOTE;
-      }
-      $student_approved_career_subject->setMark($mark);
-
-      $student_repproved_course_subject = $student_examination_repproved_subject->getStudentRepprovedCourseSubject();
-      $student_repproved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
-      $student_repproved_course_subject->save($con);
-
-
-      $student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
-
-      $student_approved_career_subject->save($con);
-    }
   }
 
   //This function is a hack for Historia del arte
@@ -564,5 +514,49 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
    public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
   {
     return (($average > self::MIN_NOTE)) ? self::DECEMBER : self::FEBRUARY;
+  }
+
+  /**
+   * If the student approves examination repproved, then it creates a student_approved_career_subject for this student
+   *
+   * @param StudentExaminationRepprovedSubject $student_examination_repproved_subject
+   * @param PropelPDO $con
+   */
+  public function closeStudentExaminationRepprovedSubject(StudentExaminationRepprovedSubject $student_examination_repproved_subject, PropelPDO $con)
+  {
+    if ($student_examination_repproved_subject->getMark() >= $this->getExaminationNote())
+    {
+      $student_approved_career_subject = new StudentApprovedCareerSubject();
+      $student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
+      $student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
+      $student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());
+
+      $examination_type = $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType();
+      if ($examination_type == ExaminationRepprovedType::REPPROVED)
+      {
+        //If it is a previous examination instance, final average is the average of the course_subject_student and the mark of student_examination_repproved_subject
+        $average = (string) (($student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getMarksAverage() + $student_examination_repproved_subject->getMark()) / 2);
+
+        $average = sprintf('%.4s', $average);
+        if ($average < self::MIN_NOTE)
+        {
+          $average = self::MIN_NOTE;
+        }
+      }
+      else // if it's a free examination instance, mark is simply the mark gotten at the exam
+      {
+        $average = $student_examination_repproved_subject->getMark();
+      }
+      $student_approved_career_subject->setMark($average);
+
+      $student_repproved_course_subject = $student_examination_repproved_subject->getStudentRepprovedCourseSubject();
+      $student_repproved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
+      $student_repproved_course_subject->save($con);
+
+      ##se agrega el campo en student_disapproved_course_subject a el link del resultado final
+      $student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
+
+      $student_approved_career_subject->save($con);
+    }
   }
 }

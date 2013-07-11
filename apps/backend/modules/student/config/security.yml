@@ -30,6 +30,12 @@ registerForCurrentSchoolYear:
 
 canBeManagedForCareerSubjectAllowed:
   credentials: [edit_student]
-  
+
 free:
   credentials: [set_free]
+
+withdraw:
+  credentials: [edit_student]
+
+undo_withdraw:
+  credentials: [edit_student]

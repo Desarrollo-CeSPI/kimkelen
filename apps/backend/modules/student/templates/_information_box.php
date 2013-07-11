@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -20,5 +20,5 @@
 <div class="box">
   <span class='box_free'><?php echo __('Free')?></span>
   <span class='box_almost_free'><?php echo __('Almost free')?></span>
-  <span class='box_justificated_studet_show'><?php echo __('Justificated absences')?></span>
+  <span class='box_justificated_student_show'><?php echo __('Justificated absences')?></span>
 </div>
