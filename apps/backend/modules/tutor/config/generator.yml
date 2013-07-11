@@ -12,15 +12,51 @@ generator:
 
     config:
       actions:
+      exportation:
+        enabled: true
+        title: Tutor List
+        type: xls
+        fieldSelection:
+          lastname:
+            label: Lastname
+            method: getPersonLastname
+            decorator: text
+          person_firstname:
+            label: Firstname
+            method: getPersonFirstname
+            decorator: text
+          person_full_identification:
+            label: Identification number
+            method: getPersonFullIdentification
+            decorator: text
+          tutor_type:
+            label: Tutor type
+            method: getTutorType
+            decorator: text
+          in_charge_of:
+            label: In charge of
+            method: getStudentTutorsString
+            decorator: text
+          person_phone:
+            label: Phone
+            method: getPersonPhone
+            decorator: text
+          person_email:
+            label: Email
+            method: getPersonEmail
+            decorator: text
+          person_address:
+            label: Address
+            method: getPersonAddress
+            decorator: text
       fields:
-        #necesario para que no se cuelque el list
+        #necesario para que no se cuelgue el list
         person:
         person_lastname:                  { label: Lastname, column_name: PersonPeer::LASTNAME }
         person_firstname:                 { label: Firstname, column_name: PersonPeer::FIRSTNAME }
         person_full_identification:       { label: Identification number, column_name: PersonPeer::IDENTIFICATION_NUMBER }
         person_sf_guard_user:             { label: Username }
-        # person_is_active:    { label: Activo, type: Boolean }
-        student_tutor:  { label: In charge of}
+        student_tutor:  { label: In charge of }
 
       list:
         peer_method:       doSelectJoinAll
@@ -30,6 +66,7 @@ generator:
         actions:
           _new:
             credentials:   [edit_tutor]
+          _user_export:
         object_actions:
           _show:
             credentials:   [show_tutor]
