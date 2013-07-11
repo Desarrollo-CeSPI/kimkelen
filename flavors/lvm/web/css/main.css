@@ -1124,7 +1124,7 @@ table.list
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: greenyellow !important;
+    background-color: #F29A79 !important;
 }
 .box_free
 {
@@ -1140,11 +1140,11 @@ table.list
     background-color: greenyellow !important;
 }
 
-.box_justificated_studet_show
+.box_justificated_student_show
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: #F29A79 !important;
+    background-color: greenyellow !important;
 }
 .nc_changelog_tooltip
 {
@@ -1791,4 +1791,21 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
 {
   background-image: url('../images/enrolment.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_withdraw a
+{
+  background-image: url('../images/withdraw.png') !important;
+}
+
+.student_career_withdraw
+{
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #F37321;
+}
+
+.sf_admin_list .sf_admin_action_undo_withdraw a
+{
+  background-image: url('../images/undo_withdraw.png') !important;
 }

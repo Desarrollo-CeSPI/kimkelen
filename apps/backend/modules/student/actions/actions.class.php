@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -208,14 +208,28 @@ class studentActions extends autoStudentActions
   }
 
   /**
-   * This action (de)activates person
+   * This action activates person
    *
    * @param sfWebRequest $request
    */
   public function executePersonActivation(sfWebRequest $request)
   {
     $this->related_person = $this->getRoute()->getObject();
-    $this->related_person->getPerson()->setIsActive(!$this->related_person->getPersonIsActive());
+    $this->related_person->getPerson()->setIsActive(true);
+    $this->related_person->save();
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@student');
+  }
+
+  /**
+   * This action deactivates person
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeDeactivate(sfWebRequest $request)
+  {
+    $this->related_person = $this->getRoute()->getObject();
+    $this->related_person->getPerson()->setIsActive(false);
     $this->related_person->save();
     $this->getUser()->setFlash('info','The item was updated successfully.');
     $this->redirect('@student');
@@ -535,5 +549,24 @@ class studentActions extends autoStudentActions
   {
     $this->setLayout('cleanLayout');
     $this->student = $this->getRoute()->getObject();
+  }
+
+  public function executeWithdrawStudent()
+  {
+    $student = $this->getRoute()->getObject();
+    $student->getCurrentStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
+    $student->getCurrentStudentCareerSchoolYear()->save();
+
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@student');
+  }
+
+  public function executeUndoWithdrawStudent(){
+    $student = $this->getRoute()->getObject();
+    $student->getCurrentStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::IN_COURSE);
+    $student->getCurrentStudentCareerSchoolYear()->save();
+
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@student');
   }
 }

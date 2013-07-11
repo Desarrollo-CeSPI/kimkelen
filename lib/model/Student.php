@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -230,7 +230,7 @@ class Student extends BaseStudent
 
   }
 
-  public function getMessageCantPersonBeDeactivated()
+  public function getMessageCantBeDeactivated()
   {
     return "The student cant be deactivated because is already inactive or is matriculed.";
 
@@ -1104,7 +1104,7 @@ class Student extends BaseStudent
     {
 
       if ($course_result->getCareerSchoolYear()->getSubjectConfiguration()->getNecessaryStudentApprovedCareerSubjectToShowPromDef())
-      {        
+      {
         return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? $student_approved_career_subject->getMark() : '&nbsp';
       }
       else
@@ -1121,10 +1121,10 @@ class Student extends BaseStudent
   public function canBeDeactivated()
   {
     $c = new Criteria();
-    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-    $c->addJoin(CareerSchoolYearPeer::ID, StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
-    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
-    return count(StudentCareerSchoolYearPeer::doSelect($c)) == 0;
+    $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+    $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+
+    return (count(SchoolYearStudentPeer::doSelect($c)) == 0) && ($this->getPerson()->getIsActive());
   }
 
   public function getCareerFromStudentStatsFilters()
@@ -1199,7 +1199,7 @@ class Student extends BaseStudent
   }
 
   public function getCourseSubjectStudentsForSchoolYear($school_year)
-  {    
+  {
     $c = new Criteria();
     $c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
     $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
@@ -1218,6 +1218,37 @@ class Student extends BaseStudent
   {
     return ($this->getCareerStudent() != null) ? $this->getCareerStudent()->getOrientation() : "";
   }
+
+  public function canBeWithdrawn()
+  {
+    return (is_null($this->getSchoolYearStudentForSchoolYear())) && !is_null($this->getCurrentStudentCareerSchoolYear()) && $this->getCurrentStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN;
+  }
+
+  public function canUndoWithdrawn()
+  {
+    return !is_null($this->getCurrentStudentCareerSchoolYear()) && $this->getCurrentStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN;
+  }
+
+   public function getMessageCantBeWithdrawn()
+  {
+    return "The student cant be withdrawn because it is still matriculated.";
+  }
+
+   public function getMessageCantUndoWithdrawn()
+  {
+    return "Undo withdraw can be done only if student is withdrawn.";
+  }
+
+   public function getPersonIsActiveString()
+  {
+    return $this->getPerson()->getIsActiveString();
+  }
+
+   public function getIsRegisteredString()
+  {
+    return ($this->getIsRegistered())? 'Sí': 'No';
+  }
+
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

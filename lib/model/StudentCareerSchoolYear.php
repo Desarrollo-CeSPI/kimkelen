@@ -98,6 +98,11 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
     return $this->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
   }
 
+  public function isWithdraw()
+  {
+    return $this->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN;
+  }
+
   public function suggestYear()
   {
     return $this->isApproved() ? $this->getYear() + 1 : $this->getYear();
