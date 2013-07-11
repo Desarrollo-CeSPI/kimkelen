@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -31,7 +31,7 @@ class Tutor extends BaseTutor
     return $this->getPersonLastname().' '.$this->getPersonFirstname();
   }
 
-  
+
   /**
    * Proxies getPerson()->$method as getPersonMethod in current object. Only for getters
    *
@@ -76,5 +76,8 @@ class Tutor extends BaseTutor
     }
   }
 
-
+  public function getStudentTutorsString()
+  {
+    return implode(',', $this->getStudentTutors());
+  }
 }
