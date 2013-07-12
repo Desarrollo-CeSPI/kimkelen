@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -43,7 +43,7 @@
   <fieldset id="student_person">
     <?php echo get_partial('student/person', array('type' => 'list', 'student' => $student)) ?>
     <?php echo get_partial('student/address', array('type' => 'list', 'student' => $student)) ?>
-    <?php echo get_partial('student/health', array('type' => 'list', 'student' => $student)) ?>
+  
   </fieldset>
 <?php endif; ?>
 
