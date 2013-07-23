@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -62,7 +62,8 @@ class student_disciplinary_sanctionActions extends autoStudent_disciplinary_sanc
 
     $this->form->setDefaults(array(
       "student_id" => $this->student_disciplinary_sanction->getStudentId(),
-      "school_year_id" => $this->student_disciplinary_sanction->getSchoolYearId()
+      "school_year_id" => $this->student_disciplinary_sanction->getSchoolYearId(),
+      "value"=> 1,
     ));
   }
 

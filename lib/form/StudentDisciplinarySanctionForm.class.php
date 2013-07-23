@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -38,6 +38,7 @@ class StudentDisciplinarySanctionForm extends BaseStudentDisciplinarySanctionFor
     $this->setWidget('request_date', new csWidgetFormDateInput());
     $this->setValidator('request_date', new mtValidatorDateString());
     $this->getWidgetSchema()->setLabel('request_date', 'Day');
+    $this->setValidator('value', new sfValidatorNumber(array('required'=>true)));
 
     $this->getWidget('disciplinary_sanction_type_id')->setOption('add_empty', true);
     $this->getWidget('sanction_type_id')->setOption('add_empty', true);
