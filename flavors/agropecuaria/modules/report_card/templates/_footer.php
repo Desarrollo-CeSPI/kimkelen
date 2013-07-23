@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -44,7 +44,7 @@
       </table>
     </div>
 
-    <div class="rowamon">
+    <div class="rowins">
       <div class="titletable"><?php echo __('Admonitions') ?></div>
       <table class="lefttable">
         <tr>
@@ -66,12 +66,7 @@
       <?php include_partial('quaterly_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division, 'has_to_show_repproveds' => $has_to_show_repproveds)); ?>
     <?php endif; ?>
 
-    <?php if ($has_to_show_repproveds): ?>
-      <?php include_partial('career_subject_repproveds', array('examination_repproveds' => $examination_repproveds, 'has_to_show_attendances_per_day' => $division->hasAttendanceForDay())); ?>
-    <?php endif ?>
-
-
-    <div class="rowins">
+    <div class="rowamon">
       <div class="titletable"><?php echo __('Admonitions') ?></div>
       <table class="lefttable">
         <tr>
@@ -85,6 +80,11 @@
         </tr>
       </table>
     </div>
+  
+       <?php if ($has_to_show_repproveds): ?>
+      <?php include_partial('career_subject_repproveds', array('examination_repproveds' => $examination_repproveds, 'has_to_show_attendances_per_day' => $division->hasAttendanceForDay())); ?>
+    <?php endif ?>
+
 
   <?php elseif ($division->hasCourseType(CourseType::BIMESTER)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getBimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
@@ -143,4 +143,8 @@
 
 <?php include_partial('signature_boxes') ?>
 <div style="clear:both;"></div>
-<div class="date"><?php echo date('d/m/Y') ?></div>
+<div class="date"><?php echo __('Issue date') ?> <?php echo date('d/m/Y') ?></div>
+
+
+
+

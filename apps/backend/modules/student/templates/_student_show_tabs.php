@@ -43,12 +43,12 @@
   <fieldset id="student_person">
     <?php echo get_partial('student/person', array('type' => 'list', 'student' => $student)) ?>
     <?php echo get_partial('student/address', array('type' => 'list', 'student' => $student)) ?>
-  
+
   </fieldset>
 <?php endif; ?>
 
 <fieldset id="student_current_courses">
-  <?php foreach ($student->getStudentCareerSchoolYearsAssending() as $csy): ?>
+  <?php foreach ($student->getStudentCareerSchoolYearsAscending() as $csy): ?>
     <?php echo get_partial('student/history_school_year', array('type' => 'list', 'student_career_school_year' => $csy, 'back_url' => '@student_show')) ?>
   <?php endforeach ?>
 </fieldset>
