@@ -554,8 +554,9 @@ class studentActions extends autoStudentActions
   public function executeWithdrawStudent()
   {
     $student = $this->getRoute()->getObject();
-    $student->getCurrentStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
-    $student->getCurrentStudentCareerSchoolYear()->save();
+
+    $student_career_school_year = $student->getCurrentOrLastStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
+    $student_career_school_year->save();
 
     $this->getUser()->setFlash('info','The item was updated successfully.');
     $this->redirect('@student');
@@ -563,8 +564,8 @@ class studentActions extends autoStudentActions
 
   public function executeUndoWithdrawStudent(){
     $student = $this->getRoute()->getObject();
-    $student->getCurrentStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::IN_COURSE);
-    $student->getCurrentStudentCareerSchoolYear()->save();
+    $student_career_school_year = $student->getCurrentOrLastStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::IN_COURSE);
+    $student_career_school_year->save();
 
     $this->getUser()->setFlash('info','The item was updated successfully.');
     $this->redirect('@student');

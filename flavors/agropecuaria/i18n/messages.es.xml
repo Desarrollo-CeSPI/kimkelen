@@ -3654,7 +3654,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Admonitions</source>
-                <target>Apercibimientos</target>
+                <target>Apercibimientos y sanciones</target>
             </trans-unit>
             <trans-unit>
                 <source>Authority signature</source>
@@ -4236,6 +4236,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Undo withdraw can be done only if student is withdrawn.</source>
               <target>El estudiante no está en estado retirado.</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Admonition details</source>
+              <target>Detalle de apercibimientos y sanciones</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Disciplinary sanction type</source>
+              <target>Tipo de sanción</target>
             </trans-unit>
         </body>
     </file>
