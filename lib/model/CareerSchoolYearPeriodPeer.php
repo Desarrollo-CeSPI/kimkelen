@@ -174,4 +174,29 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
     return self::doSelectOne($c);
   }
 
+
+  static public function getPeriodsArrayForCourseType($course_type, $career_school_year_id)
+  {
+    $periods_array = array();
+    if ($course_type == CourseType::TRIMESTER)
+    {
+      $periods = self::getTrimesterPeriodsSchoolYear($career_school_year_id);
+    }
+    elseif ($course_type == CourseType::QUATERLY)
+    {
+      $periods = self::getQuaterlyPeriodsSchoolYear($career_school_year_id);
+    }
+    else
+    {
+      $periods = self::getBimesterPeriodsSchoolYear($career_school_year_id);
+    }
+
+    foreach ($periods as $period)
+    {
+      $periods_array[$period->getShortName()] = $period;
+    }
+
+    return $periods_array;
+  }
+
 }

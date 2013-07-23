@@ -26,8 +26,8 @@
     <div class="student_career_orientation"><?php $cs->getSubOrientation() != '' and print __('Sub orientation: %sub_orientation%', array('%sub_orientation%' => $cs->getSubOrientation())) ?></div>
     <?php if ($cs->isRegular() && ($cs->getCurrentStudentCareerSchoolYear())): ?>
       <div class="student_year"><?php echo __('Year: %year%', array('%year%' => $cs->getCurrentStudentCareerSchoolYear()->getYear())) ?></div>
-      <div class="student_career_repproved"><?php $cs->getCurrentStudentCareerSchoolYear()->getIsRepproved() and print __('Repproved') ?></div>
-      <div class="student_career_withdraw"><?php $cs->getCurrentStudentCareerSchoolYear()->IsWithdraw() and print __('Withdraw') ?></div>
+      <div class="student_career_repproved"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->getIsRepproved() and print __('Repproved') ?></div>
+      <div class="student_career_withdraw"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsWithdraw() and print __('Withdraw') ?></div>
     <?php elseif ($cs->isGraduate()): ?>
       <div class="student_career_graduate"><strong><?php echo __('Graduate') ?></div>
     <?php endif ?>
