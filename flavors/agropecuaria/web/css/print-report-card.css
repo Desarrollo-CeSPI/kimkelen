@@ -308,6 +308,7 @@ table.lefttable tr {
 /*    text-transform: uppercase;*/
     font-size: large;
 }
+
 .date
 {
     text-align:right;
@@ -321,4 +322,21 @@ table.lefttable tr {
     display:block;
     padding-left: 16%;
     padding-top: 80px;
+}
+
+.hr_break {
+  border:dashed #000;
+  border-width:1px 0 0 0;
+  height:0;
+  line-height:0px;
+  font-size:0;
+  margin-bottom:15px;
+  margin-top: 15px;
+  padding:0;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  text-transform: uppercase;
 }

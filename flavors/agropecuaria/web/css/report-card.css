@@ -202,7 +202,7 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 33%;
+  width: 46% !important;
 }
 
 .colsright{
@@ -242,7 +242,7 @@ table.lefttable tr {
   border:1px solid #ccc;
   padding:0px 5px;
   float:right;
-  width:44%;
+  width:45% !important;
   margin-top:5px;
 }
 
@@ -293,6 +293,7 @@ table.lefttable tr {
 /*    text-transform: capitalize;*/
     font-size: large;
 }
+
 .date
 {
     text-align:right;
@@ -313,4 +314,18 @@ table.lefttable tr {
   padding:5px 0px;
   margin-right: 10px;
   float:right;
+}
+
+.report-wrapper .hr_break {
+  clear:both;
+  border: none;
+  border-bottom: 2px dashed #999 !important;
+  margin-bottom:20px;
+  padding:10px;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  text-transform: uppercase;
 }

@@ -1077,13 +1077,13 @@ class Student extends BaseStudent
     return CareerStudentPeer::doSelectOne($c);
   }
 
-
-
-  public function getStudentCareerSchoolYearsAssending()
+  public function getLastStudentCareerSchoolYear()
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-    return $this->getStudentCareerSchoolYears($c);
+    $scsy = $this->getStudentCareerSchoolYears($c);
+
+    return $scsy[0];
   }
 
   public function getCommisions($school_year = null)
@@ -1221,12 +1221,12 @@ class Student extends BaseStudent
 
   public function canBeWithdrawn()
   {
-    return (is_null($this->getSchoolYearStudentForSchoolYear())) && !is_null($this->getCurrentStudentCareerSchoolYear()) && $this->getCurrentStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN;
+    return (is_null($this->getSchoolYearStudentForSchoolYear())) && !is_null($this->getCurrentOrLastStudentCareerSchoolYear()) && $this->getCurrentOrLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN;
   }
 
   public function canUndoWithdrawn()
   {
-    return !is_null($this->getCurrentStudentCareerSchoolYear()) && $this->getCurrentStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN;
+    return !is_null($this->getCurrentOrLastStudentCareerSchoolYear()) && $this->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN;
   }
 
    public function getMessageCantBeWithdrawn()
@@ -1249,6 +1249,29 @@ class Student extends BaseStudent
     return ($this->getIsRegistered())? 'Sí': 'No';
   }
 
+  /**
+   * This method returns the current or last StudentCareerSchoolYear.
+   *
+   * @return StudentCareerSchoolYear
+   */
+  public function getCurrentOrLastStudentCareerSchoolYear()
+  {
+    $object = $this->getCurrentStudentCareerSchoolYear();
+    if (is_null($object))
+    {
+      return $this->getLastStudentCareerSchoolYear();
+    }
+    else
+      return $object;
+  }
+
+   public function getStudentCareerSchoolYearsAscending()
+   {
+     $c = new Criteria();
+     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+
+     return $this->getStudentCareerSchoolYears($c);
+}
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

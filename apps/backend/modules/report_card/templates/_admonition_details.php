@@ -17,17 +17,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<div class="<?php echo ($has_to_show_attendances_per_day)? 'rowcom': 'rowins' ?>">
-  <div class="titletable"><?php echo __('Examination repproved') ?></div>
-  <table class="lefttable">
-
-    <tr>
-      <?php foreach ($examination_repproveds as $examination_repproved): ?>
-        <?php if (is_null($examination_repproved->getStudentApprovedCareerSubject())): ?>
-          <td><?php echo $examination_repproved->getSubject() ?></td>
-          <td><?php echo $examination_repproved->getMarksStr() ? $examination_repproved->getMarksStr() : '-' ?></td>
-      <?php endif; ?>
-      </tr>
-<?php endforeach; ?>
-  </table>
-</div>
+<!-- TEMPLATE DE  Agropecuaria No TOCAR -->

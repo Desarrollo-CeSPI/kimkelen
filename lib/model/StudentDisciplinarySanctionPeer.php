@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -32,7 +32,7 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
    * @return integer
    */
   public static function countStudentDisciplinarySanctionsForPeriod(Student $student, SchoolYear $school_year = null, CareerSchoolYearPeriod  $period = null)
-  {    
+  {
     $c = new Criteria();
     if (is_null($school_year))
     {
@@ -81,5 +81,36 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
     $criteria->setDistinct();
 
     return self::doCount($criteria);
+  }
+
+  /**
+   *
+   *
+   * @param Student $student
+   * @param SchoolYear $school_year
+   * @param CareerSchoolYearPeriod $period
+   * @return integer
+   */
+  public static function retrieveStudentDisciplinarySanctionsForPeriod(Student $student, SchoolYear $school_year = null, CareerSchoolYearPeriod  $period = null)
+  {
+    $c = new Criteria();
+    if (is_null($school_year))
+    {
+      $school_year = SchoolYearPeer::retrieveCurrent();
+    }
+    $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(self::STUDENT_ID, $student->getId());
+
+    //Check for sanctions type considered in report_card
+    $c->addJoin(self::SANCTION_TYPE_ID, SanctionTypePeer::ID);
+    $c->add(SanctionTypePeer::CONSIDERED_IN_REPORT_CARD, true);
+
+    if (!is_null($period))
+    {
+      $c->add(self::REQUEST_DATE, $period->getStartAt(), Criteria::GREATER_EQUAL);
+      $c->addAnd(self::REQUEST_DATE, $period->getEndAt(), Criteria::LESS_EQUAL);
+    }
+
+    return self::doSelect($c);
   }
 }

@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -37,10 +36,16 @@
       <?php $school_year = $division->getSchoolYear(); ?>
       <?php $course_subject_students = $student->getCourseSubjectStudentsForSchoolYear($school_year); ?>
 
-      <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>      
+      <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
 
       <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
+
     </div>
+    <hr class="hr_break">
+    <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
+    <div class="report-content">
+    <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
+  </div>
   </div>
   <div style="clear:both;"></div>
   <div style="page-break-before: always;"></div>
