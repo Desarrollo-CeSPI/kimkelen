@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -21,8 +21,8 @@
 <th><?php echo __('1°C') ?></th>
 <th><?php echo __('2°C') ?></th>
 <th><?php echo __('Calif. final') ?></th>
-<th><?php echo __('Ev. Diciembre') ?></th>
-<th><?php echo __('Ev. Marzo') ?></th>
+<th><?php echo __('Ex. Diciembre') ?></th>
+<th><?php echo __('Ex. Febrero/Marzo') ?></th>
 <th><?php echo __('Calif. definitiva') ?></th>
 
 <?php if ($has_attendance_for_subject): ?>
