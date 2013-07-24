@@ -4121,6 +4121,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>Undo withdraw can be done only if student is withdrawn.</source>
               <target>El estudiante no está en estado retirado.</target>
             </trans-unit>
+            <trans-unit>
+              <source>This field represents the value of the disciplinary sanction</source>
+              <target>Este campo representa la cantidad del tipo de sanción (amonestación, etc). Por defecto vale 1, puede cambiarse a más o a 0.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

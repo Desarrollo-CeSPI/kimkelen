@@ -91,11 +91,11 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
   {
     $examination = $course_subject_student_examination->getExaminationSubject()->getExamination();
     #DICIEMBRE
-    if ($examination->getExaminationNumber() == 1)
+    if ($examination->getExaminationNumber() == self::DECEMBER)
     {
       return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
     }
-    elseif ($examination->getExaminationNumber() == 2)
+    elseif ($examination->getExaminationNumber() == self::FEBRUARY)
     {
       return $course_subject_student_examination->getMark();
     }
@@ -184,5 +184,7 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $student_approved_career_subject->save($con);
     }
   }
+
+
 
 }
