@@ -33,8 +33,13 @@
       <span class="report-date" > <?php echo __('Issue date') ?>: <?php echo date('d/m/Y') ?> </span>
       <div class="report-header">
         <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+        <div class="logo_fvet"><?php echo image_tag("fvet.jpeg", array('absolute' => true)) ?></div>
+        <div class="school-name">Escuela de Educación Técnico Profesional </div>
+        <div class="school-name">de Nivel Medio en Producción Agropecuaria y Agroalimentaria</div>
+        <div class="school-name">Facultad de Ciencias Veterinarias de la UBA</div>
+
         <div class="header_row">
-          <h2><?php echo __('Reporte de inasistencias y apercibimientos'); ?></h2>
+          <h2><?php echo __('Reporte de inasistencias y sanciones'); ?></h2>
           <div class="title"><?php echo __('Student') ?>: </div>
           <div class="name"><?php echo $student ?></div>
           <div class="header_right">
@@ -58,12 +63,12 @@
             <tr>
               <th><?php echo __('Day') ?></th>
               <th><?php echo __('Absence') ?></th>
+              <th><?php echo __('Description') ?></th>
               <?php if ($student->hasAttendancesPerSubject()): ?>
                 <th><?php echo __('Subject') ?></th>
               <?php endif; ?>
               <th><?php echo __('Is justified') ?></th>
               <th><?php echo __('Justification type id') ?></th>
-              <th><?php echo __('Description') ?></th>
             </tr>
           </thead>
           <tbody class="print_body">
@@ -71,12 +76,12 @@
               <tr>
                 <td><?php echo $absence->getFormattedDay(); ?></td>
                 <td><?php echo $absence->getValueString() ?></td>
+                <td><?php echo $absence->getAbsenceType()->getDescription() ?></td>
                 <?php if ($student->hasAttendancesPerSubject()): ?>
                   <td><?php echo ($course_subject = $absence->getCourseSubject()) ? $absence->getCourseSubject() : '-' ?></td>
                 <?php endif; ?>
                 <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? 'Sí' : 'No' ?></td>
                 <td><?php echo ($type = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getJustificationType() : '-' ?></td>
-                <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getObservation() : '-' ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -124,30 +129,28 @@
             <?php foreach ($periods_array as $short_name => $period): ?>
               <?php if (StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period)): ?>
                 <table class="print_table">
-                <thead>
+                  <thead>
                     <tr>
                       <th><?php echo __('Resolution date') ?></th>
-                      <th><?php echo __('Description') ?></th>
                       <th><?php echo __('Motivo') ?></th>
                       <th><?php echo __('Disciplinary sanction type') ?></th>
                       <th><?php echo __('Total') ?></th>
                     </tr>
                     </head>
-                     <tbody class="print_body">
+                  <tbody class="print_body">
                     <?php foreach (StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) as $student_disciplinary_sanction): ?>
 
                       <tr>
                         <td><?php echo $student_disciplinary_sanction->getFormattedRequestDate(); ?></td>
-                        <td><?php echo $student_disciplinary_sanction->getName(); ?></td>
                         <td><?php echo $student_disciplinary_sanction->getDisciplinarySanctionType(); ?></td>
                         <td><?php echo $student_disciplinary_sanction->getSanctionType(); ?></td>
-                        <td><?php echo $student_disciplinary_sanction->getValueString(); ?></td>
+                        <td><?php echo $student_disciplinary_sanction->getValue(); ?></td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td colspan ="5" class="report-total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) ?></td>
+                      <td colspan ="4" class="report-total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) ?></td>
                     </tr>
                   </tfoot>
                 </table>

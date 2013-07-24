@@ -14,7 +14,7 @@ generator:
       actions: ~
       fields:
         value:
-          label:          Cantidad de amonestaciones
+          label:          Valor
         disciplinary_sanction_type_id:
           label:          Motivo de sanción disciplinaria
         sanction_type_id:

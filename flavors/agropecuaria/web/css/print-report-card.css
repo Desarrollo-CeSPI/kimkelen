@@ -203,11 +203,12 @@ table.lefttable tr {
 
 .colsleft{
     float:left;
-    width: 33%;
+    width: 57%;
 }
 
 .colsright{
     float:right;
+    width: auto;
 }
 
 .row{
@@ -225,46 +226,51 @@ table.lefttable tr {
 }
 
 .rowins{
-    border:1px solid #ccc;
-    margin-top:10px;
-    padding:0px 5px;
+  border:1px solid #ccc;
+  padding:0px 10px;
+  float:left;
+  width:auto;
+  margin-top:10px;
+  min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowcom{
-    border:1px solid #ccc;
-    padding:0px 5px;
-    float:left;
-    width:46%;
-    margin-top:5px;
-    min-height: 5em;
+  border:1px solid #ccc;
+  padding:0px 10px;
+  float:left;
+  width:auto;
+  margin-top:10px;
+  min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowamon{
-    border:1px solid #ccc;
-    padding:0px 5px;
-    float:right;
-    width:44%;
-    margin-top:5px;
+  border:1px solid #ccc;
+  padding:0px 5px;
+  float:left;
+  width: auto;
+  margin-top:10px;
+  margin-right: 5px;
 }
 
 .rowfirm_authority{
-    border:1px solid #ccc;
-    float:right;
-    margin-top:10px;
-    margin-left:5px;
-    padding:0px 55px;
-    height:115px;
-
+  border:1px solid #ccc;
+  float:right;
+  margin-top:10px;
+  margin-left:5px;
+  padding:0px 15px !important;
+  height: 115px;
+  width: auto;
 }
 
 .rowfirm_responsible{
-    border:1px solid #ccc;
-    float:right;
-    margin-top:10px;
-    margin-left:5px;
-    padding:0px 15px;
-    height:115px;
-
+  border:1px solid #ccc;
+  float:right;
+  margin-top:10px;
+  margin-left:5px;
+  height:115px;
+  width: auto;
 }
 
 .rownotice{
@@ -273,7 +279,6 @@ table.lefttable tr {
     margin-top:10px;
     padding:0px 8px;
     height:115px;
-
 }
 
 #sfWebDebug,
@@ -281,16 +286,19 @@ table.lefttable tr {
 {
     display: none !important;
 }
+
 .partial_average
 {
     text-align: left !important;
     font-weight: bold;
+    font-size: 12px;
     text-transform: uppercase;
 }
 
 .td_average
 {
     font-weight: bold;
+    font-size: 12px;
 }
 
 .report-header .school-year
@@ -317,11 +325,10 @@ table.lefttable tr {
 }
 .titletable_signature
 {
-    font-size:12px;
+    font-size:11px;
     font-weight:bold;
     display:block;
-    padding-left: 16%;
-    padding-top: 80px;
+    padding-top: 90px;
 }
 
 .hr_break {

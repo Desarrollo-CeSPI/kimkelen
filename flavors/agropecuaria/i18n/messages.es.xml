@@ -4245,6 +4245,22 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>Disciplinary sanction type</source>
               <target>Tipo de sanción</target>
             </trans-unit>
+            <trans-unit>
+              <source>This field represents the value of the disciplinary sanction</source>
+              <target>Este campo representa la cantidad del tipo de sanción (amonestación, etc). Por defecto vale 1, puede cambiarse a más o a 0.</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Ex.R.</source>
+              <target>Ex. Diciembre</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Ex.C.</source>
+              <target>Ex. Febrero/Marzo</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Student doesn't have any disciplinary sanctions.</source>
+              <target>No se registraron sanciones en este periodo.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
