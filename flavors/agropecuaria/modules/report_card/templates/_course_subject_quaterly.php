@@ -71,8 +71,8 @@
   <?php $course_types_included = array(CourseType::QUATERLY, CourseType::BIMESTER); ?>
   <tr>
     <td class='partial_average'><?php echo __('Average') ?></td>
-    <td><?php echo $student_career_school_year->getAverageFor(1, $course_types_included);?></td>
-    <td><?php echo $student_career_school_year->getAverageFor(2, $course_types_included); ?></td>
+    <td class="td_average"><?php echo $student_career_school_year->getAverageFor(1, $course_types_included);?></td>
+    <td class="td_average"><?php echo $student_career_school_year->getAverageFor(2, $course_types_included); ?></td>
     <td></td>
     <td></td>
     <td></td>
