@@ -37,9 +37,9 @@
       <?php $course_subject_students = $student->getCourseSubjectStudentsForSchoolYear($school_year); ?>
 
       <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
-
+      <div class="footer" style="width: 100%">
       <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
-
+      </div>
     </div>
     <hr class="hr_break">
     <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>

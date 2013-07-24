@@ -38,6 +38,8 @@ class StudentDisciplinarySanctionForm extends BaseStudentDisciplinarySanctionFor
     $this->setWidget('request_date', new csWidgetFormDateInput());
     $this->setValidator('request_date', new mtValidatorDateString());
     $this->getWidgetSchema()->setLabel('request_date', 'Day');
+
+    $this->getWidgetSchema()->setHelp('value', 'This field represents the value of the disciplinary sanction');
     $this->setValidator('value', new sfValidatorNumber(array('required'=>true)));
 
     $this->getWidget('disciplinary_sanction_type_id')->setOption('add_empty', true);

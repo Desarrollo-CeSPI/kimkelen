@@ -1081,9 +1081,9 @@ class Student extends BaseStudent
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-    $scsy = $this->getStudentCareerSchoolYears($c);
+    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
 
-    return $scsy[0];
+    return StudentCareerSchoolYearPeer::doSelectOne($c);
   }
 
   public function getCommisions($school_year = null)

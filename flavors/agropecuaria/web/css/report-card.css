@@ -202,11 +202,12 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 46% !important;
+  width: auto;
 }
 
 .colsright{
   float:right;
+  width: auto;
 }
 
 .row{
@@ -225,25 +226,31 @@ table.lefttable tr {
 
 .rowins{
   border:1px solid #ccc;
+  padding:0px 10px;
+  float:left;
+  width:auto;
   margin-top:10px;
-  padding:0px 5px;
+  min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowcom{
   border:1px solid #ccc;
-  padding:0px 5px;
+  padding:0px 10px;
   float:left;
-  width:46%;
-  margin-top:5px;
+  width:auto;
+  margin-top:10px;
   min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowamon{
   border:1px solid #ccc;
   padding:0px 5px;
-  float:right;
-  width:45% !important;
-  margin-top:5px;
+  float:left;
+  width: auto;
+  margin-top:10px;
+  margin-right: 5px;
 }
 
 .rowfirm_authority{
@@ -251,8 +258,8 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 55px;
-  height:115px;
+  padding:0px 30px !important;
+  height: 115px;
 }
 
 .rowfirm_responsible{
@@ -260,7 +267,7 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 15px;
+  padding:0px 20px !important;
   height:115px;
 }
 
@@ -276,12 +283,14 @@ table.lefttable tr {
 {
   text-align: left !important;
   font-weight: bold;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
 .td_average
 {
   font-weight: bold;
+  font-size: 12px;
 }
 
 
@@ -302,11 +311,11 @@ table.lefttable tr {
 }
 .titletable_signature
 {
-    font-size:12px;
+    font-size:11px;
     font-weight:bold;
     display:block;
-    padding-left: 16%;
-    padding-top: 80px;
+
+    padding-top: 90px;
 }
 .report-header .school-year
 {
