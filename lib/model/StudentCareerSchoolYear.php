@@ -120,33 +120,81 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
 
 
   /**
-   * This method returns the average of marks for the mark_number and course_type
+   * Returns avg of marks for the quaterly given in the scope of considered course_types.
+   * It also considers those course_subjects with only one mark as sometimes they don't need to be averaged
    *
-   * @return string
+   * @return float
    */
-  public function getAverageFor($mark_number, $course_type)
+  public function getAvgFor($quaterly_number, $course_types_array)
   {
-    $course_subject_students = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForCourseType($this->getStudent(), $course_type, $this->getSchoolYear());
-    $avg = 0;
+    $course_subject_students = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForCourseType($this->getStudent(), $course_types_array, $this->getSchoolYear());
+    $sum = 0;
     $count = 0;
 
     foreach ($course_subject_students as $course_subject_student)
     {
-      $course_subject_student_mark = $course_subject_student->getMarkFor($mark_number);
-      if (!is_null($course_subject_student_mark))
+      if ($course_subject_student->getCourseSubject()->getCourseType() != CourseType::QUATERLY)
       {
-        $count++;
-        if (!$course_subject_student_mark->getIsClosed())
+        $configs = $course_subject_student->getCourseSubject()->getCourseSubjectConfigurations();
+        $config = array_shift($configs);
+
+        //estas especificaciones son necesarias ya que hay materias cuatrimestrales con una sola nota y por ende según en qué cuatrimestre se cursen su nota debe o no ser promediada
+        if ($quaterly_number == 1)
         {
-          return '';
+          if (($config->getPeriod()->isBimester() && $config->parentIsFirst()) || ($course_subject_student->getCourseSubject()->getCourseType() == CourseType::QUATERLY_OF_A_TERM && $config->isForFirstQuaterly()))
+          {
+            $course_subject_student_mark = $course_subject_student->getMarkFor($quaterly_number);
+            if (!is_null($course_subject_student_mark))
+            {
+              $count++;
+              if (!$course_subject_student_mark->getIsClosed())
+              {
+                return '';
+              }
+
+              $sum = $course_subject_student_mark->getMark() + $sum;
+            }
+          }
         }
 
-        $avg = $course_subject_student_mark->getMark() + $avg;
+        if ($quaterly_number == 2)
+        {
+          if (($config->getPeriod()->isBimester() && !$config->parentIsFirst()) || ($course_subject_student->getCourseSubject()->getCourseType() == CourseType::QUATERLY_OF_A_TERM && !$config->isForFirstQuaterly()))
+          {
+            $course_subject_student_mark = $course_subject_student->getMarkFor($quaterly_number - 1);
+
+            if (!is_null($course_subject_student_mark))
+            {
+              $count++;
+              if (!$course_subject_student_mark->getIsClosed())
+              {
+                return '';
+              }
+
+              $sum = $course_subject_student_mark->getMark() + $sum;
+            }
+          }
+        }
+      }
+      else
+      {
+        $course_subject_student_mark = $course_subject_student->getMarkFor($quaterly_number);
+        if (!is_null($course_subject_student_mark))
+        {
+          $count++;
+          if (!$course_subject_student_mark->getIsClosed())
+          {
+            return '';
+          }
+
+          $sum = $course_subject_student_mark->getMark() + $sum;
+        }
       }
     }
-    $avg = $avg / $count;
 
+    $avg = $sum / $count;
     $avg = sprintf('%.4s', $avg);
+
     return $avg;
   }
 
@@ -190,4 +238,6 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
 
     return DivisionPeer::doSelect($c);
   }
+
+
 }
