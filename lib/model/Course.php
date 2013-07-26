@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -801,7 +801,7 @@ class Course extends BaseCourse
   }
 
   /**
-   * If the subject has attendance for subject can configurate otherwise not.
+   * If subject has attendance for subject or is bimestral/quaterly of a term can be configurated, otherwise not.
    *
    */
   public function canConfigurate()
@@ -814,16 +814,15 @@ class Course extends BaseCourse
    $result = true;
     foreach ($this->getCourseSubjects() as $course_subject)
     {
-      $is_bimester =  $course_subject->getCourseType() == CourseType::BIMESTER;
+      $is_bimester_or_quaterly_of_a_term =  ($course_subject->getCourseType() == CourseType::BIMESTER) || ($course_subject->getCourseType() == CourseType::QUATERLY_OF_A_TERM) ;
 
-      if (!$is_bimester && $course_subject->hasAttendanceForDay())
+      if (!$is_bimester_or_quaterly_of_a_term && $course_subject->hasAttendanceForDay())
         {
         $result = false;
       }
     }
 
     return $result;
-
   }
 
   public function getCourseSubjectsWithAttendanceForSubject()

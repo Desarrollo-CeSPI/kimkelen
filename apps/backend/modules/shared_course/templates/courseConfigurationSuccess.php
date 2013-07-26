@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -34,7 +34,9 @@
       <input type="hidden" name="id" value="<?php echo $course->getId() ?>" />
 
       <div>
-        <h2><?php echo __('Absences by period') ?></h2>
+        <?php if ($course->getCourseSubject()->hasAttendanceForSubject()): ?>
+          <h2><?php echo __('Absences by period') ?></h2>
+        <?php endif; ?>
         <?php $first = true ?>
         <?php foreach ($course_subjects as $course_subject): ?>
           <?php if ($course_subject->getCareerSubject()->getHasOptions()): ?>
