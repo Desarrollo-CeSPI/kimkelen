@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -26,22 +26,34 @@ class CourseSubjectConfiguration extends BaseCourseSubjectConfiguration
   }
 
   /**
-   *Este metodo recupera el  periodo padre de un curso bimestral  y devuelve  tru si es el primero del cuatrimester
-   *Siempre va a exisiter un solo periodo padre distinto al que recupero
+   * Este metodo recupera el periodo padre de un curso bimestral y devuelve true si es el primero del cuatrimestre
+   *Siempre va a exisistir solo un periodo padre distinto al que recupero, porque los cuatrimestres son siempre dos.
+   *
+   * @return boolean
    */
   public function parentIsFirst()
   {
     $parent_period = CareerSchoolYearPeriodPeer::retrieveByPK($this->getPeriod()->getCareerSchoolYearPeriodId());
-    
+
     $c = new Criteria();
     $c->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID,$parent_period->getCareerSchoolYearId());
     $c->add(CareerSchoolYearPeriodPeer::COURSE_TYPE,$parent_period->getCourseType());
     $c->add(CareerSchoolYearPeriodPeer::ID,$parent_period->getId(),Criteria::NOT_EQUAL);
-    $compare_perdiod = CareerSchoolYearPeriodPeer::doSelectOne($c);
+    $compare_period = CareerSchoolYearPeriodPeer::doSelectOne($c);
 
+    return $parent_period->getStartAt() < $compare_period->getStartAt();
+  }
 
-    return $parent_period->getStartAt() < $compare_perdiod->getStartAt();
+  /**
+   * Este método recupera el periodo de un curso cuatrimestral y devuelve true si es el mismo es el primer cuatrimestre.
+   * Devuelve false en caso de ser el 2do cuatrimeste.
+   *
+   * @return boolean
+   */
+  public function isForFirstQuaterly()
+  {
+    $first_quaterly = CareerSchoolYearPeriodPeer::retrieveCurrentFirstQuaterly();
 
-
+    return $first_quaterly->getStartAt() == $this->getPeriod()->getStartAt();
   }
 }
