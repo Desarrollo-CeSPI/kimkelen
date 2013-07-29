@@ -3,9 +3,9 @@ default:
     content-type: text/html
 
   metas:
-    title:         Kimkelem
-    description:   Sistema de alumnos
-    keywords:      kimkelem, CeSPI, Sistema de alumnos
+    title:         Kimkëlen
+    description:   Sistema de gestión de escuelas
+    keywords:      kimkelen, CeSPI, Sistema de alumnos
     language:      es_AR
     #robots:       index, follow
 

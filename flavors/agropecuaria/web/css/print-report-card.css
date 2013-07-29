@@ -203,12 +203,13 @@ table.lefttable tr {
 
 .colsleft{
     float:left;
-    width: 57%;
+    margin-bottom: 15px;
+    width: auto;
 }
 
 .colsright{
-    float:right;
     width: auto;
+    margin-top:50px;
 }
 
 .row{
@@ -239,7 +240,7 @@ table.lefttable tr {
   border:1px solid #ccc;
   padding:0px 10px;
   float:left;
-  width: 125px;
+  width: 170px;
   margin-top:10px;
   min-height: 5em;
   margin-right: 5px;
@@ -252,6 +253,7 @@ table.lefttable tr {
   width: auto;
   margin-top:10px;
   margin-right: 5px;
+  min-height: 5em;
 }
 
 .rowfirm_authority{
@@ -260,17 +262,18 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 15px !important;
-  height: 115px;
-  width: auto;
+  height: 159px;
+  width: 300px;
 }
 
 .rowfirm_responsible{
   border:1px solid #ccc;
-  float:right;
+  float:left;
   margin-top:10px;
   margin-left:5px;
-  height:115px;
-  width: auto;
+  height: 159px;
+  width: 274px;
+  padding:0px 15px;
 }
 
 .rownotice{
@@ -325,10 +328,10 @@ table.lefttable tr {
 }
 .titletable_signature
 {
-    font-size:11px;
+    font-size:12px;
     font-weight:bold;
     display:block;
-    padding-top: 90px;
+    padding-top: 130px;
 }
 
 .hr_break {
