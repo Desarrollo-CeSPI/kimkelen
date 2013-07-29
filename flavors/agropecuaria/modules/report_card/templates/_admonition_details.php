@@ -46,3 +46,6 @@
 </div>
 
 <?php include_partial('signature_boxes') ?>
+<div style="clear:both;"></div>
+<br>
+<div class="date"><?php echo __('Issue date') ?> <?php echo date('d/m/Y') ?></div>

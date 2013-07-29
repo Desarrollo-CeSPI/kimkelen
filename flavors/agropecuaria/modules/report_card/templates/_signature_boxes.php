@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -19,12 +18,12 @@
  */ ?>
 <div class="colsright">
 
-  <div class="rowfirm_responsible">
-    <div class="titletable_signature"><?php echo __('Responsible signature') ?></div>
-  </div>
-
   <div class="rowfirm_authority">
     <div class="titletable_signature"><?php echo __('Authority signature') ?></div>
+  </div>
+
+  <div class="rowfirm_responsible">
+    <div class="titletable_signature"><?php echo __('Responsible signature') ?></div>
   </div>
 
 </div>
