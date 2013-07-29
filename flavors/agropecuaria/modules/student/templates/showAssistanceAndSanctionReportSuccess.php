@@ -165,11 +165,11 @@
   <?php endforeach ?>
 
   <div class="colsright">
-    <div class="rowfirm_responsible">
-      <div class="titletable"><?php echo __('Responsible signature') ?></div>
-    </div>
     <div class="rowfirm_authority">
       <div class="titletable"><?php echo __('Authority signature') ?></div>
+    </div>
+    <div class="rowfirm_responsible">
+      <div class="titletable"><?php echo __('Responsible signature') ?></div>
     </div>
   </div>
 </div>

@@ -80,7 +80,7 @@
         </tr>
       </table>
     </div>
-  
+
        <?php if ($has_to_show_repproveds): ?>
       <?php include_partial('career_subject_repproveds', array('examination_repproveds' => $examination_repproveds, 'has_to_show_attendances_per_day' => $division->hasAttendanceForDay())); ?>
     <?php endif ?>
@@ -141,9 +141,7 @@
   <?php endif; ?>
 </div>
 
-<?php include_partial('signature_boxes') ?>
-<div style="clear:both;"></div>
-<div class="date"><?php echo __('Issue date') ?> <?php echo date('d/m/Y') ?></div>
+
 
 
 
