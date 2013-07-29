@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -347,9 +347,7 @@ class Division extends BaseDivision
 
   public function countStudents()
   {
-    return $this->countDivisionStudents();
-//    return count($this->getStudents());
-
+    return count($this->getStudents());
   }
 
   public function getPreceptorsString()

@@ -188,7 +188,7 @@ class Course extends BaseCourse
   }
 
   /*
-   * This methor returns an Array of Students that are inscripted in the subjects of this course
+   * This method returns an Array of Students that are inscripted in the subjects of this course
    *
    * @return array Students[]
    */
