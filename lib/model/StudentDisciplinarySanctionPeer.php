@@ -109,6 +109,7 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
     {
       $c->add(self::REQUEST_DATE, $period->getStartAt(), Criteria::GREATER_EQUAL);
       $c->addAnd(self::REQUEST_DATE, $period->getEndAt(), Criteria::LESS_EQUAL);
+      $c->addAscendingOrderByColumn(self::REQUEST_DATE);
     }
 
     return self::doSelect($c);

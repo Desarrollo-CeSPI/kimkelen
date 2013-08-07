@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -40,7 +40,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
   {
     if (!$this->getUser()->getReferenceFor('examination_repproved'))
     {
-      
+
       $this->getUser()->setFlash('warning', 'Debe seleccionar una mesa de previa para administrar las materias de la mesa.');
       $this->redirect('@examination_repproved');
     }
@@ -155,7 +155,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
 
   public function executeStudents(sfWebRequest $request)
   {
-   
+
     $this->examination_repproved_subject = $this->getRoute()->getObject();
 
     if (null === $this->examination_repproved_subject)
@@ -164,7 +164,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
 
       $this->redirect('@examination_repproved_subject');
     }
-    
+
     $this->form = new ExaminationRepprovedSubjectStudentForm($this->examination_repproved_subject);
   }
 
@@ -174,7 +174,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
 
     if (null === $this->examination_repproved_subject)
     {
-      
+
       $this->getUser()->setFlash('error', 'Debe seleccionar una mesa de examen para inscribir a los estudiantes');
 
       $this->redirect('@examination_repproved_subject');
@@ -204,10 +204,19 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
    * @return sfPropelPager
   */
   public function getPager()
-  {    
+  {
         /* @var $pager sfPropelPager */
       $pager = parent::getPager();
       $pager->setParameter('examination', $this->examination_repproved);
       return $pager;
+  }
+
+  public function executePrintStudents(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = $this->getRoute()->getObject();
+    $this->students = $this->examination_repproved_subject->getStudents();
+    
+    $this->setLayout('cleanLayout');
+
   }
 }

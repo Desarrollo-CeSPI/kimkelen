@@ -38,6 +38,10 @@ generator:
             label: Close examination
             credentials: [edit_examination_repproved_subject]
 
+          print_students:
+            label: Print students
+            action: printStudents
+            
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
