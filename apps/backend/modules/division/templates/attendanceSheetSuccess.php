@@ -46,6 +46,7 @@
               <th class="attendance_day"><?php echo date('d/m', $day); ?></th>
             <?php endforeach; ?>
             <th class="attendance_day"><?php echo __('Total'); ?></th>
+             <th class="attendance_day"><?php echo __('Total absences till today (without justification)'); ?></th>
             <th class="attendance_day"><?php echo __('Total absences till today'); ?></th>
           </tr>
         </thead>
@@ -90,8 +91,9 @@
                 <?php endif; ?>
               <?php endforeach; ?>
               <td style="text-align:center"><?php echo round($total, 2) ?></td>
+              <td style="text-align:center"><?php echo $student->getTotalAbsences($career_school_year_id, null, $course_subject_id, false) ?></td>
               <td style="text-align:center"><?php echo round($student->getTotalAbsences($career_school_year_id, null, $course_subject_id), 2) ?></td>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
           </tr>
           <tr>
             <th><?php echo __('Students'); ?></th>
@@ -99,6 +101,7 @@
               <th class="attendance_day"><?php echo date('d/m', $day); ?></th>
             <?php endforeach; ?>
             <th class="attendance_day"><?php echo __('Total'); ?></th>
+             <th class="attendance_day"><?php echo __('Total absences till today (without justification)'); ?></th>
             <th class="attendance_day"><?php echo __('Total absences till today'); ?></th>
           </tr>
         </tbody>

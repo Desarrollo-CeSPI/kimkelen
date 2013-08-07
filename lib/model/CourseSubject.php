@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -211,7 +211,7 @@ class CourseSubject extends BaseCourseSubject
       }
     }
     unset($mark);
-    #SI ES EL ULTIMO PERIDO....numero de periodo == a cantidad de notas
+    #SI ES EL ULTIMO PERIODO....numero de periodo == a cantidad de notas
     if ($current_period == $this->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks())
     {
       foreach ($this->getCourseSubjectStudents() as $course_subject_student)
@@ -683,10 +683,10 @@ class CourseSubject extends BaseCourseSubject
 
       if (! is_null($mark_number))
       {
-        $c->add(CourseSubjectStudentMarkPeer::MARK_NUMBER, $mark_number);  
+        $c->add(CourseSubjectStudentMarkPeer::MARK_NUMBER, $mark_number);
       }
-      
-      
+
+
       $c->clearSelectColumns();
       $c->addSelectColumn("SUM(" . CourseSubjectStudentMarkPeer::MARK . ") as sum");
       $stmt = CourseSubjectStudentMarkPeer::doSelectStmt($c);
@@ -731,7 +731,7 @@ class CourseSubject extends BaseCourseSubject
       {
         $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
       }
-      
+
     }
 
     return StudentRepprovedCourseSubjectPeer::doCount($c);

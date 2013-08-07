@@ -3643,7 +3643,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Total absences till today</source>
-                <target>Total al día de la fecha</target>
+                <target>Total al día de hoy (J)</target>
             </trans-unit>
             <trans-unit>
                 <source>Request date</source>
@@ -4130,6 +4130,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>This field represents the value of the disciplinary sanction</source>
               <target>Este campo representa el valor del tipo de sanción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Total absences till today (without justification)</source>
+                <target>Total al día de hoy (SJ)</target>
             </trans-unit>
         </body>
     </file>
