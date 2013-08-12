@@ -148,7 +148,7 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
     }
 
 
-    $this->form = new ExaminationSubjectStudentForm($this->examination_subject);
+    $this->form = new ManualExaminationSubjectStudentForm($this->examination_subject);
 
     if ($request->isMethod("post"))
     {
