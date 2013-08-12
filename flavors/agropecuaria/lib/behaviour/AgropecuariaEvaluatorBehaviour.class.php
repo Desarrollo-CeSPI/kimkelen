@@ -185,6 +185,81 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
   }
 
+  public function closeCourseSubjectStudentExamination(CourseSubjectStudentExamination $course_subject_student_examination, PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
 
+    $course_subject_student = $course_subject_student_examination->getCourseSubjectStudent();
+
+    // si aprueba la mesa de examen
+
+    if ($course_subject_student_examination->getMark() >= $this->getExaminationNote())
+    {
+      $result = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
+
+      if (is_null($result)){
+        $result = new StudentApprovedCareerSubject();
+        $result->setCareerSubject($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
+        $result->setStudent($course_subject_student->getStudent());
+        $result->setSchoolYear($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
+      }
+
+      $examination_subject = $course_subject_student_examination->getExaminationSubject();
+
+      // IF is null, is because the course_subject_student_examination has been created editing student history
+      $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();
+
+      $result->setSchoolYearId($school_year->getId());
+
+      $average = $this->getAverage($course_subject_student, $course_subject_student_examination);
+
+      $average = sprintf('%.4s', $average);
+
+      if ($average < 4)
+      {
+        $average = 4;
+      }
+
+      // se guarda la NOTA FINAL de la materia
+      if ($course_subject_student_examination->getExaminationNumber() == self::FEBRUARY)
+      {
+
+        $this->setFebruaryApprovedResult($result, $average, $course_subject_student_examination->getMark());
+      }
+      else
+      {
+        $result->setMark($average);
+      }
+
+      ##se agrega en la tupla student_disapproved_course_subject el link a al resultado final
+      $course_subject_student->getCourseResult()->setStudentApprovedCareerSubject($result)->save($con);
+
+      $result->save($con);
+
+      // verifica si hay creada una tupla de previa de esta materia que no corresponde porque el alumno aprobo en mesas regulares.
+      // Si la encuentra la borra ya que no corresponde que exista
+      $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+      if ($srcs && is_null($srcs->getStudentApprovedCareerSubject())) {
+        $srcs->delete($con);
+      }
+    }
+    else
+    {
+      // TODO: arreglar esto: pedir a la configuración
+      // Pasa de diciembre a febrero (se copia el course_subject_student_examination con examination_number + 1)
+      if ($course_subject_student_examination->getExaminationNumber() < count($this->_examination_number))
+      {
+        $this->nextCourseSubjectStudentExamination($course_subject_student_examination, $con);
+      }
+      else
+      {
+        // se crea una previa
+        $student_repproved_course_subject = new StudentRepprovedCourseSubject();
+        $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
+        $student_repproved_course_subject->save($con);
+      }
+    }
+
+  }
 
 }

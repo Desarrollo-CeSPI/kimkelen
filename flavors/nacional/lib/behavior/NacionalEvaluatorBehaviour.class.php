@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -69,8 +69,4 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return parent::checkRepeationCondition($student, $student_career_school_year);
   }
 
-  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
-  {
-    return self::DECEMBER;
-  }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -34,7 +34,7 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
 
   public function getMessageCantCalificate()
   {
-    
+
     if ($this->getIsClosed())
       $str =  'Cant calificate students because the examination repproved subject is closed.';
     else
@@ -50,7 +50,7 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
 
     if ($this->countStudentExaminationRepprovedSubjects() == 0)
       return false;
-    
+
     $c = new Criteria();
     $c->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $this->getId());
     $criterion= $c->getNewCriterion(StudentExaminationRepprovedSubjectPeer::MARK,null,Criteria::ISNOTNULL);
@@ -134,10 +134,25 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
   {
     return !$this->getIsClosed();
   }
-  
+
   public function canEditCalifications()
   {
     return !$this->getIsClosed();// || sfContext::getInstance()->getUser()->hasCredential('edit_closed_examination');
+  }
+
+  public function getExaminationNoteForStudent($student) {
+
+    $student_repproved_course_subject = StudentRepprovedCourseSubjectPeer:: retrieveByCareerSubjectIdAndStudentId($this->getCareerSubject()->getId(), $student->getId());
+    $c = new Criteria();
+    $c->add(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, $student_repproved_course_subject->getId());
+    $c->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $this->getId());
+
+    return StudentExaminationRepprovedSubjectPeer::doSelectOne($c);
+  }
+
+    public function getTeachersToString()
+  {
+    return implode(' / ', $this->getExaminationRepprovedSubjectTeachers());
   }
 }
 
