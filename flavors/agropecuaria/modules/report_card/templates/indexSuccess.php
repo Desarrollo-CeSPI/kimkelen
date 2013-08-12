@@ -42,7 +42,6 @@
       </div>
     </div>
     <hr class="hr_break">
-    <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
     <div class="report-content">
     <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
   </div>

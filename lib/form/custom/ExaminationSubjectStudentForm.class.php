@@ -25,18 +25,18 @@
  */
 class ExaminationSubjectStudentForm extends sfFormPropel
 {
-  static $_students = array();
+  //static $_students = array();
 
-  public static function setAvailableStudentsForDivision($examination_subject)
+  public function getAvailableStudentsForDivision()
   {
-    self::$_students = array_merge($examination_subject->getStudents(),SchoolBehaviourFactory::getInstance()->getAvailableStudentsForExaminationSubject($examination_subject));
+    return array_merge($this->getObject()->getStudents(), SchoolBehaviourFactory::getInstance()->getAvailableStudentsForExaminationSubject($this->getObject()));
   }
 
-  public static function getCriteriaForAvailableStudentsForExaminationSubjectIds()
+  public function getCriteriaForAvailableStudentsForExaminationSubjectIds()
   {
     $ret = array();
 
-    foreach (self::$_students as $st)
+    foreach ($this->getAvailableStudentsForDivision() as $st)
     {
       $ret[]=$st->getId();
     }
@@ -61,9 +61,9 @@ class ExaminationSubjectStudentForm extends sfFormPropel
     $this->validatorSchema['id'] = new sfValidatorPropelChoice(array('model' => 'ExaminationSubject'));
 
 
-    self::setAvailableStudentsForDivision($this->getObject());
+    //self::setAvailableStudentsForDivision($this->getObject());
 
-    $this->widgetSchema['examination_subject_student_list'] = new csWidgetFormStudentMany(array('criteria'=> self::getCriteriaForAvailableStudentsForExaminationSubjectIds()));
+    $this->widgetSchema['examination_subject_student_list'] = new csWidgetFormStudentMany(array('criteria'=> $this->getCriteriaForAvailableStudentsForExaminationSubjectIds()));
 
     $this->getWidget('examination_subject_student_list')->setLabel('Alumnos');
 

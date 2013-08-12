@@ -933,6 +933,19 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 
   }
 
+  public function getAvailableStudentsForManualExaminationSubject(ExaminationSubject $examination_subject)
+  {
+    $c = new Criteria();
+    $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $examination_subject->getCareerSubjectSchoolYearId());
+    $c->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPeer::COURSE_SUBJECT_ID, Criteria::INNER_JOIN);
+    $c->add(CourseSubjectStudentPeer::STUDENT_APPROVED_COURSE_SUBJECT_ID, null, Criteria::ISNULL);
+    $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+    $c->addJoin(CourseSubjectStudentPeer::ID, StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, Criteria::INNER_JOIN);
+    $c->add(StudentDisapprovedCourseSubjectPeer::EXAMINATION_NUMBER, $examination_subject->getExamination()->getExaminationNumber());
+
+    return StudentPeer::doSelect($c);
+  }
+
   public function getMarkNameByNumberAndCourseType($number, $course_type)
   {
     return $number . 'T';
