@@ -5,6 +5,7 @@
 <div>
   <div class="admonition_details">
     <?php foreach ($periods_array as $short_name => $period): ?>
+    <?php if ($period->getIsClosed()): ?>
       <table class="gridtable">
         <thead>
           <tr>
@@ -40,7 +41,7 @@
           <td style="text-align:left"><?php echo __("Student doesn't have any disciplinary sanctions.") ?></td>
         </tr></tbody></table>
       <?php endif; ?>
-
+<?php endif; ?>
     <?php endforeach; ?>
   </div>
 </div>

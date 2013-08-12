@@ -1205,6 +1205,7 @@ class Student extends BaseStudent
     $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $c->addAscendingOrderByColumn(CareerSubjectSchoolYearPeer::INDEX_SORT);
 
     return $this->getCourseSubjectStudents($c);
   }
