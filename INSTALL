@@ -19,7 +19,7 @@ Requisitos mínimos:
 
 * Para editar la conexión de las bases, editar los archivos dentro del directorio BASE_APLICACION/config, donde se edita el dsn, usuario y contraseña.
   Si no se quieren editar estos archivos, existe un script que va solicitando los datos de a uno:
-  *** Para poder lograrlo hay que ejecutar el script:  ./lib/vendor/eztools/bin/ezconfigure.sh que va pidiendo paso a paso los hooks de conexion a la 
+  *** Para poder lograrlo hay que ejecutar el script:  ./lib/vendor/eztools/bin/ezconfigure.sh que va pidiendo paso a paso los hooks de conexion a la
 
   * BASE_APLICACION/databases.yml
 
@@ -50,7 +50,11 @@ all:
 
 * Ejecutar los siguientes comandos dentro del directorio BASE_APLICACION/:
 *
+    * ./symfony kimkelen:flavor #behavior#
+      Setea el comportamiento o sabor a utilizar. Por defecto utilizar demo
+
     * ./symfony propel:build-all-load --no-confirmation
+      Crea todas las clases del modelo (modelos, formularios y filtros), carga los fixtures y los guarda en la base
 
     * ./symfony project:permissions
       Actualiza los permisos dentro del directorio del proyecto, para que el web server pueda escribir datos en el proyecto.
@@ -58,15 +62,14 @@ all:
     * ./symfony plugin:publish-assets
       Actualiza referencias javascript y estilos visuales de todo el proyecto en general.
 
-ln -s
-* Editar el archivo BASE_APLICACION/config/app.yml la linea que dice school_behavior: #comportamient# Poner el comportamiento correspondiente (Por defecto poner Demo)
-
-  Una vez editado ese archivo correr el comando ./emulate.sh #comportamiento# (Por defecto demo)
+    * ./symfony cache:clear
+      Limpia la cache de la aplicación
 
 
 Consideraciones del Web Server
 Debido a que el sistema se ha desarrollado utilizando el Framework symfony, que emplea URLs que ocultan la extensión de los scripts, se recomienda:
-Habilitar el módulo de reescritura: mod_rewrite
+Habilitar el módulo de reescritura: mod_rewrite.
+Teniendo el módulo Apache mod_rewrite instalado es posible remover la parte /backend_dev.php de todas las URL.
 
 Permitir al directorio publicado en el DocumentRoot que se corresponde al BASE_APLICACION/web la redefinición de condiciones mediante .htaccess
 Por ejemplo, en Apache 2, asumiendo ya se encuentra habilitado el mod_rewrite, la configuración correcta sería:
