@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -153,6 +153,14 @@ class ExaminationSubject extends BaseExaminationSubject
   public function canEditCalifications()
   {
     return !$this->getIsClosed();// || sfContext::getInstance()->getUser()->hasCredential('edit_closed_examination');
+  }
+
+  public function canDelete()
+  {
+    if ($this->countCourseSubjectStudentExaminations() > 0)
+      return false;
+
+    return !$this->getIsClosed();
   }
 
 }
