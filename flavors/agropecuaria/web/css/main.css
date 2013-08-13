@@ -1906,3 +1906,22 @@ div.wc-cal-event{
 {
   background-image: url('../images/undo_withdraw.png') !important;
 }
+
+.sf_admin_action_print
+{
+  background: url("../images/printer.png") no-repeat 0 0 !important;
+}
+
+.school-name
+{
+    text-align:center;
+    padding:5px 0px;
+    margin-right: 15%;
+    font-size: large;
+}
+
+.attendance_sheet_header {
+   float:left;
+   width:100%;
+   margin:30px auto;
+}

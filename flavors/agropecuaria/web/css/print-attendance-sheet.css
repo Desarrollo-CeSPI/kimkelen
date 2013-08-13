@@ -67,9 +67,27 @@ body {
 }
 
 .date_last {
- display: block;
+ display: none;
 }
 
 .date_separator {
  display: none;
+}
+
+.student_fix {
+  align: left;
+}
+
+.school-name
+{
+    text-align:center;
+    padding:5px 0px;
+    margin-right: 15%;
+    font-size: large;
+}
+
+.attendance_sheet_header {
+   float:left;
+   width:100%;
+   margin:30px auto;
 }

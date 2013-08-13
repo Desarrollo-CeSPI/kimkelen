@@ -19,13 +19,22 @@
 <?php use_helper('Object', 'I18N', 'Form', 'Date') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/global.css') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/extended.css') ?>
-<?php #use_stylesheet('fix/jquery.dataTables.css')           ?>
 <?php use_javascript('fix/jquery.dataTables.js') ?>
 <?php use_javascript('fix/FixedColumns.js') ?>
 <?php use_stylesheet('print-attendance-sheet.css', 'last', array('media' => 'print')) ?>
 
 <?php $period = null; ?>
 <?php $career_school_year_id = !isset($division) ? $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYearId() : $division->getCareerSchoolYearId(); ?>
+
+
+<div class="attendence_sheet_header">
+  <div style="float: left"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+  <div style="float: right"><?php echo image_tag("fvet.jpeg", array('absolute' => true)) ?></div>
+  <div class="school-name">Escuela de Educación Técnico Profesional </div>
+  <div class="school-name">de Nivel Medio en Producción Agropecuaria y Agroalimentaria</div>
+  <div class="school-name">Facultad de Ciencias Veterinarias de la UBA</div>
+</div>
+
 <div id="sf_admin_container">
   <div class="non-printable">
     <ul class="sf_admin_actions">
@@ -33,6 +42,7 @@
       <li><a href="#" onclick="window.print(); return false;" class="sf_admin_action_print"><?php echo __('Print') ?></a></li>
     </ul>
   </div>
+
   <?php if ($course_subject == null) : ?>
     <h1><?php echo __('Attendance sheet for division: %division%', array('%division%' => $division)) ?></h1>
   <?php else: ?>
