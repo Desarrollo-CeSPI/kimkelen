@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -31,11 +31,11 @@
       <td align="center"><?php echo ((!$cssm->getMark())? __('free'): $cssm->getMark() ?  $cssm : ''); ?></td>
     <?php endforeach; ?>
 
-    <td align="center"><?php echo ($final_period)? $course_subject_student->getMarksAverage() : '' ?></td>    
+    <td align="center"><?php echo ($final_period)? $course_subject_student->getMarksAverage() : '' ?></td>
     <td align="center"><?php echo $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1); ?></td>
     <td align="center"><?php echo $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2); ?></td>
-    <td align="center"><?php echo $course_subject_student->getStudentRepprovedCourseSubjectStrings()?></td>    
-    <td align="center"><?php echo $course_subject_student->getFinalMark()?></td>
+    <td align="center"><?php echo $course_subject_student->getStudentRepprovedCourseSubjectStrings()?></td>
+    <td align="center"><?php echo ($course_subject_student->getStudentApprovedCareerSubject()) ? $course_subject_student->getFinalMark() : "" ?></td>
     <td></td>
   </tr>
 <?php endforeach ?>
