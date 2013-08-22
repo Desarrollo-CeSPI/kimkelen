@@ -62,6 +62,15 @@ php symfony propel:build-all-load
 php symfony plugin:publish
 php symfony project:permissions
 ```
+En el caso de que al ejecutar el comando "php symfony propel:build-all-load" se produzca algún error, reemplazar la ejecución del misimo por la ejecución de los siguientes comandos
+
+```
+php symfony propel:build-model
+php symfony propel:build-forms
+php symfony propel:build-filters
+php symfony propel:build-sql
+php symfony propel:insert-sql
+```
 
 ### ¿Qué es el **comportamiento** o **sabor**?
 
