@@ -62,6 +62,15 @@ php symfony propel:build-all-load
 php symfony plugin:publish
 php symfony project:permissions
 ```
+En el caso de que al ejecutar el comando "php symfony propel:build-all-load" se produzca algún error, reemplazar la ejecución del misimo por la ejecución de los siguientes comandos
+
+```
+php symfony propel:build-model
+php symfony propel:build-forms
+php symfony propel:build-filters
+php symfony propel:build-sql
+php symfony propel:insert-sql
+```
 
 ### ¿Qué es el **comportamiento** o **sabor**?
 
@@ -94,11 +103,11 @@ El sistema se instala con algunos datos cargados a decir:
     * `username:` profesor
     * `password:` @pr0f3s0r
 
-* *Año lectivo:* se creará un año lectivo vigente para el año corriente
+* *Año lectivo:* se creará un año lectivo en estado vigente 
 
-* *Plan de estudios:* **No se crean años lectivos** Esto debe crearlo cada
+* *Plan de estudios:* **No se crean planes de estudio** Esto debe crearlo cada
   colegio. Queremos permitir que cada colegio *done* su plan de estudios, así lo
-pueden compartir con otros colegios.
+pueden compartir con otros colegios. 
 
 
 # Instalación con Capistrano
