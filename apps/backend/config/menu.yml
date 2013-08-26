@@ -244,8 +244,8 @@ root:
     credentials: []
     menu:
       glpi:
-        title: Mesa de ayuda
-        url: http://glpi.desarrollo.cespi.unlp.edu.ar
+        title: Ayuda y Soporte 
+        url: '<?php echo sfConfig::get('app_helpdesk_url','https://github.com/Desarrollo-CeSPI/kimkelen'); ?>'
         target: _blank
         icon: external
       manual:
