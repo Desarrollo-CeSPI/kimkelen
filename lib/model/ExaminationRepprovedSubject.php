@@ -150,9 +150,15 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
     return StudentExaminationRepprovedSubjectPeer::doSelectOne($c);
   }
 
+    public function getTeachers()
+  {
+    return array_map(create_function('$c', 'return $c->getTeacher();'), $this->getExaminationRepprovedSubjectTeachers());
+
+  }
+
     public function getTeachersToString()
   {
-    return implode(' / ', $this->getExaminationRepprovedSubjectTeachers());
+    return implode(' / ', $this->getTeachers());
   }
 }
 

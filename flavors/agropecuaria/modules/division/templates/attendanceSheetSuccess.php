@@ -107,8 +107,8 @@
                 <?php endif; ?>
               <?php endforeach; ?>
               <td style="text-align:center"><?php echo round($total, 2) ?></td>
-              <td style="text-align:center"><?php echo $student->getTotalAbsences($career_school_year_id, null, $course_subject_id, false) ?></td>
-              <td style="text-align:center"><?php echo round($student->getTotalAbsences($career_school_year_id, null, $course_subject_id), 2) ?></td>
+              <td style="text-align:center"><?php echo $student->getTotalAbsences($career_school_year_id, null, $course_subject_id, true) ?></td>
+              <td style="text-align:center"><?php echo $student->getTotalAbsences($career_school_year_id, null, null, false) - $student->getTotalAbsences($career_school_year_id, null, null, true) ?></td>
             <?php endforeach; ?>
           </tr>
           <tr class="non-printable">

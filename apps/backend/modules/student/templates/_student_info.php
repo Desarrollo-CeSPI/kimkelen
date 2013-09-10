@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -24,6 +24,7 @@
   <div class="active"><strong><?php echo __("Is Active?") ?></strong> <em><?php include_partial("student/is_active", array("student" => $student)) ?></em></div>
 </div>
 
+<?php if (!($sf_user->isTeacher())): ?>
 <div class="student_info">
   <div class="student_personal_info">
     <div class="info_div"><strong><?php echo $student->getPersonFullIdentification() ?></strong></div>
@@ -31,6 +32,7 @@
     <div class="info_div"><strong><?php $person->getPhone() != '' and print __('Phone %phone_number%', array('%phone_number%' => $person->getPhone())); ?></strong></div>
     <div class="info_div"><?php  include_partial("student/tutors", array("student" => $student)) ?></div>
   </div>
+  <?php endif; ?>
 
   <div class="student_current_info">
     <div class="info_div"><strong><?php echo __("Is registered?") ?></strong> <em><?php include_partial("student/is_registered", array("student" => $student)) ?></em></div>

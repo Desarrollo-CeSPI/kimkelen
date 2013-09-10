@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -62,6 +62,74 @@ class AgropecuariaSchoolBehaviour extends BaseSchoolBehaviour
   public function canRelatedToDivision($division = null, $is_current_school_year = null)
   {
     return is_null($division) && $is_current_school_year;
+
+  }
+
+   public function getTotalAbsences($career_school_year_id, $period=null, $course_subject_id = null, $exclude_justificated = true, $student_id)
+  {
+    $absences = $this->getAbsences($career_school_year_id, $student_id, $period, $course_subject_id, $exclude_justificated);
+    $rounder = new StudentAttendanceRounder();
+    $total = 0;
+
+    foreach ($absences as $absence)
+    {
+      // sacamos las justificadas, es decir se quiere el total SIN las justificadas
+      if ($exclude_justificated && $absence->hasJustification())
+      {
+        continue;
+      }
+      else{
+        $total += $absence->getValue();
+        $rounder->process($absence);
+      }
+
+    }
+
+    $diff = $rounder->calculateDiff();
+
+    return $total + $diff;
+  }
+
+  /**
+   * This method returns the absences depending of arguments:
+   *
+   * IF period_id is null, then returns all the absences.
+   * IF course_subject_id is null then returns the absences per day.
+   * IF include_justificated is null, then excludes the absences justificated.
+   *
+   * @param type $career_school_year_id
+   * @param type $student_id
+   * @param type $period_id
+   * @param type $course_subject_id
+   * @param type $include_justificated
+   *
+   * @return StudentAttendance array
+   */
+  public function getAbsences($career_school_year_id, $student_id, $period = null, $course_subject_id = null, $exclude_justificated=true)
+  {
+    $c = new Criteria();
+    $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
+    $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
+
+    if ($course_subject_id instanceof CourseSubject)
+    {
+      $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id->getId());
+    }
+    else
+    {
+      $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
+    }
+
+
+    $c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
+
+    if (!is_null($period))
+    {
+      $criterion = $c->getNewCriterion(StudentAttendancePeer::DAY, $period->getStartAt(), Criteria::GREATER_EQUAL);
+      $criterion->addAnd($c->getNewCriterion(StudentAttendancePeer::DAY, $period->getEndAt(), Criteria::LESS_EQUAL));
+      $c->add($criterion);
+    }
+    return $student_attendances = StudentAttendancePeer::doSelect($c);
 
   }
 }

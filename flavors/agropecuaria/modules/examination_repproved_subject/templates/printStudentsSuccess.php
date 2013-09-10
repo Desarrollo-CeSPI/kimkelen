@@ -66,7 +66,8 @@
             <td><?php echo $i ?> </td>
             <td><?php echo $student ?> </td>
             <td><?php echo $student->getPerson()->getIdentificationNumber() ?> </td>
-            <td><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_repproved_subject->getCareerSubject()->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
+            <?php $division = DivisionStudentPeer::retrieveDivisionsForStudentAndYear($student, $examination_repproved_subject->getCareerSubject()->getYear()); ?>
+            <td><?php echo implode(', ', $division); ?> </td>
             <?php $ers = $examination_repproved_subject->getExaminationNoteForStudent($student); ?>
              <?php if ($ers->getIsAbsent()): ?>
               <td><?php echo __('Is absent') ?></td>

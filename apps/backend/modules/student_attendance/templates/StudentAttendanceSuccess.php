@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -34,8 +34,8 @@
         <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
       </ul>
-  
-      <div class="week_move">   
+
+      <div class="week_move">
         <?php echo image_tag('../sfPropelPlugin/images/previous.png') ?>
         <?php echo link_to(__('previous week'), 'student_attendance/StudentAttendance', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . date('Y-m-d', strtotime($form->day . '- 1 week')))); ?>
         <?php echo link_to(__('next week'), 'student_attendance/StudentAttendance', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . date('Y-m-d', strtotime($form->day . '+ 1 week')))); ?>
@@ -43,9 +43,9 @@
       </div>
 
       <?php if (! $form->isAttendanceBySubject()):?>
-        <div class="division_move">        
+        <div class="division_move">
           <?php $next_division = $form->getNextDivision() ?>
-          <?php $previous_division = $form->getPreviousDivision() ?>          
+          <?php $previous_division = $form->getPreviousDivision() ?>
 
           <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $previous_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="previous_division"/>
           <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $next_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="next_division"/>
@@ -158,8 +158,8 @@
                   <?php $free_class = $student->getFreeClass($career_school_year_perdiod, $course_subject, $career_school_year, $form->getDivision()) ?>
 
                   <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id, true) ?></td>
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id) ?></td>
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id, false) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id, false) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id) ?></td>
                 <?php endforeach ?>
               <?php else: ?>
                 <?php $free_class = $student->getFreeClass(null, $course_subject, $career_school_year) ?>
