@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php if (!($sf_user->getLoginRole() == 'Teacher')): ?>
+<?php if (!($sf_user->isTeacher())): ?>
   <a class="tab tab-selected" href="#student_person" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Datos personales</a>
   <?php $class = "tab" ?>
 <?php else: ?>
@@ -39,7 +39,7 @@
   <?php endif ?>
 <?php endforeach ?>
 
-<?php if (!($sf_user->getLoginRole() == 'Teacher')): ?>
+<?php if (!($sf_user->isTeacher())): ?>
   <fieldset id="student_person">
     <?php echo get_partial('student/person', array('type' => 'list', 'student' => $student)) ?>
     <?php echo get_partial('student/address', array('type' => 'list', 'student' => $student)) ?>

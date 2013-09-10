@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -27,7 +27,7 @@
       <div class="tutor_occupation"><?php $st->getTutor()->getOccupation() != '' and print __('Occupation %occupation%', array('%occupation%' => $st->getTutor()->getOccupation())) ?></div>
       <div class="tutor_email"><?php $person->getEmail() != '' and print __('Email %email%', array('%email%' => $person->getEmail())) ?></div>
       <div class="tutor_phone"><?php $person->getPhone() != '' and print __('Phone %phone_number%', array('%phone_number%' => $person->getPhone())); ?></div>
-      <div class="emergency_information"><?php $student->getEmergencyInformation() != '' and print __('Emergency information %extra_information%', array('%extra_information%' => $student->getEmergencyInformation())); ?></div>
     </div>
   <?php endforeach ?>
+  <div class="emergency_information"><?php $student->getEmergencyInformation() != '' and print __('Emergency information %extra_information%', array('%extra_information%' => $student->getEmergencyInformation())); ?></div>
 </div>
