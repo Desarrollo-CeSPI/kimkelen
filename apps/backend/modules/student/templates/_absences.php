@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -24,9 +24,15 @@
   <?php if (!is_null($student_career_school_year)): ?>
     <div>
       <div>
-        <?php echo __('Total absences till today') . ": " 
-              . round($student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, false), 2) ?>
+        <?php $total_justificated = $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, false) - $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, true) ?>
+        <?php $total = $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, true) ?>
+          <?php echo __('Total absences till today') . ": "
+              . $total_justificated ?>
+          <?php echo __('Total absences till today (without justification)') . ": "
+              . $total ?>
       </div>
     </div>
   <?php endif; ?>
 </div>
+
+
