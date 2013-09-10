@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -80,6 +80,16 @@ class DivisionStudentPeer extends BaseDivisionStudentPeer
     $criteria->setDistinct();
 
     return DivisionPeer::doSelect($criteria);
+  }
+
+  public static function retrieveDivisionsForStudentAndYear($student, $year)
+  {
+    $c = new Criteria();
+    $c->addJoin(self::DIVISION_ID, DivisionPeer::ID, Criteria::INNER_JOIN);
+    $c->add(self::STUDENT_ID, $student->getId());
+    $c->add(DivisionPeer::YEAR, $year);
+
+    return DivisionPeer::doSelect($c);
   }
 
 }
