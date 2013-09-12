@@ -139,8 +139,11 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
       }
 
       $prev_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($career_school_year->getSchoolYear());
+
+      if ($prev_school_year) {
       $prev_student_career_school_year = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this->getObject(), $prev_school_year);
-     
+      }
+      
       if (!empty($prev_student_career_school_year))
       {
         $prev_student_career_school_year = array_shift($prev_student_career_school_year);
