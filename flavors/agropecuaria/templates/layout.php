@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -114,7 +113,7 @@
         <div class="logo_footer">
           <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
         </div>
-        © <?php echo date('Y'); ?> | CeSPI-UNLP | <?php echo link_to(__('versión %%number%%', array('%%number%%' => sfConfig::get('app_version_number', 1))), public_path('/CHANGELOG.txt', true)) ?>
+        © <?php echo date('Y'); ?> | CeSPI-UNLP | <?php echo sfConfig::get('app_version_number') ?>
       </div><!-- end footer -->
     </div> <!-- end wrapper -->
   </body>
