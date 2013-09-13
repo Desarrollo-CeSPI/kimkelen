@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,11 +19,12 @@
  */ ?>
 <?php foreach ($course_subject_students as $course_subject_student): ?>
   <div class="sf_admin_form_row">
+    <?php include_partial('course_student_mark/free_info', array('course_subject_student' => $course_subject_student))?>
     <label for="course_student_mark[<?php echo $course_subject_student->getId() ?>]" class="required">
       <?php echo strval($course_subject_student->getStudent()) ?>
     </label>
     <div>
-      <?php include_partial('course_student_mark/free_info', array('course_subject_student' => $course_subject_student))?>
+
       <?php include_component('course_student_mark', 'mark', array('form' => $form, 'course_subject_student' => $course_subject_student, 'course_subject' => $course_subject, 'configuration' => $configuration)) ?>
 
 
