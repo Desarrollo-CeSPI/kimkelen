@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -45,7 +45,6 @@ class course_student_markActions extends sfActions
    */
   public function getCourse()
   {
-    //$course = CoursePeer::retrieveByPK($this->getUser()->getCourseReferer());
     $course = CoursePeer::retrieveByPK($this->getRequest()->getParameter("id"));
 
     if (null === $course)

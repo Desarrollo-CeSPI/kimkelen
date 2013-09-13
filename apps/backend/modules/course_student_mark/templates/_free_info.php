@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,9 +19,9 @@
  */ ?>
 <?php $student_frees = $course_subject_student->getStudentFrees() ?>
 <?php if ($student_frees): ?>
-  <span class="free_info">
+  <div class="free_info">
     <?php foreach ($student_frees as $student_free): ?>
       <div><?php echo __($student_free) ?><?php echo $student_free->renderChangelog() ?></div>
     <?php endforeach ?>
-  </span>
+  </div>
 <?php endif; ?>
