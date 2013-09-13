@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,7 +19,7 @@
  */ ?>
 <div class="title"><?php echo __('Marks') ?></div>
 <table class="gridtable">
-  <?php if (count($course_subject_students_first_q = $student->getCourseSubjectStudentsForBimesterFirstQuaterly()) > 0): ?>
+  <?php if (count($course_subject_students_first_q = $student->getCourseSubjectStudentsForBimesterFirstQuaterly($student_career_school_year)) > 0): ?>
     <tr><?php include_partial('th_bimester_tabular', array('division' => $division, 'number' => '1')) ?></tr>
   <?php endif; ?>
 
@@ -29,7 +29,7 @@
       <td><?php echo $course_subject_student->getMarkFor(1) ?></td>
       <td><?php echo $course_subject_student->getMarkFor(2) ?></td>
       <td><?php echo $course_subject_student->getMarkFor(3) ?></td>
-      
+
       <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
       <td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
       <td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
@@ -47,7 +47,7 @@
 
 
 <table class="gridtable">
-  <?php if (count($course_subject_students_second_q = $student->getCourseSubjectStudentsForBimesterSecondQuaterly()) > 0): ?>
+  <?php if (count($course_subject_students_second_q = $student->getCourseSubjectStudentsForBimesterSecondQuaterly($student_career_school_year)) > 0): ?>
     <tr>
       <?php include_partial('th_bimester_tabular', array('division' => $division, 'number' => '2')) ?>
     </tr>
