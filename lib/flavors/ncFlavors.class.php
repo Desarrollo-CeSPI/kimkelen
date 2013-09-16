@@ -94,7 +94,7 @@ class ncFlavorFlavors
    */
   public function current()
   {
-    return sfConfig::get('nc_flavor_flavors_current', 'choique');
+    return sfConfig::get('nc_flavor_flavors_current', 'demo');
   }
 
   /**

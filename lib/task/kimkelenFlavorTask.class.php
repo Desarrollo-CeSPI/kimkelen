@@ -114,13 +114,10 @@ EOF;
       $this->logSection('Flavor', 'Successfully updated flavor configuration file');
     }
 
-    $school_behavior = '<?php echo ucwords("' . $arguments['flavor'] . '"); ?>';
-    $updated = @file_put_contents($cfg_dir . '/school_behaviour', $school_behavior);
 
     if ($updated === false)
     {
       $this->logSection('Config', 'Unable to update configuration', null, 'ERROR');
-      $this->logSection('Config', "Please update your configuration file {$cfg_dir}/school_behaviour with this contents:");
       $this->logBlock($school_behavior, 'COMMENT');
     }
     else
