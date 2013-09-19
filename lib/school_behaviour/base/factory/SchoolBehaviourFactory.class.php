@@ -24,7 +24,7 @@ class SchoolBehaviourFactory
 
   static public function getInstance()
   {
-    $behavior = sfConfig::get("nc_flavor_flavors_current","demo");
+    $behavior = ucwords(sfConfig::get("nc_flavor_flavors_current","demo"));
 
     $clazz = $behavior."SchoolBehaviour";
     $form_clazz = $behavior."FormFactory";
@@ -34,7 +34,7 @@ class SchoolBehaviourFactory
 
   static public function getEvaluatorInstance()
   {
-    $behavior = sfConfig::get("nc_flavor_flavors_current","demo");
+    $behavior = ucwords(sfConfig::get("nc_flavor_flavors_current","demo"));
     $clazz = $behavior."EvaluatorBehaviour";
     
     return new $clazz();

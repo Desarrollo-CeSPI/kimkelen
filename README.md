@@ -135,6 +135,7 @@ Editar el archivo `config/deploy.rb`
 ## Ejemplo de archivo config/deploy.rb
 
 ```ruby
+set :flavor, "demo"
 set :ssh_options, { :forward_agent => true }
 set :application, "kimekelen"
 set :user, application
@@ -157,7 +158,19 @@ set :shared_files, %w(config/databases.yml config/app.yml)
 
  after "deploy:finalize_update" do
    symfony.propel.setup
+    # Build classes
+       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-model"
+       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-forms"
+       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-filters"
+
+    # Emulate
+       run "#{try_sudo} #{php_bin} #{latest_release}/symfony kimkelen:flavor #{flavor} "
+
+  symfony.cc
+  symfony.plugin.publish_assets
+  symfony.project.permissions
  end
+
 ```
 
 ## Comandos a correr
