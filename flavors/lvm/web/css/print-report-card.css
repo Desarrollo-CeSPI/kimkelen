@@ -199,11 +199,16 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 34%;
+  width: 40%;
+  padding: 8px 6px 0px 0px;
+  height: auto;
 }
 
 .colsright{
   float:right;
+  width: 58%;
+  padding: 8px 6px 0px 0px;
+  height: auto;
 }
 
 .row{
@@ -222,7 +227,6 @@ table.lefttable tr {
 
 .rowins{
   border:1px solid #ccc;
-  margin-top:10px;
   padding:0px 5px;
 }
 
@@ -230,23 +234,21 @@ table.lefttable tr {
   border:1px solid #ccc;
   padding:0px 5px;
   float:left;
-  width:46%;
-  margin-top:5px;
+  width:auto;
+
   min-height: 5em;
 }
 
 .rowamon{
   border:1px solid #ccc;
   padding:0px 5px;
-  float:right;
-  width:44%;
-  margin-top:5px;
+  float:left;
+  width:auto;
 }
 
 .rowfirm_authority{
   border:1px solid #ccc;
-  float:right;
-  margin-top:10px;
+  float:left;
   margin-left:5px;
   padding:0px 15px;
   height:100px;
@@ -254,8 +256,7 @@ table.lefttable tr {
 
 .rowfirm_responsible{
   border:1px solid #ccc;
-  float:right;
-  margin-top:10px;
+  float:left;
   margin-left:5px;
   padding:0px 15px;
   height:100px;
@@ -264,10 +265,9 @@ table.lefttable tr {
 .rownotice{
   border:1px solid #ccc;
   float:left;
-  margin-top:10px;
   padding:0px 15px;
   height:100px;
-  width:140px;
+  width:auto;
 }
 
 #sfWebDebug,

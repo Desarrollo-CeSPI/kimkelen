@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -70,10 +70,10 @@ class course_student_markComponents extends sfComponents
     $this->course_subject_student_examinations = CourseSubjectStudentExaminationPeer::doSelect($c);
 
     $c = new Criteria();
-    $c->add(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, $this->course_subject_student->getId());
-    $c->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID);
-    $c->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID);
-    $c->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID);
+    $c->add(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, $this->course_subject_student->getId(). Criteria::INNER_JOIN);
+    $c->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID, Criteria::INNER_JOIN);
+    $c->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID, Criteria::INNER_JOIN);
+    $c->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID, Criteria::INNER_JOIN);
     $c->addAscendingOrderByColumn(ExaminationRepprovedPeer::EXAMINATION_NUMBER);
 
     $criterion = $c->getNewCriterion(StudentExaminationRepprovedSubjectPeer::MARK, null, Criteria::ISNOTNULL);
