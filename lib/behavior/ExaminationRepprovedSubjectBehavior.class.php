@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -26,6 +26,7 @@ class ExaminationRepprovedSubjectBehavior
 {
   /**
    * Adds the reference for the ExaminationRepprovedSubject to StudentExaminationRepprovedSubjects.
+   * If student is withdrawn then it does not add the reference.
    *
    * @param ExaminationRepprovedSubject $examination_repproved_subject
    * @param PropelPDO $con
@@ -38,9 +39,14 @@ class ExaminationRepprovedSubjectBehavior
 
       foreach ($student_repproved_course_subjects as $student_repproved_course_subject)
       {
-        $student_examination_repproved_subject = new StudentExaminationRepprovedSubject();
-        $student_examination_repproved_subject->setStudentRepprovedCourseSubjectId($student_repproved_course_subject->getId());
-        $examination_repproved_subject->addStudentExaminationRepprovedSubject($student_examination_repproved_subject);
+        $student = $student_repproved_course_subject->getCourseSubjectStudent()->getStudent();
+        $scsys = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($student, SchoolYearPeer::retrieveCurrent());
+        if ($scsys[0]->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN)
+        {
+          $student_examination_repproved_subject = new StudentExaminationRepprovedSubject();
+          $student_examination_repproved_subject->setStudentRepprovedCourseSubjectId($student_repproved_course_subject->getId());
+          $examination_repproved_subject->addStudentExaminationRepprovedSubject($student_examination_repproved_subject);
+        }
       }
     }
   }
