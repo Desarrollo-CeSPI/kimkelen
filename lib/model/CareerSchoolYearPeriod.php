@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -23,6 +23,10 @@ class CareerSchoolYearPeriod extends BaseCareerSchoolYearPeriod
 {
   public function __toString()
   {
+    if ($this->isBimester()) {
+      $parent = CareerSchoolYearPeriodPeer::retrieveByPk($this->getCareerSchoolYearPeriodId());
+      return sprintf('%s del %s (%s)', $this->getName(), $parent->getName(), $this->getTermStr());
+    }
     return sprintf('%s (%s)', $this->getName() , $this->getTermStr());
   }
 
