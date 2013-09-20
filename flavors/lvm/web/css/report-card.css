@@ -199,11 +199,16 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 34%;
+  width: 40%;
+  padding: 8px 6px 0px 0px;
+  height: auto;
 }
 
 .colsright{
   float:right;
+  width: 58%;
+  padding: 8px 6px 0px 0px;
+  height: auto;
 }
 
 .row{
@@ -222,62 +227,69 @@ table.lefttable tr {
 
 .rowins{
   border:1px solid #ccc;
-  margin-top:10px;
-  padding:0px 5px;
+  float:left;
+  width: auto;
+  min-height: 5em;
+  padding:3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
-
 
 .rowcom{
   border:1px solid #ccc;
-  padding:0px 5px;
   float:left;
-  width:46%;
-  margin-top:5px;
+  width: auto;
   min-height: 5em;
+  padding:3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
 
 .rowprev{
   border:1px solid #ccc;
-  padding:0px 5px;
   float:left;
-  width:46%;
-  margin-top:5px;
+  width: auto;
+  min-height: 5em;
+  padding:3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
 
 .rowamon{
   border:1px solid #ccc;
-  padding:0px 5px;
-  float:right;
-  width:44%;
-  margin-top:5px;
+  float:left;
+  width: 30%;
+  min-height: 5em;
+  padding:3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
 
 .rowfirm_authority{
   border:1px solid #ccc;
-  float:right;
-  margin-top:10px;
-  margin-left:5px;
+   float:left;
   padding:0px 15px;
-  height:100px;
+  height:135px;
+  width:auto;
 }
 
 .rowfirm_responsible{
   border:1px solid #ccc;
-  float:right;
-  margin-top:10px;
-  margin-left:5px;
+   float:left;
   padding:0px 15px;
-  height:100px;
+  margin:0px 6px;
+  height:135px;
+  width:auto;
 }
 
 .rownotice{
   border:1px solid #ccc;
   float:left;
-  margin-top:10px;
-  padding:0px 15px;
-  height:100px;
-  width:140px;
+  height:135px;
+  width:auto;
+  padding: 0px 40px;
 }
+
 .report-header .school-year
 {
     text-align:right;
