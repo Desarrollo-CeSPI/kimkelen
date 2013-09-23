@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -30,17 +30,30 @@ class StudentFreeForm extends BaseStudentFreeForm
 {
   public function configure()
   {
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
     $this->setWidget('student_id', new sfWidgetFormInputHidden());
     $this->setWidget('is_free', new sfWidgetFormInputHidden());
-        
+
     $this->getWidget('career_school_year_id')->setOption('criteria', CareerSchoolYearPeer::retrieveCurrentForStudentCriteria($this->getObject()->getStudent()));
 
-    $this->getWidget('career_school_year_period_id')->setLabel('Period');
-    $this->getWidget('career_school_year_period_id')->setOption('add_empty',true);    
-    $this->getWidget('career_school_year_period_id')->setOption('criteria', CareerSchoolYearPeriodPeer::retrieveCurrentsCriteria());
-    $this->getWidget('career_school_year_period_id')->setOption('peer_method','retrieveOrdered');
+
+        #widget de periodos
+    $w = new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'add_empty' => true));
+    $this->setWidget('career_school_year_period_id', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $w,
+        'observe_widget_id' => 'student_free_career_school_year_id',
+        "message_with_no_value" => "Seleccione una carrera y apareceran los periodos que correspondan",
+        'get_observed_value_callback' => array(get_class($this), 'getPeriods')
+      )));
+
+
+    $this->getWidgetSchema()->moveField('career_school_year_period_id', 'after', 'career_school_year_id');
+
+    $this->getWidget('career_school_year_period_id')->setLabel('Periodo');
+    //$this->getWidget('career_school_year_period_id')->setOption('add_empty',true);
+    ///$this->getWidget('career_school_year_period_id')->setOption('criteria', CareerSchoolYearPeriodPeer::retrieveCurrentsCriteria());
+  //$this->getWidget('career_school_year_period_id')->setOption('peer_method','retrieveOrdered');
 
     $this->getWidget('course_subject_id')->setOption('criteria', $this->getCourseSubjectCriteria());
     $this->getWidget('course_subject_id')->setLabel('Course subject');
@@ -48,8 +61,8 @@ class StudentFreeForm extends BaseStudentFreeForm
 
     if ($this->getObject()->isNew())
     {
-      $this->getValidatorSchema()->setPostValidator(new sfValidatorCallback(array('callback' => array($this , 'validateUnique'))));  
-    }    
+      $this->getValidatorSchema()->setPostValidator(new sfValidatorCallback(array('callback' => array($this , 'validateUnique'))));
+    }
   }
 
   public function getCourseSubjectCriteria()
@@ -72,7 +85,7 @@ class StudentFreeForm extends BaseStudentFreeForm
     {
       $c->add(StudentFreePeer::COURSE_SUBJECT_ID, $values['course_subject_id']);
     }
-      
+
     $student_free = StudentFreePeer::doSelectOne($c);
 
     if(!is_null($student_free))
@@ -81,5 +94,13 @@ class StudentFreeForm extends BaseStudentFreeForm
     }
 
     return $values;
+  }
+
+    public static function getPeriods($widget, $values)
+  {
+    $c = CareerSchoolYearPeriodPeer::retrieveCurrentsCriteria();
+    $c->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $values);
+    $widget->setOption('criteria', $c);
+    sfContext::getInstance()->getUser()->setAttribute('career_school_year_id', $values);
   }
 }

@@ -426,7 +426,11 @@ class CareerSchoolYear extends BaseCareerSchoolYear
         foreach ($students as $student)
         {
           $shift = $student->getShiftForSchoolYear($last_school_year);
-          $student->registerToSchoolYear($this->getSchoolYear(), $shift, $con);
+
+          if (!$student->getIsRegistered($this->getSchoolYear()))
+          {
+            $student->registerToSchoolYear($this->getSchoolYear(), $shift, $con);
+          }
 
           if (!is_null($shift)) $shift->clearAllReferences(true);
           $student->clearAllReferences(true);
