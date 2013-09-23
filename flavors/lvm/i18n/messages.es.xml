@@ -4135,6 +4135,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Total absences till today (without justification)</source>
                 <target>Total al día de hoy (SJ)</target>
             </trans-unit>
+            <trans-unit>
+                <source>Career subject repproved details</source>
+                <target>Detalle de materias previas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

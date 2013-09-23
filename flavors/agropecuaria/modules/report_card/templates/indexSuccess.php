@@ -38,13 +38,21 @@
 
       <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
       <div class="footer" style="width: 100%">
-      <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
+        <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
       </div>
     </div>
     <hr class="hr_break">
     <div class="report-content">
-    <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
-  </div>
+      <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
+      <hr class="hr_break">
+      <?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
+      <?php include_partial('career_subject_repproved_details', array('examination_repproveds' => $examination_repproveds)); ?>
+
+      <?php include_partial('signature_boxes') ?>
+      <div style="clear:both;"></div>
+      <br>
+      <div class="date"><?php echo __('Issue date') ?> <?php echo date('d/m/Y') ?></div>
+    </div>
   </div>
   <div style="clear:both;"></div>
   <div style="page-break-before: always;"></div>
