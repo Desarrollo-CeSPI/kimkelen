@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -27,13 +27,23 @@
 class StudentApprovedCareerSubjectBehavior
 {
   /**
-   * Check if a studente has approved all career_subjects of the career, then graduates the student.
+   * Check if a student has approved all career_subjects of the career, then graduates the student.
    *
    * @param StudentApprovedCareerSubject $student_approved_career_subject
    * @param PropelPDO $con
    */
   public function graduateStudent(StudentApprovedCareerSubject $student_approved_career_subject, PropelPDO $con = null)
   {
-    //Hay que hacer la funcionalidad de marcar como egresado a un alumno que rinde la ultima materia.
+
+
+    //habria que chequear que este en el ultimo año del plan, que tenga todas aprobadas las materias del ultimo año y que no tenga previas.
+  $student = $student_approved_career_subject->getStudent();
+  $career = $student_approved_career_subject->getCareerSubject()->getCareer();
+$school_year = $student_approved_career_subject->getSchoolYear();
+  $last_year_subjects = $career->getMaxYearSubject();
+
+  //$approved_career_subjects = StudentApprovedCareerSubjectPeer::getByStudentAndSchoolYear($student, $school_year);
+  return;
+
   }
 }

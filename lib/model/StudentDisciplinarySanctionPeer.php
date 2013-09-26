@@ -114,4 +114,12 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
 
     return self::doSelect($c);
   }
+
+    public static function countTotalForStudent(Student $student)
+  {
+    $c = new Criteria();
+    $c->add(self::STUDENT_ID, $student->getId());
+
+    return self::doCount($c);
+  }
 }
