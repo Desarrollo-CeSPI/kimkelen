@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -47,6 +47,13 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     return $result;
   }
 
+  public function getMarksShortStr()
+  {
+    $result = implode(', ',array_map(create_function('$sers', 'return $sers->getShortValueString();'), $this->getStudentExaminationRepprovedSubjects()));
+
+    return $result;
+  }
+
   public function getLastMarkStr()
   {
     $result = array();
@@ -60,7 +67,7 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     {
       return null;
     }
-    
+
     return $result[count($result) - 1];
   }
 }

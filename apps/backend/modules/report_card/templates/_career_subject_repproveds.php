@@ -23,7 +23,7 @@
       <?php foreach ($examination_repproveds as $examination_repproved): ?>
      <tr>
           <td><?php echo $examination_repproved->getSubject() ?></td>
-          <td><?php echo $examination_repproved->getMarksStr() ? $examination_repproved->getMarksStr() : '-' ?></td>
+          <td><?php echo $examination_repproved->getMarksShortStr() ? $examination_repproved->getMarksShortStr() : '-' ?></td>
           <td><?php echo (is_null($examination_repproved->getStudentApprovedCareerSubject()))? '(Pendiente)' : '(Aprobada)' ?>
     </tr>
 <?php endforeach; ?>

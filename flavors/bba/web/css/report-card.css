@@ -293,3 +293,32 @@ table.lefttable tr {
     margin-right: 10px;
     float:right;
 }
+
+.hr_break {
+  border:dashed #000;
+  border-width:1px 0 0 0;
+  height:0;
+  line-height:0px;
+  font-size:0;
+  margin-bottom:15px;
+  margin-top: 15px;
+  padding:0;
+}
+
+.partial_average
+{
+  text-align: left !important;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.total {
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.big-total {
+  font-size: larger;
+  font-weight: bold;
+}

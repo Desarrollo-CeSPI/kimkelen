@@ -4224,6 +4224,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Total absences till today (without justification)</source>
                 <target>Total al día de hoy (SJ)</target>
             </trans-unit>
+            <trans-unit>
+                <source>Admonition details</source>
+                <target>Informe de sanciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanction type</source>
+                <target>Tipo de sanción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student doesn't have any disciplinary sanctions.</source>
+                <target>No se han registrado sanciones disciplinarias.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

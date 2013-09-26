@@ -64,13 +64,18 @@
 
       <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
     </div>
-    <?php if (SchoolBehaviourFactory::getInstance()->showReportCardAdmonitionDetails()): ?>
-      <div class="report-content">
-        <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
-        <hr class="hr_break">
-      </div>
-    <?php endif; ?>
+
   </div>
   <div style="clear:both;"></div>
   <div style="page-break-before: always;"></div>
+
+  <?php if (SchoolBehaviourFactory::getInstance()->showReportCardAdmonitionDetails()): ?>
+    <div class="report-wrapper">
+      <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
+      <div class="report-content">
+        <?php include_partial('admonition_details', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
+      </div>
+    </div>
+  <?php endif; ?>
+
 <?php endforeach; ?>
