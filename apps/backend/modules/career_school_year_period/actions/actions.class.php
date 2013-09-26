@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -79,7 +79,7 @@ class career_school_year_periodActions extends autoCareer_school_year_periodActi
     $career_school_year_period = $this->getRoute()->getObject();
     $career_school_year_period->close();
 
-    $this->getUser()->setFlash("notice", "The career school year period have been closed");
+    $this->getUser()->setFlash("notice", "El periodo fue cerrado existosamente.");
     $this->redirect("@career_school_year_period");
   }
 
@@ -88,7 +88,7 @@ class career_school_year_periodActions extends autoCareer_school_year_periodActi
     $career_school_year_period = $this->getRoute()->getObject();
     $career_school_year_period->open();
 
-    $this->getUser()->setFlash("notice", "The career school year period have been opened");
+    $this->getUser()->setFlash("notice", "El periodo fue abierto exitosamente.");
     $this->redirect("@career_school_year_period");
   }
 }
