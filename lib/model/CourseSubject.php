@@ -211,12 +211,13 @@ class CourseSubject extends BaseCourseSubject
       }
     }
     unset($mark);
-    #SI ES EL ULTIMO PERIODO....numero de periodo == a cantidad de notas
+    #SI ES EL ULTIMO PERIODO... numero de periodo == cantidad de notas
     if ($current_period == $this->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks())
     {
       foreach ($this->getCourseSubjectStudents() as $course_subject_student)
       {
         $result_object = $course_subject_student->getCourseResult($con);
+
         if (!is_null($result_object))
         {
           $result_object->save($con);

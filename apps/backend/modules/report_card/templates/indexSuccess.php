@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -29,16 +28,16 @@
 <?php foreach ($students as $student): ?>
   <?php $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear()) ?>
   <div class="report-wrapper">
-    <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id,'school_year'=>$student_career_school_year->getSchoolYear() ,'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
+    <?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
     <div class="report-content">
 
       <?php if ($student->hasCourseType(CourseType::TRIMESTER, $student_career_school_year)): ?>
         <?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
         <?php if ($course_subject_students_attendance_day = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForDay(CourseType::TRIMESTER, $student_career_school_year)): ?>
-          <?php include_partial('course_subject_trimester', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>          
+          <?php include_partial('course_subject_trimester', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
         <?php endif ?>
         <?php if ($course_subject_student_attendance_subject = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForSubject(CourseType::TRIMESTER, $student_career_school_year)): ?>
-          <?php include_partial('course_subject_trimester', array('student' => $student, 'course_subject_students' => $course_subject_student_attendance_subject, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>          
+          <?php include_partial('course_subject_trimester', array('student' => $student, 'course_subject_students' => $course_subject_student_attendance_subject, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>
         <?php endif ?>
       <?php endif; ?>
 
@@ -51,7 +50,7 @@
           <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_student_attendance_subject, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>
         <?php endif ?>
       <?php endif; ?>
-      
+
       <?php if ($student->hasCourseType(CourseType::BIMESTER, $student_career_school_year)): ?>
 
         <?php $periods = CareerSchoolYearPeriodPeer::getBimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
@@ -59,13 +58,18 @@
 
       <?php endif; ?>
 
-
       <?php if (!is_null($average = $student_career_school_year->getAnualAverage())): ?>
         <?php include_partial('average', array('average' => $average)); ?>
       <?php endif; ?>
 
       <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
     </div>
+    <?php if (SchoolBehaviourFactory::getInstance()->showReportCardAdmonitionDetails()): ?>
+      <div class="report-content">
+        <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
+        <hr class="hr_break">
+      </div>
+    <?php endif; ?>
   </div>
   <div style="clear:both;"></div>
   <div style="page-break-before: always;"></div>
