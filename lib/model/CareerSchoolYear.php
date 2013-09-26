@@ -385,14 +385,14 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
 
-    return !is_null($last_school_year) && $last_school_year->getIsClosed() && $this->countStudentCareerSchoolYears() == 0;
+    return $last_school_year && $last_school_year->getIsClosed() && $this->countStudentCareerSchoolYears() == 0;
   }
 
   public function getMessageCantMatriculateStudentsFromLastYear()
   {
     $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
 
-     if (!is_null($last_school_year) && !$last_school_year->getIsClosed())
+     if ($last_school_year && !$last_school_year->getIsClosed())
     {
       return 'Last year school year is still open';
     }
