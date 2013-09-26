@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -229,6 +229,11 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
         break;
     }
 
+  }
+  
+    public function showReportCardAdmonitionDetails()
+  {
+    return true;
   }
 
 }
