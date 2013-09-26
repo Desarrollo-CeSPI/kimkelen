@@ -132,4 +132,10 @@ class AgropecuariaSchoolBehaviour extends BaseSchoolBehaviour
     return $student_attendances = StudentAttendancePeer::doSelect($c);
 
   }
+
+  public function showReportCardAdmonitionDetails()
+  {
+    return true;
+  }
+
 }

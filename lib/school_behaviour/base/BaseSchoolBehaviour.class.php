@@ -1122,4 +1122,9 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return false;
   }
 
+    public function showReportCardAdmonitionDetails()
+  {
+    return false;
+  }
+
 }

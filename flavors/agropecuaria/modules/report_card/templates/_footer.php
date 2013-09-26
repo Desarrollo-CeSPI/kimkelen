@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -18,7 +17,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
-<?php $has_to_show_repproveds = SchoolBehaviourFactory::getInstance()->showReportCardRepproveds() && !empty($examination_repproveds) && $student->checkIfRepprovedAreNotApproved($examination_repproveds) ?>
+<?php $has_to_show_repproveds = SchoolBehaviourFactory::getInstance()->showReportCardRepproveds() && !empty($examination_repproveds) ?>
 <div class="colsleft">
   <?php if ($division->hasCourseType(CourseType::TRIMESTER)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
@@ -81,7 +80,7 @@
       </table>
     </div>
 
-       <?php if ($has_to_show_repproveds): ?>
+    <?php if ($has_to_show_repproveds): ?>
       <?php include_partial('career_subject_repproveds', array('examination_repproveds' => $examination_repproveds, 'has_to_show_attendances_per_day' => $division->hasAttendanceForDay())); ?>
     <?php endif ?>
 
