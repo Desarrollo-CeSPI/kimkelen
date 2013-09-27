@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -396,10 +396,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     {
       $c->add(StudentFreePeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
     }
-    else
-    {
-      $c->add(StudentFreePeer::COURSE_SUBJECT_ID, null, Criteria::ISNULL);
-    }
+    //else
+    //{
+      //$c->add(StudentFreePeer::COURSE_SUBJECT_ID, null, Criteria::ISNULL);
+    //}
 
     return StudentFreePeer::doSelect($c);
 
