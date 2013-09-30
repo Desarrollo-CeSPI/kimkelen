@@ -229,3 +229,45 @@ body {
 .print_sanctions {
     float: left;
 }
+
+/***table***/
+
+table.gridtable {
+    font-family:arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border:none;
+    border-collapse: collapse;
+    width:100%;
+    text-align:left;
+}
+
+table.gridtable th {
+    padding: 3px;
+    border-bottom:1px solid #ccc;
+    font-size:12px;
+}
+
+.th-subject-name {
+    width:20%;
+}
+
+table.gridtable td {
+    padding: 3px;
+    border-bottom:1px solid #ccc;
+    background-color: #ffffff;
+}
+
+table.gridtable tr {
+    border-bottom:1px solid #ccc;
+    background-color: #ffffff;
+    text-align:center;
+}
+
+.partial_average
+{
+  text-align: left !important;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}

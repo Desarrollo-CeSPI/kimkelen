@@ -71,6 +71,17 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
 
   }
 
+  static public function retrieveCurrentPeriodsIds($course_type = null)
+  {
+    $ids = array();
+    foreach (self::retrieveOrdered($course_type) as $value)
+    {
+      $ids[]= $value->getId();
+    }
+
+    return $ids;
+  }
+
   static public function retrieveCurrentsCriteria()
   {
     $c = new Criteria();

@@ -43,7 +43,7 @@
     </div>
     <hr class="hr_break">
     <div class="report-content">
-      <?php include_partial('admonition_details', array('student' => $student, 'division' => $division)); ?>
+      <?php include_partial('student/admonition_details', array('student' => $student, 'division' => $division, 'student_career_school_year' => $student_career_school_year)); ?>
       <hr class="hr_break">
       <?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
       <?php include_partial('career_subject_repproved_details', array('examination_repproveds' => $examination_repproveds)); ?>
