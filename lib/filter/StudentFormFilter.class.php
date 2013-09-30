@@ -38,6 +38,10 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setWidget('is_inscripted_in_career', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
     $this->setValidator('is_inscripted_in_career', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
 
+    $this->setWidget('is_free_in_some_period', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('is_free_in_some_period', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
+    $this->getWidgetSchema()->setLabel('is_free_in_some_period', 'Is free in some career school year period?');
+
     $status = StudentCareerSchoolYearStatus::getInstance('StudentCareerSchoolYearStatus');
 
     $this->setWidget('status', new sfWidgetFormChoice(array('choices' => $status->getOptions(true))));
@@ -137,6 +141,16 @@ class StudentFormFilter extends BaseStudentFormFilter
     }
   }
 
+  public function addIsFreeInSomePeriodColumnCriteria($criteria, $field, $value)
+  {
+    if ($value != '')
+    {
+      $criteria->addJoin(StudentFreePeer::STUDENT_ID , StudentPeer::ID);
+      $criteria->add(StudentFreePeer::IS_FREE , $value);
+      $criteria->addAnd(StudentFreePeer::CAREER_SCHOOL_YEAR_PERIOD_ID, CareerSchoolYearPeriodPeer::retrieveCurrentPeriodsIds(), Criteria::IN);
+    }
+  }
+
   public function getFields()
   {
     return array_merge(parent::getFields(),
@@ -146,6 +160,7 @@ class StudentFormFilter extends BaseStudentFormFilter
         'division' => 'Number',
         'is_matriculated' => 'Boolean',
         'is_inscripted_in_career' => 'Boolean',
+        'is_free_in_some_period' => 'Boolean',
         'is_graduated' => 'Boolean',
         'status' => 'Number'));
   }

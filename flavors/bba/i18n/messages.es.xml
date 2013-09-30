@@ -4236,6 +4236,22 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Student doesn't have any disciplinary sanctions.</source>
                 <target>No se han registrado sanciones disciplinarias.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Is free in some career school year period?</source>
+                <target>Quedó libre en algún periodo de este año lectivo?</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student assistance report</source>
+                <target>Reporte de inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reason</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Applicant</source>
+                <target>Solicitante</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -230,10 +230,5 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
     }
 
   }
-  
-    public function showReportCardAdmonitionDetails()
-  {
-    return true;
-  }
 
 }
