@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -25,15 +24,19 @@
   <a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a>
   <a href="<?php echo url_for('student') ?>"><?php echo __('Go back') ?></a>
 </div>
+
 <?php foreach ($student_career_school_years as $student_career_school_year): ?>
   <?php $school_year = $student_career_school_year->getSchoolYear(); ?>
   <?php foreach ($student_career_school_year->getDivisions() as $division): ?>
+
     <div class="report-wrapper">
+
       <span class="report-date" > <?php echo __('Issue date') ?>: <?php echo date('d/m/Y') ?> </span>
+
       <div class="report-header">
         <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
         <div class="header_row">
-          <h2><?php echo __('Student assistance and sanction report'); ?></h2>
+          <h2><?php echo __('Student assistance report'); ?></h2>
           <div class="title"><?php echo __('Student') ?>: </div>
           <div class="name"><?php echo $student ?></div>
           <div class="header_right">
@@ -41,18 +44,19 @@
             <div class="course"><?php echo $student_career_school_year->getYear() ?></div>
             <div class="title"><?php echo __('Division') ?>: </div>
             <div class="division"><?php echo $division->getDivisionTitle(); ?></div>
-            <div class="school_year"><?php echo __('School year') . " " . $school_year ?></div>
           </div>
         </div>
       </div>
+
       <div style="clear:both"></div>
+
       <div class="report-title"><?php echo __('Absences') ?></div>
       <div style="clear:both"></div>
       <?php if (count($student->getAbsences($student_career_school_year->getCareerSchoolYearId())) == 0): ?>
         <div style="clear:both"></div>
         <span class="report-notice"><?php echo __('No se registraron inasistencias para este alumno.'); ?></span>
       <?php else: ?>
-        <table class="print_table">
+        <table class="gridtable">
           <thead>
             <tr>
               <th><?php echo __('Day') ?></th>
@@ -82,48 +86,22 @@
           <tfoot>
             <tr>
               <td colspan="6" class="report-total">
-                <?php
-                echo __('Total ') . ': '
-                . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null, null, false), 2)
-                ?>
+                <?php echo __('Total') . ': ' . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null, null, false), 2) ?>
               </td>
             </tr>
             <tr>
               <td colspan="6" class="report-total">
-                <?php
-                echo __('Total unjustified') . ': '
-                . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null), 2)
-                ?>
+                <?php echo __('Total unjustified') . ': ' . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null), 2) ?>
               </td>
             </tr>
             <tr>
               <td colspan="6" class="report-total">
-                <?php
-                echo __('Total justified') . ': '
-                . round($student->getTotalJustificatedAbsences($division->getCareerSchoolYearId(), null, null), 2)
-                ?>
+                <?php echo __('Total justified') . ': ' . round($student->getTotalJustificatedAbsences($division->getCareerSchoolYearId(), null, null), 2) ?>
               </td>
             </tr>
           </tfoot>
         </table>
 
-      <?php endif; ?>
-      <br>
-      <div style="clear:both"></div>
-      <div class="report-title" style="background-color:#f2f2f2;"><?php echo __('Disciplinary sanctions') ?></div>
-      <?php if ($student->countStudentDisciplinarySanctionsForSchoolYear($school_year) == 0): ?>
-        <span class="report-notice"><?php echo __('No se registraron sanciones para este alumno.'); ?></span>
-      <?php else: ?>
-        <ul class="print_sanctions">
-          <?php foreach ($student->getStudentDisciplinarySanctionsForSchoolYear($school_year) as $ds): ?>
-            <li>
-              <span><?php echo $ds->getFormattedRequestDate() ?> - </span>
-              <span><?php echo $ds->getValueString(); ?> - </span>
-              <span><?php echo __('Description') . ": " . $ds->getDisciplinarySanctionType(); ?> </span>
-            </li>
-          <?php endforeach; ?>
-          <strong><?php echo __('Total') . ": " . $student->countStudentDisciplinarySanctionsForSchoolYear($school_year); ?></strong>
-        </ul>
       <?php endif; ?>
 
       <div class="colsright">
@@ -135,6 +113,11 @@
         </div>
       </div>
 
+      <div style="clear:both"></div>
+
+      <div style="page-break-before: always;"></div>
+      <br>
+      <?php include_partial('admonition_details', array('student' => $student, 'division' => $division, 'student_career_school_year' => $student_career_school_year)); ?>
+
     <?php endforeach ?>
   <?php endforeach ?>
-</div>
