@@ -4139,6 +4139,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Career subject repproved details</source>
                 <target>Detalle de materias previas</target>
             </trans-unit>
+            <trans-unit>
+                <source>Is free in some career school year period?</source>
+                <target>Quedó libre en algún periodo de este año lectivo?</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reason</source>
+                <target>Motivo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
