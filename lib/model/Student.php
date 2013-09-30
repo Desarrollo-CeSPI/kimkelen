@@ -1266,13 +1266,19 @@ class Student extends BaseStudent
       return $object;
   }
 
-   public function getStudentCareerSchoolYearsAscending()
-   {
-     $c = new Criteria();
-     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+ public function getStudentCareerSchoolYearsAscending()
+  {
+    $c = new Criteria();
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
 
-     return $this->getStudentCareerSchoolYears($c);
-}
+    return $this->getStudentCareerSchoolYears($c);
+  }
+
+ public function getCareerSchoolYearsNames()
+  {
+    return implode(', ', array_map(create_function('$scsy', 'return $scsy->getCareerSchoolYear();'), $this->getStudentCareerSchoolYearsAscending()));
+  }
+
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

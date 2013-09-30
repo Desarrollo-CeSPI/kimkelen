@@ -115,11 +115,20 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
     return self::doSelect($c);
   }
 
-    public static function countTotalForStudent(Student $student)
+    public static function countTotalValueForStudent(Student $student)
   {
     $c = new Criteria();
     $c->add(self::STUDENT_ID, $student->getId());
 
-    return self::doCount($c);
+    //$c->clearSelectColumns();
+    //$c->addSelectColumn('SUM(' . self::VALUE. ')');
+
+    $total = 0;
+    foreach (self::doSelect($c) as $sds)
+    {
+      $total+= $sds->getValue();
+    }
+
+    return $total;
   }
 }

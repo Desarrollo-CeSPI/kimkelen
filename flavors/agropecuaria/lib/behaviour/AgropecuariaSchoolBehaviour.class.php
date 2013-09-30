@@ -133,9 +133,4 @@ class AgropecuariaSchoolBehaviour extends BaseSchoolBehaviour
 
   }
 
-  public function showReportCardAdmonitionDetails()
-  {
-    return true;
-  }
-
 }
