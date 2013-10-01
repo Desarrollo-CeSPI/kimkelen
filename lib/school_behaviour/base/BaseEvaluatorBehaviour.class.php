@@ -325,6 +325,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         $result->setCareerSubject($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
         $result->setStudent($course_subject_student->getStudent());
         $result->setSchoolYear($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
+
+        //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
+        if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
+        {
+          $student_repproved_course_subject->delete($con);
+        }
       }
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();

@@ -2413,8 +2413,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>The student can not be removed because: id enrolled in a course, already has passed a subject or already has passed a course.</source>
-                <target>El estudiante no puede ser eliminado debido a que: está inscripto en una asignatura, ya tiene aprobado una materia o ya tiene aprobada una asignatura.</target>
+                <source>The student can not be removed because: id enrolled in a course, already has passed a subject, already has passed a course, or has some related data stored.</source>
+                <target>El estudiante no puede ser eliminado debido a que: está inscripto en una materia, ya la tiene aprobada, o posee algún dato relacionado.</target>
             </trans-unit>
 
             <trans-unit>

@@ -361,11 +361,17 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       ##se agrega en la tupla student_disapproved_course_subject el link a al resultado final
 
-      $student_disapproved_course_subject =   $course_subject_student->getCourseResult();
+      $student_disapproved_course_subject = $course_subject_student->getCourseResult();
       $student_disapproved_course_subject->setStudentApprovedCareerSubject($result);
       $student_disapproved_course_subject->save($con);
 
       $result->save($con);
+
+      //Se busca si había una previa creada para esta materia, se debe eliminar
+      if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
+      {
+        $student_repproved_course_subject->delete($con);
+      }
     }
     else
     {
@@ -385,7 +391,8 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         // se crea una previa
         $student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
 
-        if (is_null($student_repproved_course_subject)){
+        if (is_null($student_repproved_course_subject))
+        {
           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
         }
 
@@ -393,7 +400,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         $student_repproved_course_subject->save($con);
       }
     }
-
   }
 
   public function getAnualAverageForStudentCareerSchoolYear($student_career_school_year)
