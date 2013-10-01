@@ -41,7 +41,7 @@ class ExaminationRepprovedSubjectBehavior
       {
         $student = $student_repproved_course_subject->getCourseSubjectStudent()->getStudent();
         $scsys = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($student, SchoolYearPeer::retrieveCurrent());
-        if ($scsys[0]->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN)
+        if (!empty($scsys) && $scsys[0]->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN)
         {
           $student_examination_repproved_subject = new StudentExaminationRepprovedSubject();
           $student_examination_repproved_subject->setStudentRepprovedCourseSubjectId($student_repproved_course_subject->getId());
