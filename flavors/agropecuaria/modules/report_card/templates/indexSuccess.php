@@ -37,23 +37,68 @@
       <?php $course_subject_students = $student->getCourseSubjectStudentsForSchoolYear($school_year); ?>
 
       <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
+      <?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
+      <?php $has_to_show_repproveds = SchoolBehaviourFactory::getInstance()->showReportCardRepproveds() && !empty($examination_repproveds) ?>
+
       <div class="footer" style="width: 100%">
         <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
       </div>
+      <?php if ($has_to_show_repproveds): ?>
+        <hr class="hr_break">
+        <?php include_partial('career_subject_repproved_details', array('examination_repproveds' => $examination_repproveds)); ?>
+      <?php endif; ?>
     </div>
     <hr class="hr_break">
     <div class="report-content">
-      <?php include_partial('student/admonition_details', array('student' => $student, 'division' => $division, 'student_career_school_year' => $student_career_school_year)); ?>
-      <hr class="hr_break">
-      <?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
-      <?php include_partial('career_subject_repproved_details', array('examination_repproveds' => $examination_repproveds)); ?>
 
-      <?php include_partial('signature_boxes') ?>
-      <div style="clear:both;"></div>
-      <br>
-      <div class="date"><?php echo __('Issue date') ?> <?php echo date('d/m/Y') ?></div>
+      <div class="title"><?php echo __('Admonition details'); ?></div>
+      <div style="clear:both"></div>
+      <?php $periods_array = CareerSchoolYearPeriodPeer::getPeriodsArrayForCourseType($division->getCourseType(), $division->getCareerSchoolYearId()); ?>
+
+      <div class="admonition_details">
+        <?php foreach ($periods_array as $short_name => $period): ?>
+          <?php if ($period->getIsClosed()): ?>
+            <table class="gridtable">
+              <thead>
+                <tr>
+                  <td colspan="4" class="partial_average"><?php echo $period->getName() ?></td>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period)): ?>
+                  <tr>
+                    <th><?php echo __('Resolution date') ?></th>
+                    <th><?php echo __('Reason') ?></th>
+                    <th><?php echo __('Disciplinary sanction type') ?></th>
+                    <th><?php echo __('Total') ?></th>
+                  </tr>
+                  <?php foreach (StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) as $student_disciplinary_sanction): ?>
+
+                    <tr>
+                      <td><?php echo $student_disciplinary_sanction->getFormattedRequestDate(); ?></td>
+                      <td><?php echo $student_disciplinary_sanction->getDisciplinarySanctionType(); ?></td>
+                      <td><?php echo $student_disciplinary_sanction->getSanctionType(); ?></td>
+                      <td><?php echo $student_disciplinary_sanction->getValue(); ?></td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan ="4" class="total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) ?></td>
+                  </tr>
+                </tfoot>
+              </table>
+            <?php else: ?>
+              <tr>
+                <td style="text-align:left"><?php echo __("Student doesn't have any disciplinary sanctions.") ?></td>
+              </tr></tbody></table>
+            <?php endif; ?>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </div>
+      <?php include_partial('signature_boxes'); ?>
     </div>
   </div>
-  <div style="clear:both;"></div>
+
   <div style="page-break-before: always;"></div>
 <?php endforeach; ?>

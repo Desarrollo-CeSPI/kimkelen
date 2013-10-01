@@ -522,14 +522,13 @@ class Student extends BaseStudent
 
   public function canBeDeleted()
   {
-    return !$this->countCourseSubjectStudents() && !$this->countStudentApprovedCareerSubjects() && !$this->countStudentApprovedCourseSubjects() && !$this->countDivisionStudents();
+    return !$this->countCourseSubjectStudents() && !$this->countStudentApprovedCareerSubjects() && !$this->countStudentApprovedCourseSubjects() && !$this->countDivisionStudents() && !$this->getStudentAttendancesPerDay();
 
   }
 
   public function getMessageCantBeDeleted()
   {
-    return "The student can not be removed because: id enrolled in a course, already has passed a subject or already has passed a course.";
-
+    return "The student can not be removed because: id enrolled in a course, already has passed a subject, already has passed a course, or has some related data stored.";
   }
 
   public function isInscriptedInCareer()
