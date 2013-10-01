@@ -4147,6 +4147,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Reason</source>
                 <target>Motivo</target>
             </trans-unit>
+            <trans-unit>
+                <source>Admonition details</source>
+                <target>Informe de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student assistance report</source>
+                <target>Reporte de inasistencias</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
