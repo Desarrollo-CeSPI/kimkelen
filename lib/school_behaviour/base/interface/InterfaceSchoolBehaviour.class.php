@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -334,4 +334,11 @@ abstract class InterfaceSchoolBehaviour
    * @return boolean
    */
   abstract public function isFreeStudent(Student $student, CareerSchoolYearPeriod $career_school_year_period= null, CourseSubject $course_subject = null, CareerSchoolYear $career_school_year);
+
+  /**
+   * This method return true if repproved subject ought to be shown in report cards Otherwise, returns false.
+   *
+   * @return boolean
+   */
+  abstract public function showReportCardRepproveds();
 }
