@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -113,29 +113,6 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
   {
     $filter_by_orientation = false;
     return StudentPeer::doSelect($this->getAvailableStudentsForDivisionCourseSubjectCriteria($course_subject, $criteria, $filter_by_orientation));
-
-  }
-
-  public function getPrintReportUrlFor(Division $division)
-  {
-    if ($division->getYear() >= 1 && $division->getYear() < 4)
-    {
-      return 'Report::Kimkelen_LVM/boletin1.prpt';
-    }
-    elseif ($division->getYear() == 4)
-    {
-      return 'Report::Kimkelen_LVM/boletin-4.prpt';
-    }
-    elseif ($division->getYear() == 5)
-    {
-      return 'Report::Kimkelen_LVM/boletin-5.prpt';
-    }
-    elseif ($division->getYear() == 6)
-    {
-      return 'Report::Kimkelen_LVM/boletin-6.prpt';
-    }
-
-    throw new InvalidArgumentException('Invalid division year for report card.');
 
   }
 

@@ -150,22 +150,6 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 
   }
 
-  public function getPrintReportUrlFor(Division $division)
-  {
-    if ($division->getYear() >= 1 && $division->getYear() < 4)
-    {
-      return 'Report::Kimkelen_BBA/boletin-trimestral-asistencia-por-año.prpt';
-    }
-    elseif ($division->getYear() >= 4)
-    {
-      #return 'Report::Kimkelen_BBA/boletin-anual-bimestal-asistencia-por-materia.prpt';
-      return 'Report::Kimkelen_BBA/boletin-trimestral-asistencia-por-materia.prpt';
-    }
-
-    throw new InvalidArgumentException('Invalid division year for report card.');
-
-  }
-
   public function getMarkNameByNumberAndCourseType($number, $course_type)
   {
     if (($number == 3) && ($course_type == CourseType::QUATERLY || $course_type == CourseType::BIMESTER))
