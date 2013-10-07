@@ -503,7 +503,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     foreach (CourseSubjectStudentPeer::doSelect($c) as $course_subject_student)
     {
       $course_result = $course_subject_student->getCourseResult();
-      if ($course_result instanceof StudentDisapprovedCourseSubject)
+      if ((is_null($course_result)) || ($course_result instanceof StudentDisapprovedCourseSubject))
       {
         return '';
       }
@@ -514,7 +514,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     $avg = $avg / 2;
 
     return sprintf('%.4s', $avg);
-
   }
 
    public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
