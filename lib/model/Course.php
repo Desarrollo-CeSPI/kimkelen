@@ -243,10 +243,10 @@ class Course extends BaseCourse
     if ($sf_user->isTeacher())
     {
       $c->add(PersonPeer::USER_ID, $sf_user->getGuardUser()->getId());
-      $c->addJoin(TeacherPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
-      $c->addJoin(CourseSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID, Criteria::INNER_JOIN);
-      $c->addJoin(CourseSubjectPeer::ID, CourseSubjectTeacherPeer::COURSE_SUBJECT_ID, Criteria::INNER_JOIN);
-      $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID, Criteria::INNER_JOIN);
+      $c->addJoin(PersonPeer::ID, TeacherPeer::PERSON_ID, Criteria::INNER_JOIN);
+      $c->addJoin(TeacherPeer::ID, CourseSubjectTeacherPeer::TEACHER_ID, Criteria::INNER_JOIN);
+      $c->addJoin(CourseSubjectTeacherPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID, Criteria::INNER_JOIN);
+      $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID, Criteria::INNER_JOIN);
     }
 
     return $this->getCourseSubjectsOrdered($c);
