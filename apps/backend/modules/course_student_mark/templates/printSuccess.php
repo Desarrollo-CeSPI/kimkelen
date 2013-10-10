@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -17,4 +17,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php include_partial('course_student_mark/course_subject_marks_table', array('course_subjects' => $course_subjects))?>;
+<?php include_partial('course_student_mark/course_subject_marks_table', array('course_subjects' => $course_subjects))?>
