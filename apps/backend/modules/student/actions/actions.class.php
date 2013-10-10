@@ -40,7 +40,7 @@ class studentActions extends autoStudentActions
   }
 
 /**
-   * This action allows to manage career regsitration for one student
+   * This action allows to manage career registration for one student
    * This is, add new registration as delete current ones
    *
    * @param sfWebRequest $request
@@ -54,7 +54,7 @@ class studentActions extends autoStudentActions
     $this->form = new $class($career_student);
   }
   /**
-   * This action allows to delete a career regsitration for selected student
+   * This action allows to delete a career registration for selected student
    * @see executeRegisterForCareer
    * @param sfWebRequest $request
    */

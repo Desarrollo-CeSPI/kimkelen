@@ -1891,3 +1891,18 @@ div.wc-cal-event{
   font-weight: bold;
   color: #F37321;
 }
+
+.sf_admin_action_matriculate_graduated_students_from_other_career a
+{
+  background-image: url('../images/matriculate_graduated.png') !important;
+}
+
+.teacher_signature_box{
+    border:1px solid #ccc;
+    float:left;
+    margin-top:10px;
+    margin-right: 5px;
+    padding:5px 15px;
+    height:123px;
+    width: 20%;
+}
