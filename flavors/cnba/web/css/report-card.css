@@ -308,3 +308,33 @@ table.lefttable tr {
     margin-right: 10px;
     float:right;
 }
+
+/***table for calification sheet***/
+
+table.gridtable_bordered {
+    font-family:arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border:1px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    text-align:left;
+}
+
+table.gridtable_bordered th {
+    padding: 3px;
+    border:1px solid #ccc;
+    font-size:12px;
+}
+
+table.gridtable_bordered td {
+    padding: 3px;
+    border:1px solid #ccc;
+    background-color: #ffffff;
+}
+
+table.gridtable_bordered tr {
+    border:1px solid #ccc;
+    background-color: #ffffff;
+    text-align:center;
+}
