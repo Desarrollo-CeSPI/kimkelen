@@ -95,7 +95,7 @@
 
     <?php $is_historia = $historia->getId() == $career_subject_school_year->getId() || in_array($career_subject_school_year->getCareerSubject()->getId(), array(261, 262)); ?>
     <tr>
-      <td class="subject_name"><?php echo $name = ($is_historia) ? $course_subject_student->getCourseSubject()->getCourse()->getName() : $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
+      <td class="subject_name"><?php echo $name = $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 
       <?php for ($i = 1; $i <= $count_marks; $i++): ?>
         <td><?php echo $course_subject_student->getMarkFor($i) ?></td>

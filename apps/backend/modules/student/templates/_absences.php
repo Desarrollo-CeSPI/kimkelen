@@ -18,8 +18,8 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php use_helper('I18N') ?>
-<h2><?php echo __('Absences') ?></h2>
-<div>
+<div class="student_year"><?php echo __('Absences') ?></div>
+<div style="margin-left:5px"> 
   <?php $student_career_school_year = $student->getCurrentStudentCareerSchoolYear(); ?>
   <?php if (!is_null($student_career_school_year)): ?>
     <div>

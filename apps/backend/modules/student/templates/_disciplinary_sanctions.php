@@ -18,8 +18,8 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php use_helper('I18N') ?>
-<h2><?php echo __('Disciplinary sanctions') ?></h2>
-<div>
+<div class="student_year"><?php echo __('Disciplinary sanctions') ?></div>
+<div style="margin-left:5px">
   <?php if ($current_student_career_school_year = $student->getCurrentStudentCareerSchoolYear()): ?>
   <?php $max_disciplinary_sanctions= $current_student_career_school_year->getCareerSchoolYear()->getSubjectConfiguration()->getMaxDisciplinarySanctions() ?>
   <?php $student_disciplinary_sanctions = $student->countStudentDisciplinarySanctionsForSchoolYear() ?>

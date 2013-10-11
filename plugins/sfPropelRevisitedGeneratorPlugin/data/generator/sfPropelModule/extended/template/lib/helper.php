@@ -200,7 +200,8 @@ class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorHelper extends s
   { $ret='';
     if ($this->showDisabledActions() && count($action_list)>0 )
     {
-      $ret='<div class="sf_admin_td_actions_disabled_title">'.__('Disabled actions').'</div><ul class="sf_admin_td_actions_disabled">';
+      $ret='<div class="sf_admin_td_actions_disabled_title">'.__('Disabled actions').'<a href="#" onClick="jQuery(this).closest(\'td\').find(\'.sf_admin_td_actions_disabled\').toggle();return false"> '.__('Show').'</a>'.
+       '</div><ul class="sf_admin_td_actions_disabled" style="display:none">';
       foreach($action_list as $li) $ret.=$li;
       $ret.='</ul>';
     }

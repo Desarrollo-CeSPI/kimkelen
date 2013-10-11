@@ -35,7 +35,9 @@
   <?php endif; ?>
 
   <div class="student_current_info">
-    <div class="info_div"><strong><?php echo __("Is registered?") ?></strong> <em><?php include_partial("student/is_registered", array("student" => $student)) ?></em></div>
+    <div class="info_div"><strong><?php echo __("Is registered?") ?></strong> 
+         <em><?php include_partial("student/is_registered", array("student" => $student)) ?></em>
+   </div>
     <div class="info_div"><?php include_partial("student/careers", array("student" => $student)) ?></div>
     <div class="info_div"><?php include_partial("student/divisions", array("student" => $student)) ?></div>
     <div class="info_div"><?php include_partial("student/commisions", array("student" => $student)) ?></div>

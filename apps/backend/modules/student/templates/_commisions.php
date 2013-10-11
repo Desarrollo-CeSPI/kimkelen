@@ -21,10 +21,12 @@
 <?php /* @var $student Student */ ?>
 <?php $commisions = $student->getCommisions()?>
 <?php if (count($commisions)): ?>
-  <?php echo count($commisions) > 1 ?  __('Currently inscripted in commisions:') : __('Currently inscripted in commision:')?>
+   <div class="student_year">
+       <?php echo count($commisions) > 1 ?  __('Currently inscripted in commisions:') : __('Currently inscripted in commision:')?>
+   </div>
   <div class="student_commisions">
     <?php foreach( $commisions as $course):?>
-    <div><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
+    	<div style="margin-left:5px"><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
     <?php endforeach ?>
   </div>
 <?php endif ?>
