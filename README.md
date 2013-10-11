@@ -5,6 +5,12 @@ El sistema permite personalización a través de comportamientos o _behaviors_; 
 
 # Instalación
 
+La instalación de **Kimkëlen** requiere de la congiguración de un Servidor de aplicaciones Web, como puede ser Apache, configurado correctamente para ejecutar el lenguaje de programación PHP, Server así como de un servidor de Base de Datos, como MySQL.
+Se recomienda recomienda la instalación del producto por parte de un usuario con conocimientos en los componenentes antes enunciados.
+
+Para usuarios que utilizan el sistema operativo Windows se recomienda la instalación de Wamp (http://www.wampserver.com/) o XAMP (http://www.apachefriends.org/es/xampp.html) que incluye los componentes enumerados y una rapida configuración de los mismos. Tenga a bien realizar la instalación y configuración como se indica en los mencionados productos. 
+
+
 ## Editar la configuración de la base de datos
 
 La configuración de la base de datos se realiza por medio de los archivos
