@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -38,5 +38,10 @@ class PellegriniFormFactory extends BaseFormFactory
   public function getCommissionForm()
   {
     return 'PellegriniCommissionForm';
+  }
+
+   public function getStudentForm()
+  {
+    return 'PellegriniStudentForm';
   }
 }

@@ -28,10 +28,6 @@
   <div class="record-header">
     <div>
       <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
-      <div class="logo_fvet"><?php echo image_tag("fvet.jpeg", array('absolute' => true)) ?></div>
-      <div class="school-name">Escuela de Educación Técnico Profesional </div>
-      <div class="school-name">de Nivel Medio en Producción Agropecuaria y Agroalimentaria</div>
-      <div class="school-name">Facultad de Ciencias Veterinarias de la UBA</div>
     </div>
   </div>
   <div class="report-content">
