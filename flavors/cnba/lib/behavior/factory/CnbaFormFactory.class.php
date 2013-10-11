@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -39,5 +39,9 @@ class CnbaFormFactory extends BaseFormFactory
     return 'CnbaStudentDisciplinarySanctionForm';
   }
 
+    public function getStudentForm()
+  {
+    return 'CnbaStudentForm';
+  }
 
 }
