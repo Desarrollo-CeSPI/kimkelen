@@ -117,6 +117,7 @@ generator:
         object_actions:
           _show:
             credentials: [show_student]
+            label: Ver Legajo Completo
 
           _edit:
             credentials: [edit_student]
@@ -162,14 +163,6 @@ generator:
             credentials: [edit_student]
             action: deactivate
             condition: canBeDeactivated
-
-          brothers:
-            credentials: [edit_student]
-            action: manageBrothers
-
-          tutors:
-            credentials: [edit_student]
-            action: tutors
 
           sanctions:
             credentials: [show_student_disciplinary_sanction]

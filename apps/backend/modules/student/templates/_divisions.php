@@ -20,10 +20,9 @@
 <?php use_helper('I18N')?>
 <?php $divisions = $student->getCurrentDivisions()?>
 <?php if (count($divisions)): ?>
-  <?php echo count($divisions) > 1 ?  __('Currently inscripted in divisions:') : __('Currently inscripted in division:')?>
-  <div class="student_divisions">
+  <div class="student_year"><?php echo count($divisions) > 1 ?  __('Currently inscripted in divisions:') : __('Currently inscripted in division:')?>
     <?php foreach( $divisions as $division):?>
-    <div><?php echo link_to($division, 'division/show?id=' . $division->getId())?></div>
+    <?php echo link_to($division, 'division/show?id=' . $division->getId())?>,
     <?php endforeach ?>
   </div>
 <?php endif ?>

@@ -18,12 +18,12 @@
  */ ?>
 <?php use_helper('I18N') ?>
 
-<?php echo __('Career') ?>
 <div class="student_careers">
+<strong><?php echo __('Career') ?></strong>
   <?php if ($cs = $student->getLastCareerStudent()): ?>
-    <div><?php echo $cs->getCareer() ?></div>
-    <div class="student_career_orientation"><?php $cs->getOrientation() != '' and print __('Orientation: %orientation%', array('%orientation%' => $cs->getOrientation())) ?></div>
-    <div class="student_career_orientation"><?php $cs->getSubOrientation() != '' and print __('Sub orientation: %sub_orientation%', array('%sub_orientation%' => $cs->getSubOrientation())) ?></div>
+    <div style="margin-left:5px"><?php echo $cs->getCareer() ?></div>
+    <div  style="margin-left:5px" class="student_career_orientation"><?php $cs->getOrientation() != '' and print __('Orientation: %orientation%', array('%orientation%' => $cs->getOrientation())) ?></div>
+    <div style="margin-left:10px" class="student_career_orientation"><?php $cs->getSubOrientation() != '' and print __('Sub orientation: %sub_orientation%', array('%sub_orientation%' => $cs->getSubOrientation())) ?></div>
     <?php if ($cs->isRegular() && ($cs->getCurrentStudentCareerSchoolYear())): ?>
       <div class="student_year"><?php echo __('Year: %year%', array('%year%' => $cs->getCurrentStudentCareerSchoolYear()->getYear())) ?></div>
       <div class="student_career_repproved"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->getIsRepproved() and print __('Repproved') ?></div>
