@@ -55,6 +55,7 @@
         <tr class="printColumns"></tr>
       <th>N°</th>
       <th><?php echo __('Student'); ?></th>
+      <th><?php echo __('Folio number'); ?></th>
       <th><?php echo __('Identification number'); ?></th>
       <th><?php echo __('Division') ?></th>
       <th><?php echo __('Calification') ?></th>
@@ -65,6 +66,7 @@
           <tr>
             <td><?php echo $i ?> </td>
             <td><?php echo $student ?> </td>
+            <td><?php echo $student->getPerson()->getStudent()->getFolioNumber() ?> </td>
             <td><?php echo $student->getPerson()->getIdentificationNumber() ?> </td>
             <?php $division = DivisionStudentPeer::retrieveDivisionsForStudentAndYear($student, $examination_repproved_subject->getCareerSubject()->getYear()); ?>
             <td><?php echo implode(', ', $division); ?> </td>
