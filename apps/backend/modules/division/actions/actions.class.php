@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -477,5 +477,21 @@ class divisionActions extends autoDivisionActions
   {
     $this->division = $this->getRoute()->getObject();
     $this->form = new CourseSubjectConfigurationDivisionForm();
+  }
+
+  public function executeShowAssistanceReport(sfWebRequest $request)
+  {
+    $this->division = $this->getRoute()->getObject();
+    $this->students = $this->division->getStudents();
+
+    $this->setLayout('cleanLayout');
+  }
+
+  public function executeShowDisciplinarySanctionReport(sfWebRequest $request)
+  {
+    $this->division = $this->getRoute()->getObject();
+    $this->students = $this->division->getStudents();
+
+    $this->setLayout('cleanLayout');
   }
 }
