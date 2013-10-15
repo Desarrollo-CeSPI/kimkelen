@@ -262,3 +262,11 @@ table.gridtable tr {
   border-bottom:1px solid #ccc;
   background-color: #ffffff;
 }
+
+.partial_average
+{
+  text-align: left !important;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}

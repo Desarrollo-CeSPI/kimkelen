@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -28,5 +28,12 @@ class CareerPeer extends BaseCareerPeer
     $career = self::doSelectOne($c);
 
     return ($career)? $career->getQuantityYears() : 0;
+  }
+
+  static public function moreThanOneCareer()
+  {
+    $c = new Criteria();
+
+    return self::doCount($c) > 1;
   }
 }
