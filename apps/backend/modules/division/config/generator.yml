@@ -85,6 +85,14 @@ generator:
             credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
             condition: canPrintReportCards
 
+          show_disciplinary_sanction_report:
+            label: Student disciplinary sanction report
+            action: showDisciplinarySanctionReport
+
+          show_assistance_report:
+            label: Student assistance report
+            action: showAssistanceReport
+
           printCalification:
             label:   Print califications
             action:  printCalification

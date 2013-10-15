@@ -1936,3 +1936,13 @@ div.wc-cal-event{
     height:123px;
     width: 20%;
 }
+
+.sf_admin_list .sf_admin_action_show_disciplinary_sanction_report a
+{
+  background-image: url('../images/sanction.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_assistance_report a
+{
+  background-image: url('../images/report.png') !important;
+}

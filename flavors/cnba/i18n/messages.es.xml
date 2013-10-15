@@ -3836,7 +3836,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Division configure</source>
-              <target>Configuración de cantidad de asistencias permitidas.</target>
+              <target>Configuración de cantidad de asistencias permitidas</target>
             </trans-unit>
             <trans-unit>
               <source>Course configuration of the %division%</source>
@@ -4144,6 +4144,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Matriculate graduated students from other career</source>
                 <target>Matricular alumnos egresados de otra carrera del año lectivo anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student disciplinary sanction report</source>
+                <target>Reporte de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student assistance report</source>
+                <target>Reporte de inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Admonition details</source>
+              <target>Detalle de apercibimientos y sanciones</target>
             </trans-unit>
         </body>
     </file>
