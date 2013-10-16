@@ -3,6 +3,11 @@
 **Kimkëlen** es un sistema de gestión integrada de colegios secundarios realizado por el [CeSPI](http://www.cespi.unlp.edu.ar/) perteneciente a la  [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/).
 El sistema permite personalización a través de comportamientos o _behaviors_; cada comportamiento permite definir formas de evaluación según lo resuelva el colegio, seguimiento de inasistencias, sanciones disciplinarias, impresión de boletines, generación de reportes, etcétera.
 
+# Demo
+
+Presentamos un sitio de demo donde se podrá probar la funcionalidad del sistema. Para acceder ingresa a [Kimkelen Demo](http://demo.kimkelen.cespi.unlp.edu.ar/) con usuado "admin" y contraseña "admin".
+Los datos que se visualizan su ficticios y la base de datos se rastaurara periodicamente. 
+
 # Instalación
 
 La instalación de **Kimkëlen** requiere de la configuración de un Servidor de aplicaciones Web, como puede ser [Apache](http://httpd.apache.org/), configurado correctamente para ejecutar el lenguaje de programación PHP, Server así como de un servidor de Base de Datos, como MySQL.
