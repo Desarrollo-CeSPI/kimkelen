@@ -6,7 +6,7 @@ El sistema permite personalización a través de comportamientos o _behaviors_; 
 # Demo
 
 Presentamos un sitio de demo donde se podrá probar la funcionalidad del sistema. Para acceder ingresa a [Kimkelen Demo](http://demo.kimkelen.cespi.unlp.edu.ar/) con usuado "admin" y contraseña "admin".
-Los datos que se visualizan su ficticios y la base de datos se rastaurara periodicamente. 
+Los datos que se visualizan son ficticios y la base de datos se rastaurara periódicamente. 
 
 # Instalación
 
