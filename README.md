@@ -35,7 +35,7 @@ cp config/propel.ini-default config/propel.ini
 
 Edite estos archivos según la configuración de su entorno.
 
-### Ejemplo de `databases.yml`
+## Ejemplo de `databases.yml`
 
 ```yml
 ....
@@ -52,7 +52,7 @@ all:
       pooling:    true
 ```
 
-### Ejemplo de `propel.ini`
+## Ejemplo de `propel.ini`
 
 ```yml
 propel.targetPackage       = lib.model
@@ -71,7 +71,7 @@ propel.database.encoding   = utf8
 *Es importante destacar que la base de datos debe crearla manualmente, no es
 creada por ninguno de los pasos siguientes*
 
-## Correr los siguientes comandos
+## Instalar por primera vez
 
 ```
 php symfony kimkelen:flavor <COMPORTAMIENTO>
@@ -79,6 +79,7 @@ php symfony propel:build-all-load
 php symfony plugin:publish
 php symfony project:permissions
 ```
+
 En el caso de que al ejecutar el comando "php symfony propel:build-all-load" se produzca algún error, reemplazar la ejecución del misimo por la ejecución de los siguientes comandos
 
 ```
@@ -89,7 +90,33 @@ php symfony propel:build-sql
 php symfony propel:insert-sql
 ```
 
-### ¿Qué es el **comportamiento** o **sabor**?
+## Actualizar la versión
+
+En el caso de que se desee actualizar la versión, no se deben ejecutar todos los comandos anteriores dado que algunos rearman la base de datos y se perderia información.
+Entonces, cuando ya se cuenta con Kimkelen y simplemente se actualiza a una nueva versión, se deberán ejecutar los siguientes comandos sobre la nueva:
+
+```
+php symfony kimkelen:flavor <COMPORTAMIENTO>
+php symfony plugin:publish
+php symfony project:permissions
+php symfony propel:build-model
+php symfony propel:build-forms
+php symfony propel:build-filters
+```
+
+## Datos Iniciales
+
+Por defecto, los comandos anteriores crean la base de datos pero no agregan los datos por defectos con lo que cuenta el sistema.
+En caso de queres crearlos, ejecutar el sieguiente comando:
+
+```
+php symfony propel:data-load
+```
+
+> **Importante** Este comando borra TODOS los datos de la base. No debe ejecutarse una vez que el sistema se encuentre en uso para evitar la perdida de información 
+
+
+## ¿Qué es el **comportamiento** o **sabor**?
 
 Cada colegio tiene su propio esquema de enseñanza siguiendo reglas diferentes.
 Kimelen provee una forma desacoplada de programar esta lógica en lo que llamamos
