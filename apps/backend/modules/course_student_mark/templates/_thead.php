@@ -25,9 +25,21 @@
     <th align="center" rowspan="2" style="width: 10%"><?php echo __('Average') ?></th>
     <th align="center" rowspan="2" style="width: 40%"><?php echo __('Observation') ?></th>
   </tr>
+
+
   <tr>
-    <?php for ($i = 1; $i <= $configuration->getCourseMarks(); $i++): ?>
-      <th align="center"><?php echo $i; ?></th>
-    <?php endfor; ?>
+    <?php $marks_count = $configuration->getCourseMarks(); ?>
+    <?php if ($configuration->getCourseType() == CourseType::TRIMESTER): ?>
+      <?php include_partial('thead_trimester', array('marks_count' => $marks_count)); ?>
+    <?php endif; ?>
+    <?php if ($configuration->getCourseType() == CourseType::QUATERLY): ?>
+      <?php include_partial('thead_quaterly', array('marks_count' => $marks_count)); ?>
+    <?php endif; ?>
+    <?php if ($configuration->getCourseType() == CourseType::BIMESTER): ?>
+      <?php include_partial('thead_bimester', array('marks_count' => $marks_count)); ?>
+    <?php endif; ?>
+    <?php if ($configuration->getCourseType() == CourseType::QUATERLY_OF_A_TERM): ?>
+       <th align="center"><?php echo __('1°'); ?></th>
+    <?php endif; ?>
   </tr>
 </thead>
