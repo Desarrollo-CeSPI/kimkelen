@@ -65,22 +65,20 @@
       </tbody>
     </table>
   </div>
-  <div class="report-wrapper">
-    <?php foreach (range(1, $configuration->getCourseMarks()) as $number): ?>
-      <div class="teacher_signature_box">
-        <div class="titletable">
-          <span><?php echo __('Término ') . $number ?></span></div>
-        <div style="margin-top: 16%">
-          <div align="center">_________________________</div>
-          <div align="center"><?php echo __('Professor signature') ?></div>
-          <br>
-          <div align="center"><?php echo __('Fecha') ?> _____ / _____ / _____ </div>
-        </div>
-      </div>
 
-    <?php endforeach; ?>
+  <div class="report-wrapper">
+    <?php if ($configuration->getCourseType() == CourseType::TRIMESTER): ?>
+      <?php include_partial('trimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+    <?php elseif ($configuration->getCourseType() == CourseType::QUATERLY): ?>
+      <?php include_partial('quaterly_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+    <?php elseif ($configuration->getCourseType() == CourseType::BIMESTER): ?>
+      <?php include_partial('bimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+    <?php elseif ($configuration->getCourseType() == CourseType::QUATERLY_OF_A_TERM): ?>
+      <?php include_partial('quaterly_of_a_term_boxes'); ?>
+    <?php endif; ?>
   </div>
 <?php endforeach; ?>
+
 <div style="clear:both"></div>
 <div class="non-printable">
   <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
