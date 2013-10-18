@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -31,9 +31,7 @@ class CareerSubjectForm extends BaseCareerSubjectForm
 {
   public function configure()
   {
-
-    unset( $this['is_option'],$this['created_at']);
-
+    unset($this['created_at']);
 
      /* Career as static */
     $this->setWidget('career_id', new sfWidgetFormReadOnly(array(
@@ -58,7 +56,7 @@ class CareerSubjectForm extends BaseCareerSubjectForm
     }
 
     /* Subject widget */
-    if ($this->isNew()||$this instanceOf CareerSubjectOptionForm)
+    if ($this->isNew())
     {
       $this->getWidget('subject_id')->setOption('add_empty', 'Seleccione una materia');
       $this->getWidget('subject_id')->setOption('peer_method', 'doSelectOrdered');
@@ -76,14 +74,14 @@ class CareerSubjectForm extends BaseCareerSubjectForm
     {
       //If there are career subjects that has this career subject as correlative
       $this->setWidget('orientation_id', new sfWidgetFormReadOnly(array('plain'          => false,'empty_value'=>'N/A')));
-      
+
       $this->getWidgetSchema()->setHelp('orientation_id','No es posible cambiar la orientación mientras existan materias que nos declaren como correlativa');
     }
     else
     {
       $this->getWidgetSchema()->setHelp('orientation_id', 'Hace que la materia pertenezca a una orientación');
     }
-    
+
     /* Subject sub orientation widget and validator */
     if ($this->getObject()->getIsCorrelative())
     {
@@ -92,7 +90,7 @@ class CareerSubjectForm extends BaseCareerSubjectForm
         'plain' => false,
         'empty_value' => 'N/A'
       )));
-      
+
       $this->getWidgetSchema()->setHelp('sub_orientation_id', 'No es posible cambiar la sub orientación mientras existan materias que nos declaren como correlativa');
     }
     else
@@ -101,7 +99,7 @@ class CareerSubjectForm extends BaseCareerSubjectForm
         'model' => 'SubOrientation',
         'add_empty' => true
       ));
-      
+
       $this->setWidget('sub_orientation_id', new dcWidgetAjaxDependencePropel(array(
         'dependant_widget' => $widget,
         'observe_widget_id' => 'career_subject_orientation_id',
@@ -109,13 +107,30 @@ class CareerSubjectForm extends BaseCareerSubjectForm
       )));
       $this->getWidgetSchema()->setHelp('sub_orientation_id', 'Hace que la materia pertenezca a una sub orientación');
     }
-        
 
-    /* Widget Helps */    
-
+    /* Widget Helps */
     $this->getWidgetSchema()->setHelp('type', 'La duración de la materia no puede cambiarse si la materia es una opción de una optativa.');
 
-    $this->getValidatorSchema()->getPostValidator()->setMessage('invalid', 'Ya existe otra materia igual para el año seleccionado');
+    // Post validators
+    $this->getValidatorSchema()->setPostValidator(
+      new sfValidatorCallback(array('callback' => array($this, 'checkOptionCheckboxes')))
+    );
+
+    $this->mergePostValidator(
+      new sfValidatorPropelUnique(array(
+        'model' => 'CareerSubject',
+        'column' => array('year', 'career_id', 'subject_id', 'orientation_id', 'sub_orientation_id')),
+        array('invalid' => 'La materia ya existe para este año y carrera en el plan de estudios.'))
+    );
   }
 
+  public function checkOptionCheckboxes($validator, $values)
+  {
+    if ($values['has_options'] && $values['is_option'])
+    {
+      throw new sfValidatorError($validator, 'Una materia no puede ser optativa y opción de optativa a la vez');
+    }
+
+    return $values;
+  }
 }

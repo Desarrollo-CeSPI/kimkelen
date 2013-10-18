@@ -45,11 +45,6 @@ generator:
             label:          Materias
             credentials:    [edit_career]
 
-          subject_options:
-            action:         subjectOptions
-            label:          Opciones para optativas
-            credentials:    [edit_career]
-
           career_view:
             action:         careerView
             label:          Plan de estudios
