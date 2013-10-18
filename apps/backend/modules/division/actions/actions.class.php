@@ -245,11 +245,9 @@ class divisionActions extends autoDivisionActions
     $this->students = $this->division->getStudents();
     $this->periods = $this->division->getCareerSchoolYearPeriods();
 
-    #   $students = $this->division->getStudents();
     $career_school_year = $this->division->getCareerSchoolYear();
     $this->form = new StudentsCareerSchoolYearConductForm();
     $this->form->setStudents($this->students, $career_school_year);
-    //$form->setStudents($this->division->getStudents() ,$this->division->getCareerSchoolYear());
 
     $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
     if ($this->form->isValid())

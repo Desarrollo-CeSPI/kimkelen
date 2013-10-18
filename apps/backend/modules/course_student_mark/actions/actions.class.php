@@ -95,8 +95,6 @@ class course_student_markActions extends sfActions
 
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
 
-    #$this->forms           = $this->getForms($this->course_subjects);
-
   }
 
   public function executePrintTable(SfWebRequest $request)

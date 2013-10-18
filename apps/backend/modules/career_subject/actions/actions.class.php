@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -31,10 +31,10 @@ require_once dirname(__FILE__).'/../lib/career_subjectGeneratorHelper.class.php'
  */
 
 class career_subjectActions extends autoCareer_subjectActions
-{ 
+{
   /**
    * redefines preExecute because this action CANT BE RISED WITHOUT A REFERENCE
-   * 
+   *
    */
   public function preExecute()
   {
@@ -49,7 +49,7 @@ class career_subjectActions extends autoCareer_subjectActions
       $this->getUser()->setFlash('warning', 'Debe seleccionar una carrera para poder administrar sus materias.');
       $this->redirect('@career');
     }
-    
+
     parent::preExecute();
 
   }
@@ -72,7 +72,7 @@ class career_subjectActions extends autoCareer_subjectActions
   {
     $this->redirect('@career');
   }
-  
+
   public function executeEditCorrelatives($request)
   {
     $this->career_subject = $this->getRoute()->getObject();
@@ -102,7 +102,7 @@ class career_subjectActions extends autoCareer_subjectActions
   }
 
   public function getProcessFormNotice($new)
-  { 
+  {
     if ($this->getActionName() == 'updateCorrelatives')
     {
       return 'Las correlativas para la materia seleccionada fueron establecidas correctamente';
@@ -111,7 +111,7 @@ class career_subjectActions extends autoCareer_subjectActions
   }
 
   public function setProcessFormErrorFlash()
-  { 
+  {
     if ($this->getActionName() == 'updateCorrelatives')
     {
       $message = 'Las correlativas no pudieron ser establecidas debido a algunos errores.';
@@ -120,16 +120,24 @@ class career_subjectActions extends autoCareer_subjectActions
     else
     {
       parent::setProcessFormErrorFlash();
-    }   
+    }
   }
-
 
   public function executeAddToCurrentCareerSchoolYear(sfWebRequest $request)
   {
     $this->career_subject = $this->getRoute()->getObject();
-    $this->career_subject->addToCurrentCareerSchoolYear();
-
-    $this->getUser()->setFlash('notice', 'La materia fue agregada de forma exitosa.');
+    try
+    {
+      $this->career_subject->addToCurrentCareerSchoolYear();
+      $this->getUser()->setFlash('notice', 'La materia fue agregada de forma exitosa.');
+    }
+    catch (Exception $exc)
+    {
+      $this->getUser()->setFlash('error', 'La materia no puede ser agregada al año lectivo actual.');
+    }
     $this->redirect('@career_subject');
   }
+
+
+
 }

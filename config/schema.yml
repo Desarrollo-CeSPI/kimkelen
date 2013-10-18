@@ -421,7 +421,7 @@ classes:
         description:      Numero que ordena a las materias
         type:             integer
         default:          0
-      _indexes:
+      _uniques:
         career_subject_school_year: [career_subject_id, career_school_year_id]
 
   CareerSubjectSchoolYearTag:

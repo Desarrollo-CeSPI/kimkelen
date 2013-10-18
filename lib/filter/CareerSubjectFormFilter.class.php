@@ -16,10 +16,9 @@ class CareerSubjectFormFilter extends BaseCareerSubjectFormFilter
       $this["created_at"],
       $this["career_id"],
       $this["has_correlative_previous_year"],
-      $this["is_option"],
       $this["student_career_subject_allowed_list"]
     );
-    
+
     $this->widgetSchema["subject_id"] = new sfWidgetFormInput();
 
     $this->widgetSchema["year"] = new dcWidgetFormFilterInputRange();
