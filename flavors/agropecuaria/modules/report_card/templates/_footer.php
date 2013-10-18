@@ -20,7 +20,7 @@
   <?php if ($division->hasCourseType(CourseType::TRIMESTER)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
     <?php if ($division->hasAttendanceForDay()): ?>
-      <?php include_partial('trimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division, 'has_to_show_repproveds' => $has_to_show_repproveds)); ?>
+      <?php include_partial('trimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division)); ?>
     <?php endif; ?>
     <div class="rowcom">
       <div class="titletable"><?php echo __('Behaviour') ?></div>
@@ -41,14 +41,14 @@
   <?php elseif ($division->hasCourseType(CourseType::QUATERLY)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getQuaterlyPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
     <?php if ($division->hasAttendanceForDay()): ?>
-      <?php include_partial('quaterly_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division, 'has_to_show_repproveds' => $has_to_show_repproveds)); ?>
+      <?php include_partial('quaterly_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division)); ?>
     <?php endif; ?>
 
 
   <?php elseif ($division->hasCourseType(CourseType::BIMESTER)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getBimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
     <?php if ($division->hasAttendanceForDay()): ?>
-      <?php include_partial('bimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division, 'has_to_show_repproveds' => $has_to_show_repproveds)); ?>
+      <?php include_partial('bimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division)); ?>
     <?php endif; ?>
 
     <div class="rowcom">
