@@ -58,10 +58,13 @@ wkhtmltopdf library is required. You can download it from [wkhtmltopdf on Google
   * You can save any view to a file (instead of inline view in the browser)
     using the pmPDFKit class.
   
-  * Specify extra parameters for wkhtmltopdf appending them to the url:
-  
-        [bash]
-        http://somedomain.com/something/1.pdf?orientation=landscape&page-size=Letter&print-media-type=true
+  * Specify  parameters to wkhtmltopdf  in two ways: :
+
+     * You can use the pm_pdf_kit.yml file in your app config directory. See the default value con plugin config directory to see all options
+
+     * Appending them to the url, like html params
+         [bash]
+         http://somedomain.com/something/1.pdf?orientation=landscape&page-size=Letter&print-media-type=true
     
     See all options executing `wkhtmltopdf -H` in the terminal.
 

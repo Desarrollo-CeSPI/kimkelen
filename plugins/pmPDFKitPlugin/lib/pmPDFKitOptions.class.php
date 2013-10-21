@@ -115,31 +115,39 @@ class pmPDFKitOptions
   
   public static function getSwitchesFromRequest(sfWebRequest $request)
   {
+     include sfContext::getInstance()->getConfigCache()->checkConfig('config/pm_pdf_kit.yml');
     $switches = array();
-    
+
+
     foreach (self::$switches as $switch)
     {
-      if ($request->hasParameter($switch) && ($request->getParameter($switch) == "true" || $request->getParameter($switch) == 1))
+      if (sfConfig::get('pkp_switches_'.$switch, false)
+       ||($request->hasParameter($switch) && ($request->getParameter($switch) == "true" || $request->getParameter($switch) == 1)))
       {
         $switches[] = $switch;
       }
     }
-    
+
     return $switches;
   }
   
   public static function getOptionsFromRequest(sfWebRequest $request)
   {
-    $options = array();
+   include sfContext::getInstance()->getConfigCache()->checkConfig('config/pm_pdf_kit.yml');
+   $options = array();
     
     foreach (self::$options as $option)
     {
+      if (!is_null($value = sfConfig::get('pkp_options_'.$option, null)))
+      {
+          $options[$option] = $value;
+      }
       if ($request->hasParameter($option))
       {
         $options[$option] = $request->getParameter($option);
       }
     }
-    
+    die(var_dump($options));
     return $options;
   }
   
