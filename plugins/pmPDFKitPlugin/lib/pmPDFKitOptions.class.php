@@ -147,7 +147,6 @@ class pmPDFKitOptions
         $options[$option] = $request->getParameter($option);
       }
     }
-    die(var_dump($options));
     return $options;
   }
   
