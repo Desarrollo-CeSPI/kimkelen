@@ -49,7 +49,6 @@ class AdminGeneratorFiltersClass
       // Restrictions for careersubject module
       if ($user->getReferenceFor('career'))
       {
-        $criteria->add(CareerSubjectPeer::IS_OPTION, false);
         $criteria->add(CareerSubjectPeer::CAREER_ID, $user->getReferenceFor('career'));
         CareerSubjectPeer::OrderByYearAndName($criteria);
       }
