@@ -1,0 +1,4 @@
+config/pm_pdf_kit.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: pkp_
