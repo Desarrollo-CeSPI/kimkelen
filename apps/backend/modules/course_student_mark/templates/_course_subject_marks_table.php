@@ -21,12 +21,12 @@
 <?php use_stylesheet('main.css', '', array('media' => 'all')) ?>
 
 <div class="non-printable">
-  <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
   <span><a href="<?php echo url_for('course_student_mark/goBack') ?>"><?php echo __('Go back') ?></a></span>
+  <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
   <form action="<?php echo url_for('@print_table') ?>" method="post" target="_blank" id="exportation_form">
-    <p><?php echo __('Export to excel') ?> <?php echo image_tag('export_to_excel.gif', array('class' => 'excel_button')) ?></p>
     <input type="hidden" id="send_data" name="send_data" />
   </form>
+  <span><a href="#" onclick="javascript:exportToExcel()"><?php echo __('Export to excel') ?></a></span>
 </div>
 
 <div class="report-wrapper"  id="export_to_excel">
@@ -36,26 +36,7 @@
     <?php $final_period = $course_subject->isFinalPeriod(); ?>
     <?php $configuration = $course_subject->getCareerSubjectSchoolYear()->getConfiguration() ?>
 
-    <div class="report-header">
-      <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
-      <div class="header_row">
-        <h2><?php echo __('Print califications'); ?></h2>
-        <div class="title"><?php echo __('School year') ?>: </div>
-        <div class="orientation"><?php echo $course->getSchoolYear() ?></div>
-        <div class="title"><?php echo __('Año/Nivel') ?>: </div>
-        <div class="course"><?php echo $course->getYear() ?></div>
-        <?php if (!(is_null($course->getDivision()))): ?>
-          <div class="title"><?php echo __('Division') ?>: </div>
-          <div class="course"><?php echo $course->getDivision()->getDivisionTitle(); ?></div>
-        <?php endif; ?>
-        <div class="title"><?php echo __('Subject') ?>: </div>
-        <div class="orientation"><?php echo $course->getSubjectsStr(); ?></div>
-      </div>
-      <div class="header_row">
-        <div class="title"><?php echo __('Teacher') ?>: </div>
-        <div class="orientation"><?php echo $course->getTeachersStr() ?></div>
-      </div>
-    </div>
+    <?php include_partial('information_header', array('course'=> $course)); ?>
 
     <div style="clear:both"></div>
     <table width="100%" class="gridtable_bordered">
@@ -81,21 +62,18 @@
 
 <div style="clear:both"></div>
 <div class="non-printable">
-  <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
   <span><a href="<?php echo url_for('course_student_mark/goBack') ?>"><?php echo __('Go back') ?></a></span>
+  <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
   <form action="<?php echo url_for('@print_table') ?>" method="post" target="_blank" id="exportation_form">
-    <p><?php echo __('Export to excel') ?> <?php echo image_tag('export_to_excel.gif', array('class' => 'excel_button')) ?></p>
     <input type="hidden" id="send_data" name="send_data" />
   </form>
+  <span><a href="#" onclick="javascript:exportToExcel()"><?php echo __('Export to excel') ?></a></span>
 </div>
 
 <script language="javascript">
-  jQuery(document).ready(function()
-  {
-    jQuery(".excel_button").click(function(event)
-    {
-      jQuery("#send_data").val( jQuery("<div>").append( jQuery("#export_to_excel").eq(0).clone()).html());
-      jQuery("#exportation_form").submit();
-    });
-  });
+
+  function exportToExcel(){
+    jQuery("#send_data").val( jQuery("<div>").append( jQuery("#export_to_excel").eq(0).clone()).html());
+    jQuery("#exportation_form").submit();
+  };
 </script>
