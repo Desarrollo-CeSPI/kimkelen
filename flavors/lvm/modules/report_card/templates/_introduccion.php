@@ -20,7 +20,7 @@
 <div class="title"><?php echo __('Trimestrales') ?></div>
 <table class="gridtable">
   <tr>
-    <th class="th-subject-name"><?php echo __('Introducción a la Problemática de:') ?></th>
+    <th class="th-subject-name"><?php echo __('Intro. a la Problemática de:') ?></th>
     <th><?php echo __('1°T') ?></th>
     <th><?php echo __('Ex.R.') ?></th>
     <th><?php echo __('Ex.C.') ?></th>
