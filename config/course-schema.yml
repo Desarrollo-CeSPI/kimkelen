@@ -679,3 +679,7 @@ classes:
       is_absent:
         type:             boolean
         default:          false
+      date:
+        description:  Fecha en que el alumno rinde
+        type: date
+        required: false
