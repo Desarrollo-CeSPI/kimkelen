@@ -49,7 +49,7 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
 
   public function getMarksShortStr()
   {
-    $result = implode(', ',array_map(create_function('$sers', 'return $sers->getShortValueString();'), $this->getStudentExaminationRepprovedSubjects()));
+    $result = implode(',',array_map(create_function('$sers', 'return $sers->getShortValueString();'), $this->getStudentExaminationRepprovedSubjects()));
 
     return $result;
   }
@@ -69,6 +69,11 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     }
 
     return $result[count($result) - 1];
+  }
+
+  public function getApprovalYear()
+  {
+    return $this->getStudentApprovedCareerSubject()->getSchoolYear()->getYear();
   }
 }
 
