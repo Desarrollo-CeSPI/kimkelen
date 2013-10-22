@@ -17,8 +17,8 @@ body {
 
 .report-wrapper{
   text-align:left;
-  width:900px;
-  margin:10px auto;
+  width:90%;
+  margin:4px auto;
 }
 
 .report-header {
@@ -55,7 +55,7 @@ body {
   float:left;
   font-weight:bold;
   font-size:13px;
-  padding-top:3px;
+  padding-top:65px;
   padding-right:5px;
 }
 
@@ -63,14 +63,15 @@ body {
 {
   float:left;
   font-size:16px;
+  padding-top: 62px;
 }
 
 .header_row .course
 {
   float:left;
   font-size:13px;
-  padding:3px;
   width:20px;
+  padding-top: 65px;
 
 }
 
@@ -78,9 +79,8 @@ body {
 {
   float:left;
   font-size:13px;
-  padding:3px;
   width:100px;
-
+  padding-top: 65px;
 }
 
 
@@ -88,7 +88,14 @@ body {
 {
   float:left;
   font-size:13px;
-  padding:3px;
+  padding-top: 65px;
+}
+
+.header_row .school_year
+{
+  float:right;
+  font-size:13px;
+  padding-top: 65px;
 }
 
 .row_top
@@ -199,16 +206,16 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 40%;
-  padding: 8px 6px 0px 0px;
+  padding-top: 5px;
   height: auto;
+  width:51%;
 }
 
 .colsright{
   float:right;
-  width: 58%;
-  padding: 8px 6px 0px 0px;
-  height: auto;
+  height: 20%;
+  width: 48%;
+  padding-top: 5px;
 }
 
 .row{
@@ -222,7 +229,7 @@ table.lefttable tr {
   font-size:12px;
   font-weight:bold;
   display:block;
-  padding:3px;
+  padding:1px;
 }
 
 .rowins{
@@ -240,9 +247,11 @@ table.lefttable tr {
   float:left;
   width: auto;
   min-height: 5em;
-  padding:3px;
+  padding-top:3px;
   margin-right: 6px;
-  margin-bottom: 6px;
+  padding-left:10px;
+  padding-right:10px;
+  max-width: 18.5em;
 }
 
 .rowprev{
@@ -250,17 +259,21 @@ table.lefttable tr {
   float:left;
   width: auto;
   min-height: 5em;
-  padding:3px;
+  padding-top:3px;
   margin-right: 6px;
   margin-bottom: 6px;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 .rowamon{
   border:1px solid #ccc;
   float:left;
-  width: 30%;
+  width: 15%;
   min-height: 5em;
   padding:3px;
+  padding-left:10px;
+  padding-right:10px;
   margin-right: 6px;
   margin-bottom: 6px;
 }
@@ -269,25 +282,26 @@ table.lefttable tr {
   border:1px solid #ccc;
    float:left;
   padding:0px 15px;
-  height:135px;
+  height:80px;
   width:auto;
 }
 
 .rowfirm_responsible{
   border:1px solid #ccc;
-   float:left;
+  float:left;
   padding:0px 15px;
-  margin:0px 6px;
-  height:135px;
+  height:80px;
   width:auto;
+  margin-right: 5px;
 }
 
 .rownotice{
   border:1px solid #ccc;
   float:left;
-  height:135px;
+  height:80px;
   width:auto;
-  padding: 0px 40px;
+  padding: 0px 15px;
+  margin-right: 5px;
 }
 
 .report-header .school-year
