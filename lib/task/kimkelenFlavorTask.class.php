@@ -60,7 +60,7 @@ EOF;
     $pm_pdf_kit_cfg = sfConfig::get('sf_apps_dir') . '/backend/config/pm_pdf_kit.yml';
 
     $files = array();
-    foreach (array($web_css, $web_img, $pdf_cfg,$pm_pdf_kit_cfg) as $file)
+    foreach (array($web_css, $web_img, $pm_pdf_kit_cfg) as $file)
     {
       if (file_exists($file))
       {
