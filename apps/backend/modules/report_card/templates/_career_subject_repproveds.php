@@ -29,7 +29,6 @@
           <?php else: ?>
           <td><span style="font-size: 9px">(Aprobada)</span></td>
           <?php endif; ?>
-
     </tr>
 <?php endforeach; ?>
   </table>

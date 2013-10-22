@@ -57,6 +57,7 @@ body {
   font-size:13px;
   padding-top:65px;
   padding-right:5px;
+  padding-left: 5px;
 }
 
 .header_row .name
@@ -240,6 +241,7 @@ table.lefttable tr {
   padding:3px;
   margin-right: 6px;
   margin-bottom: 6px;
+  max-width: 25em;
 }
 
 .rowcom{
@@ -251,7 +253,7 @@ table.lefttable tr {
   margin-right: 6px;
   padding-left:10px;
   padding-right:10px;
-  max-width: 18.5em;
+  max-width: 17.5em;
 }
 
 .rowprev{
