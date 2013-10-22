@@ -16,10 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php $examination_repproveds = array(); ?>
-<?php foreach (SchoolYearPeer::retrieveLastYearSchoolYears($division->getSchoolYear()) as $school_year): ?>
-  <?php $examination_repproveds = array_merge($examination_repproveds, $student->getStudentRepprovedCourseSubjectForSchoolYear($school_year)); ?>
-<?php endforeach; ?>
+<?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForRepordCards($division->getSchoolYear()); ?>
 <?php $has_to_show_repproveds = SchoolBehaviourFactory::getInstance()->showReportCardRepproveds() && !empty($examination_repproveds) ?>
 <div class="colsleft">
   <?php if ($division->hasCourseType(CourseType::TRIMESTER)): ?>

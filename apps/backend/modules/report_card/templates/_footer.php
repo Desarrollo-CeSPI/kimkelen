@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForSchoolYear(SchoolYearPeer::retrieveLastYearSchoolYear($division->getCareerSchoolYear()->getSchoolYear())) ?>
+<?php $examination_repproveds = $student->getStudentRepprovedCourseSubjectForRepordCards($division->getSchoolYear()); ?>
 <?php $has_to_show_repproveds = SchoolBehaviourFactory::getInstance()->showReportCardRepproveds() && !empty($examination_repproveds) && $student->checkIfRepprovedAreNotApproved($examination_repproveds) ?>
 <div class="colsleft">
   <?php if ($division->hasCourseType(CourseType::TRIMESTER)): ?>

@@ -203,6 +203,11 @@ class Person extends BasePerson
   {
     return $this->getIsActive()? 'Sí': 'No';
   }
+
+   public function getFormattedBirthDate()
+  {
+    return $this->getBirthdate('d-m-Y');
+  }
 }
 
 sfPropelBehavior::add('Person', array('changelog'));

@@ -24,7 +24,11 @@
      <tr>
           <td><?php echo $examination_repproved->getSubject() ?></td>
           <td><?php echo $examination_repproved->getMarksShortStr() ? $examination_repproved->getMarksShortStr() : '-' ?></td>
-          <td><?php echo (is_null($examination_repproved->getStudentApprovedCareerSubject()))? '(Pendiente)' : '(Aprobada)' ?>
+          <?php if (is_null($examination_repproved->getStudentApprovedCareerSubject())): ?>
+          <td><span style="font-size: 9px">(Pendiente)</span></td>
+          <?php else: ?>
+          <td><span style="font-size: 9px">(Aprobada)</span></td>
+          <?php endif; ?>
     </tr>
 <?php endforeach; ?>
   </table>

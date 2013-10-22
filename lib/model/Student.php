@@ -1041,7 +1041,6 @@ class Student extends BaseStudent
     $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
 
     return StudentRepprovedCourseSubjectPeer::doSelect($c);
-
   }
 
   public function checkIfRepprovedAreNotApproved($examination_repproveds)
@@ -1276,6 +1275,33 @@ class Student extends BaseStudent
  public function getCareerSchoolYearsNames()
   {
     return implode(', ', array_map(create_function('$scsy', 'return $scsy->getCareerSchoolYear();'), $this->getStudentCareerSchoolYearsAscending()));
+  }
+
+ public function getStudentRepprovedCourseSubjectForRepordCards($school_year)
+  {
+    $school_years = SchoolYearPeer::retrieveLastYearSchoolYears($school_year);
+    $repproveds = array();
+    foreach ($school_years as $sy)
+    {
+      $srcs = $this->getStudentRepprovedCourseSubjectForSchoolYear($sy);
+      $repproveds = array_merge($repproveds, $srcs);
+    }
+
+    $repproveds_to_show = array();
+
+    foreach ($repproveds as $r)
+    {
+      //si está pendiente
+      if (is_null($r->getStudentApprovedCareerSubject())) {
+        $repproveds_to_show[] = $r;
+      }
+      //si fue aprobada en el año que se está renderizando
+      elseif ($school_year->getYear() == ($r->getApprovalYear())){
+        $repproveds_to_show[] = $r;
+      }
+    }
+
+    return $repproveds_to_show;
   }
 
 }
