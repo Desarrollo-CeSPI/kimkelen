@@ -17,13 +17,10 @@ Requisitos mínimos:
     mv wkhtmltopdf-i386 /usr/local/bin/wkhtmltopdf
     chmod +x /usr/local/bin/wkhtmltopdf
 
-* Para editar la conexión de las bases, editar los archivos dentro del directorio BASE_APLICACION/config, donde se edita el dsn, usuario y contraseña.
-  Si no se quieren editar estos archivos, existe un script que va solicitando los datos de a uno:
-  *** Para poder lograrlo hay que ejecutar el script:  ./lib/vendor/eztools/bin/ezconfigure.sh que va pidiendo paso a paso los hooks de conexion a la
+* Para editar la conexión de las bases, editar los archivos `databases.yml` y `propel.ini` dentro del directorio BASE_APLICACION/config, donde se deberá modificar al menos el `dsn`, usuario (`username`) y contraseña (`password`).
 
-  * BASE_APLICACION/databases.yml
-
-
+```yaml
+# config/databases.yml
 all:
   propel:
     class:        sfPropelDatabase
@@ -35,18 +32,17 @@ all:
       encoding:   utf8
       persistent: true
       pooling:    true
+```
 
 
-
-  * BASE_APLICACION/propel.ini
-
-      Especificar el dns
-        propel.database.url        = mysql:dbname=#db_name#;host=#db_host#
-      Especificar nombre de usuario y contraseña
-        propel.database.user       = #db_user#
-        propel.database.password   = #db_pass#
-
-
+```ini
+; config/propel.ini
+; Especificar el dns
+propel.database.url        = mysql:dbname=#db_name#;host=#db_host#
+; Especificar nombre de usuario y contraseña
+propel.database.user       = #db_user#
+propel.database.password   = #db_pass#
+```
 
 * Ejecutar los siguientes comandos dentro del directorio BASE_APLICACION/:
 *
