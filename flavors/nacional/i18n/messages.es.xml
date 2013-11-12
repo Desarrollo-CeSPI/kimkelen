@@ -2006,7 +2006,6 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Cantidad de ausencias.</target>
             </trans-unit>
 
-
             <trans-unit>
                 <source>Justification type List</source>
                 <target>Tipos de justificación</target>
@@ -2075,6 +2074,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Absences</source>
                 <target>Inasistencias</target>
+            </trans-unit>
+
+            <trans-unit>
+                <source>Absences per day</source>
+                <target>Inasistencias por día</target>
             </trans-unit>
 
             <trans-unit>
@@ -4107,8 +4111,16 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <target>Este campo representa el valor del tipo de sanción</target>
             </trans-unit>
             <trans-unit>
+                <source>Absences per day</source>
+                <target>Inasistencias por día</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Total absences till today</source>
+                <target>Total (J)</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Total absences till today (without justification)</source>
-                <target>Total al día de hoy (SJ)</target>
+                <target>Total (SJ)</target>
             </trans-unit>
             <trans-unit>
                 <source>Is free in some career school year period?</source>
