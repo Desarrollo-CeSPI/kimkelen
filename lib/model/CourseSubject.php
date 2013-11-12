@@ -738,4 +738,25 @@ class CourseSubject extends BaseCourseSubject
     return StudentRepprovedCourseSubjectPeer::doCount($c);
   }
 
+  /*
+   * Retrieves number of examinations for examination instance (December, Februray) given as parameter.
+   */
+   public function countExaminationsForExaminationNumber($examination_number)
+  {
+    $es = ExaminationSubjectPeer::retrieveForCareerSubjectSchoolYearAndExaminationNumber($this->getCareerSubjectSchoolYear(), $examination_number);
+    $total = 0;
+
+    if ($es)
+    {
+      foreach (CourseSubjectStudentExaminationPeer::doSelectForExaminationSubjectAndNumber($es, $examination_number) as $csse)
+      {
+        // Could be improved a lot...
+        if ($csse->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision() == $this->getCourse()->getDivision())
+        {
+          $total++;
+        }
+      }
+    }
+    return $total;
+  }
 }

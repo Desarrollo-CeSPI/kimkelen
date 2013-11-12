@@ -68,7 +68,7 @@
                 <?php if ($user_course_subject): ?>
                   <?php if (is_null($period)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $course_subject->getCourseType()); ?>
-                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period) ?>
+                    <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id)); ?>
                   <?php elseif ($period->getEndAt() < date('Y-m-d', $day)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $course_subject->getCourseType()); ?>
                     <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -24,16 +24,16 @@ class ExaminationSubjectPeer extends BaseExaminationSubjectPeer
   public static function countNotClosedExaminationSubjectsFor(SchoolYear $school_year, PropelPDO $con = null)
   {
     $con = is_null($con) ? Propel::getConnection() : $con;
-    
+
     $c = new Criteria();
     $c->add(ExaminationPeer::SCHOOL_YEAR_ID, $school_year->getId());
     $c->addJoin(ExaminationSubjectPeer::EXAMINATION_ID, ExaminationPeer::ID);
     $c->add(ExaminationSubjectPeer::IS_CLOSED, false);
-    
+
     return ExaminationSubjectPeer::doCount($c, $con);
 
   }
-  
+
   public static function retrieveByCourseSubjectStudentExamination(CourseSubjectStudentExamination $course_subject_student_examination, $con = null)
   {
     $criteria = new Criteria();
@@ -42,5 +42,15 @@ class ExaminationSubjectPeer extends BaseExaminationSubjectPeer
     $criteria->add(ExaminationPeer::EXAMINATION_NUMBER, $course_subject_student_examination->getExaminationNumber());
     $criteria->add(ExaminationPeer::SCHOOL_YEAR_ID, $course_subject_student_examination->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
     return self::doSelectOne($criteria, $con);
+  }
+
+  public static function retrieveForCareerSubjectSchoolYearAndExaminationNumber($career_subject_school_year, $examination_number)
+  {
+    $criteria = new Criteria();
+    $criteria->add(self::CAREER_SUBJECT_SCHOOL_YEAR_ID, $career_subject_school_year->getId());
+    $criteria->addJoin(self::EXAMINATION_ID, ExaminationPeer::ID);
+    $criteria->addAnd(ExaminationPeer::EXAMINATION_NUMBER, $examination_number);
+
+    return self::doSelectOne($criteria);
   }
 }

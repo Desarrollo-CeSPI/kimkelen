@@ -337,3 +337,9 @@ table.gridtable_bordered tr {
     background-color: #ffffff;
     text-align:center;
 }
+
+.strong_footer {
+  font-size:12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
