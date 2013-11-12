@@ -2078,6 +2078,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
+                <source>Absences per day</source>
+                <target>Inasistencias por día</target>
+            </trans-unit>
+
+            <trans-unit>
                 <source>Manage regularity</source>
                 <target>Administrar regularidad</target>
             </trans-unit>
@@ -3628,7 +3633,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Total absences till today</source>
-                <target>Total al día de hoy (J)</target>
+                <target>Total (J)</target>
             </trans-unit>
             <trans-unit>
                 <source>Attendance report</source>
@@ -4127,7 +4132,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Total absences till today (without justification)</source>
-                <target>Total al día de hoy (SJ)</target>
+                <target>Total (SJ)</target>
             </trans-unit>
             <trans-unit>
                 <source>Is free in some career school year period?</source>

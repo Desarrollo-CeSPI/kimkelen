@@ -18,18 +18,25 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php use_helper('I18N') ?>
-<div class="student_year"><?php echo __('Absences') ?></div>
+<div class="student_year"><?php echo __('Absences per day') ?></div>
 <div style="margin-left:5px"> 
   <?php $student_career_school_year = $student->getCurrentStudentCareerSchoolYear(); ?>
   <?php if (!is_null($student_career_school_year)): ?>
     <div>
       <div>
+        <?php $total= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, false) ?>
+          <?php echo __('Total absences') . ": "
+              . $total ?>
+      </div> 
+      <div>
         <?php $total_justificated = $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, false) - $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, true) ?>
-        <?php $total = $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, true) ?>
+        <?php $total_injustificated = $student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), null, null, true) ?>
           <?php echo __('Total absences till today') . ": "
               . $total_justificated ?>
+      </div> 
+      <div>             
           <?php echo __('Total absences till today (without justification)') . ": "
-              . $total ?>
+              . $total_injustificated ?>
       </div>
     </div>
   <?php endif; ?>

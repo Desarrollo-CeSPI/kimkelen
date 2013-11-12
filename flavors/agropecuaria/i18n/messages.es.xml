@@ -2077,6 +2077,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
+                <source>Absences per day</source>
+                <target>Inasistencias por día</target>
+            </trans-unit>
+
+            <trans-unit>
                 <source>Manage regularity</source>
                 <target>Administrar regularidad</target>
             </trans-unit>
