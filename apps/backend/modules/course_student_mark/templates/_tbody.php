@@ -17,6 +17,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
+ <tbody class="print_body">
 <?php $i = 0; ?>
 <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
   <?php $i++ ?>
@@ -35,3 +36,4 @@
     <td></td>
   </tr>
 <?php endforeach ?>
+ </tbody>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -27,7 +27,7 @@ class StudentDisciplinarySanction extends BaseStudentDisciplinarySanction
    */
   public static function getDocumentDirectory()
   {
-    return sfConfig::get('sf_web_dir').DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR.'disciplinary-sanction-documents';
+     return sfConfig::get('sf_data_dir') . DIRECTORY_SEPARATOR . 'disciplinary-sanction-documents';
   }
 
   /**
@@ -52,7 +52,7 @@ class StudentDisciplinarySanction extends BaseStudentDisciplinarySanction
     else
         return($this->getPersonRelatedByApplicantId());
   }
-  
+
   public function  getResponsible() {
     return $this->getPersonRelatedByResponsibleId();
   }

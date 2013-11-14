@@ -10,6 +10,9 @@ Gemfile.lock
 /cache/*cache
 /data/sql/*sql
 data/sql/sqldb.map
+/data/persons-photos/*
+/data/disciplinary-sanctions/*
+/data/justification-documents/*
 /backups
 /graph
 /lib/filter/base/*
