@@ -11,7 +11,7 @@ Gemfile.lock
 /data/sql/*sql
 data/sql/sqldb.map
 /data/persons-photos/*
-/data/disciplinary-sanctions/*
+/data/disciplinary-sanction-documents/*
 /data/justification-documents/*
 /backups
 /graph
