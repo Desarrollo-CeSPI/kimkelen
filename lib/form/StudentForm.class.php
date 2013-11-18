@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -48,6 +48,8 @@ class StudentForm extends BaseStudentForm
     $this->getWidget('student_tag_list')->setOption('expanded', true);
     $this->getWidget('student_tag_list')->setOption('multiple', true);
 
+    $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
+    $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
   }
 
   public function unsetFields()
@@ -69,9 +71,7 @@ class StudentForm extends BaseStudentForm
           'Personal data'   =>  $personal_data_fields,
           'Contact data'    =>  array('person-email', 'person-phone', 'person-address'),
           'Health data'   =>  array('blood_group', 'blood_factor', 'health_coverage_id', 'emergency_information'),
-          //'System access'   =>  array('person-username', 'person-password', 'person-password_again' ),
           'Tags' => array('student_tag_list'),
-//          'Work data'       =>  array('occupation_id', 'busy_starts_at', 'busy_ends_at'),
     );
   }
 

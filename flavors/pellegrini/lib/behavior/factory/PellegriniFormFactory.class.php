@@ -44,4 +44,14 @@ class PellegriniFormFactory extends BaseFormFactory
   {
     return 'PellegriniStudentForm';
   }
+
+    /**
+   * Returns form used by student examiantion repproved subject new|edit action
+   *
+   * @return string represents a Form PHPClass
+   */
+  public function getStudentExaminationRepprovedSubjectForm()
+  {
+    return 'PellegriniStudentExaminationRepprovedSubjectForm';
+  }
 }

@@ -585,11 +585,19 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $crit->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID);
     $crit->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID);
     $crit->addAscendingOrderByColumn(ExaminationRepprovedPeer::EXAMINATION_NUMBER);
-    $marks = array_map(create_function('$c', 'return $c->getShortValueString();'), $student_repproved_course_subject->getStudentExaminationRepprovedSubjects($crit));
+
+    foreach ($student_repproved_course_subject->getStudentExaminationRepprovedSubjects($crit) as $srcs)
+    {
+      if (!is_null($srcs->getDate())) {
+        $marks[] = $srcs->getShortValueString() . ' (' . $srcs->getDate('d/m/y') . ') ';
+      }
+      else {
+        $marks[] = $srcs->getShortValueString();
+      }
+    }
     $marks = implode($marks, ', ');
 
     return $marks;
-
   }
 
   public function hasNotAbsense()

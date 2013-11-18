@@ -75,6 +75,15 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
   {
     return $this->getStudentApprovedCareerSubject()->getSchoolYear()->getYear();
   }
+
+  public function getOrderedStudentExaminationRepprovedSubjects()
+  {
+    $c = new Criteria();
+    $c->addAscendingOrderByColumn(StudentExaminationRepprovedSubjectPeer::MARK);
+    $c->addAscendingOrderByColumn(StudentExaminationRepprovedSubjectPeer::DATE);
+
+    return $this->getStudentExaminationRepprovedSubjects($c);
+  }
 }
 
 sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));
