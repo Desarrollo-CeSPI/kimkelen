@@ -1530,7 +1530,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>The student can't present and dont have a mark..</source>
+                <source>The student can't present and dont have a mark.</source>
                 <target>Un alumno no puede estar presente y no tener una nota.</target>
             </trans-unit>
 
@@ -4297,6 +4297,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Student assistance report</source>
                 <target>Reporte de inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Format must be XX-XXXX</source>
+                <target>El formato debe ser XX-XXXX</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Examination date</source>
+                <target>Fecha del examen</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Examination %%examination%%</source>
+                <target>Instancia de mesa de examen %%examination%%</target>
             </trans-unit>
         </body>
     </file>

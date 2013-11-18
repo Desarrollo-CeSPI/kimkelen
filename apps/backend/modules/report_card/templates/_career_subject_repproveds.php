@@ -22,7 +22,7 @@
   <table class="lefttable">
       <?php foreach ($examination_repproveds as $examination_repproved): ?>
      <tr>
-          <td><?php echo $examination_repproved->getCourseSubjectStudent()->getCourseSubject()->getCourse(); ?></td>
+          <td><?php echo $examination_repproved->getCourseSubjectStudent()->getCourseSubject()->getCourse() . ' ('. $examination_repproved->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getSchoolYear() . ')' ; ?></td>
           <td><?php echo $examination_repproved->getMarksShortStr() ? $examination_repproved->getMarksShortStr() : '-' ?></td>
           <?php if (is_null($examination_repproved->getStudentApprovedCareerSubject())): ?>
           <td><span style="font-size: 9px">(Pendiente)</span></td>

@@ -397,7 +397,6 @@ class studentActions extends autoStudentActions
 
       }
     }
-
   }
 
   public function executeManageBrothers()
@@ -430,8 +429,6 @@ class studentActions extends autoStudentActions
 
   public function executeTutors(sfWebRequest $request)
   {
-//    $this->getUser()->setReferenceFor($this);
-//    $this->getUser()->setAttribute('tutors_from_student', true);
     $this->forward('tutor', 'indexByStudent');
   }
 

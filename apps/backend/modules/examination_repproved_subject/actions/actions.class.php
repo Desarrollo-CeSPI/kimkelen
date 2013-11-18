@@ -87,7 +87,9 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $forms = array();
     foreach ($examination_repproved_subject->getStudentExaminationRepprovedSubjects() as $student_examination_repproved_subject)
     {
-      $form = new StudentExaminationRepprovedSubjectForm($student_examination_repproved_subject);
+      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentExaminationRepprovedSubjectForm();
+      $form = new $form_name($student_examination_repproved_subject);
+
       $form->getWidgetSchema()->setNameFormat("student_examination_repproved_subject_{$student_examination_repproved_subject->getId()}[%s]");
       $forms[$student_examination_repproved_subject->getId()] = $form;
     }
@@ -215,7 +217,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
   {
     $this->examination_repproved_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_repproved_subject->getStudents();
-    
+
     $this->setLayout('cleanLayout');
 
   }

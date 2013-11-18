@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -37,5 +37,15 @@ class AgropecuariaFormFactory extends BaseFormFactory
   public function getStudentForm()
   {
     return 'AgropecuariaStudentForm';
+  }
+
+  /**
+   * Returns form used by student examiantion repproved subject new|edit action
+   *
+   * @return string represents a Form PHPClass
+   */
+  public function getStudentExaminationRepprovedSubjectForm()
+  {
+    return 'AgropecuariaStudentExaminationRepprovedSubjectForm';
   }
 }

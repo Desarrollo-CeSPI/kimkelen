@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -18,10 +18,10 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php if ($course_subject_student_examination->getExaminationSubject()): ?>
-      
+
   <div class="history_details">
     <h2><?php echo $course_subject_student_examination->getExaminationSubject()->getExamination()->getName() ?></h2>
-  
+
     <div class="info_div">
       <strong><?php echo __("Instance") ?></strong> <em><?php echo $course_subject_student_examination->getExaminationNumber() ?></em>
     </div>
@@ -35,17 +35,17 @@
       </div>
     <?php endif ?>
     <div class="info_div">
-      <strong><?php echo __("Fecha") ?></strong> <em><?php echo $course_subject_student_examination->getDate('d/m/y')?></em>
+      <strong><?php echo __("Day") ?></strong> <em><?php echo $course_subject_student_examination->getDate('d/m/y')?></em>
     </div>
     <div class="info_div">
       <strong><?php echo __("Status") ?></strong> <em><?php echo __($course_subject_student_examination->getExaminationSubject()->getIsClosed() ? $course_subject_student_examination->getResultString() : "Examination subject is not closed yet.") ?></em>
     </div>
   </div>
-  
+
 <?php else: ?>
-  
+
   <div class="info_div">
     <strong><?php echo __("The subject is not approved yet. The student is not inscripted to any examination.") ?></strong>
   </div>
-  
+
 <?php endif ?>

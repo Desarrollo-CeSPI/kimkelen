@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -38,7 +37,8 @@
         <?php if ($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::REPPROVED): ?>
           <?php echo 'Previa' ?>
         <?php else: echo 'Libre' ?>
-        <?php endif; echo $examination_repproved_subject->getExaminationRepproved() ?>
+        <?php endif;
+        echo $examination_repproved_subject->getExaminationRepproved() ?>
       </span>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_repproved_subject->getExaminationRepproved()->getSchoolYear() ?></span>
     </div>
@@ -54,6 +54,7 @@
       <th><?php echo __('Folio number'); ?></th>
       <th><?php echo __('Identification number'); ?></th>
       <th><?php echo __('Division') ?></th>
+      <th><?php echo __('Examination date') ?></th>
       <th><?php echo __('Calification') ?></th>
       </thead>
       <tbody>
@@ -66,11 +67,12 @@
             <td><?php echo $student->getPerson()->getIdentificationNumber() ?> </td>
             <?php $division = DivisionStudentPeer::retrieveDivisionsForStudentAndYear($student, $examination_repproved_subject->getCareerSubject()->getYear()); ?>
             <td><?php echo implode(', ', $division); ?> </td>
-            <?php $ers = $examination_repproved_subject->getExaminationNoteForStudent($student); ?>
-             <?php if ($ers->getIsAbsent()): ?>
+            <?php $sers = $examination_repproved_subject->getExaminationNoteForStudent($student); ?>
+            <td><?php echo $sers->getDate('d/m/Y'); ?> </td>
+            <?php if ($sers->getIsAbsent()): ?>
               <td><?php echo __('Is absent') ?></td>
             <?php else: ?>
-              <td> <?php echo $ers->getMark() ?> </td>
+              <td> <?php echo $sers->getMark() ?> </td>
             <?php endif; ?>
           </tr>
           <?php $i++; ?>

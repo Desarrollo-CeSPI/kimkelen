@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -23,7 +23,12 @@
   <div class="info_div">
     <strong><?php echo __("School year") ?></strong> <em><?php echo $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear() ?></em>
   </div>
-  <?php if (!$student_examination_repproved_subject->getIsAbsent()): ?>
+  <?php if ($student_examination_repproved_subject->getDate()): ?>
+  <div class="info_div">
+    <strong><?php echo __("Examination date") ?></strong> <em><?php echo $student_examination_repproved_subject->getDate('d/m/Y') ?></em>
+  </div>
+  <?php endif; ?>
+    <?php if (!$student_examination_repproved_subject->getIsAbsent()): ?>
     <div class="info_div">
       <strong><?php echo __("Mark") ?></strong> <em><?php echo ($mark = $student_examination_repproved_subject->getMark()) ? $mark : "-" ?></em>
     </div>
