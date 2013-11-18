@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -22,22 +22,27 @@
 <?php use_javascript('home') ?>
 
 <div id="home_container">
-  <h1><?php echo __('Kimkelen') ?></h1>
+  <h2>
+    <p>Escuela de Educación Técnico Profesional</p>
+    <p>de Nivel Medio en Producción Agropecuaria y Agroalimentaria</p>
+    <p>Facultad de Ciencias Veterinarias de la UBA</p>
+  </h2>
+
 
   <?php include_component('mainBackend', 'generalInformation') ?>
 
   <?php if($sf_user->hasCredential('show_student')):?>
     <?php include_component('mainBackend', 'studentBox') ?>
   <?php endif?>
-  
+
   <?php if($sf_user->hasCredential('show_teacher')):?>
     <?php include_component('mainBackend', 'teacherBox') ?>
   <?php endif?>
-  
+
   <?php if($sf_user->hasCredential('show_course')):?>
     <?php include_component('mainBackend', 'divisionBox') ?>
   <?php endif?>
-  
+
 </div>
 
 <?php javascript_tag() ?>

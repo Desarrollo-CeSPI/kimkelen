@@ -29,7 +29,7 @@ a img
     height:auto;
     margin:0;
     padding:0;
-    background-color: #1888C6;
+    background-color: #006b66;
 }
 
 /* logo */
@@ -67,7 +67,7 @@ a img
 #header .top_navigation a{
     font-family:Trebuchet MS,sans-serif;
     font-size:12px;
-    color:#000;
+    color:white;
     font-weight:bold;
     text-decoration:none;
 }
@@ -82,10 +82,10 @@ a img
     height:auto;
     margin:0;
     padding:5px 0px 5px 8px;
-    border:0px solid red;
+    border:0px solid white;
     clear:both;
     text-align:right;
-    color:#000;
+    color:white;
 }
 
 #header .version {
