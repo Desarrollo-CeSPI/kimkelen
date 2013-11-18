@@ -88,10 +88,7 @@
       <div id="menu-div">
         <div class="content">
           <?php if ($sf_user->isAuthenticated()): ?>
-
             <?php $menu = pmJSCookMenu::createFromYaml(SchoolBehaviourFactory::getInstance()->getMenuYaml()) ?>
-            <?php // comento ésto porque aún on está finalizado. ?>
-            <?php //$sf_user->addCareerMenu($menu) ?>
             <?php echo $menu->render() ?>
           <?php endif ?>
 

@@ -67,7 +67,7 @@ a img
 #header .top_navigation a{
     font-family:Trebuchet MS,sans-serif;
     font-size:12px;
-    color:#000;
+    color:white;
     font-weight:bold;
     text-decoration:none;
 }
@@ -85,7 +85,7 @@ a img
     border:0px solid red;
     clear:both;
     text-align:right;
-    color:#000;
+    color:white;
 }
 
 #header .version {
