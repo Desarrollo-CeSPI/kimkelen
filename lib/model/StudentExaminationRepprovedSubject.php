@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -21,46 +21,56 @@
 
 class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepprovedSubject
 {
-  public function getResultClass()
-  {
-    list($clazz, $string) = SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationRepprovedResult($this);
+    public function getResultClass()
+    {
+        list($clazz, $string) = SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationRepprovedResult($this);
 
-    return $clazz;
-  }
+        return $clazz;
+    }
 
-  public function getStudent()
-  {
-    return $this->getStudentRepprovedCourseSubject()->getStudent();
-  }
+    public function getStudent()
+    {
+        return $this->getStudentRepprovedCourseSubject()->getStudent();
+    }
 
-  public function getResultString()
-  {
-    list($clazz, $string) = SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationRepprovedResult($this);
+    public function getResultString()
+    {
+        list($clazz, $string) = SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationRepprovedResult($this);
 
-    return $string;
-  }
+        return $string;
+    }
 
-  public function close(PropelPDO $con = null)
-  {
-    $con = is_null($con) ? Propel::getConnection() : $con;
+    public function close(PropelPDO $con = null)
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
 
-    SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubject($this, $con);
-  }
+        SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubject($this, $con);
+    }
 
-  public function getValueString()
-  {
-    return $this->getIsAbsent() ? __('Absence') : $this->getMark();
-  }
+    public function getValueString()
+    {
+        return $this->getIsAbsent() ? __('Absence') : $this->getMark();
+    }
 
-  public function getShortValueString()
-  {
-    return $this->getIsAbsent() ? __('A') : $this->getMark();
-  }
+    public function getShortValueString()
+    {
+        return $this->getIsAbsent() ? __('A') : $this->getMark();
+    }
 
-  public function renderChangeLog()
-  {
-    return ncChangelogRenderer::render($this, 'tooltip', array('credentials' => 'view_changelog'));
-  }
+    public function renderChangeLog()
+    {
+        return ncChangelogRenderer::render($this, 'tooltip', array('credentials' => 'view_changelog'));
+    }
+
+
+    public function getMarkText()
+    {
+        $c = new num2text();
+        return $c->num2str($this->getMark());
+    }
+
+
+
 }
 
 sfPropelBehavior::add('StudentExaminationRepprovedSubject', array('changelog'));

@@ -22,146 +22,186 @@
 class ExaminationSubject extends BaseExaminationSubject
 {
 
-  public function canBeClosed()
-  {
-    $c = new Criteria();
-    $c->addJoin(ExaminationSubjectPeer::ID, CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID);
-    $c->add(CourseSubjectStudentExaminationPeer::MARK, null, Criteria::ISNULL);
-    $c->add(CourseSubjectStudentExaminationPeer::IS_ABSENT, false);
-    $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
-
-    return $this->countCourseSubjectStudentExaminations($c) == 0 && !$this->getIsClosed();
-
-  }
-
-  public function getMessageCantBeClosed()
-  {
-    if ($this->getIsClosed())
+    public function canBeClosed()
     {
-      return "The examination subject can't be closed because it's already closed.";
-    }
-    else
-    {
-      return 'Examination subject cant be closed, because some students were not calificated';
+        $c = new Criteria();
+        $c->addJoin(ExaminationSubjectPeer::ID, CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID);
+        $c->add(CourseSubjectStudentExaminationPeer::MARK, null, Criteria::ISNULL);
+        $c->add(CourseSubjectStudentExaminationPeer::IS_ABSENT, false);
+        $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
+
+        return $this->countCourseSubjectStudentExaminations($c) == 0 && !$this->getIsClosed();
+
     }
 
-  }
-
-  public function close(PropelPDO $con = null)
-  {
-    $con = is_null($con) ? Propel::getConnection() : $con;
-
-    try
+    public function getMessageCantBeClosed()
     {
-      $con->beginTransaction();
+        if ($this->getIsClosed())
+        {
+            return "The examination subject can't be closed because it's already closed.";
+        }
+        else
+        {
+            return 'Examination subject cant be closed, because some students were not calificated';
+        }
 
-      $c = new Criteria();
-      $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
-
-      foreach ($this->getCourseSubjectStudentExaminations($c) as $course_subject_student_examination)
-      {
-        $course_subject_student_examination->close($con);
-      }
-
-      $this->setIsClosed(true);
-      $this->save($con);
-
-      $con->commit();
-    }
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      throw $e;
     }
 
-  }
-
-  /**
-   * This method join Students with this examination_subject
-   *
-   * @return array Students
-   */
-  public function getStudents()
-  {
-    $criteria = new Criteria();
-    $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
-    $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID, Criteria::INNER_JOIN);
-    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
-
-    return StudentPeer::doSelect($criteria);
-
-  }
-
-  public function canManageStudents()
-  {
-    return !$this->getIsClosed();
-
-  }
-
-  public function getMessageCantManageStudents()
-  {
-    if ($this->getIsClosed())
+    public function close(PropelPDO $con = null)
     {
-      return "The examination subject cant be moddify because it's closed.";
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();
+
+            $c = new Criteria();
+            $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
+
+            foreach ($this->getCourseSubjectStudentExaminations($c) as $course_subject_student_examination)
+            {
+                $course_subject_student_examination->close($con);
+            }
+
+            $this->setIsClosed(true);
+            $this->save($con);
+
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }
+
     }
 
-  }
-
-  public function getSortedCourseSubjectStudentExaminations(Criteria $c = null)
-  {
-    if (is_null($c))
+    public function getCriteriaForCourseSubjectExamination()
     {
-      $c = new Criteria();
+        $criteria = new Criteria();
+        $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
+        $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        return $criteria;
     }
 
-    $c->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-    $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-    $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+    /**
+     * This method join Students with this examination_subject
+     *
+     * @return array Students
+     */
+    public function getStudents()
+    {
+        $criteria = $this->getCriteriaForCourseSubjectExamination();
+        return StudentPeer::doSelect($criteria);
 
-    return $this->getCourseSubjectStudentExaminations($c);
+    }
 
-  }
+    public function canManageStudents()
+    {
+        return !$this->getIsClosed();
 
-  public function getSubject()
-  {
-    return $this->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject();
+    }
 
-  }
+    public function getMessageCantManageStudents()
+    {
+        if ($this->getIsClosed())
+        {
+            return "The examination subject cant be moddify because it's closed.";
+        }
 
-  public function getExaminationNoteForStudent($student)
-  {
-    $criteria = new Criteria();
-    $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
-    $criteria->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
-    return CourseSubjectStudentExaminationPeer::doSelectOne($criteria);
+    }
 
-  }
+    public function getSortedCourseSubjectStudentExaminations(Criteria $c = null)
+    {
+        if (is_null($c))
+        {
+            $c = new Criteria();
+        }
 
-  public function getTeachers()
-  {
-    return array_map(create_function('$c', 'return $c->getTeacher();'), $this->getExaminationSubjectTeachers());
 
-  }
+        $c->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+        $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
-  public function getTeachersToString()
-  {
-    return implode(' / ', $this->getTeachers());
-  }
+        return $this->getCourseSubjectStudentExaminations($c);
 
-  public function canEditCalifications()
-  {
-    return !$this->getIsClosed();// || sfContext::getInstance()->getUser()->hasCredential('edit_closed_examination');
-  }
+    }
 
-  public function canDelete()
-  {
-    if ($this->countCourseSubjectStudentExaminations() > 0)
-      return false;
+    public function getSubject()
+    {
+        return $this->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject();
 
-    return !$this->getIsClosed();
-  }
+    }
+
+    public function getExaminationNoteForStudent($student)
+    {
+        $criteria = new Criteria();
+        $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
+        $criteria->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+        return CourseSubjectStudentExaminationPeer::doSelectOne($criteria);
+
+    }
+
+    public function getTeachers()
+    {
+        return array_map(create_function('$c', 'return $c->getTeacher();'), $this->getExaminationSubjectTeachers());
+
+    }
+
+    public function getTeachersToString()
+    {
+        return implode(' / ', $this->getTeachers());
+    }
+
+    public function canEditCalifications()
+    {
+        return !$this->getIsClosed();// || sfContext::getInstance()->getUser()->hasCredential('edit_closed_examination');
+    }
+
+    public function canDelete()
+    {
+        if ($this->countCourseSubjectStudentExaminations() > 0)
+            return false;
+
+        return !$this->getIsClosed();
+    }
+
+    public function countTotalStudents()
+    {
+        return count($this->getStudents());
+    }
+
+    public function countApprovedStudents()
+    {
+        $criteria = $this->getCriteriaForCourseSubjectExamination();
+        $criteria->add(CourseSubjectStudentExaminationPeer::MARK,SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote(),Criteria::GREATER_EQUAL);
+        return  CourseSubjectStudentExaminationPeer::doCount($criteria) ;
+    }
+
+
+    public function countDisapprovedStudents()
+    {
+        $criteria = $this->getCriteriaForCourseSubjectExamination();
+        $criteria->add(CourseSubjectStudentExaminationPeer::MARK,SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote(),Criteria::LESS_THAN);
+        return  CourseSubjectStudentExaminationPeer::doCount($criteria) ;
+    }
+
+    public function countAbsenceStudents()
+    {
+        $criteria = $this->getCriteriaForCourseSubjectExamination();
+        $criteria->add(CourseSubjectStudentExaminationPeer::IS_ABSENT,true);
+        return  CourseSubjectStudentExaminationPeer::doCount($criteria) ;
+    }
+
+
+    public function getCareerSchoolYear()
+    {
+        return $this->getCareerSubjectSchoolYear()->getCareerSchoolYear();
+    }
+
 
 }
 

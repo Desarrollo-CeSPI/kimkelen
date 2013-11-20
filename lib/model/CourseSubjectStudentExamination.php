@@ -94,6 +94,12 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
     }
   }
 
+    public function getMarkText()
+    {
+        $c = new num2text();
+        return $c->num2str($this->getMark());
+    }
+
 }
 
 sfPropelBehavior::add('CourseSubjectStudentExamination', array('changelog'));
