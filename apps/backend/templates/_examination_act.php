@@ -45,28 +45,29 @@
         </div>
 
         <div class="row">
-            Exámenes de Alumnos:
+            <?php echo __('Exámenes de Alumnos');?> :
             <strong>
-            <?php if ($examination_subject->getExamination()->getExaminationNumber() == 1): ?>
-                <?php echo 'Regulares'; ?>
-            <? elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
-                <?php echo 'Febrero/Marzo'; ?>
-            <?php else: echo 'Previas'; ?>
-            <?php endif; ?>
+                <?php if ($examination_subject->getExamination()->getExaminationNumber() == 1): ?>
+                    <?php echo __('Regulares'); ?>
+                <? elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
+                    <?php echo __('Febrero/Marzo'); ?>
+                <?php else: ?>
+                    <?php echo __('Previas'); ?>
+                <?php endif; ?>
             </strong>
         </div>
 
 
         <div class="row">
-            Asignatura: <strong><?php echo $examination_subject->getSubject() ?></strong>
-            Año:  <strong><?php echo $examination_subject->getExamination()->getSchoolYear() ?></strong>
+             <?php echo __('Asignatura');?>: <strong><?php echo $examination_subject->getSubject() ?></strong>
+             <?php echo __('Año');?> :  <strong><?php echo $examination_subject->getExamination()->getSchoolYear() ?></strong>
         </div>
 
 
         <table class="gridtable">
             <thead>
             <tr class="printColumns">
-                <th rowspan="2">N° de Orden</th>
+                <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
                 <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
                 <th rowspan="2"><?php echo __('División'); ?></th>
                 <th colspan="2"><?php echo __('Calificación'); ?></th>
@@ -81,16 +82,26 @@
             <?php $i = 1; ?>
             <?php foreach ($students as $student): ?>
                 <tr>
-                    <td><?php echo $i ?> </td>
-                    <td><?php echo $student ?> </td>
-                    <td><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear(), $student)); ?> </td>
-                    <td>
+                    <td class="orden"><?php echo $i ?> </td>
+                    <td class="student"><?php echo $student ?> </td>
+                    <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear(), $student)); ?> </td>
+                    <?php $ess = $examination_subject->getExaminationNoteForStudent($student);?>
+                    <td class="calification number">
                          <?php if($examination_subject->getIsClosed()):?>
-                            <?php echo $examination_subject->getExaminationNoteForStudent($student)->getMark() ?>
+                             <?php if (!$ess->getIsAbsent()):?>
+                                 <?php echo $ess->getMark() ?>
+                             <?php endif;?>
+                         <?php else: ?>
+                             <?php echo __('-'); ?>
                          <?php endif;?>
                     </td>
-                    <td> <?php if($examination_subject->getIsClosed()):?>
-                        <?php echo $examination_subject->getExaminationNoteForStudent($student)->getMarkText() ?>
+                    <td class="calification text">
+                        <?php if($examination_subject->getIsClosed()):?>
+                            <?php if (!$ess->getIsAbsent()):?>
+                                <?php echo $ess->getMarkText() ?>
+                            <?php else: ?>
+                                <?php echo __('Ausente'); ?>
+                            <?php endif;?>
                         <?php endif;?>
                     </td>
                 </tr>
@@ -98,8 +109,7 @@
             <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-</div>
+
 
 <div class="row">
     Art 34º: <span class="sub">Exámenes regulares:</span> La evaluación en las mesas de exámenes regulares, regulares complementarios o regulares previos, se realizará sobre aquellos contenidos desarrollados durante el ciclo lectivo cursado.
@@ -117,7 +127,7 @@
 
 <div class="row">
     <div class="observation-box">
-        Observaciones
+        <?php echo __('Observaciones');?>
     </div>
 </div>
 
@@ -126,11 +136,11 @@
 
     <table class="examination-type-boxes">
         <tr>
-            <td>Oral:</td>
+            <td><?php echo __('Oral');?>:</td>
             <td class="boxed"></td>
-            <td>Escrita:</td>
+            <td><?php echo __('Escrita');?>:</td>
             <td class="boxed"></td>
-            <td>Práctica</td>
+            <td><?php echo __('Práctica');?>:</td>
             <td class="boxed"></td>
         </tr>
     </table>
@@ -139,14 +149,14 @@
 <div class="row">
     <table class="examination-count-boxes">
         <tr>
-            <td>Total de Alumnos:</td>
+            <td><?php echo __('Total de Alumnos'); ?>:</td>
             <td class="boxed"><?php if($examination_subject->getIsClosed()):?>
                                  <?php echo $examination_subject->countTotalStudents();?>
                               <?php endif;?>
             </td>
         </tr>
         <tr>
-            <td>Aprobados:</td>
+            <td><?php echo __('Aprobados');?>:</td>
             <td class="boxed"><?php if($examination_subject->getIsClosed()):?>
                                  <?php echo $examination_subject->countApprovedStudents();?>
                              <?php endif;?>
@@ -154,14 +164,14 @@
 
         </tr>
         <tr>
-            <td>Aplazados:</td>
+            <td><?php echo __('Aplazados');?>:</td>
             <td class="boxed"><?php if($examination_subject->getIsClosed()):?>
                 <?php echo $examination_subject->countDisapprovedStudents();?>
                 <?php endif;?>
             </td>
         </tr>
         <tr>
-            <td>Ausentes:</td>
+            <td><?php echo __('Ausentes'); ?>:</td>
             <td class="boxed"><?php if($examination_subject->getIsClosed()):?>
                 <?php echo $examination_subject->countAbsenceStudents();?>
                 <?php endif;?>
@@ -189,7 +199,6 @@
     </div>
 </div>
 
-<div style="page-break-before: always;">
 
 </div>
 
