@@ -50,7 +50,7 @@ class num2text {
 
   public function Unidades($VUnidad) {
     $Numeros[0] = "cero";
-    $Numeros[1] = "un";
+    $Numeros[1] = "uno";
     $Numeros[2] = "dos";
     $Numeros[3] = "tres";
     $Numeros[4] = "cuatro";

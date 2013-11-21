@@ -33,6 +33,10 @@ generator:
             label: Identification number
             method: getPersonIdentificationNumber
             decorator: text
+          person_birth_date:
+            label: Birthdate
+            method: getPersonFormattedBirthDate
+            decorator: text
           person_email:
             label: Email
             method: getPersonEmail
