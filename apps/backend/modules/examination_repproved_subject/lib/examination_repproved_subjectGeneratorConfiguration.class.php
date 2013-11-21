@@ -29,9 +29,11 @@
  */
 class examination_repproved_subjectGeneratorConfiguration extends BaseExamination_repproved_subjectGeneratorConfiguration
 {
-  public function getForm($object = null)
+  /*public function getForm($object = null)
   {
     $form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentExaminationRepprovedSubjectForm();
     return new $form($object);
   }
+   * 
+   */
 }

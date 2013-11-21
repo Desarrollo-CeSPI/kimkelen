@@ -191,3 +191,23 @@ h2 {
 {
   display: none !important;
 }
+
+.article-div {
+  margin: 20px 0;
+}
+
+.observation-box {
+  padding: 2px 0 0 5px;
+  border:1px solid #ccc;
+  min-height: 70px;
+}
+
+.sub {
+  text-decoration: underline;
+}
+
+.little-box {
+  border:1px solid #ccc;
+  padding: 1px 13px;
+  margin-right: 4px;
+}
