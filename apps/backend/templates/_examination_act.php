@@ -57,7 +57,7 @@
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
   </div>
   <br>
-  <table class="gridtable">
+  <table class="gridtable_bordered">
     <thead>
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
@@ -170,19 +170,21 @@
   <div class="article-div">
     La Plata, __________ de ______________________ de __________
   </div>
-</div>
 
-<div class="signature signature-center">
-  <div class="signature-text">Presidente
-    <div class="signature-subtext">Firma y aclaración</div>
+  <div style="margin-left: 25px;" class="signature">
+    <p class="signature-text">Vocal</p>
+    <p class="signature-subtext">Firma y aclaración</p>
   </div>
-</div>
-<div class="signature signature-left">
-  <div class="signature-text">Vocal
-    <div class="signature-subtext">Firma y aclaración</div></div>
-</div>
-<div class="signature signature-right">
-  <div class="signature-text">Vocal
-    <div class="signature-subtext">Firma y aclaración</div></div>
+
+  <div class="signature">
+    <p class="signature-text">Presidente</p>
+    <p class="signature-subtext">Firma y aclaración</p>
+  </div>
+
+  <div class="signature">
+    <p class="signature-text">Vocal</p>
+    <p class="signature-subtext">Firma y aclaración</p>
+  </div>
+
 </div>
 <div style="page-break-before: always;"></div>
