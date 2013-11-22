@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -93,7 +93,7 @@ class mainBackendActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->current_school_year = SchoolYearPeer::retrieveCurrent();
-    
+
   }
 
   /**
@@ -161,32 +161,35 @@ class mainBackendActions extends sfActions
 
   public function executeDownloableDocument(sfWebRequest $request)
   {
-    $student_attendance_justification  = StudentAttendanceJustificationPeer::retrieveByPK($request->getParameter('id'));
+    $student_attendance_justification = StudentAttendanceJustificationPeer::retrieveByPK($request->getParameter('id'));
 
-    
-    if($student_attendance_justification && $student_attendance_justification->getDocument())
+    if ($student_attendance_justification && $student_attendance_justification->getDocument())
     {
       $filePath = $student_attendance_justification->getDocumentFullPath();
-      
       $response = $this->getResponse();
       $response->setHttpHeader('Pragma', '');
       $response->setHttpHeader('Cache-Control', '');
       $data = file_get_contents($filePath);
+
       $file_exploded = explode('.', $student_attendance_justification->getDocument());
       $file_extension = end($file_exploded);
-
-      if($file_extension == 'jpg'){
-        $content_type = 'jpeg';
+      if ($file_extension == 'pdf')
+      {
+        $response->setHttpHeader('Content-Type', 'application/pdf');
       }
       else
       {
-        $content_type = $file_extension;
-      }      
-      $response->setHttpHeader('Content-Type', 'image/'.$content_type);
-      if($attachment)
-      {
-        $response->setHttpHeader('Content-Disposition', "attachment; filename=\"".$student_attendance_justification->getDocument()."\"");
+        if ($file_extension == 'jpg')
+        {
+          $content_type = 'jpeg';
+        }
+        else
+        {
+          $content_type = $file_extension;
+        }
+        $response->setHttpHeader('Content-Type', 'image/' . $content_type);
       }
+      $response->setHttpHeader('Content-Disposition', "attachment; filename=\"" . $student_attendance_justification->getDocument() . "\"");
       $response->setContent($data);
     }
 
@@ -197,7 +200,7 @@ class mainBackendActions extends sfActions
   {
     $this->form = new ChangeRoleForm(array(), array('actual_user' => $this->getUser()));
     $values = $request->getParameter($this->form->getName());
-   
+
     if (isset($values['roles']) && !empty($values['roles']))
     {
       $this->getUser()->clearCredentials();
