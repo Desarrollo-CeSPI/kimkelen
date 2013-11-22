@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -64,30 +64,35 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
 
   public function getMarkStr()
   {
-    return $this->getIsAbsent() ? __('A') : $this->getMark();    
+    if ($this->getIsAbsent()) {
+      return __('A');
+    }
+    elseif ($this->getMark() != SchoolBehaviourFactory::getEvaluatorInstance()->getMinimumMark()){
+      return $this->getMark();
+    }
   }
 
   public function __toString()
   {
     return $this->getMarkStr();
   }
-  
-  public function saveForTask(PropelPDO $con = null) 
+
+  public function saveForTask(PropelPDO $con = null)
   {
-    if ($con === null) 
+    if ($con === null)
     {
       $con = Propel::getConnection(CourseSubjectStudentExaminationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
     }
 
     $con->beginTransaction();
-    try 
+    try
     {
       $affectedRows = $this->doSave($con);
       $con->commit();
       CourseSubjectStudentExaminationPeer::addInstanceToPool($this);
       return $affectedRows;
-    } 
-    catch (PropelException $e) 
+    }
+    catch (PropelException $e)
     {
       $con->rollBack();
       throw $e;
