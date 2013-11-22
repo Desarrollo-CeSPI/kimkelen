@@ -72,15 +72,16 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
          $course_type = $course_subject->getCourseType();
          $periods = CareerSchoolYearPeriodPeer::getPeriodsArrayForCourseType($course_type, $cssy->getCareerSchoolYear()->getId());
 
-         $val = false;
+         $val = $course_subject_student_mark->getIsFree();
           foreach ($periods as $period)
           {
-            if ($student->isFree($period, $course_subject, $cssy->getCareerSchoolYear()))
+            if ($val || $student->isFree($period, $course_subject, $cssy->getCareerSchoolYear()))
             {
               $val = true;
               $widgets[$widget_name]->setAttribute('style', 'display:none');
               continue;
             }
+
           }
           $this->setDefault($free_widget_name, $val);
 
