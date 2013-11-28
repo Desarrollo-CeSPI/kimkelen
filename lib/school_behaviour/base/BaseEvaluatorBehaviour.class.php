@@ -48,6 +48,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return $this->_examination_number_short;
   }
 
+
+	public function getExaminationNumbersLong()
+	{
+		return $this->_examination_number;
+	}
+
   /*
    * Returns if a student has approved or not the course subject
    *

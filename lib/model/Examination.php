@@ -50,6 +50,12 @@ class Examination extends BaseExamination
 
     return true;
   }
+
+	public function getExaminationTypeStr()
+	{
+		$examinations= SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNumbersLong();
+		return $examinations[$this->getExaminationNumber()];
+	}
 }
 
 sfPropelBehavior::add('Examination', array('examination'));

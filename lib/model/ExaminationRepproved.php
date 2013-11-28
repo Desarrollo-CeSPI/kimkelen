@@ -47,4 +47,9 @@ class ExaminationRepproved extends BaseExaminationRepproved
   {
     return $this->getSchoolYear()->getIsActive();
   }
+
+	public function getExaminationTypeStr()
+	{
+			return $this->getExaminationRepprovedTypeStr();
+	}
 }

@@ -29,9 +29,13 @@
     <div>
       <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
     </div>
+      <div style="float:right">
+          <h2>Acta volante de Exámenes</h2>
+      </div>
+
+
   </div>
 
-  <h2>Acta volante de exámenes</h2>
   <div class="article-div">
     <div><?php echo __('Day') ?> _____ / _____ / _____ &nbsp;<?php echo __('Hora') ?> _____ : _____ </div>
   </div>
@@ -39,13 +43,7 @@
   <div class="gray-background">
     <span><strong><?php echo 'Exámenes de Alumnos'; ?></strong>:
       <strong>
-        <?php if ($examination_subject->getExamination()->getExaminationNumber() == 1): ?>
-          <?php echo __('Regulares'); ?>
-        <? elseif ($examination_subject->getExamination()->getExaminationNumber() == 2): ?>
-          <?php echo __('Febrero/Marzo'); ?>
-        <?php else: ?>
-          <?php echo __('Previas'); ?>
-        <?php endif; ?>
+        <?php echo $examination_subject->getExamination()->getExaminationTypeStr();?>
       </strong>
     </span>
 
@@ -142,8 +140,7 @@
           <?php echo $examination_subject->countTotalStudents(); ?>
         <?php endif; ?>
       </span>
-    </div>
-    <div class="article-div">
+
       <strong><?php echo __('Aprobados'); ?>:</strong>
       <span class="little-box">
         <?php if ($examination_subject->getIsClosed()): ?>
