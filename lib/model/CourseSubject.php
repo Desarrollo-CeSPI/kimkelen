@@ -241,9 +241,13 @@ class CourseSubject extends BaseCourseSubject
     $c = new Criteria();
     $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNULL);
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getId());
+    $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getId());
+    $c->addJoin(StudentPeer::ID,CourseSubjectStudentPeer::STUDENT_ID);
+		$c->addJoin(StudentPeer::PERSON_ID,PersonPeer::ID);
+		$c->add(PersonPeer::IS_ACTIVE,true);
 
-    return CourseSubjectStudentmarkPeer::doCount($c) == 0;
+		//die(var_dump(CourseSubjectStudentMarkPeer::doSelect($c)));
+    return CourseSubjectStudentMarkPeer::doCount($c) == 0;
 
   }
 

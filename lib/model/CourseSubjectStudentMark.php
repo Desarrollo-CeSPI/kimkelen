@@ -64,6 +64,8 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
   {
     return SchoolBehaviourFactory::getEvaluatorInstance()->getColorForCourseSubjectStudentMark($this);
   }
+
+
 }
 
 sfPropelBehavior::add('CourseSubjectStudentMark', array('changelog'));
