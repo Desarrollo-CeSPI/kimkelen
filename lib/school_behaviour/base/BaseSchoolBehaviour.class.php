@@ -1034,7 +1034,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 
   }
 
-  public function getCourseSubjectStudentsForCourseTypeArray($student, $course_type, $school_year = null)
+  public function getCourseSubjectStudentsForCourseTypeArray($student, $course_type = null, $school_year = null)
   {
     if (is_null($school_year))
     {
@@ -1049,6 +1049,31 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     CareerSubjectSchoolYearPeer::sorted($c);
 
     return $student->getCourseSubjectStudents($c);
+
+  }
+
+  public function getCourseSubjectStudentsForAnalytics($student, $school_year)
+  {
+    
+    $ret = array();
+
+    foreach ($this->getCourseSubjectStudentsForCourseTypeArray($student, null,$school_year) as $css){
+      $ret[] = $this->getInstanceSubjectStudentAnalytic($css);
+    }
+    return $ret;
+  }
+
+  protected function getInstanceSubjectStudentAnalytic($course_subject_student){
+
+    $klass = $this->getClassSubjectStudentAnalytic();
+
+    return new $klass($course_subject_student);
+
+  }
+
+  protected function getClassSubjectStudentAnalytic(){
+
+    return 'BaseSubjectStudentAnalytic';
 
   }
 

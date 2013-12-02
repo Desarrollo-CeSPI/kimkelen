@@ -19,43 +19,70 @@
  */ ?>
 <?php use_helper('Date') ?>
 
-<div id='content' style='font-size: 12px;'>
-  <div id='sf_admin_container'>
-    <?php if(0 == count($objects)):?>
-      <div class="notice" style="padding: 20px; background-image: none; margin-bottom: 15px;">
-        <?php echo __('The student has no approved subjects')?>
-      </div>
-    <?php else: ?>
-      <?php foreach ($objects as $key => $subjects): ?>
+  <?php if(0 == count($objects)):?>
+    
+    <div class="notice" style="padding: 20px; background-image: none; margin-bottom: 15px;">
+      <?php echo __('The student has no approved subjects')?>
+    </div>
+  
+  <?php else: ?>
+      <?php $year= 0; ?>
 
-        <table class="analytical">
+
+      <?php foreach ($objects as $key => $subjects): ?>
+        
+        <table class="table gridtable_bordered">
           <thead>
             <tr>
-              <th colspan="6" ><?php echo __('Año: '.$key) ?></th>
+                <th colspan="7"><?php echo __('Year '.$key) ?></th>
             </tr>
             <tr>
-              <th><?php echo __("Subject") ?></th>
-              <th><?php echo __("Year") ?></th>
-              <th><?php echo __("Month") ?></th>
-              <th><?php echo __("Result") ?></th>
-              <th><?php echo __("Mark") ?></th>
-              <th><?php echo __("Approved method") ?></th>
+              <th rowspan="2"><?php echo __("Condition") ?></th>
+              <th rowspan="2"><?php echo __("Fecha aprobación") ?></th>
+              <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
+              <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
+              <th colspan="2"><?php echo __("Calification") ?></th>
+              <th rowspan="2"><?php echo __("School") ?></th>
             </tr>
-          </thead>
+            <tr>
+              <th>Nro.</th>
+              <th>Letras</th>
+            </tr>
+          </thead> 
+
           <tbody>
-          <?php foreach ($subjects as $subject): ?>
-            <tr>
-              <td><?php echo $subject->getCareerSubject()->getSubject() ?></td>
-              <td><?php echo $subject->getSchoolYear() ?></td>
-              <td><?php  // echo format_date($subject->getApprovationDate(), "MMMM") ?></td>
-              <td><?php echo $subject->getResult(false) ?></td>
-              <td><?php echo $subject->getMark() ?></td>
-              <td><?php echo $subject->getMethod() ?></td>
+            <?php $school_year = null ?>
+
+            <?php foreach ($subjects as $css): ?>
+                  <tr>
+
+                    <td class="text-center"><?php echo $css->getCondition() ?></td>
+
+                    <td class="text-center"><?php echo $css->getApprovedDate() ?></td>
+
+                    <td class="text-center"><?php echo $css->getSchoolYear() ?></td>
+
+                    <td align="left" width="500px"><?php echo $css->getSubjectName() ?></td>
+
+                    <td class="text-center"><?php echo $css->getMark() ?></td>
+
+                    <td class="text-center"><?php echo $css->getMarkAsSymbol()?></td>
+
+                    <td class="text-center"><?php echo $css->getSchoolName() ?></td>
+
+                  </tr>
+            <?php endforeach ?>
+              
+            <tr >
+              <th colspan="5" style="text-align:left !important;"><?php echo __('Course') ?></th>
+              <th colspan="2"><?php echo __('Average ') ?>: <?php echo "HACER" ?>    </th>
+              <th colspan="2"></th>
             </tr>
-          <?php endforeach ?>
+          
           </tbody>
-        </table>
-      <?php endforeach ?>
-    <?php endif; ?>
-  </div>
-</div>
+      </table>
+      <?php $year++ ?>
+    <?php endforeach ?>
+
+<?php endif; ?>
+

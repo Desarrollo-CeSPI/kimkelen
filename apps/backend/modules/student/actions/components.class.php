@@ -24,23 +24,45 @@ class studentComponents extends sfComponents
 
   public function executeComponent_analytical_table()
   {
+
+    //De aca recupero el nombre del establecimiento
     $this->career_student = $this->getVar('career_student');
 
-    $subjects = $this->career_student->getStudentApprovedCareerSubjects();
+    $this->student =  $this->career_student->getStudent();
+
+    $this->student_career_school_years = $this->student->getStudentCareerSchoolYears();
+
+    //Deberia recorrer todos los "scsy" y recuperar por c/año las materias 
 
     $this->objects = array();
 
-    foreach($subjects as $subject)
-    {
-      if(!isset($this->objects[$subject->getYear()]))
-      {
-        $this->objects[$subject->getYear()] = array();
-      }
+    foreach ($this->student_career_school_years as $scsy ) {
 
-      $this->objects[$subject->getYear()][] = $subject;
+        //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
+        //Siempre tomo el año "Aprobado" - Ver si esta bien asi o si deberia quedarme con el ultimo 
+        if ($scsy->getStatus() == 1){
+
+            $year_in_career = $scsy->getYear();
+
+            $career_school_year = $scsy->getCareerSchoolYear();
+
+            $school_year = $career_school_year->getSchoolYear();
+
+            $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->student, $school_year);
+
+            $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->student, $school_year);
+
+            foreach($csss as $css){
+                 if(!isset($this->objects[$year_in_career])){
+                     $this->objects[$year_in_career] = array();
+                 }
+
+                 $this->objects[$year_in_career][] = $css;
+             }
+        }
     }
+
   }
 
 }
 
-?>
