@@ -52,7 +52,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         if ($course_subject_student_mark->getIsClosed())
         {
           $widgets[$widget_name] = new mtWidgetFormPlain(array(
-              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => true), array('class' => 'mark'));
+              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => false), array('class' => 'mark'));
           $widgets[$widget_name]->setAttribute('class', 'mark_note');
         }
         else
@@ -137,14 +137,17 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       {
         $is_free = $values[$course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber()];
         $value = $values[$course_subject_student->getId().'_'.$course_subject_student_mark->getMarkNumber()];
-        if($is_free)
-        {
-          $value = 0;
-        }
+        if ( !is_null($value) && !is_null($is_free))
+	{
+          if($is_free)
+          {
+            $value = 0;
+          }
 
-        $course_subject_student_mark->setMark($value);
-        $course_subject_student_mark->setIsFree($is_free);
-        $course_subject_student_mark->save($con);
+          $course_subject_student_mark->setMark($value);
+          $course_subject_student_mark->setIsFree($is_free);
+          $course_subject_student_mark->save($con);
+	}
       }
     }
   }
