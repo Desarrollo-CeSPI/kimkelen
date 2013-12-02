@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -18,15 +17,12 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <div class="report-header">
-  <div class="logo"><?php echo image_tag("logo_uba_2.gif", array('absolute' => true)) ?></div>
-
-  <div class="logo_fvet"><?php echo image_tag("escudo_pelle.jpg", array('absolute' => true)) ?></div>
-
-
-
-  <div class="school-name-title"><?php echo __('UNIVERSIDAD DE BUENOS AIRES') ?></div>
-  <div class="school-name"><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName(); ?></div>
-  <div class="school-year"><?php echo __('ciclo lectivo') ?>: <?php echo $school_year; ?></div>
+  <div>
+    <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+    <div class="logo_fvet"><?php echo image_tag("escudo_pelle.jpg", array('absolute' => true)) ?></div>
+    <div class="school-name"><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName(); ?></div>
+    <div class="school-name"><?php echo __('Universidad de Buenos Aires') ?></div>
+  </div>
 
   <div class="header_row">
     <div class="title"><?php echo __('Alumno/a') ?>: </div>
@@ -42,5 +38,6 @@
         <div class="orientation"><?php echo (($student_career->getOrientation()) ? $student_career->getOrientation() : '-'); ?></div>
       <?php endif ?>
     </div>
+    <div class="school-year"><?php echo __('ciclo lectivo') ?>: <?php echo $school_year; ?></div>
   </div>
 </div>

@@ -297,13 +297,11 @@ width: 274px;
   font-size: 12px;
 }
 
-
 .report-header .school-name
 {
     text-align:center;
     padding:5px 0px;
     margin-right: 15%;
-/*    text-transform: capitalize;*/
     font-size: large;
 }
 
@@ -313,6 +311,7 @@ width: 274px;
     padding:5px 0px;
     float:right;
 }
+
 .titletable_signature
 {
     font-size:12px;
