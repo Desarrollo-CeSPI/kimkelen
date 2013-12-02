@@ -226,61 +226,61 @@ table.lefttable tr {
 }
 
 .rowins{
-    border:1px solid #ccc;
-    margin-top:10px;
-    padding:0px 5px;
+  border:1px solid #ccc;
+  padding:0px 10px;
+  float:left;
+  width:145px;
+  margin-top:10px;
+  min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowcom{
-    border:1px solid #ccc;
-    padding:0px 5px;
-    float:left;
-    width:46%;
-    margin-top:5px;
-    min-height: 5em;
+  border:1px solid #ccc;
+  padding:0px 10px;
+  float:left;
+  width:145px;
+  margin-top:10px;
+  min-height: 5em;
+  margin-right: 5px;
 }
 
 .rowamon{
-    border:1px solid #ccc;
-    padding:0px 5px;
-    float:right;
-    width:46%;
-    margin-top:5px;
+  border:1px solid #ccc;
+  padding:0px 5px;
+  float:left;
+  width: auto;
+  margin-top:10px;
+  margin-right: 5px;
+  min-height: 5em;
 }
 
 .rowfirm_authority{
-    border:1px solid #ccc;
-    float:left;
-    margin-top:10px;
-
-    padding:0px 15px;
-    height:123px;
-    width: 42%;
+  border:1px solid #ccc;
+  float:right;
+  margin-top:10px;
+  margin-left:5px;
+  padding:0px 30px !important;
+  height: 159px;
+width: 274px;
 }
 
 .rowfirm_responsible{
-    border:1px solid #ccc;
-    float:right;
-    margin-top:10px;
-    margin-left:5px;
-    padding:0px 15px;
-    height:123px;
-    width: 42%;
+  border:1px solid #ccc;
+  float:left;
+  margin-top:10px;
+  margin-left:5px;
+  padding:0px 20px !important;
+  height: 159px;
+width: 274px;
 }
 
 .rownotice{
-    border:1px solid #ccc;
-    float:left;
-    margin-top:10px;
-    padding:0px 15px;
-    height:123px;
-    width:140px;
-}
-
-#sfWebDebug,
-.non-printable
-{
-    display: none !important;
+  border:1px solid #ccc;
+  float:left;
+  margin-top:10px;
+  padding:0px 8px;
+  height:115px;
 }
 
 .report-header .school-year
@@ -289,6 +289,7 @@ table.lefttable tr {
     padding:5px 0px;
     margin-right: 10px;
     float:right;
+
 }
 .titletable_signature
 {
@@ -298,6 +299,7 @@ table.lefttable tr {
     padding-left: 20%;
     padding-top: 42%;
 }
+
 .report-header .school-name-title
 {
     text-align:right;
@@ -308,12 +310,56 @@ table.lefttable tr {
 }
 .report-header .school-name
 {
-    text-align:right;
+    text-align:center;
     padding:5px 0px;
     margin-right: 23%;
-    text-transform: uppercase;
+    margin-top: 1%;
     font-size: large;
 }
+
+.td_average
+{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.report-header .school-name
+{
+    text-align:center;
+    padding:5px 0px;
+    margin-right: 15%;
+    font-size: large;
+}
+
+.date
+{
+    text-align:right;
+    padding:5px 0px;
+    float:right;
+}
+
+.titletable_signature
+{
+    font-size:12px;
+    font-weight:bold;
+    display:block;
+    padding-top: 130px;
+}
+
+.report-wrapper .hr_break {
+  clear:both;
+  border: none;
+  border-bottom: 2px dashed #999 !important;
+  margin-bottom:20px;
+  padding:10px;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 
 /***table for calification sheet***/
 

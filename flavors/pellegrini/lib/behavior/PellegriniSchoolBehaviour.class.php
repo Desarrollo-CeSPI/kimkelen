@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -55,12 +55,18 @@ class PellegriniSchoolBehaviour extends BaseSchoolBehaviour
     return self::BLOCKS_PER_COURSE_SUBJECT_DAY;
 
   }
-    public function getMarkNameByNumberAndCourseType($number, $course_type)
+
+  public function getMarkNameByNumberAndCourseType($number, $course_type)
   {
     If ($number == 1){
         return "P.E.P";
     }elseif ($number == 2)
         return "E.I";
     return $number . 'T';
+  }
+
+   public function showReportCardRepproveds()
+  {
+    return true;
   }
 }

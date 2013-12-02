@@ -59,3 +59,8 @@ a
   text-align: right;
   padding-top: 12px;
 }
+
+#sf_admin_container label
+{
+  width: 11em !important;
+}

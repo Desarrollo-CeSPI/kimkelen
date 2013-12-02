@@ -4159,6 +4159,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Examination %%examination%%</source>
                 <target>Instancia de mesa de examen %%examination%%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Career subject repproved details</source>
+                <target>Detalle de asignaturas pendientes</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student doesn't have any disciplinary sanctions.</source>
+                <target>El alumno no posee sanciones disciplinarias.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
