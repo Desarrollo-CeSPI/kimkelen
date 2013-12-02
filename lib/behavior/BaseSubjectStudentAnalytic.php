@@ -60,7 +60,7 @@
       case 'StudentRepprovedCourseSubject':
         return 'Previa';
      }
-     return $instance."|".$this->getNullLabel();
+     return $this->getNullLabel();
    }
 
    public function getApprovedDate()
