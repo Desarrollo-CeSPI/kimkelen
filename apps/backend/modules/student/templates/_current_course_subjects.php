@@ -69,7 +69,7 @@
             <td>
               <?php echo ($course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber($number)) ? $course_subject_student_examination->getMarkStr() : '' ?>
               <br/>
-              <?php echo is_null($course_subject_student_examination) ? '' : ' (' . $course_subject_student_examination->getDate('d/m/y') . ') '?>
+              <?php echo is_null($course_subject_student_examination) ? '' : $course_subject_student_examination->getFormattedDate()?>
             </td>
           <?php endforeach?>
 
