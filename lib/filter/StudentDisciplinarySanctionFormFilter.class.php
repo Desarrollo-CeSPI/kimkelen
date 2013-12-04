@@ -11,5 +11,14 @@ class StudentDisciplinarySanctionFormFilter extends BaseStudentDisciplinarySanct
 {
   public function configure()
   {
+		$this->unsetFilters();
+
+		$this->setWidget('request_date', new csWidgetFormDateInput());
+		$this->setWidget('resolution_date', new csWidgetFormDateInput());
   }
+
+	protected  function unsetFilters()
+	{
+		unset($this['id'],$this['value'],$this['observation'],$this['document'],$this['applicant_other'],$this['name']);
+	}
 }

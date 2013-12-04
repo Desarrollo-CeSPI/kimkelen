@@ -1,3 +1,21 @@
+student_disciplinary_sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+
+sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
