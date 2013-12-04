@@ -262,4 +262,26 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   }
 
+    /**
+   * This method check the conditions of repetition of a year.
+   *
+   * @param Student $student
+   * @param StudentCareerSchoolYear $student_career_school_year
+   * @return boolean
+   */
+  public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
+  {
+    //IF the current year is the last year of the career.
+    if ($student_career_school_year->isLastYear())
+    {
+      return false;
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    //If previous count > than max count of previous allowed, then the student repeats
+    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
+
+    return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
+  }
 }
