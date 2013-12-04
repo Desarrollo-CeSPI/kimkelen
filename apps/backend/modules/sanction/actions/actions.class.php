@@ -14,8 +14,27 @@ require_once dirname(__FILE__).'/../lib/sanctionGeneratorHelper.class.php';
 class sanctionActions extends autoSanctionActions
 {
 
+  public function executeEdit(sfWebRequest $request)
+	{
+		$this->forward404('Not implemented');
+	}
 
-	public function executeDownloadDocument($request)
+	public function executeDelete(sfWebRequest $request)
+	{
+		$this->forward404('Not implemented');
+	}
+
+	public function executeNew(sfWebRequest $request)
+	{
+		$this->forward404('Not implemented');
+	}
+
+	public function executeCreate(sfWebRequest $request)
+	{
+		$this->forward404('Not implemented');
+	}
+
+	public function executeDownloadDocument(sfWebRequest $request)
 	{
 		$student_disciplinary_sanction = StudentDisciplinarySanctionPeer::retrieveByPK($request->getParameter('id'));
 

@@ -234,6 +234,10 @@ root:
         title: Attendance justification
         url: @attendance_justification
         credentials: [edit_attendance_justification]
+      sanctions:
+        title: Sanciones Disciplinarias
+        url: @sanction
+        credentials: [show_all_disciplinary_sanction]
       tutors:
         title: Listado de tutores
         url: tutor/index
