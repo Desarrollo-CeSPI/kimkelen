@@ -589,15 +589,14 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     foreach ($student_repproved_course_subject->getStudentExaminationRepprovedSubjects($crit) as $srcs)
     {
       if (!is_null($srcs->getDate())) {
-        $marks[] = $srcs->getShortValueString() . ' (' . $srcs->getDate('d/m/y') . ') ';
+        $marks[] = $srcs->getShortValueString() . ' (' . $srcs->getDate('d/m/Y') . ') ';
       }
       else {
         $marks[] = $srcs->getShortValueString();
       }
     }
-    $marks = implode($marks, ', ');
 
-    return $marks;
+    return $marks = $marks != "" ? implode($marks, ', '): $marks;
   }
 
   public function hasNotAbsense()
