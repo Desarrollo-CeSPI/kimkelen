@@ -100,10 +100,18 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
   }
 
     public function getMarkText()
+  {
+    $c = new num2text();
+    return $c->num2str($this->getMark());
+  }
+
+    public function getFormattedDate()
+  {
+    if ($this->getDate())
     {
-        $c = new num2text();
-        return $c->num2str($this->getMark());
+      return' (' . $this->getDate('d/m/Y') . ') ';
     }
+  }
 
 }
 
