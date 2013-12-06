@@ -62,14 +62,14 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    *
    * @return Object $object
    * Este metodo se fija que la nota del promedio sea mayor o igual que el minimo de aprobacion de la carrera
-   * y que la ultima nota no sea un aplazo (menor que 4)
+   * y que la ultima nota no sea un aplazo (menor que self::POSTPONED_NOTE)
    */
 
   public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
   {
     $minimum_mark = $course_subject_student->getCourseSubject($con)->getCareerSubjectSchoolYear($con)->getConfiguration($con)->getCourseMinimunMark();
     return $average >= $minimum_mark
-      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() > $this->getPosponedNote;
+      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() > $this->getPosponedNote();
 
   }
 
