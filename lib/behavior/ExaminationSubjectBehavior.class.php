@@ -24,6 +24,22 @@
  */
 class ExaminationSubjectBehavior
 {
+  private static $_enabled = true;
+
+  public static function enabled()
+  {
+    return ExaminationSubjectBehavior::$_enabled;
+  }
+
+  public static function disable()
+  {
+    ExaminationSubjectBehavior::$_enabled = false;
+  }
+
+  public static function enable()
+  {
+    ExaminationSubjectBehavior::$_enabled = true;
+  }
   /**
    * Adds the reference for the ExaminationSubject to the CourseSubjectStudentExaminations.
    *
@@ -33,7 +49,8 @@ class ExaminationSubjectBehavior
   public function updateCourseSubjectStudentExaminations($examination_subject, PropelPDO $con)
   {
     //this is done for manual examinations
-    if ($examination_subject->isNew()) {
+    if (!ExaminationSubjectBehavior::enabled())
+    {
       return;
     }
 
