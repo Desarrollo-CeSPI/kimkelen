@@ -265,20 +265,23 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   {
     if ($result instanceof StudentApprovedCourseSubject)
     {
-      $student_approved_career_subject = new StudentApprovedCareerSubject();
-      $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
-      $student_approved_career_subject->setStudent($result->getStudent($con));
-      $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
-      $student_approved_career_subject->setMark($result->getMark());
+      if (is_null($student_approved_career_subject = $result->getStudentApprovedCareerSubject($con)))
+      {
+        $student_approved_career_subject = new StudentApprovedCareerSubject();
+        $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
+        $student_approved_career_subject->setStudent($result->getStudent($con));
+        $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
+        $student_approved_career_subject->setMark($result->getMark());
 
-      $result->setStudentApprovedCareerSubject($student_approved_career_subject);
+        $result->setStudentApprovedCareerSubject($student_approved_career_subject);
 
-      $student_approved_career_subject->save($con);
-      $result->save($con);
+        $student_approved_career_subject->save($con);
+        $result->save($con);
 
-      $student_approved_career_subject->clearAllReferences(true);
+        $student_approved_career_subject->clearAllReferences(true);
 
-      $result->clearAllReferences(true);
+        $result->clearAllReferences(true);
+      }
 
       unset($result);
       unset($student_approved_career_subject);

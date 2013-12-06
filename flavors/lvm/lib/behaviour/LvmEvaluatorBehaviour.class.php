@@ -236,11 +236,12 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $result = $course_subject_student->getCourseResult($con);
 
       if (!is_null($result))
+      {
         $result->close($con);
-
-      ###Liberando memoria ###
-      $result->clearAllReferences(true);
-      unset($result);
+        ###Liberando memoria ###
+        $result->clearAllReferences(true);
+        unset($result);
+      }
       $course_subject_student->clearAllReferences(true);
       unset($course_subject_student);
       ###########################

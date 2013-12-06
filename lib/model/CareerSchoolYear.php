@@ -290,10 +290,8 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     catch (Exception $e)
     {
-      throw $e;
-
       $con->rollBack();
-      return $errors;
+      throw $e;
     }
     return true;
 
