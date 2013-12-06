@@ -151,17 +151,11 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
 
     $results = array();
 
-    //var_dump($course_type);
-    //die(var_dump($course_subject_students));
     foreach ($course_subject_students as $css)
     {
       if ($css->getCourseSubject()->getCourseType() == $course_type)
       {
         $results[] = $css;
-      }
-      else
-      {
-      //  var_dump($css->getCourseSubject()->getCourseType());
       }
 
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -160,7 +160,17 @@ class StudentEditHistoryForm extends sfFormPropel
         $this->setWidget($name_absence, new sfWidgetFormInputCheckbox());
         $this->setValidator($name_absence, new sfValidatorBoolean(array('required' => false)));
         $this->setDefault($name_absence, $course_subject_student_examination->getIsAbsent());
-        $this->getWidget($name_absence)->setLabel(__('Is absent', array('%number%' => $i)));
+        $this->getWidget($name_absence)->setLabel(__('Is absent'));
+
+        $name_date = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_date';
+        $fields[] = $name_date;
+
+        $this->setWidget($name_date, new csWidgetFormDateInput());
+        $this->setValidator($name_date, new mtValidatorDateString(array('required' => false)));
+        $this->setDefault($name_date, $course_subject_student_examination->getDate());
+        $this->getWidget($name_date)->setLabel(__('Day'));
+
+
       }
 
 
@@ -343,6 +353,7 @@ class StudentEditHistoryForm extends sfFormPropel
 
           $mark = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_mark'];
           $is_absent = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_is_absent'];
+          $date = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_date'];
 
 
           if ($mark !== $course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
@@ -350,6 +361,7 @@ class StudentEditHistoryForm extends sfFormPropel
             $course_subject_student_examination->setExaminationSubject(ExaminationSubjectPeer::retrieveByCourseSubjectStudentExamination($course_subject_student_examination));
             $course_subject_student_examination->setMark($mark);
             $course_subject_student_examination->setIsAbsent($is_absent);
+            $course_subject_student_examination->setDate($date);
             $course_subject_student_examination->save($con);
 
             SchoolBehaviourFactory::getEvaluatorInstance()->closeCourseSubjectStudentExamination($course_subject_student_examination, $con);
