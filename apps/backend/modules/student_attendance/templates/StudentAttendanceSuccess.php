@@ -47,8 +47,8 @@
           <?php $next_division = $form->getNextDivision() ?>
           <?php $previous_division = $form->getPreviousDivision() ?>
 
-          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $previous_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="previous_division"/>
-          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $next_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="next_division"/>
+          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $previous_division)) ?>" onClick="return confirm('Se guardarán los cambios antes de cambiar de división. ¿Está seguro que quiere abandonar la página?')" name="previous_division"/>
+          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $next_division)) ?>" onClick="return confirm('Se guardarán los cambios antes de cambiar de división. ¿Está seguro que quiere abandonar la página?')" name="next_division"/>
         </div>
       <?php endif?>
 

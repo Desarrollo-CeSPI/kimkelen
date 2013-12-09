@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -23,7 +23,7 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
 {
 
   public static function retrieveByCourseSubjectStudent(CourseSubjectStudent $course_subject_student, $school_year = null)
-  {    
+  {
     $c = new Criteria();
     $c->add(self::CAREER_SUBJECT_ID, $course_subject_student->getCourseSubject()->getCareerSubject()->getId());
     $c->add(self::STUDENT_ID, $course_subject_student->getStudentId());
@@ -78,10 +78,9 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
     $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student_career_school_year->getStudentId());
     $c->addJoin(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID,  CareerSubjectPeer::ID);
     $c->add(CareerSubjectPeer::YEAR,$student_career_school_year->getYear());
-    #$c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYear()->getSchoolYearId());
+    $c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYear()->getSchoolYearId());
 
     return $c;
-
   }
 
   static public function retrieveApprovationDate(StudentApprovedCareerSubject $studentApprovedCareerSubject)
@@ -94,7 +93,7 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
       if(!is_null($period))
       {
         return $period->getEndAt();
-      }  
+      }
     }
 
     $approvationInstance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($studentApprovedCareerSubject);
