@@ -21,6 +21,7 @@
 <tbody class="print_body">
   <?php $i = 0; ?>
   <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
+  <?php if ($course_subject_student->getStudent()->getIsRegistered($course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear())): ?>
     <?php $i++ ?>
     <?php $course_result = $course_subject_student->getCourseResult(); ?>
     <tr>
@@ -35,6 +36,7 @@
           <td>
             <?php echo ($course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber($number)) ? $course_subject_student_examination->getMarkStr() : '-' ?>
           </td>
+
         <?php endforeach ?>
       <?php else: ?>
         <td>-</td>
@@ -43,6 +45,7 @@
       <td><?php echo $course_subject_student->getStudentRepprovedCourseSubjectStrings(); ?></td>
       <td><?php echo ($course_subject_student->getStudentApprovedCareerSubject()) ? $course_subject_student->getFinalMark() : "-" ?></td>
     </tr>
+    <?php endif; ?>
   <?php endforeach ?>
 </tbody>
 <tfoot class="strong_footer">
