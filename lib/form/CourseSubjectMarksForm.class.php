@@ -108,8 +108,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
     return $tmp_sum;
   }
 
-
-
   public function getJavaScripts()
   {
     return array_merge(parent::getJavaScripts(),array('course_subject_student_mark.js'));
@@ -137,7 +135,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       {
         $is_free = $values[$course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber()];
         $value = $values[$course_subject_student->getId().'_'.$course_subject_student_mark->getMarkNumber()];
-        if ( !is_null($value) && !is_null($is_free))
+        if ((!is_null($is_free)))
 	{
           if($is_free)
           {
@@ -148,6 +146,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $course_subject_student_mark->setIsFree($is_free);
           $course_subject_student_mark->save($con);
 	}
+
       }
     }
   }

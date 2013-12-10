@@ -380,6 +380,8 @@ class CourseSubject extends BaseCourseSubject
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
         $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
         $criteria->add(PersonPeer::IS_ACTIVE, true);
+        $criteria->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
         $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
         CourseSubjectStudentPeer::addSelectColumns($criteria);
