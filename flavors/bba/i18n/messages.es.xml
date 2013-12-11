@@ -4281,6 +4281,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Examination %%examination%%</source>
                 <target>Instancia de mesa de examen %%examination%%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Mark should de 0 (zero) if you want the student to be free at this period</source>
+                <target>Coloque como nota 0 (cero) si el alumno quedó libre en este periodo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

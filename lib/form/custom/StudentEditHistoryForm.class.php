@@ -75,6 +75,7 @@ class StudentEditHistoryForm extends sfFormPropel
       $this->setDefault($name, $cssm->getMark());
 
       $this->getWidget($name)->setLabel(__('Mark %number%', array('%number%' => $i)));
+      $this->getWidgetSchema()->setHelp($name, 'Mark should de 0 (zero) if you want the student to be free at this period');
       $i++;
     }
 
@@ -315,6 +316,13 @@ class StudentEditHistoryForm extends sfFormPropel
           if ($cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
+
+            if ($mark == 0){
+              $cssm->setIsFree(true);
+            }
+            else {
+              $cssm->setIsFree(false);
+            }
             $cssm->save($con);
             $any_change = true;
           }
@@ -334,7 +342,7 @@ class StudentEditHistoryForm extends sfFormPropel
           }
 
           //Si ya fue procesado el año lectivo, entonces crea si corresponde la materia aprobada o la mesa de examen
-          if ($this->getObject()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getIsProcessed() ||
+          if ($this->getObject()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getIsProcessed() &&
             $this->getObject()->getCourseSubject()->getCourse()->getIsClosed()
           )
           {
