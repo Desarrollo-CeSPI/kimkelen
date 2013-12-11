@@ -4167,6 +4167,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Student doesn't have any disciplinary sanctions.</source>
                 <target>El alumno no posee sanciones disciplinarias.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Mark should de 0 (zero) if you want the student to be free at this period</source>
+                <target>Coloque como nota 0 (cero) si el alumno quedó libre en este periodo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
