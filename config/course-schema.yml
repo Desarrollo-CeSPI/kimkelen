@@ -264,13 +264,12 @@ classes:
       id:
       created_at:
       course_subject_student_id:
-        description:      Referencia a la cursada_alumno
-        type:             integer
-        foreignTable:     course_subject_student
-        foreignReference: id
-        required:         true
-        onUpdate:         cascade
-        onDelete:         cascade
+        type:              integer
+        foreignTable:      course_subject_student
+        foreignReference:  id
+        required:          true
+        onDelete:          restrict
+        onUpdate:          cascade
       mark_number:
         description:      Posicion de la nota, 1era, 2da, etc
         type:             integer
