@@ -218,7 +218,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
    */
   public function getFinalMark()
   {
-    if (!$this->areAllMarksClosed())
+    if (!$this->areAllMarksClosed() || $this->getIsNotAverageable())
       return '';
 
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);

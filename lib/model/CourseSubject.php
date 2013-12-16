@@ -242,6 +242,7 @@ class CourseSubject extends BaseCourseSubject
     $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNULL);
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getId());
+    $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(StudentPeer::ID,CourseSubjectStudentPeer::STUDENT_ID);
 		$c->addJoin(StudentPeer::PERSON_ID,PersonPeer::ID);
 		$c->add(PersonPeer::IS_ACTIVE,true);
@@ -357,6 +358,7 @@ class CourseSubject extends BaseCourseSubject
         $criteria->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->id);
 
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+        $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
         $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
         $criteria->add(PersonPeer::IS_ACTIVE, true);
         $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);

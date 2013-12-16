@@ -325,7 +325,13 @@ class commissionActions extends autoCommissionActions
     $course = CoursePeer::retrieveByPK($request->getParameter('id'));
 
     return $this->renderPartial('course_students', array('course' => $course));
+  }
 
+  public function executeCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "commission");
+    $this->redirect("course_student_mark/calificateNonNumericalMark?id=" . $this->course->getId());
   }
 
 }

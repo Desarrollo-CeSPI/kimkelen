@@ -133,11 +133,11 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
     {
       foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks($c) as $course_subject_student_mark)
       {
-        $is_free = $values[$course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber()];
-        $value = $values[$course_subject_student->getId().'_'.$course_subject_student_mark->getMarkNumber()];
+        $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
+        $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
         if ((!is_null($is_free)))
-	{
-          if($is_free)
+        {
+          if ($is_free)
           {
             $value = 0;
           }
@@ -145,8 +145,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $course_subject_student_mark->setMark($value);
           $course_subject_student_mark->setIsFree($is_free);
           $course_subject_student_mark->save($con);
-	}
-
+        }
       }
     }
   }

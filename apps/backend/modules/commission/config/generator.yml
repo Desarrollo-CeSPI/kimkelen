@@ -65,6 +65,12 @@ generator:
             credentials:    [edit_division_course_califications]
             condition:      canEditMarks
 
+          calificateNonNumericalMark:
+            label: Calificate non numerical mark
+            action: calificateNonNumericalMark
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
+
           printCalification:
             label:   Print califications
             action:  printCalification

@@ -33,16 +33,34 @@
       <?php # este for imprime las notas ?>
       <?php for ($mark_number = 1; $mark_number <= $course_subject_student->getCourseSubject()->countMarks(); $mark_number++): ?>
 
+         <?php if ($course_subject_student->getIsNotAverageable()): ?>
+
+
+      <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
+
+          <?php else: ?>
+
+
+
         <?php if ($course_subject_student->getCourseSubject()->getCourseType() == CourseType::BIMESTER): ?>
           <?php $configs = $course_subject_student->getCourseSubject()->getCourseSubjectConfigurations(); ?>
           <?php $config = array_shift($configs); ?>
-          <?php if ($config && $config->parentIsFirst()): ?>
+
+
+
+
+
+
+
+            <?php if ($config && $config->parentIsFirst()): ?>
             <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
             <td>--</td>
           <?php else: ?>
             <td>--</td>
             <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
           <?php endif; ?>
+
+
 
         <?php elseif ($course_subject_student->getCourseSubject()->getCourseType() == CourseType::QUATERLY_OF_A_TERM): ?>
           <?php $configs = $course_subject_student->getCourseSubject()->getCourseSubjectConfigurations(); ?>
@@ -56,6 +74,7 @@
           <?php endif; ?>
         <?php else: ?>
           <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+    <?php endif; ?>
     <?php endif; ?>
       <?php endfor; ?>
 

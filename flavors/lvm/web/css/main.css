@@ -1834,3 +1834,8 @@ div.wc-cal-event{
 {
   background-image: url('../images/report.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
+{
+  background-image: url('../images/unchain.png') !important;
+}

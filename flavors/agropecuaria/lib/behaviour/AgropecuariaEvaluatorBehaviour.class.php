@@ -30,6 +30,7 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   const POSTPONED_NOTE = 6;
   const PROMOTION_NOTE = 6;
+  const EXEMPT = 'Ex.';
 
   /*
    * Returns if a student has approved or not the course subject
@@ -284,4 +285,10 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
   }
+
+   public function getExemptString()
+  {
+    return self::EXEMPT;
+  }
+
 }
