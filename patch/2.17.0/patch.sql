@@ -1,0 +1,1 @@
+ALTER TABLE `course_subject_student` ADD `is_not_averageable` TINYINT default 0 COMMENT 'El alumno no será calificado numéricamente en este curso';

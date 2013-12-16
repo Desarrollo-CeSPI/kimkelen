@@ -31,6 +31,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   const EXAMINATION_NOTE = 6;
   const MINIMUN_MARK = 0; //nota minima de un examen
   const MAXIMUN_MARK = 10; //nota maxima de un examen
+  const EXEMPT = 'Eximido';
 
   protected
   $_examination_number = array(
@@ -609,7 +610,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     if ($this->hasApprovedAllCourseSubjects($student_career_school_year))
     {
       $sum = 0;
-      $course_subject_students = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent(
+
+      $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
         $student_career_school_year->getCareerSchoolYear(),
         $student_career_school_year->getStudent());
 
@@ -754,6 +756,11 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
 
     return $class;
+  }
+
+   public function getExemptString()
+  {
+    return self::EXEMPT;
   }
 
 }

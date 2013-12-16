@@ -185,6 +185,10 @@ classes:
         required:         false
         onUpdate:         cascade
         onDelete:         setnull
+      is_not_averageable:
+        description: El alumno no será calificado numéricamente en este curso
+        type: boolean
+        default:  false
       _uniques:
         course_subject_student_unique: [ course_subject_id, student_id ]
       _indexes:

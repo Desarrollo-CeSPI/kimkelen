@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -230,5 +230,12 @@ class division_courseActions extends autoDivision_courseActions
     $this->course = $this->getRoute()->getObject();
     $this->getUser()->setAttribute("referer_module", "division_course");
     $this->redirect("shared_course/attendanceSheetByCourseSubject?id=" . $this->course->getId());
+  }
+
+  public function executeCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "division_course");
+    $this->redirect("course_student_mark/calificateNonNumericalMark?id=" . $this->course->getId());
   }
 }

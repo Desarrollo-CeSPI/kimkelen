@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -53,8 +53,14 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
 
   public function getResultStr()
   {
-    return sprintf("%01.2f", $this->getMark());
-
+    if ($this->getIsNotAverageable())
+    {
+      return "";
+    }
+    else
+    {
+      return sprintf("%01.2f", $this->getMark());
+    }
   }
 
   public function getResultWithMark()
@@ -93,6 +99,11 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
   public function getColor()
   {
     return 'mark_green';
+  }
+
+  public function getIsNotAverageable()
+  {
+    return $this->getCourseSubjectStudent()->getIsNotAverageable();
   }
 
 }

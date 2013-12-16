@@ -20,6 +20,10 @@ move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
 
+save_calificate_non_numerical_mark:
+  url:  course_student_mark/saveCalificateNonNumericalMark
+  param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
+
 rating_report:
   url:  rating_report
   param:  { module: rating_report, action: index }

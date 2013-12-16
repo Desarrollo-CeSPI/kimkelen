@@ -33,6 +33,7 @@ class PellegriniEvaluatorBehaviour extends BaseEvaluatorBehaviour
   const LAST_INTEGRATOR_MARK = 4; //nota del examen integrador
   const MIN_NOTE = 3;
   const MEDIUM_NOTE = 6;
+  const EXEMPT = 'Ex.';
 
   protected
   $_examination_number = array(
@@ -200,4 +201,10 @@ class PellegriniEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
   }
+
+  public function getExemptString()
+  {
+    return self::EXEMPT;
+  }
+
 }
