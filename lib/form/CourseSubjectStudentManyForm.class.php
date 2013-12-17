@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -66,6 +66,10 @@ class CourseSubjectStudentManyForm extends sfFormPropel
     $this->setWidget('course_subject_student_list', new csWidgetFormStudentMany(array('criteria'=> $available_criteria)));
 
     $this->setValidator('course_subject_student_list', new sfValidatorPass());
+
+    $this->mergePostValidator(new sfValidatorCallback(array(
+          'callback' => array($this, 'postValidateAvailableStudents')
+        )));
 
     $this->widgetSchema->setNameFormat('course_subject[%s]');
   }
@@ -188,4 +192,29 @@ class CourseSubjectStudentManyForm extends sfFormPropel
     }
   }
 
+  /*
+   * Validates if chosen students are not already inscripted in a course for this subject
+   */
+  public function postValidateAvailableStudents(sfValidatorBase $validator, $values)
+  {
+    $duplicated_students = array();
+    $student_ids = $values['course_subject_student_list'];
+    $course_subject_id = $values['id'];
+
+    foreach ($student_ids as $student_id)
+    {
+      if (CourseSubjectStudentPeer::countStudentInscriptionsForCareerSubjectSchoolYear($course_subject_id, $student_id) != 0)
+      {
+        $duplicated_students[] = StudentPeer::retrieveByPk($student_id);
+      }
+    }
+
+    if ($duplicated_students)
+    {
+      $error = new sfValidatorError($validator, 'Los siguientes estudiantes seleccionados ya se encuentran inscriptos en otro curso para esta misma materia: ' . implode(',', $duplicated_students));
+        throw new sfValidatorErrorSchema($validator, array('course_subject_student_list' => $error));
+    }
+
+    return $values;
+  }
 }
