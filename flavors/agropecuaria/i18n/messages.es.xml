@@ -4322,6 +4322,22 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Choose student to calificate without numerical mark from %course%</source>
                 <target>Elija los estudiantes a eximir del curso %course%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Holidays of school year</source>
+                <target>Feriados del año lectivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Holidays</source>
+                <target>Días feriados</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Edit Holiday</source>
+                <target>Editar día feriado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New Holiday</source>
+                <target>Nuevo día feriado</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
