@@ -33,6 +33,10 @@ root:
             title:       Turnos
             url:         @shift
             credentials: [show_shift]
+          feriados:
+            title:       Días feriados
+            url:         @holiday
+            credentials: [show_holiday]
           orientations:
             title:       Orientation
             url:         @orientation
@@ -248,7 +252,7 @@ root:
     credentials: []
     menu:
       glpi:
-        title: Ayuda y Soporte 
+        title: Ayuda y Soporte
         url: '<?php echo sfConfig::get('app_helpdesk_url','https://github.com/Desarrollo-CeSPI/kimkelen'); ?>'
         target: _blank
         icon: external

@@ -1,3 +1,12 @@
+holiday:
+  class: sfPropelRouteCollection
+  options:
+    model:                Holiday
+    module:               holiday
+    prefix_path:          holiday
+    column:               id
+    with_wildcard_routes: true
+
 student_disciplinary_sanction:
   class: sfPropelRouteCollection
   options:
