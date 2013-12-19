@@ -472,6 +472,8 @@ classes:
         default: false
       _indexes:
         examination_career_subject_school_year: [career_subject_school_year_id, examination_id]
+      _uniques:
+        examination_subject_unique: [ examination_id, career_subject_school_year_id ]
 
   ExaminationSubjectTeacher:
     tablename: examination_subject_teacher

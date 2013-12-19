@@ -23,3 +23,6 @@ INSERT INTO  `alumnos`.`sf_guard_permission` (
 VALUES (
 NULL ,  'show_holiday',  'Crear, editar y eliminar días feriados'
 );
+
+
+--ALTER TABLE `examination_subject` ADD UNIQUE INDEX `examination_subject_unique` (`examination_id`, `career_subject_school_year_id`), DROP INDEX examination_subject_FI_1;

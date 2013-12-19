@@ -737,15 +737,3 @@ classes:
         required: false
       _indexes:
         career_school_year_course_type: [course_type, career_school_year_id]
-
-  Holiday:
-    tableName: holiday
-    description:          Cada tupla representa un día feriado
-    columns:
-      id:
-      day:
-        required: true
-        type: date
-      description:
-        required: false
-        type: varchar(50)
