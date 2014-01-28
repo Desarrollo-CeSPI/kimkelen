@@ -235,6 +235,7 @@ Dentro de la carpeta `templates/` podemos redefinir (crear) el partial `_header.
 Nota: Será necesario limpiar la caché del proyecto para que los cambios tomen efecto y las nuevas clases y archivos sean reconocidas, y por supuesto también recordar "emular" el *flavor* que se quiere utilizar corriendo el *task* correspondiente, así:
 
 `php symfony cc`
+
 `php symfony kimkelen:flavor ejemplo`
 
 ## Subdirectorio `templates/`
