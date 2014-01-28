@@ -155,26 +155,25 @@ Luego, podría interesarnos por ejemplo redefinir el método que chequea las con
 
 ```php
 
-    class EjemploEvaluatorBehaviour extends BaseEvaluatorBehaviour
-    {
+class EjemploEvaluatorBehaviour extends BaseEvaluatorBehaviour
+{
 
-     public function checkRepetitionCondition($student, $student_career_school_year)
-     {
-      //Si el estudiante está en el último año de la carrera, retorna falso.
-      if ($student_career_school_year->isLastYear())
-      {
-        return false;
-      }
+  public function checkRepetitionCondition($student, $student_career_school_year)
+  {
+  //Si el estudiante está en el último año de la carrera, retorna falso.
+  if ($student_career_school_year->isLastYear()) {
+    return false;
+  }
 
-      $career_school_year = $student_career_school_year->getCareerSchoolYear();
+  $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
-      //Si el alumno adeuda más previas de las permitidas por la institución, debe repetir.
-      $prev =    StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, 
-      $student_career_school_year->getCareerSchoolYear()->getCareer());
+  //Si el alumno adeuda más previas de las permitidas por la institución, debe repetir.
+  $prev =    StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, 
+  $student_career_school_year->getCareerSchoolYear()->getCareer());
 
-      return ($prev > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
-      }
-    }
+  return ($prev > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
+  }
+}
 ```
 
 Nota: La cantidad de materias previas/asignaturas pendientes `$prev` utilizado en este ejemplo es modificable desde la interfaz del sistema.
@@ -183,37 +182,39 @@ Ahora supongamos que una de las reglas de la institución dice que un alumno que
 
 ```php
 
-    public function checkRepetitionCondition($student, $student_career_school_year)
-    {
-      //Si el estudiante está en el último o primer año de la carrera, retorna falso
-      if ($student_career_school_year->isLastYear() || $student_career_school_year->isFirstYear())
-      {
-        return false;
-      }
-      ...
-    }
+public function checkRepetitionCondition($student, $student_career_school_year)
+{
+//Si el estudiante está en el último o primer año de la carrera, retorna falso
+if ($student_career_school_year->isLastYear() || $student_career_school_year->isFirstYear())
+{
+  return false;
+}
+...
+}
 ```
 
 y como está claro, deberíamos implementar la función `isFirstYear()` dentro de la clase `lib/model/StudentCareerSchoolYear.php`. Esta función podría definir algo como lo siguiente:
 
-    public function isFirstYear()
-    {
-      return $this->getYear() == $this->getCareerSchoolYear()->getCareer()->getMinYear();
-    }
+```php
+public function isFirstYear()
+{
+  return $this->getYear() == $this->getCareerSchoolYear()->getCareer()->getMinYear();
+}
+```
 
 y si seguimos esto con más profundidad, el método getMinYear() en lib/model/Career.php está definido como:
 
 ```php
 
-    /**
-     * Returns the number that represents the first year for this career
-     * @return int
-     */
+/**
+* Returns the number that represents the first year for this career
+* @return int
+*/
 
-    public function getMinYear()
-    {
-      return SchoolBehaviourFactory::getInstance()->getMinimumCareerYear();
-    }
+public function getMinYear()
+{
+  return SchoolBehaviourFactory::getInstance()->getMinimumCareerYear();
+}
 ```
 
 La sentencia establecida en el *return* significa que el flujo irá a la clase SchoolBehaviour correspondiente al *flavor* emulado actualmente y que busque allí un método llamado `getMinimumCareerYear()`. De no encontrar dicho método, en este caso, en nuestra clase `EjemploSchoolBehaviour.class.php`, la buscará en la clase `BaseSchoolBehaviour.class.php`. Si queremos redefinir este método en nuestra clase `EjemploSchoolBehaviour.class.php` podemos hacerlo por supuesto, de la misma forma que redefinimos el método anterior.
