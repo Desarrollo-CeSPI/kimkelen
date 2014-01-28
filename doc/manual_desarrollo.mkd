@@ -135,17 +135,20 @@ Para más información sobre internacionalización, consultar la [documentación
 Dentro del directorio lib/ encontramos el corazón del *flavor*. Luego de haber creado un nuevo flavor nos encontraremos con la estructura de directorios descrita en el apartado anterior. 
 Nótese que las clases `EjemploSchoolBehaviour.class.php` y `EjemploEvaluatorBehaviour.class.php` heredarán de `BaseSchoolBehaviour` y `BaseEvaluatorBehaviour` respectivamente (concepto de [herencia de clases](http://php.net/manual/es/language.oop5.inheritance.php)). Se verán de la siguiente forma:
 
-```
+```php
 
-    class EjemploSchoolBehaviour extends BaseSchoolBehaviour
-    {
-    }
+class EjemploSchoolBehaviour extends BaseSchoolBehaviour
+{
+}
+
+```
 
 y 
 
-    class EjemploEvaluatorBehaviour extends BaseEvaluatorBehaviour
-    {
-    }
+```php
+class EjemploEvaluatorBehaviour extends BaseEvaluatorBehaviour
+{
+}
 ```
 
 Luego, podría interesarnos por ejemplo redefinir el método que chequea las condiciones de repetición de un alumno, y que retorna *true* si debe repetir o *false* en caso contrario. Para lograr esto, crearemos dentro de la clase `EjemploEvaluatorBehaviour.class.php` el método:
