@@ -1070,7 +1070,6 @@ class Student extends BaseStudent
     $c = new Criteria();
     $c->add(CareerStudentPeer::STUDENT_ID, $this->getId());
     $c->addJoin(CareerPeer::ID, CareerStudentPeer::CAREER_ID);
-    $c->addDescendingOrderByColumn(CareerPeer::CREATED_AT);
 
     return CareerStudentPeer::doSelectOne($c);
   }
