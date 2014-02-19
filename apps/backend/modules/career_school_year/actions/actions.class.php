@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -265,5 +265,42 @@ class career_school_yearActions extends autoCareer_school_yearActions
     $this->getUser()->setFlash('notice', "Se crearon las divisiones y se anotaron a los alumnos en sus respectivas.");
     $this->redirect('@career_school_year');
   }
+
+  public function executeMatriculateGraduatedFromOtherCareer(sfWebRequest $request)
+  {
+    $this->career_school_year = $this->getRoute()->getObject();
+    $this->form = new MatriculateGraduatedStudentsForm();
+  }
+
+  public function executeSaveMatriculateGraduatedFromOtherCareer(sfWebRequest $request)
+  {
+    if ($request->isMethod('POST'))
+    {
+      $destiny_career_id = $request->getParameter('id');
+      if (is_null($destiny_career_id))
+      {
+        $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+
+        $this->redirect('@career_school_year');
+      }
+
+      $this->form = new MatriculateGraduatedStudentsForm();
+      $this->form->setOption('destiny_career_id', $destiny_career_id);
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+        $this->getUser()->setFlash('notice', 'Los egresados fueron matriculados en la carrera exitosamente.');
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+      }
+    }
+
+    $this->redirect('@career_school_year');
+  }
+
 
 }

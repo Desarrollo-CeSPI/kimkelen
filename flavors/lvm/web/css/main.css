@@ -1839,3 +1839,8 @@ div.wc-cal-event{
 {
   background-image: url('../images/unchain.png') !important;
 }
+
+.sf_admin_action_create_last_year_divisions a
+{
+  background-image: url('../images/create-division.png') !important;
+}

@@ -595,6 +595,30 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     return $this->getCareerSchoolYearPeriods($c);
   }
+
+  public function canMatriculateGraduatedFromOtherCareer()
+  {
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
+
+    return $last_school_year && $last_school_year->getIsClosed() && CareerPeer::moreThanOneCareer();
+  }
+
+  public function getMessageCantMatriculateGraduatedFromOtherCareer()
+  {
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
+
+     if ($last_school_year && !$last_school_year->getIsClosed())
+    {
+      return 'Last year school year is still open';
+    }
+    elseif (!($last_school_year)){
+      return 'No previous school year';
+    }
+    else {
+      return 'School has only one career';
+    }
+  }
+
 }
 
 
