@@ -45,6 +45,9 @@ generator:
             label: Print students
             action: printStudents
             credentials: [edit_examination]
+          _delete:
+            condition: canDelete
+            credentials: [edit_examination]
         actions:
           back:
             action: back

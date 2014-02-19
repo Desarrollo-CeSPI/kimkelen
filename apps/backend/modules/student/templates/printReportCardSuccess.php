@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -22,6 +22,7 @@
   <thead>
     <tr>
       <td><?php echo __('School year') ?></td>
+      <td><?php echo __('Career') ?></td>
       <td><?php echo __('Year') ?></td>
       <td><?php echo __('Status') ?></td>
       <td><?php echo __('Report card') ?></td>
@@ -30,6 +31,7 @@
   <?php foreach ($student_career_school_years as $student_career_school_year): ?>
     <tr>
       <td><?php echo $student_career_school_year->getCareerSchoolYear()->getSchoolYear() ?></td>
+      <td><?php echo $student_career_school_year->getCareerSchoolYear()->getCareer() ?></td>
       <td><?php echo $student_career_school_year->getYear() ?></td>
       <td><?php echo __($student_career_school_year->getStatusString()) ?></td>
       <?php if (count($student->getCurrentDivisions($student_career_school_year->getCareerSchoolYear()->getId())) != 0) : ?>
