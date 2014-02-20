@@ -4283,12 +4283,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Motivo</target>
             </trans-unit>
             <trans-unit>
-                <source>Matriculate graduated students from other career to career %career_school_year%</source>
-                <target>Matricular estudiantes graduados de otra carrera en %career_school_year%</target>
+                <source>Matriculate students from other career to career %career_school_year%</source>
+                <target>Matricular graduados de otra carrera en %career_school_year%</target>
             </trans-unit>
             <trans-unit>
-                <source>Matriculate graduated students from other career</source>
-                <target>Matricular alumnos egresados de otra carrera del año lectivo anterior</target>
+                <source>Matriculate graduated from other career</source>
+                <target>Matricular egresados de otra carrera</target>
             </trans-unit>
             <trans-unit>
                 <source>Student disciplinary sanction report</source>

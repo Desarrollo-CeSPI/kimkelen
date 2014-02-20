@@ -32,8 +32,6 @@ class CareerPeer extends BaseCareerPeer
 
   static public function moreThanOneCareer()
   {
-    $c = new Criteria();
-
-    return self::doCount($c) > 1;
+    return self::doCount(new Criteria()) > 1;
   }
 }

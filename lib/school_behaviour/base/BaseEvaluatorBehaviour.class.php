@@ -241,6 +241,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         if ($next_year > $career_student->getCareer()->getMaxYear() && $previous == 0)
         {
           $career_student->setStatus(CareerStudentStatus::GRADUATE);
+          //se guarda el school_year en que termino esta carrera
+          $career_student->setGraduationSchoolYearId($school_year->getId());
           $career_student->save($con);
         }
         //Si no fue aprobado ya.

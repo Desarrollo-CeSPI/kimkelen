@@ -57,6 +57,12 @@ generator:
             credentials:    [edit_school_year]
             condition:      canCreateLastYearDivisions
 
+          matriculate_graduated_from_other_career:
+            action:         matriculateGraduatedFromOtherCareer
+            label:          Matriculate graduated from other career
+            credentials:    [edit_school_year]
+            condition:      canMatriculateGraduatedFromOtherCareer
+
           subjects:
             action:         careerCareerSubjectSchoolYear
             label:          Materias

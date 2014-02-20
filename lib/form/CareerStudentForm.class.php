@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -34,13 +34,13 @@ class CareerStudentForm extends BaseCareerStudentForm
     $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
-    
-    unset( $this['created_at'], $this['status'],$this['file_number']);
+
+    unset( $this['created_at'], $this['status'],$this['file_number'], $this['graduation_school_year']);
     //career choice widget
     $this->getWidget('career_id')->setOption('criteria',SchoolBehaviourFactory::getInstance()->getAvailableCareerForStudentCriteria($this->getObject()->getStudent()));
 
     $this->setWidget('student_id', new sfWidgetFormInputHidden());
-    
+
     $w = new sfWidgetFormChoice(array("choices" => array()));
     $this->setWidget("start_year", new dcWidgetAjaxDependence(array(
       "dependant_widget"            => $w,
@@ -55,17 +55,17 @@ class CareerStudentForm extends BaseCareerStudentForm
       "message_with_no_value"       => "Seleccione una carrera y apareceran las orientaciones correspondientes",
       "get_observed_value_callback" => array(get_class($this), "getOrientations")
     )));
-    
+
     $this->setWidget("sub_orientation_id", new dcWidgetAjaxDependence(array(
       "dependant_widget"            => $w,
       "observe_widget_id"           => "career_student_orientation_id",
       "message_with_no_value"       => "Seleccione una orientación y apareceran las sub orientaciones correspondientes",
       "get_observed_value_callback" => array(get_class($this), "getSubOrientations")
     )));
-    
+
     $this->validatorSchema["start_year"] = new sfValidatorInteger();
   }
-  
+
   /**
    * Don't call parent::doSave($con) we have to use Propelconnection to safely get nextFileNumber
    * @param <type> $con
@@ -77,26 +77,26 @@ class CareerStudentForm extends BaseCareerStudentForm
       $con = $this->getConnection();
     }
     $this->updateObject();
-    
+
     $start_year = $this->getValue("start_year");
-           
-    
+
+
     SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($this->getObject(),$con);
     $this->object->save($con);
-    
+
     SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($this->object, $start_year , $con);
-    
+
     // embedded forms
     $this->saveEmbeddedForms($con);
   }
-  
+
   public static function getYears($widget, $value)
   {
     $career = CareerPeer::retrieveByPk($value);
     $choices = $career->getYearsForOption(true);
     $widget->setOption("choices", $choices);
   }
-  
+
   public static function getOrientations($widget, $value)
   {
     $career = CareerPeer::retrieveByPk($value);
@@ -108,7 +108,7 @@ class CareerStudentForm extends BaseCareerStudentForm
 
     $widget->setOption("choices", $orientations);
   }
-  
+
   public static function getSubOrientations($widget, $value)
   {
     $orientation = OrientationPeer::retrieveByPk($value);
