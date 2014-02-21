@@ -4186,6 +4186,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>New Holiday</source>
                 <target>Nuevo día feriado</target>
             </trans-unit>
+            <trans-unit>
+                <source>Create the same last year commissions</source>
+                <target>Crear las mismas comisiones del año anterior</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
