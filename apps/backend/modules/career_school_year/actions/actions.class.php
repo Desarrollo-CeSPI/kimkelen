@@ -266,6 +266,15 @@ class career_school_yearActions extends autoCareer_school_yearActions
     $this->redirect('@career_school_year');
   }
 
+  public function executeCreateLastYearCommissions(sfWebRequest $request)
+  {
+    ini_set('max_execution_time', 0);
+    $this->career_school_year = $this->getRoute()->getObject();
+    $this->career_school_year->createLastYearCommissions();
+    $this->getUser()->setFlash('notice', "Se crearon las comisiones y se anotaron a los alumnos en sus respectivas.");
+    $this->redirect('@career_school_year');
+  }
+
   public function executeMatriculateGraduatedFromOtherCareer(sfWebRequest $request)
   {
     $this->career_school_year = $this->getRoute()->getObject();
