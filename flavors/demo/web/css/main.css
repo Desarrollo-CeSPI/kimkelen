@@ -1923,3 +1923,8 @@ div.wc-cal-event{
 {
   background-image: url('../images/create-division.png') !important;
 }
+
+.sf_admin_action_add_subject a
+{
+  background-image: url('../images/plus.png') !important;
+}

@@ -157,6 +157,7 @@ class Student extends BaseStudent
     $career_student->setStudentId($this->getId());
     $career_student->setStartYear($start_year);
     SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($career_student, $con);
+
     $career_student->save($con);
 
     SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($career_student, $start_year, $con);
@@ -1065,11 +1066,20 @@ class Student extends BaseStudent
     return CareerStudentPeer::doSelectOne($c);
   }
 
+  public function getCareerStudents($criteria = null, PropelPDO $con = null)
+  {
+    $c = new Criteria();
+    $c->addDescendingOrderByColumn(CareerStudentPeer::CREATED_AT);
+
+    return parent::getCareerStudents($c);
+  }
+
   public function getLastCareerStudent()
   {
     $c = new Criteria();
     $c->add(CareerStudentPeer::STUDENT_ID, $this->getId());
     $c->addJoin(CareerPeer::ID, CareerStudentPeer::CAREER_ID);
+    $c->addDescendingOrderByColumn(CareerStudentPeer::CREATED_AT);
 
     return CareerStudentPeer::doSelectOne($c);
   }

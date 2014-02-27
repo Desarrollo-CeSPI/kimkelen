@@ -725,8 +725,7 @@ class Course extends BaseCourse
 
   public function canBackPeriodCommission(PropelPDO $con = null)
   {
-
-    if ($this->getCareerSchoolYear()->getIsProcessed())
+    if ($this->getCareerSchoolYear() && $this->getCareerSchoolYear()->getIsProcessed())
       return false;
 
     return $this->getCurrentPeriod() != 1 && $this->isCurrentSchoolYear();

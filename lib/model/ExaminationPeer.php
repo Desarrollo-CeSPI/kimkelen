@@ -37,4 +37,13 @@ class ExaminationPeer extends BaseExaminationPeer
 
     return $obj->getExaminationNumber() + 1;
   }
+
+  static public function retrieveForSchoolYearAndExaminationNumber($school_year, $examination_number)
+  {
+    $c = new Criteria();
+    $c->add(ExaminationPeer::EXAMINATION_NUMBER, $examination_number);
+    $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
+
+    return self::doSelect($c);
+  }
 }

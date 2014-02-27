@@ -765,4 +765,9 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return self::EXEMPT;
   }
 
+   public function getFebruaryExaminationNumber()
+  {
+    return self::FEBRUARY;
+  }
+
 }

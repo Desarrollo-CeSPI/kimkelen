@@ -4342,6 +4342,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create the same last year commissions</source>
                 <target>Crear las mismas comisiones del año anterior</target>
             </trans-unit>
+            <trans-unit>
+                <source>Add subject</source>
+                <target>Agregar materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New subject for commission</source>
+                <target>Nueva materia para la comisión</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New subject added to commission successfully</source>
+                <target>Se agregó la materia a la comisión exitosamente.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

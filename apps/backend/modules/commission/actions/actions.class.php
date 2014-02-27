@@ -334,4 +334,27 @@ class commissionActions extends autoCommissionActions
     $this->redirect("course_student_mark/calificateNonNumericalMark?id=" . $this->course->getId());
   }
 
+  public function executeAddSubject(sfWebRequest $request)
+  {
+    if ($request->isMethod('post'))
+    {
+      $params = $request->getPostParameters();
+      $this->course = CoursePeer::retrieveByPk($params['course']['id']);
+      $this->form = new SubjectForCommissionForm($this->course);
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "New subject added to commission successfully");
+
+        $this->redirect("@commission");
+      }
+    }
+    else
+    {
+      $this->course = $this->getRoute()->getObject();
+      $this->form = new SubjectForCommissionForm($this->course);
+    }
+  }
 }
