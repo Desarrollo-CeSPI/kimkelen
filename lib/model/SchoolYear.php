@@ -379,7 +379,7 @@ class SchoolYear extends BaseSchoolYear
 
   public function areAllExaminationsClosed()
   {
-    if ($this->getMaxCourseExaminationCount() != $this->countExaminations())
+    if (count(ExaminationPeer::retrieveForSchoolYearAndExaminationNumber($this, SchoolBehaviourFactory::getEvaluatorInstance()->getFebruaryExaminationNumber())) == 0)
     {
       return false;
     }

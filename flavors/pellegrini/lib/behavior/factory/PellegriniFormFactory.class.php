@@ -29,17 +29,6 @@ class PellegriniFormFactory extends BaseFormFactory
     return 'PellegriniTutorForm';
   }
 
-  /**
-   * Returns form used by commission/new action
-   *
-   * @see commissionGeneratorConfiguration::getForm
-   * @return string represents a Form PHPClass
-   */
-  public function getCommissionForm()
-  {
-    return 'PellegriniCommissionForm';
-  }
-
    public function getStudentForm()
   {
     return 'PellegriniStudentForm';

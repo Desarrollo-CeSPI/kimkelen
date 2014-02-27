@@ -1,3 +1,7 @@
+add:
+  url: /add
+  param: { module: commission, action: add }
+
 holiday:
   class: sfPropelRouteCollection
   options:
@@ -270,7 +274,7 @@ commission:
   options:
     model:                Course
     module:               commission
-    prefix_path:          comisiones
+    prefix_path:          commission
     column:               id
     with_wildcard_routes: true
 

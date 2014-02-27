@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -31,13 +31,13 @@
 
 
 <?php if ($course->countSubjects()): ?>
-  <span class="attribute"><?php echo __('Materia') ?>:&nbsp;
-    <span style="font-size: 1.2em;">
+  <div class="attribute"><?php echo __('Materia/s') ?>:&nbsp;
+    <div style="font-size: 1.2em;">
       <?php foreach ($course->getCourseSubjects() as $subject): ?>
         <?php echo $subject->getCareerSubjectSchoolYear() ?>
       <?php endforeach ?>
-    </span>
-  </span>
+    </div>
+  </div>
 <?php endif ?>
 
 <div id="course_teachers_text<?php echo $course->getId() ?>">
