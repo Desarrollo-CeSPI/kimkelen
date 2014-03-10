@@ -592,7 +592,8 @@ class Division extends BaseDivision
     $this->copyPreceptorsToDivision($con, $copy_division);
     $this->copyCoursesToDivision($con, $copy_division, $career_school_year);
 
-    if ($this->getYear() < $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
+
+    if ($this->getYear() <= $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
     {
       $copy_division->createStudentsForNextYear($con, $this->getCareerSchoolYear());
     }
