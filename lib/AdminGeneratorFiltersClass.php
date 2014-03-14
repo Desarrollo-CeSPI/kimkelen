@@ -374,13 +374,6 @@ class AdminGeneratorFiltersClass
       $career_school_year_id = sfContext::getInstance()->getUser()->getReferenceFor("career_school_year");
       $criteria->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
     }
-    else if ($event->getSubject() instanceOf sfGuardUserActions)
-    {
-      /*
-        $criteria->add(sfGuardUserGroupPeer::GROUP_ID,  sfGuardGroupPeer::personalizedGroups(), Criteria::NOT_IN);
-        $criteria->addJoin(sfGuardUserPeer::ID, sfGuardUserGroupPeer::USER_ID);
-       */
-    }
     else if ($event->getSubject() instanceOf student_freeActions)
     {
       $student_id = sfContext::getInstance()->getUser()->getReferenceFor("student");
@@ -397,6 +390,12 @@ class AdminGeneratorFiltersClass
       $examination_subject_id = sfContext::getInstance()->getUser()->getReferenceFor("examination_subject");
 
       $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $examination_subject_id);
+    }
+    else if ($event->getSubject() instanceOf student_examination_repproved_subjectActions)
+    {
+      $examination_repproved_subject_id = sfContext::getInstance()->getUser()->getReferenceFor("examination_repproved_subject");
+
+      $criteria->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $examination_repproved_subject_id);
     }
 
     return $criteria;

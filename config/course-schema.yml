@@ -268,7 +268,7 @@ classes:
         foreignTable:      course_subject_student
         foreignReference:  id
         required:          true
-        onDelete:          restrict
+        onDelete:          cascade
         onUpdate:          cascade
       mark_number:
         description:      Posicion de la nota, 1era, 2da, etc
@@ -546,6 +546,8 @@ classes:
         course_subject_student_subject_examination_number: [course_subject_student_id, examination_subject_id, examination_number]
         course_subject_student_examination_number: [course_subject_student_id, examination_number]
         course_subject_student_id: [course_subject_student_id, examination_subject_id]
+      _uniques:
+        csse_unique: [ course_subject_student_id, examination_subject_id, examination_number ]
 
   StudentRepprovedCourseSubject:
     tableName:            student_repproved_course_subject

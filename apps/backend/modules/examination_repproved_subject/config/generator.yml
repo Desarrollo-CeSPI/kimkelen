@@ -23,10 +23,14 @@ generator:
           _edit:
             credentials: [edit_examination_repproved_subject]
 
+          manage_students:
+            action: manageStudents
+            condition: canEditStudents
+            credentials: [edit_examination_subject_califications]
+
           students:
             action: students
-            credentials: [edit_examination_repproved_subject]
-            condition: canEditStudents
+            credentials: [edit_examination_subject_califications]
 
           califications:
             action: califications
@@ -41,7 +45,7 @@ generator:
           print_students:
             label: Print students
             action: printStudents
-            
+
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]

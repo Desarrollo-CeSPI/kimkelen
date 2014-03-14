@@ -35,7 +35,7 @@ class CareerStudentForm extends BaseCareerStudentForm
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
 
-    unset( $this['created_at'], $this['status'],$this['file_number'], $this['graduation_school_year']);
+    unset( $this['created_at'], $this['status'],$this['file_number'], $this['graduation_school_year_id']);
     //career choice widget
     $this->getWidget('career_id')->setOption('criteria',SchoolBehaviourFactory::getInstance()->getAvailableCareerForStudentCriteria($this->getObject()->getStudent()));
 
