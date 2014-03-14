@@ -59,7 +59,7 @@ generator:
         title:             Listado de docentes
         peer_method:       doSelectJoinAll
         peer_method:       doSelectJoinAll
-        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_is_in_license ,person_sf_guard_user, _subjects, telefon, email ]
+        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_is_in_license ,person_sf_guard_user, _subjects, phone, email ]
         sort: [ person_lastname ]
         batch_actions:     []
         actions:

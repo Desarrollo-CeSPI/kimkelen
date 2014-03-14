@@ -3018,7 +3018,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Log in with another role</source>
-                <target>Ingresar con otro rol</target>
+                <target>Roles disponibles</target>
             </trans-unit>
             <trans-unit>
                 <source>Actual role</source>
@@ -4214,6 +4214,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>New subject added to commission successfully</source>
                 <target>Se agregó la materia a la comisión exitosamente.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>User has some references you sholud delete first</source>
+                <target>El usuario posee referencias que debe eliminar primero. Por ejemplo: cursos asociados.</target>
             </trans-unit>
         </body>
     </file>

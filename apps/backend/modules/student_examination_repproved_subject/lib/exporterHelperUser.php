@@ -17,6 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<h2>Año lectivo: <?php echo $pager->getParameter('school_year')?></h2>
-<h4>Utilice este tipo de mesas de examen para manejar aquéllas instancias que ocurran durante el año lectivo y no luego del Cierre anual de cursadas.</h4>
-<h5>Por ejemplo, instancias de mesas de Examen Regulares en Agosto/Septiembre.</h5>
+<?php
+
+/**
+ * course_subject_student_examination exporter helper user.
+ *
+ * @package    sistema de alumnos
+ * @subpackage course_subject_student_examination
+ * @author     Your name here
+ * @version    SVN: $Id: exporterHelperUser.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class student_examination_repproved_subjectExporterHelperUser extends BaseStudent_examination_repproved_subjectExporterHelperUser
+{
+}

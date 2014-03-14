@@ -61,7 +61,11 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function countValidCourseSubjectStudentMarks()
   {
     $c = new Criteria();
-    $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNOTNULL);
+    $criterion = $c->getNewCriterion(CourseSubjectStudentMarkPeer::IS_FREE, true, Criteria::EQUAL);
+    $criterion->addOr($c->getNewCriterion(CourseSubjectStudentMarkPeer::IS_CLOSED, true, Criteria::EQUAL));
+    $criterion->addOr($c->getNewCriterion(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNOTNULL));
+
+    $c->addOr($criterion);
     return $this->countCourseSubjectStudentMarks($c);
 
   }

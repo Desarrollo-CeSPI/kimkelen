@@ -1124,13 +1124,13 @@ table.list
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: #F29A79 !important;
+    background-color: yellow !important;
 }
 .box_free
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: yellow !important;
+    background-color: #F29A79 !important;
 }
 
 .box_justificated
@@ -1848,4 +1848,8 @@ div.wc-cal-event{
 .sf_admin_action_add_subject a
 {
   background-image: url('../images/plus.png') !important;
+}
+
+#change-role {
+  color: #FFF !important;
 }

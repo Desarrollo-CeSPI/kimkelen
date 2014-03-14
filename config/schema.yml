@@ -629,7 +629,7 @@ classes:
         foreignReference: id
         required:         false
         default:          null
-        onDelete:         restrict
+        onDelete:         setnull
       school_year_id:
         type: integer
         foreignTable: school_year

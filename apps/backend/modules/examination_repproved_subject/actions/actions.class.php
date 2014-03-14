@@ -157,6 +157,13 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
 
   public function executeStudents(sfWebRequest $request)
   {
+    $this->getUser()->setReferenceFor($this);
+    $this->redirect('@student_examination_repproved_subject');
+
+  }
+
+  public function executeManageStudents(sfWebRequest $request)
+  {
 
     $this->examination_repproved_subject = $this->getRoute()->getObject();
 
