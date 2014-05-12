@@ -4333,6 +4333,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>User has some references you sholud delete first</source>
                 <target>El usuario posee referencias que debe eliminar primero. Por ejemplo: cursos asociados.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Global file number</source>
+                <target>Legajo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

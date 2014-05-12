@@ -55,7 +55,7 @@ generator:
 
           manual_examinations:
             action: manualExaminations
-            label: Mesas de examen manuales (año lectivo aún abierto)
+            label: Mesas de examen manuales (para cursadas aún abiertas)
             credentials: [show_examination]
             condition: canManualExamination
 

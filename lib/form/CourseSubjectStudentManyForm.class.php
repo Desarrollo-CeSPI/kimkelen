@@ -122,10 +122,10 @@ class CourseSubjectStudentManyForm extends sfFormPropel
 
     foreach ($this->getObject()->getCourseSubjectStudents() as $course_subject_student)
     {
-      //if student has marks, it can't be deleted from course
+      //if student has marks or attendances/absences, it can't be deleted from course
       if (!in_array($course_subject_student->getStudentId(), $this->values))
       {
-        if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentMarks() == 0)
+        if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentMarks() == 0 && $this->countAttendances($course_subject_student) == 0)
         {
           $course_subject_student->delete($con);
         }
@@ -216,5 +216,10 @@ class CourseSubjectStudentManyForm extends sfFormPropel
     }
 
     return $values;
+  }
+
+  private function countAttendances($course_subject_student)
+  {
+    return StudentAttendancePeer::doCountByCourseSubjectAndStudent($course_subject_student->getCourseSubject(), $course_subject_student->getStudent());
   }
 }

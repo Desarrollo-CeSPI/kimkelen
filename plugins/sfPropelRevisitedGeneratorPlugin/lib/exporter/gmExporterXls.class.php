@@ -62,7 +62,7 @@ class gmExporterXls extends gmExporter
 
   public function build()
   {
-    ini_set("max_execution_time",0); 
+    ini_set("max_execution_time",0);
 
     $this->buildTitle();
     $this->buildHeaders($this->getHeaders());
@@ -102,8 +102,8 @@ class gmExporterXls extends gmExporter
 
   public function saveFile($whereTo)
   {
-    ini_set("max_execution_time",0); 
-    $this->excelWriter = new PHPExcel_Writer_Excel5($this->getExcelObject());
+    ini_set("max_execution_time",0);
+    $this->excelWriter = new PHPExcel_Writer_Excel2007($this->getExcelObject());
     $this->excelWriter->save($whereTo);
   }
 

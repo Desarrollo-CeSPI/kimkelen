@@ -542,6 +542,10 @@ classes:
         description:  Fecha en que el alumno rinde la materia
         type: date
         required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
+        required: false
       _indexes:
         course_subject_student_subject_examination_number: [course_subject_student_id, examination_subject_id, examination_number]
         course_subject_student_examination_number: [course_subject_student_id, examination_number]
@@ -689,4 +693,8 @@ classes:
       date:
         description:  Fecha en que el alumno rinde
         type: date
+        required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
         required: false
