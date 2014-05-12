@@ -28,6 +28,11 @@
     <strong><?php echo __("Examination date") ?></strong> <em><?php echo $student_examination_repproved_subject->getDate('d/m/Y') ?></em>
   </div>
   <?php endif; ?>
+  <?php if ($student_examination_repproved_subject->getFolioNumber()): ?>
+  <div class="info_div">
+    <strong><?php echo __("Folio number") ?></strong> <em><?php echo $student_examination_repproved_subject->getFolioNumber() ?></em>
+  </div>
+  <?php endif; ?>
     <?php if (!$student_examination_repproved_subject->getIsAbsent()): ?>
     <div class="info_div">
       <strong><?php echo __("Mark") ?></strong> <em><?php echo ($mark = $student_examination_repproved_subject->getMark()) ? $mark : "-" ?></em>

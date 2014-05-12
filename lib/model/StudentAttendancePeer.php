@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -27,14 +27,14 @@ class StudentAttendancePeer extends BaseStudentAttendancePeer
     $c = new Criteria();
     $c->add(self::DAY, $date);
     $c->add(self::STUDENT_ID, $student->getId());
-  
+
     $c->add(self::COURSE_SUBJECT_ID, $course_subject_id);
 
     if (!is_null($career_school_year_id))
     {
-      $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year_id);  
+      $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year_id);
     }
-    
+
     return self::doSelectOne($c);
   }
 
@@ -81,6 +81,16 @@ class StudentAttendancePeer extends BaseStudentAttendancePeer
     $c->add(self::COURSE_SUBJECT_ID, $course_subject_id);
 
     return self::doSelect($c);
+
+  }
+
+  static public function doCountByCourseSubjectAndStudent($course_subject, $student)
+  {
+    $c = new Criteria();
+    $c->add(self::COURSE_SUBJECT_ID, $course_subject->getId());
+    $c->add(self::STUDENT_ID, $student->getId());
+
+    return self::doCount($c);
 
   }
 

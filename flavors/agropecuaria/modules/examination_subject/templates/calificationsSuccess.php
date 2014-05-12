@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -58,6 +58,8 @@
               <?php if (isset($form["is_absent"])): ?>
                 <?php echo $form["is_absent"] ?><span style="margin-left: 10px"><?php echo __("Is absent") ?>?</span>
               <?php endif ?>
+              <?php echo $form["folio_number"]->renderLabel() ?>
+              <?php echo $form["folio_number"] ?>
             </div>
 
             <div class="help">

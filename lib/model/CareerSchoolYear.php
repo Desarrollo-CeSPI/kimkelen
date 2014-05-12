@@ -423,6 +423,9 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
         foreach ($students as $student)
         {
+
+          if ($student->getPerson()->getIsActive()) {
+          
           $shift = $student->getShiftForSchoolYear($last_school_year);
 
           if (!$student->getIsRegistered($this->getSchoolYear()))
@@ -434,6 +437,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
           $student->clearAllReferences(true);
           unset($student);
           unset($shift);
+        }
         }
 
         StudentPeer::clearInstancePool();

@@ -1686,7 +1686,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Close course student ?</source>
-                <target>¿ Cerrar cursada del alumno ?</target>
+                <target>¿Cerrar cursada del alumno?</target>
             </trans-unit>
 
             <trans-unit>
@@ -2237,7 +2237,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Free</source>
-                <target>¿Libre/Ausente?</target>
+                <target>¿Libre? ¿Ausente?</target>
             </trans-unit>
 
             <trans-unit>
