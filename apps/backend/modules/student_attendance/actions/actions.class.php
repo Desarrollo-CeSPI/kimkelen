@@ -81,6 +81,12 @@ class student_attendanceActions extends sfActions
     $this->redirect('@student_reincorporation');
   }
 
+  public function executeMultipleSubjectsCommissionAttendance(sfWebRequest $request) {
+    $this->course = CoursePeer::retrieveByPk($request->getParameter('course'));
+    $this->course_subjects = $this->course->getCourseSubjects();
+
+  }
+
   public function executeStudentAttendance(sfWebRequest $request)
   {
     $params = $request->getParameter('multiple_student_attendance');

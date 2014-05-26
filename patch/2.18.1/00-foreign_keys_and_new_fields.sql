@@ -1,5 +1,5 @@
-ALTER TABLE `student_examination_repproved_subject` ADD  `folio_number` VARCHAR( 20 ) NULL COMMENT  'Número de folio del examen', ADD UNIQUE INDEX `csse_unique` (`course_subject_student_id`, `examination_subject_id`, `examination_number`);
-ALTER TABLE `course_subject_student_examination` ADD `folio_number` VARCHAR(20) COMMENT 'Número de folio del examen';
+ALTER TABLE `student_examination_repproved_subject` ADD  `folio_number` VARCHAR( 20 ) NULL COMMENT  'Número de folio del examen';
+ALTER TABLE `course_subject_student_examination` ADD `folio_number` VARCHAR(20) COMMENT 'Número de folio del examen', ADD UNIQUE INDEX `csse_unique` (`course_subject_student_id`, `examination_subject_id`, `examination_number`);
 
 ALTER TABLE  `student_advice` DROP FOREIGN KEY  `student_advice_FK_5` ,
 ADD FOREIGN KEY (  `responsible_id` ) REFERENCES  `person` (
