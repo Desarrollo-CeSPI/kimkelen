@@ -4337,6 +4337,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Global file number</source>
                 <target>Legajo</target>
             </trans-unit>
+            <trans-unit>
+                <source>Course subjects of course %course%</source>
+                <target>Cursos de la comisión %course%</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

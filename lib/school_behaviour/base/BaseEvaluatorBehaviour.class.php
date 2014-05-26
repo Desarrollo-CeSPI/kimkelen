@@ -390,7 +390,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       {
         // se crea una previa
         $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
-        if (!$srcs && is_null($srcs->getStudentApprovedCareerSubject())) {
+        if (is_null($srcs)) {
            $student_repproved_course_subject = new StudentRepprovedCourseSubject();
            $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
            $student_repproved_course_subject->save($con);

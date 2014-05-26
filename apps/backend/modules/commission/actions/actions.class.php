@@ -314,10 +314,16 @@ class commissionActions extends autoCommissionActions
   {
     $this->redirectIf($this->getUser()->isTeacher());
     $course = $this->getRoute()->getObject();
-    $career_school_year_id = $course->getCareerSchoolYear()->getId();
-    $course_subject_id = array_shift($course->getCourseSubjectIds());
-    $year = $course->getYear();
-    $this->redirect("student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+    if (count($course->getCourseSubjects()) > 1){
+      $course_id = $course->getId();
+      $this->redirect("student_attendance/MultipleSubjectsCommissionAttendance?course=$course_id&division_id=");
+    }
+    else {
+      $career_school_year_id = $course->getCareerSchoolYear()->getId();
+      $course_subject_id = array_shift($course->getCourseSubjectIds());
+      $year = $course->getYear();
+      $this->redirect("student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+    }
   }
 
   public function executeShowStudents(sfWebRequest $request)

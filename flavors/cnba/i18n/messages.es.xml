@@ -4222,6 +4222,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>User has some references you sholud delete first</source>
                 <target>El usuario posee referencias que debe eliminar primero. Por ejemplo: cursos asociados.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Choose which course subject you want to load attendances for</source>
+                <target>Seleccione la materia para la cual desea cargar inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course subjects of course %course%</source>
+                <target>Cursos de la comisión %course%</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
