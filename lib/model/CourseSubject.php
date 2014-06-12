@@ -767,4 +767,45 @@ class CourseSubject extends BaseCourseSubject
     }
     return $total;
   }
+
+
+  public function addStudentsFromCourseSubject($students, $origin_course_subject, $con = null)
+  {
+    if (!$this->getCourse()->canMoveStudents())
+    {
+      throw (new Exception());
+    }
+
+    if (is_null($con))
+      $con = Propel::getConnection();
+
+    $con->beginTransaction();
+    try
+    {
+      foreach ($students as $student_id)
+      {
+        $css_origin = CourseSubjectStudentPeer::retrieveByCourseSubjectAndStudent($origin_course_subject->getId(), $student_id);
+        $css_origin->setCourseSubjectId($this->getId());
+        $css_origin->save($con);
+
+        //para las asistencias
+        foreach ($origin_course_subject->getStudentAttendances() as $sa)
+        {
+          $sa->setCourseSubject($this);
+          $sa->save($con);
+        }
+      }
+      $con->commit();
+    }
+    catch (Exception $e)
+    {
+      $con->rollBack();
+      throw $e;
+    }
+  }
+
+  public function getCourseSubjectAndTeacherToString()
+  {
+    return sprintf('%s, %s (%s)', $this->getCourse(), $this->getCareerSubjectToString(), $this->getCourse()->getTeachersStr());
+  }
 }

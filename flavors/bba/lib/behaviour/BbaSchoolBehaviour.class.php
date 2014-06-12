@@ -104,6 +104,10 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 
   public function getAvailableStudentsForCourseSubjectCriteria(CourseSubject $course_subject, $criteria = null, $filter_by_orientation = true)
   {
+    if ($course_subject->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption() || $course_subject->getCareerSubjectSchoolYear()->getCareerSubject()->getHasOptions()){
+      $filter_by_orientation = false;
+    }
+
     return parent::getAvailableStudentsForCourseSubjectCriteria($course_subject, $criteria, false);
   }
 

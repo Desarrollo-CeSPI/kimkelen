@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -53,6 +53,29 @@ class report_cardActions extends sfActions
 
 
     $this->students = $this->getUser()->getAttribute('students');
+    $this->career_id = $this->division->getCareer()->getId();
+
+    $this->setLayout('cleanLayout');
+    $this->setTemplate('index');
+  }
+
+  public function executeSubsetReportCardsToPDF(sfWebRequest $request)
+  {
+    ini_set('max_execution_time', '10000');
+    $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
+
+    if (is_null($this->division))
+    {
+      $this->division = DivisionPeer::retrieveByPk($this->getUser()->getAttribute('division_id'));
+    }
+    if ($request->getParameter('all_approved'))
+    {
+      $this->students = $this->division->getStudentsWithAllSubjectsApproved();
+    }
+    else
+    {
+      $this->students = $this->division->getStudentsWithDisapprovedSubjects();
+    }
     $this->career_id = $this->division->getCareer()->getId();
 
     $this->setLayout('cleanLayout');

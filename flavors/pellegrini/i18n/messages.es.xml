@@ -4223,6 +4223,26 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Course subjects of course %course%</source>
                 <target>Cursos de la comisión %course%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Students that have more or equal to disciplinary sanctions in current school year.</source>
+                <target>Buscará a aquellos alumnos que tengan >= sanciones a la cantidad ingresada registradas en el ciclo lectivo actual.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanction count</source>
+                <target>Sanciones acumuladas mayor o igual a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Export totally approved</source>
+                <target>Exportar boletines completamente aprobados</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Export not totally approved</source>
+                <target>Exportar boletines que adeudan materias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Move students from course %course%</source>
+                <target>Mover estudiantes del curso %course%</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
