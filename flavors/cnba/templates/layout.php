@@ -29,7 +29,7 @@
       var myThemePanelBase = '<?php echo $sf_request->getRelativeUrlRoot(); ?>' + '/pmJSCookMenuPlugin/images/' + theme +'/';
       var cmBase = myThemePanelBase;
     </script>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
   </head>
 
   <body onLoad="setFontSize()">
