@@ -32,11 +32,27 @@
 
 <?php if ($course->countSubjects()): ?>
   <div class="attribute"><?php echo __('Materia/s') ?>:&nbsp;
+     <?php foreach ($course->getCourseSubjects() as $subject): ?>
     <div style="font-size: 1.2em;">
-      <?php foreach ($course->getCourseSubjects() as $subject): ?>
+
         <?php echo $subject->getCareerSubjectSchoolYear() ?>
-      <?php endforeach ?>
-    </div>
+      </div>
+
+      <?php if ($subject->countCourseSubjectDays() > 0): ?>
+        <ul style="color:#333; font-weight:normal">
+
+          <?php foreach ($subject->getCourseSubjectDays() as $cd): ?>
+            <li>
+              <?php
+              echo sprintf("%s (%s %s)", __($cd->getDayName()), is_null($cd->getStartsAt()) ? '' : $cd->getTimeRangeString(), $cd->getClassroom())
+              ?>
+            </li>
+          <?php endforeach ?>
+        </ul>
+      <?php endif ?>
+
+
+    <?php endforeach ?>
   </div>
 <?php endif ?>
 
@@ -44,7 +60,11 @@
   <span class="attribute <?php !$course->getActiveTeachers() and print 'disabled' ?>"><?php echo __('Tiene docentes que lo dictan') ?> <?php echo ($course->countActiveTeachers()) ? "(" . $course->countActiveTeachers() . ")" : "" ?></span>
 
   <?php if ($course->getActiveTeachers()): ?>
-    <?php echo link_to_function(__('&gt; Ver docentes'), "jQuery('#course_teachers_" . $course->getId() . "').toggle()", array('class' => 'show-more-link', 'title' => __('Desplegar todos los profesores de esta comisión'))) ?>
+    <ul>
+      <?php foreach ($course->getTeachers() as $teacher): ?>
+        <li><?php echo $teacher ?></li>
+      <?php endforeach ?>
+    </ul>
 
     <ul id="course_teachers_<?php echo $course->getId() ?>" style="display: none;" class="more_info">
       <?php foreach ($course->getActiveTeachers() as $t): ?>
@@ -62,4 +82,5 @@
   <div class='info_div'><span class="alert"><?php echo __('This course has attendance for subject and may not be properly configurated') ?></span>
   </div>
   <?php
+
  endif ?>
