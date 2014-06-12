@@ -4251,6 +4251,19 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Move students from course %course%</source>
                 <target>Mover estudiantes del curso %course%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Move students to other course subject</source>
+                <target>Mover estudiantes a otro curso</target>
+            </trans-unit>
+            <trans-unit>
+                <source>This action allows deletion of students from course only if them do not have associated information for this course. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one course to another.</source>
+                <target>Se podrán eliminar alumnos de la comisión/curso siempre y cuando no existan datos asociados (calificaciones o asistencias). Para esos casos, el sistema no realizará la acción de desinscripción para evitar la pérdida
+    de información. En estos casos, utilice la acción:</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The course has not been configured with attendance for subject.</source>
+                <target>El curso no fue configurado para registrar Asistencia por materia.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
