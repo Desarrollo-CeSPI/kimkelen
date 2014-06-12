@@ -957,5 +957,10 @@ class Course extends BaseCourse
 
     return CourseSubjectPeer::doSelectOne($c);
   }
+
+  public function canMoveStudents()
+  {
+    return !$this->getIsClosed();
+  }
 }
 sfPropelBehavior::add('Course', array('changelog'));

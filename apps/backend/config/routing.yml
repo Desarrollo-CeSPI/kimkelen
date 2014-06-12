@@ -42,6 +42,10 @@ move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
 
+move_course_students:
+  url:  move_course_students
+  param:  { module: shared_course, action: moveStudents }
+
 save_calificate_non_numerical_mark:
   url:  course_student_mark/saveCalificateNonNumericalMark
   param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
@@ -126,6 +130,14 @@ sanction_type:
 report_card:
   url: /report_card
   param: { module: report_card, action: index }
+
+export_not_totally_approved_report_cards:
+  url: /report_card/Boletines_adeudan_materias.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf }
+
+export_totally_approved_report_cards:
+  url: /report_card/Boletines_aprobados.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf, all_approved: true }
 
 export_report_cards:
   url: /report_card/Boletines.pdf

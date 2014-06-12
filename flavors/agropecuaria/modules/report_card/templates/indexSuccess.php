@@ -21,7 +21,11 @@
 <?php use_helper('Asset', 'I18N') ?>
 
 <div class="non-printable">
-  <div><a href="<?php echo url_for('@export_report_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a></div>
+  <div><a href="<?php echo url_for('@export_report_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a>
+    <?php if (count($students) > 1): ?>
+      <a href="<?php echo url_for('@export_totally_approved_report_cards?sf_format=pdf') ?>"><?php echo __('Export totally approved') ?></a> |
+      <a href="<?php echo url_for('@export_not_totally_approved_report_cards?sf_format=pdf') ?>"><?php echo __('Export not totally approved') ?></a></div>
+    <?php endif; ?>
   <div><a href="<?php echo url_for($back_url) ?>"><?php echo __('Go back') ?></a></div>
 </div>
 

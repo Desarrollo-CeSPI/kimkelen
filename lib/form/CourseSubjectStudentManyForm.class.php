@@ -96,7 +96,6 @@ class CourseSubjectStudentManyForm extends sfFormPropel
 
   protected function doSave($con = null)
   {
-    //parent::doSave($con);
     $this->saveCourseSubjectStudentList($con);
   }
 
@@ -131,7 +130,7 @@ class CourseSubjectStudentManyForm extends sfFormPropel
         }
         else
         {
-          throw new Exception('Los alumnos seleccionados poseen datos que les impiden ser borrados de este curso.');
+          throw new Exception('El/Los alumno/s seleccionado/s poseen calificaciones y/o asistencias que le/s impide/n ser borrado/s de este curso.');
         }
       }
     }

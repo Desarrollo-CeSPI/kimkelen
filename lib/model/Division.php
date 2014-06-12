@@ -792,5 +792,34 @@ class Division extends BaseDivision
 
     return true;
   }
+
+  public function getStudentsWithAllSubjectsApproved()
+  {
+    $students = Array();
+    foreach ($this->getStudents() as $student)
+    {
+      $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this->getCareerSchoolYear());
+      if (!is_null($student_career_school_year->getAnualAverage()))
+      {
+        $students[]= $student;
+      }
+    }
+    return $students;
+  }
+
+  public function getStudentsWithDisapprovedSubjects()
+  {
+    $students = Array();
+    foreach ($this->getStudents() as $student)
+    {
+      $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this->getCareerSchoolYear());
+      if (is_null($student_career_school_year->getAnualAverage()))
+      {
+        $students[]= $student;
+      }
+    }
+    return $students;
+  }
+
 }
 sfPropelBehavior::add('Division', array('changelog'));

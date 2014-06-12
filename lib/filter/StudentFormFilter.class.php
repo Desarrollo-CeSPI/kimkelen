@@ -53,6 +53,10 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setWidget('is_graduated', new sfWidgetFormInputCheckbox());
     $this->setValidator('is_graduated', new sfValidatorBoolean());
     $this->widgetSchema->setHelp('is_graduated', 'If is checked, then will show only students graduated in some career.');
+
+    $this->setWidget('disciplinary_sanction_count', new sfWidgetFormInput());
+    $this->setValidator('disciplinary_sanction_count', new sfValidatorNumber(array('required' => false)));
+    $this->widgetSchema->setHelp('disciplinary_sanction_count', 'Students that have more or equal to disciplinary sanctions in current school year.');
   }
 
   public function unsetFields()
@@ -162,6 +166,7 @@ class StudentFormFilter extends BaseStudentFormFilter
         'is_inscripted_in_career' => 'Boolean',
         'is_free_in_some_period' => 'Boolean',
         'is_graduated' => 'Boolean',
+        'disciplinary_sanction_count' => 'Number',
         'status' => 'Number'));
   }
 
@@ -171,6 +176,18 @@ class StudentFormFilter extends BaseStudentFormFilter
     {
       $criteria->addJoin(CareerStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
       $criteria->add(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE);
+    }
+  }
+
+  public function addDisciplinarySanctionCountColumnCriteria(Criteria $criteria, $field, $values)
+  {
+    if ($values)
+    {
+      $criteria->addJoin(StudentPeer::ID, StudentDisciplinarySanctionPeer::STUDENT_ID, Criteria::INNER_JOIN);
+      $criteria->add(StudentDisciplinarySanctionPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+      $criteria->addGroupByColumn(StudentDisciplinarySanctionPeer::STUDENT_ID);
+      $criterion = $criteria->getNewCriterion(StudentDisciplinarySanctionPeer::STUDENT_ID, 'count('.StudentDisciplinarySanctionPeer::STUDENT_ID.') >='.$values, Criteria::CUSTOM);
+      $criteria->addHaving($criterion);
     }
   }
 
