@@ -45,6 +45,10 @@ class CommissionFormFilter extends BaseCourseFormFilter
     $this->getWidgetSchema()->setLabel('current_period', 'Período');
     $this->getWidgetSchema()->setLabel('career_school_year', 'Carrera');
     $this->getWidgetSchema()->setHelp('career_school_year', 'Seleccione alguna de las carreras habilitadas');
+
+    $this->setWidget('teacher', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectTeacher')));
+    $this->setValidator('teacher', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));
+
   }
 
   public static function getCareersCriteria()
@@ -67,6 +71,7 @@ class CommissionFormFilter extends BaseCourseFormFilter
         'current_period' => 'Number',
         'school_year_id' => 'ForeignKey',
         'division' => 'ForeignKey',
+        'teacher' => 'ForeignKey',
         'student' => 'ForeignKey'));
 
   }
@@ -91,6 +96,18 @@ class CommissionFormFilter extends BaseCourseFormFilter
       $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
       $criteria->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPeer::COURSE_SUBJECT_ID);
       $criteria->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+      $criteria->add(PersonPeer::ID,$value);
+    }
+  }
+
+  public function addTeacherColumnCriteria($criteria, $field, $value)
+  {
+    if ($value !== null)
+    {
+      $criteria->addJoin(TeacherPeer::PERSON_ID, PersonPeer::ID);
+      $criteria->addJoin(CourseSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
+      $criteria->addJoin(CourseSubjectTeacherPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+      $criteria->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
       $criteria->add(PersonPeer::ID,$value);
     }
   }
