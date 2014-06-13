@@ -63,7 +63,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $free_widget_name = $course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber();
           $name = 'course_student_mark_'. $this->getObject()->getId() . '_' . $widget_name;
           $name_free_element = 'course_student_mark_'. $this->getObject()->getId() . '_' . $free_widget_name;
-          $widgets[$free_widget_name] = new sfWidgetFormInputCheckbox(array('default' => $course_subject_student_mark->getIsFree()), array('onChange' => "free_mark('$name_free_element','$name');"));
+         $widgets[$free_widget_name] = new sfWidgetFormInputCheckbox(array('default' => $course_subject_student_mark->getIsFree()), array('onChange' => "free_mark('$name_free_element','$name');"));
 
 
          $student = $course_subject_student_mark->getCourseSubjectStudent()->getStudent();
@@ -72,7 +72,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
          $course_type = $course_subject->getCourseType();
          $periods = CareerSchoolYearPeriodPeer::getPeriodsArrayForCourseType($course_type, $cssy->getCareerSchoolYear()->getId());
 
-         $val = $course_subject_student_mark->getIsFree();
+         $val = $course_subject_student_mark->getIsFree() || $student->isFree(null, null,$cssy->getCareerSchoolYear() );
           foreach ($periods as $period)
           {
             if ($val || $student->isFree($period, $course_subject, $cssy->getCareerSchoolYear()))

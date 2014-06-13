@@ -42,7 +42,7 @@ class course_subject_student_examinationActions extends autoCourse_subject_stude
     {
       if (!$this->getUser()->getReferenceFor('manual_examination_subject'))
       {
-        $this->getUser()->setFlash('warning', 'Debe seleccionar mesa para ver sus alumnos');
+        $this->getUser()->setFlash('warning', 'Debe seleccionar una mesa para ver sus alumnos');
         $this->redirect("@manual_examination_subject");
       }
     }
@@ -50,7 +50,7 @@ class course_subject_student_examinationActions extends autoCourse_subject_stude
     {
       if (!$this->getUser()->getReferenceFor('examination_subject'))
       {
-        $this->getUser()->setFlash('warning', 'Debe seleccionar mesa para ver sus alumnos');
+        $this->getUser()->setFlash('warning', 'Debe seleccionar una mesa para ver sus alumnos');
         $this->redirect("@examination_subject");
       }
     }

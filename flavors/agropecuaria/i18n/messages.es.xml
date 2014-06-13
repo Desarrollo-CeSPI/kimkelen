@@ -4395,6 +4395,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>The course has not been configured with attendance for subject.</source>
                 <target>El curso no fue configurado para registrar Asistencia por materia.</target>
             </trans-unit>
+            <trans-unit>
+                <source>The student is free</source>
+                <target>El estudiante es LIBRE</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

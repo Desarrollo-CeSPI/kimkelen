@@ -51,9 +51,7 @@ class StudentFreeForm extends BaseStudentFreeForm
     $this->getWidgetSchema()->moveField('career_school_year_period_id', 'after', 'career_school_year_id');
 
     $this->getWidget('career_school_year_period_id')->setLabel('Periodo');
-    //$this->getWidget('career_school_year_period_id')->setOption('add_empty',true);
-    ///$this->getWidget('career_school_year_period_id')->setOption('criteria', CareerSchoolYearPeriodPeer::retrieveCurrentsCriteria());
-  //$this->getWidget('career_school_year_period_id')->setOption('peer_method','retrieveOrdered');
+    $this->getWidgetSchema()->setHelp('career_school_year_period_id', 'Elegir en caso de que quede libre para un período en especial.');
 
     $this->getWidget('course_subject_id')->setOption('criteria', $this->getCourseSubjectCriteria());
     $this->getWidget('course_subject_id')->setLabel('Course subject');
