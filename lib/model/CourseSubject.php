@@ -200,7 +200,7 @@ class CourseSubject extends BaseCourseSubject
     {
       $mark = $course_subject_student->getMarkFor($current_period);
 
-      if ($mark->getMark() != '')
+      if ($mark && $mark->getMark() != '')
       {
         $mark->setIsClosed(true);
         $mark->save($con);
