@@ -532,7 +532,10 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
   {
     if ($student_examination_repproved_subject->getMark() >= $this->getExaminationNote())
     {
+      $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent());
+      if (is_null($student_approved_career_subject)){
       $student_approved_career_subject = new StudentApprovedCareerSubject();
+      }
       $student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
       $student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
       $student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());

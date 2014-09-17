@@ -20,6 +20,7 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
 
     $this->setWidget("career_subject_school_year_id", new sfWidgetFormPropelChoice(array(
       'model' => 'CareerSubjectSchoolYear',
+        'method' => 'getFullToString',
       'add_empty' => false,
       'criteria' => $c
     )));
