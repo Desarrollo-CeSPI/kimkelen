@@ -160,14 +160,14 @@
                 <?php foreach ($career_school_year_periods as $career_school_year_period): ?>
                   <?php $free_class = $student->getFreeClass($career_school_year_period, $course_subject, $career_school_year, $form->getDivision()) ?>
 
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, true) ?></td>
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, false) ?></td>
                   <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, false) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, false) ?></td>
                 <?php endforeach ?>
               <?php else: ?>
                 <?php $free_class = $student->getFreeClass(null, $course_subject, $career_school_year) ?>
-                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id, true) ?></td>
-                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, null, $course_subject_id) ?></td>
+                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id) ?></td>
+                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, null, $course_subject_id, false) ?></td>
                 <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id, false) ?></td>
               <?php endif ?>
 
