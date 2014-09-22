@@ -61,7 +61,6 @@
         <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
         <th rowspan="2"><?php echo __('Division'); ?></th>
-        <th rowspan="2"><?php echo __('Tipo de evaluación'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
       </tr>
       <tr>
@@ -77,22 +76,12 @@
           <td class="orden"><?php echo $i ?> </td>
           <td class="student"><?php echo $student ?> </td>
           <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
-          <td class="evaluation_type">
-            <?php $course_subject_student = CourseSubjectStudentPeer::retrieveByCareerSubjectSchoolYearAndStudent($examination_subject->getCareerSubjectSchoolYear(), $student->getId()); ?>
-            <?php if ($course_subject_student->hasSomeMarkFree() && $course_subject_student->getFinalAvg() < SchoolBehaviourFactory::getEvaluatorInstance()->getPromotionNote()): ?>
-              <span><?php echo ('Escrito y oral') ?></span>
-            <?php else: ?>
-              <span><?php echo ('Escrito') ?></span>
-            <?php endif; ?>
-          </td>
-            <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
+          <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">
             <?php if ($examination_subject->getIsClosed()): ?>
               <?php if (!$ess->getIsAbsent()): ?>
                 <?php echo $ess->getMark() ?>
               <?php endif; ?>
-            <?php else: ?>
-              <?php echo '-'; ?>
             <?php endif; ?>
           </td>
           <td class="calification text">

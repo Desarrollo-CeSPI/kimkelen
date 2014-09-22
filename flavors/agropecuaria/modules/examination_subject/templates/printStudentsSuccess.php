@@ -46,7 +46,7 @@
         <?php endif; ?></span>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
     </div>
-    <p>Acta de los examenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
+    <p>Acta de los exámenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
     <p>Examinados los alumnos que se mencionan a continuación, han merecido las calificaciones consignadas en la presente Acta,
       que firman los señores profesores <strong><?php echo $examination_subject->getTeachersToString(); ?></strong>.
 

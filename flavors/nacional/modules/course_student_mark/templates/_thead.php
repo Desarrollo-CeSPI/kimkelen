@@ -30,15 +30,15 @@
 </tr>
 <tr class="head" valign="bottom">
   <td align="center" width="40%" height="22" colspan="2"></td>
-  <td align="center" width="18%" colspan="<?php echo $configuration->getCourseMarks()?>">Terminos</td>
+  <td align="center" width="18%" colspan="<?php echo $configuration->getCourseMarks()?>">Términos</td>
   <td align="center" width="20%" colspan="2">Promedio Anual</td>
 
   <?php if ($is_block):?>
     <td align="center" width="30%" colspan="3">Per. de acompañam. y eval.</td>
   <?php endif?>
 
-  <td align="center" width="20%"  colspan="3">Notas de examenes</td>
-  <td align="center" width="10%">Calificacion</td>
+  <td align="center" width="20%"  colspan="3">Notas de exámenes</td>
+  <td align="center" width="10%">Calificación</td>
   <td align="center" width="20%">Observaciones</td>
 </tr>
 <tr class="head" valign="bottom">
