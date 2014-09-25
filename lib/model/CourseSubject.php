@@ -321,82 +321,20 @@ class CourseSubject extends BaseCourseSubject
     return CourseSubjectStudentPeer::doSelectOne($c);
   }
 
-  /**
-   * Gets an array of CourseSubjectStudent objects which contain a foreign key that references this object.
-   *
-   * The student references in the array are ordered by lastname.
-   * If this collection has already been initialized with an identical Criteria, it returns the collection.
-   * Otherwise if this CourseSubject has previously been saved, it will retrieve
-   * related CourseSubjectStudents from storage. If this CourseSubject is new, it will return
-   * an empty collection or the current collection, the criteria is ignored on a new object.
-   *
-   * @param      PropelPDO $con
-   * @param      Criteria $criteria
-   * @return     array CourseSubjectStudent[]
-   * @throws     PropelException
-   */
   public function getCourseSubjectStudents($criteria = null, PropelPDO $con = null)
   {
     if ($criteria === null)
     {
-      $criteria = new Criteria(CourseSubjectPeer::DATABASE_NAME);
-    }
-    elseif ($criteria instanceof Criteria)
-    {
-      $criteria = clone $criteria;
+      $criteria = new Criteria();
     }
 
-    if ($this->collCourseSubjectStudents === null)
-    {
-      if ($this->isNew())
-      {
-        $this->collCourseSubjectStudents = array();
-      }
-      else
-      {
+    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+    $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+    $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+    $criteria->add(PersonPeer::IS_ACTIVE, true);
+    $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
-        $criteria->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->id);
-
-        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-        $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
-        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-        $criteria->add(PersonPeer::IS_ACTIVE, true);
-        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-
-        CourseSubjectStudentPeer::addSelectColumns($criteria);
-        $this->collCourseSubjectStudents = CourseSubjectStudentPeer::doSelect($criteria, $con);
-      }
-    }
-    else
-    {
-
-      // criteria has no effect for a new object
-      if (!$this->isNew())
-      {
-        // the following code is to determine if a new query is
-        // called for.  If the criteria is the same as the last
-        // one, just return the collection.
-
-        $criteria->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->id);
-
-        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-        $criteria->add(PersonPeer::IS_ACTIVE, true);
-        $criteria->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
-        $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-
-        CourseSubjectStudentPeer::addSelectColumns($criteria);
-        if (!isset($this->lastCourseSubjectStudentCriteria) || !$this->lastCourseSubjectStudentCriteria->equals($criteria))
-        {
-          $this->collCourseSubjectStudents = CourseSubjectStudentPeer::doSelect($criteria, $con);
-        }
-      }
-    }
-    $this->lastCourseSubjectStudentCriteria = $criteria;
-
-    return $this->collCourseSubjectStudents;
-
+    return parent::getCourseSubjectStudents($criteria);
   }
 
   public function getCourseSubjectConfigurationDivisionForm()
