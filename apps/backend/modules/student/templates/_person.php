@@ -38,6 +38,36 @@
   </div>
   <div style="margin-top: 1px; clear: both;"></div>
 </div>
+
+
+<div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_origin_school">
+    <div>
+        <label for="origin_school"> <?php echo __('Origin school'); ?> </label>
+        <?php echo ($student->getOriginSchool())? $student->getOriginSchool(): '-'; ?>
+    </div>
+    <div style="margin-top: 1px; clear: both;"></div>
+</div>
+
+<?php if ($student->getEducationalDependency()): ?>
+  <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_educational_dependency">
+    <div>
+      <label for="educational_dependency"> <?php echo __('Educational dependency'); ?> </label>
+      <?php echo $student->getEducationalDependency(); ?>
+    </div>
+    <div style="margin-top: 1px; clear: both;"></div>
+  </div>
+<?php endif; ?>
+
+<?php if ($student->getGlobalFileNumber()): ?>
+<div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_global_file_number">
+    <div>
+        <label for="global_file_number"> <?php echo __('Global file number'); ?> </label>
+        <?php echo $student->getGlobalFileNumber(); ?>
+    </div>
+    <div style="margin-top: 1px; clear: both;"></div>
+</div>
+<?php endif; ?>
+
 <?php if (!$sf_user->hasCredential('show_student_min')): ?>
   <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_email">
     <div>

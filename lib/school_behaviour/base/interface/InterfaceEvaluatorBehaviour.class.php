@@ -153,6 +153,13 @@ abstract class InterfaceEvaluatorBehaviour
   abstract public function getStudentApprovedResultString(StudentApprovedCourseSubject $student_approved_course_subject);
 
   /**
+   * This method returns a string for the result.
+   * @param StudentRepprovedCourseSubject $student_repproved_course_subject
+   * @return String
+   */
+  abstract public function getStudentRepprovedResultString(StudentRepprovedCourseSubject $student_repproved_course_subject);
+
+  /**
    * This method returns the available marks for students. For Bba behavior like, depends of the closed notes.
    *
    * @param CourseSubjectStudent $course_subject_student

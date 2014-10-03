@@ -150,7 +150,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   }
 
   /**
-   * This method check the conditions of repetition of a year.
+   * This method checks conditions of repetition.
    *
    * @param Student $student
    * @param StudentCareerSchoolYear $student_career_school_year
@@ -158,7 +158,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    */
   public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
   {
-    //IF the current year is the last year of the career.
+    //If current year is the last year of the career.
     if ($student_career_school_year->isLastYear())
     {
       return false;
@@ -172,7 +172,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       return true;
     }
 
-    //IF Previous is > than max count of previos permitted, then the student repeat
+    //If Previous count > max count of repproved subject allowed, then the student repeats
     $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
 
     return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
@@ -473,6 +473,16 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
   }
 
+   /**
+    * This method returns a string for the result.
+    * @param StudentRepprovedCourseSubject $student_repproved_course_subject
+    * @return String
+    */
+   public function getStudentRepprovedResultString(StudentRepprovedCourseSubject $student_repproved_course_subject)
+   {
+     return __('Previous') . "/" . __('Free');
+   }
+
   /**
    * This method returns a string for the result.
    * @param StudentApprovedCourseSubject $student_approved_course_subject
@@ -480,7 +490,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    */
   public function getStudentApprovedResultString(StudentApprovedCourseSubject $student_approved_course_subject)
   {
-    return 'Aprobado';
+    return __('Approved');
 
   }
 
@@ -636,14 +646,14 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
   public function hasApprovedAllCourseSubjects($student_career_school_year)
   {
-    #Aca se cuentan las materias que curso el alumno
+    #Counts the subjects the student did
     $c = new Criteria();
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student_career_school_year->getStudentId());
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
     $c->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
 
-    #aca se cuentan todas las materias que tiene aprobadas en el año
+    #Counts the subjects approved by the student during this year
     $course_subject_students = CourseSubjectStudentPeer::doSelect($c);
     /* @var $course_subject_student CourseSubjectStudent */
     foreach ($course_subject_students as $course_subject_student)

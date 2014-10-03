@@ -4239,6 +4239,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>The student is free</source>
                 <target>El estudiante es LIBRE</target>
             </trans-unit>
+            <trans-unit>
+                <source>Origin school</source>
+                <target>Escuela de origen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

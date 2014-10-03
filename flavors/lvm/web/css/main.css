@@ -1104,6 +1104,11 @@ table.list
     background-color: yellow !important;
 }
 
+.regular
+{
+    background-color: yellow !important;
+}
+
 .almost_free
 {
     background-color: greenyellow !important;
@@ -1227,6 +1232,11 @@ table.list
 }
 
 .febrero
+{
+    background-color: red !important;
+}
+
+.reprobado
 {
     background-color: red !important;
 }
