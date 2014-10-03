@@ -156,6 +156,12 @@ classes:
         foreignReference: id
         onDelete:         restrict
         default:          null
+      origin_school:
+        type: varchar(255)
+        required: false
+      educational_dependency:
+        type: varchar(255)
+        required: false
 
   Brotherhood:
     tableName:            brotherhood
