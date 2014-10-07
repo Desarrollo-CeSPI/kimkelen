@@ -1900,3 +1900,8 @@ div.wc-cal-event{
 #change-role {
   color: #FFF !important;
 }
+
+.sf_admin_list .sf_admin_action_open a
+{
+  background-image: url('../images/lock_open.png') !important;
+}
