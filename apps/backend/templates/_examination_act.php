@@ -82,8 +82,6 @@
               <?php if (!$ess->getIsAbsent()): ?>
                 <?php echo $ess->getMark() ?>
               <?php endif; ?>
-            <?php else: ?>
-              <?php echo '-'; ?>
             <?php endif; ?>
           </td>
           <td class="calification text">
