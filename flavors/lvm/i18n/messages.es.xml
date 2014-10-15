@@ -151,7 +151,7 @@
             </trans-unit>
             <trans-unit>
                 <source>A problem occurs when deleting the selected items as some items do not exist anymore.</source>
-                <target>Ocurrió un problema al eliminar los items selccionados debido a que ya no existen.</target>
+                <target>Ocurrió un problema al eliminar los items seleccionados debido a que ya no existen.</target>
             </trans-unit>
             <trans-unit>
                 <source>The selected items have been deleted successfully.</source>
@@ -4271,6 +4271,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Origin school</source>
                 <target>Escuela de origen</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Course subjects for commission</source>
+              <target>Materias asociadas a este curso</target>
             </trans-unit>
         </body>
     </file>

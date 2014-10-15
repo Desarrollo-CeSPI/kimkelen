@@ -6,12 +6,27 @@
 <?php include_partial('commission/assets') ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('New subject for commission') ?></h1>
-
-  <?php include_partial('commission/flashes') ?>
+<?php include_partial('commission/flashes') ?>
 
   <div id="sf_admin_header">
   </div>
+
+ <?php if (!empty($course_subjects)): ?>
+  <h1><?php echo __('Course subjects for commission') ?></h1>
+
+    <div id="related_courses">
+      <table>
+        <?php foreach ($course_subjects as $course_subject):?>
+          <tr>
+            <th><?php echo $course_subject ?></th>
+            <td><?php echo link_to(__('Delete'), "commission/deleteSubject?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId())?></td>
+          </tr>
+        <?php endforeach?>
+      </table>
+    </div>
+  <?php endif; ?>
+
+  <h1><?php echo __('New subject for commission') ?></h1>
 
   <div id="sf_admin_content">
     <div class="sf_admin_form">

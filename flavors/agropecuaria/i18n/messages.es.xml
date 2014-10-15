@@ -4404,8 +4404,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Escuela de origen</target>
             </trans-unit>
             <trans-unit>
-                <source>Educational dependency</source>
-                <target></target>
+                <source>Course subjects for commission</source>
+                <target>Materias asociadas a este curso</target>
             </trans-unit>
         </body>
     </file>

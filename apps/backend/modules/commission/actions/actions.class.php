@@ -360,7 +360,21 @@ class commissionActions extends autoCommissionActions
     else
     {
       $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
       $this->form = new SubjectForCommissionForm($this->course);
     }
   }
+
+   public function executeDeleteSubject(sfWebRequest $request)
+   {
+     $cs= CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+
+      try {
+        $cs->delete();
+        $this->getUser()->setFlash("notice", "The item was deleted successfully.");
+      } catch (PropelException $e) {
+        $this->getUser()->setFlash('error', 'A problem occurs when deleting the selected items.');
+      }
+     $this->redirect("@commission");
+   }
 }

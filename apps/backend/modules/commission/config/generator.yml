@@ -54,10 +54,6 @@ generator:
             credentials:    [edit_course]
             condition:      canCourseSubjectStudent
 
-          add_subject:
-            action:         addSubject
-            credentials:    [edit_course]
-
           copy_students_from_other_course:
             action:         copyStudentsFromOtherCourse
             credentials:    [edit_course]
@@ -109,6 +105,10 @@ generator:
             action:         relatedToDivision
             credentials:    [edit_course]
             condition:      canRelatedToDivision
+
+          add_subject:
+            action:         addSubject
+            credentials:    [edit_course]
 
           attendanceSubject:
             label: Load Attendances

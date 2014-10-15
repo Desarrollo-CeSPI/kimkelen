@@ -4378,6 +4378,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Educational dependency</source>
                 <target>Dependencia educativa</target>
             </trans-unit>
+            <trans-unit>
+                <source>Course subjects for commission</source>
+                <target>Materias asociadas a este curso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
