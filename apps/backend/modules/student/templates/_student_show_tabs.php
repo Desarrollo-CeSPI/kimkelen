@@ -59,7 +59,8 @@
     <fieldset id="student_absences_per_day">
       <?php echo get_partial('student/student_absences_per_day', array('type' => 'list', 'student' => $student, 'back_url' => '@student_show', 'student_career_school_year' => $student_career_school_year, 'reincorporations' => $student->getStudentReincorporationsPerDay())) ?>
     </fieldset>
-  <?php elseif ($student->hasAttendancesPerSubject()):?>
+  <?php endif?>
+  <?php if ($student->hasAttendancesPerSubject()):?>
     <fieldset id="student_absences_per_subject">
       <?php echo get_partial('student/student_absences_per_subject', array('type' => 'list', 'student' => $student, 'back_url' => '@student_show', 'student_career_school_year' => $student_career_school_year, 'reincorporations' => $student->getStudentReincorporationsPerSubject())) ?>
     </fieldset>
