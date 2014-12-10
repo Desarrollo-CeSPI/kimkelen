@@ -97,6 +97,17 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
   }
 
   /**
+   * Returns default City selection
+   *
+   * @return int City Id
+   */
+  public function getDefaultDepartmentId()
+  {
+    return Department::LA_PLATA;
+
+  }
+
+  /**
    * Determines the way the school manage file numbers for students: if students have
    * only one file number for every career or it will have a file number per registered
    * career. Default behaviour is a file number per career

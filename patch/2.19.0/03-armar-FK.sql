@@ -1,0 +1,7 @@
+ALTER TABLE  `department` ADD FOREIGN KEY (  `state_id` ) REFERENCES  `state` (
+`id`
+) ON DELETE CASCADE ON UPDATE CASCADE ;
+
+ALTER TABLE  `state` ADD FOREIGN KEY (  `country_id` ) REFERENCES  `country` (
+`id`
+) ON DELETE CASCADE ON UPDATE CASCADE ;

@@ -59,20 +59,6 @@ class PersonForm extends BasePersonForm
    //identification number
     //$this->setValidator('identification_number', new sfValidatorNumber(array('required'=>false)));
 
-    //Birth country, state and city widgets
-    $this->setWidget('birth_country', new sfWidgetFormPropelchoice(array(
-        'model'     => 'Country',
-        'add_empty' => true
-    )));
-
-    $this->setDefault('birth_country',  SchoolBehaviourFactory::getInstance()->getDefaultCountryId());
-
-    $widget_birth_state = new imWidgetFormPropelChoiceOrCreatePopUp(array(
-      'model' => 'State',
-      'add_empty' => true,
-      'url' =>'state/new',
-      'new_label'=>'Nueva provincia'
-      ));
 
     #This string is necesary to assemble the id needed for the html object
     $related_class= $this->getOption('related_class');
@@ -83,31 +69,8 @@ class PersonForm extends BasePersonForm
     $embed_str = empty($embed_str)?'':"$embed_str-";
     $related_class.='_'.$embed_str;
 
-    $this->setWidget('birth_state', new dcWidgetAjaxDependencePropel(array(
-        'related_column'     => 'country_id',
-        'dependant_widget'   => $widget_birth_state,
-        'observe_widget_id'  => $related_class.'birth_country',
-        'message_with_no_value' => __('Select a country first'),
-    )));
-
-    $this->setDefault('birth_state',  SchoolBehaviourFactory::getInstance()->getDefaultStateId());
-
     $c = new Criteria();
     $c->addAscendingOrderByColumn('name');
-
-    $widget_birth_city = new sfWidgetFormPropelChoice(array(
-      'model'      => 'City',
-      'add_empty'  => true,
-      'criteria' => $c
-    ));
-
-    $this->setWidget('birth_city', new dcWidgetAjaxDependencePropel(array(
-        'related_column'     => 'state_id',
-        'dependant_widget'   => $widget_birth_city,
-        'observe_widget_id'  => $related_class.'birth_state',
-        'message_with_no_value' => __('Select a state first'),
-        )));
-    $this->setDefault('birth_city',  SchoolBehaviourFactory::getInstance()->getDefaultCityId());
 
     //field sex widget and validator
     $this->setWidget('sex', new sfWidgetFormSelect(array(

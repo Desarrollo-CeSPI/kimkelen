@@ -35,12 +35,11 @@ classes:
       birthdate:
         type:               date
         required:           false
-      birth_country:
-        type:               varchar(255)
-      birth_state:
-        type:               varchar(255)
       birth_city:
-        type:               varchar(255)
+        type:               integer
+        foreignTable:       city
+        foreignReference:   id
+        required:           false
       observations:
         type:               longvarchar
       address_id:
@@ -305,10 +304,6 @@ classes:
     description:          Representa una direccion postal
     columns:
       id:
-      state_id:
-        type:             integer
-        foreignTable:     state
-        foreignReference: id
       city_id:
         type:             integer
         foreignTable:     city

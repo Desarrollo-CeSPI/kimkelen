@@ -7,9 +7,25 @@ classes:
     description:          Representa una ciudad
     columns:
       id:
-      zip_code:
+      name:
         type: varchar(255)
         required: true
+      short_name:
+        type: varchar(255)
+        required: true
+      department_id:
+        type: integer
+        foreignTable: department
+        foreignReference: id
+        required: true
+      _indexes:
+        name: [name]
+
+  Department:
+    tableName: department
+    description: Representa un partido o departamento
+    columns:
+      id:
       name:
         type: varchar(255)
         required: true
@@ -18,9 +34,9 @@ classes:
         foreignTable: state
         foreignReference: id
         required: true
-      _indexes:
-        state: [state_id]
-        name: [name]
+      status:
+        type: varchar(1)
+
 
   State:
     tableName:            state
@@ -35,8 +51,6 @@ classes:
         foreignTable: country
         foreignReference: id
         required: true
-      _indexes:
-        country: [country_id]
 
   Country:
     tableName:            country
