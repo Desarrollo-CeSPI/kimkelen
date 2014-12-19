@@ -29,3 +29,6 @@ ALTER TABLE `address` ADD CONSTRAINT `address_FK_1`
 		REFERENCES `city` (`id`), DROP INDEX address_FI_1, ADD  INDEX `address_FI_1` (`city_id`), DROP INDEX address_FI_2, DROP `state_id`;
 
 
+ALTER TABLE  `address` ADD  `old_city_id` INT NULL DEFAULT NULL;
+
+ALTER TABLE  `person` ADD  `old_birth_city` INT NULL DEFAULT NULL;

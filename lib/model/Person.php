@@ -80,31 +80,8 @@ class Person extends BasePerson
 
   }
 
-  /**
-   * Return the string representation for the birth state
-   *
-   * @return string
-   */
-  public function getBirthStaterepresentation()
-  {
-    $criteria = new Criteria();
-    $criteria->add(StatePeer::ID, $this->getBirthState());
-    return StatePeer::doSelectOne($criteria)->getName();
 
-  }
 
-  /**
-   * Return the string representation for the birth city
-   *
-   * @return string
-   */
-  public function getBirthCityRepresentation()
-  {
-    $criteria = new Criteria();
-    $criteria->add(CityPeer::ID, $this->getBirthCity());
-    return CityPeer::doSelectOne($criteria)->getName();
-
-  }
 
   /**
    * Returns if this person can be set to active. This will be only when is not active
@@ -115,6 +92,7 @@ class Person extends BasePerson
     return $this->getIsActive() == false;
 
   }
+
 
   /**
    * Returns if this person can be set to inactive. This will be only when is not active
@@ -210,6 +188,19 @@ class Person extends BasePerson
    public function getFormattedBirthDate()
   {
     return $this->getBirthdate('d-m-Y');
+  }
+
+
+  public function getBirthState()
+  {
+    if (is_null($this->getCity())) return null;
+    return $this->getCity()->getDepartment()->getState();
+  }
+
+  public function getBirthCountry()
+  {
+    if (is_null($this->getCity())) return null;
+    return $this->getCity()->getDepartment()->getState()->getCountry();
   }
 }
 

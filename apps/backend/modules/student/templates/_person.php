@@ -94,9 +94,9 @@
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_birth_country">
   <div>
     <label for="birth_country"> <?php echo __('Lugar de nacimiento'); ?> </label>
-    <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? 'No ha sido cargada' : $student->getPerson()->getBirthCityRepresentation(); ?>
-    , <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? 'No ha sido cargado' : $student->getPerson()->getBirthStateRepresentation(); ?>
-    , <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? 'No ha sido cargado' : $student->getPerson()->getBirthCountryRepresentation(); ?></div>
+    <?php echo (is_null($student->getPerson()->getCity()) | $student->getPerson()->getCity() == '') ? 'No ha sido cargada' : $student->getPerson()->getCity(); ?>
+    , <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? 'No ha sido cargado' : $student->getPerson()->getBirthState(); ?>
+    , <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? 'No ha sido cargado' : $student->getPerson()->getBirthCountry(); ?></div>
   <div style="margin-top: 1px; clear: both;"></div>
 </div>
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_address">
