@@ -961,24 +961,22 @@ class Student extends BaseStudent
   }
 
   public function getStudentDisapprovedCourseSubject()
-  {
-    #StudentCareerSchoolYearPeer
-    #student_disapproved_course_subject
-    $criteria = new Criteria();
+	{
+	 $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+	 if (!is_null($last_year_school_year)) {
+	   $criteria = new Criteria();
 
-    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-    $criteria->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+		 $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
+	   $criteria->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
 
-    $criteria->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-    $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+		 $criteria->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		 $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+		 $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
 
-    $school_id = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent())->getId();
-    $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_id);
+		 $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $last_year_school_year->getId());
 
-
-    return StudentDisapprovedCourseSubjectPeer::doSelect($criteria);
-
+	   return StudentDisapprovedCourseSubjectPeer::doSelect($criteria);
+	 }
   }
 
   public function getAmountStudentAttendanceUntilDay($day, $school_year = null)
