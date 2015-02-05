@@ -35,7 +35,7 @@
 
 <?php foreach ($student->getCareerStudents() as $career_student): ?>
   <?php if ($student->countStudentApprovedCareerSubjects()): ?>
-    <a class="tab" href="#student_history_<?php echo $career_student->getId() ?>" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historia Academica <?php echo $career_student->getCareer() ?></a>
+    <a class="tab" href="#student_history_<?php echo $career_student->getId() ?>" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historia Académica <?php echo $career_student->getCareer() ?></a>
   <?php endif ?>
 <?php endforeach ?>
 
