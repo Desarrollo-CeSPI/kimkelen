@@ -87,4 +87,14 @@ class examinationActions extends autoExaminationActions
       $pager->setParameter('school_year',$this->school_year);
       return $pager;
   }
+
+	public function executeCreateExaminationSubjects($request) {
+		$examination = ExaminationPeer::retrieveByPK($request->getParameter('id'));
+		$year = $request->getParameter('year');
+
+		$examination->createExaminationSubjectsForYear($year);
+		$examination->save();
+
+		$this->redirect("@examination_subject");
+	}
 }
