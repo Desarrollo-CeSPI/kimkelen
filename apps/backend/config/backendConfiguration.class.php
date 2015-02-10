@@ -37,13 +37,13 @@ class backendConfiguration extends sfApplicationConfiguration
       ':save:pre'    => array('StudentCareerSchoolYearBehavior', 'createStudentCareerSchoolYear'),
     ));
     
-    sfPropelBehavior::registerHooks('examination', array(
-      ':save:pre' => array('ExaminationBehavior', 'createExaminationSubjects'),
-    ));
+    //sfPropelBehavior::registerHooks('examination', array(
+    //  ':save:pre' => array('ExaminationBehavior', 'createExaminationSubjects'),
+    //));
     
-    //sfPropelBehavior::registerHooks('examination_subject', array(
-    //  ':save:pre' => array('ExaminationSubjectBehavior', 'updateCourseSubjectStudentExaminations'),
-    // ));
+    sfPropelBehavior::registerHooks('examination_subject', array(
+      ':save:pre' => array('ExaminationSubjectBehavior', 'updateCourseSubjectStudentExaminations'),
+     ));
     
     sfPropelBehavior::registerHooks('examination_repproved_subject', array(
       ':save:pre' => array('ExaminationRepprovedSubjectBehavior', 'updateStudentExaminationRepprovedSubjects'),
