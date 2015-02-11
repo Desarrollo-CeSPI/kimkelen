@@ -4231,6 +4231,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Course subjects for commission</source>
                 <target>Materias asociadas a este curso</target>
             </trans-unit>
+            <trans-unit>
+                <source>Create examination subjects for %year%° year</source>
+                <target>Crear mesas de examen de %year%° año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Create examinations</source>
+                <target>Crear mesas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
