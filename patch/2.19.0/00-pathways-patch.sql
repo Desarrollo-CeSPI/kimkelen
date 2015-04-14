@@ -48,3 +48,6 @@ CREATE TABLE `course_subject_student_pathway`
 )Engine=InnoDB COMMENT='Representa la inscripción de un alumno en un curso de trayectoria';
 
 ALTER TABLE `course` ADD `is_pathway` TINYINT default 0;
+
+INSERT INTO sf_guard_permission VALUES (null, 'show_pathway', 'Listar y ver detalle de trayectorias');
+INSERT INTO sf_guard_permission VALUES (null, 'edit_pathway', 'Crear, editar y eliminar trayectorias');
