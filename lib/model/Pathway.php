@@ -15,4 +15,9 @@ class Pathway extends BasePathway
         
         return parent::getPathwayStudentsJoinStudent($criteria, $con, Criteria::INNER_JOIN);
     }
+    
+    function __toString()
+    {
+        return $this->getName();
+    }
 }

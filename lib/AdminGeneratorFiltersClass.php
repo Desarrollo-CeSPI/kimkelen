@@ -260,6 +260,8 @@ class AdminGeneratorFiltersClass
       */
       CoursePeer::sorted($criteria);
       $criteria->add(CoursePeer::DIVISION_ID, null, Criteria::ISNULL);
+      
+      $criteria->add(CoursePeer::IS_PATHWAY, false);
 
       if ($user->isPreceptor())
       {
@@ -396,6 +398,10 @@ class AdminGeneratorFiltersClass
       $examination_repproved_subject_id = sfContext::getInstance()->getUser()->getReferenceFor("examination_repproved_subject");
 
       $criteria->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $examination_repproved_subject_id);
+    }
+    else if ($event->getSubject() instanceOf pathway_commissionActions)
+    {
+      $criteria->add(CoursePeer::IS_PATHWAY, true);
     }
 
     return $criteria;

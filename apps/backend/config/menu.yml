@@ -244,7 +244,7 @@ root:
         menu:
           list:
             title: Comisiones
-            url: pathway/index
+            url: pathway_commission/index
             credentials: [show_student_pathway_courses]
       student_attendance:
         title: Attendance
