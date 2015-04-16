@@ -37,6 +37,7 @@ class shared_courseActions extends autoShared_courseActions
     parent::preExecute();
 
     $this->referer_module = $this->getUser()->getAttribute("referer_module");
+    $this->referer_actions_class = $this->getUser()->getAttribute("referer_actions_class", null);
   }
 
   /**
@@ -132,6 +133,10 @@ class shared_courseActions extends autoShared_courseActions
 
   public function getForms($course_subjects)
   {
+    if ($this->referer_actions_class)
+    {
+        return call_user_func( array( $this->referer_actions_class, 'getForms' ), $course_subjects );
+    }
     $forms = array();
     $i = 0;
     foreach ($course_subjects as $course_subject)

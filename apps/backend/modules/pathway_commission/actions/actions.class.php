@@ -14,16 +14,31 @@ require_once dirname(__FILE__) . '/../lib/pathway_commissionGeneratorHelper.clas
 class pathway_commissionActions extends autoPathway_commissionActions
 {
 
+    public static function getForms($course_subjects)
+    {
+        $forms = array();
+        $i = 0;
+        foreach ($course_subjects as $course_subject)
+        {
+            $forms[$course_subject->getId()] = new PathwayCourseSubjectStudentManyForm($course_subject);
+            $forms[$course_subject->getId()]->getWidgetSchema()->setNameFormat("course_subject_${i}[%s]");
+            $i++;
+        }
+
+        return $forms;
+    }
+
     public function executeCourseSubjectStudent(sfWebRequest $request)
     {
-        $this->getUser()->setAttribute("referer_module", "commission");
+        $this->getUser()->setAttribute("referer_module", "pathway_commission");
+        $this->getUser()->setAttribute("referer_actions_class", __CLASS__);
 
         $this->forward("shared_course", "courseSubjectStudent");
     }
 
     public function executeAddSubject(sfWebRequest $request)
     {
-        //TODO: Ver si puede extenderse de commissionActions
+        //TODO: Ver de extenderlo de commissionActions
         if ($request->isMethod('post'))
         {
             $params = $request->getPostParameters();
@@ -49,6 +64,7 @@ class pathway_commissionActions extends autoPathway_commissionActions
 
     public function executeDeleteSubject(sfWebRequest $request)
     {
+        //TODO: Ver de extenderlo de commissionActions
         $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
 
         if ($cs and $course = $cs->getCourse() and $course->isPathway())
