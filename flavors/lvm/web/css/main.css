@@ -16,6 +16,12 @@ body {
     border: 1px solid #BBB;
 }
 
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
 a img
 {
     border: none;
@@ -1428,6 +1434,14 @@ div.no_results_advice {
 {
   float: right;
   margin-left: 5px;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
 }
 
 .student_head .person_name

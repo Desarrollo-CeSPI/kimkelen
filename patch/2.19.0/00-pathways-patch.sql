@@ -48,3 +48,16 @@ CREATE TABLE `course_subject_student_pathway`
 )Engine=InnoDB COMMENT='Representa la inscripción de un alumno en un curso de trayectoria';
 
 ALTER TABLE `course` ADD `is_pathway` TINYINT default 0;
+
+
+CREATE TABLE `tentative_repproved_student`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`created_at` DATETIME,
+	`student_career_school_year_id` INTEGER  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `tentative_repproved_student_FI_1` (`student_career_school_year_id`),
+	CONSTRAINT `tentative_repproved_student_FK_1`
+		FOREIGN KEY (`student_career_school_year_id`)
+		REFERENCES `student_career_school_year` (`id`)
+)Engine=InnoDB COMMENT='Representa un alumno que puede llegar a repetir o a ser marcado como trayectoria';

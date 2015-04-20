@@ -99,6 +99,12 @@ text-align:right;
 color:#000;
 }
 
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
 /***content***/
 
 #content {
@@ -1973,4 +1979,12 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_open a
 {
   background-image: url('../images/lock_open.png') !important;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
 }

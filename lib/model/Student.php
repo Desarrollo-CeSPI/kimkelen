@@ -1315,6 +1315,21 @@ class Student extends BaseStudent
     return $repproveds_to_show;
   }
 
+
+	/**
+	 * Returns if the student is inscripted in pathway program
+	 *
+	 * @return boolean
+	 */
+	public function getBelongsToPathway()
+	{
+		$c = new Criteria();
+		$c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
+
+		return $this->countPathwayStudents($c) > 0;
+
+	}
+
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

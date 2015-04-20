@@ -50,6 +50,10 @@ save_calificate_non_numerical_mark:
   url:  course_student_mark/saveCalificateNonNumericalMark
   param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
 
+save_resolve_problematic_students:
+  url:  tentative_repproved_student/save
+  param:  { module: tentative_repproved_student, action: save }
+
 rating_report:
   url:  rating_report
   param:  { module: rating_report, action: index }
