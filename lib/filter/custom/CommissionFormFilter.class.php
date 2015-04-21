@@ -12,7 +12,7 @@ class CommissionFormFilter extends BaseCourseFormFilter
 {
   public function configure()
   {
-    unset($this['starts_at'], $this['quota'], $this['division_id'], $this['related_division_id']);
+    unset($this['starts_at'], $this['quota'], $this['division_id'], $this['related_division_id'], $this['is_pathway']);
 
     $this->getWidget('name')->setOption('with_empty', false);
     $this->getWidgetSchema()->setHelp('name', 'Se buscará por nombre de la comisión.');

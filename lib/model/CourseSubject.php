@@ -130,6 +130,20 @@ class CourseSubject extends BaseCourseSubject
 
   }
 
+  public function getPathwayStudents()
+  {
+    $ret = array();
+    foreach ($this->getCourseSubjectStudentPathways() as $css)
+    {
+      if ($css->getStudent()->getPerson()->getIsActive())
+      {
+        $ret[] = $css->getStudent();
+      }
+    }
+    return $ret;
+
+  }
+
   public function getAllMarksForStudent($student)
   {
     $criteria = new Criteria();

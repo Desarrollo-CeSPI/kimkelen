@@ -1,0 +1,20 @@
+index:
+  credentials: [show_course]
+
+new:
+  credentials: [new_course]
+
+create:
+  credentials: [new_course]
+
+edit:
+  credentials: [edit_course]
+
+update:
+  credentials: [edit_course]
+
+show:
+  credentials: [show_course]
+
+delete:
+  credentials: [edit_course]

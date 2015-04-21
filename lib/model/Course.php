@@ -962,5 +962,28 @@ class Course extends BaseCourse
   {
     return !$this->getIsClosed();
   }
+  
+  public function isPathway()
+  {
+      return $this->getIsPathway();
+  }
+  
+  public function getPathways()
+  {
+      $pathways = null;
+      if ($this->isPathway())
+      {
+          if ($school_year = $this->getSchoolYear())
+          {
+              $pathways = $school_year->getPathways();
+          }
+      }
+      
+      return $pathways;
+  }
+  public function canManagePathwayCourseStudents()
+  {
+      return ( count($this->getCourseSubject()) > 0 );
+  }
 }
 sfPropelBehavior::add('Course', array('changelog'));

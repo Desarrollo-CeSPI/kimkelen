@@ -1,3 +1,21 @@
+pathway_commission:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               pathway_commission
+    prefix_path:          pathway_commission
+    column:               id
+    with_wildcard_routes: true
+
+pathway:
+  class: sfPropelRouteCollection
+  options:
+    model:                Pathway
+    module:               pathway
+    prefix_path:          pathway
+    column:               id
+    with_wildcard_routes: true
+
 student_examination_repproved_subject:
   class: sfPropelRouteCollection
   options:
