@@ -29,32 +29,22 @@ class tentative_repproved_studentActions extends sfActions
 
 		$this->form->bind($request->getParameter($this->form->getName()));
 
-
 		if (is_null($con))
 		{
 			$con = Propel::getConnection(DivisionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
-		$con->beginTransaction();
-		try
+		if ($this->form->isValid())
 		{
-			if ($this->form->isValid())
-			{
-				$this->form->save($con);
-				$this->getUser()->setFlash('notice', 'Los alumnos se guardaron satisfactoriamente.');
-				$this->redirect('schoolyear/index');
-			}
-			else
-			{
-				$this->getUser()->setFlash('error', 'Ocurrieron errores al intentar guardar los alumnos. Por favor, intente nuevamente la operación.');
-				$this->setTemplate('show');
-			}
-			$con->commit();
+			$this->form->save($con);
+			$this->getUser()->setFlash('notice', 'Los alumnos se guardaron satisfactoriamente.');
+			$this->redirect('schoolyear/index');
 		}
-		catch (Exception $e)
+		else
 		{
-			$con->rollBack();
-			$this->getUser()->setFlash('error', $e->getMessage());
+			$this->getUser()->setFlash('error', 'Ocurrieron errores al intentar guardar los alumnos. Por favor, intente nuevamente la operación.');
+			$this->setTemplate('show');
 		}
+
 	}
 }

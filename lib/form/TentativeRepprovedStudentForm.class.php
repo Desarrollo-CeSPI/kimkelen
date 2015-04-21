@@ -13,7 +13,9 @@ class TentativeRepprovedStudentForm extends sfForm
 
 	public static function setAvailableStudents()
 	{
-		self::$_students = TentativeRepprovedStudentPeer::doSelect(new Criteria());
+		$c = new Criteria();
+		$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
+		self::$_students = TentativeRepprovedStudentPeer::doSelect($c);
 	}
 
 	public static function setAvailableStudentsIds()
@@ -28,7 +30,7 @@ class TentativeRepprovedStudentForm extends sfForm
 		$criteria = new Criteria();
 		$criteria->addJoin(StudentCareerSchoolYearPeer::ID, TentativeRepprovedStudentPeer::STUDENT_CAREER_SCHOOL_YEAR_ID);
 		$criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
-		$criteria->add(StudentPeer::ID,$ret,Criteria::IN);
+		$criteria->add(StudentPeer::ID, $ret, Criteria::IN);
 		$criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
 		$criteria->add(PersonPeer::IS_ACTIVE, true);
 
@@ -38,9 +40,10 @@ class TentativeRepprovedStudentForm extends sfForm
 
 	public function configure()
 	{
+		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
+
 		self::setAvailableStudents();
 
-		sfContext::getInstance()->getConfiguration()->loadHelpers(array('Url'));
 		$sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
 		$this->getWidgetSchema()->addFormFormatter("Revisited", $sf_formatter_revisited);
 		$this->getWidgetSchema()->setFormFormatterName("Revisited");
@@ -54,7 +57,7 @@ class TentativeRepprovedStudentForm extends sfForm
 	{
 		$this->setWidget('students', new csWidgetFormStudentMany(array('criteria' => self::setAvailableStudentsIds())));
 
-		$this->getWidgetSchema()->setLabel("students", "Alumnos que repetirán el año");
+		$this->getWidgetSchema()->setLabel("students", __("Students that will go to pathway plan"));
 	}
 
 	public function configureValidators()
@@ -90,6 +93,7 @@ class TentativeRepprovedStudentForm extends sfForm
 				{
 					$c = new Criteria();
 					$c->addJoin(TentativeRepprovedStudentPeer::STUDENT_CAREER_SCHOOL_YEAR_ID, StudentCareerSchoolYearPeer::ID);
+					$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
 					$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $value);
 
 					$trs = TentativeRepprovedStudentPeer::doSelectOne($c);
@@ -100,17 +104,18 @@ class TentativeRepprovedStudentForm extends sfForm
 					$pathway_student->setYear($trs->getStudentCareerSchoolYear()->getYear());
 					$pathway_student->save($con);
 
-					$trs->delete($con);
+					$trs->setIsDeleted(true);
+					$trs->save($con);
 				}
 
 				foreach (TentativeRepprovedStudentPeer::doSelect(new Criteria()) as $trs) {
 					$behavior = SchoolBehaviourFactory::getEvaluatorInstance();
 					$behavior->repproveStudent($trs->getStudentCareerSchoolYear()->getStudent(), $trs->getStudentCareerSchoolYear());
-					$trs->delete($con);
+					$trs->setIsDeleted(true);
+					$trs->save($con);
 				}
 
 			}
-
 			$con->commit();
 		}
 		catch (Exception $e)

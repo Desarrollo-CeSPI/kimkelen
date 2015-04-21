@@ -433,6 +433,16 @@ class SchoolYear extends BaseSchoolYear
 
   }
 
+	public function getMessageCantHasProblematicStudents()
+	{
+		return 'There are no problematic students to resolve.';
+
+	}
+
+	public function hasProblematicStudents()
+	{
+		return (TentativeRepprovedStudentPeer::countPending() > 0 && $this->currentYearIsClosed());
+	}
 }
 
 sfPropelBehavior::add('SchoolYear', array('changelog'));

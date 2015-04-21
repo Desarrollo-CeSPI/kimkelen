@@ -82,3 +82,6 @@ classes:
         foreignTable:     student_career_school_year
         foreignReference: id
         required:         true
+      is_deleted:
+        type: boolean
+        default: false

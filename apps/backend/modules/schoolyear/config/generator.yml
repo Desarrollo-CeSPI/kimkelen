@@ -72,7 +72,7 @@ generator:
 
           resolve_problematic_students:
             action: resolveProblematicStudents
-            condition: currentYearIsClosed
+            condition: hasProblematicStudents
             label:  Resolver alumnos problemáticos
 
           _delete:

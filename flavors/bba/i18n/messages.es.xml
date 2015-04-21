@@ -4394,6 +4394,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway</source>
                 <target>Trayectoria</target>
             </trans-unit>
+            <trans-unit>
+                <source>Students that will go to pathway plan</source>
+                <target>Alumnos que Promocionan por excepción</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

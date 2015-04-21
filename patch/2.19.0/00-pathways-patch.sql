@@ -55,6 +55,7 @@ CREATE TABLE `tentative_repproved_student`
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`created_at` DATETIME,
 	`student_career_school_year_id` INTEGER  NOT NULL,
+	`is_deleted` TINYINT default 0;
 	PRIMARY KEY (`id`),
 	INDEX `tentative_repproved_student_FI_1` (`student_career_school_year_id`),
 	CONSTRAINT `tentative_repproved_student_FK_1`
