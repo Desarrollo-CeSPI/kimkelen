@@ -38,7 +38,8 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
     $available_pathway_students = array();
     foreach ($pathways as $pathway)
     {
-        foreach ($pathway->getPathwayStudents() as $student)
+        //foreach ($pathway->getPathwayStudents() as $student)getPathwayStudentsForYear
+        foreach ($pathway->getPathwayStudentsForYear( $course_subject->getYear() ) as $student)
         {
             $available_pathway_students[] = $student->getStudent();
         }
