@@ -51,3 +51,15 @@ ALTER TABLE `course` ADD `is_pathway` TINYINT default 0;
 
 INSERT INTO sf_guard_permission VALUES (null, 'show_pathway', 'Listar y ver detalle de trayectorias');
 INSERT INTO sf_guard_permission VALUES (null, 'edit_pathway', 'Crear, editar y eliminar trayectorias');
+
+CREATE TABLE `tentative_repproved_student`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`created_at` DATETIME,
+	`student_career_school_year_id` INTEGER  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `tentative_repproved_student_FI_1` (`student_career_school_year_id`),
+	CONSTRAINT `tentative_repproved_student_FK_1`
+		FOREIGN KEY (`student_career_school_year_id`)
+		REFERENCES `student_career_school_year` (`id`)
+)Engine=InnoDB COMMENT='Representa un alumno que puede llegar a repetir o a ser marcado como trayectoria';

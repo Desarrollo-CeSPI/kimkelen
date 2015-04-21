@@ -222,6 +222,7 @@ class AdminGeneratorFiltersClass
       ExaminationRepprovedSubjectPeer::sortedBySubject($criteria);
 
       if ($user->isTeacher())
+
       {
         $criteria->addJoin(ExaminationRepprovedSubjectPeer::ID, ExaminationRepprovedSubjectTeacherPeer::EXAMINATION_REPPROVED_SUBJECT_ID);
         $criteria->addJoin(ExaminationRepprovedSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
@@ -273,7 +274,7 @@ class AdminGeneratorFiltersClass
       }
       if ($user->isHeadPreceptor())
       {
-        self::addCommissiionHeadPreceptorCriteria($criteria, $user);
+        self::addCommissionHeadPreceptorCriteria($criteria, $user);
       }
     }
     else if ($event->getSubject() instanceOf final_examinationActions)
@@ -451,7 +452,7 @@ class AdminGeneratorFiltersClass
 
   }
 
-  public static function addCommissiionHeadPreceptorCriteria($criteria, $user)
+  public static function addCommissionHeadPreceptorCriteria($criteria, $user)
   {
     $personal_in = $user->getPersonalIds();
 

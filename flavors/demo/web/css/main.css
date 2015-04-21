@@ -1937,3 +1937,11 @@ div.wc-cal-event{
 {
   background-image: url('../images/lock_open.png') !important;
 }
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
+}

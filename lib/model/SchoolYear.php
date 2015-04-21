@@ -107,11 +107,11 @@ class SchoolYear extends BaseSchoolYear
    *
    * @return <boolean
    */
-  public function canChangedState()
+  public function canChangeState()
   {
     $current = SchoolYearPeer::retrieveCurrent();
 
-    return !$this->getIsActive() && $current->getIsClosed() && !$this->getIsClosed();
+    return !$this->getIsActive() && !$this->getIsClosed();
   }
 
   /**
@@ -127,7 +127,7 @@ class SchoolYear extends BaseSchoolYear
     {
       return false;
     }
-    elseif ($this->hasStudents())
+    elseif ($this->hasStudents() || $this->getCareerSchoolYears())
     {
       return false;
     }
@@ -158,8 +158,11 @@ class SchoolYear extends BaseSchoolYear
     {
       $msj = 'No se puede borrar el año lectivo por que el mismo posee alumnos matriculados en alguna de las carreras';
     }
+	  elseif ($this->getCareerSchoolYears()){
+	    $msj = "Debe eliminar primero la/s carrera/s de este año lectivo";
+    }
 
-    return $msj;
+	  return $msj;
 
   }
 
@@ -359,6 +362,10 @@ class SchoolYear extends BaseSchoolYear
     return $this->countCareerSchoolYears() > 0 && !$this->getIsClosed() && $this->getIsActive() && $this->areAllExaminationsClosed();
 
   }
+
+	public function currentYearIsClosed() {
+		return $this->getIsClosed() && $this->getIsActive();
+	}
 
   public function getMessageCantClose()
   {

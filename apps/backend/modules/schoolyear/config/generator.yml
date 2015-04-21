@@ -22,7 +22,7 @@ generator:
       list:
         title:             Listado de años lectivos
         sort:              [year, desc]
-        display:           [year, is_active]
+        display:           [year, is_active, is_closed]
         batch_actions:     []
         actions:
           _new:
@@ -32,7 +32,7 @@ generator:
 
           change_state:
             action:       changeState
-            condition:    canChangedState
+            condition:    canChangeState
             label:        Cambiar vigencia
             credentials:  [edit_school_year]
 
@@ -70,6 +70,11 @@ generator:
             label:  close school year
             params: confirm= '¿Está seguro? Esta acción es crítica y no podrá revertirse.'
 
+          resolve_problematic_students:
+            action: resolveProblematicStudents
+            condition: currentYearIsClosed
+            label:  Resolver alumnos problemáticos
+
           _delete:
             credentials: [edit_school_year]
             condition:    canBeDeleted
@@ -93,5 +98,3 @@ generator:
           _save_and_list:
             label:          Guardar año lectivo
           _save_and_add:
-            label:          Guardar y agregar otro año lectivo
-      show:

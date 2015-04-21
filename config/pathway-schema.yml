@@ -70,3 +70,15 @@ classes:
       approval_date:
         description: Representa la fecha de aprobación del curso trayectoria
         type: date
+
+  TentativeRepprovedStudent:
+    tableName: tentative_repproved_student
+    description: Representa un alumno que puede llegar a repetir o a ser marcado como trayectoria
+    columns:
+      id:
+      created_at:
+      student_career_school_year_id:
+        type:             integer
+        foreignTable:     student_career_school_year
+        foreignReference: id
+        required:         true

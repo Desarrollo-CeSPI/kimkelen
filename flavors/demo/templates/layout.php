@@ -37,8 +37,15 @@
     <div id="wrapper">
       <div id="header">
        <div class="logo">
-          <?php echo link_to(image_tag("logo-kimkelen.png", array('alt' => __('Sistema Alumnos - CeSPI'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
-        </div>
+         <?php echo link_to(image_tag("logo-kimkelen.png", array('alt' => __('Sistema Alumnos - CeSPI'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
+
+	       <?php $school_year = SchoolYearPeer::retrieveCurrent(); ?>
+	       <?php if ($school_year): ?>
+		       <div id="header-school-year">
+			       <?php echo __("Año lectivo vigente: %%school_year%%", array('%%school_year%%' => $school_year)); ?>
+		       </div>
+	       <?php endif; ?>
+       </div>
 
         <div class="navigation">
           <?php if ($sf_user->isAuthenticated()): ?>
