@@ -135,7 +135,7 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
       //if student has marks it can't be deleted from course
       if (!in_array($course_subject_student->getStudentId(), $this->values))
       {
-        if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentMarks() == 0)
+        if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentPathwayMarks() == 0)
         {
           $course_subject_student->delete($con);
         }
@@ -211,18 +211,21 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
     $student_ids = $values['course_subject_student_list'];
     $course_subject_id = $values['id'];
 
-    foreach ($student_ids as $student_id)
+    if (!empty($student_ids))
     {
-      if (CourseSubjectStudentPathwayPeer::countStudentInscriptionsForCareerSubjectSchoolYear($course_subject_id, $student_id) != 0)
-      {
-        $duplicated_students[] = StudentPeer::retrieveByPk($student_id);
-      }
-    }
+        foreach ($student_ids as $student_id)
+        {
+          if (CourseSubjectStudentPathwayPeer::countStudentInscriptionsForCareerSubjectSchoolYear($course_subject_id, $student_id) != 0)
+          {
+            $duplicated_students[] = StudentPeer::retrieveByPk($student_id);
+          }
+        }
 
-    if ($duplicated_students)
-    {
-      $error = new sfValidatorError($validator, 'Los siguientes estudiantes seleccionados ya se encuentran inscriptos en otro curso para esta misma materia: ' . implode(',', $duplicated_students));
-        throw new sfValidatorErrorSchema($validator, array('course_subject_student_list' => $error));
+        if ($duplicated_students)
+        {
+          $error = new sfValidatorError($validator, 'Los siguientes estudiantes seleccionados ya se encuentran inscriptos en otro curso para esta misma materia: ' . implode(',', $duplicated_students));
+            throw new sfValidatorErrorSchema($validator, array('course_subject_student_list' => $error));
+        }
     }
 
     return $values;

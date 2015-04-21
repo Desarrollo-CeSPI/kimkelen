@@ -14,7 +14,7 @@ require_once dirname(__FILE__) . '/../lib/pathway_commissionGeneratorHelper.clas
 class pathway_commissionActions extends autoPathway_commissionActions
 {
 
-    public static function getForms($course_subjects)
+    protected function getForms($course_subjects)
     {
         $forms = array();
         $i = 0;
@@ -26,14 +26,6 @@ class pathway_commissionActions extends autoPathway_commissionActions
         }
 
         return $forms;
-    }
-
-    public function executeCourseSubjectStudent(sfWebRequest $request)
-    {
-        $this->getUser()->setAttribute("referer_module", "pathway_commission");
-        $this->getUser()->setAttribute("referer_actions_class", __CLASS__);
-
-        $this->forward("shared_course", "courseSubjectStudent");
     }
 
     public function executeAddSubject(sfWebRequest $request)
@@ -85,6 +77,87 @@ class pathway_commissionActions extends autoPathway_commissionActions
         }
 
         $this->redirect("@pathway_commission");
+    }
+
+    /**
+     * alumnos
+     */
+    public function executeCourseSubjectStudent(sfWebRequest $request)
+    {
+        $this->course = $this->getRoute()->getObject();
+        $this->course_subjects = $this->course->getCourseSubjects();
+        $this->forms = $this->getForms($this->course_subjects);
+
+        $this->handleSelectedTab($request);
+    }
+
+    public function handleSelectedTab(sfWebRequest $request)
+    {
+        if ($request->hasParameter("selected"))
+        {
+            $this->selected = $request->getParameter("selected");
+        }
+        else
+        {
+            // siempre hay uno.
+            $this->selected = $this->course_subjects[0]->getId();
+        }
+    }
+
+    public function executeUpdateCourseSubjectStudents(sfWebRequest $request, $con = null)
+    {
+        if (!$request->isMethod("post"))
+        {
+            $this->redirect($this->referer_module . '/index');
+        }
+
+        $this->course = CoursePeer::retrieveByPK($request->getParameter('id'));
+        $this->course_subjects = $this->course->getCourseSubjects();
+        $this->forms = $this->getForms($this->course_subjects);
+
+        $this->handleSelectedTab($request);
+
+        $valid = count($this->forms);
+
+        foreach ($this->forms as $form)
+        {
+            $form->bind($request->getParameter($form->getName()));
+
+            if ($form->isValid())
+            {
+                $valid--;
+            }
+        }
+
+        if (is_null($con))
+        {
+            $con = Propel::getConnection(DivisionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+        }
+
+        $con->beginTransaction();
+        try
+        {
+            if ($valid == 0)
+            {
+                foreach ($this->forms as $form)
+                {
+                    $form->save($con);
+                }
+                $this->getUser()->setFlash('notice', 'Los alumnos se guardaron satisfactoriamente.');
+            }
+            else
+            {
+                $this->getUser()->setFlash('error', 'Ocurrieron errores al intentar guardar los alumnos. Por favor, intente nuevamente la operación.');
+            }
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            $this->getUser()->setFlash('error', $e->getMessage());
+        }
+
+        $this->setTemplate('courseSubjectStudent');
     }
 
 }

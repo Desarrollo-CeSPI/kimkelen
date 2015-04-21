@@ -8,7 +8,7 @@ class CourseSubjectStudentPathway extends BaseCourseSubjectStudentPathway
     $criterion = $c->getNewCriterion(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNOTNULL);
 
     $c->addOr($criterion);
-    return $this->countCourseSubjectStudentMarks($c);
+    return CourseSubjectStudentPathwayPeer::doCount($c);
 
   }
 }
