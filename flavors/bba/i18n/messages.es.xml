@@ -4398,6 +4398,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Students that will go to pathway plan</source>
                 <target>Alumnos que Promocionan por excepción</target>
             </trans-unit>
+            <trans-unit>
+                <source>There are no problematic students to resolve.</source>
+                <target>No hay alumnos problemáticos.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>here</source>
+                <target>aquí</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Create pathway if it does not exist from</source>
+                <target>Crear plan de promoción por excepción desde</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

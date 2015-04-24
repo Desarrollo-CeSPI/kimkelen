@@ -4263,6 +4263,27 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Students that will go to pathway plan</source>
                 <target>Alumnos que se inscriben en Trayectorias</target>
             </trans-unit>
+            <trans-unit>
+                <source>There are no problematic students to resolve.</source>
+                <target>No hay alumnos problemáticos.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Problematic students legend</source>
+                <target>El siguiente listado representa aquellos alumnos que superaron el límite de materias previas establecido por
+                    la institución. Seleccionelos para inscribirlos en el programa de Trayectorias Inteligentes. Si no los selecciona los mismos repetirán el año lectivo actual.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Students that will go to pathway plan</source>
+                <target>Alumnos a inscribir en Trayectorias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>here</source>
+                <target>aquí</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Create pathway if it does not exist from</source>
+                <target>Crear plan de Trayectorias desde</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

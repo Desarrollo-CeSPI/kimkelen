@@ -4243,6 +4243,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Max absences</source>
                 <target>Cantidad máxima de inasistencias</target>
             </trans-unit>
+            <trans-unit>
+                <source>Resolve problematic students</source>
+                <target>Resolver alumnos problemáticos</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

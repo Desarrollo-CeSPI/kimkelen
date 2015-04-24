@@ -5,9 +5,9 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-	<h1><?php echo __('Resolver alumnos problemáticos') ?></h1>
-	<h2><?php echo __('El siguiente listado representa aquellos alumnos que superaron el límite de materias previas estableciodo por
-	la institución. Seleccionelos para inscribirlos en el programa de Trayectorias Inteligentes/Promoción por excepción. Si no los selecciona los mismos repetirán el año lectivo actual.') ?></h2>
+	<h1><?php echo __('Resolve problematic students') ?></h1>
+	<h2><?php echo __("Problematic students legend") ?></h2>
+	<h3><?php echo __('Create pathway if it does not exist from') ?> <span class="yellow_link"><a target="_blank" href="<?php echo url_for('pathway') ?>"><?php echo __("here") ?></a></span></h3>
 
 	<div id="sf_admin_content">
 		<form action="<?php echo url_for('tentative_repproved_student/save') ?>" method="POST">

@@ -1919,3 +1919,8 @@ div.wc-cal-event{
     color: green;
     text-transform: uppercase;
 }
+
+.sf_admin_list .sf_admin_action_resolve_problematic_students a
+{
+    background-image: url('../images/puzzle--arrow.png') !important;
+}

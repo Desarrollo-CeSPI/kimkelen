@@ -68,6 +68,8 @@ class TentativeRepprovedStudentForm extends sfForm
 			"multiple" => true,
 			'required' => true
 		)));
+
+		$this->validatorSchema->setPostValidator(new sfValidatorCallback(array("callback" => array($this, "validatePathway"))));
 	}
 
 	public function save($con = null)
@@ -106,9 +108,15 @@ class TentativeRepprovedStudentForm extends sfForm
 
 					$trs->setIsDeleted(true);
 					$trs->save($con);
+
+					$trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::APPROVED);
+					$trs->getStudentCareerSchoolYear()->save($con);
 				}
 
-				foreach (TentativeRepprovedStudentPeer::doSelect(new Criteria()) as $trs) {
+				$c = new Criteria();
+				$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
+
+				foreach (TentativeRepprovedStudentPeer::doSelect($c) as $trs) {
 					$behavior = SchoolBehaviourFactory::getEvaluatorInstance();
 					$behavior->repproveStudent($trs->getStudentCareerSchoolYear()->getStudent(), $trs->getStudentCareerSchoolYear());
 					$trs->setIsDeleted(true);
@@ -124,4 +132,17 @@ class TentativeRepprovedStudentForm extends sfForm
 			throw $e;
 		}
 	}
+
+	public function validatePathway($validator, $values)
+	{
+		$criteria = new Criteria();
+		$criteria->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+		if (PathwayPeer::doCount($criteria) == 0)
+		{
+			throw new sfValidatorError($validator, "No se puede guardar el formulario si no existe una trayectoria.");
+		}
+
+		return $values;
+	}
+
 }

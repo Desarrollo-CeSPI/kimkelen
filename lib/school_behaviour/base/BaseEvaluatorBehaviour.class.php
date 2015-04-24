@@ -191,7 +191,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $student_career_school_year->save($con);
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
-
+		if ($student->getId() == 41){
+die(var_dump($student));}
     // se eliminan las previas que se habian generado en este año de cursada
     $c = new Criteria();
     $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
@@ -337,6 +338,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       }
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();
+
 
       // IF is null, is because the course_subject_student_examination has been created editing student history
       $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();

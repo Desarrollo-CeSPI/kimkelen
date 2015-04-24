@@ -436,7 +436,6 @@ class SchoolYear extends BaseSchoolYear
 	public function getMessageCantHasProblematicStudents()
 	{
 		return 'There are no problematic students to resolve.';
-
 	}
 
 	public function hasProblematicStudents()

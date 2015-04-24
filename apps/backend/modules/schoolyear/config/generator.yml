@@ -73,7 +73,7 @@ generator:
           resolve_problematic_students:
             action: resolveProblematicStudents
             condition: hasProblematicStudents
-            label:  Resolver alumnos problemáticos
+            label:  Resolve problematic students
 
           _delete:
             credentials: [edit_school_year]
