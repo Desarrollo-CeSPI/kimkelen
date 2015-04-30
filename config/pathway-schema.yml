@@ -64,12 +64,15 @@ classes:
         type: decimal
         size:             5
         scale:            2
-      average:
-        description: Representa el promedio resultado. Se define tomando la nota de la cursada original + campo mark dividido 2
-        type: decimal
       approval_date:
         description: Representa la fecha de aprobación del curso trayectoria
         type: date
+      pathway_student_id:
+        description:      Referencia a la trayectoria
+        type:             integer
+        foreignTable:     pathway_student
+        foreignReference: id
+        required:         true
 
   TentativeRepprovedStudent:
     tableName: tentative_repproved_student

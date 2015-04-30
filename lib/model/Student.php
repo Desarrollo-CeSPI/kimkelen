@@ -1317,7 +1317,7 @@ class Student extends BaseStudent
 
 
 	/**
-	 * Returns if the student is inscripted in pathway program
+	 * Returns if the student is inscripted in pathway program for current school year
 	 *
 	 * @return boolean
 	 */
@@ -1325,9 +1325,10 @@ class Student extends BaseStudent
 	{
 		$c = new Criteria();
 		$c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
+		$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
+		$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
 
 		return $this->countPathwayStudents($c) > 0;
-
 	}
 
 }

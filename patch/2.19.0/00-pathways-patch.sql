@@ -34,8 +34,8 @@ CREATE TABLE `course_subject_student_pathway`
 	`student_id` INTEGER  NOT NULL COMMENT 'Referencia al estudiante',
 	`course_subject_id` INTEGER  NOT NULL COMMENT 'Referencia a la materia dentro del curso',
 	`mark` DECIMAL(5,2) COMMENT 'Representa la nota que obtiene el alumno en la trayectoria. Se aprueba con 7 (CNLP).',
-	`average` DECIMAL COMMENT 'Representa el promedio resultado. Se define tomando la nota de la cursada original + campo mark dividido 2',
 	`approval_date` DATE COMMENT 'Representa la fecha de aprobación del curso trayectoria',
+	`pathway_student_id` INTEGER  NOT NULL COMMENT 'Referencia a la trayectoria',
 	PRIMARY KEY (`id`),
 	INDEX `course_subject_student_pathway_FI_1` (`student_id`),
 	CONSTRAINT `course_subject_student_pathway_FK_1`
@@ -44,7 +44,11 @@ CREATE TABLE `course_subject_student_pathway`
 	INDEX `course_subject_student_pathway_FI_2` (`course_subject_id`),
 	CONSTRAINT `course_subject_student_pathway_FK_2`
 		FOREIGN KEY (`course_subject_id`)
-		REFERENCES `course_subject` (`id`)
+		REFERENCES `course_subject` (`id`),
+	INDEX `course_subject_student_pathway_FI_3` (`pathway_student_id`),
+	CONSTRAINT `course_subject_student_pathway_FK_3`
+		FOREIGN KEY (`pathway_student_id`)
+		REFERENCES `pathway_student` (`id`)
 )Engine=InnoDB COMMENT='Representa la inscripción de un alumno en un curso de trayectoria';
 
 ALTER TABLE `course` ADD `is_pathway` TINYINT default 0;
