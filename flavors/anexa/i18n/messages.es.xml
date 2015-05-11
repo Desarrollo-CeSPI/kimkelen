@@ -3532,11 +3532,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Authority signature</source>
-                <target>Firma de la Autoridad</target>
+                <target>Firma de la Dirección</target>
             </trans-unit>
             <trans-unit>
                 <source>Responsible signature</source>
-                <target>Firma del/la Responsable</target>
+                <target>Firma de padre, madre o tutor</target>
             </trans-unit>
             <trans-unit>
                 <source>Students absences</source>
@@ -3757,7 +3757,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Marks for day</source>
-                <target>Calificaciones con asistencia por dia</target>
+                <target>Calificaciones</target>
             </trans-unit>
             <trans-unit>
                 <source>Marks for subject</source>

@@ -1954,3 +1954,11 @@ div.wc-cal-event{
 {
   background-image: url('../images/puzzle--arrow.png') !important;
 }
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
+}

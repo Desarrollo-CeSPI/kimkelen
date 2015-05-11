@@ -1419,6 +1419,14 @@ div.no_results_advice {
     padding: 1px;
 }
 
+.pathway_info
+{
+    position: absolute;
+    padding: 1px;
+    color: green;
+    text-transform: uppercase;
+}
+
 .sf_admin_form_row div
 {
     position:relative;

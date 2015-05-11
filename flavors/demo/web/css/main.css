@@ -1945,3 +1945,11 @@ div.wc-cal-event{
     color: green;
     text-transform: uppercase;
 }
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
+}

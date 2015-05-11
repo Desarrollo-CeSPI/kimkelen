@@ -1943,3 +1943,11 @@ div.wc-cal-event{
 {
   background-image: url('../images/lock_open.png') !important;
 }
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
+}

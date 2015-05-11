@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php $pathway = $student->getStudentPathway() ?>
-<?php if ($pathway): ?>
-	<div class="free_info">
-		TIENE TRAYECTORIA
+<?php if ($student->getBelongsToPathway()): ?>
+	<div class="pathway_info">
+		<?php echo __('Pathway'); ?>
+
 	</div>
 <?php endif; ?>
