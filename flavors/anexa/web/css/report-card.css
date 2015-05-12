@@ -57,12 +57,16 @@ body {
   font-size:13px;
   padding-top:3px;
   padding-right:5px;
+  margin-left: 30px;
 }
+
+
 
 .header_row .name
 {
-  float:left;
   font-size:16px;
+  float:left;
+
 }
 
 .header_row .course
@@ -70,25 +74,21 @@ body {
   float:left;
   font-size:13px;
   padding:3px;
-  width:20px;
+  width:35px;
 
 }
 
-.header_row .division
+.header_row .school_year
 {
   float:left;
   font-size:13px;
   padding:3px;
-  width:100px;
-
+  width:10px;
+  margin-right:20px
 }
 
-
-.header_row .orientation
-{
-  float:left;
-  font-size:13px;
-  padding:3px;
+.pair {
+  padding-top: 46px;
 }
 
 .row_top
@@ -153,7 +153,7 @@ table.gridtable {
 }
 
 table.gridtable th {
-  padding: 3px;
+  padding: 8px;
   border-bottom:1px solid #ccc;
   font-size:12px;
 }

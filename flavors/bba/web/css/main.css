@@ -1922,7 +1922,7 @@ div.wc-cal-event{
 
 .sf_admin_list .sf_admin_action_resolve_problematic_students a
 {
-    background-image: url('../images/puzzle--arrow.png') !important;
+  background-image: url('../images/puzzle--arrow.png') !important;
 }
 
 .pathway_info
@@ -1931,4 +1931,10 @@ div.wc-cal-event{
   padding: 1px;
   color: green;
   text-transform: uppercase;
+}
+
+#header-school-year
+{
+  padding-top: 12px;
+  font-size: 13px;
 }
