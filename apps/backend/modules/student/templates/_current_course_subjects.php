@@ -84,7 +84,8 @@
 
         <td><?php echo $course_subject_student->getStudentRepprovedCourseSubjectStrings(); ?></td>
 
-        <td><?php echo ($course_subject_student->getStudentApprovedCareerSubject()) ? $course_subject_student->getFinalMark() : "" ?></td>
+	      <?php $student = $course_subject_student->getStudent(); ?>
+        <td><?php echo ($course_subject_student->getStudentApprovedCareerSubject()) ? $student->getPromDef($course_subject_student->getCourseResult()) : "" ?></td>
 
         <td>
              <?php if (!$course_subject_student->getIsNotAverageable()): ?>

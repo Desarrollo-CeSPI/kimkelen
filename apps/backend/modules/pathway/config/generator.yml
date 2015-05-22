@@ -12,7 +12,8 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
+      fields:
+        school_year:  { label: Año lectivo que se recupera }
       list:
         title:             Listado de trayectorias
         sort:              [name, asc]
@@ -31,7 +32,7 @@ generator:
         actions:
           _list:           { label: Volver al listado de trayectorias }
           _save_and_list:
-            label:          Guardar treyectoria
+            label:          Guardar trayectoria
           _save_and_add:
       new:
         title:             Crear una nueva trayectoria
@@ -43,5 +44,7 @@ generator:
           _save_and_add:
             label:          Guardar y agregar otra trayectoria
       show:
-          title: Trayectoria
-          display: [name, school_year, _student_list]
+          title: Ver trayectoria "%%name%%"
+          display: [school_year, _student_list]
+          actions:
+            _list:
