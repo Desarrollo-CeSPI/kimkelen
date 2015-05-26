@@ -38,11 +38,14 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
     $available_pathway_students = array();
     foreach ($pathways as $pathway)
     {
-        //foreach ($pathway->getPathwayStudents() as $student)getPathwayStudentsForYear
-        foreach ($pathway->getPathwayStudentsForYear( $course_subject->getYear() ) as $student)
-        {
-            $available_pathway_students[] = $student->getStudent();
-        }
+	    $c = new Criteria();
+	    $c->add(PathwayStudentPeer::PATHWAY_ID, $pathway->getId());
+	    $c->add(PathwayStudentPeer::YEAR, $course_subject->getYear());
+
+      foreach (PathwayStudentPeer::doSelect($c) as $ps)
+      {
+        $available_pathway_students[] = $ps->getStudent();
+      }
     }
     self::$_students = array_merge($course_subject->getPathwayStudents(), $available_pathway_students);
   }
@@ -130,6 +133,7 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
     }
 
     $this->values = $this->getValue('course_subject_student_list');
+
 
     foreach ($this->getObject()->getCourseSubjectStudentPathways() as $course_subject_student)
     {

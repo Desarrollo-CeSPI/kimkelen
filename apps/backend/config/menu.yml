@@ -237,15 +237,16 @@ root:
       commissions:
         title: Comisiones
         credentials: [show_course]
-        url: commission/index
-      student_pathways:
-        title: Trayectorias
-        credentials: [show_student_pathway]
         menu:
           list:
-            title: Comisiones
+            title: Listado de comisiones
+            url: commission/index
+            credentials: [show_course]
+          student_pathways:
+            title: Listado de comisiones de trayectorias
+            credentials: [show_student_pathway]
             url: pathway_commission/index
-            credentials: [show_student_pathway_courses]
+
       student_attendance:
         title: Attendance
         url: @student_attendance_day

@@ -41,8 +41,6 @@ generator:
           _list:           { label: Volver al listado de trayectorias }
           _save_and_list:
             label:          Guardar trayectoria
-          _save_and_add:
-            label:          Guardar y agregar otra trayectoria
       show:
           title: Ver trayectoria "%%name%%"
           display: [school_year, _student_list]

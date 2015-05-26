@@ -26,10 +26,12 @@
   <?php else:?>
     <table>
 	    <th></th>
-	    <th>Año para el cual está inscripto</th>
+	    <th><?php echo __('Año para el cual está inscripto') ?></th>
       <?php foreach ($pathway->getPathwayStudents() as $pathway_student): ?>
-        <tr><td><?php echo $pathway_student->getStudent(); ?></td>
-	        <td><?php echo $pathway_student->getYear(); ?>°</td></tr>
+        <tr>
+	        <td><?php echo $pathway_student->getStudent(); ?></td>
+	        <td><?php echo $pathway_student->getYear(); ?>°</td>
+        </tr>
       <?php endforeach  ?>
     </table>
   <?php endif?>
