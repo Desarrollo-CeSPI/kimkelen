@@ -15,34 +15,35 @@ generator:
       fields:
         school_year:  { label: Año lectivo que se recupera }
       list:
-        title:             Listado de trayectorias
+        title:             Pathway list
         sort:              [name, asc]
         display:           [name, school_year]
         batch_actions:     []
         actions:
           _new:
-            label: Nueva trayectoria
             credentials: [edit_pathway]
+        object_actions:
+          _edit:
+          _show:
+          _delete:
+            condition: canBeDeleted
       filter:
         class: false
       form:    ~
       edit:
-        title:             Edición de la trayectoria "%%name%%"
+        title:             Edición de "%%name%%"
         display:           [name, school_year_id]
         actions:
-          _list:           { label: Volver al listado de trayectorias }
+          _list:
           _save_and_list:
-            label:          Guardar trayectoria
-          _save_and_add:
       new:
         title:             Crear una nueva trayectoria
         display:           [name, school_year_id]
         actions:
-          _list:           { label: Volver al listado de trayectorias }
+          _list:
           _save_and_list:
-            label:          Guardar trayectoria
       show:
-          title: Ver trayectoria "%%name%%"
+          title: Ver "%%name%%"
           display: [school_year, _student_list]
           actions:
             _list:

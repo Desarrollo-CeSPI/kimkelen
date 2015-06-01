@@ -113,15 +113,7 @@ class TentativeRepprovedStudentForm extends sfForm
 					$trs->getStudentCareerSchoolYear()->save($con);
 				}
 
-				$c = new Criteria();
-				$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
 
-				foreach (TentativeRepprovedStudentPeer::doSelect($c) as $trs) {
-					$behavior = SchoolBehaviourFactory::getEvaluatorInstance();
-					$behavior->repproveStudent($trs->getStudentCareerSchoolYear()->getStudent(), $trs->getStudentCareerSchoolYear());
-					$trs->setIsDeleted(true);
-					$trs->save($con);
-				}
 
 			}
 			$con->commit();

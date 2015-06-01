@@ -22,4 +22,8 @@ class Pathway extends BasePathway
     {
         return $this->getName();
     }
+
+	  function canBeDeleted() {
+		  return ($this->countPathwayStudents() == 0);
+	  }
 }
