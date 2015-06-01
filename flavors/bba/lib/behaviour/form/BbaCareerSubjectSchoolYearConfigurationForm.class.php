@@ -46,7 +46,7 @@ class BbaCareerSubjectSchoolYearConfigurationForm extends BbaSubjectConfiguratio
     }
 
     $this->updateObject();
-    $this->object->setCourseMarks(3);
+   // $this->object->setCourseMarks(3);
     if ($this->object->getCourseType() == CourseType::BIMESTER){
       $this->object->setEvaluationMethod(EvaluationMethod::FINAL_PROM);
     }
