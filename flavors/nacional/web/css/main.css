@@ -1948,6 +1948,7 @@ div.wc-cal-event{
     padding: 5px 15px !important;
     color: green;
     text-transform: uppercase;
+
 }
 
 .sf_admin_list .sf_admin_action_resolve_problematic_students a
@@ -1961,4 +1962,19 @@ div.wc-cal-event{
   padding: 1px;
   color: green;
   text-transform: uppercase;
+}
+
+.warning-button {
+    text-transform: uppercase;
+    display: block;
+    width: 6em;
+    padding: 0.2em;
+    line-height: 1.4;
+    background-color: #CC6666;
+    border: 1px solid black;
+    color: #fefefe !important;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none !important;
 }

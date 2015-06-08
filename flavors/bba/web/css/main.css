@@ -1938,3 +1938,18 @@ div.wc-cal-event{
   padding-top: 12px;
   font-size: 13px;
 }
+
+.warning-button {
+    text-transform: uppercase;
+    display: block;
+    width: 6em;
+    padding: 0.2em;
+    line-height: 1.4;
+    background-color: #CC6666;
+    border: 1px solid black;
+    color: #fefefe !important;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none !important;
+}

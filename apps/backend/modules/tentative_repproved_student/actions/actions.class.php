@@ -47,4 +47,17 @@ class tentative_repproved_studentActions extends sfActions
 		}
 
 	}
+
+	public function executeFinish(sfWebRequest $request, $con = null)
+	{
+    $all_tentative_repproved_students = TentativeRepprovedStudentPeer::doSelectNonDeleted();
+
+		foreach ($all_tentative_repproved_students as $trs) {
+      $trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
+			$trs->setIsDeleted(true);
+			$trs->save();
+		}
+
+		$this->redirect('schoolyear/index');
+	}
 }

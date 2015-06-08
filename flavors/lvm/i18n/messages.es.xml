@@ -4299,7 +4299,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Problematic students legend</source>
                 <target>El siguiente listado representa aquellos alumnos que superaron el límite de materias previas establecido por
-                    la institución. Seleccionelos para inscribirlos en el programa de Promoción por excepción. Si no los selecciona los mismos repetirán el año lectivo actual.</target>
+                    la institución. Selecciónelos para inscribirlos en el programa de Promoción por excepción. Una vez que termine la inscripción haga click en 'Finalizar'. Todo alumno NO seleccionado repetirá el año lectivo actual.</target>
             </trans-unit>
             <trans-unit>
                 <source>Students that will go to pathway plan</source>

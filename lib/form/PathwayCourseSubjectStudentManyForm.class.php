@@ -121,6 +121,7 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
       throw $this->getErrorSchema();
     }
 
+
     if (!isset($this->widgetSchema['course_subject_student_list']))
     {
       // somebody has unset this widget
@@ -164,6 +165,7 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
           $course_subject_student = new CourseSubjectStudentPathway();
           $course_subject_student->setCourseSubject($this->getObject());
           $course_subject_student->setStudentId($value);
+	        $course_subject_student->setPathwayStudent(PathwayStudentPeer::retrieveByStudentAndSchoolYear($value, $this->getObject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYearId()));
           $course_subject_student->save($con);
         }
         $con->commit();

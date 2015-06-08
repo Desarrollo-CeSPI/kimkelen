@@ -4391,16 +4391,25 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Crear mesas</target>
             </trans-unit>
             <trans-unit>
+                <source>There are no problematic students to resolve.</source>
+                <target>No hay alumnos en situación dudosa para resolver.</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Pathway</source>
                 <target>Trayectoria</target>
             </trans-unit>
             <trans-unit>
-                <source>Students that will go to pathway plan</source>
-                <target>Alumnos que Promocionan por excepción</target>
+                <source>Resolve problematic students</source>
+                <target>Resolver alumnos en situación dudosa</target>
             </trans-unit>
             <trans-unit>
-                <source>There are no problematic students to resolve.</source>
-                <target>No hay alumnos problemáticos.</target>
+                <source>Problematic students legend</source>
+                <target>El siguiente listado representa aquellos alumnos que superaron el límite de materias previas establecido por
+                    la institución. Selecciónelos para inscribirlos en el programa de Promoción por excepción. Una vez que termine la inscripción haga click en 'Finalizar'. Todo alumno NO seleccionado repetirá el año lectivo actual.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Students that will go to pathway plan</source>
+                <target>Alumnos a inscribir en Promoción por excepción</target>
             </trans-unit>
             <trans-unit>
                 <source>here</source>

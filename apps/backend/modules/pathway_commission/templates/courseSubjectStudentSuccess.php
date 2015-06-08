@@ -45,15 +45,6 @@
         <?php endforeach ?>
       </div>
 
-      <div>
-        <h3><?php echo __("Important") ?></h3>
-        <p><?php echo __("This action allows deletion of students from course only if them do not have associated information for this course. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one course to another.") ?>
-
-        <?php if ($course->canMoveStudents()): ?>
-        <span class="yellow_link"><a href="<?php echo url_for('move_course_students') . '?id=' . $selected; ?>"><?php echo __("Move students to other course subject") ?></a></s>
-        <?php endif; ?>
-        </p>
-      </div>
 
       <?php foreach ($course_subjects as $course_subject): ?>
         <?php if ($course_subject->getCareerSubject()->getHasOptions()): ?>

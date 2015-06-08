@@ -82,6 +82,8 @@ class course_student_markComponents extends sfComponents
     $c->add($criterion);
 
     $this->student_examination_repproved_subjects = StudentExaminationRepprovedSubjectPeer::doSelect($c);
+
+	  //$this->pathway_mark = $this->course_subject_student->getCourseSubjectStudentPathwayMark()->getMark();
   }
 
 }

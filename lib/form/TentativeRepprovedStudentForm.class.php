@@ -9,65 +9,19 @@
  */
 class TentativeRepprovedStudentForm extends sfForm
 {
-	static $_students=array();
-
-	public static function setAvailableStudents()
-	{
-		$c = new Criteria();
-		$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
-		self::$_students = TentativeRepprovedStudentPeer::doSelect($c);
-	}
-
-	public static function setAvailableStudentsIds()
-	{
-		$ret = array();
-
-		foreach (self::$_students as $st)
-		{
-			$ret[]=$st->getStudentCareerSchoolYear()->getStudentId();
-		}
-
-		$criteria = new Criteria();
-		$criteria->addJoin(StudentCareerSchoolYearPeer::ID, TentativeRepprovedStudentPeer::STUDENT_CAREER_SCHOOL_YEAR_ID);
-		$criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
-		$criteria->add(StudentPeer::ID, $ret, Criteria::IN);
-		$criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-		$criteria->add(PersonPeer::IS_ACTIVE, true);
-
-		return $criteria;
-	}
-
 
 	public function configure()
 	{
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
-		self::setAvailableStudents();
-
-		$sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
-		$this->getWidgetSchema()->addFormFormatter("Revisited", $sf_formatter_revisited);
-		$this->getWidgetSchema()->setFormFormatterName("Revisited");
-		$this->getWidgetSchema()->setNameFormat('tentative_repproved_students[%s]');
-
-		$this->configureWidgets();
-		$this->configureValidators();
-	}
-
-	public function configureWidgets()
-	{
-		$this->setWidget('students', new csWidgetFormStudentMany(array('criteria' => self::setAvailableStudentsIds())));
-
-		$this->getWidgetSchema()->setLabel("students", __("Students that will go to pathway plan"));
-	}
-
-	public function configureValidators()
-	{
-
-		$this->setValidator("students", new sfValidatorPropelChoice(array(
-			"model" => "Student",
-			"multiple" => true,
-			'required' => true
+		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'peer_method' => 'getStudents',     'multiple'  => true,
+			"renderer_class"  => "csWidgetFormSelectDoubleList"
 		)));
+
+		$this->validatorSchema['students'] = new sfValidatorPass();
+		$this->validatorSchema->setOption('allow_extra_fields', true);
+
+		$this->getWidgetSchema()->setNameFormat('tentative_repproved_students[%s]');
 
 		$this->validatorSchema->setPostValidator(new sfValidatorCallback(array("callback" => array($this, "validatePathway"))));
 	}
@@ -131,7 +85,7 @@ class TentativeRepprovedStudentForm extends sfForm
 		$criteria->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
 		if (PathwayPeer::doCount($criteria) == 0)
 		{
-			throw new sfValidatorError($validator, "No se puede guardar el formulario si no existe una trayectoria.");
+			throw new sfValidatorError($validator, "No se puede guardar el formulario si no existe una trayectoria para el año lectivo actual.");
 		}
 
 		return $values;

@@ -2991,17 +2991,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Conduct of students to the division</source>
-                <target>Conducta de  estudiantes por division</target>
+                <target>Convivencia e integración por división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Conduct of the students to the %division%</source>
-                <target>Conducta de  estudiantes de %division%</target>
+                <target>Convivencia e integración de %division%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Student conduct</source>
-                <target>Conducta de estudiantes</target>
+                <target>Convivencia e integración</target>
             </trans-unit>
 
             <trans-unit>

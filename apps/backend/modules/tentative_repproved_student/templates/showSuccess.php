@@ -9,12 +9,11 @@
 	<h2><?php echo __("Problematic students legend") ?></h2>
 	<h3><?php echo __('Create pathway if it does not exist from') ?> <span class="yellow_link"><a target="_blank" href="<?php echo url_for('pathway') ?>"><?php echo __("here") ?></a></span></h3>
 
+	<a href="<?php echo url_for('tentative_repproved_student/finish') ?>" class="warning-button" onclick="return (confirm('¿Está seguro? Los alumnos que no fueron seleccionados repetirán el año lectivo actual.'));"><?php echo __('Finalizar') ?></a>
+
 	<div id="sf_admin_content">
 		<form action="<?php echo url_for('tentative_repproved_student/save') ?>" method="POST">
-			<ul class="sf_admin_actions">
-				<li><?php echo link_to(__('Back'), 'schoolyear/index', array('class' => 'sf_admin_action_go_back')) ?></li>
-				<li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-			</ul>
+
 			<fieldset>
 				<?php echo $form ?>
 			</fieldset>
@@ -25,6 +24,6 @@
 			</ul>
 		</form>
 	</div>
-	<div style="margin-top: 1px; clear: both;">
-	</div>
+
+	<div style="margin-top: 1px; clear: both;"></div>
 </div>
