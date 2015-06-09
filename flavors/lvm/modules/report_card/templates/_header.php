@@ -31,7 +31,7 @@
         <div class="title"><?php echo __('Career orientation') ?>: </div>
         <div class="orientation"><?php echo (($student_career->getOrientation()) ? $student_career->getOrientation() : '-'); ?></div>
       <?php endif ?>
-     <div class="title"><?php echo __('Ciclo lectivo') ?>: </div>
+     <div class="title"><?php echo __('School year') ?>: </div>
       <div class="school_year"><?php echo $school_year; ?></div>
     </div>
   </div>

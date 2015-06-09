@@ -354,6 +354,16 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   }
 
+	public function getCourseSubjectStudentPathwayMark() {
+		$c = new Criteria();
+		$c->add(CourseSubjectStudentPathwayPeer::STUDENT_ID, $this->getStudentId());
+		$c->add(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
+		$c->addJoin(CourseSubjectStudentPathwayPeer::PATHWAY_STUDENT_ID, PathwayStudentPeer::ID, Criteria::INNER_JOIN);
+		$c->add(PathwayStudentPeer::PATHWAY_ID, PathwayPeer::retrieveCurrent()->getId());
+
+		return CourseSubjectStudentPathwayPeer::doSelect($c);
+  }
+
   public function getTotalAbsences()
   {
     $c = new Criteria();

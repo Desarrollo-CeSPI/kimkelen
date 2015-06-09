@@ -80,7 +80,7 @@ class courseActions extends autoCourseActions
 
     if (null === $this->course)
     {
-      $this->getUser()->setFlash('error', 'Debe seleccionar un curso para configurar sus profesorres');
+      $this->getUser()->setFlash('error', 'Debe seleccionar un curso para configurar sus profesores');
 
       $this->redirect('@course');
     }
@@ -160,7 +160,7 @@ class courseActions extends autoCourseActions
     $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectStudentsRegularityForm();
     $this->form = new $form_name;
     $this->form->setCourse($this->course);
-    if ($request->isMethod("post"))
+    if ($request->isMethod("POST"))
     {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
       if ($this->form->isValid())
@@ -168,7 +168,6 @@ class courseActions extends autoCourseActions
         $this->form->save();
 
         $this->getUser()->setFlash("notice", "All students states have been saved successfully.");
-
       }
     }
 

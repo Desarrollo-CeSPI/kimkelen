@@ -4279,6 +4279,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create examinations</source>
                 <target>Crear mesas</target>
             </trans-unit>
+            <trans-unit>
+                <source>Pathway</source>
+                <target>Trayectoria</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

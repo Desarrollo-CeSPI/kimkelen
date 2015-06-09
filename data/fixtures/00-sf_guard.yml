@@ -368,7 +368,12 @@ sfGuardPermission:
   sfGuardPermission_115:
     name: edit_closed_examination
     description: 'Editar calificaciones de mesas de examen cerradas'
-
+  sfGuardPermission_116:
+    name: show_pathway
+    description: 'Listar y ver detalle de trayectorias'
+  sfGuardPermission_117:
+    name: edit_pathway
+    description: 'Crear, editar y eliminar trayectorias'
 
 
 sfGuardUserGroup:
@@ -708,7 +713,12 @@ sfGuardGroupPermission:
   sfGuardGroupPermission_1_115:
     group_id: sfGuardGroup_1
     permission_id: sfGuardPermission_115
-
+  sfGuardGroupPermission_1_116:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_116
+  sfGuardGroupPermission_1_117:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_117
 
 #Permisos para el grupos de usuarios preceptor
   sfGuardGroupPermission_2_1:
@@ -891,6 +901,9 @@ sfGuardGroupPermission:
   sfGuardGroupPermission_2_112:
     group_id: sfGuardGroup_2
     permission_id: sfGuardPermission_112
+  sfGuardGroupPermission_2_116:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_116
 
 
 
@@ -961,7 +974,10 @@ sfGuardGroupPermission:
   sfGuardGroupPermission_3_106:
     group_id: sfGuardGroup_3
     permission_id: sfGuardPermission_106
-  
+  sfGuardGroupPermission_3_116:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_116
+
 
   #jefe de preceptores
   sfGuardGroupPermission_4_1:
@@ -1153,7 +1169,10 @@ sfGuardGroupPermission:
   sfGuardGroupPermission_4_112:
     group_id: sfGuardGroup_4
     permission_id: sfGuardPermission_112
-   
+  sfGuardGroupPermission_4_116:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_116
+
 
 
   #permisos para el grupo de usuarios oficina de alumnos

@@ -3415,7 +3415,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Is closed</source>
-                <target>¿ Está cerrado ?</target>
+                <target>¿Está cerrado?</target>
             </trans-unit>
             <trans-unit>
                 <source>Phone %phone_number%</source>
@@ -4414,6 +4414,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Create examinations</source>
                 <target>Crear mesas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Pathway</source>
+                <target>Trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+                <source>There are no problematic students to resolve.</source>
+                <target>No hay alumnos problemáticos.</target>
             </trans-unit>
         </body>
     </file>

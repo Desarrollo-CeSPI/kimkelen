@@ -39,6 +39,7 @@ class AbsenceTypeForm extends BaseAbsenceTypeForm
 
     $faltas = array(
         "1" => '1',
+	      "2" => '2',
         "0.5" => '1/2',
         "0.33" => '1/3',
         "0.25" => '1/4',

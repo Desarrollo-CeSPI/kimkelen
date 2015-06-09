@@ -74,6 +74,9 @@ classes:
       current_period:
         type: integer
         default:  1
+      is_pathway:
+        type: boolean
+        default: false
       _indexes:
         course_division: [school_year_id, division_id]
 

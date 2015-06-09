@@ -37,7 +37,7 @@ class sfGuardGroupForm extends BasesfGuardGroupForm
                                                                                               'label_unassociated' => 'No seleccionados',
                                                                                               'label_associated' => 'Seleccionados',
                                                                                               'associate'=>'<img src="../../../sfFormExtraPlugin/images/next.png" alt="Seleccionar" />',
-                                                                                              'unassociate'=> '<img src="../../../sfFormExtraPlugin/images/previous.png" alt="Desseleccionar" />')));
+                                                                                              'unassociate'=> '<img src="../../../sfFormExtraPlugin/images/previous.png" alt="Deseleccionar" />')));
     $this->widgetSchema['sf_guard_group_permission_list']->setLabel('Permissions');
 
   }

@@ -41,7 +41,7 @@
   </div>
   <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_cuil">
     <div>
-    <label for="cuil"> <?php echo __('Cuil');?> </label>
+    <label for="cuil"> <?php echo __('CUIL');?> </label>
       <?php echo (is_null($tutor->getPerson()->getCuil()) | $tutor->getPerson()->getCuil() == '') ? 'No ha sido cargado' : $tutor->getPerson()->getCuil();?>
     </div>
     <div style="margin-top: 1px; clear: both;"></div>
