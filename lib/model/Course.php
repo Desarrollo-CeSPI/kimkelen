@@ -170,6 +170,13 @@ class Course extends BaseCourse
 
   }
 
+	public function countPathwayStudents()
+	{
+		$criteria = CoursePeer::retrievePathwayStudentsCriteria($this->getId());
+		return CourseSubjectStudentPathwayPeer::doCount($criteria);
+
+	}
+
   /*
    * This method returns how many students has been qualified. At any courseSubject
    *
@@ -200,6 +207,19 @@ class Course extends BaseCourse
 
   }
 
+	/**
+	 * Return if the course marks can be edited.
+	 *
+	 * @param PropelPDO $con
+	 *
+	 * return boolean
+	 */
+	public function canEditPathwayMarks(PropelPDO $con = null)
+	{
+		return ($this->countPathwayStudents()) && (!$this->getIsClosed());
+
+	}
+
   /**
    * Return if the course marks can be edited.
    *
@@ -209,7 +229,7 @@ class Course extends BaseCourse
    */
   public function canEditMarks(PropelPDO $con = null)
   {
-    return ($this->countStudents()) && (!$this->getIsClosed()) && $this->isCurrentSchoolYear();
+    return ($this->countStudents()) && (!$this->getIsClosed()) && ($this->isCurrentSchoolYear());
 
   }
 

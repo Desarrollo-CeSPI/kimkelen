@@ -139,4 +139,26 @@ class CoursePeer extends BaseCoursePeer
 
   }
 
+	/*
+ * This static method returns the criteria, for the students that are inscripted in any subject of the course_id
+ *
+ * @return Criteria
+ */
+
+	static public function retrievePathwayStudentsCriteria($course_id)
+	{
+		$course = CoursePeer::retrieveByPk($course_id);
+
+		$c = new Criteria();
+		$c->add(CourseSubjectPeer::COURSE_ID, $course_id);
+		$c->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID);
+		$c->addJoin(CourseSubjectStudentPathwayPeer::STUDENT_ID, StudentPeer::ID);
+		$c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+		$c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
+		$c->add(PersonPeer::IS_ACTIVE,true);
+		$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
+		return $c;
+
+	}
+
 }

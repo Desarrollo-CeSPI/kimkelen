@@ -32,7 +32,11 @@ class course_student_markComponents extends sfComponents
 
     $this->configuration  = $this->course_subject->getCareerSubjectSchoolYear()->getConfiguration();
 
-    $this->course_subject_students = $this->course_subject->getCourseSubjectStudents();
+	  if (!$this->course->getIsPathway()) {
+      $this->course_subject_students = $this->course_subject->getCourseSubjectStudents();
+	  }else {
+		  $this->course_subject_students = $this->course_subject->getCourseSubjectStudentPathways();
+	  }
   }
 
   public function executeMark()
@@ -43,6 +47,13 @@ class course_student_markComponents extends sfComponents
 
     $this->marks = $this->course_subject_student->getAvailableCourseSubjectStudentMarks();
   }
+
+	public function executePathwayMark()
+	{
+		$this->course_subject = $this->getVar('course_subject');
+
+		$this->course_subject_student = $this->getVar('course_subject_student');
+	}
 
   public function executeComponent_close()
   {

@@ -30,12 +30,11 @@ class pathway_commissionActions extends autoPathway_commissionActions
 
     public function executeAddSubject(sfWebRequest $request)
     {
-        //TODO: Ver de extenderlo de commissionActions
-        if ($request->isMethod('post'))
+        if ($request->isMethod('POST'))
         {
             $params = $request->getPostParameters();
             $this->course = CoursePeer::retrieveByPk($params['course']['id']);
-            $this->form = new SubjectForCommissionForm($this->course);
+            $this->form = new SubjectForPathwayCommissionForm($this->course);
             $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
             if ($this->form->isValid())
             {
@@ -50,7 +49,7 @@ class pathway_commissionActions extends autoPathway_commissionActions
         {
             $this->course = $this->getRoute()->getObject();
             $this->course_subjects = $this->course->getCourseSubjects();
-            $this->form = new SubjectForCommissionForm($this->course);
+            $this->form = new SubjectForPathwayCommissionForm($this->course);
         }
     }
 
@@ -106,7 +105,7 @@ class pathway_commissionActions extends autoPathway_commissionActions
 
     public function executeUpdateCourseSubjectStudents(sfWebRequest $request, $con = null)
     {
-        if (!$request->isMethod("post"))
+        if (!$request->isMethod("POST"))
         {
             $this->redirect($this->referer_module . '/index');
         }
@@ -160,4 +159,21 @@ class pathway_commissionActions extends autoPathway_commissionActions
         $this->setTemplate('courseSubjectStudent');
     }
 
+	public function executeCalifications(sfWebRequest $request)
+	{
+		$this->course = $this->getRoute()->getObject();
+
+		$this->getUser()->setAttribute("referer_module", "pathway_commission");
+
+		$this->redirect("course_student_mark/index?id=" . $this->course->getId());
+
+	}
+
+	public function executeClose(sfWebRequest $request)
+	{
+		$this->getUser()->setAttribute("referer_module", "pathway_commission");
+
+		$this->forward("shared_course", "close");
+
+	}
 }

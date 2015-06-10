@@ -36,6 +36,10 @@ generator:
           _edit:
 #            condition:      canBeEdited
             credentials:    [edit_course]
+          califications:
+            action:         califications
+            credentials:    [edit_division_course_califications]
+            condition:      canEditPathwayMarks
           _delete:
 #            condition:      canBeDeleted
             credentials:    [edit_course]
