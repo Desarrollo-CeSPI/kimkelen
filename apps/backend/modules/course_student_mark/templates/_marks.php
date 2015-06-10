@@ -19,17 +19,24 @@
  */ ?>
 <?php foreach ($course_subject_students as $course_subject_student): ?>
   <div class="sf_admin_form_row">
+	  <?php if (!$course->getIsPathway()): ?>
     <?php include_partial('course_student_mark/free_info', array('course_subject_student' => $course_subject_student))?>
+		<?php endif; ?>
     <label for="course_student_mark[<?php echo $course_subject_student->getId() ?>]" class="required">
       <?php echo strval($course_subject_student->getStudent()) ?>
     </label>
     <div>
 
-      <?php include_component('course_student_mark', 'mark', array('form' => $form, 'course_subject_student' => $course_subject_student, 'course_subject' => $course_subject, 'configuration' => $configuration)) ?>
+	<?php if (!$course->getIsPathway()): ?>
+      <?php include_component('course_student_mark', 'mark', array('form' => $form, 'course_subject_student' => $course_subject_student, 'course_subject' => $course_subject, 'configuration' => $configuration)); ?>
+  <?php else: ?>
+		<?php include_component('course_student_mark', 'pathwayMark', array('form' => $form, 'course_subject_student' => $course_subject_student, 'course_subject' => $course_subject, 'configuration' => $configuration)) ?>
+	<?php endif; ?>
 
-
+	  <?php if (!$course->getIsPathway()): ?>
       <?php include_component('course_student_mark', 'component_close', array('form' => $form, 'course_subject_student' => $course_subject_student, 'course_subject' => $course_subject, 'configuration' => $configuration)) ?>
-      <div style="clear: both; font-size: 1px; height: 1px;">
+    <?php endif; ?>
+		<div style="clear: both; font-size: 1px; height: 1px;">
       </div>
     </div>
   </div>
