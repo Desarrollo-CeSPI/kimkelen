@@ -18,39 +18,20 @@
  */ ?>
 
 <?php $career = $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer(); ?>
-<?php $final_period = $course_subject->isFinalPeriod(); ?>
-<?php $course_subject_configurations = $course_subject->getCourseSubjectConfigurations() ?>
-<?php $configuration = $course_subject->getCareerSubjectSchoolYear()->getConfiguration() ?>
-<?php $marks = $configuration->getCourseMarks() ?>
 
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_marks_count">
-  <div>
-    <label for="marks_count"> <?php echo __('Marks count'); ?> </label>
-    <?php echo $configuration->getCourseMarks(); ?>
-  </div>
+
   <div style="margin-top: 1px; clear: both;"></div>
 </div>
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_marks_course_minimun_mark">
   <div>
     <label for="course_minimun_mark"> <?php echo __('Course minimun mark'); ?> </label>
-    <?php echo $configuration->getCourseMinimunMark(); ?>
+	  <?php $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance() ?>
+    <?php echo  $evaluator_instance::PATHWAY_PROMOTION_NOTE ?>
   </div>
   <div style="margin-top: 1px; clear: both;"></div>
 </div>
-<?php if ($course_subject->hasAttendanceForSubject()): ?>
-  <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_marks_assistance">
-    <div>
-      <label for="attendance_for_subject"> <?php echo __('Attendance for subject'); ?> </label>
-      <?php foreach ($course_subject_configurations as $config): ?>
-        <div>
-          <?php echo __('Maximun absences for') ?>
-          <?php echo $course_subject->getConfigurationForPeriod($config->getCareerSchoolYearPeriod())->getCareerSchoolYearPeriod() . ': ' . $course_subject->getMaxAbsenceForPeriod($config->getCareerSchoolYearPeriod()); ?>
-        </div>
-      <?php endforeach; ?>
-    </div>
-    <div style="margin-top: 1px; clear: both;"></div>
-  </div>
-<?php endif ?>
+
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_students">
   <div>
     <label for="students"> <?php echo __('Students'); ?> </label>
@@ -59,42 +40,23 @@
         <tr>
           <th><?php echo __('File number'); ?></th>
           <th><?php echo __('Student'); ?></th>
-          <?php if ($course_subject->hasAttendanceForSubject()): ?>
-            <th><?php echo __('Absences'); ?></th>
-          <?php endif ?>
-          <?php for ($i = 1; $i <= $marks; $i++): ?>
-            <th><?php echo __(SchoolBehaviourFactory::getInstance()->getMarkTitle($i), array('%number%' => $i)) ?></th>
-          <?php endfor ?>
-          <?php if ($final_period): ?>
-            <th><?php echo __('Average'); ?></th>
-            <th><?php echo __('Result'); ?></th>
-          <?php endif; ?>
+
+          <th><?php echo __('Mark'); ?></th>
+
+          <th><?php echo __('Average'); ?></th>
+          <th><?php echo __('Result'); ?></th>
+
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
-          <?php $course_result = $course_subject_student->getCourseResult(); ?>
-
-          <tr<?php echo (($final_period && !is_null($course_result)) ? " class='" . $course_result->getClass() . "'" : ""); ?>>
-
+        <?php foreach ($course_subject->getCourseSubjectStudentPathways() as $course_subject_student): ?>
+          <?php $course_result = $course_subject_student->getMark() >= $evaluator_instance::PATHWAY_PROMOTION_NOTE ? __('Approved') : __('Dissaproved'); ?>
+          <tr>
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
             <td><?php echo $course_subject_student->getStudent() ?></td>
-            <?php if ($course_subject->hasAttendanceForSubject()): ?>
-              <td><?php echo round($course_subject_student->getTotalAbsences(), 2); ?></td>
-            <?php endif ?>
-
-            <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm): ?>
-              <td><?php echo ($cssm->getMark() ? $cssm : '-'); ?></td>
-            <?php endforeach; ?>
-            <?php if ($final_period): ?>
-              <?php if ($course_subject_student->getIsNotAverageable()): ?>
-                <td></td>
-                <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
-              <?php else: ?>
-                <td><?php echo $course_subject_student->getMarksAverage() ?></td>
-                <td><?php echo $course_result ?></td>
-              <?php endif; ?>
-            <?php endif; ?>
+            <td><?php echo ($course_subject_student->getMark() ?  $course_subject_student->getMark() : '-'); ?></td>
+            <td><?php echo $course_subject_student->getMark() ?></td>
+            <td><?php echo $course_result ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
