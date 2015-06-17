@@ -21,14 +21,14 @@
 <?php echo $form->renderGlobalErrors() ?>
 <?php echo $form->renderHiddenFields() ?>
 
-	<?php $field = $form[$course_subject_student->getId() . '_1']; ?>
-	<?php $request_value = $sf_request->getParameter($form->getName() . '[' . $course_subject_student->getId() . '_1]'); ?>
+	<?php $field = $form[$course_subject_student->getId()]; ?>
+
+	<?php $request_value = $sf_request->getParameter($form->getName() . '[' . $course_subject_student->getId(). ']'); ?>
+
 	<div class='mark-container'>
-		<?php echo __('Nota %d:', array('%d' => $course_subject_student->getMark())); ?>&nbsp;&nbsp;
+		<?php echo __('Nota:'); ?>&nbsp;&nbsp;
 		<?php echo $field->render(array('class' => 'mark' . ($field->hasError() ? ' with-error' : ''), 'value' => ((isset($request_value) && $request_value) ? $request_value : $field->getValue()))); ?>
 		<?php if ($field->hasError()): ?>
 			<?php echo $field->renderError(); ?>
 		<?php endif; ?>
-
-
 	</div>

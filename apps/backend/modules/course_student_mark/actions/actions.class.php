@@ -126,7 +126,7 @@ class course_student_markActions extends sfActions
 
     $this->course = $this->getCourse();
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-    $this->forms = $this->getForms($this->course_subjects);
+    $this->forms = $this->getForms($this->course_subjects, $this->course->getIsPathway());
 
     $valid = count($this->forms);
 

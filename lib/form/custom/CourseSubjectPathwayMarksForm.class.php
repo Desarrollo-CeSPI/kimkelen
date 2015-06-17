@@ -22,7 +22,6 @@
 /**
  * Description of CourseSubjectPathwayMarksForm
  *
- * @author ncuesta
  */
 class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 {
@@ -42,15 +41,14 @@ class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 			'max'     => 'La calificación debe ser a lo sumo %max%.',
 			'invalid' => 'El valor ingresado es inválido.'
 		);
+
 		$this->disableCSRFProtection();
-		$tmp_sum = 0;
 		foreach ($this->object->getCourseSubjectStudentPathways() as $course_subject_student)
 		{
-
-				$widget_name = $course_subject_student->getId().'_1';
+				$widget_name = $course_subject_student->getId();
 
 			  $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student->getMark()), array('class' => 'mark'));
-
+        $validators[$widget_name] = new sfValidatorPass();
 		}
 
 		$this->setWidgets($widgets);
@@ -79,26 +77,11 @@ class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 	{
 		$values = $this->getValues();
 
-		$c = new Criteria();
-		$c->add(CourseSubjectStudentMarkPeer::IS_CLOSED, false);
-		foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
+		foreach ($this->object->getCourseSubjectStudentPathways() as $course_subject_student)
 		{
-			foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks($c) as $course_subject_student_mark)
-			{
-				$is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
-				$value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
-				if ((!is_null($is_free)))
-				{
-					if ($is_free)
-					{
-						$value = 0;
-					}
-
-					$course_subject_student_mark->setMark($value);
-					$course_subject_student_mark->setIsFree($is_free);
-					$course_subject_student_mark->save($con);
-				}
-			}
+				$value = $values[$course_subject_student->getId()];
+				$course_subject_student->setMark($value);
+				$course_subject_student->save($con);
 		}
 	}
 }
