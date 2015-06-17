@@ -1001,9 +1001,30 @@ class Course extends BaseCourse
       
       return $pathways;
   }
+
   public function canManagePathwayCourseStudents()
   {
       return ( count($this->getCourseSubject()) > 0 );
   }
+
+	public function pathwayCanBeClosed(PropelPDO $con = null)
+	{
+		if ($this->getIsClosed())
+			return false;
+
+
+		$c = new Criteria();
+		$c->addJoin(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectStudentPathwayPeer::STUDENT_ID, StudentPeer::ID);
+		$c->addJoin(StudentPeer::PERSON_ID,  PersonPeer::ID);
+		$c->addJoin(PersonPeer::IS_ACTIVE,true);
+
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, $this->getId());
+
+		$c->add(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNULL);
+
+		return CourseSubjectStudentPathwayPeer::doCount($c) == 0;
+
+	}
 }
 sfPropelBehavior::add('Course', array('changelog'));

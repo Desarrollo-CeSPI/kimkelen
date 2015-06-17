@@ -40,6 +40,10 @@ generator:
             action:         califications
             credentials:    [edit_division_course_califications]
             condition:      canEditPathwayMarks
+          close:
+            label:        Close
+            action:       close
+            condition:    pathwayCanBeClosed
           _delete:
 #            condition:      canBeDeleted
             credentials:    [edit_course]

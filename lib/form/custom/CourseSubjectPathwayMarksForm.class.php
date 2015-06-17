@@ -80,6 +80,9 @@ class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 		foreach ($this->object->getCourseSubjectStudentPathways() as $course_subject_student)
 		{
 				$value = $values[$course_subject_student->getId()];
+			  if (($value == "") || ($value == "0.00")){
+				  $value = null;
+			  }
 				$course_subject_student->setMark($value);
 				$course_subject_student->save($con);
 		}

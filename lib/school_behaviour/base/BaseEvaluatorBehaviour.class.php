@@ -33,6 +33,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   const MAXIMUN_MARK = 10; //nota maxima de un examen
   const EXEMPT = 'Eximido';
 
+	const PATHWAY_PROMOTION_NOTE = 7;
+
   protected
   $_examination_number = array(
     self::DECEMBER => 'Diciembre',

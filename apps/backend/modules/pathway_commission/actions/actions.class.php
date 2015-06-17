@@ -171,9 +171,18 @@ class pathway_commissionActions extends autoPathway_commissionActions
 
 	public function executeClose(sfWebRequest $request)
 	{
-		$this->getUser()->setAttribute("referer_module", "pathway_commission");
-
-		$this->forward("shared_course", "close");
-
+		$this->course = $this->getRoute()->getObject();
 	}
+
+	public function executeSaveClose(sfWebRequest $request)
+	{
+		// TODO
+		// si es mayor que 7 crear el student approved career subject. si no mandarlo a previa.
+		sfContext::getInstance()->getConfiguration()->loadHelpers('I18N');
+		$this->course = CoursePeer::retrieveByPk($request->getParameter('id'));
+		$this->course->pathwayClose();
+		$this->getUser()->setFlash('notice', __('The course has been closed successfuly'));
+		$this->setTemplate('close');
+	}
+
 }
