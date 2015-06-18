@@ -32,6 +32,14 @@
   <div style="margin-top: 1px; clear: both;"></div>
 </div>
 
+<div class="sf_admin_form_row sf_admin_Text">
+<div>
+	<label> <?php echo __('Average'); ?> </label>
+	<?php echo __('Pathway mark is averaged with course subject average marks.') ?>
+</div>
+<div style="margin-top: 1px; clear: both;"></div>
+</div>
+
 <div class="sf_admin_form_row sf_admin_Text sf_admin_form_field_students">
   <div>
     <label for="students"> <?php echo __('Students'); ?> </label>
@@ -54,8 +62,8 @@
           <tr>
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
             <td><?php echo $course_subject_student->getStudent() ?></td>
-            <td><?php echo ($course_subject_student->getMark() ?  $course_subject_student->getMark() : '-'); ?></td>
-            <td><?php echo $course_subject_student->getMark() ?></td>
+            <td><?php echo $course_subject_student->getMark(); ?></td>
+            <td><?php echo bcdiv(bcadd($course_subject_student->getMark(), $course_subject_student->getRelatedCourseSubjectStudent()->getMarksAverage()), 2, 2); ?></td>
             <td><?php echo $course_result ?></td>
           </tr>
         <?php endforeach; ?>
