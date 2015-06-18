@@ -32,8 +32,6 @@
 			</ul>
 			<input type='hidden' id="id" name="id" value="<?php echo $course->getId()?>">
 
-
-
 			<?php foreach ($course->getCourseSubjects() as $course_subject):?>
 				<?php include_partial('pathway_commission/course_subject_students', array('course_subject' => $course_subject))?>
 			<?php endforeach ?>
