@@ -22,7 +22,7 @@
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/extended.css') ?>
 <div id="sf_admin_container">
 
-		<h1><?php echo __('Cerrar %course%', array('%course%' => $course))?></h1>
+		<h1><?php echo __('Cerrar curso %course%', array('%course%' => $course))?></h1>
 
 	<div id="sf_admin_content">
 		<form action="<?php echo url_for('pathway_commission/saveClose') ?>" method="post">
