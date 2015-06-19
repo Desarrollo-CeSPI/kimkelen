@@ -146,6 +146,23 @@ class Course extends BaseCourse
 
   }
 
+	/**
+	 * String representation of the cantBeClosed cause
+	 * @return string
+	 */
+	public function getMessageCantClosePathway()
+	{
+		if ($this->countPathwayStudents() == 0)
+		{
+			return 'The course hasnt any student inscripted.';
+		}
+		else
+		{
+			return 'You must calificate all the students in the course.';
+		}
+
+	}
+
   /**
    * String representation of the cantBeDeleted cause
    *
@@ -1007,11 +1024,14 @@ class Course extends BaseCourse
       return ( count($this->getCourseSubject()) > 0 );
   }
 
-	public function pathwayCanBeClosed(PropelPDO $con = null)
+	public function CanClosePathway(PropelPDO $con = null)
 	{
 		if ($this->getIsClosed())
 			return false;
 
+
+		if ($this->countPathwayStudents() == 0)
+			return false;
 
 		$c = new Criteria();
 		$c->addJoin(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
@@ -1024,6 +1044,30 @@ class Course extends BaseCourse
 		$c->add(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNULL);
 
 		return CourseSubjectStudentPathwayPeer::doCount($c) == 0;
+
+	}
+
+	public function pathwayClose()
+	{
+		$con = Propel::getConnection();
+		try
+		{
+			$con->beginTransaction();
+			$course_subjects = $this->getCourseSubjects();
+			foreach ($course_subjects as $cs)
+			{
+				$cs->pathwayClose($con);
+			}
+
+			$this->setIsClosed(true);
+			$this->save($con);
+			$con->commit();
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+			$con->rollBack();
+		}
 
 	}
 }

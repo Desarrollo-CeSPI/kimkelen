@@ -43,7 +43,7 @@ generator:
           close:
             label:        Close
             action:       close
-            condition:    pathwayCanBeClosed
+            condition:    canClosePathway
           _delete:
 #            condition:      canBeDeleted
             credentials:    [edit_course]

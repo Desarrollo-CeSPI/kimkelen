@@ -121,7 +121,7 @@ abstract class InterfaceSchoolBehaviour
    * @param Boolean $filter_by_orientation
    * @return Criteria
    */
-  abstract public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation);
+  abstract public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation = true);
 
   /**
    * This methods returns the students available four a course that have a Division

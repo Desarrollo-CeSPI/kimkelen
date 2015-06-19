@@ -28,7 +28,9 @@
 		<form action="<?php echo url_for('pathway_commission/saveClose') ?>" method="post">
 			<ul class="sf_admin_actions">
 				<li><?php echo link_to(__('Back'), "pathway_commission", array('class' => 'sf_admin_action_go_back')) ?></li>
-
+				<?php if (!$course->getIsClosed()): ?>
+					<li><input type="submit" value="<?php echo __('Confirm') ?>" onCLick="return (confirm('¿Esta seguro?'));" /></li>
+				<?php endif ?>
 			</ul>
 			<input type='hidden' id="id" name="id" value="<?php echo $course->getId()?>">
 
