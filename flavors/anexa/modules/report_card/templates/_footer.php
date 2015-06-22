@@ -94,4 +94,23 @@
   <?php endif; ?>
 
 </div>
-<?php include_partial('signature_boxes') ?>
+
+<div class="colsright">
+
+	<div class="rowfirm_teacher">
+		<div class="titletable"><?php echo __('Teacher signature') ?></div>
+	</div>
+
+	<div class="rowfirm_responsible">
+		<div class="titletable"><?php echo __('Responsible signature') ?></div>
+	</div>
+
+	<div class="rowfirm_authority">
+		<div class="titletable"><?php echo __('Authority signature') ?></div>
+	</div>
+
+</div>
+
+<div class="rownotice">
+	<div class="titletable"><?php echo __('Observations') ?></div>
+</div>
