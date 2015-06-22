@@ -148,7 +148,7 @@ body {
 
 table.gridtable {
   font-family:arial,sans-serif;
-  font-size:11px;
+  font-size:13px;
   color:#333333;
   border:none;
   border-collapse: collapse;
@@ -159,7 +159,7 @@ table.gridtable {
 table.gridtable th {
   padding: 8px;
   border-bottom:1px solid #ccc;
-  font-size:12px;
+  font-size:14px;
 }
 
 .th-subject-name {
@@ -186,7 +186,7 @@ table.gridtable tr {
 
 table.lefttable {
   font-family:arial,sans-serif;
-  font-size:11px;
+  font-size:13px;
   color:#333333;
   border:none;
   border-collapse: collapse;
@@ -216,7 +216,7 @@ table.lefttable tr {
 }
 
 .titletable {
-  font-size:12px;
+  font-size:14px;
   font-weight:bold;
   display:block;
   padding:3px;
@@ -251,7 +251,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 15px;
-  height:123px;
+  height:126px;
 }
 
 .rowfirm_responsible{
@@ -260,7 +260,16 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 15px;
-  height:123px;
+  height:126px;
+}
+
+.rowfirm_teacher{
+    border:1px solid #ccc;
+    float:left;
+    margin-top:10px;
+    margin-left:5px;
+    padding:0px 30px;
+    height:126px;
 }
 
 .rownotice{
@@ -268,8 +277,8 @@ table.lefttable tr {
   float:left;
   margin-top:10px;
   padding:0px 15px;
-  height:123px;
-  width:140px;
+  height:150px;
+  width:869px;
 }
 
 #sfWebDebug,
@@ -290,7 +299,7 @@ table.lefttable tr {
 
 table.gridtable_bordered {
     font-family:arial,sans-serif;
-    font-size:11px;
+    font-size:13px;
     color:#333333;
     border:1px solid #ccc;
     border-collapse: collapse;
@@ -301,7 +310,7 @@ table.gridtable_bordered {
 table.gridtable_bordered th {
     padding: 3px;
     border:1px solid #ccc;
-    font-size:12px;
+    font-size:14px;
 }
 
 table.gridtable_bordered td {
@@ -320,7 +329,7 @@ table.gridtable_bordered tr {
 {
   float:left;
   font-weight:bold;
-  font-size:13px;
+  font-size:14px;
   padding-right:5px;
   padding-left: 5px;
 }
@@ -328,5 +337,5 @@ table.gridtable_bordered tr {
 .header_row .row-content
 {
   float:left;
-  font-size:13px;
+  font-size:14px;
 }

@@ -4247,6 +4247,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Resolve problematic students</source>
                 <target>Resolver alumnos problemáticos</target>
             </trans-unit>
+            <trans-unit>
+                <source>Teacher signature</source>
+                <target>Firma del maestro</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
