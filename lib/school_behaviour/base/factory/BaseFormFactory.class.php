@@ -256,14 +256,4 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
     return 'StudentExaminationRepprovedSubjectForm';
   }
-  /**
-   * Returns form used by a pathwat commission/new action
-   *
-   * @see pathwayCommissionGeneratorConfiguration::getFormClass
-   * @return string represents a Form PHPClass
-   */
-  public function getPathwayCommissionForm()
-  {
-    return 'PathwayCommissionForm';
-  }
 }

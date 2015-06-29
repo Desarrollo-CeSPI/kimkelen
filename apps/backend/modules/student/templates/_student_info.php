@@ -21,12 +21,7 @@
 
 <div class="student_head">
   <div class="person_name"><strong><?php echo link_to($student, 'student/show?id=' . $student->getId())?></strong></div>
-
-	<div class="active"><strong><?php echo __("Is Active?") ?></strong> <em><?php include_partial("student/is_active", array("student" => $student)) ?></em></div>
-
-	<?php if ($student->getBelongsToPathway()): ?>
-	<div class="pathway"><strong><?php echo __("Pathway") ?></strong>
-		<?php endif; ?>
+  <div class="active"><strong><?php echo __("Is Active?") ?></strong> <em><?php include_partial("student/is_active", array("student" => $student)) ?></em></div>
 </div>
 
 <?php if (!($sf_user->isTeacher())): ?>

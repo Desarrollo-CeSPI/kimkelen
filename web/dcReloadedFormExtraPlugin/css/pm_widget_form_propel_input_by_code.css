@@ -1,0 +1,23 @@
+.label.found
+{
+  background-color: #46A546;
+}
+
+.label.not-found
+{
+  background-color: #C43C35;
+}
+
+.label {
+  padding: 1px 3px 2px;
+  background-color: #BFBFBF;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  
+  margin-left: 10px;
+}

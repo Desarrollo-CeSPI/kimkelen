@@ -1,21 +1,3 @@
-pathway_commission:
-  class: sfPropelRouteCollection
-  options:
-    model:                Course
-    module:               pathway_commission
-    prefix_path:          pathway_commission
-    column:               id
-    with_wildcard_routes: true
-
-pathway:
-  class: sfPropelRouteCollection
-  options:
-    model:                Pathway
-    module:               pathway
-    prefix_path:          pathway
-    column:               id
-    with_wildcard_routes: true
-
 student_examination_repproved_subject:
   class: sfPropelRouteCollection
   options:
@@ -67,10 +49,6 @@ move_course_students:
 save_calificate_non_numerical_mark:
   url:  course_student_mark/saveCalificateNonNumericalMark
   param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
-
-save_resolve_problematic_students:
-  url:  tentative_repproved_student/save
-  param:  { module: tentative_repproved_student, action: save }
 
 rating_report:
   url:  rating_report
@@ -164,6 +142,13 @@ export_totally_approved_report_cards:
 export_report_cards:
   url: /report_card/Boletines.pdf
   param: { module: report_card, action: reportCardsToPDF, sf_format: pdf }
+
+
+
+social_card:
+  url: /student/:id/printSocialCard
+  param: { module: student, action: printSocialCard, sf_format: pdf }
+
 
 student_free:
   class: sfPropelRouteCollection

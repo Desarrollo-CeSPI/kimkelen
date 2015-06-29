@@ -535,6 +535,16 @@ class studentActions extends autoStudentActions
     $this->student_career_school_years = $this->student->getStudentCareerSchoolYears();
   }
 
+/* CODIGO SOCIAL CARD */
+  public function executePrintSocialCard(sfWebRequest $request)
+  {
+     $this->setLayout('cleanLayout');
+     $this->student = StudentPeer::retrieveByPK($request->getParameter('id'));
+//    $this->student = $this->getRoute()->getObject(); 
+
+  }
+/* CODIGO SOCIAL CARD */
+
   public function executeShowAssistanceAndSanctionReport($request)
   {
     $this->student = $this->getRoute()->getObject();

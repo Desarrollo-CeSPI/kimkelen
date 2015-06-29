@@ -1,0 +1,75 @@
+/* ThemeMiniBlackMenu Style Sheet */
+
+.ThemeMiniBlackMenu,.ThemeMiniBlackSubMenuTable
+{
+	font-family:	verdana, arial, sans-serif;
+	font-size:	9px;
+	color:		white;
+	background-color:	black;
+
+	padding:	0;
+	border:		0;
+
+	cursor:		default;
+}
+
+.ThemeMiniBlackSubMenu
+{
+	position: absolute;
+	visibility: hidden;
+
+	border:		0;
+	padding:	0;
+}
+
+.ThemeMiniBlackSubMenuTable
+{
+	border-top:	1px solid white;
+}
+
+.ThemeMiniBlackMenu td
+{
+	padding:	0px 3px 0px 3px;
+}
+
+.ThemeMiniBlackSubMenuTable td
+{
+	white-space:	nowrap;
+}
+
+.ThemeMiniBlackMainItem,.ThemeMiniBlackMainItemHover,.ThemeMiniBlackMainItemActive,
+.ThemeMiniBlackMenuItem,.ThemeMiniBlackMenuItemHover,.ThemeMiniBlackMenuItemActive
+{
+	white-space:	nowrap;
+}
+
+.ThemeMiniBlackMainItemHover,.ThemeMiniBlackMainItemActive,
+.ThemeMiniBlackMenuItemHover,.ThemeMiniBlackMenuItemActive
+{
+	color:		red;
+}
+
+td.ThemeMiniBlackMenuSplit
+{
+	overflow:	hidden;
+	background-color:	inherit;
+}
+
+div.ThemeMiniBlackMenuSplit
+{
+	height:		1px;
+	margin:		1px 0px 1px 0px;
+	overflow:	hidden;
+	background-color:	inherit;
+	border-top:	1px solid white;
+}
+
+.ThemeMiniBlackMenuVSplit
+{
+	display:	block;
+	width:		1px;
+	margin:		0px 3px 0px 3px;
+	overflow:	hidden;
+	background-color:	inherit;
+	border-right:	1px solid white;
+}

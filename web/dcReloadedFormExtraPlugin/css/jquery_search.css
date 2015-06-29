@@ -1,0 +1,46 @@
+ul#jquery_search_results
+{
+  margin-left: 0px !important;
+}
+
+ul#jquery_search_results li
+{
+  list-style: none !important;
+}
+
+ul#jquery_search_results li a
+{
+  background: none !important;
+  vertical-align: middle;
+  padding-left: 0 !important;
+  padding-right: 5px !important;
+}
+
+.preview span a
+{
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/**/
+
+span#jquery_search_navigation_previous
+{
+  margin-right: 20px;
+}
+
+span#jquery_search_navigation_previous a
+{
+  padding-left: 20px;
+  background: url(../images/resultset_previous.png) no-repeat 0px 0px;
+}
+
+span#jquery_search_navigation_next
+{
+}
+
+span#jquery_search_navigation_next a
+{
+  padding-right: 20px;
+  background: url(../images/resultset_next.png) no-repeat 33px 0px;
+}

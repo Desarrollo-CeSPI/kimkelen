@@ -38,7 +38,7 @@ class BbaSubjectConfigurationForm extends SubjectConfigurationForm
         'choices'  => array_keys($course_type_choices),
         'required' => true
     )));
-    $this->setDefault('course_type', SchoolBehaviourFactory::getInstance()->getDefaultCourseType());
+    $this->setDefault('course_type',SchoolBehaviourFactory::getInstance()->getDefaultCourseType());
 
     $this->getWidgetSchema('attendance_type')->setHelp('attendance_type', 'Se define el tipo de asistencia que tendrán las materias. Si se cambia de "por materia" a "por día", se perderán los valores de los cursos existentes.');
     $this->widgetSchema->setHelp('course_type','Determina la cantidad de notas de un alumno dentro de la cursada y el método de evaluación.');
@@ -46,6 +46,7 @@ class BbaSubjectConfigurationForm extends SubjectConfigurationForm
       $this["course_required"],
       $this["final_examination_required"],
       $this['course_examination_count'],
+      $this['course_marks'],
       $this['evaluation_method']
     );
   }
@@ -60,7 +61,7 @@ class BbaSubjectConfigurationForm extends SubjectConfigurationForm
     parent::doSave($con);
 
     $this->updateObject();
-    //$this->object->setCourseMarks(3);
+    $this->object->setCourseMarks(3);
     $this->object->setEvaluationMethod(BaseCustomOptionsHolder::getInstance('CourseType')->getEvaluationMethodFor($this->object->getCourseType()));
     $this->object->save($con);
 

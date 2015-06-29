@@ -99,12 +99,6 @@ a img
     color:#000;
 }
 
-#header-school-year {
-    font-size: 15px;
-    padding: 6px;
-    color: white;
-}
-
 /***content***/
 
 #content {
@@ -490,7 +484,8 @@ a img
 .sf_admin_list .sf_admin_action_boletines a,
 .sf_admin_list .sf_admin_action_print_report_card a,
 .sf_admin_list .print_certificate a,
-.sf_admin_actions .print_certificate a
+.sf_admin_actions .print_certificate a,
+.sf_admin_list .sf_admin_action_print_social_card a
 {
     background-image: url('../images/printer.png') !important;
 }
@@ -1942,27 +1937,4 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_open a
 {
   background-image: url('../images/lock_open.png') !important;
-}
-
-.pathway_info
-{
-  position: absolute;
-  padding: 1px;
-  color: green;
-  text-transform: uppercase;
-}
-
-.warning-button {
-    text-transform: uppercase;
-    display: block;
-    width: 6em;
-    padding: 0.2em;
-    line-height: 1.4;
-    background-color: #CC6666;
-    border: 1px solid black;
-    color: #fefefe !important;
-    text-decoration: none;
-    text-align: center;
-    margin-bottom: 10px;
-    text-decoration: none !important;
 }

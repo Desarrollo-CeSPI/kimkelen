@@ -191,7 +191,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
 
     $this->form = new ExaminationRepprovedSubjectStudentForm($this->examination_repproved_subject);
 
-    if ($request->isMethod("POST"))
+    if ($request->isMethod("post"))
     {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
 

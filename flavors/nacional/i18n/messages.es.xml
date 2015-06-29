@@ -4255,47 +4255,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create examinations</source>
                 <target>Crear mesas</target>
             </trans-unit>
-            <trans-unit>
-                <source>Pathway</source>
-                <target>Trayectoria</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Students that will go to pathway plan</source>
-                <target>Alumnos que se inscriben en Trayectorias</target>
-            </trans-unit>
-            <trans-unit>
-                <source>There are no problematic students to resolve.</source>
-                <target>No hay alumnos en situación dudosa.</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Resolve problematic students</source>
-                <target>Resolver alumnos en situación dudosa</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Pathway year</source>
-                <target>Año para el cual está inscripto en trayectorias</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Pathway list</source>
-                <target>Trayectorias</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Can't create two pathways for the same school year</source>
-                <target>No se pueden crear dos trayectorias para el mismo año lectivo</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Problematic students legend</source>
-                <target>El siguiente listado representa aquellos alumnos que superaron el límite de materias previas establecido por
-                    la institución. Seleccionelos para inscribirlos en el programa de Trayectorias. Una vez que termine la inscripción haga click en 'Finalizar'. Todo alumno NO seleccionado repetirá el año lectivo actual.</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Create pathway if it does not exist from</source>
-                <target>Crear una nueva trayectoria desde</target>
-            </trans-unit>
-            <trans-unit>
-                <source>here</source>
-                <target>aquí</target>
-            </trans-unit>
         </body>
     </file>
 </xliff>
+

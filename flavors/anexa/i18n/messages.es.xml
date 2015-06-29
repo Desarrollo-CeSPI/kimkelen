@@ -2991,17 +2991,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Conduct of students to the division</source>
-                <target>Convivencia e integración por división</target>
+                <target>Conducta de  estudiantes por division</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Conduct of the students to the %division%</source>
-                <target>Convivencia e integración de %division%</target>
+                <target>Conducta de  estudiantes de %division%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Student conduct</source>
-                <target>Convivencia e integración</target>
+                <target>Conducta de estudiantes</target>
             </trans-unit>
 
             <trans-unit>
@@ -3524,7 +3524,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Behaviour</source>
-                <target>Convivencia e integración</target>
+                <target>Comportamiento</target>
             </trans-unit>
             <trans-unit>
                 <source>Admonitions</source>
@@ -3532,11 +3532,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Authority signature</source>
-                <target>Firma de la Dirección</target>
+                <target>Firma de la Autoridad</target>
             </trans-unit>
             <trans-unit>
                 <source>Responsible signature</source>
-                <target>Firma de padre, madre o tutor</target>
+                <target>Firma del/la Responsable</target>
             </trans-unit>
             <trans-unit>
                 <source>Students absences</source>
@@ -3757,7 +3757,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Marks for day</source>
-                <target>Calificaciones</target>
+                <target>Calificaciones con asistencia por dia</target>
             </trans-unit>
             <trans-unit>
                 <source>Marks for subject</source>
@@ -4244,12 +4244,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Cantidad máxima de inasistencias</target>
             </trans-unit>
             <trans-unit>
-                <source>Resolve problematic students</source>
-                <target>Resolver alumnos problemáticos</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Teacher signature</source>
-                <target>Firma del maestro</target>
+                <source>Print social card</source>
+            <target>Imprimir ficha social</target>
             </trans-unit>
         </body>
     </file>

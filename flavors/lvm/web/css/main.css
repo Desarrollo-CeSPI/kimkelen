@@ -16,12 +16,6 @@ body {
     border: 1px solid #BBB;
 }
 
-#header-school-year {
-    font-size: 15px;
-    padding: 6px;
-    color: white;
-}
-
 a img
 {
     border: none;
@@ -499,7 +493,8 @@ a img
 .sf_admin_list .sf_admin_action_boletines a,
 .sf_admin_list .sf_admin_action_print_report_card a,
 .sf_admin_list .print_certificate a,
-.sf_admin_actions .print_certificate a
+.sf_admin_actions .print_certificate a,
+.sf_admin_list .sf_admin_action_print_social_card a
 {
     background-image: url('../images/printer.png') !important;
 }
@@ -1419,14 +1414,6 @@ div.no_results_advice {
     padding: 1px;
 }
 
-.pathway_info
-{
-    position: absolute;
-    padding: 1px;
-    color: green;
-    text-transform: uppercase;
-}
-
 .sf_admin_form_row div
 {
     position:relative;
@@ -1442,14 +1429,6 @@ div.no_results_advice {
 {
   float: right;
   margin-left: 5px;
-}
-
-.student_head .pathway
-{
-    float: right;
-    padding: 5px 15px !important;
-    color: green;
-    text-transform: uppercase;
 }
 
 .student_head .person_name
@@ -1820,11 +1799,6 @@ div.wc-cal-event{
   background-image: url('../images/school_year_close.png') !important;
 }
 
-.sf_admin_list .sf_admin_action_resolve_problematic_students a
-{
-    background-image: url('../images/puzzle--arrow.png') !important;
-}
-
 .sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
 {
   background-image: url('../images/enrolment.png') !important;
@@ -1894,19 +1868,4 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_open a
 {
   background-image: url('../images/lock_open.png') !important;
-}
-
-.warning-button {
-    text-transform: uppercase;
-    display: block;
-    width: 6em;
-    padding: 0.2em;
-    line-height: 1.4;
-    background-color: #CC6666;
-    border: 1px solid black;
-    color: #fefefe !important;
-    text-decoration: none;
-    text-align: center;
-    margin-bottom: 10px;
-    text-decoration: none !important;
 }

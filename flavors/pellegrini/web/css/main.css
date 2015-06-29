@@ -1935,11 +1935,3 @@ div.wc-cal-event{
 #change-role {
   color: #FFF !important;
 }
-
-.student_head .pathway
-{
-    float: right;
-    padding: 5px 15px !important;
-    color: green;
-    text-transform: uppercase;
-}

@@ -222,7 +222,6 @@ class AdminGeneratorFiltersClass
       ExaminationRepprovedSubjectPeer::sortedBySubject($criteria);
 
       if ($user->isTeacher())
-
       {
         $criteria->addJoin(ExaminationRepprovedSubjectPeer::ID, ExaminationRepprovedSubjectTeacherPeer::EXAMINATION_REPPROVED_SUBJECT_ID);
         $criteria->addJoin(ExaminationRepprovedSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
@@ -261,8 +260,6 @@ class AdminGeneratorFiltersClass
       */
       CoursePeer::sorted($criteria);
       $criteria->add(CoursePeer::DIVISION_ID, null, Criteria::ISNULL);
-      
-      $criteria->add(CoursePeer::IS_PATHWAY, false);
 
       if ($user->isPreceptor())
       {
@@ -274,7 +271,7 @@ class AdminGeneratorFiltersClass
       }
       if ($user->isHeadPreceptor())
       {
-        self::addCommissionHeadPreceptorCriteria($criteria, $user);
+        self::addCommissiionHeadPreceptorCriteria($criteria, $user);
       }
     }
     else if ($event->getSubject() instanceOf final_examinationActions)
@@ -400,10 +397,6 @@ class AdminGeneratorFiltersClass
 
       $criteria->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $examination_repproved_subject_id);
     }
-    else if ($event->getSubject() instanceOf pathway_commissionActions)
-    {
-      $criteria->add(CoursePeer::IS_PATHWAY, true);
-    }
 
     return $criteria;
 
@@ -452,7 +445,7 @@ class AdminGeneratorFiltersClass
 
   }
 
-  public static function addCommissionHeadPreceptorCriteria($criteria, $user)
+  public static function addCommissiionHeadPreceptorCriteria($criteria, $user)
   {
     $personal_in = $user->getPersonalIds();
 

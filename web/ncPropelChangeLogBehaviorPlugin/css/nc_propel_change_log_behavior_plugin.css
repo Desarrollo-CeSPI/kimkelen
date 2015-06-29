@@ -1,0 +1,161 @@
+#nc_change_log_container
+{
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  font-size:11px;
+}
+
+#nc_change_log_container h2
+{
+  background-color:#F2F2F2;
+  border-bottom:1px solid #CCCCCC;
+  border-top:1px solid #CCCCCC;
+  margin:0 0 20px;
+  padding:2px;
+}
+
+#nc_change_log_container h1
+{
+  background-color:#F2F2F2;
+  border-bottom:1px solid #CCCCCC;
+  border-top:1px solid #CCCCCC;
+  margin:0 0 20px;
+  padding:2px;
+}
+
+#nc_change_log_container fieldset
+{
+  background-color:#FFFFFF;
+  border-color:#DDDDDD #DDDDDD -moz-use-text-color;
+  border-style:solid solid none;
+  border-width:1px 1px 0;
+  margin-bottom:3px;
+  padding: 0;
+}
+
+#nc_change_log_content
+{
+
+}
+
+#nc_change_log_fieldset
+{
+
+}
+
+.nc_change_log_form_row
+{
+  border-bottom:1px solid #DDDDDD;
+  clear:both;
+  padding:10px;
+  margin:0
+}
+
+.nc_change_log_form_row label
+{
+  color:#444444;
+  display:block;
+  float:left;
+  font-weight:normal !important;
+  padding:0 1em 3px 0;
+  text-align:left;
+  width:8em;
+}
+
+.nc_change_log_list
+{
+
+}
+
+#nc_change_log_container table
+{
+  margin-bottom:2.5em;
+  border-collapse:collapse;
+  border-spacing:0;
+  width:100%;
+  font-size: inherit;
+}
+
+#nc_change_log_container table tr
+{
+  background-color:#FFFFFF;
+  border-left:1px solid #DDDDDD;
+  border-right:1px solid #DDDDDD;
+}
+
+#nc_change_log_container th, #nc_change_log_container td
+{
+  border-color:#DDDDDD -moz-use-text-color;
+  border-style:solid none;
+  border-width:1px 0;
+  text-align:left;
+  vertical-align:middle;
+  padding: 0.5em;
+}
+
+#nc_change_log_container tr:hover
+{
+  background-color:#eee;
+}
+
+
+#nc_change_log_container th
+{
+  background-color:#555555;
+  color:#FFFFFF;
+  white-space:nowrap;
+}
+
+.nc_change_log_form_row table
+{
+  margin-right: 1em !important;
+  width : auto !important;
+}
+
+.nc_change_log_form_row table th
+{
+  background-color:#d4d4d4 !important;
+}
+
+div.nc_change_log_related_entries
+{
+  margin-left: 1.5em;
+}
+
+.nc_change_log_toggler
+{
+}
+
+.nc_change_log_list_th_actions
+{
+
+}
+
+.nc_change_log_list_th_actions
+{
+
+}
+
+.nc_change_log_list_th_actions
+{
+
+}
+
+.nc_change_log_list_td_actions
+{
+
+}
+
+.nc_change_log_row
+{
+
+}
+
+.odd
+{
+
+}
+
+.even
+{
+
+}
