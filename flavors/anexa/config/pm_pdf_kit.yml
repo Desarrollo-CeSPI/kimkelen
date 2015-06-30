@@ -1,6 +1,6 @@
 all:
   options:
-    orientation: Landscape
+    orientation: Portrait
     page-size: A4
     margin-top: 0.5
     margin-bottom: 0
