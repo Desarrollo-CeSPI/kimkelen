@@ -740,9 +740,9 @@ class CourseSubject extends BaseCourseSubject
         $css_origin->setCourseSubjectId($this->getId());
         $css_origin->save($con);
 
-        //para las asistencias
+       //para las asistencias
         $c = new Criteria();
-	      $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
+             $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
         foreach ($origin_course_subject->getStudentAttendances($c) as $sa)
         {
           $sa->setCourseSubject($this);
