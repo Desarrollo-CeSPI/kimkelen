@@ -1,6 +1,0 @@
-Classroom:
-<?php for($j=1; $j <= 10; $j++): ?>
-  Classroom<?php echo $j;?>:
-    name:   Aula <?php echo $j;?>    
-<?php endfor;?>
-    

@@ -1,4 +1,0 @@
-SchoolYear:
-  SY01:
-    year: '<?php echo date("Y")?>'
-    is_active: true

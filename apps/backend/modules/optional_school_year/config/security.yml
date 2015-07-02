@@ -1,5 +1,0 @@
-index:
-  credentials:   [show_school_year]
-
-optional:
-  credentials:    [edit_school_year]

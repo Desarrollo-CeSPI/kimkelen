@@ -1,8 +1,0 @@
-.svn
-.cache
-/web/uploads/*
-/cache/*
-/log/*
-/config/databases.yml
-/config/propel.ini
-

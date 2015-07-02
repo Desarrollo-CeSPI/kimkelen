@@ -1,5 +1,0 @@
-index:
-  credentials:  [show_dissaproved_students]
-
-show:
-  credentials:   [show_dissaproved_students]

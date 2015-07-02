@@ -1,3 +1,0 @@
-all:
-  view_class: ncFlavor
-  partial_view_class: ncFlavor

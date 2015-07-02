@@ -1,7 +1,0 @@
-TutorType:
-  madre:
-    name:       Madre
-  padre:
-    name:       Padre
-  hermano:
-    name:       Hermano (mayor de 21)

@@ -1,9 +1,0 @@
-dcWidgetFormSelectDoubleListFinderPropel:
-  url:  /dcWidgetFormSelectDoubleListFinderPropel
-  param:  {module: dcFormExtraPlugin, action: dcWidgetFormSelectDoubleListFinderPropel}
-dcWidgetFormPropelChoiceDependant:
-  url:   /dcWidgetFormPropelChoiceDependant
-  param: { module: dcFormExtraPlugin,  action: dcWidgetFormPropelChoiceDependant }
-dcWidgetAjaxDependenceChanged:
-  url:   /dcWidgetAjaxDependenceChanged
-  param: { module: dcFormExtraPlugin,  action: dcWidgetAjaxDependenceChanged }
