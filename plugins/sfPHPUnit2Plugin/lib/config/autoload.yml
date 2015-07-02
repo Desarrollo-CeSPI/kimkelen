@@ -1,0 +1,6 @@
+autoload:
+  # tests for sfPHPUnit2Plugin
+  sfPHPUnit2Plugin_tests:
+    name:           sfPHPUnit2Plugin tests
+    path:           %SF_PLUGINS_DIR%/sfPHPUnit2Plugin/lib/test
+    recursive:      false

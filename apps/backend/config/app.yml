@@ -1,0 +1,104 @@
+all:
+  search:
+    items_per_page:       10
+  configuration:
+    max_course_marks:      4
+    max_course_minimun_mark:     10
+    min_course_minimun_mark:     4
+    share_subjects:  false #Defines if two careers could share subjects.
+    max_person_image_width: 300 #In pixels
+    max_person_image_height: 300 #In pixels
+  pm_module_enabler:
+    always_enabled: [default, sfGuardGroup, sfGuardPermission, sfGuardAuth, sfGuardUser, dcFormExtraPlugin, pmconfiguration, dc_ajax, sfCaptchaGD, sfGuardChangePassword ]
+    modules_names:
+      default:                    Predeterminado
+      sfGuardGroup:               Grupos de usuarios
+      sfGuardUser:                Usuarios
+      sfGuardPermission:          Permisos para los usuarios
+      sfGuardAuth:                Seguridad para los usuarios
+      dcFormExtraPlugin:          Plugin extra para formularios
+      pmconfiguration:            Configuración de modulos adicionales
+      disciplinarysanction:       Sanciones disciplinarias
+      disciplinarysanctionlists:  Listado de sanciones disciplinarias
+      absence_per_day:            Inasistencias (por día)
+      absence_per_subject:        Inasistencias (por materia)
+      justification_type:         Tipos de justificación
+      absence_reason:             Motivos de inasistencia
+      course_absence_per_day:     Carga de inasistencias por curso (por día)
+      course_absence_per_subject: Carga de inasistencias por curso (por materia)
+      disapproved_student:        Estadística de alumnos desaprobados
+      deserter_student:           Estadística de alumnos desertores
+      repeater_student:           Estadistica de alumnos repitentes
+    dependencies:
+      absence_per_day:            [justification_type, absence_reason]
+      absence_per_subject:        [justification_type, absence_reason]
+      course_absence_per_day:     [absence_per_day, justification_type, absence_reason]
+      course_absence_per_subject: [absence_per_subject, justification_type, absence_reason]
+
+  sf_guard_plugin:
+    success_signin_url: homepage
+
+  mailer:
+    defaults:
+      connection:
+        # default connection uses mail() native function
+        #type: native
+        #params: []
+        # Using a SMTP server
+        type:               smtp
+        params:
+          server:           localhost
+          port:             25
+          encryption:       OFF     # can be SSL, TLS, or OFF
+          authentication:           # only if there is an authentication required
+          username:         syncadmin
+          password:         ecdhcdp
+          timeout:          10      # connection failed after this time (seconds)
+          requires_ehlo:    off     # depending on the target server
+
+      from: info@conservatorio.edu.ar # define your default sender's email
+      reply-to: ~
+      return-path: ~
+      cc: ~
+      bcc: ~
+      subject-template: Conservatorio - Gilardo Gilardi "%s" # Change this to customize all your subjects, exemple "[My Company] %s"
+      # About I18N : note that the subject_template AND the subject will be individually passed into the i18n process.
+      i18n-catalogue: messages # Whenever you would like to put your mail translations in a separate catalogue
+
+  nc_change_log_behavior:
+    username_cli:         migracion
+    formatter_class:      ncChangeLogEntryFormatterCustom
+    translation_use_i18n: true
+    date_format:          'd/m/Y'
+    date_time_format:     'd/m/Y H:i:s'
+    time_format:          'H:i:s'
+
+  nc_bi_plugin:
+    bi_server_url: http://163.10.20.70:8080/pentaho
+    #bi_server_url: pentaho.cespi.unlp.edu.ar:8080/pentaho
+    report_suffix: content/reporting
+    timeout: 30.0
+    probe_timeout: 3.0
+
+  sf_guard_secure_plugin:
+    login_failure:
+      max_attempts_per_user: 3
+      max_attempts_per_ip: 10
+      time_window: 90
+    force_change_password_after: 360
+
+  sf_captchagd:
+    image_width:                100 # image width in pixels
+    image_height:               30 # image height in pixels
+    chars:                      "123456789" # possible chars in captcha
+    length:                     4 # length of captcha
+    font_size:                  18 # font size
+    force_new_captcha:          true # if true - captcha regenerated EVERY request, even if user input true value before
+
+    # possible chars colors
+    font_color:                 ["252525", "8b8787", "550707", "3526E6", "88531E"]
+
+    # chars fonts
+    fonts:                      ["akbar/akbar.ttf", "brushcut/BRUSHCUT.TTF", "molten/molten.ttf", "planet_benson/Planetbe.ttf", "whoobub/WHOOBUB_.TTF"]
+    background_color:           DDDDDD # image background color
+    border_color:               000000 # image border color

@@ -1,0 +1,42 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           CareerSubjectSchoolYear
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          optional_school_year
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title:      Materias opcionales de la carrera
+        display:    [career_subject]
+        layout:             stacked
+        params:             |
+          %%_career_subject_info%%
+
+        object_actions:
+          tags:
+            action: tags
+            label: Tags
+            credentials: [edit_school_year]
+            condition: canBeEdited  
+
+          optionals:
+            action:         optional
+            label:          Editar opciones
+            credentials:    [edit_school_year]
+            condition: canBeEdited
+            
+        batch_actions:  []
+        actions:        []
+      filter: 
+        class:  -
+      form:    ~
+      edit:    ~
+      new:     ~

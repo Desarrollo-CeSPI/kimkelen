@@ -1,0 +1,747 @@
+pathway_commission:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               pathway_commission
+    prefix_path:          pathway_commission
+    column:               id
+    with_wildcard_routes: true
+
+pathway:
+  class: sfPropelRouteCollection
+  options:
+    model:                Pathway
+    module:               pathway
+    prefix_path:          pathway
+    column:               id
+    with_wildcard_routes: true
+
+student_examination_repproved_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentExaminationRepprovedSubject
+    module:               student_examination_repproved_subject
+    prefix_path:          student_examination_repproved_subject
+    column:               id
+    with_wildcard_routes: true
+
+add:
+  url: /add
+  param: { module: commission, action: add }
+
+holiday:
+  class: sfPropelRouteCollection
+  options:
+    model:                Holiday
+    module:               holiday
+    prefix_path:          holiday
+    column:               id
+    with_wildcard_routes: true
+
+student_disciplinary_sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+
+sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+
+move_students:
+  url:  move_students
+  param:  { module: division, action: moveStudents }
+
+move_course_students:
+  url:  move_course_students
+  param:  { module: shared_course, action: moveStudents }
+
+save_calificate_non_numerical_mark:
+  url:  course_student_mark/saveCalificateNonNumericalMark
+  param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
+
+save_resolve_problematic_students:
+  url:  tentative_repproved_student/save
+  param:  { module: tentative_repproved_student, action: save }
+
+rating_report:
+  url:  rating_report
+  param:  { module: rating_report, action: index }
+
+course_subject_student_mark_change_log:
+  url:  /showMarkChangeLog
+  param:  {module: course_student_mark, action: showMarkChangeLog }
+
+export_student_stats:
+  url: /student_stats/ReportesEstudiantes.pdf
+  param: { module: student_stats, action: studentReportsToPDF, sf_format: pdf }
+
+set_student_filters:
+  url:  /set_student_filters
+  param:  {module: student_stats, action: setStudentFilters}
+
+student_reports:
+  url:  /student_reports
+  param:  {module: student_stats, action: studentReports}
+
+student_stats:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               student_stats
+    prefix_path:          student_stats
+    column:               id
+    with_wildcard_routes: true
+
+resources:
+  class: sfPropelRouteCollection
+  options:
+    model:                Resources
+    module:               resources
+    prefix_path:          resources
+    column:               id
+    with_wildcard_routes: true
+
+state:
+  class: sfPropelRouteCollection
+  options:
+    model:                State
+    module:               state
+    prefix_path:          state
+    column:               id
+    with_wildcard_routes: true
+
+print_table:
+  url:   /printTable
+  param: { module: course_student_mark, action: printTable }
+
+division_show_courses:
+  url:  /showCourses
+  param:  {module: division, action: showCourses}
+
+division_show_students:
+  url:  /showStudents
+  param:  {module: division, action: showStudents}
+
+
+course_show_students:
+  url:  /showCourseStudents
+  param:  {module: commission, action: showStudents}
+
+delete_course_configuration:
+  url: /delete_course_configuration
+  param: { module: shared_course, action: deleteCourseSubjectConfiguration }
+
+sanction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                SanctionType
+    module:               sanction_type
+    prefix_path:          sanction_type
+    column:               id
+    with_wildcard_routes: true
+
+report_card:
+  url: /report_card
+  param: { module: report_card, action: index }
+
+social_card:
+  url: /student/:id/printSocialCard
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait  }
+
+
+export_not_totally_approved_report_cards:
+  url: /report_card/Boletines_adeudan_materias.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf }
+
+export_totally_approved_report_cards:
+  url: /report_card/Boletines_aprobados.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf, all_approved: true }
+
+export_report_cards:
+  url: /report_card/Boletines.pdf
+  param: { module: report_card, action: reportCardsToPDF, sf_format: pdf }
+
+student_free:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentFree
+    module:               student_free
+    prefix_path:          student_free
+    column:               id
+    with_wildcard_routes: true
+
+career_school_year_period:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSchoolYearPeriod
+    module:               career_school_year_period
+    prefix_path:          career_school_year_period
+    column:               id
+    with_wildcard_routes: true
+
+student_career_school_year_conduct:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentCareerSchoolYearConduct
+    module:               student_career_school_year_conduct
+    prefix_path:          student_career_school_year_conduct
+    column:               id
+    with_wildcard_routes: true
+
+search:
+  url: /search
+  param: { module: search, action: index }
+
+study:
+  class: sfPropelRouteCollection
+  options:
+    model:                Study
+    module:               study
+    prefix_path:          study
+    column:               id
+    with_wildcard_routes: true
+
+occupation_category:
+  class: sfPropelRouteCollection
+  options:
+    model:                OccupationCategory
+    module:               occupation_category
+    prefix_path:          occupation_category
+    column:               id
+    with_wildcard_routes: true
+
+student_office:
+  class: sfPropelRouteCollection
+  options:
+    model:                Personal
+    module:               student_office
+    prefix_path:          student_office
+    column:               id
+    with_wildcard_routes: true
+
+license:
+  class: sfPropelRouteCollection
+  options:
+    model:                License
+    module:               license
+    prefix_path:          license
+    column:               id
+    with_wildcard_routes: true
+
+license_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                LicenseType
+    module:               license_type
+    prefix_path:          license_type
+    column:               id
+    with_wildcard_routes: true
+
+head_personal:
+  class: sfPropelRouteCollection
+  options:
+    model:                Personal
+    module:               head_personal
+    prefix_path:          head_personal
+    column:               id
+    with_wildcard_routes: true
+
+shared_course_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                CourseSubject
+    module:               shared_course_subject
+    prefix_path:          shared_course_subject
+    column:               id
+    with_wildcard_routes: true
+
+student_disciplinary_sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               student_disciplinary_sanction
+    prefix_path:          student_disciplinary_sanction
+    column:               id
+    with_wildcard_routes: true
+
+disciplinary_sanction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                DisciplinarySanctionType
+    module:               disciplinary_sanction_type
+    prefix_path:          disciplinary_sanction_type
+    column:               id
+    with_wildcard_routes: true
+
+absence_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                AbsenceType
+    module:               absence_type
+    prefix_path:          absence_type
+    column:               id
+    with_wildcard_routes: true
+
+student_reincorporation:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentReincorporation
+    module:               student_reincorporation
+    prefix_path:          student_reincorporation
+    column:               id
+    with_wildcard_routes: true
+
+attendance_justification_justificate:
+  url: /justificacion-de-asistencia/justificar
+  param: { module: attendance_justification, action: justificate }
+
+attendance_justification:
+  url: /justificacion-de-asistencia
+  param: { module: attendance_justification, action: index }
+
+justification_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                JustificationType
+    module:               justification_type
+    prefix_path:          justification_type
+    column:               id
+    with_wildcard_routes: true
+
+commission:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               commission
+    prefix_path:          commission
+    column:               id
+    with_wildcard_routes: true
+
+tutor_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                TutorType
+    module:               tutor_type
+    prefix_path:          tutor_type
+    column:               id
+    with_wildcard_routes: true
+
+health_coverage:
+  class: sfPropelRouteCollection
+  options:
+    model:                HealthCoverage
+    module:               health_coverage
+    prefix_path:          health_coverage
+    column:               id
+    with_wildcard_routes: true
+
+student_attendance_subject:
+  url: /inasistencias-por-materia
+  param: { module: student_attendance, action: SelectValuesForAttendanceSubject }
+
+student_attendance_day:
+  url: /inasistencias-por-dia
+  param: { module: student_attendance, action: SelectValuesForAttendanceDay }
+
+save_student_attendance:
+  url: /student_attendance/SaveStudentAttendance
+  param: { module: student_attendance, action: SaveStudentAttendance }
+
+tag:
+  class: sfPropelRouteCollection
+  options:
+    model:                Tag
+    module:               tag
+    prefix_path:          tag
+    column:               id
+    with_wildcard_routes: true
+
+sub_orientation:
+  class: sfPropelRouteCollection
+  options:
+    model:                SubOrientation
+    module:               sub_orientation
+    prefix_path:          sub_orientation
+    column:               id
+    with_wildcard_routes: true
+
+tutor:
+  class: sfPropelRouteCollection
+  options:
+    model:                Tutor
+    module:               tutor
+    prefix_path:          tutor
+    column:               id
+    with_wildcard_routes: true
+
+
+equivalence:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSchoolYear
+    module:               equivalence
+    prefix_path:          equivalence
+    column:               id
+    with_wildcard_routes: true
+
+
+examination_repproved_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                ExaminationRepprovedSubject
+    module:               examination_repproved_subject
+    prefix_path:          examination_repproved_subject
+    column:               id
+    with_wildcard_routes: true
+
+examination_repproved:
+  class: sfPropelRouteCollection
+  options:
+    model:                ExaminationRepproved
+    module:               examination_repproved
+    prefix_path:          examination_repproved
+    column:               id
+    with_wildcard_routes: true
+
+course_subject_student_examination:
+  class: sfPropelRouteCollection
+  options:
+    model:                CourseSubjectStudentExamination
+    module:               course_subject_student_examination
+    prefix_path:          course_subject_student_examination
+    column:               id
+    with_wildcard_routes: true
+
+examination_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                ExaminationSubject
+    module:               examination_subject
+    prefix_path:          examination_subject
+    column:               id
+    with_wildcard_routes: true
+
+manual_examination_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                ExaminationSubject
+    module:               manual_examination_subject
+    prefix_path:          manual_examination_subject
+    column:               id
+    with_wildcard_routes: true
+
+examination:
+  class: sfPropelRouteCollection
+  options:
+    model:                Examination
+    module:               examination
+    prefix_path:          examination
+    column:               id
+    with_wildcard_routes: true
+
+manual_examination:
+  class: sfPropelRouteCollection
+  options:
+    model:                Examination
+    module:               manual_examination
+    prefix_path:          manual_examination
+    column:               id
+    with_wildcard_routes: true
+
+classroom:
+  class: sfPropelRouteCollection
+  options:
+    model:                Classroom
+    module:               classroom
+    prefix_path:          classroom
+    column:               id
+    with_wildcard_routes: true
+
+division_course:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               division_course
+    prefix_path:          division_course
+    column:               id
+    with_wildcard_routes: true
+
+shared_student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               shared_student
+    prefix_path:          shared_student
+    column:               id
+    with_wildcard_routes: true
+
+student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               student
+    prefix_path:          student
+    column:               id
+    with_wildcard_routes: true
+
+shift:
+  class: sfPropelRouteCollection
+  options:
+    model:                Shift
+    module:               shift
+    prefix_path:          shift
+    column:               id
+    with_wildcard_routes: true
+
+career_subject_option:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSubject
+    module:               career_subject_option
+    prefix_path:          career_subject_option
+    column:               id
+    with_wildcard_routes: true
+
+optional_school_year:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSubjectSchoolYear
+    module:               optional_school_year
+    prefix_path:          optional_school_year
+    column:               id
+    with_wildcard_routes: true
+
+career_subject_school_year:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSubjectSchoolYear
+    module:               career_subject_school_year
+    prefix_path:          career_subject_school_year
+    column:               id
+    with_wildcard_routes: true
+
+career_school_year:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSchoolYear
+    module:               career_school_year
+    prefix_path:          career_school_year
+    column:               id
+    with_wildcard_routes: true
+
+orientation:
+  class: sfPropelRouteCollection
+  options:
+    model:                Orientation
+    module:               orientation
+    prefix_path:          orientation
+    column:               id
+    with_wildcard_routes: true
+
+division_title:
+  class: sfPropelRouteCollection
+  options:
+    model:                DivisionTitle
+    module:               division_title
+    prefix_path:          division_title
+    column:               id
+    with_wildcard_routes: true
+
+optional_career_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                OptionalCareerSubject
+    module:               optional_career_subject
+    prefix_path:          optional_career_subject
+    column:               id
+    with_wildcard_routes: true
+
+occupation:
+  class: sfPropelRouteCollection
+  options:
+    model:                Occupation
+    module:               occupation
+    prefix_path:          ocupaciones
+    column:               id
+    with_wildcard_routes: true
+
+division:
+  class: sfPropelRouteCollection
+  options:
+    model:                Division
+    module:               division
+    prefix_path:          division
+    column:               id
+    with_wildcard_routes: true
+
+create_course_division:
+  url:  /course/createCourseDivision/:career_subject_id
+  param:
+    module:   course
+    action:   createCourseDivision
+  requirements:
+    career_subject_id: \d+
+
+generate_backup:
+  url:  /generar-backup-del-sistema
+  params:
+    module: mainBackend
+    action: generateBackup
+
+personal:
+  class: sfPropelRouteCollection
+  options:
+    model:                Personal
+    module:               personal
+    prefix_path:          personal
+    column:               id
+    with_wildcard_routes: true
+
+shared_course:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               shared_course
+    prefix_path:          shared_course
+    column:               id
+    with_wildcard_routes: true
+
+course:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               course
+    prefix_path:          cursos
+    column:               id
+    with_wildcard_routes: true
+
+school_year:
+  class: sfPropelRouteCollection
+  options:
+    model:                SchoolYear
+    module:               schoolyear
+    prefix_path:          anios-lectivos
+    column:               id
+    with_wildcard_routes: true
+
+address:
+  class: sfPropelRouteCollection
+  options:
+    model:                Address
+    module:               address
+    prefix_path:          address
+    column:               id
+    with_wildcard_routes: true
+
+
+career_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                CareerSubject
+    module:               career_subject
+    prefix_path:          career_subject
+    column:               id
+    with_wildcard_routes: true
+
+
+#career_rules
+career:
+  class: sfPropelRouteCollection
+  options:
+    model:                Career
+    module:               career
+    prefix_path:          career
+    column:               id
+    with_wildcard_routes: true
+
+teacher:
+  class: sfPropelRouteCollection
+  options:
+    model:                Teacher
+    module:               teacher
+    prefix_path:          teacher
+    column:               id
+    with_wildcard_routes: true
+
+#school_year_attendande_day_date
+change_school_year_attendance_date:
+  url:    /cambiar-fecha
+  param:  { module: division, action: changeDate }
+
+divisionAttendanceDay:
+  url:    /asistencias-alumnos
+  param:  { module: division, action: attendanceSheet }
+
+courseAttendanceCourseSubject:
+  url:    /asistencias-alumnos-materia
+  param:  { module: shared_course, action: attendanceSheet }
+
+#user change password
+change_password:
+  url:    /cambiar-password
+  param:  { module: sfGuardChangePassword, action: index}
+
+#subject rules
+subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                Subject
+    module:               subject
+    prefix_path:          materias
+    column:               id
+    with_wildcard_routes: true
+
+get_careers:
+  url:   /carreras-de-año-lectivo
+  param:  {module: subject, action: getCareers}
+
+courses_for_school_year_career:
+  url:  /cursadas-de-año-lectivo-y-carrera
+  param: {module: subject, action: coursesForSchoolYearCareer}
+
+#subject rules
+courses_for_subject:
+  url:    /historico-de-cursos
+  param:  { module: course, action: filter }
+
+# default rules
+sf_guard_secure:
+  url:   /acceso-denegado
+  param: { module: sfGuardAuth, action: secure }
+
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+manual_administracion:
+  url: /manual_administracion
+  param: { module: default, action: displayAdministrationManual }
+
+homepage:
+  url:   /
+  param: { module: mainBackend, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

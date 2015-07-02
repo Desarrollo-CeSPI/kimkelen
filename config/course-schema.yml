@@ -1,0 +1,703 @@
+connection: propel
+description: Modelo de datos de la representacion de cursos en el sistema
+
+classes:
+  StudentCareerSubjectAllowed:
+    tableName:            student_career_subject_allowed
+    description:          Representa que materias puede cursar un alumno
+    columns:
+      id:
+      career_subject_id:
+        description:      Referencia a la materia de una carrera
+        type:             integer
+        foreignTable:     career_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+        primaryKey: true
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         cascade
+        primaryKey: true
+      _uniques:
+        career_subject_student: [ career_subject_id, student_id ]
+      _indexes:
+        career_subject_student_index: [student_id, career_subject_id]
+
+
+  Course:
+    tableName:            course
+    description:           Representa un curso para una materia
+    columns:
+      id:
+      starts_at:
+        description:       Indica el dia que se empieza a cursar
+        type:              date
+        required:          false
+      name:
+        description:       Nombre del curso
+        type:              varchar(255)
+        required:          true
+      quota:
+        description:       Entero que representa la capacidad de alumnos que pueden estar inscriptos
+        type:              integer
+      school_year_id:
+        type: integer
+        foreignTable: school_year
+        foreignReference: id
+        required: true
+        onDelete: restrict
+      division_id:
+        type: integer
+        foreignTable: division
+        foreignReference: id
+        onDelete:         cascade
+        required: false
+        onDelete: cascade
+      related_division_id:
+        description:  En caso de que una comision, se quiera relacionar con una division.
+        type: integer
+        foreignTable: division
+        foreignReference: id
+        onDelete:         setnull
+        default:  null
+        required: false
+      is_closed:
+        type: boolean
+        default:  false
+      current_period:
+        type: integer
+        default:  1
+      is_pathway:
+        type: boolean
+        default: false
+      _indexes:
+        course_division: [school_year_id, division_id]
+
+  CourseSubjectConfiguration:
+    tableName:           course_subject_configuration
+    description:         Representa la configuracion de un curso
+    columns:
+      id:
+      course_subject_id:
+        type: integer
+        foreignTable: course_subject
+        foreignReference: id
+        onDelete:         cascade
+        required: false
+        onDelete: cascade
+      division_id:
+        type: integer
+        foreignTable: division
+        foreignReference: id
+        onDelete:         cascade
+        required: false
+        onDelete: cascade
+      career_school_year_period_id:
+        description:      Referencia a al periodo padre (En caso de ser un bimestre, señala a un cuatrimestre padre).
+        type:             integer
+        foreignTable:     career_school_year_period
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         cascade
+      max_absence:
+        description:      Define la cantidad de faltas permitidas en un periodo
+        type:             float
+        required:         false
+      _indexes:
+        course_subject_configuration: [course_subject_id, division_id, career_school_year_period_id]
+
+  CoursePreceptor:
+    tableName:             course_preceptor
+    description:           Representa la relación entre un curso y su/sus preceptores a cargo
+    columns:
+      id:
+      preceptor_id:
+        type:             integer
+        foreignTable:     personal
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      course_id:
+        type:             integer
+        foreignTable:     course
+        foreignReference: id
+        required:         true
+        onDelete:         cascade
+      _uniques:
+        unique_course_preceptor: [ preceptor_id, course_id ]
+      _indexes:
+        course_preceptor: [ preceptor_id, course_id ]
+
+  CourseSubject:
+    tableName:            course_subject
+    description:          Representa una materia dentro de un curso
+    columns:
+      id:
+      course_id:
+        type:             integer
+        foreignTable:     course
+        foreignReference: id
+        required:         true
+        onDelete:         cascade
+      career_subject_school_year_id:
+        type:             integer
+        foreignTable:     career_subject_school_year
+        foreignReference: id
+        required:         true
+        onDelete:         cascade
+      _uniques:
+        course_subject_unique: [ course_id, career_subject_school_year_id ]
+      _indexes:
+        course_subject: [ course_id, career_subject_school_year_id ]
+
+  CourseSubjectStudent:
+    tableName:            course_subject_student
+    description:          Cada tupla representa un inscripto a una cursada de una materia
+    columns:
+      id:
+      created_at:
+      course_subject_id:
+        description:      Referencia a la cursada de una materia
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      student_approved_course_subject_id:
+        description:      Si el estudiante aprobo la cursada existe esta relacion
+        type:             integer
+        foreignTable:     student_approved_course_subject
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         setnull
+      is_not_averageable:
+        description: El alumno no será calificado numéricamente en este curso
+        type: boolean
+        default:  false
+      _uniques:
+        course_subject_student_unique: [ course_subject_id, student_id ]
+      _indexes:
+        course_subject_student: [ course_subject_id, student_id ]
+
+  CourseSubjectTeacher:
+    tableName:             course_subject_teacher
+    description:           Sobreescribe el profesor de un curso en caso de que esta relacion exista
+    columns:
+      id:
+      teacher_id:
+        type: integer
+        foreignTable: teacher
+        foreignReference: id
+        required: true
+        onDelete: cascade
+      course_subject_id:
+        description:      Referencia a la cursada de una materia
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         cascade
+      _uniques:
+        teacher_course_subject_unique: [teacher_id, course_subject_id ]
+      _indexes:
+        teacher_course_subject: [teacher_id, course_subject_id ]
+
+  CourseSubjectDay:
+    tableName:             course_subject_day
+    description:           Representa un dia en el cual se cursa una materia para un curso dado
+    columns:
+      id:
+      course_subject_id:
+        type:              integer
+        foreignTable:      course_subject
+        foreignReference:  id
+        required:          true
+        onDelete:          cascade
+        onUpdate:          cascade
+      day:
+        description:       Dia de la semana en que se cursa un curso: los valores van de 1 (lunes) a 7 (domingo)
+        type:              integer
+        required:          true
+      block:
+        description:       Bloque horario en un dia para una materia
+        type:              integer
+        required:          true
+        default: 1
+      starts_at:
+        description:       Hora de comienzo de la cursada
+        type:              time
+        required:          false
+      ends_at:
+        description:       Hora de fin de la cursada
+        type:              time
+        required:          false
+      classroom_id:
+        type:              integer
+        foreignTable:      classroom
+        foreignReference:  id
+        required:          false
+        onDelete:          restrict
+        onUpdate:          cascade
+      _indexes:
+        course_subject_day: [course_subject_id, day]
+
+  CourseSubjectStudentMark:
+    tableName:            course_subject_student_mark
+    description:          Representa una nota para un alumno en una cursada de una materia (no necesariamente es la nota final)
+    columns:
+      id:
+      created_at:
+      course_subject_student_id:
+        type:              integer
+        foreignTable:      course_subject_student
+        foreignReference:  id
+        required:          true
+        onDelete:          cascade
+        onUpdate:          cascade
+      mark_number:
+        description:      Posicion de la nota, 1era, 2da, etc
+        type:             integer
+        required:         true
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             decimal
+        required:         false
+        size:             5
+        scale:            2
+      is_closed:
+        description:      Indica que se cerro la nota del alumno en ese mark_number
+        type: boolean
+        default:  false
+      is_free:
+        description:      El alumno esta libre en este periodo
+        type: boolean
+        default:  false
+      _indexes:
+        course_subject_student: [course_subject_student_id]
+
+  StudentApprovedCareerSubject:
+    tableName:            student_approved_career_subject
+    description:          Tabla para almacenar que materias aprueban los alumnos. Una entrada en esta tabla indica que student_id aprobo career_subject_id.
+    columns:
+      id:
+      created_at:
+      updated_at:
+      career_subject_id:
+        description:      Referencia a la materia de una carrera
+        type:             integer
+        foreignTable:     career_subject
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      school_year_id:
+        description:      Referencia al school_year en que se asento la nota
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             decimal
+        size: 4
+        scale: 2
+        required:         false
+      is_equivalence:
+        description:      Si es verdadera, entonces esta nota se paso como equivalencia o de otra carrera o de la historia del alumno
+        type:             boolean
+        default:          false
+      _uniques:
+        unique_student_approval: [career_subject_id, student_id, school_year_id]
+      _indexes:
+        student_approval: [career_subject_id, student_id, school_year_id]
+        student_career_subject_id: [career_subject_id, student_id]
+        student_id: [student_id]
+        career_subject: [career_subject_id]
+
+  StudentApprovedCourseSubject:
+    tableName:            student_approved_course_subject
+    description:          Tabla para almacenar que materia del curso  aprueban los alumnos. Una entrada en esta tabla indica que student_id aprobo course_subject_id.
+    columns:
+      id:
+      created_at:
+      updated_at:
+      course_subject_id:
+        description:      Referencia a la materia de un curso
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      school_year_id:
+        description:      Referencia al school_year en que se asento la nota
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      student_approved_career_subject_id:
+        description:      Si el estudiante aprobo el career subject existe esta relacion
+        type:             integer
+        foreignTable:     student_approved_career_subject
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         cascade
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             decimal
+        size: 4
+        scale: 2
+        required:         false
+      _uniques:
+        unique_student_approval: [course_subject_id, student_id, school_year_id]
+      _indexes:
+        student_school_year_course_subject: [course_subject_id, student_id, school_year_id]
+        student_school_year: [student_id, school_year_id]
+        student_course_subject: [student_id, course_subject_id]
+        student: [student_id]
+        course_subject: [course_subject_id]
+
+
+  StudentDisapprovedCourseSubject:
+    tableName:            student_disapproved_course_subject
+    description:          Tabla que refleja los alumnos que se presentaron a una mesa de desaprobados
+    columns:
+      id:
+      course_subject_student_id:
+        description:      Referencia a un alumno en una materia de un curso
+        type:             integer
+        foreignTable:     course_subject_student
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      examination_number:
+        description:      Representa el numero de mesa en que rinde (Refiriendose a Diciembre, Marzo , etc)
+        type:             integer
+        default:          0
+      student_approved_career_subject_id:
+        description:      Si el estudiante aprobo el career subject existe esta relacion
+        type:             integer
+        foreignTable:     student_approved_career_subject
+        foreignReference: id
+        required:         false
+        onDelete:         setnull
+        onUpdate:         setnull
+      _indexes:
+        course_subject: [course_subject_student_id]
+        student_approved_career_subject: [student_approved_career_subject_id]
+
+
+  Examination:
+    tablename:            examination
+    description:          Representa una mesa de examen. # TODO: pensar bien que datos tiene (fecha, hora, lugar, etc).
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      date_from:
+        type: date
+        required: true
+      date_to:
+        type: date
+        required: true
+      examination_number:
+        description:      Indica la instancia de la mesa (diciembre, febrero, etc).
+        type:             integer
+        required:         true
+        default:          1
+      school_year_id:
+        description:      año lectivo
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+
+  ExaminationSubject:
+    tablename: examination_subject
+    description: Representa una mesa de examen para una materia
+    columns:
+      id:
+      examination_id:
+        description:      Referencia a una mesa de examen
+        type:             integer
+        foreignTable:     examination
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      career_subject_school_year_id:
+        description:      Referencia a una materia
+        type:             integer
+        foreignTable:     career_subject_school_year
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      is_closed:
+        type: boolean
+        default: false
+      _indexes:
+        examination_career_subject_school_year: [career_subject_school_year_id, examination_id]
+      _uniques:
+        examination_subject_unique: [ examination_id, career_subject_school_year_id ]
+
+  ExaminationSubjectTeacher:
+    tablename: examination_subject_teacher
+    description: Representa una mesa de examen para una materia, con un conjunto de profesores
+    columns:
+      id:
+      examination_subject_id:
+        description:      Referencia a una mesa de examen
+        type:             integer
+        foreignTable:     examination_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         cascade
+        primaryKey: true
+      teacher_id:
+        description:      Referencia a un profesor
+        type:             integer
+        foreignTable:     teacher
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+        primaryKey: true
+
+  CourseSubjectStudentExamination:
+    tablename:            course_subject_student_examination
+    description:          Representa la inscripción de un alumno a una mesa de examen.
+    columns:
+      id:
+      course_subject_student_id:
+        description:      Referencia a un alumno en una materia de un curso
+        type:             integer
+        foreignTable:     course_subject_student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      examination_subject_id:
+        description:      Referencia a una mesa de examen
+        type:             integer
+        foreignTable:     examination_subject
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             decimal
+        size:             5
+        scale:            2
+        required:         false
+      is_absent:
+        type: boolean
+        default: false
+      examination_number:
+        description:      Indica la instancia en la que el alumno se inscribe (por defecto es "Diciembre").
+        type:             integer
+        required:         true
+        default:          1
+      can_take_examination:
+        description: Indica si el alumno puede rendir el examen. Para casos en que el alumno repite antes de que rinda.
+        type: boolean
+        default: true
+      date:
+        description:  Fecha en que el alumno rinde la materia
+        type: date
+        required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
+        required: false
+      _indexes:
+        course_subject_student_subject_examination_number: [course_subject_student_id, examination_subject_id, examination_number]
+        course_subject_student_examination_number: [course_subject_student_id, examination_number]
+        course_subject_student_id: [course_subject_student_id, examination_subject_id]
+      _uniques:
+        csse_unique: [ course_subject_student_id, examination_subject_id, examination_number ]
+
+  StudentRepprovedCourseSubject:
+    tableName:            student_repproved_course_subject
+    description:          Representa a un alumno que se llevo una previa de la materia de un curso
+    columns:
+      id:
+      created_at:
+      updated_at:
+      course_subject_student_id:
+        description:      Referencia a un alumno en una materia de un curso
+        type:             integer
+        foreignTable:     course_subject_student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      student_approved_career_subject_id:
+        description:      Si el estudiante aprobo el career subject existe esta relacion
+        type:             integer
+        foreignTable:     student_approved_career_subject
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      _indexes:
+        course_subject_student_student_approved: [course_subject_student_id, student_approved_career_subject_id]
+
+  ExaminationRepproved:
+    tablename:            examination_repproved
+    description:          Representa una mesa de previa.
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      date_from:
+        type: date
+        required: true
+      date_to:
+        type: date
+        required: true
+      examination_number:
+        description:      Indica la instancia de la mesa.
+        type:             integer
+        required:         true
+        default:          1
+      examination_type:
+        description:      Indica el tipo de examination_repproved (Libre o previa)
+        type: integer
+        required: true
+      school_year_id:
+        description:      año lectivo
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+
+  ExaminationRepprovedSubject:
+    tablename: examination_repproved_subject
+    description: Representa una mesa de previa para una materia
+    columns:
+      id:
+      examination_repproved_id:
+        description:      Referencia a una mesa de examen
+        type:             integer
+        foreignTable:     examination_repproved
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      career_subject_id:
+        description:      Referencia a una materia
+        type:             integer
+        foreignTable:     career_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      is_closed:
+        type: boolean
+        default: false
+
+  ExaminationRepprovedSubjectTeacher:
+    tablename: examination_repproved_subject_teacher
+    description: Representa una mesa de previa para una materia, con un conjunto de profesores
+    columns:
+      id:
+      examination_repproved_subject_id:
+        description:      Referencia a una mesa de examen
+        type:             integer
+        foreignTable:     examination_repproved_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         cascade
+        primaryKey: true
+      teacher_id:
+        description:      Referencia a un profesor
+        type:             integer
+        foreignTable:     teacher
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+        primaryKey: true
+
+  StudentExaminationRepprovedSubject:
+    tablename:            student_examination_repproved_subject
+    description:          Representa la inscripción de un alumno a una mesa de previa.
+    columns:
+      id:
+      student_repproved_course_subject_id:
+        description:      Referencia a una previa de un alumno
+        type:             integer
+        foreignTable:     student_repproved_course_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+      examination_repproved_subject_id:
+        description:      Referencia a una mesa de previa
+        type:             integer
+        foreignTable:     examination_repproved_subject
+        foreignReference: id
+        required:         false
+        onUpdate:         cascade
+        onDelete:         restrict
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             decimal
+        size:             5
+        scale:            2
+        required:         false
+      is_absent:
+        type:             boolean
+        default:          false
+      date:
+        description:  Fecha en que el alumno rinde
+        type: date
+        required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
+        required: false

@@ -1,0 +1,1193 @@
+sfGuardUser:
+  sfGuardUser_1:
+    username: admin
+    password: @dm1n1strad0r
+    is_super_admin: true
+    must_change_password: false
+  sfGuardUser_2:
+    username: preceptor
+    password: @pr3c3pt0r
+    must_change_password: false
+  sfGuardUser_3:
+    username: profesor
+    password: @pr0f3s0r
+    must_change_password: false
+  sfGuardUser_4:
+    username: desarrollo
+    password: desarrollo
+    is_super_admin: true
+
+sfGuardGroup:
+  sfGuardGroup_1:
+    name: Administrador
+    description: 'Grupo de usuarios administradores del sistema'
+  sfGuardGroup_2:
+    name: Preceptor
+    description: 'Grupo de usuarios preceptores'
+  sfGuardGroup_3:
+    name: Profesor
+    description: 'Grupo de usuarios profesores'  
+  sfGuardGroup_4:
+    name: Jefe de preceptores
+    description: 'Grupo de usuarios jefe de preceptores'
+  sfGuardGroup_5:
+    name: Oficina de alumnos
+    description: 'Grupo de usuarios de la oficina de alumnos'
+
+sfGuardPermission:
+  sfGuardPermission_1:
+    name: show_course
+    description: 'Listar y ver detalle de cursos y divisiones'
+  sfGuardPermission_2:
+    name: edit_course
+    description: 'Crear, editar y eliminar cursos y divisiones'
+  sfGuardPermission_3:
+    name: show_course_day
+    description: 'Listar y ver detalle de días de cursada'
+  sfGuardPermission_4:
+    name: edit_course_day
+    description: 'Crear, editar y eliminar días de cursada'
+  sfGuardPermission_5:
+    name: edit_absence_per_day
+    description: 'Crear, editar y eliminar inasistencias por día'
+  sfGuardPermission_6:
+    name: edit_absense_per_subject
+    description: 'Crear, editar y eliminar inasistencias por materia'
+  sfGuardPermission_7:
+    name: show_course_student_mark
+    description: 'Listar y ver calificaciones de los alumnos'
+  sfGuardPermission_8:
+    name: edit_course_student_mark
+    description: 'Crear, editar y eliminar calificaciones de los alumnos'
+  sfGuardPermission_9:
+    name: edit_correlative
+    description: 'Crear, editar y eliminar correlativas'
+  sfGuardPermission_10:
+    name: show_correlative
+    description: 'Listar y ver detalle de correlativas'
+  sfGuardPermission_11:
+    name: show_subject
+    description: 'Listar y ver detalle de materias'
+  sfGuardPermission_12:
+    name: edit_subject
+    description: 'Crear, editar y eliminar materias'
+  sfGuardPermission_13:
+    name: show_examination_subject_day
+    description: 'Listar y ver detalle de los días de examen de las materias'
+  sfGuardPermission_14:
+    name: edit_examination_subject_day
+    description: 'Crear, editar y eliminar días de examen de las materias'
+  sfGuardPermission_17:
+    name: show_examination_subject
+    description: 'Listar y ver detalle de las materias de una mesa de examen'
+  sfGuardPermission_18:
+    name: edit_examination_subject
+    description: 'Crear, editar y eliminar materias de una mesa de examen'
+  sfGuardPermission_19:
+    name: show_career_subject
+    description: 'Listar y ver materias de una carrera'
+  sfGuardPermission_20:
+    name: edit_career_subject
+    description: 'Crear, editar y eliminar materias de una carrera'
+  sfGuardPermission_21:
+    name: show_career
+    description: 'Listar y ver detalle de una carrera'
+  sfGuardPermission_22:
+    name: edit_career
+    description: 'Crear, editar y eliminar carreras'
+  sfGuardPermission_23:
+    name: show_career_student
+    description: 'Listar y ver detalle de inscripciones de alumnos'
+  sfGuardPermission_24:
+    name: edit_career_student
+    description: 'Inscribir alumnos en carreras'
+  sfGuardPermission_25:
+    name: show_group
+    description: 'Listar y ver detalle de grupos de usuarios (Recomendado para Administradores)'
+  sfGuardPermission_26:
+    name: edit_group
+    description: 'Crear, editar y eliminar grupos de usuarios (Recomendado para Administradores)'
+  sfGuardPermission_27:
+    name: show_student
+    description: 'Listar y ver detalle de alumnos'
+  sfGuardPermission_28:
+    name: edit_student
+    description: 'Crear, editar y eliminar alumnos'
+  sfGuardPermission_29:
+    name: edit_disciplinary_saction
+    description: 'Crear, editar y eliminar sanciones disciplinarias'
+  sfGuardPermission_30:
+    name: edit_module
+    description: 'Activar y desactivar agregados'
+  sfGuardPermission_31:
+    name: show_examination
+    description: 'Listar y ver detalle de mesas de examen'
+  sfGuardPermission_32:
+    name: edit_examination
+    description: 'Crear, editar y eliminar mesas de examen'
+  sfGuardPermission_33:
+    name: show_user
+    description: 'Listar y ver detalle de usuarios'
+  sfGuardPermission_34:
+    name: edit_user
+    description: 'Crear, editar y eliminar usuarios'
+  sfGuardPermission_35:
+    name: show_tutor
+    description: 'Listar y ver detalle de tutores'
+  sfGuardPermission_36:
+    name: edit_tutor
+    description: 'Crear, editar y eliminar tutores'
+  sfGuardPermission_37:
+    name: show_school_year
+    description: 'Listar y ver detalle de años lectivos'
+  sfGuardPermission_38:
+    name: edit_school_year
+    description: 'Crear, editar y eliminar años lectivos'
+  sfGuardPermission_39:
+    name: show_teacher
+    description: 'Listar y ver detalle de docentes'
+  sfGuardPermission_40:
+    name: edit_teacher
+    description: 'Crear, editar y eliminar docentes'
+  sfGuardPermission_41:
+    name: show_absence_reason
+    description: 'Listar y ver detalle de motivos de inasistencia'
+  sfGuardPermission_42:
+    name: edit_absence_reason
+    description: 'Crear, editar y eliminar motivos de inasistencia'
+  sfGuardPermission_43:
+    name: show_justification_type
+    description: 'Listar y ver detalle de tipos de justificación'
+  sfGuardPermission_44:
+    name: edit_justification_type
+    description: 'Crear, editar y eliminar tipos de justificación'
+  sfGuardPermission_45:
+    name: backup
+    description: 'Respaldo de datos (backup) (Recomendado para Administradores)'
+  sfGuardPermission_46:
+    name: show_absence_per_day
+    description: 'Listar y ver detalle de inasistencias por día'
+  sfGuardPermission_47:
+    name: show_absence_per_subject
+    description: 'Listar y ver detalle de inasistencias por materia'
+  sfGuardPermission_48:
+    name: show_disciplinary_sanction
+    description: 'Listar y ver detalle de sanciones disciplinarias'
+  sfGuardPermission_49:
+    name: edit_disciplinary_sanction
+    description: 'Crear, editar y eliminar sanciones disciplinarias'
+  sfGuardPermission_50:
+    name: show_deserter_students
+    description: 'Listar y ver detalle de alumnos desertores'
+  sfGuardPermission_51:
+    name: show_dissaproved_students
+    description: 'Listar y ver detalle de alumnos desaprobados'
+  sfGuardPermission_52:
+    name: show_repeater_students
+    description: 'Listar y ver detalle de alumnos repitentes'
+  sfGuardPermission_53:
+    name: private_access
+    description: 'Acceso a la parte privada de la aplicación (Recomendado para Administradores, Preceptores y Profesores)'
+  sfGuardPermission_54:
+    name: public_access
+    description: 'Acceso a la parte pública de la aplicación (Recomendado para Alumnos)'
+  sfGuardPermission_55:
+    name: show_occupation
+    description: 'Listar y ver detalle de ocupaciones'
+  sfGuardPermission_56:
+    name: edit_occupation
+    description: 'Crear, editar y eliminar ocupaciones'
+  sfGuardPermission_57:
+    name: edit_course_preceptors
+    description: 'Editar los preceptores de los cursos'
+  sfGuardPermission_58:
+    name: show_division_title
+    description: 'Listar y ver detalle de nombres de división'
+  sfGuardPermission_59:
+    name: edit_division_title
+    description: 'Crear, editar y eliminar nombres de divisiones'
+  sfGuardPermission_60:
+    name: show_personal
+    description: 'Listar y ver detalle de personal no docente'
+  sfGuardPermission_61:
+    name: edit_personal
+    description: 'Crear, editar y eliminar personal no docente'
+  sfGuardPermission_62:
+    name: edit_orientation
+    description: 'Crear, editar y eliminar orientaciones'
+  sfGuardPermission_63:
+    name: show orientation
+    description: 'Listar y ver detalle de orientaciones'
+  sfGuardPermission_64:
+    name: edit_division_preceptors
+    description: 'Editar los preceptores de una división'
+  sfGuardPermission_65:
+    name: new_division
+    description: 'Crear una nueva división'
+  sfGuardPermission_66:
+    name: delete_division
+    description: 'Eliminar una división'
+  sfGuardPermission_67:
+    name: show_classroom
+    description: 'Listar y ver detalle de aulas'
+  sfGuardPermission_68:
+    name: edit_classroom
+    description: 'Crear, editar y eliminar aulas'
+  sfGuardPermission_69:
+    name: edit_course_subject_students
+    description: 'Editar los estudiantes de un curso'
+  sfGuardPermission_70:
+    name: edit_division_course_califications
+    description: 'Editar las calificaciones de un curso'
+  sfGuardPermission_71:
+    name: show_examination_repproved
+    description: 'Mostrar las mesas de previas de un año lectivo'
+  sfGuardPermission_72:
+    name: edit_examination_subject_califications
+    description: 'Editar las calificaciones de una materia en una mesa de exámen'
+  sfGuardPermission_73:
+    name: edit_examination_repproved
+    description: 'Editar las mesas de previas de un año lectivo'
+  sfGuardPermission_74:
+    name: show_examination_repproved_subjects
+    description: 'Mostrar las materias de mesas de previas de un año lectivo'
+  sfGuardPermission_75:
+    name: edit_examination_repproved_subject
+    description: 'Editar las materias de mesas de previas de un año lectivo'
+  sfGuardPermission_76:
+    name: edit_examination_repproved_subject_students
+    description: 'Editar los estudiantes de las materias de mesas de previas de un año lectivo'
+  sfGuardPermission_77:
+    name: edit_examination_repproved_subjects_califications
+    description: 'Editar las calificaciones de las materias de mesas de previas de un año lectivo'     
+  sfGuardPermission_78:
+    name: close_student_mark
+    description: 'Cerrar nota de estudiante.'
+  sfGuardPermission_79:
+    name: new_course
+    description: 'Crear un nuevo curso.'
+  sfGuardPermission_80:
+    name: show_final_examination
+    description: 'Ver mesa de final'
+  sfGuardPermission_81:
+    name: edit_final_examination
+    description: 'Editar mesa de final'
+  sfGuardPermission_82:
+    name: show_final_examination_subject
+    description: 'Ver materias de la mesa de final'
+  sfGuardPermission_83:
+    name: edit_final_examination_subject
+    description: 'Editar materias de la mesa de final'
+  sfGuardPermission_84:
+    name: edit_final_examination_subject_students
+    description: 'Inscribir alumnos a la mesa de final.'
+  sfGuardPermission_85:
+    name: edit_final_examination_subject_califications
+    description: 'Calificar alumnos de la mesa.'
+  sfGuardPermission_86:
+    name: show_equivalence
+    description: 'Ver equivalencias de un alumno.'
+  sfGuardPermission_87:
+    name: edit_equivalence
+    description: 'Editar equivalencias de un alumno.'  
+  sfGuardPermission_90:
+    name: edit_student_attendance
+    description: 'Ver y editar asistencias.'
+  sfGuardPermission_91:
+    name: new_tutor_type
+    description: 'Crear, editar, eliminar y ver tipos de tutores.'
+  sfGuardPermission_92:
+    name: new_health_coverage
+    description: 'Crear, editar, eliminar y ver obras sociales.'
+  sfGuardPermission_93:
+    name: back_period_course
+    description: 'Permite volver atras un periodo de un curso.'
+  sfGuardPermission_94:
+    name: close_course
+    description: 'Permite cerrar un periodo.'
+  sfGuardPermission_95:
+    name: edit_attendance_justification
+    description: 'Permite editar las justificaciones de faltas.'
+  sfGuardPermission_96:
+    name: set_free
+    description: 'Poner libre un estudiante'
+  sfGuardPermission_97:
+    name: show_student_reincorporation
+    description: 'Ver reincorporaciones'
+  sfGuardPermission_98:
+    name: edit_student_reincorporation
+    description: 'Editar/borrar reincorporaciones'
+  sfGuardPermission_99:
+    name: edit_absence_type
+    description: 'Editar tipos de ausencias'
+  sfGuardPermission_100:
+    name: new_absence_type
+    description: 'Crear/borrar tipo de ausencia'
+  sfGuardPermission_101:
+    name: edit_disciplinary_sanction_type
+    description: 'Editar tipos de sanciones'
+  sfGuardPermission_102:
+    name: new_disciplinary_sanction_type
+    description: 'Crear/borrar tipo de sanción'
+  sfGuardPermission_103:
+    name: new_student_disciplinary_sanction
+    description: 'Crear sanción de alumno'
+  sfGuardPermission_104:
+    name: edit_student_disciplinary_sanction
+    description: 'Editar sanción de alumno'
+  sfGuardPermission_105:
+    name: delete_student_disciplinary_sanction
+    description: 'Eliminar sanción de alumno'
+  sfGuardPermission_106:
+    name: show_student_disciplinary_sanction
+    description: 'Ver sanción de alumno'
+  sfGuardPermission_107:
+    name: preceptor_filter
+    description: 'Poder filtrar divisiones por preceptor'
+  sfGuardPermission_108:
+    name: teacher_filter
+    description: 'Poder filtrar divisiones/cursos por profesor'
+  sfGuardPermission_109:
+    name: show_head_personal
+    description: 'Poder ver/listar los jefes de preceptores'
+  sfGuardPermission_110:
+    name: edit_head_personal
+    description: 'Poder crear/editar jefes de preceptores'
+  sfGuardPermission_111:
+    name: close_course_period
+    description: 'Poder cerrar el periodo en una comisión'
+  sfGuardPermission_112:
+    name: edit_attendance
+    description: 'Ver y editar asistencias'
+  sfGuardPermission_113:
+    name: edit_study
+    description: 'Ver y editar estudios cursados'
+  sfGuardPermission_114:
+    name: show_study
+    description: 'Ver y listar estudios cursados'
+  sfGuardPermission_115:
+    name: edit_closed_examination
+    description: 'Editar calificaciones de mesas de examen cerradas'
+  sfGuardPermission_116:
+    name: show_pathway
+    description: 'Listar y ver detalle de trayectorias'
+  sfGuardPermission_117:
+    name: edit_pathway
+    description: 'Crear, editar y eliminar trayectorias'
+
+
+sfGuardUserGroup:
+  sfGuardUserGroup_1_1:
+    user_id: sfGuardUser_1
+    group_id: sfGuardGroup_1
+  sfGuardUserGroup_3_2:
+    user_id: sfGuardUser_2
+    group_id: sfGuardGroup_2
+  sfGuardUserGroup_2_3:
+    user_id: sfGuardUser_3
+    group_id: sfGuardGroup_3
+
+sfGuardGroupPermission:
+  #Permisos para el grupo de usuarios de administradores
+  sfGuardGroupPermission_1_1:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_1
+  sfGuardGroupPermission_1_2:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_2
+  sfGuardGroupPermission_1_3:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_1_4:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_4
+  sfGuardGroupPermission_1_5:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_5
+  sfGuardGroupPermission_1_6:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_6
+  sfGuardGroupPermission_1_7:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_7
+  sfGuardGroupPermission_1_8:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_8
+  sfGuardGroupPermission_1_9:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_9
+  sfGuardGroupPermission_1_10:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_10
+  sfGuardGroupPermission_1_11:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_11
+  sfGuardGroupPermission_1_12:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_12
+  sfGuardGroupPermission_1_13:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_13
+  sfGuardGroupPermission_1_14:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_14
+  sfGuardGroupPermission_1_17:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_17
+  sfGuardGroupPermission_1_18:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_18
+  sfGuardGroupPermission_1_19:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_19
+  sfGuardGroupPermission_1_20:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_20
+  sfGuardGroupPermission_1_21:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_21
+  sfGuardGroupPermission_1_22:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_22
+  sfGuardGroupPermission_1_23:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_23
+  sfGuardGroupPermission_1_24:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_24
+  sfGuardGroupPermission_1_25:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_25
+  sfGuardGroupPermission_1_26:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_26
+  sfGuardGroupPermission_1_27:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_27
+  sfGuardGroupPermission_1_28:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_28
+  sfGuardGroupPermission_1_29:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_29
+  sfGuardGroupPermission_1_30:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_30
+  sfGuardGroupPermission_1_31:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_31
+  sfGuardGroupPermission_1_32:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_32
+  sfGuardGroupPermission_1_33:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_33
+  sfGuardGroupPermission_1_34:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_34
+  sfGuardGroupPermission_1_35:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_35
+  sfGuardGroupPermission_1_36:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_36
+  sfGuardGroupPermission_1_37:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_37
+  sfGuardGroupPermission_1_38:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_38
+  sfGuardGroupPermission_1_39:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_39
+  sfGuardGroupPermission_1_40:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_40
+  sfGuardGroupPermission_1_41:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_41
+  sfGuardGroupPermission_1_42:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_42
+  sfGuardGroupPermission_1_43:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_43
+  sfGuardGroupPermission_1_44:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_44
+  sfGuardGroupPermission_1_45:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_45
+  sfGuardGroupPermission_1_46:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_46
+  sfGuardGroupPermission_1_47:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_47
+  sfGuardGroupPermission_1_48:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_48
+  sfGuardGroupPermission_1_49:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_49
+  sfGuardGroupPermission_1_50:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_50
+  sfGuardGroupPermission_1_51:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_51
+  sfGuardGroupPermission_1_52:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_52
+  sfGuardGroupPermission_1_53:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_53
+  sfGuardGroupPermission_1_55:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_55
+  sfGuardGroupPermission_1_56:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_56
+  sfGuardGroupPermission_1_57:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_57
+  sfGuardGroupPermission_1_58:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_58
+  sfGuardGroupPermission_1_59:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_59
+  sfGuardGroupPermission_1_60:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_60
+  sfGuardGroupPermission_1_61:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_61
+  sfGuardGroupPermission_1_64:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_64
+  sfGuardGroupPermission_1_65:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_65
+  sfGuardGroupPermission_1_66:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_66
+  sfGuardGroupPermission_1_67:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_67
+  sfGuardGroupPermission_1_68:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_68
+  sfGuardGroupPermission_1_69:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_69
+  sfGuardGroupPermission_1_70:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_70
+  sfGuardGroupPermission_1_71:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_71
+  sfGuardGroupPermission_1_72:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_72
+  sfGuardGroupPermission_1_73:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_73
+  sfGuardGroupPermission_1_74:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_74
+  sfGuardGroupPermission_1_75:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_75
+  sfGuardGroupPermission_1_76:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_76
+  sfGuardGroupPermission_1_77:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_77
+  sfGuardGroupPermission_1_78:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_78
+  sfGuardGroupPermission_1_79:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_79
+  sfGuardGroupPermission_1_80:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_80
+  sfGuardGroupPermission_1_81:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_81
+  sfGuardGroupPermission_1_82:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_82
+  sfGuardGroupPermission_1_83:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_83
+  sfGuardGroupPermission_1_84:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_84
+  sfGuardGroupPermission_1_85:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_85
+  sfGuardGroupPermission_1_86:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_86
+  sfGuardGroupPermission_1_87:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_87  
+  sfGuardGroupPermission_1_90:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_90
+  sfGuardGroupPermission_1_91:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_91
+  sfGuardGroupPermission_1_92:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_92
+  sfGuardGroupPermission_1_93:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_93
+  sfGuardGroupPermission_1_94:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_94
+  sfGuardGroupPermission_1_95:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_95
+  sfGuardGroupPermission_1_96:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_96
+  sfGuardGroupPermission_1_97:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_97
+  sfGuardGroupPermission_1_98:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_98
+  sfGuardGroupPermission_1_99:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_99
+  sfGuardGroupPermission_1_100:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_100
+  sfGuardGroupPermission_1_101:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_101
+  sfGuardGroupPermission_1_102:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_102
+  sfGuardGroupPermission_1_103:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_103
+  sfGuardGroupPermission_1_104:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_104
+  sfGuardGroupPermission_1_105:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_105
+  sfGuardGroupPermission_1_106:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_106
+  sfGuardGroupPermission_1_107:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_107
+  sfGuardGroupPermission_1_108:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_108
+  sfGuardGroupPermission_1_109:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_109
+  sfGuardGroupPermission_1_110:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_110
+  sfGuardGroupPermission_1_111:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_111
+  sfGuardGroupPermission_1_112:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_112
+  sfGuardGroupPermission_1_113:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_113
+  sfGuardGroupPermission_1_114:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_114
+  sfGuardGroupPermission_1_115:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_115
+  sfGuardGroupPermission_1_116:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_116
+  sfGuardGroupPermission_1_117:
+    group_id: sfGuardGroup_1
+    permission_id: sfGuardPermission_117
+
+#Permisos para el grupos de usuarios preceptor
+  sfGuardGroupPermission_2_1:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_1
+  sfGuardGroupPermission_2_2:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_2
+  sfGuardGroupPermission_2_3:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_2_4:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_4
+  sfGuardGroupPermission_2_5:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_5
+  sfGuardGroupPermission_2_6:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_6
+  sfGuardGroupPermission_2_7:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_7
+  sfGuardGroupPermission_2_8:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_8
+  sfGuardGroupPermission_2_13:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_13
+  sfGuardGroupPermission_2_14:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_14
+  sfGuardGroupPermission_2_17:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_17
+  sfGuardGroupPermission_2_18:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_18
+  sfGuardGroupPermission_2_21:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_21
+  sfGuardGroupPermission_2_23:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_23
+  sfGuardGroupPermission_2_24:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_24
+  sfGuardGroupPermission_2_27:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_27
+  sfGuardGroupPermission_2_28:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_28
+  sfGuardGroupPermission_2_29:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_29
+  sfGuardGroupPermission_2_31:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_31
+  sfGuardGroupPermission_2_32:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_32
+  sfGuardGroupPermission_2_35:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_35
+  sfGuardGroupPermission_2_36:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_36
+  sfGuardGroupPermission_2_37:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_37
+  sfGuardGroupPermission_2_39:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_39
+  sfGuardGroupPermission_2_46:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_46
+  sfGuardGroupPermission_2_47:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_47
+  sfGuardGroupPermission_2_48:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_48
+  sfGuardGroupPermission_2_49:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_49
+  sfGuardGroupPermission_2_50:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_50
+  sfGuardGroupPermission_2_51:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_51
+  sfGuardGroupPermission_2_52:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_52
+  sfGuardGroupPermission_2_53:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_53
+  sfGuardGroupPermission_2_61:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_61
+  sfGuardGroupPermission_2_62:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_62
+  sfGuardGroupPermission_2_63:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_63
+  sfGuardGroupPermission_2_65:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_65
+  sfGuardGroupPermission_2_67:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_67
+  sfGuardGroupPermission_2_68:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_68
+  sfGuardGroupPermission_2_70:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_70
+  sfGuardGroupPermission_2_71:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_71
+  sfGuardGroupPermission_2_72:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_72
+  sfGuardGroupPermission_2_73:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_73
+  sfGuardGroupPermission_2_74:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_74
+  sfGuardGroupPermission_2_75:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_75
+  sfGuardGroupPermission_2_76:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_76
+  sfGuardGroupPermission_2_77:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_77
+  sfGuardGroupPermission_2_78:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_78
+  sfGuardGroupPermission_2_80:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_80
+  sfGuardGroupPermission_2_81:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_81
+  sfGuardGroupPermission_2_82:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_82
+  sfGuardGroupPermission_2_83:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_83
+  sfGuardGroupPermission_2_84:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_84
+  sfGuardGroupPermission_2_85:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_85
+  sfGuardGroupPermission_2_95:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_95
+  sfGuardGroupPermission_2_103:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_103
+  sfGuardGroupPermission_2_104:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_104
+  sfGuardGroupPermission_2_105:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_105
+  sfGuardGroupPermission_2_106:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_106
+  sfGuardGroupPermission_2_108:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_108
+  sfGuardGroupPermission_2_112:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_112
+  sfGuardGroupPermission_2_116:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_116
+
+
+
+  #permisos para el grupo de usuarios profesor
+  sfGuardGroupPermission_3_1:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_1
+  sfGuardGroupPermission_3_8:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_8
+  sfGuardGroupPermission_3_7:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_7
+  sfGuardGroupPermission_3_13:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_13
+  sfGuardGroupPermission_3_17:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_17
+  sfGuardGroupPermission_3_21:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_21
+  sfGuardGroupPermission_3_27:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_27
+  sfGuardGroupPermission_3_31:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_31
+  sfGuardGroupPermission_3_37:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_37
+  sfGuardGroupPermission_3_35:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_35
+  sfGuardGroupPermission_3_53:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_53
+  sfGuardGroupPermission_3_68:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_68
+  sfGuardGroupPermission_3_70:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_70
+  sfGuardGroupPermission_3_71:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_71
+  sfGuardGroupPermission_3_72:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_72
+  sfGuardGroupPermission_3_74:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_74
+  sfGuardGroupPermission_3_76:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_76
+  sfGuardGroupPermission_3_77:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_77
+  sfGuardGroupPermission_3_80:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_80
+  sfGuardGroupPermission_3_82:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_82
+  sfGuardGroupPermission_3_85:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_85
+  sfGuardGroupPermission_3_106:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_106
+  sfGuardGroupPermission_3_116:
+    group_id: sfGuardGroup_3
+    permission_id: sfGuardPermission_116
+
+
+  #jefe de preceptores
+  sfGuardGroupPermission_4_1:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_1
+  sfGuardGroupPermission_4_2:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_2
+  sfGuardGroupPermission_4_3:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_3
+  sfGuardGroupPermission_4_4:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_4
+  sfGuardGroupPermission_4_5:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_5
+  sfGuardGroupPermission_4_6:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_6
+  sfGuardGroupPermission_4_7:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_7
+  sfGuardGroupPermission_4_8:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_8
+  sfGuardGroupPermission_4_13:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_13
+  sfGuardGroupPermission_4_14:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_14
+  sfGuardGroupPermission_4_17:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_17
+  sfGuardGroupPermission_4_18:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_18
+  sfGuardGroupPermission_4_21:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_21
+  sfGuardGroupPermission_4_23:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_23
+  sfGuardGroupPermission_4_24:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_24
+  sfGuardGroupPermission_4_27:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_27
+  sfGuardGroupPermission_4_28:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_28
+  sfGuardGroupPermission_4_29:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_29
+  sfGuardGroupPermission_4_31:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_31
+  sfGuardGroupPermission_4_32:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_32
+  sfGuardGroupPermission_4_35:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_35
+  sfGuardGroupPermission_4_36:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_36
+  sfGuardGroupPermission_4_37:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_37
+  sfGuardGroupPermission_4_39:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_39
+  sfGuardGroupPermission_4_46:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_46
+  sfGuardGroupPermission_4_47:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_47
+  sfGuardGroupPermission_4_48:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_48
+  sfGuardGroupPermission_4_49:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_49
+  sfGuardGroupPermission_4_50:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_50
+  sfGuardGroupPermission_4_51:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_51
+  sfGuardGroupPermission_4_52:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_52
+  sfGuardGroupPermission_4_53:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_53
+  sfGuardGroupPermission_4_57:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_57
+  sfGuardGroupPermission_4_61:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_61
+  sfGuardGroupPermission_4_62:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_62
+  sfGuardGroupPermission_4_63:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_63
+  sfGuardGroupPermission_4_67:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_67
+  sfGuardGroupPermission_4_68:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_68
+  sfGuardGroupPermission_4_70:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_70
+  sfGuardGroupPermission_4_71:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_71
+  sfGuardGroupPermission_4_72:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_72
+  sfGuardGroupPermission_4_73:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_73
+  sfGuardGroupPermission_4_74:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_74
+  sfGuardGroupPermission_4_75:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_75
+  sfGuardGroupPermission_4_76:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_76
+  sfGuardGroupPermission_4_77:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_77
+  sfGuardGroupPermission_4_78:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_78
+  sfGuardGroupPermission_4_80:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_80
+  sfGuardGroupPermission_4_81:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_81
+  sfGuardGroupPermission_4_82:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_82
+  sfGuardGroupPermission_4_83:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_83
+  sfGuardGroupPermission_4_84:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_84
+  sfGuardGroupPermission_4_85:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_85
+  sfGuardGroupPermission_4_95:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_95
+  sfGuardGroupPermission_4_103:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_103
+  sfGuardGroupPermission_4_104:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_104
+  sfGuardGroupPermission_4_105:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_105
+  sfGuardGroupPermission_4_106:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_106
+  sfGuardGroupPermission_4_108:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_108
+  sfGuardGroupPermission_4_64:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_64  
+  sfGuardGroupPermission_4_66:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_66
+  sfGuardGroupPermission_4_111:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_111
+  sfGuardGroupPermission_4_112:
+    group_id: sfGuardGroup_4
+    permission_id: sfGuardPermission_112
+  sfGuardGroupPermission_4_116:
+    group_id: sfGuardGroup_2
+    permission_id: sfGuardPermission_116
+
+
+
+  #permisos para el grupo de usuarios oficina de alumnos
+  sfGuardGroupPermission_5_27:
+    group_id: sfGuardGroup_5
+    permission_id: sfGuardPermission_27
+  sfGuardGroupPermission_5_28:
+    group_id: sfGuardGroup_5
+    permission_id: sfGuardPermission_28
+  sfGuardGroupPermission_5_23:
+    group_id: sfGuardGroup_5
+    permission_id: sfGuardPermission_23
+  sfGuardGroupPermission_5_24:
+    group_id: sfGuardGroup_5
+    permission_id: sfGuardPermission_24
+  sfGuardGroupPermission_5_53:
+    group_id: sfGuardGroup_5
+    permission_id: sfGuardPermission_53

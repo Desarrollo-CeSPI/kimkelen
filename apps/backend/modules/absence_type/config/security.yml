@@ -1,0 +1,18 @@
+index:
+  credentials: [[edit_absence_type, new_absence_type]]
+
+new:
+  credentials: [new_absence_type]
+
+create:
+  credentials: [new_absence_type]
+
+edit:
+  credentials: [edit_absence_type]
+
+update:
+  credentials: [edit_absence_type]
+
+delete:
+  credentials: [new_absence_type]
+

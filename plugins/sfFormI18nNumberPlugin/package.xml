@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sfFormI18nNumberPlugin</name>
+ <channel>plugins.symfony-project.org</channel>
+ <summary>I18n-Number validator and widget</summary>
+ <description>I18n-Number validator and widget</description>
+ <lead>
+  <name>oweitman</name>
+  <user>oweitman</user>
+  <email>oweitman@gmx.de</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-04-09</date>
+ <time>10:27:38</time>
+ <version>
+  <release>0.9.3</release>
+  <api>0.9.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.symfony-project.org/license">MIT license</license>
+ <notes>
+-
+ </notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="d509e893096cd79bf4bf5a64898a9b09" name="test/unit/widget/sfWidgetFormI18nNumberTest.php" role="data" />
+   <file md5sum="5318bd59e2abe95c72216e4198c1ee0d" name="test/unit/validator/sfValidatorI18nNumberTest.php" role="data" />
+   <file md5sum="3342e2e00283321c6e02401452886fb9" name="test/bootstrap/unit.php" role="data" />
+   <file md5sum="604d04fa189f79b6651c20d3234dcd6d" name="test/bootstrap/functional.php" role="data" />
+   <file md5sum="b84d430d03fce3a229116fb8a7fb0db1" name="lib/widget/i18n/sfWidgetFormI18nNumber.php" role="data" />
+   <file md5sum="0e5e8155d7a5e6677b200723c53e161f" name="lib/validator/i18n/sfValidatorI18nNumber.php" role="data" />
+   <file md5sum="27bcd1769dacf95ef717435a10c46754" name="lib/i18n/sfNumberFormatPlus.class.php" role="data" />
+   <file md5sum="62e8e18f5f7ef8b6575c6631e5ded2d4" name="README" role="data" />
+   <file md5sum="c08e44581c779e68051552222fd7a778" name="LICENSE" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.4</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.2.0</min>
+    <max>1.5.0</max>
+    <exclude>1.5.0</exclude>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog />
+</package>

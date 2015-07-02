@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+  <name>[automatic]</name>
+  <channel>pear.symfony-project.com</channel>
+  <summary>Behavior for change tracking on Propel objects.</summary>
+  <description>Behavior for change tracking on Propel objects.</description>
+  <lead>
+    <name>José Nahuel CUESTA LUENGO</name>
+    <user>ncuesta</user>
+    <email>ncuesta@cespi.unlp.edu.ar</email>
+    <active>yes</active>
+  </lead>
+  <lead>
+    <name>Matías Alejandro TORRES</name>
+    <user>mtorres</user>
+    <email>torresmat@gmail.com</email>
+    <active>yes</active>
+  </lead>
+  <date>[automatic]</date>
+  <version>
+    <release>[automatic]</release>
+    <api>[automatic]</api>
+  </version>
+  <stability>
+    <release>[automatic]</release>
+    <api>[automatic]</api>
+  </stability>
+  <license>[automatic]</license>
+  <notes>-</notes>
+  <contents>[automatic]</contents>
+
+  <dependencies>
+    <required>
+      <php>
+        <min>5.1.0</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+      <package>
+        <name>symfony</name>
+        <channel>pear.symfony-project.com</channel>
+        <min>1.2.0</min>
+        <max>1.3.0</max>
+        <exclude>1.3.0</exclude>
+      </package>
+   </required>
+  </dependencies>
+
+ <phprelease>
+ </phprelease>
+
+ <changelog>
+    <release>
+      <version>
+        <release>0.1.0</release>
+        <api>0.1.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Added to symfony</notes>
+    </release>
+    <release>
+     <version>
+       <release>0.1.1</release>
+       <api>0.1.1</api>
+     </version>
+     <stability>
+       <release>beta</release>
+       <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Minor addition: getChangeLogRoute method</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.1</release>
+        <api>0.1.1</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Minor addition: getChangeLogRoute method; Fixed typo</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.2</release>
+        <api>0.1.2</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Minor addition: getChangeLogRoute method; Fixed typo</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.2</release>
+        <api>0.1.2</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Minor addition: getChangeLogRoute method; Fixed typo</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.2</release>
+        <api>0.1.2</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-28</date>
+      <notes>Minor addition: getChangeLogRoute method; Fixed typo</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.3</release>
+        <api>0.1.3</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-04-29</date>
+      <notes>Bug fixed when dealing with objects with multiple primary key</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.4</release>
+        <api>0.1.4</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-07-17</date>
+      <notes>
+        - ncChangeLogConfigHandle class added to access the app config in a uniform way.
+        - Translation is now working.
+        - Translation of table names and fields can be now be achieved by activating 
+          'translation_use_i18n' key in the app.yml and adding translation catalogues 
+          under the i18n/tables/ directory. The name of the catalogues must be equal to the table name.
+        - Also translation of the text rendered by the classes of the plugin can also be translated.
+          the catalogues for this must be in plugin_dir/ncPropelChangeLogBehavior/i18n/nc_change_log_behavior.CULTURE.xml
+        - The key 'username_attribute' does not work anymore. Now instead of getting the username from the user's attributes,
+          the username is retrieved by calling a method of the sfUser. The method is specified in 'username_method' key. Read the README.
+        - The date format is now specified in the app.yml. Key: 'date_format'.
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.0</release>
+        <api>0.2.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-08-02</date>
+      <notes>
+        - The changes are translated *after* they are saved.
+        - Added configuration keys in app.yml
+          - date_format:
+          - date_time_format:
+          - time_format:
+        These are used to,
+          1) Render the 'created by' field in the ncChangeLogEntry
+          2) Save the time/date columns with the desired format. 
+          In next versions this will change, date/time columns
+          will be saved in standard format and will be retrieved with this formats.
+          You can get an adapter of the ncChangeLogEntry by using the 'getAdapter' method.
+          This adapters have a uniform interface for accessing the changes.
+
+        Interfaces of classes,
+          ncChangeLogEntry
+            - isOperation
+            - getOperationString
+            - getObject
+            - getObjectClassName
+            - getObjectPeerClassName
+            - getObjectTableName
+            - getObjectPrimaryKey
+            - getObjectChanges
+            - getRelatedTablesChangeLogEntries
+            - getAdapter
+          ncChangeLogAdapter
+            These classes implement the Iterator to iterate over the changes made.
+            Actually, only the Updation operations return a non empty array.
+            Also implements the Countable and ArrayAccess interface.
+
+            This methods return the same values as the ncChangeLogEntry 'getObject*' methods.
+              getChangeLog
+                Returns an array of ncChangeLogUpdateChange. (just for updates)
+              getClassName
+              getTableName
+              getPrimaryKey
+              getEntry
+
+            This methods returns the translated values
+              renderClassName
+              renderCreatedAt
+              renderUsername
+              renderOperationType
+
+            This methods use the formatter class to render the operation.
+              render: Render the detail in a 'show' action way.
+              renderList: Render a brief description in a 'list' action way.
+
+            Methods use for translation
+              tableTranslate
+              classTranslate
+              translate
+              ncChangeLogPluginTranslate
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.1</release>
+        <api>0.2.1</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-08-06</date>
+      <notes>
+        - ncChangeLogEntryPeer::getChangeLogOfObject now retrieves adapter instances.
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.2</release>
+        <api>0.2.2</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-08-12</date>
+      <notes>
+        - ncClassFinder has only Peer classes in its class dictionary.
+        - getRelatedChangeLog has been renamed to get1NRelatedChangeLog
+        - getNNRelatedChangeLog has been added. It looks for related changes in all the tables.
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.3</release>
+        <api>0.2.3</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-08-24</date>
+      <notes>
+        - Added ncPropelChangeLogBehavior:migrateV1toV2 task
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.4</release>
+        <api>0.2.4</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-09-13</date>
+      <notes>
+        - Minor fixes
+        - Fixed "Not showing old values for updated fields".
+      </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.2.5</release>
+        <api>0.2.5</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT</license>
+      <date>2009-12-31</date>
+      <notes>
+        - Bug fix version
+        - The plugin now shows foreign keys by retrieving the objects and echoing its '_toString' method.
+        - Each time the plugin renders a new or an old value, a signal is emitted with the name 'table_name.render_field_name' . This gives the possibility to render the value in a different way.
+      </notes>
+    </release>
+  </changelog>
+</package>

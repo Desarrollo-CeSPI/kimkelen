@@ -1,0 +1,62 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Course
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          shared_course
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~
+      show:        
+        display:
+          Curso:      [_course_show_tabs]
+        actions:
+          _edit:
+            condition:      canBeEdited
+            credentials:    [edit_course]          
+
+          manage_course_days:
+            action:         manageCourseDays
+            label:          Manage course days
+            credentials:    [edit_course]
+
+          manage_students:
+            action:         courseSubjectStudent
+            credentials:    [edit_course]
+            condition:  canManageStudents          
+
+          teachers:
+            action:       courseTeachers
+            credentials:  [edit_course]          
+
+          close:
+            label:        Close period
+            action:       close
+            credentials:  [close_course]
+            condition:    canBeClosed
+
+          revert_period:
+            label:        Back to period
+            action:       backPeriod
+            credentials:   [back_period_course]
+            condition:    canBackPeriod
+            params: confirm='Are you sure?'
+
+          _delete:
+            condition:      canBeDeleted
+            credentials:    [delete_division]
+
+          #Datos postales:        [_address]
+          #Datos de salud:        [_health]
+          #Historia academica:       [_career_student_histories]

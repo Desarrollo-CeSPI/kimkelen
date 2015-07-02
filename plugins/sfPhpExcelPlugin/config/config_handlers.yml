@@ -1,0 +1,4 @@
+config/phpexcel.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: ex_

@@ -1,0 +1,8 @@
+pm_configuration:
+  class: sfPropelRouteCollection
+  options:
+    model:                pmConfiguration
+    module:               pmconfiguration
+    prefix_path:          pmconfiguration
+    column:               id
+    with_wildcard_routes: true

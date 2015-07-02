@@ -1,0 +1,74 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           CareerSubjectSchoolYear
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          career_subject_school_year
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      exportation:
+        enabled: true
+        title: Subject list
+        type: xls
+        fieldSelection:
+          getName:
+            label: Materia
+            method: getSubject
+            decorator: text
+          getYear:
+            label: Año
+            method: getYear
+            decorator: text
+          getCantDisaproveCurrentSchoolYear:
+            label: Cantidad de aprobados
+            method: getCantApprovedCurrentSchoolYear
+            decorator: text
+          getStudents:
+            label: Cantidad total de alumnos
+            method: getCantStudents
+            decorator: text
+
+      fields:  ~
+      list:
+        title:      Materias de la carrera
+        display:    [career_subject]
+        layout:             stacked
+        params:             |
+          <div class='info_div'>%%~component_career_subject%%</div>
+        object_actions:
+
+          _edit:
+            credentials: [edit_school_year]
+            condition: canBeEdited
+
+          tags:
+            action: tags
+            label: Tags
+            credentials: [edit_school_year]
+            condition: canBeEdited
+
+          configuration:
+            action:         configuration
+            label:          Configuración
+            credentials:    [edit_school_year]
+            condition:      canBeEdited
+
+        batch_actions:
+          configuration:
+            label: Configuración
+            credentials: [edit_school_year]
+        actions:
+          _user_export:
+      filter:  ~
+      form:
+        actions:
+          _list:
+          _save_and_list:
+      edit:    ~
+      new:     ~

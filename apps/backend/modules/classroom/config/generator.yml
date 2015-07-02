@@ -1,0 +1,50 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Classroom
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          classroom
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Listado de aulas
+        batch_actions:      []
+        display:            [name, seat_number, resourcesStr]
+        object_actions:
+          _edit:
+            credentials:    [edit_classroom]
+          _delete:
+            credentials:    [edit_classroom]
+            condition:      canBeDeleted
+          show_calendar:
+            action: showCalendar
+        actions:
+          _new:
+            label:          Nueva aula
+            credentials:    [show_classroom]
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title:              Editar aula
+        actions:
+          _list:
+            label:          Volver al listado de aulas
+          _save_and_list:
+            label:          Guardar aula
+      new:
+        title:              Nueva aula
+        actions:
+          _list:
+            label:          Volver al listado de aulas
+          _save_and_list:
+            label:          Guardar aula
+          _save_and_add:
+            label:          Guardar y agregar otra aula

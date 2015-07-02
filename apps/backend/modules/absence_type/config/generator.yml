@@ -1,0 +1,45 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           AbsenceType
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          absence_type
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        value:
+          label:           Valor
+      list:
+        peer_method:       doSelectOrder
+        title:             Tipos de ausencias
+        display:           [name, value ,method_str, _order, description]
+        object_actions:
+          _edit:
+            credentials:   [edit_absence_type]
+          _delete:
+            credentials:   [new_absence_type]
+        batch_actions:     []
+        actions:
+          _new:
+            label:         Nuevo tipo de ausencias
+            credentials:   [new_absence_type]
+      filter:
+        class:             false
+      form:
+        actions:
+          _list:
+            label:         Volver al listado de tipos de ausencias
+          _save_and_list:
+            label:         Guardar y volver a listado de tipos de ausencias
+          _save_and_add:
+            label:         Guardar y agregar otro tipo de ausencia
+      edit:
+        title:             Editar tipo de ausencia: %%name%%
+      new:
+        title:             Nuevo tipo de ausencia

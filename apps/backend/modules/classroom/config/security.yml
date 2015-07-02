@@ -1,0 +1,14 @@
+index:
+  credentials: [show_classroom]
+
+new:
+  credentials: [edit_classroom]
+
+edit:
+  credentials: [edit_classroom]
+
+delete:
+  credentials: [edit_classroom]
+
+show:
+  credentials: [show_classroom]

@@ -1,0 +1,71 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           StudentDisciplinarySanction
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          student_disciplinary_sanction
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        value:
+          label:          Valor
+        disciplinary_sanction_type_id:
+          label:          Motivo de sanción disciplinaria
+        sanction_type_id:
+          label:          Tipo de sanción disciplinaria
+        applicant_id:
+          label:          Solicitante
+        responsible_id:
+          label:          Responsable
+        disciplinary_sanction_type:
+          label:          Motivo de sanción disciplinaria
+        sanction_type:
+          label:          Tipo de sanción disciplinaria
+        applicant:
+          label:          Solicitante
+        applicant_str:
+          label:          Solicitante
+        applicant_other:
+          label:          Otro solicitante
+        responsible:
+          label:          Responsable
+      list:
+        title:            Listado de sanciones
+        display:          [request_date, number , name ,value, disciplinary_sanction_type, sanction_type]
+        batch_actions:    []
+        actions:
+          _new:
+            label:        Nueva sanción
+          _back:
+            label:        Volver al listado de alumnos
+      filter:
+        class:            false
+      form:    ~
+      edit:
+        title:            Editar sanción
+        actions:
+          _list:
+            label:        Volver al listado de sanciones
+          _save_and_list:
+            label:        Guardar y volver al listado de sanciones
+      new:
+        title:            Nueva sanción
+        actions:
+          _list:
+            label:        Volver al listado de sanciones
+          _save_and_list:
+            label:        Guardar y volver al listado de sanciones
+          _save_and_add:
+            label:        Guardar y agregar otra sanción
+      show:
+        title:            Detalle de la sanción
+        display:          [request_date, number, name, value, disciplinary_sanction_type, sanction_type ,applicant_str, responsible, _document_show, observation]
+        actions:
+          _list:
+            label:        Volver al listado de sanciones

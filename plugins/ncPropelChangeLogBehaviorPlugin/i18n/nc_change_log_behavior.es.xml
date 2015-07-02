@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<xliff version="1.0">
+  <file original="global" source-language="en" datatype="plaintext">
+    <header />
+    <body>
+      <!-- Actions -->
+      <trans-unit>
+        <source>Insertion</source>
+        <target>Inserción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update</source>
+        <target>Actualización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Deletion</source>
+        <target>Borrado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>%operation% at %date%</source>
+        <target>%operation% en %date%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value of field '%field_name%' changed from '%old_value%' to '%new_value%'.</source>
+        <target>El valor del campo '%field_name%' cambió de '%old_value%' a '%new_value%'.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value of field '%field_name%' was unset. It's previous value was '%old_value%'.</source>
+        <target>El valor del campo '%field_name%' fue borrado. Anteriormente tenía el valor '%old_value%'.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value of field '%field_name%' was set to '%new_value%'. It had no value set before.</source>
+        <target>El valor del campo '%field_name%' fue seteado a '%new_value%'. No tenía un valor previamente asignado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A new %object_name% has been created and it has been given the primary key '%pk%' at %date% by %username%.</source>
+        <target>Un nuevo objeto %object_name% ha sido creado con la clave primaria '%pk%' el %date% por %username%.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The %object_name% with primary key '%pk%' has been deleted at %date% by %username%.</source>
+        <target>El %object_name% con la clave primaria '%pk%' ha sido eliminado el %date% por %username%..</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Performed at</source>
+        <target>Realizado el</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Performed by</source>
+        <target>Realizado por</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changes made</source>
+        <target>Cambios efectuados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Operation type</source>
+        <target>Tipo de operación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Details on change log entry #%id%</source>
+        <target>Detalles en el historial #%id%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Details on change log entry for "%object%"</source>
+        <target>Detalles en el historial de "%object%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changelog of "%object%" of class "%class%"</source>
+        <target>Historial del objeto "%object%" de la clase "%class%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No entries have been found for this object</source>
+        <target>No existe un historial para este objeto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Go back</source>
+        <target>Volver</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changelog of field "%field%"</source>
+        <target>Historial de "%field%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changelog for object of class "%class%"</source>
+        <target>Historial de la instancia de la clase "%class%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Related changes</source>
+        <target>Cambios relacionados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>show</source>
+        <target>Ver detalle</target>
+      </trans-unit>
+      <trans-unit>
+        <source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+        <target>[0] sin resultados|[1] 1 resultado|(1,+Inf] %1% resultados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changes in foreign objects referenced by object "%%object%%" of class "%%class%%"</source>
+        <target>Cambios en los objetos referenciados por el objeto "%%object%%" de la clase "%%class%%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changes in objects that reference to object "%%object%%" of class "%%class%%"</source>
+        <target>Cambios en los objetos que referencian al objeto "%%object%%" de la clase "%%class%%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Changelog of referencing object "%object%"</source>
+        <target>Historial del objeto referenciado "%object%"</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Show details</source>
+        <target>Mostrar detalle</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Field</source>
+        <target>Campo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Old value</source>
+        <target>Valor antiguo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New value</source>
+        <target>Valor nuevo</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

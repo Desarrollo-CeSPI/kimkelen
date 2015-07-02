@@ -1,0 +1,363 @@
+connection:   propel
+description: Tablas de referencia de personas del sistema de alumnos
+
+classes:
+  Person:
+    tableName:              person
+    description:            Representa los datos comunes para las diferentes personas del sistema
+    columns:
+      id:
+      lastname:
+        type:               varchar(255)
+        required:           true
+      firstname:
+        type:               varchar(255)
+        required:           true
+      identification_type:
+        type:               integer
+        required:           false
+      identification_number:
+        type:               varchar(20)
+        required:           false
+      sex:
+        type:               integer
+        required:           true
+      cuil:
+        type:               varchar(20)
+        required:           false
+      is_active:
+        type:               boolean
+        default:            true
+      email:
+        type:               varchar(255)
+      phone:
+        type:               varchar(255)
+      birthdate:
+        type:               date
+        required:           false
+      birth_country:
+        type:               varchar(255)
+      birth_state:
+        type:               varchar(255)
+      birth_city:
+        type:               varchar(255)
+      observations:
+        type:               longvarchar
+      address_id:
+        type:               integer
+        foreignTable:       address
+        foreignReference:   id
+        onUpdate:           cascade
+        onDelete:           restrict
+      user_id:
+        description:        Si se crea un usuario para la persona, este id representará el sf_guard_user_id
+        type:               integer
+        required:           false
+        foreignTable:       sf_guard_user
+        foreignReference:   id
+        onUpdate:           cascade
+        onDelete:           setnull
+      photo:
+        type:               varchar(255)
+        required:           false
+
+  Personal:
+    tableName:            personal
+    description:          Representa las personas no docentes de la institución (regentes, jefe de preceptores, preceptores)
+    columns:
+      id:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      salary:
+        type:             float
+      aging_institution:
+        type:             date
+        required:         false
+      file_number:
+        type:             integer
+      personal_type:
+        type:             integer
+        required:         false
+        default:          1
+
+  HeadPersonalPersonal:
+    tableName:  head_personal_personal
+    description: Representa a un jefe de preceptor con sus preceptores a cargo.
+    columns:
+      id:
+      head_personal_id:
+        type:             integer
+        foreignTable:     personal
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      personal_id:
+        type:             integer
+        foreignTable:     personal
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      _uniques:
+        head_personal_personal:  [head_personal_id, personal_id]
+
+
+  Student:
+    tableName:            student
+    description:          Representa un alumno
+    columns:
+      id:
+      global_file_number:
+        description:      Número de alumno en el colegio (puede que coincida con el numero de alumno de la carrera) depende del behaviour
+        type:             varchar(20)
+        required:         true
+        unique:           true
+      order_of_merit:
+        description:      Número de orden de merito del alumno
+        type:             varchar(20)
+        required:         false
+        unique:           true
+      folio_number:
+        description:      Número de folio del alumno
+        type:             varchar(20)
+        required:         false
+        unique:           true
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      occupation_id:
+        type:             integer
+        foreignTable:     occupation
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      busy_starts_at:
+        type:             time
+      busy_ends_at:
+        type:             time
+      blood_group:
+        type:             varchar(50)
+        required:         false
+      blood_factor:
+        type:             varchar(50)
+        required:         false
+      emergency_information:
+        type:             longvarchar
+        required:         false
+      health_coverage_id:
+        type:             integer
+        foreignTable:     health_coverage
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      origin_school:
+        type: varchar(255)
+        required: false
+      educational_dependency:
+        type: varchar(255)
+        required: false
+
+  Brotherhood:
+    tableName:            brotherhood
+    description:          Representa la relación de hermandad entre dos alumnos
+    columns:
+      id:
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      brother_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+
+  HealthCoverage:
+    tableName: health_coverage
+    columns:
+      id:
+      name:
+        type:             varchar(255)
+        required:         true
+
+  StudentTag:
+    tableName: student_tag
+    columns:
+      student_id:
+        type: integer
+        foreignTable: student
+        foreignReference: id
+        onUpdate: cascade
+        onDelete: cascade
+        primaryKey: true
+      tag_id:
+        type: integer
+        foreignTable: tag
+        foreignReference: id
+        onUpdate: restrict
+        onDelete: cascade
+        primaryKey: true
+
+  Teacher:
+    tableName:            teacher
+    description:           representa a un docente
+    columns:
+      id:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      salary:
+        type:             float
+      aging_institution:
+        type:             date
+        required:         false
+      file_number:
+        type:             integer
+
+  Tutor:
+    tableName:            tutor
+    description:           representa a un tutor
+    columns:
+      id:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      occupation_id:
+        type:             integer
+        foreignTable:     occupation
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      tutor_type_id:
+        type:             integer
+        foreignTable:     tutor_type
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      nationality:
+        description:      La nacionalidad del tutor (nativo, naturalizado, extrangero)
+        type:             integer
+        required:         false
+        default:          0
+      occupation_category_id:
+        type:             integer
+        foreignTable:     occupation_category
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      study_id:
+        type:             integer
+        foreignTable:     study
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      is_alive:
+        type:               boolean
+        default:            true
+
+  TutorType:
+    tableName:            tutor_type
+    description:          representa el tipo de un tutor (madre, padre, hermano mayor de 21, etc)
+    columns:
+      id:
+      name:
+        type:             varchar(255)
+        required:         true
+      _uniques:
+        name: [name]
+
+  StudentTutor:
+    tableName:            student_tutor
+    description:           representa la tutoría sobre un alumno
+    columns:
+      id:
+      tutor_id:
+        type:             integer
+        foreignTable:     tutor
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+
+
+  Address:
+    tableName:            address
+    description:          Representa una direccion postal
+    columns:
+      id:
+      state_id:
+        type:             integer
+        foreignTable:     state
+        foreignReference: id
+      city_id:
+        type:             integer
+        foreignTable:     city
+        foreignReference: id
+      street:
+        type:             varchar(255)
+      number:
+        type:             varchar(255)
+      floor:
+        type:             varchar(255)
+      flat:
+        type:             varchar(255)
+
+  License:
+    tableName:  license
+    description:  Licencia de una persona
+    columns:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      license_type_id:
+        type:             integer
+        foreignTable:     license_type
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         restrict
+      date_from:
+        type:             date
+        required:         true
+      date_to:
+        type:             date
+        required:         false
+      observation:
+        type:             longvarchar
+        required:         false
+      is_active:
+        type:             boolean
+        default:          true
+
+  LicenseType:
+    tableName:  license_type
+    description:  Tipos de licencia
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      _uniques:
+        license_type:  [name]

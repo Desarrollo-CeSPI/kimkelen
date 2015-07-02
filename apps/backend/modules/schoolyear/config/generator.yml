@@ -1,0 +1,100 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           SchoolYear
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          school_year
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        year:
+          label:           Año
+        is_active:
+          label:           Vigente
+        _change_state:
+          label:           Pasar a No Vigente
+      list:
+        title:             Listado de años lectivos
+        sort:              [year, desc]
+        display:           [year, is_active, is_closed]
+        batch_actions:     []
+        actions:
+          _new:
+            label: Nuevo año lectivo
+            credentials: [edit_school_year]
+        object_actions:
+
+          change_state:
+            action:       changeState
+            condition:    canChangeState
+            label:        Cambiar vigencia
+            credentials:  [edit_school_year]
+
+          registered_students:
+            action: registeredStudents
+            credentials: [show_school_year]
+            label: Registered students
+            condition:  canShowStudents
+
+          careers:
+            action:       schoolYearCareers
+            label:        Ver carreras
+            credentials:  [show_career]
+
+          examinations:
+            action: examinations
+            label: Examinations
+            credentials: [show_examination]
+            condition:    canExamination
+
+          manual_examinations:
+            action: manualExaminations
+            label: Mesas de examen manuales (para cursadas aún abiertas)
+            credentials: [show_examination]
+            condition: canManualExamination
+
+          examination_repproved:
+            action: examinationRepproved
+            label: Examination repproved
+            credentials: [show_examination_repproved]
+
+          close_year:
+            action: closeSchoolYear
+            condition:  canClose
+            label:  close school year
+            params: confirm= '¿Está seguro? Esta acción es crítica y no podrá revertirse.'
+
+          resolve_problematic_students:
+            action: resolveProblematicStudents
+            condition: hasProblematicStudents
+            label:  Resolve problematic students
+
+          _delete:
+            credentials: [edit_school_year]
+            condition:    canBeDeleted
+
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title:             Edición del año lectivo "%%year%%"
+        display:           [year]
+        actions:
+          _list:           { label: Volver al listado de años lectivos }
+          _save_and_list:
+            label:          Guardar año lectivo
+          _save_and_add:
+      new:
+        title:             Crear un año lectivo
+        display:           [year]
+        actions:
+          _list:           { label: Volver al listado de años lectivos }
+          _save_and_list:
+            label:          Guardar año lectivo
+          _save_and_add:

@@ -1,0 +1,1970 @@
+body {
+    text-align:center;
+    font-family:Trebuchet MS, sans-serif;
+    font-size:11px;
+    color:#333;
+    margin:0px 0px 0px 0px;
+}
+
+a img
+{
+    border: none;
+}
+
+/* wrapper */
+
+#wrapper{
+    border:0px solid blue;
+    text-align:left;
+    width:100%;
+    margin:auto;
+    padding:0px;
+    border:0px solid #ccc;
+}
+
+/* header */
+
+#header {
+    width:100%;
+    height:auto;
+    margin:0;
+    padding:0;
+    background: #549876;
+}
+
+/* logo */
+
+#header .logo {
+    float:left;
+    margin:18px;
+    padding:0;
+    border:0px solid #ccc;
+}
+
+/* navegation */
+
+#header .navigation {
+    float:right;
+    width:20%;
+    height:auto;
+    margin-top:10px;
+    margin-right:20px;
+    padding:0;
+    border:0px solid red;
+}
+
+#header .top_navigation{
+    float:right;
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:3px 10px 3px 10px;
+    text-align:center;
+    border:1px solid #fff;
+    background-color:none;
+}
+
+#header .top_navigation a{
+    font-family:Trebuchet MS,sans-serif;
+    font-size:12px;
+    color:#000;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+#header .top_navigation a:hover{
+    font-size:12px;
+    color:#000;
+}
+
+#header .user {
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:5px 0px 5px 8px;
+    border:0px solid red;
+    clear:both;
+    text-align:right;
+    color:#000;
+}
+
+#header .version {
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:5px 0px 5px 8px;
+    border:0px solid red;
+    clear:both;
+    text-align:right;
+    color:#000;
+}
+
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
+/***content***/
+
+#content {
+    float:left;
+    width:97%;
+    height:auto;
+    background-color:none;
+    margin:20px;
+    border:0px solid #ccc;
+    text-align:justify;
+    font-size:12px;
+    padding:0px;
+}
+
+
+/* menu */
+
+#jscookmenu {
+    float:left;
+    width:100%;
+    height:24px;
+    background-color:#F7F3F7;
+    border-top:2px solid #fff;
+    border-bottom:1px solid #ccc;
+}
+
+#jscookmenu .content {
+    margin-left:10px;
+}
+
+#jscookmenu .buton {
+    display:block;
+    color:#E61F17;
+    padding:6px 10px 6px 10px;
+    width:auto;
+    border-right:2px solid #fff;
+    float:left;
+}
+
+#jscookmenu .buton a{
+    color:#E61F17;
+    font-weight:bold;
+    font-size:11px;
+    text-decoration:none;
+}
+
+#menu-div .buton:hover{
+    color:#FFF;
+    background-color:#E2E2E2;
+    font-weight:bold;
+    font-size:11px;
+    text-decoration:none;
+}
+
+/* footer */
+
+#footer {
+    width:100%;
+    clear:both;
+    height:40px;
+    padding-top:15px;
+    text-align:center;
+    color:#555;
+    border-top:4px solid #DED9C2;
+    margin:0px;
+}
+
+/******
+ * sf *
+ ******/
+
+#sf_admin_container fieldset h2 {
+    background-color:#003F2D!important;
+}
+
+#sf_admin_container .list th {
+    background-color:#555!important;
+    color:#FFF!important;
+}
+
+#sf_admin_container th a:hover {
+    color:#EDECB5 !important;
+}
+
+#sf_admin_container .warning
+{
+    margin: 4px 0;
+    padding: 4px 4px 4px 26px;
+    background: url(../images/exclamation.png) no-repeat 4px 2px;
+    border: 1px solid #ddd;
+    background-color: #ffc;
+    display: inline;
+}
+
+#sf_admin_container .help {
+}
+
+#sf_admin_container .help br
+{
+    display: none;
+}
+
+#course_day table th{
+    min-width:200px;
+    text-align:center;
+    background-color:#555!important;
+    color:#FFF!important;
+}
+#course_day table th label{
+    color:#fff;
+}
+#course_day table td{
+    min-width:200px;
+    color:#333;
+    text-align:center!important;
+}
+
+.ancho{
+    min-width:200px;
+}
+.ancho-selected{
+    min-width:200px;
+}
+
+.career_view_title{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.career_view_title h2{
+    display:inline;
+}
+.career_view_title h3{
+    display:inline;
+    color:#666;
+}
+
+.sf_career_table{
+    width:100%;
+}
+
+.sf_career_ul{
+    list-style:none !important;
+    padding:0px !important;
+    margin:0px !important;
+}
+.sf_career_li{
+    display:block;
+    border-top: 1px solid #ccc;
+    padding:0px !important;
+    margin:0px  !important;
+}
+
+.sf_admin_action_course_days a
+{
+    background-image: url('../images/clock.png') !important;
+}
+
+.sf_admin_action_course_absence_per_day a
+{
+    background-image: url('../images/calendar-cross.png') !important;
+}
+
+.sf_admin_action_course_absence_per_subject a
+{
+    background-image: url('../images/calendar-cross.png') !important;
+}
+
+.sf_admin_action_absence_per_day a
+{
+    background-image: url('../images/calendar-cross.png') !important;
+}
+.sf_admin_action_absence_per_subject a
+{
+    background-image: url('../images/calendar-cross.png') !important;
+}
+.sf_admin_action_exporttoexcel a
+{
+    background-image: url('../images/xls.png') !important;
+}
+
+.sf_admin_action_export_to_excel a
+{
+    background-image: url('../images/xls.png') !important;
+}
+
+.sf_admin_action_excel a
+{
+    background-image: url('../images/xls.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_add_marks a
+{
+    background-image: url('../images/award.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_stundent_marks a
+{
+    background-image: url('../images/clipboard-list.png') !important;
+}
+
+.sf_admin_action_subject_options a, .sf_admin_action_optionals a
+
+{
+    background-image: url('../images/node.png') !important;
+}
+
+.sf_admin_action_copy_students_from_division a,
+.sf_admin_list .sf_admin_action_clonecourse a
+{
+    background-image: url('../images/disk_multiple.png') !important;
+}
+
+.sf_admin_action_copy_division a{
+    background-image: url('../images/disk_multiple.png') !important;
+}
+
+.sf_admin_action_course_students a,
+.sf_admin_action_division_students a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_clone_course a
+{
+    background-image: url('../images/disk_multiple.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_generateuser a
+{
+    background-image: url('../images/user-plus.png') !important;
+}
+.sf_admin_list .sf_admin_action_generate_user a
+{
+    background-image: url('../images/user-plus.png') !important;
+}
+.sf_admin_list .sf_admin_action_copy a
+{
+    background-image: url('../images/document-copy.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_register_student_school_year a
+{
+    background-image: url('../images/tick-circle-frame.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_equivalences a
+{
+    background-image: url('../images/equivalence.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_change_to_open a,
+.sf_admin_list .sf_admin_action_change_to_active a,
+.sf_admin_list .sf_admin_action_change_to_close a,
+.sf_admin_list .sf_admin_action_change_to_valid a,
+.sf_admin_list .sf_admin_action_change_to_new a,
+.sf_admin_list .sf_admin_action_change_to_invalid a,
+.sf_admin_list .sf_admin_action_change_state a,
+.sf_admin_list .sf_admin_action_change_status a,
+.sf_admin_list .sf_admin_action_change_to_not_valid a,
+.sf_admin_list .sf_admin_action_back_to_new a,
+.sf_admin_list .sf_admin_action_change_to_inactive_status a,
+.sf_admin_list .sf_admin_action_change_to_active_status a,
+.sf_admin_list .sf_admin_action_back_to_valid a,
+.sf_admin_list .sf_admin_action_change_to_new_status a
+{
+    background-image: url('../images/arrow-circle-double-135.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_registered_students a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_careers a
+{
+    background-image: url('../images/node.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_examinations a
+{
+    background-image: url('../images/examinations.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_examination_repproved a
+{
+    background-image: url('../images/examination-repproved.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_deactivate a,
+.sf_admin_list .sf_admin_action_deactivate a
+{
+    background-image: url('../images/deshabilitar.png') !important;
+}
+.sf_admin_actions .sf_admin_action_activate a,
+.sf_admin_list .sf_admin_action_activate a
+{
+    background-image: url('../images/habilitar.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_regiter_for_careers a,
+.sf_admin_list .sf_admin_action_regiter_for_careers a
+{
+    background-image: url('../images/node-select-child.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_register_for_current_school_year a,
+.sf_admin_list .sf_admin_action_register_for_current_school_year a
+{
+    background-image: url('../images/administrar-matricula.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_califications a,
+.sf_admin_list .sf_admin_action_califications a
+{
+    background-image: url('../images/award.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_manage_students a,
+.sf_admin_list .sf_admin_action_manage_students a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_manage_course_days a,
+.sf_admin_list .sf_admin_action_manage_course_days a
+{
+    background-image: url('../images/clock.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_manage_allowed_subjects a,
+.sf_admin_list .sf_admin_action_manage_allowed_subjects a
+{
+    background-image: url('../images/folder-stand.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_close a
+{
+    background-image: url('../images/close-course.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_revert_period a
+{
+    background-image: url('../images/lock_open.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_examination_subjects a
+{
+    background-image: url('../images/folder-stand.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_history a
+{
+    background-image: url('../images/medal-gold.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_students a,
+.sf_admin_list .sf_admin_action_students a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_action_revert_state a{
+    background-image: url('../images/arrow-circle-double-135.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_configuration a,
+.sf_admin_list .sf_admin_action_configuration a
+{
+    background-image: url('../images/report--pencil.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_configuration_view a,
+.sf_admin_list .sf_admin_action_configuracion_view a
+{
+    background-image: url('../images/report--show.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_print_calification a
+{
+  background-image: url('../images/calification_sheet.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_boletines a,
+.sf_admin_list .sf_admin_action_print_report_card a,
+.sf_admin_list .print_certificate a,
+.sf_admin_actions .print_certificate a,
+.sf_admin_list .sf_admin_action_print_social_card a
+{
+    background-image: url('../images/printer.png') !important;
+}
+
+
+.sf_admin_list .history a,
+.sf_admin_actions .history a
+{
+    background-image: url('../images/award.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_manage_subjects a,
+.sf_admin_list .sf_admin_action_subjects a,
+.sf_admin_actions .sf_admin_action_subjects a
+{
+    background-image: url('../images/folder-stand.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_career_view a,
+.sf_admin_actions .sf_admin_action_career_view a
+{
+    background-image: url('../images/node.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_enrollments a,
+.sf_admin_list .sf_admin_action_show_students a,
+.sf_admin_list .sf_admin_action_show_inscripted a,
+.sf_admin_actions .sf_admin_action_show_inscripted a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_enrollments a,
+.sf_admin_list .sf_admin_action_show_students a,
+.sf_admin_list .sf_admin_action_show_inscripted a,
+.sf_admin_actions .sf_admin_action_show_inscripted a,
+.sf_admin_action_student_inscriptions a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_clone a,
+.sf_admin_actions .sf_admin_action_clone a
+{
+    background-image: url('../images/disk_multiple.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_school_year a,
+.sf_admin_actions .sf_admin_action_show_school_year a
+{
+    background-image: url('../images/node-select-child.png') !important;
+}
+
+
+.sf_admin_list .sf_admin_action_marks a,
+.sf_admin_list .sf_admin_action_course_marks a,
+.sf_admin_actions .sf_admin_action_marks a
+{
+    background-image: url('../images/clipboard-list.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_days a,
+.sf_admin_actions .sf_admin_action_days a
+{
+    background-image: url('../images/calendar-month.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_print a
+{
+    background-image: url('../images/printer.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_correlatives a,
+.sf_admin_actions .sf_admin_action_correlatives a
+{
+    background-image: url('../images/node-select-child.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_tutors a,
+.sf_admin_list .sf_admin_action_tutors a
+{
+    background-image: url('../images/user-orange-female.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_register_student_career a
+{
+    background-image: url('../images/clipboard--pencil.png') !important;
+}
+.sf_admin_actions .sf_admin_action_register_student_course a,
+.sf_admin_actions .sf_admin_action_division_courses a,
+.sf_admin_list .sf_admin_action_division_courses a,
+.sf_admin_list .sf_admin_action_register_student_course a
+{
+    background-image: url('../images/books-stack.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_unregister_student_career a
+{
+    background-image: url('../images/cancel_inscription.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_teachers a,
+.sf_admin_actions .sf_admin_action_division_preceptors a,
+.sf_admin_list .sf_admin_action_teachers a,
+.sf_admin_list .sf_admin_action_division_preceptors a
+{
+    background-image: url('../images/user-black.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_division_attendance_per_day a
+{
+    background-image: url('../images/clipboard-list.png') !important;
+}
+
+.sf_admin_action_teacher
+{
+    background: url('../images/user-black.png') no-repeat 0 0;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 20px;
+}
+
+.sf_admin_action_student
+{
+    background: url('../images/user-white.png') no-repeat 0 0;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 20px;
+}
+
+
+.sf_admin_form_row table {
+    width:  80%;
+}
+
+.go-back
+{
+    padding: 3px 4px 3px 20px;
+    background: url('../images/arrow-180-medium.png') no-repeat left center #eee;
+    border: 1px solid #aaa;
+    -moz-border-radius: 3px;
+}
+
+table.list
+{
+    width: 80%;
+}
+
+.ui-datepicker-trigger
+{
+    vertical-align: middle !important;
+    margin-left: 3px;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.floating-list
+{
+    display: none;
+    padding: 3px 12px !important;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.floating-list .highlight
+{
+    font-weight: bold;
+}
+
+.double_list select
+{
+    width: 300px;
+}
+
+.course-marks ul{
+    margin:0px!important;
+    margin-bottom:2px!important;
+}
+.course-marks ul li{
+    list-style-image:none!important;
+    list-style-type:none!important;
+}
+.multiple-marks{
+    width:40%;
+    border:1px solid #AAA;
+    padding:5px!important;
+    margin: 10px 6px !important;
+    float: left;
+}
+
+.multiple-marks a.title
+{
+    display: block;
+}
+
+#multiple-marks-div{
+    padding-left:10%!important;
+}
+#multiple-marks-div td{
+    border:0px !important;
+    padding:5px !important;
+}
+#multiple-marks-div tr{
+    border:0px !important;
+}
+.course-state{
+    width:40%;
+    border:1px solid #AAA;
+    padding:5px!important;
+    margin: 10px 6px !important;
+    float: left;
+}
+#change-course-state{
+    padding-left:10%!important;
+}
+#change-course-state td{
+    border:0px !important;
+    padding:5px !important;
+}
+#change-course-state tr{
+    border:0px !important;
+}
+
+.course-state-configuration{
+    width:40%;
+    border:1px solid #AAA;
+    padding:5px!important;
+    margin: 10px 6px !important;
+    float: inherit;
+}
+
+#course-state-configuration{
+    padding-left:10%!important;
+}
+#course-state-configuration td{
+    border:0px !important;
+    padding:5px !important;
+}
+#course-state-configuration tr{
+    border:0px !important;
+}
+
+
+#courses-by-school-year{
+    border:1px solid #AAA;
+    padding:5px!important;
+    margin-bottom:10px!important;
+    width:85%!important;
+}
+#courses-by-school-year td{
+    text-align:center!important;
+}
+#students-course-list{
+    margin-left:10%!important;
+}
+
+
+/* Style for the career-student detail action */
+
+.career-student-content{
+    border:1px solid #AAA;
+    padding:5px!important;
+    margin-bottom:30px!important;
+    margin-left:5%!important;
+    width:85%!important;
+}
+
+.career-student-content table{
+    min-width:90%!important;
+    margin-left:5%!important;
+}
+
+.career-student-content td{
+    text-align: center!important;
+}
+
+.status-1{
+    background-color: #B1D398!important;
+}
+
+.status-2{
+    background-color: #F29A79!important;
+}
+
+
+.career-student-content h1{
+    margin:0!important;
+    padding:0!important;
+    margin-bottom:15px!important;
+}
+
+#ajax-loading{
+    position:absolute;
+    right:5%;
+    background-color:#eee;
+    padding:9px !important;
+    margin: 10px!important;
+    border: 1px solid #ccc;
+    -moz-border-radius: 6px;
+}
+
+#ajax-loading img{
+    vertical-align: middle;
+}
+
+.mark, .average, .input-calification{
+    width: 4em !important;
+}
+
+/*EQUIVALENCES*/
+#equivalences-table{
+    width:90%;
+}
+
+.input-fullsize{
+    width:90%!important;
+}
+
+/*DisciplinarySanction*/
+.sf_admin_list .sf_admin_action_disciplinary_sanctions a
+{
+    background-image: url('../images/sanction.png') !important;
+}
+
+#sf_admin_container ul li.sf_admin_action_back a,
+#sf_admin_container ul li.sf_admin_action_return a
+{
+    background: url("../images/arrow-180.png") no-repeat 0 0 !important;
+}
+
+.sf_admin_action_go_back
+{
+    background: url("../images/arrow-180.png") no-repeat 0 0 !important;
+}
+
+#sf_admin_container ul li.sf_admin_action_list a
+{
+    background: url("../images/arrow-180.png") no-repeat 0 0 !important;
+}
+
+.sf_admin_list .sf_admin_action_sanctions_for_student a,
+.sf_admin_list .sf_admin_action_sanctionsforstudent a
+{
+    background-image: url('../sfPropelRevisitedGeneratorPlugin/images/icons/16x16/show.png') !important;
+}
+
+.radio_list li
+{
+    display: inline;
+}
+
+.sf_admin_form table th
+{
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.box{
+    background-color:#eee;
+    border: 1px solid #ccc;
+    padding:10px!important;
+    margin-bottom:10px!important;
+}
+.box select{
+    margin-left:40px!important;
+}
+.box h3{
+    font-size:16px!important;
+    float:left;
+    padding:0!important;
+    margin:0!important;
+}
+
+#students-list{
+    width:80%;
+    margin:0 auto!important;
+}
+#students-list table{
+    width:100%!important;
+}
+#students-list table td{
+    border: 1px solid #CCC!important;
+}
+#students-list table th{
+    border: 1px solid #CCC!important;
+}
+
+/** eliminamos campos del formulario por estilos... */
+#sf_fieldset_datos_ocupacionales,
+.sf_admin_form_field_discharge
+{
+    display: none;
+}
+
+.center-box-form{
+    width: 50%!important;
+    margin:0 auto!important;
+}
+.center-box-list{
+    width: 90%!important;
+    margin:0 auto!important;
+}
+
+.show-more
+{
+    display: block;
+    color: #346 !important;
+    background-color: #ddd;
+    border-bottom: 1px dashed #bbb;
+    padding: 3px 3px 3px 6px;
+}
+
+.info
+{
+    display: block;
+}
+
+.info_container
+{
+    text-align: center !important;
+    width: 600px;
+    margin: 12px auto !important;
+}
+
+.info_container *
+{
+    text-align: left;
+}
+
+.course_info
+{
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 4px !important;
+    background-color: #fff;
+}
+
+.info_title
+{
+    font-weight: bold;
+}
+
+.flash
+{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.9;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.error
+{
+    background-color: red !important;
+    color: white !important;
+}
+
+.sf_admin_list .sf_admin_action_free a {
+    background-image:url("../images/arrow-circle-double-135.png") !important;
+}
+.sf_admin_action_free a
+{
+    background-image:url("../images/arrow-circle-double-135.png") !important;
+}
+.disabled
+{
+    color: #ddd;
+}
+
+.inactive
+{
+    color: red !important;
+}
+
+.attribute
+{
+    font-weight: bold;
+    color: #065a02;
+}
+
+.disabled
+{
+    color: #ccc;
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+.more_info
+{
+    padding: 3px !important;
+    margin: 0 0 0 10px !important;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.more_info li
+{
+    list-style: none !important;
+    padding-left: 3px !important;
+}
+
+.show-more-link
+{
+    font-weight: bold;
+    color: #00577b !important;
+}
+
+.study_plan_odd
+{
+    background-color: #EEEEEE !important;
+}
+.study_plan_even:hover
+{
+    background-color: white!important;
+}
+.study_plan
+{
+    width: 100% !important;
+    text-size: 10em !important;
+}
+.study_plan body
+{
+    border-color: #DDDDDD !important;
+    border-left: 0 none !important;
+    border-right: 0 none!important;
+    border-style: solid none!important;
+    border-width: 1px 0!important;
+    text-align: left!important;
+    vertical-align: middle!important;
+}
+.analytical_odd
+{
+    background-color: #EEEEEE !important;
+}
+.analytical_even:hover
+{
+    background-color: white!important;
+}
+
+.analytical
+{
+    width: 100% !important;
+    text-size: 10em !important;
+}
+
+.marks-fieldset .error_list
+{
+    display: inline-block !important;
+}
+
+.with-error
+{
+    border: 1px solid #f30 !important;
+}
+
+.mark-container
+{
+    margin-left: 9em !important;
+}
+
+.tab
+{
+    border: 1px solid #b3b4b5;
+    background-color: #d4d7d9;
+    padding: 2px 6px;
+    margin: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.tab:hover,
+.tab-selected
+{
+    text-decoration: none !important;
+    border-color: #0066cc;
+    background-color: #3399ff;
+    color: #fff !important;
+}
+
+.sf_admin_action_print_gradebook a
+{
+    background-image: url('../images/document-table.png') !important;
+}
+
+.info_div strong
+{
+    font-size: 14px;
+}
+
+.subject_actions
+{
+    margin-top: 5px;
+}
+
+.subject_actions th.actions
+{
+    width: 200px;
+}
+
+.subject_actions td,
+.subject_actions th
+{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.subject_actions ul
+{
+    margin: 0 !important;
+}
+.subject_actions li
+{
+    list-style: none !important;
+}
+
+.subject_actions a
+{
+    padding-left: 0 !important;
+}
+
+.diciembre
+{
+    background-color: yellow !important;
+}
+
+.febrero
+{
+    background-color: red !important;
+}
+
+.absent
+{
+    background-color: #3BB9FF !important;
+}
+
+table.dc_horizontal_table
+{
+    margin: 0.5em;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row
+{
+    border: none !important;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
+{
+    padding: 0 0 0 3px !important;
+    border: none !important;
+}
+
+.close_student
+{
+    display: block;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 3px !important;
+    margin: 3px 3px 3px 9em !important;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.close_student .close_student_result
+{
+    background-color: #39f;
+    padding: 3px;
+    color: #fff;
+    display: inline-block;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.sf_admin_action_manage_students_regularity a,
+.sf_admin_action_manage_regularity a
+{
+    background-image: url('../images/calendar-task.png') !important;
+}
+
+.free
+{
+  background-color: yellow !important;
+}
+.almost_free
+{
+  background-color: greenyellow !important;
+}
+
+.box
+{
+  text-align: right !important;
+}
+
+.total_absence
+{
+  font-size: 16px !important;
+  font-weight: bold;
+  background-color:  #F2F2F2;
+}
+
+.box_almost_free
+{
+  border: 1px solid black;
+  padding: 1px;
+  background-color: yellow  !important;
+}
+
+.box_free
+{
+  border: 1px solid black;
+  padding: 1px;
+  background-color: #F29A79 !important;
+}
+
+.box_justificated
+{
+  border: 1px solid black;
+  padding: 1px;
+  background-color: greenyellow !important;
+}
+
+.box_justificated_student_show
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: greenyellow !important;
+}
+
+.nc_changelog_tooltip
+{
+    display: block;
+    border: 1px solid #aaa;
+    background: #ddd;
+    padding: 3px !important;
+    position: absolute;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.nc_changelog_tooltip ul
+{
+    list-style: none;
+}
+
+.sf_admin_action_manage_students_regularity a,
+.sf_admin_action_manage_regularity a
+{
+    background-image: url('../images/calendar-task.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_preceptors a
+{
+    background-image: url('../images/user-gray.png') !important;
+}
+
+.sf_admin_actions .sf_admin_action_brothers a,
+.sf_admin_list .sf_admin_action_brothers a
+{
+    background-image: url('../images/users.png') !important;
+}
+
+.student_attendance_justificated
+{
+    background-color: greenyellow !important;
+}
+
+
+
+.sf_admin_list .sf_admin_action_justificate a
+{
+    background-image: url('../images/sanction.png') !important;
+}
+
+.justification_help
+{
+    color:  #AAAAAA !important;
+}
+
+
+#sf_admin_action_justificate a
+{
+    background-image: url('../images/sanction.png') !important;
+}
+
+#sf_admin_action_justificate_download_document a
+{
+    background-image: url('../images/document-copy.png') !important;
+}
+
+#sf_admin_action_set_free
+{
+    background-image: url('../sf/sf_web_debug/images/error.png') !important;
+}
+
+.justification_help
+{
+    color:  #AAAAAA !important;
+}
+
+.attendance_justificated
+{
+    color:#CCC;
+}
+
+.sf_admin_action_show_calendar a
+{
+    background-image: url('../images/calendar-task.png') !important;
+}
+
+.sf_admin_action_sanctions a
+{
+    background-image: url('../images/disciplinary_sanction.png') !important;
+}
+
+.sf_admin_action_equivalence a
+{
+    background-image: url('../images/node-green-child.png') !important;
+}
+
+.sf_admin_action_course a
+{
+    background-image: url("../images/books-stack.png") !important;
+}
+
+.sf_admin_list .sf_admin_action_licenses a
+{
+    background-image: url('../images/pill.png') !important;
+}
+
+/** box information for courses not related by division**/
+.info-box
+{
+    border: 1px solid #ddd;
+}
+
+.info-box-title
+{
+    background-color: #E7EEF6;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-box-collapsable
+{
+    padding: 3px;
+    display: none;
+}
+
+.info-box-collapsable li
+{
+    list-style: none !important;
+}
+
+.sf_admin_list .sf_admin_action_copy_configuration a {
+    background-image: url("../images/document-copy.png") !important;
+}
+
+div.no_results_advice {
+    font-weight: bolder !important;
+    padding-left: 40px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    border-top: 1px solid #DDDDDD;
+}
+
+.sf_admin_action_manage_orientation a
+{
+    background-image: url('../images/arrow-circle-double-135.png') !important;
+}
+
+.result
+{
+    margin-bottom: 10px;
+}
+.search-content
+{
+    text-align: right;
+    display:inline;
+}
+.sf_admin_action_student_conduct a
+{
+    background-image: url('../images/conducta.gif') !important;
+}
+
+.print_table *
+{
+    text-align: center;
+}
+
+.print_table .mark
+{
+    width: 1.5em;
+}
+
+.print_table tbody th
+{
+    text-align: left;
+}
+
+.print_table thead th,
+.print_table tbody th
+{
+    background-color: #555;
+    color: #fff;
+    padding: 3px;
+}
+
+.print_table tbody td
+{
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+#marks-table table
+{
+    width: 100% !important;
+    text-align: left;
+}
+
+#marks-table th,
+#marks-table td
+{
+    text-align: center !important;
+    border: 1px solid #DDD !important;
+    border-collapse: collapse !important;
+    width: 10% !important;
+}
+
+#mark-subject  td,
+#mark-subject th
+{
+    width: 30% !important;
+    min-width: 30% !important;
+    text-align: left !important;
+}
+
+.absence_subject_a
+{
+    font-weight: bold !important;
+    color: #3399FF !important;
+}
+.course_subject_absence_show
+{
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.student_is_free
+{
+    background-color:  #FFFF00 !important;
+}
+
+.student_is_free_title
+{
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-align:center !important;
+    background-color:  #FFFF00 !important;
+}
+
+.free_info
+{
+    margin-top: 20px;
+    position: absolute;
+    background-color: #FCC;
+    border: solid 1px #C66;
+    padding: 1px;
+}
+
+.sf_admin_form_row div
+{
+    position:relative;
+}
+
+.block_screen
+{
+    text-align: center;
+}
+
+.student_head
+{
+    width: 100%;
+}
+
+.student_head .active
+{
+    float: right;
+    margin-left: 5px;
+}
+
+.student_head .person_name
+{
+    float: left;
+    font-size: 1.2em;
+}
+.student_head .person_name a
+{
+    font-weight: bold;
+    color: #0093DD !important;
+}
+
+
+.student_info
+{
+    overflow: hidden;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.student_current_info
+{
+    float: right;
+    width: 45%;
+    margin-left: -2px;
+    padding-left: 10px;
+}
+
+.student_personal_info
+{
+    float: left;
+    width: 50%;
+    border-right: 2px solid #ddd;
+}
+
+.student_tutor
+{
+    border-top: 2px solid #ddd;
+    width: 70%;
+}
+
+.student_tutor .tutor
+{
+    margin-top: 5px;
+}
+
+.student_career_repproved
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
+}
+
+.student_career_graduate
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: blue;
+}
+
+.no_available
+{
+    background-color: silver;
+}
+
+.sf_admin_actions .sf_admin_action_course_delete_configuration
+{
+    background-image: url('../images/cross.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_see_attendance_sheet a
+{
+    background-image: url('../images/tick.png') !important;
+}
+
+.sf_admin_action_aggregate_preceptor a
+{
+    background-image: url('../images/user-gray.png') !important;
+}
+
+.many_disciplinary_sanctions
+{
+    color: #fb2929;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#name_blank
+{
+    width: 220px !important;
+    display:block !important;
+    float: left;
+    padding: 10px 0px !important;
+
+}
+
+
+.attendance_date span
+{
+    margin-left: 11px;
+}
+
+
+.attendance_date
+{
+    float: left;
+}
+
+.student_attendance_period{
+    width: 200px;
+    float: right;
+    display:block;
+}
+
+
+
+.attendance_week span
+{
+    width: 210px;
+    float: left;
+    display:block;
+
+}
+
+.attendance_week
+{
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #E2E2E2;
+}
+
+
+.sf_admin_action_attendance_day a
+{
+    background-image: url('../images/report--pencil.png') !important;
+}
+.sf_admin_action_attendance_subject a
+{
+    background-image: url('../images/report--pencil.png') !important;
+}
+.week_move
+{
+    float: right;
+}
+
+.sf_admin_action_related_to_a_division a
+{
+ background-image: url('../images/puzzle--arrow.png') !important;
+}
+
+.mark_green
+{
+  background-color: #12f447
+}
+.mark_yellow
+{
+  background-color: #FFFF00;
+}
+.mark_red
+{
+  background-color: tomato;
+}
+#sf_admin_container .double_list_select, #sf_admin_container .double_list_select-selected
+{
+  width: 40em;
+  height: 40em;
+}
+
+#go_back_action
+{
+  float:left;
+  margin-top:0% !important;
+  padding:4px !important;
+}
+
+.attendance_sheet_footer
+{
+  padding:1%;
+}
+
+.alert
+{
+  background-color: #C66;
+  color: #E2E2E2;
+  text-transform:uppercase;
+}
+
+.sf_admin_list .sf_admin_action_student_assistance_sanction_report a
+{
+  background-image: url('../images/report.png') !important;
+}
+
+.attendance_week_input
+{
+    max-width: 70px;
+    margin-left: 7px !important;
+
+}
+
+.info-mark-container
+{
+    margin-left: 10em !important;
+}
+.print_student_examination
+{
+    float: left;
+    text-align: center;
+}
+
+.student_divisions
+{
+  font-weight: bolder;
+}
+
+.student_year
+{
+  font-weight: bolder;
+}
+
+.sf_admin_action_print_students a
+{
+      background-image: url('../images/printer.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_print_details a
+{
+    background-image: url('../images/student_details.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_analytical a
+{
+    background-image: url('../images/analytic.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_periods a
+{
+    background-image: url('../images/periods.png') !important;
+}
+div.wc-cal-event{
+    line-height: 100% !important;
+}
+.attendance_day{
+    text-align: center !important;
+}
+
+.sf_admin_list .sf_admin_action_tags a
+{
+    background-image: url('../images/label.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_configuration a
+{
+    background-image: url('../images/config_show.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_optionals a
+{
+    background-image: url('../images/node-select-next.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_sub_orientations a
+{
+    background-image: url('../images/orientation.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_inactive a
+{
+    background-image: url('../images/cross-circle-frame.png') !important;
+}
+
+
+#student_attendance
+{
+    width: 100%;
+}
+
+.period
+{
+    text-align: center !important;
+}
+
+#tabs
+{
+  min-height: 28px !important;
+  width: 100%;
+  background: #ccc;
+  font-size: 11px;
+  line-height: normal;
+}
+
+#tabs li
+{
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+#tabs a
+{
+  float: left;
+  background: url(../images/tableft1.gif) no-repeat left top;
+  margin: 0;
+  padding: 5px 2px 2px 0 !important;
+  text-decoration: none;
+}
+
+#tabs a span
+{
+  float: left;
+  display: block;
+  background: url(../images/tabright1.gif) no-repeat right top;
+  padding: 2px 20px 4px 4px;
+  color: #333;
+}
+
+#tabs a:hover { background-position: 0% -42px; }
+
+#tabs a:hover span { background-position: 100% -42px; }
+
+#tabs li.selected a { background-position: 0% -42px; }
+
+#tabs li.selected a span { background-position: 100% -42px; }
+
+.tab_content
+{
+  display: none;
+}
+
+.tab_content:first-child
+{
+  display: block;
+}
+
+.tab_content table
+{
+  width: 100%;
+}
+
+.item_career
+{
+  background-color: #e9f6f7;
+  text-transform: uppercase;
+}
+
+.th_stats
+{
+  background-color: gray !important;
+}
+
+.td_stats
+{
+  font-style: italic;
+}
+
+.info_div_label
+{
+  font-weight:bold;
+  padding-right: 2px !important;
+}
+
+.sf_admin_action_edit_student_history
+{
+    background: url("../images/eraser.png") no-repeat 0 0 !important;
+}
+
+.yellow_link
+{
+  text-decoration: none !important;
+  background-color: #fbec88 !important;
+}
+
+.sf_admin_action_print_report_card a
+{
+  background-image: url('../images/report.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_manual_examinations a
+{
+  background-image: url('../images/handmade.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_close_year a
+{
+  background-image: url('../images/school_year_close.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
+{
+  background-image: url('../images/enrolment.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_withdraw a
+{
+  background-image: url('../images/withdraw.png') !important;
+}
+
+.student_career_withdraw
+{
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #F37321;
+}
+
+.sf_admin_list .sf_admin_action_undo_withdraw a
+{
+  background-image: url('../images/undo_withdraw.png') !important;
+}
+
+.sf_admin_action_matriculate_graduated_students_from_other_career a
+{
+  background-image: url('../images/matriculate_graduated.png') !important;
+}
+
+.teacher_signature_box{
+    border:1px solid #ccc;
+    float:left;
+    margin-top:10px;
+    margin-right: 5px;
+    padding:5px 15px;
+    height:123px;
+    width: 20%;
+}
+
+.sf_admin_list .sf_admin_action_show_disciplinary_sanction_report a
+{
+  background-image: url('../images/sanction.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_assistance_report a
+{
+  background-image: url('../images/report.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
+{
+  background-image: url('../images/unchain.png') !important;
+}
+
+.sf_admin_action_create_last_year_divisions a
+{
+  background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_add_subject a
+{
+  background-image: url('../images/admin-subjects.png') !important;
+}
+
+#change-role {
+  color: #FFF !important;
+}
+
+.sf_admin_list .sf_admin_action_open a
+{
+  background-image: url('../images/lock_open.png') !important;
+}
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
+}
+
+.warning-button {
+    text-transform: uppercase;
+    display: block;
+    width: 6em;
+    padding: 0.2em;
+    line-height: 1.4;
+    background-color: #CC6666;
+    border: 1px solid black;
+    color: #fefefe !important;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none !important;
+}

@@ -1,0 +1,15 @@
+index:
+  credentials: [show_student_reincorporation]
+
+new:
+  credentials: [edit_student_reincorporation]
+
+create:
+  credentials: [edit_student_reincorporation]
+
+edit:
+  credentials: [edit_student_reincorporation]
+
+delete:
+  credentials: [edit_student_reincorporation]
+

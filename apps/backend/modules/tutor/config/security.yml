@@ -1,0 +1,20 @@
+index:
+  credentials: [show_tutor]
+
+new:
+  credentials: [edit_tutor]
+
+create:
+  credentials: [edit_tutor]
+
+edit:
+  credentials: [edit_tutor]
+
+update:
+  credentials: [edit_tutor]
+
+show:
+  credentials: [show_tutor]
+
+delete:
+  credentials: [edit_tutor]

@@ -1,0 +1,19 @@
+## Copyright: 2009 - José Nahuel Cuesta Luengo <ncuesta@cespi.unlp.edu.ar>
+##
+## ncPropelChangeLogBehaviorPlugin default configuration values.
+## You may override any of these settings in your application's app.yml configuration file.
+##
+
+#all:
+#  nc_change_log_behavior:
+#    username_method:       getUsername
+#    username_cli:          cli
+#    formatter_class:       ncChangeLogEntryFormatter
+#    translation_object_method:    getHumanName
+#    translation_field_method:     translateField
+#    translation_use_i18n:         false
+#    date_format:                  'Y/m/d'
+#    date_time_format:             'Y/m/d H:i:s'
+#    time_format:                  'H:i:s'
+#    ignore_fields:
+#      any_class: [created_at, created_by, updated_at, updated_by]

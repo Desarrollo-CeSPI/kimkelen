@@ -1,0 +1,42 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           CareerSchoolYearPeriod
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          career_school_year_period
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        course_type_str:
+          label:  Course type
+        is_closed:
+          label:  ¿Está cerrado?
+      list:
+        display:  [name, start_at, end_at, course_type_str]
+        batch_actions:  []
+        object_actions:
+          _edit:
+          close:
+            action: close
+            condition: canClose
+          open:
+            action: open
+            condition: canOpen
+          _delete:
+        actions:
+          back:
+            action: back
+          _new:
+            credentials: [edit_school_year]
+      filter: ~
+      form:    ~
+      edit:    ~
+      new:
+        actions:
+          _save_and_list:

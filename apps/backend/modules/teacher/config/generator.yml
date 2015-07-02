@@ -1,0 +1,139 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Teacher
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          teacher
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      exportation:
+        enabled: true
+        title: Teacher list
+        type: xls
+        fieldSelection:
+          lastname:
+            label: Lastname
+            method: getPersonLastname
+            decorator: text
+          person_firstname:
+            label: Firstname
+            method: getPersonFirstname
+            decorator: text
+          person_identification_type:
+            label: Identification type
+            method: getPersonIdentificationTypeString
+            decorator: text
+          person_identification_number:
+            label: Identification number
+            method: getPersonIdentificationNumber
+            decorator: text
+          person_email:
+            label: Email
+            method: getPersonEmail
+            decorator: text
+          person_phone:
+            label: Phone
+            method: getPersonPhone
+            decorator: text
+          person_address:
+            label: Address
+            method: getPersonAddress
+            decorator: text
+      fields:
+        #necesario para que no se cuelque el list
+        person:
+        person_lastname:                    { label: Lastname, column_name: PersonPeer::LASTNAME }
+        person_firstname:                   { label: Firstname, column_name: PersonPeer::FIRSTNAME }
+        person_full_identification:       { label: Identification number, column_name: PersonPeer::IDENTIFICATION_NUMBER }
+        person_sf_guard_user:             { label: Username }
+        person_is_active:    { label: Activo, type: Boolean }
+        person_is_in_license: { label: Licencia, type: Boolean }
+
+      list:
+        title:             Listado de docentes
+        peer_method:       doSelectJoinAll
+        peer_method:       doSelectJoinAll
+        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_is_in_license ,person_sf_guard_user, _subjects, phone, email ]
+        sort: [ person_lastname ]
+        batch_actions:     []
+        actions:
+          _new:
+            label:         Nuevo docente
+            credentials:   [edit_teacher]
+          _user_export:
+        object_actions:
+          _show:
+            credentials:   [show_teacher]
+
+          show_calendar:
+            action: showCalendar
+            credentials:   [show_teacher]
+
+          _edit:
+            credentials:   [edit_teacher]
+
+          _delete:
+            credentials:   [edit_teacher]
+
+          aggregate_preceptor:
+            label:  Aggregate as a preceptor
+            action: aggregateAsPreceptor
+            condition:  canAddPreceptor
+            credentials:  [edit_teacher]
+
+          licenses:
+            label:  Licenses
+            action: licenses
+            credentials:   [edit_teacher]
+
+          course:
+            label: Courses
+            action: courses
+            condition: haveCourses
+
+          activate:
+            label: Set active
+            credentials: [edit_teacher]
+            action: personActivation
+            condition: canPersonBeActivated
+
+          deactivate:
+            label: Set inactive
+            credentials: [edit_teacher]
+            action: personActivation
+            condition: canPersonBeDeactivated
+
+      filter:
+
+      form:
+      edit:
+        title:             Editar datos del docente "%%person%%"
+        actions:
+          _list:
+            label:            Volver al listado de docentes
+          _save_and_list:
+            label:            Guardar y volver al listado de docentes
+
+      new:
+        title:                Crear un nuevo docente
+        actions:
+          _list:
+            label:            Volver al listado de docentes
+          _save_and_list:
+            label:            Guardar y volver al listado de docentes
+          _save_and_add:
+            label:            Guardar y agregar otro docente
+
+      show:
+        title:              Detalle del docente "%%person%%"
+        display:
+          "Datos personales": [_person]
+        actions:
+          _list:
+            label:            Volver al listado de docentes

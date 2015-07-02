@@ -1,0 +1,26 @@
+propel:
+  _attributes: { package: plugins.pmModuleEnablerPlugin.lib.model }
+
+  pm_configuration:
+    _attributes: { phpName: pmConfiguration }
+    id:
+    created_at:
+    updated_at:
+
+  pm_module:
+    _attributes: { phpName: pmModule }
+    id:
+    name:
+      type: varchar(256)
+      required: true
+    _uniques:
+      name: [name(20)]
+    is_enabled:
+      type: boolean
+      default: false
+    pm_configuration_id:
+      type: integer
+      foreignTable: pm_configuration
+      foreignReference: id
+      required: true
+      onDelete: cascade

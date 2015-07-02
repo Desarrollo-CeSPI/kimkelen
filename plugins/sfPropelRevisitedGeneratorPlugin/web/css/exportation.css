@@ -1,0 +1,89 @@
+div #sf_admin_exportation
+{
+  z-index: 900;
+  width: 400px;
+  position: absolute;
+  border: 2px solid #666;
+  background: #fff;
+}
+
+div #sf_admin_exportation h1
+{
+  margin-bottom: 0px !important;
+  border-top: 0px solid #888 !important;
+  border-bottom: 1px solid #888 !important;
+}
+
+div#sf_admin_exportation_ajax_indicator img
+{
+  display: block;
+  margin: 5 auto;
+}
+
+div#sf_admin_exportation_ajax_indicator 
+{
+  padding: 20px;
+  text-align: center;
+}
+
+div#sf_admin_exportation_form
+{
+}
+
+div#sf_admin_exportation_form fieldset
+{
+  padding: 0px 0px !important; 
+  margin: 0px !important;
+}
+
+div#sf_admin_exportation_form form
+{
+}
+
+div.sf_admin_exportation_form_row
+{
+  margin: 10 0 !important;
+}
+
+div.sf_admin_exportation_form_row label
+{
+
+}
+
+div.sf_admin_exportation_form_row input, div.sf_admin_exportation_form_row select
+{
+
+}
+
+#sf_admin_container ul li.sf_admin_action_export_label a
+{
+  background: transparent url(../../sfPropelRevisitedGeneratorPlugin/images/icons/16x16/spreadsheet.png) no-repeat scroll 0 0;
+}
+
+#sf_admin_container ul li.sf_admin_action_export a,
+#sf_admin_container ul li.sf_admin_action_user_export a
+{
+  background: transparent url(../../sfPropelRevisitedGeneratorPlugin/images/icons/16x16/spreadsheet.png) no-repeat scroll 0 0;
+}
+
+
+div#sf_admin_exportation .actions
+{
+  border-top: 1px solid #888;
+  margin: 0 !important;
+}
+
+.sf_admin_exportation_actions
+{
+  float: right;
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  margin-right 10px !important;
+}
+
+.sf_admin_exportation_actions li
+{
+  list-style-type: none;
+  display: inline;
+  margin-left: 7px;
+}

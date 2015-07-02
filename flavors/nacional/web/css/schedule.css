@@ -1,0 +1,22 @@
+.calendar-table{
+  width:100%!important;
+}
+
+.calendar-table td{
+  padding:0px!important;
+  margin:0px!important;
+}
+
+.details h3{
+  padding:0px!important;
+  margin:0px!important;
+}
+
+.details{
+  padding:10px!important;
+  color:#222;
+}
+
+.time {
+  width:20px;
+}

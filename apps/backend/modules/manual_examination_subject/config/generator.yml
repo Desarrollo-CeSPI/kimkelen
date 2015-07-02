@@ -1,0 +1,64 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           ExaminationSubject
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          manual_examination_subject
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        examination_subject_teacher_list:
+          label: Teachers
+      list:
+        title: Subjects (manual)
+        layout: stacked
+        params: |
+          %%_information%%
+        display: [Subjects]
+        batch_actions: []
+        object_actions:
+          _edit:
+            label: Teachers
+            credentials: [edit_examination_subject]
+          close:
+            action: close
+            label: Close subject
+            condition: canBeClosed
+            credentials: [edit_examination_subject]
+          manage_students:
+            action: manageStudents
+            condition: canManageStudents
+            credentials: [edit_examination_subject_califications]
+          califications:
+            action: califications
+            credentials: [[edit_examination_subject_califications, edit_closed_examination]]
+          students:
+            action: students
+            credentials: [edit_examination_subject_califications]
+          print_students:
+            label: Print students
+            action: printStudents
+            credentials: [edit_examination]
+          _delete:
+            condition: canDelete
+            credentials: [edit_examination]
+        actions:
+          back:
+            action: back
+            label:  Volver al listado de mesas de examen
+          _new:
+      filter:
+      form:
+        class: ManualExaminationSubjectForm
+        actions:
+          _list:
+            label: Back
+          _save:
+      edit:    ~
+      new:     ~

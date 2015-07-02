@@ -1,0 +1,26 @@
+index:
+  credentials: [show_career_subject]
+
+new:
+  credentials: [edit_career_subject]
+
+create:
+  credentials: [edit_career_subject]
+
+edit:
+  credentials: [edit_career_subject]
+
+update:
+  credentials: [edit_career_subject]
+
+show:
+  credentials: [show_career_subject]
+
+delete:
+  credentials: [edit_career_subject]
+
+configuration:
+  credentials: [edit_career_subject]
+
+updateConfiguration:
+  credentials: [edit_career_subject]

@@ -1,0 +1,254 @@
+/* http://yui.yahooapis.com/2.6.0/build/reset/reset-min.css
+Copyright (c) 2008,  Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.6.0
+*/
+#sf_admin_container div,
+#sf_admin_container dl,
+#sf_admin_container dt,
+#sf_admin_container dd,
+#sf_admin_container ul,
+#sf_admin_container ol,
+#sf_admin_container li,
+#sf_admin_container h1,
+#sf_admin_container h2,
+#sf_admin_container h3,
+#sf_admin_container h4,
+#sf_admin_container h5,
+#sf_admin_container h6,
+#sf_admin_container pre,
+#sf_admin_container code,
+#sf_admin_container form,
+#sf_admin_container fieldset,
+#sf_admin_container legend,
+#sf_admin_container input,
+#sf_admin_container textarea,
+#sf_admin_container p,
+#sf_admin_container blockquote,
+#sf_admin_container th,
+#sf_admin_container td {
+  margin:0;
+  padding:0;
+}
+
+#sf_admin_container table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+#sf_admin_container fieldset,
+#sf_admin_container img {
+  border:0;
+}
+
+#sf_admin_container address,
+#sf_admin_container caption,
+#sf_admin_container cite,
+#sf_admin_container code,
+#sf_admin_container dfn,
+#sf_admin_container em,
+#sf_admin_container strong,
+#sf_admin_container th,
+#sf_admin_container var {
+  font-style:normal;
+  font-weight:normal;
+}
+
+#sf_admin_container li {
+  list-style:none;
+}
+
+#sf_admin_containercaption,
+#sf_admin_container th {
+  text-align:left;
+}
+
+#sf_admin_container h1,
+#sf_admin_container h2,
+#sf_admin_container h3,
+#sf_admin_container h4,
+#sf_admin_container h5,
+#sf_admin_container h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+
+#sf_admin_container q:before,
+#sf_admin_container q:after {
+  content:'';
+}
+
+#sf_admin_container abbr,
+#sf_admin_container acronym {
+  border:0;
+  font-variant:normal;
+}
+
+#sf_admin_container sup {
+  vertical-align:text-top;
+}
+
+#sf_admin_container sub {
+  vertical-align:text-bottom;
+}
+
+#sf_admin_container input,
+#sf_admin_container textarea,
+#sf_admin_container select {
+  font-family:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
+#sf_admin_container input,
+#sf_admin_container textarea,
+#sf_admin_container select {
+  *font-size:100%;
+}
+
+#sf_admin_container legend {
+  color:#000;
+}
+
+#sf_admin_container del,
+#sf_admin_container ins {
+  text-decoration:none;
+}
+
+
+
+/* http://yui.yahooapis.com/2.6.0/build/fonts/fonts-min.css
+Copyright (c) 2008,  Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.6.0
+*/
+#sf_admin_container body {
+  font:13px/1.231 arial, helvetica, clean, sans-serif;
+  *font-size:small;
+  *font:x-small;
+}
+
+#sf_admin_container select,
+#sf_admin_container input,
+#sf_admin_container button,
+#sf_admin_container textarea {
+  font:99% arial, helvetica, clean, sans-serif;
+}
+
+#sf_admin_container table {
+  font-size:inherit;
+  font:100%;
+}
+
+#sf_admin_container pre,
+#sf_admin_container code,
+#sf_admin_container kbd,
+#sf_admin_container samp,
+#sf_admin_container tt {
+  font-family:monospace;
+  *font-size:108%;
+  line-height:100%;
+}
+
+
+
+/* http://yui.yahooapis.com/2.6.0/build/base/base-min.css
+Copyright (c) 2008,  Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.6.0
+*/
+#sf_admin_container h1 {
+  font-size:138.5%;
+}
+
+#sf_admin_container h2 {
+  font-size:123.1%;
+}
+
+#sf_admin_container h3 {
+  font-size:108%;
+}
+
+#sf_admin_container h1,
+#sf_admin_container h2,
+#sf_admin_container h3 {
+  margin:1em 0;
+}
+
+#sf_admin_container h1,
+#sf_admin_container h2,
+#sf_admin_container h3,
+#sf_admin_container h4,
+#sf_admin_container h5,
+#sf_admin_container h6,
+#sf_admin_container strong {
+  font-weight:bold;
+}
+
+#sf_admin_container abbr,
+#sf_admin_container acronym {
+  border-bottom:1px dotted #000;
+  cursor:help;
+}
+
+ #sf_admin_container em {
+  font-style:italic;
+}
+
+#sf_admin_container blockquote,
+#sf_admin_container ul,
+#sf_admin_container ol,
+#sf_admin_container dl {
+  margin:1em;
+}
+
+#sf_admin_container ol,
+#sf_admin_container ul,
+#sf_admin_container dl {
+  margin-left:2em;
+}
+
+#sf_admin_container ol li {
+  list-style:decimal outside;
+}
+
+#sf_admin_container ul li {
+  list-style:disc outside;
+}
+
+#sf_admin_container dl dd {
+  margin-left:1em;
+}
+
+#sf_admin_container th,
+#sf_admin_container td {
+  border:1px solid #000;
+  padding:.5em;
+}
+
+#sf_admin_container th {
+  font-weight:bold;
+  text-align:center;
+}
+
+#sf_admin_container caption {
+  margin-bottom:.5em;
+  text-align:center;
+}
+
+#sf_admin_container p,
+#sf_admin_container fieldset,
+#sf_admin_container table,
+#sf_admin_container pre {
+  margin-bottom:1em;
+}
+
+#sf_admin_container input[type=text],
+#sf_admin_container input[type=password],
+#sf_admin_container textarea {
+  width:12.25em;
+  *width:11.9em;
+}
