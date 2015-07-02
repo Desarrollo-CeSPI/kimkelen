@@ -3384,7 +3384,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Is closed</source>
-                <target>¿Está cerrado?</target>
+                <target>¿ Esta cerrado ?</target>
             </trans-unit>
             <trans-unit>
                 <source>Phone %phone_number%</source>
@@ -4389,35 +4389,6 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Create examinations</source>
                 <target>Crear mesas</target>
-            </trans-unit>
-            <trans-unit>
-                <source>There are no problematic students to resolve.</source>
-                <target>No hay alumnos en situación dudosa para resolver.</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Pathway</source>
-                <target>Trayectoria</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Resolve problematic students</source>
-                <target>Resolver alumnos en situación dudosa</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Problematic students legend</source>
-                <target>El siguiente listado representa aquellos alumnos que superaron el límite de materias previas establecido por
-                    la institución. Selecciónelos para inscribirlos en el programa de Promoción por excepción. Una vez que termine la inscripción haga click en 'Finalizar'. Todo alumno NO seleccionado repetirá el año lectivo actual.</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Students that will go to pathway plan</source>
-                <target>Alumnos a inscribir en Promoción por excepción</target>
-            </trans-unit>
-            <trans-unit>
-                <source>here</source>
-                <target>aquí</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Create pathway if it does not exist from</source>
-                <target>Crear plan de promoción por excepción desde</target>
             </trans-unit>
         </body>
     </file>

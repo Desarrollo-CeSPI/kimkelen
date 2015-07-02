@@ -107,11 +107,11 @@ class SchoolYear extends BaseSchoolYear
    *
    * @return <boolean
    */
-  public function canChangeState()
+  public function canChangedState()
   {
     $current = SchoolYearPeer::retrieveCurrent();
 
-    return !$this->getIsActive() && !$this->getIsClosed();
+    return !$this->getIsActive() && $current->getIsClosed() && !$this->getIsClosed();
   }
 
   /**
@@ -127,7 +127,7 @@ class SchoolYear extends BaseSchoolYear
     {
       return false;
     }
-    elseif ($this->hasStudents() || $this->getCareerSchoolYears())
+    elseif ($this->hasStudents())
     {
       return false;
     }
@@ -158,11 +158,8 @@ class SchoolYear extends BaseSchoolYear
     {
       $msj = 'No se puede borrar el año lectivo por que el mismo posee alumnos matriculados en alguna de las carreras';
     }
-	  elseif ($this->getCareerSchoolYears()){
-	    $msj = "Debe eliminar primero la/s carrera/s de este año lectivo";
-    }
 
-	  return $msj;
+    return $msj;
 
   }
 
@@ -363,10 +360,6 @@ class SchoolYear extends BaseSchoolYear
 
   }
 
-	public function currentYearIsClosed() {
-		return $this->getIsClosed() && $this->getIsActive();
-	}
-
   public function getMessageCantClose()
   {
     if ($this->getIsClosed())
@@ -433,15 +426,6 @@ class SchoolYear extends BaseSchoolYear
 
   }
 
-	public function getMessageCantHasProblematicStudents()
-	{
-		return 'There are no problematic students to resolve.';
-	}
-
-	public function hasProblematicStudents()
-	{
-		return (TentativeRepprovedStudentPeer::countPending() > 0 && $this->currentYearIsClosed());
-	}
 }
 
 sfPropelBehavior::add('SchoolYear', array('changelog'));

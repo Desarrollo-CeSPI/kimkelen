@@ -149,18 +149,6 @@ root:
             title: Nueva materia
             url: subject/new
             credentials: [edit_subject]
-      pathways:
-        title: Trayectorias
-        credentials: [show_pathway]
-        menu:
-          list:
-            title: Listado de trayectorias
-            url: pathway/index
-            credentials: [show_pathway]
-          new:
-            title: Nueva trayectoria
-            url: pathway/new
-            credentials: [edit_pathway]
       personal:
         title: Personal del colegio
         credentials: [[show_head_personal , show_personal, show_teacher]]
@@ -237,16 +225,7 @@ root:
       commissions:
         title: Comisiones
         credentials: [show_course]
-        menu:
-          list:
-            title: Listado de comisiones
-            url: commission/index
-            credentials: [show_course]
-          student_pathways:
-            title: Listado de comisiones de trayectorias
-            credentials: [show_student_pathway]
-            url: pathway_commission/index
-
+        url: commission/index
       student_attendance:
         title: Attendance
         url: @student_attendance_day

@@ -1,4 +1,6 @@
 all:
+  pm_pdf_kit:
+    executable: /usr/local/bin/wkhtmltopdf
   search:
     items_per_page:       10
   configuration:

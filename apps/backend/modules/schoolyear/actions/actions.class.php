@@ -35,6 +35,7 @@ class schoolyearActions extends autoSchoolyearActions
   public function preExecute()
   {
     parent::preExecute();
+
     $not_allowed = array("index", "new", "create");
 
     if (in_array($this->getActionName(), $not_allowed))
@@ -57,6 +58,7 @@ class schoolyearActions extends autoSchoolyearActions
 
   public function executeSchoolYearCareers(sfWebRequest $request)
   {
+    $school_year = $this->getRoute()->getObject();
     $this->getUser()->setReferenceFor($this);
     $this->redirect('@career_school_year');
   }
@@ -77,6 +79,7 @@ class schoolyearActions extends autoSchoolyearActions
 
   public function executeExaminations(sfWebRequest $request)
   {
+    $school_year = $this->getRoute()->getObject();
     $this->getUser()->setReferenceFor($this);
 
     $this->redirect('@examination');
@@ -84,6 +87,7 @@ class schoolyearActions extends autoSchoolyearActions
 
   public function executeExaminationRepproved(sfWebRequest $request)
   {
+    $school_year = $this->getRoute()->getObject();
     $this->getUser()->setReferenceFor($this);
 
     $this->redirect('@examination_repproved');
@@ -91,6 +95,7 @@ class schoolyearActions extends autoSchoolyearActions
 
   public function executeFinalExamination(sfWebRequest $request)
   {
+    $school_year = $this->getRoute()->getObject();
     $this->getUser()->setReferenceFor($this);
 
     $this->redirect('@final_examination');
@@ -106,10 +111,11 @@ class schoolyearActions extends autoSchoolyearActions
     $this->redirect('@school_year');
   }
 
-	public function executeResolveProblematicStudents(sfWebRequest $request)
-	{
-		$this->getUser()->setAttribute("referer_module", "schoolyear");
+  public function executeManualExaminations(sfWebRequest $request)
+  {
+    $school_year = $this->getRoute()->getObject();
+    $this->getUser()->setReferenceFor($this);
 
-		$this->forward("tentative_repproved_student", "show");
-	}
+    $this->redirect('@manual_examination');
+  }
 }

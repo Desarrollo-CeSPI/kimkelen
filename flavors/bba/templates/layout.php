@@ -37,13 +37,6 @@
       <div id="header">
         <div class="logo">
           <?php echo link_to(image_tag("logobba.gif", array('alt' => sfConfig::get('app_institution_name'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
-
-	        <?php $school_year = SchoolYearPeer::retrieveCurrent(); ?>
-	        <?php if ($school_year): ?>
-		        <div id="header-school-year">
-			        <?php echo __("Año lectivo vigente: %%school_year%%", array('%%school_year%%' => $school_year)); ?>
-		        </div>
-	        <?php endif; ?>
         </div>
 
         <div class="navigation">
@@ -88,7 +81,7 @@
 
       <?php if (sfConfig::get('app_testing')): ?>
         <div style="position:absolute; left: 300px; top: 0px; font-size:14px; ">
-          <div style="margin: 4px; width: 200px; background-color: yellow; border: solid 1px red; color: red; padding:4px; text-align: center; "> Versión de prueba </div>
+          <center><div style="margin: 4px; width: 200px; background-color: yellow; border: solid 1px red; color: red; padding:4px; text-align: center; "> Versión de prueba </div></center>
         </div>
       <?php endif ?>
 

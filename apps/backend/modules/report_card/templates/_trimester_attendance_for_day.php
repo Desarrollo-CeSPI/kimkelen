@@ -24,6 +24,7 @@
       <th><?php echo __('1°T') ?></th>
       <th><?php echo __('2°T') ?></th>
       <th><?php echo __('3°T') ?></th>
+<!--      <th>Subtotal</th>-->
       <th>Total</th>
     </tr>
     <tr>

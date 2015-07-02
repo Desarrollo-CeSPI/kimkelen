@@ -172,26 +172,35 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       return true;
     }
 
-    //If Previous count > max count of repproved subject allowed, then the student will repeat or go to pathways programs
+    //If Previous count > max count of repproved subject allowed, then the student repeats
     $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
 
     return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
 
   }
 
-  public function saveTentativeRepprovedStudent($student_career_school_year, PropelPDO $con = null)
+  public function repprovedStudent(Student $student, $student_career_school_year, PropelPDO $con = null)
   {
-    $tentative_repproved_student = new TentativeRepprovedStudent();
-	  $tentative_repproved_student->setStudentCareerSchoolYear($student_career_school_year);
-	  $tentative_repproved_student->save($con);
-  }
 
-	public function repproveStudent(Student $student, $student_career_school_year, PropelPDO $con = null){
     $student_career_school_year->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
     $student_career_school_year->save($con);
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
-    // se eliminan las previas que se habian generado en este año de cursada
+    // se eliminan las materias aprobadas de este año lectivo solo las que se crearon para este año, no eliminar las aprobadas por previa
+    $c = new Criteria();
+    $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student->getId());
+    $c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $career_school_year->getSchoolYearId());
+    $c->addJoin(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+    $c->add(CareerSubjectPeer::YEAR, $student_career_school_year->getYear());
+
+    $student_approveds = StudentApprovedCareerSubjectPeer::doSelect($c);
+
+    foreach ($student_approveds as $student_approved_career_subject)
+    {
+      $student_approved_career_subject->delete($con);
+    }
+
+    // se eliminan las previas qeu se habian generado en este año de cursada
     $c = new Criteria();
     $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
@@ -217,7 +226,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       if ($this->checkRepeationCondition($student, $student_career_school_year))
       {
-        $this->saveTentativeRepprovedStudent($student_career_school_year);
+        $this->repprovedStudent($student, $student_career_school_year);
+        return false;
       }
       else
       {
@@ -336,7 +346,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       }
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();
-
 
       // IF is null, is because the course_subject_student_examination has been created editing student history
       $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();

@@ -57,16 +57,12 @@ body {
   font-size:13px;
   padding-top:3px;
   padding-right:5px;
-  margin-left: 30px;
 }
-
-
 
 .header_row .name
 {
-  font-size:16px;
   float:left;
-
+  font-size:16px;
 }
 
 .header_row .course
@@ -74,21 +70,25 @@ body {
   float:left;
   font-size:13px;
   padding:3px;
-  width:35px;
+  width:20px;
 
 }
 
-.header_row .school_year
+.header_row .division
 {
   float:left;
   font-size:13px;
   padding:3px;
-  width:10px;
-  margin-right:20px
+  width:100px;
+
 }
 
-.pair {
-  padding-top: 46px;
+
+.header_row .orientation
+{
+  float:left;
+  font-size:13px;
+  padding:3px;
 }
 
 .row_top
@@ -144,7 +144,7 @@ body {
 
 table.gridtable {
   font-family:arial,sans-serif;
-  font-size:13px;
+  font-size:11px;
   color:#333333;
   border:none;
   border-collapse: collapse;
@@ -153,9 +153,9 @@ table.gridtable {
 }
 
 table.gridtable th {
-  padding: 8px;
+  padding: 3px;
   border-bottom:1px solid #ccc;
-  font-size:14px;
+  font-size:12px;
 }
 
 .th-subject-name {
@@ -183,7 +183,7 @@ table.gridtable tr {
 
 table.lefttable {
   font-family:arial,sans-serif;
-  font-size:13px;
+  font-size:11px;
   color:#333333;
   border:none;
   border-collapse: collapse;
@@ -213,7 +213,7 @@ table.lefttable tr {
 }
 
 .titletable {
-  font-size:13px;
+  font-size:12px;
   font-weight:bold;
   display:block;
   padding:3px;
@@ -247,8 +247,8 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 20px;
-  height:126px;
+  padding:0px 15px;
+  height:123px;
 }
 
 .rowfirm_responsible{
@@ -257,16 +257,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 15px;
-  height:126px;
-}
-
-.rowfirm_teacher{
-    border:1px solid #ccc;
-    float:left;
-    margin-top:10px;
-    margin-left:5px;
-    padding:0px 30px;
-    height:126px;
+  height:123px;
 }
 
 .rownotice{
@@ -274,8 +265,8 @@ table.lefttable tr {
   float:left;
   margin-top:10px;
   padding:0px 15px;
-  height:150px;
-  width:869px;
+  height:123px;
+  width:140px;
 }
 .report-header .school-year
 {
@@ -289,7 +280,7 @@ table.lefttable tr {
 
 table.gridtable_bordered {
     font-family:arial,sans-serif;
-    font-size:13px;
+    font-size:11px;
     color:#333333;
     border:1px solid #ccc;
     border-collapse: collapse;
@@ -300,7 +291,7 @@ table.gridtable_bordered {
 table.gridtable_bordered th {
     padding: 3px;
     border:1px solid #ccc;
-    font-size:14px;
+    font-size:12px;
 }
 
 table.gridtable_bordered td {

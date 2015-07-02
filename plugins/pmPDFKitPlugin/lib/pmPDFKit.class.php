@@ -24,7 +24,7 @@ class pmPDFKit
     $this->switches = $switches;
     $this->options = $options;
     
-    $this->setExecutable(sfConfig::get('app_pm_pdf_kit_executable', '/usr/local/bin/wkhtmltopdf'));
+    $this->setExecutable(sfConfig::get('app_pm_pdf_kit_executable', '/usr/bin/wkhtmltopdf'));
   }
   
   public function setContent($content)
@@ -106,6 +106,8 @@ class pmPDFKit
       
       // close stderr
       $stderr = stream_get_contents($pipes[2]);
+//var_dump($stderr);
+//die();
       fclose($pipes[2]);
       
       $retval = proc_close($proc);

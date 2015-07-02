@@ -24,6 +24,7 @@
       <?php echo $mark->renderChangelog(); ?>
     </div>
   <?php endforeach?>
+  
 
   <div class="info-mark-container">
     <?php echo __('Average: %average%', array('%average%' => $course_subject_student->getMarksAverage())); ?>
@@ -36,8 +37,6 @@
       <?php echo ncChangelogRenderer::render($course_subject_student_examination, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>
   <?php endforeach ?>
-
-	<?php include_partial('course_student_mark/pathway_info', array('student' => $course_subject_student->getStudent()))?>
 
   <?php foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject):?>
     <div class="info-mark-container">

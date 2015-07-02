@@ -47,7 +47,6 @@ generator:
           _edit:
             credentials: [edit_career_subject]
           _delete:
-            condition: canBeDeleted
             confirm: La materia que está solicitando borrar puede que sea correlativa de otras materias. ¿Está seguro que desea borrarla?
             credentials: [edit_career_subject]
 

@@ -1098,7 +1098,7 @@ class Student extends BaseStudent
   public function getCommisions($school_year = null)
   {
     is_null($school_year) ? $school_year = SchoolYearPeer::retrieveCurrent() : $school_year;
-
+    //return CoursePeer::retrieveComissionsForSchoolYearAndStudent(SchoolYearPeer::retrieveCurrent(), $this);
     return CoursePeer::retrieveComissionsForSchoolYearAndStudent($school_year, $this);
   }
 
@@ -1114,16 +1114,16 @@ class Student extends BaseStudent
 
       if ($course_result->getCareerSchoolYear()->getSubjectConfiguration()->getNecessaryStudentApprovedCareerSubjectToShowPromDef())
       {
-        return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? number_format($student_approved_career_subject->getMark(), 2, '.', '') : '&nbsp';
+        return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? $student_approved_career_subject->getMark() : '&nbsp';
       }
       else
       {
-        return number_format($course_result->getMark(), 2, '.', '');
+        return $course_result->getMark();
       }
     }
     else
     {
-      return ($course_result->getStudentApprovedCareerSubject()) ? number_format($course_result->getStudentApprovedCareerSubject()->getMark(), 2, '.', '') : '&nbsp';
+      return ($course_result->getStudentApprovedCareerSubject()) ? $course_result->getStudentApprovedCareerSubject()->getMark() : '&nbsp';
     }
   }
 
@@ -1314,22 +1314,6 @@ class Student extends BaseStudent
 
     return $repproveds_to_show;
   }
-
-
-	/**
-	 * Returns if the student is inscripted in pathway program for current school year
-	 *
-	 * @return boolean
-	 */
-	public function getBelongsToPathway()
-	{
-		$c = new Criteria();
-		$c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
-		$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
-		$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-
-		return $this->countPathwayStudents($c) > 0;
-	}
 
 }
 
