@@ -757,8 +757,12 @@ class Division extends BaseDivision
           $css_origin = $course_subject->getCourseSubjectStudent($student);
           $cs_destiny = $this->getCourseSubjectForCareerSubjectSchoolYear($cssy);
 
+	        $c = new Criteria();
+	   
+	        $c->add(StudentAttendancePeer::STUDENT_ID, $student);
+
           //para las asistencias
-          foreach ($course_subject->getStudentAttendances() as $sa)
+          foreach ($course_subject->getStudentAttendances($c) as $sa)
           {
             $sa->setCourseSubject($cs_destiny);
             $sa->save($con);

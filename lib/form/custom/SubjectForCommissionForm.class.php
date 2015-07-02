@@ -35,9 +35,9 @@ class SubjectForCommissionForm extends BaseCourseForm
     );
 
     $this->widgetSchema["school_year_id"] = new sfWidgetFormInputHidden();
-    $this->setDefault("school_year_id", SchoolYearPeer::retrieveCurrent()->getId());
+    $this->setDefault("school_year_id", $this->getObject()->getSchoolYear()->getId());
 
-    $school_year = SchoolYearPeer::retrieveCurrent();
+    $school_year = $this->getObject()->getSchoolYear();
     $career_school_year_criteria = new Criteria();
     $career_school_year_criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
     $this->setWidget('career_school_year_id', new sfWidgetFormPropelChoice(array('criteria' => $career_school_year_criteria, 'model' => 'CareerSchoolYear', 'add_empty' => true)));
