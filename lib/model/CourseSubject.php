@@ -772,7 +772,7 @@ class CourseSubject extends BaseCourseSubject
 
 					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();
 
-					$final_mark = bcdiv(bcadd($course_subject_student_pathway->getMark(), $original_course_subject_student->getMarksAverage()), 2, 2);
+					$final_mark = $course_subject_student_pathway->getMark();
 
 					$sacs = new StudentApprovedCareerSubject();
 					$sacs->setCareerSubject($this->getCareerSubjectSchoolYear()->getCareerSubject());
@@ -796,6 +796,7 @@ class CourseSubject extends BaseCourseSubject
 						$sers->setStudentRepprovedCourseSubject($srcs);
 					}
 					$sers->setMark($final_mark);
+					$sers->setExaminationRepprovedSubject(null);
 					$sers->save($con);
 				}
 		}
