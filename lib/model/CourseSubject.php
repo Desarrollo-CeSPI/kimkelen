@@ -774,7 +774,10 @@ class CourseSubject extends BaseCourseSubject
 
 					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();
 
-					$final_mark = $course_subject_student_pathway->getMark();
+					//$final_mark = $course_subject_student_pathway->getMark();
+
+					$course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($original_course_subject_student, $con);
+					$final_mark = bcdiv($course_subject_student_pathway->getMark() + $course_marks_avg, 2, 2);
 
 					$sacs = new StudentApprovedCareerSubject();
 					$sacs->setCareerSubject($this->getCareerSubjectSchoolYear()->getCareerSubject());
@@ -797,7 +800,7 @@ class CourseSubject extends BaseCourseSubject
 						$sers = new StudentExaminationRepprovedSubject();
 						$sers->setStudentRepprovedCourseSubject($srcs);
 					}
-					$sers->setMark($final_mark);
+					$sers->setMark($course_subject_student_pathway->getMark());
 					$sers->setExaminationRepprovedSubject(null);
 					$sers->save($con);
 				}

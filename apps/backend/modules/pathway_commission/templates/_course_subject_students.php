@@ -63,7 +63,11 @@
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
             <td><?php echo $course_subject_student->getStudent() ?></td>
             <td><?php echo $course_subject_student->getMark(); ?></td>
-            <td><?php echo bcdiv(bcadd($course_subject_student->getMark(), $course_subject_student->getRelatedCourseSubjectStudent()->getMarksAverage()), 2, 2); ?></td>
+
+	          <?php $course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($course_subject_student->getRelatedCourseSubjectStudent()); ?>
+	          <?php $final_mark = bcdiv($course_subject_student->getMark() + $course_marks_avg, 2, 2); ?>
+
+            <td><?php echo $final_mark ?></td>
             <td><?php echo $course_result ?></td>
           </tr>
         <?php endforeach; ?>
