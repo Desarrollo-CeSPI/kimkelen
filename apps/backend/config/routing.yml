@@ -153,6 +153,10 @@ report_card:
   url: /report_card
   param: { module: report_card, action: index }
 
+social_card:
+  url: /student/:id/printSocialCard
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait  }
+
 export_not_totally_approved_report_cards:
   url: /report_card/Boletines_adeudan_materias.pdf
   param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf }
