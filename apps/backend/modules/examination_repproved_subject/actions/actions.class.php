@@ -203,7 +203,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
       }
     }
 
-    $this->setTemplate("students");
+    $this->setTemplate("manageStudents");
   }
 
     /**
