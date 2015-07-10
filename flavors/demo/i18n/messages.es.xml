@@ -4243,6 +4243,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway</source>
                 <target>Trayectoria</target>
             </trans-unit>
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -4419,6 +4419,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create pathway if it does not exist from</source>
                 <target>Crear plan de promoción por excepción desde</target>
             </trans-unit>
+
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
