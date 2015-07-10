@@ -4316,6 +4316,9 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
+            <trans-unit>
+                <source>Pathway mark is averaged with course subject average marks.</source>
+                <target>Se promedia la nota obtenida en trayectorias con el promedio de notas de cursada.</target>
             </trans-unit>
           </body>
     </file>

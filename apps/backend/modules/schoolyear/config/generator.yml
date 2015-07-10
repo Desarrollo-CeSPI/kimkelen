@@ -72,7 +72,7 @@ generator:
 
           resolve_problematic_students:
             action: resolveProblematicStudents
-            condition: hasProblematicStudents
+            condition: canTentativeRepproveStudents
             label:  Resolve problematic students
 
           _delete:

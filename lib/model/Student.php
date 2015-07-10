@@ -1325,8 +1325,8 @@ class Student extends BaseStudent
 	{
 		$c = new Criteria();
 		$c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
-		$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
-		$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+		//$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
+		//$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
 
 		return $this->countPathwayStudents($c) > 0;
 	}
