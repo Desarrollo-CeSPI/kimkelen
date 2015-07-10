@@ -111,7 +111,7 @@ class SchoolYear extends BaseSchoolYear
   {
     $current = SchoolYearPeer::retrieveCurrent();
 
-    return !$this->getIsActive() && !$this->getIsClosed();
+    return !$this->getIsActive() && !$this->getIsClosed() && !$this->hasTentativeRepprovedStudents();
   }
 
   /**
@@ -433,14 +433,19 @@ class SchoolYear extends BaseSchoolYear
 
   }
 
-	public function getMessageCantHasProblematicStudents()
+	public function getMessageCantTentativeRepproveStudents()
 	{
 		return 'There are no problematic students to resolve.';
 	}
 
-	public function hasProblematicStudents()
+	public function canTentativeRepproveStudents()
 	{
 		return (TentativeRepprovedStudentPeer::countPending() > 0 && $this->currentYearIsClosed());
+	}
+
+	public function hasTentativeRepprovedStudents()
+	{
+		return (TentativeRepprovedStudentPeer::countPending() > 0);
 	}
 }
 

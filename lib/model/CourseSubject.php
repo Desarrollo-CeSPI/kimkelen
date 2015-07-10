@@ -762,4 +762,48 @@ class CourseSubject extends BaseCourseSubject
   {
     return sprintf('%s, %s (%s)', $this->getCourse(), $this->getCareerSubjectToString(), $this->getCourse()->getTeachersStr());
   }
+
+	public function pathwayClose(PropelPDO $con)
+	{
+		foreach ($this->getCourseSubjectStudentPathways() as $course_subject_student_pathway)
+		{
+			$evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();
+
+				if ($course_subject_student_pathway->getMark() >= $evaluator_instance::PATHWAY_PROMOTION_NOTE)
+				{
+
+					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();
+
+					//$final_mark = $course_subject_student_pathway->getMark();
+
+					$course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($original_course_subject_student, $con);
+					$final_mark = bcdiv($course_subject_student_pathway->getMark() + $course_marks_avg, 2, 2);
+
+					$sacs = new StudentApprovedCareerSubject();
+					$sacs->setCareerSubject($this->getCareerSubjectSchoolYear()->getCareerSubject());
+					$sacs->setMark($final_mark);
+					$sacs->setStudent($course_subject_student_pathway->getStudent());
+					$sacs->setSchoolYear($this->getCourse()->getSchoolYear());
+					$original_course_subject_student->getCourseResult()->setStudentApprovedCareerSubject($sacs);
+					$original_course_subject_student->save($con);
+
+					$srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($original_course_subject_student);
+					if (is_null($srcs)) {
+						$srcs = new StudentRepprovedCourseSubject();
+						$srcs->setCourseSubjectStudent($original_course_subject_student);
+					}
+					$srcs->setStudentApprovedCareerSubject($sacs);
+					$srcs->save($con);
+					$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($srcs);
+					// TODO: pongo en blanco la referencia a una mesa de previa??
+					if (is_null($sers)) {
+						$sers = new StudentExaminationRepprovedSubject();
+						$sers->setStudentRepprovedCourseSubject($srcs);
+					}
+					$sers->setMark($course_subject_student_pathway->getMark());
+					$sers->setExaminationRepprovedSubject(null);
+					$sers->save($con);
+				}
+		}
+	}
 }

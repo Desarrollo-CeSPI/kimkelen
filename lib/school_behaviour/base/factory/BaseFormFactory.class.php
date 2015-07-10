@@ -131,6 +131,17 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
     return 'CourseSubjectMarksForm';
   }
+
+	/**
+	 * Returns form used by course_subject_student for pathway marks.
+	 *
+	 * @return string represents a Form PHPClass
+	 */
+	public function getCourseSubjectPathwayMarksForm()
+	{
+		return 'CourseSubjectPathwayMarksForm';
+	}
+
   /**
    * Returns form used by multiple registration of students.
    *
