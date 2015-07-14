@@ -1,0 +1,40 @@
+      #form-wrapper {
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #form1 {
+        width: 50%;
+        display: inline-block;
+        min-width:200px;
+      }
+      #form2 {
+        width: 50%;
+        display: inline-block;
+        min-width:200px;
+      }
+      *{
+       font-size: 25px;
+       font-family: Arial;
+      }
+
+      .f2 {
+       font-size: 25px;
+       font-family: Arial;
+      }
+      table
+      { 
+        margin-left: 200px;
+        margin-right: auto;
+      }
+      .tg  {
+        border-collapse:collapse;border-spacing:14;
+      }
+      .tg td{
+        font-family:Arial, sans-serif;font-size:20px;padding:25px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;
+      }
+      .tg th{
+        font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:20px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;
+      }
+
+}
