@@ -59,7 +59,7 @@
 			    <?php endif; ?>
 
 			    <?php if (count($course_subject_students_attendance_day_2) > 0): ?>
-		        <?php include_partial('course_subject_quaterly_2', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day_2, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
+		        <?php include_partial('course_subject_quaterly_2_marks', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day_2, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
 		      <?php endif; ?>
 
 	      <?php endif ?>

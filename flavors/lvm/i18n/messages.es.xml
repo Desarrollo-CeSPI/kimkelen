@@ -4313,6 +4313,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create pathway if it does not exist from</source>
                 <target>Crear plan de promoción por excepción desde</target>
             </trans-unit>
+            <trans-unit>
+                <source>Pathway mark is averaged with course subject average marks.</source>
+                <target>Se promedia la nota obtenida en trayectorias con el promedio de notas de cursada.</target>
+            </trans-unit>
           </body>
     </file>
 </xliff>

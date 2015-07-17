@@ -53,7 +53,7 @@ class course_student_markActions extends sfActions
 
       $this->redirect('@course');
     }
-    else if (!$course->canEditMarks())
+    else if (!$course->canEditMarks() && !$course->getIsPathway())
     {
       $this->getUser()->setFlash('error', 'El curso seleccionado no permite la edición de notas: o bien no tiene alumnos o bien el año lectivo al que pertenece no permite la edición de calificaciones.');
 
@@ -64,13 +64,18 @@ class course_student_markActions extends sfActions
 
   }
 
-  protected function getForms($course_subjects)
+  protected function getForms($course_subjects, $is_pathway)
   {
     $forms = array();
 
     foreach ($course_subjects as $course_subject)
     {
-      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectMarksForm();
+
+      if ($is_pathway){
+	      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectPathwayMarksForm();
+      } else {
+	      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectMarksForm();
+      }
       $forms[$course_subject->getId()] = new $form_name($course_subject);
     }
 
@@ -82,7 +87,7 @@ class course_student_markActions extends sfActions
   {
     $this->course = $this->getCourse();
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-    $this->forms = $this->getForms($this->course_subjects);
+    $this->forms = $this->getForms($this->course_subjects, $this->course->getIsPathway());
 
   }
 
@@ -121,7 +126,7 @@ class course_student_markActions extends sfActions
 
     $this->course = $this->getCourse();
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-    $this->forms = $this->getForms($this->course_subjects);
+    $this->forms = $this->getForms($this->course_subjects, $this->course->getIsPathway());
 
     $valid = count($this->forms);
 

@@ -155,8 +155,7 @@ report_card:
 
 social_card:
   url: /student/:id/printSocialCard
-  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait, --page-size: Legal}
-
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait, page-size:Legal}
 
 export_not_totally_approved_report_cards:
   url: /report_card/Boletines_adeudan_materias.pdf
