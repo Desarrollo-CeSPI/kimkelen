@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <body>
-     <?php use_stylesheet('social-card.css') ?>
+     <LINK href="/var/www/kimkelen-master/flavors/anexa/web/css/social-card.css" rel="stylesheet" type="text/css">
  <br>
 <img style=" margin-right: 500px;" alt="Liceo Víctor Mercante - UNLP" src="/var/www/kimkelen-master/web/images/logo.jpg">
     
 <?php echo sfConfig::get('app_base')?>     
-    <h1 style="text-align:center;font-size:400%" >Ficha Social Inicial</h1>
+    <h1 style="text-align:center;font-size:150%" >Ficha Social Inicial</h1>
     <pre style=" margin-left: 100px;"> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad 
     y rápidez en la devolución de la información.
                                                                                                 <i>Departamento de Orientación Educativa</i>
@@ -32,7 +32,7 @@
  <p style="font-size:30px">
 
      <pre>
-    PADRE
+                    PADRE
 
             Nombre: .....................................................................................................................................................................
 
@@ -52,8 +52,7 @@
 
             Horario de trabajo:.....................................................................................................................................................                                 
 
-
-    MADRE
+                    MADRE
 
             Nombre: ....................................................................................................................................................................
 
@@ -72,17 +71,12 @@
             Vive con el niño:........................................................................................................................................................                              
 
             Horario de trabajo:....................................................................................................................................................                                 
-
-
-
-
-
       </pre>
 </p>
 
 
     <!--.............TABLA 2............... -->
-    <br></br>
+  
 
 
     <style type="text/css">
@@ -170,18 +164,12 @@
           </tr>
     </table>
 
-
+  <br></br>
   
-   <p style="font-weight:bold; font-size:250%"> Otras Personas que viven en la misma casa : </p>
+   <p style="text-align:center;font-weight:bold; font-size:120%"> Otras Personas que viven en la misma casa : </p>
     <!--.............TABLA 3...............-->
 
     <table class="tg" align="center">
-    <colgroup>
-        <col style="width: 400px">
-        <col style="width: 100px">
-        <col style="width: 600px">
-        <col style="width: 800px">
-    </colgroup>
       <tr>
         <th>Relación o parentesco</th>
         <th class="tg-4mn7">Edad</th>
@@ -212,7 +200,7 @@
 
     <!--SEGUNDA HOJA -->
       
-    <p style="font-weight:bold; font-size:30px" > B- DATOS PERSONALES DEL ALUMNO  </p>
+    <p style="text-align:center;font-weight:bold; font-size:30px" > B- DATOS PERSONALES DEL ALUMNO  </p>
     
     <p style="text-align:justify">
         <pre>
@@ -250,11 +238,7 @@
 
 
 
-
-
-
-
-            Causas
+            <b> Causas</b>
 
             Quién se encarga del cuidado del niño en ausencia de sus padres? .................................................................
 
