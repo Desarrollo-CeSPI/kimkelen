@@ -51,6 +51,7 @@
           <?php continue ?>
         <?php endif ?>
 
+
         <fieldset id="marks_fieldset_<?php echo $course_subject->getId() ?>" class="marks-fieldset"<?php if ($selected != $course_subject->getId()) echo "style=\"display: none\"" ?>>
           <h2><?php echo $course_subject->getCareerSubject() ?></h2>
 

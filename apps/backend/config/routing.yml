@@ -123,6 +123,10 @@ print_table:
   url:   /printTable
   param: { module: course_student_mark, action: printTable }
 
+print_pathway_marks:
+  url:   /printPathwayMarks
+  param: { module: pathway_commission, action: printPathwayMarks }
+
 division_show_courses:
   url:  /showCourses
   param:  {module: division, action: showCourses}
@@ -155,7 +159,7 @@ report_card:
 
 social_card:
   url: /student/:id/printSocialCard
-  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait  }
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait, page-size:Legal }
 
 export_not_totally_approved_report_cards:
   url: /report_card/Boletines_adeudan_materias.pdf
