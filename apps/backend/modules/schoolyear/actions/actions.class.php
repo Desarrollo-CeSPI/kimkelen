@@ -82,6 +82,13 @@ class schoolyearActions extends autoSchoolyearActions
     $this->redirect('@examination');
   }
 
+    public function executeManualExaminations(sfWebRequest $request)
+  {
+    $this->getUser()->setReferenceFor($this);
+
+    $this->redirect('@manual_examination');
+  }
+
   public function executeExaminationRepproved(sfWebRequest $request)
   {
     $this->getUser()->setReferenceFor($this);
