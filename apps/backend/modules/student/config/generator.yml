@@ -184,11 +184,6 @@ generator:
             action: printReportCard
             condition: canPrintReportCard
 
-          print_social_card:
-            label: print social card
-            credentials: [edit_student]
-            action: printSocialCard
-
           student_reincorporation:
             credentials: [student_reincorporation_student]
             label: Student reincorporation
