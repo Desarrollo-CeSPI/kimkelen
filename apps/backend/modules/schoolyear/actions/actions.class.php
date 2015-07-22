@@ -61,6 +61,13 @@ class schoolyearActions extends autoSchoolyearActions
     $this->redirect('@career_school_year');
   }
 
+  public function executeManualExaminations(sfWebRequest $request)
+  {
+    $this->getUser()->setReferenceFor($this);
+
+    $this->redirect('@manual_examination');
+  }
+
   public function executeRegisteredStudents(sfWebRequest $request)
   {
     $reference_array = array(

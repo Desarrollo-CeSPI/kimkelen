@@ -280,7 +280,9 @@ class MultipleStudentAttendanceForm extends sfForm
   {
     if ($this->isAttendanceBySubject())
     {
-      return AbsenceTypePeer::retrieveByPK($this->getValue($name))->getValue();
+	    if (!is_null($this->getValue($name))) {
+        return AbsenceTypePeer::retrieveByPK($this->getValue($name))->getValue();
+      }
     }
     else
     {
