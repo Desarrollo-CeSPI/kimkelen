@@ -123,6 +123,10 @@ print_table:
   url:   /printTable
   param: { module: course_student_mark, action: printTable }
 
+print_pathway_marks:
+  url:   /printPathwayMarks
+  param: { module: pathway_commission, action: printPathwayMarks }
+
 division_show_courses:
   url:  /showCourses
   param:  {module: division, action: showCourses}
