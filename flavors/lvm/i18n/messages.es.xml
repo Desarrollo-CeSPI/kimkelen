@@ -4315,7 +4315,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway mark is averaged with course subject average marks.</source>
-                <target>Se promedia la nota obtenida en trayectorias con el promedio de notas de cursada.</target>
+                <target>Se promedia la nota obtenida en promoción por excepción con el promedio de notas de cursada.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Pathway list</source>
+                <target>Promociones por excepción</target>
             </trans-unit>
           </body>
     </file>
