@@ -3,12 +3,12 @@
 class Pathway extends BasePathway
 {
     
-    function getPathwayStudents($criteria = null, \PropelPDO $con = null)
+    function getPathwayStudents($criteria = null, PropelPDO $con = null)
     {
         return parent::getPathwayStudentsJoinStudent(PathwayPeer::getCriteriaForPathwayStudents($criteria), $con, Criteria::INNER_JOIN);
     }
     
-    function getPathwayStudentsForYear($year, $criteria = null, \PropelPDO $con = null)
+    function getPathwayStudentsForYear($year, $criteria = null, PropelPDO $con = null)
     {
         $criteria = PathwayPeer::getCriteriaForPathwayStudents($criteria);
         $criteria->addJoin( StudentPeer::ID, StudentCareerSchoolYearPeer::STUDENT_ID  );
