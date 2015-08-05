@@ -496,8 +496,11 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       if (!is_null($student_approved_career_subject))
       {
 	      $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this);
-	      $srcs->setStudentApprovedCareerSubject(null);
-	      $srcs->save($con);
+
+	      if (!is_null($srcs)) {
+	        $srcs->setStudentApprovedCareerSubject(null);
+	        $srcs->save($con);
+	      }
         $student_approved_career_subject->delete($con);
       }
 

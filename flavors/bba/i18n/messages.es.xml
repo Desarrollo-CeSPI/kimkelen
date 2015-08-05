@@ -627,12 +627,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Edit Course</source>
-                <target>Editar asignatura</target>
+                <target>Editar materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New Course</source>
-                <target>Asignatura nueva</target>
+                <target>Materia nueva</target>
             </trans-unit>
 
             <trans-unit>
@@ -647,7 +647,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Show Course</source>
-                <target>Ver asignatura</target>
+                <target>Ver materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -830,7 +830,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Edit Division course</source>
-                <target>Editar asignatura</target>
+                <target>Editar materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -855,7 +855,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Teachers configuration of the %course%</source>
-                <target>Configuración de los profesores de la asignatura %course%</target>
+                <target>Configuración de los profesores de la materia %course%</target>
             </trans-unit>
             <trans-unit>
                 <source>Set inactive</source>
@@ -913,7 +913,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course actions</source>
-                <target>Acciones de la asignatura</target>
+                <target>Acciones de la materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -1027,7 +1027,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Close Course %course%</source>
-                <target>Cerrar Asignatura %course%</target>
+                <target>Cerrar materia %course%</target>
             </trans-unit>
 
             <trans-unit>
@@ -1447,7 +1447,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course: %%course%%</source>
-                <target>Asignatura: %%course%%</target>
+                <target>Materia: %%course%%</target>
             </trans-unit>
 
             <trans-unit>
@@ -1477,7 +1477,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The student is not inscripted to any course.</source>
-                <target>El alumno no fue inscripto en ninguna asignatura.</target>
+                <target>El alumno no fue inscripto en ninguna materia.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1592,7 +1592,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The course does not have any subject.</source>
-                <target>La asignatura no tiene ninguna materia.</target>
+                <target>El curso no tiene ninguna materia.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2579,7 +2579,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Desplegar todos los cursos de ésta división</source>
-                <target>Desplegar todos las materias de ésta división</target>
+                <target>Desplegar todos las materias de esta división</target>
             </trans-unit>
 
             <trans-unit>
@@ -2589,17 +2589,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>El curso no puede editarse porque tiene alumnos inscriptos</source>
-                <target>La asignatura no puede editarse porque tiene alumnos inscriptos</target>
+                <target>La materia no puede editarse porque tiene alumnos inscriptos</target>
             </trans-unit>
 
             <trans-unit>
                 <source>El curso no puede eliminarse porque ya esta en estado cerrado</source>
-                <target>La asignatura no puede eliminarse porque ya esta en estado cerrado</target>
+                <target>La materia no puede eliminarse porque ya esta en estado cerrado</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Nota minima de aprobacion del curso.</source>
-                <target>Nota mínima de aprobacion de la asignatura.</target>
+                <target>Nota mínima de aprobación de la materia.</target>
             </trans-unit>
 
             <trans-unit>
@@ -3226,12 +3226,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course subject configuration</source>
-                <target>Configuracion de asignatura</target>
+                <target>Configuracion de materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Course configuration of the %course%</source>
-                <target>Configuracion de la asignatura %course%</target>
+                <target>Configuración de la materia %course%</target>
             </trans-unit>
 
             <trans-unit>
