@@ -54,7 +54,7 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
    */
   public function getExportationSharedCourseSubjectTitle(Teacher $teacher)
   {
-    return 'Asignaturas de ' . $teacher;
+    return 'Materias de ' . $teacher;
 
   }
 
