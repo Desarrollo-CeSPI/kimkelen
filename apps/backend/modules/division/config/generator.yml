@@ -16,7 +16,7 @@ generator:
         id:
           label:  División
         division_courses:
-          label: Crear cursos
+          label: Crear materias
       list:
         title: Listado de divisiones
         display:           [id]
@@ -159,8 +159,8 @@ generator:
 
           division_courses:
             action: divisionCourses
-            label:  Cursos
-            credentils: [show_course]
+            label:  Materias
+            credentials: [show_course]
 
           _delete:
             credentials: [delete_division]
