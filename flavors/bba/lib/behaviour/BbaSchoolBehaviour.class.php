@@ -81,7 +81,7 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
   }
 
   /**
-   * This method all the preceptos can see all the students
+   * This method all the preceptors can see all the students
    *
    * @param Criteria $criteria
    * @param integer $user_id

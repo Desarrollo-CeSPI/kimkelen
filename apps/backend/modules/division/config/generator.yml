@@ -71,7 +71,7 @@ generator:
 
           division_courses:
             action: divisionCourses
-            credentils: [show_course]
+            credentials: [show_course]
 
           seeAttendanceSheet:
             label:   Show attendance sheet
@@ -171,7 +171,7 @@ generator:
         type: xls
         fieldSelection:
           title:
-            label: Titulo de división
+            label: Título de división
             method: getDivisionTitle
             decorator: text
           career:
