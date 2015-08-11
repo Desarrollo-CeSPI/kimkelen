@@ -4167,6 +4167,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Student doesn't have any disciplinary sanctions.</source>
                 <target>El alumno no posee sanciones disciplinarias.</target>
             </trans-unit>
+            <trans-unit>
+                <source>School</source>
+                <target>Escuela</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

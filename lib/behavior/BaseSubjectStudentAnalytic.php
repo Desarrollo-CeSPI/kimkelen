@@ -77,11 +77,9 @@
       : $this->getNullLabel();
    }
 
-   public function getMark()
+   public function getMark($as_label = true)
    {
-     return $this->approved
-       ? $this->approved->getMark()
-       : $this->getNullLabel();
+     return ( $this->approved ? $this->approved->getMark() : ($as_label ? $this->getNullLabel():null) );
    }
 
 
@@ -94,6 +92,8 @@
 
    public function getSchoolName()
    {
-     return "-";
+       //$career_student->getCareer()->getCareerName()
+       //$this->css->getSchoolName();
+     return "Escuela?";
    }
  }

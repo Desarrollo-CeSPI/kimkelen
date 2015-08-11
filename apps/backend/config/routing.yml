@@ -1,3 +1,7 @@
+student_print_analytical:
+  url:  /student/:id/printAnalytical
+  param:  {module: student, action: printAnalytical} # , sf_format: pdf}
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }

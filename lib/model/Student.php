@@ -90,6 +90,22 @@ class Student extends BaseStudent
   }
 
   /**
+   * Returns the initial SchoolYear (the year when the student was first registered at school)
+   *
+   * @return SchoolYear
+   */
+  public function getInitialSchoolYear()
+  {
+    $criteria = new Criteria();
+    $criteria->addAscendingOrderByColumn(SchoolYearPeer::YEAR);
+    $criteria->setLimit(1);
+    $array = $this->getSchoolYearStudentsJoinSchoolYear($criteria);
+    return ($array?$array[0]->getSchoolYear():null);
+
+  }
+
+  
+  /**
    * Opposite of getIsRegistered.
    *
    * @see getIsRegistered

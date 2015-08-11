@@ -29,7 +29,7 @@
       <?php $year= 0; ?>
 
 
-      <?php foreach ($objects as $key => $subjects): ?>
+      <?php foreach ($objects as $key => $data): ?>
         
         <table class="table gridtable_bordered">
           <thead>
@@ -53,7 +53,7 @@
           <tbody>
             <?php $school_year = null ?>
 
-            <?php foreach ($subjects as $css): ?>
+            <?php foreach ($data['subjects'] as $css): ?>
                   <tr>
 
                     <td class="text-center"><?php echo $css->getCondition() ?></td>
@@ -74,9 +74,8 @@
             <?php endforeach ?>
               
             <tr >
-              <th colspan="5" style="text-align:left !important;"><?php echo __('Course') ?></th>
-              <th colspan="2"><?php echo __('Average ') ?>: <?php echo "HACER" ?>    </th>
-              <th colspan="2"></th>
+              <th colspan="5" style="text-align:left !important;"><?php echo __('Course '.$data['status']) ?></th>
+              <th colspan="2"><?php echo __('Average') ?>: <?php echo round($data['average'], 2); ?>    </th>
             </tr>
           
           </tbody>

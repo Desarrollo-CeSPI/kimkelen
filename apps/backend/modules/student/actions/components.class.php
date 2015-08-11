@@ -35,6 +35,7 @@ class studentComponents extends sfComponents
     //Deberia recorrer todos los "scsy" y recuperar por c/año las materias 
 
     $this->objects = array();
+    $avg_mark_for_year = array();
 
     foreach ($this->student_career_school_years as $scsy ) {
 
@@ -55,10 +56,22 @@ class studentComponents extends sfComponents
             foreach($csss as $css){
                  if(!isset($this->objects[$year_in_career])){
                      $this->objects[$year_in_career] = array();
+                     $this->objects[$year_in_career]['status'] = 'C';
+                     $avg_mark_for_year[$year_in_career]['sum'] = 0;
+                     $avg_mark_for_year[$year_in_career]['count'] = 0;
                  }
-
-                 $this->objects[$year_in_career][] = $css;
-             }
+                 $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
+                 $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false)?1:0);
+                 if (!$css->getMark(false))
+                 {
+                     $this->objects[$year_in_career]['status'] = 'I';
+                 }
+                 $this->objects[$year_in_career]['subjects'][] = $css;
+            }
+            foreach ($this->objects as $year => $data)
+            {
+                $this->objects[$year]['average'] = ($avg_mark_for_year[$year]['sum'] / $avg_mark_for_year[$year]['count']);
+            }
         }
     }
 
