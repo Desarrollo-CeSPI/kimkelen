@@ -76,7 +76,18 @@
       ? $this->school_year
       : $this->getNullLabel();
    }
+   
+   public function getYear()
+   {
+       return $this->css->getCourseSubject()->getYear();
+   }
 
+   public function getMarkDate()
+   {
+       //@TODO: Obtener la fecha de examen
+       return new DateTime();
+   }
+   
    public function getMark($as_label = true)
    {
      return ( $this->approved ? $this->approved->getMark() : ($as_label ? $this->getNullLabel():null) );

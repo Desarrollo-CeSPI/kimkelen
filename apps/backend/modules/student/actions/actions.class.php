@@ -371,10 +371,13 @@ class studentActions extends autoStudentActions
   public function executeAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
+    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
   }
+  
   public function executePrintAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
+    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
     $this->setLayout('cleanLayout');
   }
 

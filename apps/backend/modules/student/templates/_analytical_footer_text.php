@@ -20,7 +20,18 @@
 
 <?php use_helper('Date') ?>
 <div>
-    <div class="header-text"> 
+    <div class="header-text">
+        <?php if ($analytical->has_missing_subjects() ): ?>
+        <p>Para terminar sus estudios secundarios deberá aprobar: 
+            <?php foreach ($analytical->get_missing_subjects() as $subject): ?>
+            <?php echo $subject->getSubjectName(); ?> de <?php echo __('Year '. $subject->getYear()); ?>,
+            <?php endforeach; ?>
+        </p>
+        <?php endif; ?>
+        <p>Se deja constancia que su último examen lo rindió el <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?></p>
+        <p>Para que conste y a pedido del interesado, se expide el presente certificado confrontado con los registros y actas originales por el------------------------------------- </p>
+        <p>Departamento de alumnos, en la ciudad de La Plata, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.---------------------------------------------------------------------------------------------------------------------</p>
+
         <!-- IF ADEUDA MATERIAS -->
         <p>Para terminar sus estudios secundarios deberá aprobar: XXXXXXXXX materias </p>
         <!-- IF ADEUDA MATERIAS -->
