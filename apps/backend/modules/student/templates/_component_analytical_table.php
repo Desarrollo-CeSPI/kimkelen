@@ -51,31 +51,31 @@
                 <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
                     <tr>
 
-                        <td class="text-center"><?php echo $css->getCondition() ?></td>
+                        <td class="text-center"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
 
-                        <td class="text-center"><?php echo $css->getApprovedDate() ?></td>
+                        <td class="text-center"><?php echo ($css->getApprovedDate()? $css->getApprovedDate()->format('d/m/Y'):'<hr/>') ?></td>
 
-                        <td class="text-center"><?php echo $css->getSchoolYear() ?></td>
+                        <td class="text-center"><?php echo ($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
 
                         <td align="left" width="500px"><?php echo $css->getSubjectName() ?></td>
 
-                        <td class="text-center"><?php echo $css->getMark() ?></td>
+                        <td class="text-center"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                        <td class="text-center"><?php echo $css->getMarkAsSymbol() ?></td>
+                        <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                        <td class="text-center"><?php echo $css->getSchoolName() ?></td>
+                        <td class="text-center"><?php echo ($css->getSchoolName()?$css->getSchoolName():'<hr/>') ?></td>
 
                     </tr>
                 <?php endforeach ?>
 
-                <tr >
+                <tr>
                     <th colspan="5" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
                     <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
                 </tr>
 
             </tbody>
         </table>
-
+        <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <?php echo $object->get_total_average(); ?></div>
     <?php endforeach ?>
 
 <?php endif; ?>

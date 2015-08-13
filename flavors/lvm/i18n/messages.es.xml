@@ -4221,14 +4221,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Escuela</target>
             </trans-unit>
             <trans-unit>
-                <source>Course C</source>
+                <source>Curso C</source>
                 <target>Curso completo</target>
             </trans-unit>
             <trans-unit>
-                <source>Course I</source>
+                <source>Curso I</source>
                 <target>Curso incompleto</target>
             </trans-unit>
-            
+            <trans-unit>
+                <source>escuela_ciudad</source>
+                <target>La Plata</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

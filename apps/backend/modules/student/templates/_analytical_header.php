@@ -44,6 +44,33 @@
         display: block;
         font-weight: normal;
     }
+    .analytical hr
+    {
+        margin: 0;
+        border-color: black;
+        border-style: solid;
+    }
+    
+    .report-content {
+        float: left;
+        margin-top: 1em;
+        width: 100%;
+    }
+    
+    .school_logo
+    {
+        float: left;
+    }
+    
+    @media print
+    {
+        .sf_admin_actions {
+            display: none;
+        }
+        .table {
+            margin-bottom: 1em;
+        }
+    }
 </style>
 
 <div class="report-header">
@@ -57,7 +84,7 @@
             </dl>
         </div>
         <div class="title" id="header_analytical_data_center">
-            <?php echo image_tag("kimkelen_logo_small.png", array('absolute' => true)) ?>
+            <?php echo image_tag("kimkelen_logo_small.png", array( 'class'=>'school_logo', 'absolute' => true)) ?>
             <h1><?php echo __($career_student->getCareer()->getCareerName()) ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
         </div>
         <div id="header_analytical_data_right" class="title">

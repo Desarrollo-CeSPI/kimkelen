@@ -39,6 +39,7 @@ class BaseAnalyticalBehaviour
     protected $missing_subjects = array();
     protected $years_in_career = array();
     protected $last_exam_date = null;
+    protected $total_average = null;
 
 
     public function __construct(Student $a_student)
@@ -87,6 +88,12 @@ class BaseAnalyticalBehaviour
         return $this->_str_year_statuses[$this->get_year_status($year)]; 
     }
     
+    public function get_total_average()
+    {
+        return $this->total_average;
+    }
+
+
     public function has_missing_subjects()
     {
         return (count($this->missing_subjects) > 0);
@@ -104,7 +111,15 @@ class BaseAnalyticalBehaviour
     
     public function get_last_exam_date()
     {
-        return $this->last_exam_date;
+        //$dt = DateTime::createFromFormat('Y-m-d', $this->last_exam_date);
+        if (!$this->last_exam_date instanceof DateTime)
+        {
+            return new DateTime($this->last_exam_date);
+        }
+        else
+        {
+            return $this->last_exam_date;
+        }
     }
     
     protected function init()
@@ -168,6 +183,25 @@ class BaseAnalyticalBehaviour
             $this->objects[$year]['average'] = null;
         }
     }
+    protected function process_total_average($avg_mark_for_year)
+    {
+        $sum = 0;
+        $count = 0;
+        foreach ($avg_mark_for_year as $year => $data)
+        {
+            if (self::YEAR_COMPLETE === $this->get_year_status($year))
+            {
+                $sum += $data['sum'];
+                $count += $data['count'];
+            }
+            else
+            {
+                $this->total_average = null;
+                return;
+            }
+        }
+        $this->total_average = ($sum/$count);
+    }
     
     protected function process()
     {
@@ -215,7 +249,7 @@ class BaseAnalyticalBehaviour
                         }
                     }
                     $this->add_subject_to_year($year_in_career, $css);
-                    $this->check_last_exam_date($css->getMarkDate());
+                    $this->check_last_exam_date($css->getApprovedDate(false));
                 }
 
                 // Cálculo del promedio por año
@@ -223,6 +257,7 @@ class BaseAnalyticalBehaviour
                 {
                     $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
                 }
+                $this->process_total_average($avg_mark_for_year);
             }
         }
     }
