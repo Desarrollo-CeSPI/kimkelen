@@ -1170,7 +1170,7 @@ sfGuardGroupPermission:
     group_id: sfGuardGroup_4
     permission_id: sfGuardPermission_112
   sfGuardGroupPermission_4_116:
-    group_id: sfGuardGroup_2
+    group_id: sfGuardGroup_4
     permission_id: sfGuardPermission_116
 
 
