@@ -1,0 +1,118 @@
+/* 
+    Created on : 18-ago-2015, 11:53:20
+    Author     : lucianoc
+*/
+.header_row .title {
+    padding-top: 2em;
+}
+
+.analytical
+{
+    padding: 2em;
+}
+
+.table thead th{
+    font-size: 10px;
+    padding-top: 1px !important;
+    padding-bottom: 0 !important;
+}
+
+.table td {
+    font-size: 8px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.table tbody th {
+    font-size: 10px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+
+#header_analytical_data_left
+{
+    width: 20%;
+}
+#header_analytical_data_right
+{
+    width: 20%;
+    float: right
+}
+#header_analytical_data_center
+{
+    width: 55%;
+    text-align: center;
+}
+#header_analytical_data_center h1
+{
+    display: inline;
+
+    background-color: white;
+    border-bottom: none;
+    border-top: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.title dd.detail{
+    font-weight: normal;
+    padding-left: 1em;
+}
+#header_analytical_data_center h1 small
+{
+    display: block;
+    font-weight: normal;
+}
+.analytical hr
+{
+    margin: 0;
+    border-color: black;
+    border-style: solid;
+}
+#analytical_footer
+{
+    clear: both;
+    float: left;
+    margin-top: 1em;
+    width: 100%;
+}
+.report-content {
+    float: left;
+    margin-top: 1em;
+    width: 100%;
+}
+
+.school_logo
+{
+    float: left;
+}
+
+#promedio_gral
+{
+    text-align: center; 
+    width: 33%  !important; 
+    margin-left: 33%  !important;
+    font-weight: bold;
+}
+#promedio_gral_valor
+{
+    border: 1px solid;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+#analytic_signatures .signature
+{
+    float: left;
+    width: 39%;
+    height: 1.5em;
+    text-align: center;
+    padding-top: 5em;
+    border: 1px solid;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 2em;
+}

@@ -20,6 +20,8 @@
 <?php include_partial("student/assets") ?>
 <?php use_stylesheet('report-card.css', 'first', array('media' => 'screen')) ?>
 <?php use_stylesheet('print-report-card.css', 'last', array('media' => 'print')) ?>
+<?php use_stylesheet('analytics.css', 'last', array('media' => 'all')) ?>
+<?php use_stylesheet('print-analytics.css', 'last', array('media' => 'all')) ?>
 
 <div class="report-wrapper"> 
 

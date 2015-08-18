@@ -51,13 +51,13 @@
                 <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
                     <tr>
 
-                        <td class="text-center"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
+                        <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
 
-                        <td class="text-center"><?php echo ($css->getApprovedDate()? $css->getApprovedDate()->format('d/m/Y'):'<hr/>') ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate()? $css->getApprovedDate()->format('d/m/Y'):'<hr/>') ?></td>
 
-                        <td class="text-center"><?php echo ($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
 
-                        <td align="left" width="500px"><?php echo $css->getSubjectName() ?></td>
+                        <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
 
                         <td class="text-center"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
@@ -75,8 +75,9 @@
 
             </tbody>
         </table>
-        <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <?php echo $object->get_total_average(); ?></div>
     <?php endforeach ?>
 
+<div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?$object->get_total_average():'-'); ?></span></div>
+    
 <?php endif; ?>
 

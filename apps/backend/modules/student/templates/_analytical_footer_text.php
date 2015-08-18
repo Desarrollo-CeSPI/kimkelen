@@ -19,7 +19,7 @@
  */ ?>
 
 <?php use_helper('Date') ?>
-<div id="analytical_footer">
+
     <div class="header-text">
         <?php if ($analytical->has_missing_subjects() ): ?>
         <p>Para terminar sus estudios secundarios deberá aprobar:
@@ -34,4 +34,3 @@
         <p>Para que conste y a pedido del interesado, se expide el presente certificado confrontado con los registros y actas originales por el <?php echo __('Departamento de alumnos'); ?>, en la ciudad de <?php echo __('escuela_ciudad'); ?>, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
 
     </div>
-</div>
