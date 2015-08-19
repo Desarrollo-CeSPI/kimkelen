@@ -34,12 +34,16 @@ class BaseAnalyticalBehaviour
         self::YEAR_INCOMPLETE => 'Curso I',
     );
     
+    /* @var $student Student */
     protected $student = null;
     protected $objects = array();
     protected $missing_subjects = array();
     protected $years_in_career = array();
     protected $last_exam_date = null;
     protected $total_average = null;
+    /* @var $career_student CareerStudent */
+    protected $career_student = null;
+    protected $remaining_years = null;
 
 
     public function __construct(Student $a_student)
@@ -92,11 +96,79 @@ class BaseAnalyticalBehaviour
     {
         return $this->total_average;
     }
+    
+    public function get_student()
+    {
+        return $this->student;
+    }
 
+    public function get_career_student()
+    {
+        return $this->career_student;
+    }
+    
+    public function get_plan_name()
+    {
+        return $this->get_career_student()->getCareer()->getPlanName();
+    }
+
+    public function get_orientation()
+    {
+        return $this->get_career_student()->getOrientation();
+    }
+    
+    public function get_current_division_string()
+    {
+        if ($this->has_completed_career())
+        {
+            //@TODO: Buscar la division para los egresados (ya que el current utiliza la fecha y al estar egresado la division es nula)
+            return $this->get_career_student()->getCareer()->getMaxYear();
+        }
+        return $this->get_student()->getCurrentDivisionsString();
+    }
+    
+    public function get_current_school_year()
+    {
+        return $this->get_student()->getCurrentStudentCareerSchoolYear();
+    }
+    
+    public function get_remaining_years_string()
+    {
+        $years = $this->get_remaining_years();
+        foreach ($years as &$year)
+        {
+            $year = 'Year '.$year;
+        }
+        return $years;
+    }
+
+
+    public function get_remaining_years()
+    {
+        if (is_null($this->remaining_years) and !$this->has_completed_career())
+        {
+            $this->remaining_years = array();
+            $years = $this->get_career_student()->getCareer()->getYearsRange();
+            $current_year = $this->get_current_school_year();
+            foreach ($years as $year)
+            {
+                if ($current_year->getYear() < $year)
+                {
+                    $this->remaining_years[] = $year;
+                }
+            }
+        }
+        return $this->remaining_years;
+    }
 
     public function has_missing_subjects()
     {
         return (count($this->missing_subjects) > 0);
+    }
+    
+    public function has_remaining_years()
+    {
+        return (count($this->get_remaining_years()) > 0);
     }
     
     public function has_completed_year($year)
@@ -104,6 +176,12 @@ class BaseAnalyticalBehaviour
         return (isset($this->objects[$year]['status']) and self::YEAR_COMPLETE == $this->objects[$year]['status']);
     }
     
+    public function has_completed_career()
+    {
+        return $this->get_career_student()->isGraduate();
+    }
+
+
     public function subject_is_averageable($subject)
     {
         return true;
@@ -128,6 +206,7 @@ class BaseAnalyticalBehaviour
         $this->years_in_career = array();
         $this->missing_subjects = array();
         $this->last_exam_date = null;
+        $this->career_student = $this->get_student()->getCareerStudent();
     }
     
     protected function add_year_in_career($year)
@@ -205,7 +284,7 @@ class BaseAnalyticalBehaviour
     
     protected function process()
     {
-        $this->student_career_school_years = $this->student->getStudentCareerSchoolYears();
+        $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
 
         //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
         $this->init();
@@ -213,7 +292,6 @@ class BaseAnalyticalBehaviour
 
         foreach ($this->student_career_school_years as $scsy)
         {
-
             //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
             //Siempre tomo el año "Aprobado" - Ver si esta bien asi o si deberia quedarme con el ultimo
             if ($scsy->getStatus() == 1)
@@ -224,8 +302,8 @@ class BaseAnalyticalBehaviour
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
 
-                $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->student, $school_year);
-                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->student, $school_year);
+                $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
+                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
 
                 foreach ($csss as $css)
                 {

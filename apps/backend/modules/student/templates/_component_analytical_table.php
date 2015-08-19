@@ -35,11 +35,11 @@
                 </tr>
                 <tr>
                     <th rowspan="2"><?php echo __("Condition") ?></th>
-                    <th rowspan="2"><?php echo __("Fecha aprobación") ?></th>
+                    <th rowspan="2"><?php echo __("Mes") ?></th>
                     <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
                     <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
                     <th colspan="2"><?php echo __("Calification") ?></th>
-                    <th rowspan="2"><?php echo __("School") ?></th>
+                    <th rowspan="2"><?php echo __("Establecimiento") ?></th>
                 </tr>
                 <tr>
                     <th>Nro.</th>
@@ -53,9 +53,9 @@
 
                         <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
 
-                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate()? $css->getApprovedDate()->format('d/m/Y'):'<hr/>') ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
 
-                        <td class="text-center" width="10%"><?php echo ($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
 
                         <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
 
@@ -77,7 +77,7 @@
         </table>
     <?php endforeach ?>
 
-<div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?$object->get_total_average():'-'); ?></span></div>
+<div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
     
 <?php endif; ?>
 

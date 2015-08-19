@@ -11,25 +11,6 @@
     padding: 2em;
 }
 
-.table thead th{
-    font-size: 10px;
-    padding-top: 1px !important;
-    padding-bottom: 0 !important;
-}
-
-.table td {
-    font-size: 8px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.table tbody th {
-    font-size: 10px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-
 #header_analytical_data_left
 {
     width: 20%;
@@ -75,7 +56,8 @@
 {
     clear: both;
     float: left;
-    margin-top: 1em;
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
     width: 100%;
 }
 .report-content {

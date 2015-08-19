@@ -21,12 +21,12 @@
 <?php use_stylesheet('analytics.css', 'last', array('media' => 'all')) ?>
 <?php use_stylesheet('print-analytics.css', 'last', array('media' => 'print')) ?>
 <div id="sf_admin_container">
-    <div>
+    <div id="screen_header">
         <h1> <?php echo __("Analytical for %student%", array('%student%' => $career_student->getStudent())) ?></h1>
         <h2> <?php echo __("Study plan %career%", array('%career%' => $career_student->getCareer())) ?></h2>
     </div>
 
-        <ul class="sf_admin_actions">
+    <ul class="sf_admin_actions">
         <li class="sf_admin_action_list">
             <?php echo link_to(__('Volver al listado alumnos', array(), 'messages'), "@student", array()) ?>
         </li>
@@ -36,7 +36,7 @@
     </ul>
     
 <div class="analytical">
-    <?php include_partial('analytical_header', array('career_student' => $career_student)) ?>
+    <?php include_partial('analytical_header', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
     <div class="report-content">
         <?php include_component('student', 'component_analytical_table', array('career_student' => $career_student)) ?>
     </div>

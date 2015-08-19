@@ -37,7 +37,9 @@ class BaseSubjectStudentAnalytic
     public function approvationInstance()
     {
         if ($this->approved && !$this->approvationInstance)
+        {
             $this->approvationInstance = $this->approved->getApprovationInstance();
+        }
         return $this->approvationInstance;
     }
 
@@ -49,6 +51,38 @@ class BaseSubjectStudentAnalytic
     public function getNullLabel()
     {
         return;
+    }
+    
+    protected function getDefaultApprovedExaminationString($date)
+    {
+        return 'Diciembre';
+    }
+
+    protected function getDefaultRepprovedExaminationString($date)
+    {
+        if ($date instanceof DateTime)
+        {
+            return $date->format('M');
+        }
+        return ;
+    }
+
+
+    public function getExaminationInstance()
+    {
+        $instance = $this->approvationInstance();
+        switch (get_class($instance))
+        {
+            case 'StudentApprovedCourseSubject':
+                //@TODO: Para el caso de regular no hay asociada una examination, agregarla en la base o personalizarla para cada flavor (Si no es diciembre)...
+                return $this->getDefaultApprovedExaminationString($this->getApprovedDate(false));
+            case 'StudentDisapprovedCourseSubject':
+                return $instance->getClass();
+            case 'StudentRepprovedCourseSubject':
+                return $this->getDefaultRepprovedExaminationString($this->getApprovedDate(false));
+        }
+        
+        return ;
     }
     
     public function getCondition()
@@ -63,7 +97,7 @@ class BaseSubjectStudentAnalytic
             case 'StudentRepprovedCourseSubject':
                 return 'Previa';
         }
-        return $this->getNullLabel();
+        return;
     }
 
     public function getApprovedDate($as_label = true)
@@ -72,7 +106,15 @@ class BaseSubjectStudentAnalytic
         {
             return $this->approved_date;
         }
-        return $this->approved ? $this->approved_date = new DateTime(StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved)) : ($as_label ? $this->getNullLabel() : null);
+        if ($this->approved)
+        {
+            $approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
+            if ($approvation_date)
+            {
+                return $this->approved ? $this->approved_date = new DateTime(StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved)) : ($as_label ? $this->getNullLabel() : null);
+            }
+        }
+        return ($as_label ? $this->getNullLabel() : null);
     }
 
     public function getSchoolYear()
@@ -112,9 +154,9 @@ class BaseSubjectStudentAnalytic
         //$this->css->getSchoolName();
         if ($this->approved)
         {
-            if (1 == $this->approved->getIsEquivalence())
+            if ($this->approved->getIsEquivalence())
             {
-                return "¿Escuela?";
+                return "Establecimiento anterior";
             }
             else
             {

@@ -25,7 +25,7 @@
         <span><?php echo __($career_student->getCareer()->getCareerName()) ?></span>
         de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que
         <strong><?php echo $student ?></strong> <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?></strong> sexo <strong><?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()) ?></strong>
-        nacido/a en <span><?php echo $student->getPerson()->getBirthCityRepresentation() ?>, <?php echo $student->getPerson()->getBirthStaterepresentation() ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
+        nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
         que ingresó en este establecimiento en el año <span><?php echo $student->getInitialSchoolYear()->getYear(); ?></span>
         proveniente del Colegio <span><?php //echo $student->getOriginSchool(); ?></span> donde finalizó sus estudios de <?php echo __('nombre_ultimo_anio_primario'); ?> y aprobó en este Establecimiento las asignaturas que con sus respectivas notas se expresan:

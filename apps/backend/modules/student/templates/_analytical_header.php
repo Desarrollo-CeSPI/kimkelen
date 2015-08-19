@@ -24,7 +24,7 @@
                 <dt><?php echo __("Legajo N°") ?>:</dt>
                 <dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
                 <dt><?php echo __("Course") ?>:</dt>
-                <dd class="detail"><?php echo $career_student->getStudent()->getCurrentDivisionsString() ?></dd>
+                <dd class="detail"><?php echo $analytical->get_current_division_string() ?></dd>
             </dl>
         </div>
         <div class="title" id="header_analytical_data_center">

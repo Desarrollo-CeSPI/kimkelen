@@ -2,7 +2,7 @@
     Created on : 18-ago-2015, 11:53:20
     Author     : lucianoc
 */
-.sf_admin_actions, #header, #menu-div, #sf_admin_container, #footer {
+.sf_admin_actions, #header, #menu-div, #screen_header, #footer {
     display: none;
 }
 
@@ -19,3 +19,20 @@
         page-break-inside: avoid;
 }
 
+.table thead th{
+    font-size: 10px;
+    padding-top: 1px !important;
+    padding-bottom: 0 !important;
+}
+
+.table td {
+    font-size: 8px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.table tbody th {
+    font-size: 10px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
