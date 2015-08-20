@@ -32,6 +32,8 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 	const MINIMUN_MARK = 0; //nota minima de un examen
 	const MAXIMUN_MARK = 10; //nota maxima de un examen
 
+	const PATHWAY_PROMOTION_NOTE = 6;
+
 	protected
 		$_examination_number = array(
 		self::DECEMBER => 'Diciembre',
