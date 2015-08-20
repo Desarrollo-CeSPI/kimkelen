@@ -40,7 +40,7 @@ class SchoolYearForm extends BaseSchoolYearForm
     //widgets
     $this->widgetSchema['year'] = new sfWidgetFormInput(array());
 
-    $date = SchoolYearPeer::sugestYear();
+    $date = SchoolYearPeer::suggestYear();
     $this->widgetSchema['year']->setDefault($date);
 
 

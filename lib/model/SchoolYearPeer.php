@@ -48,7 +48,7 @@ class SchoolYearPeer extends BaseSchoolYearPeer
    *
    * @return integer
    */
-  public static function sugestYear()
+  public static function suggestYear()
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(self::YEAR);

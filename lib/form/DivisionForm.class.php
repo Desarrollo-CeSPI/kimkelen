@@ -31,7 +31,7 @@ class DivisionForm extends BaseDivisionForm
 
   public function configure()
   {
-    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Asset', 'Tag', 'Url', 'Javascript'));
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('Asset', 'Tag', 'Url', 'Javascript', 'I18N'));
 
     if ($this->getObject()->isNew())
     {
@@ -45,6 +45,7 @@ class DivisionForm extends BaseDivisionForm
 
       unset($this['division_title_id']);
       //$this->setValidator('division_title_ids',new sfValidatorPass());
+
     }
     else
     {
@@ -82,6 +83,7 @@ class DivisionForm extends BaseDivisionForm
 
     $this->setValidator('division_courses', new sfValidatorPass());
 
+	  $this->getWidgetSchema()->setLabel('division_title_ids', __('Division'));
   }
 
   public static function getYears($widget, $values)

@@ -109,8 +109,6 @@ class SchoolYear extends BaseSchoolYear
    */
   public function canChangeState()
   {
-    $current = SchoolYearPeer::retrieveCurrent();
-
     return !$this->getIsActive() && !$this->getIsClosed() && !$this->hasTentativeRepprovedStudents();
   }
 
@@ -173,9 +171,9 @@ class SchoolYear extends BaseSchoolYear
   public function hasStudents()
   {
     $cant = 0;
-    foreach ($this->getCareerSchoolYears() as $carreer_school_year)
+    foreach ($this->getCareerSchoolYears() as $career_school_year)
     {
-      $cant += count($carreer_school_year->getStudents());
+      $cant += count($career_school_year->getStudents());
     }
     if ($cant > 0)
     {
