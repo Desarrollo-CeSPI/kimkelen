@@ -594,11 +594,6 @@ create_course_division:
   requirements:
     career_subject_id: \d+
 
-generate_backup:
-  url:  /generar-backup-del-sistema
-  params:
-    module: mainBackend
-    action: generateBackup
 
 personal:
   class: sfPropelRouteCollection
