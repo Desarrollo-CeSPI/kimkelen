@@ -25,7 +25,7 @@
       <?php $course_result = $course_subject_student->getCourseResult(); ?>
       <tr>
         <td><?php echo $i ?></td>
-        <td style="text-align: left; width: 30%"><?php echo $course_subject_student->getStudent() ?></td>
+        <td style="text-align: left; width: 30%"><?php echo $course_subject_student->getStudent() . ' (' . implode(' ,',$course_subject_student->getStudent()->getCurrentDivisions(($course->getCareerSchoolYear())? $course->getCareerSchoolYear()->getId(): null)). ')' ?></td>
         <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $key => $cssm): ?>
           <td align="center"><?php echo ((!$cssm->getMark()) ? __('free') : $cssm->getMark() ? $cssm : ''); ?></td>
         <?php endforeach; ?>
