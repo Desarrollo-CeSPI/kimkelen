@@ -37,54 +37,6 @@ class mainBackendActions extends sfActions
     }
   }
 
-  public function executeGenerateBackup(sfWebRequest $request)
-  {
-    if (!$this->getUser()->hasCredential('backup'))
-    {
-      $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    }
-
-    $yml = sfConfig::get('sf_config_dir').DIRECTORY_SEPARATOR.'databases.yml';
-    $yml_array = sfYaml::load($yml);
-    $usuario = $yml_array['all']['propel']['param']['username'];
-    $password = $yml_array['all']['propel']['param']['password'];
-    $dsn = $yml_array['all']['propel']['param']['dsn'];
-    $dbname = substr($dsn, strpos($dsn, 'dbname=') + strlen('dbname='));
-    $dbname = substr($dbname, 0, strpos($dbname, ';'));
-
-    $fileName = 'sistema-alumnos';
-    $filePath = sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR.$fileName.'.sql';
-
-    if(is_null($password))
-      $command = "mysqldump -u$usuario $dbname > $filePath";
-    else
-      $command = "mysqldump -u$usuario -p$password $dbname > $filePath";
-
-    exec($command);
-  }
-
-  public function executeDownloadBackup(sfWebRequest $request)
-  {
-    if (!$this->getUser()->hasCredential('backup'))
-    {
-      $this->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    }
-
-    $fileName = 'sistema-alumnos';
-    $filePath = sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR.$fileName.'.sql';
-
-    $response = $this->getResponse();
-    $response->setHttpHeader('Pragma', '');
-    $response->setHttpHeader('Cache-Control', '');
-    $data = file_get_contents($filePath);
-    $response->setHttpHeader('Content-Type', 'text/plain');
-    $response->setHttpHeader('Content-Disposition', "attachment; filename=\"$fileName.sql\"");
-    $response->setContent($data);
-    unlink($filePath);
-
-    return sfView::NONE;
-  }
-
  /**
   * Executes index action
   *

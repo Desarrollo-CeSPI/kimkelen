@@ -90,10 +90,6 @@ root:
             title: Grupos de usuarios
             url: sfGuardGroup/index
             credentials: [show_group]
-      backup:
-        title: Respaldo de datos (backup)
-        credentials: [backup]
-        url: @generate_backup
 
   academics:
     title: Académica
