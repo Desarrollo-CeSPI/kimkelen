@@ -92,7 +92,7 @@
     </style>
 
 
-    <table class="tg" style="undefined;table-layout: fixed; width: 130%; font-size:25; margin-left: 100px" cellpadding="0" cellspacing="0" align="center">
+    <table class="tg" style="table-layout: fixed; width: 130%; font-size:25; margin-left: 100px" cellpadding="0" cellspacing="0" align="center">
         <colgroup>
         <col style="width: 150px;height:100px">
         <col style="width: 170px;height:100px">

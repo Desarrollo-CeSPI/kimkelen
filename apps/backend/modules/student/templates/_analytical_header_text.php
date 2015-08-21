@@ -28,6 +28,6 @@
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
         que ingresó en este establecimiento en el año <span><?php echo $student->getInitialSchoolYear()->getYear(); ?></span>
-        proveniente del Colegio <span><?php //echo $student->getOriginSchool(); ?></span> donde finalizó sus estudios de <?php echo __('nombre_ultimo_anio_primario'); ?> y aprobó en este Establecimiento las asignaturas que con sus respectivas notas se expresan:
+        proveniente de <span><?php echo ($student->getOriginSchool()?$student->getOriginSchool():__('otra escuela')); ?></span> donde finalizó sus estudios de <?php echo __('nombre_ultimo_anio_primario'); ?> y aprobó en este Establecimiento las asignaturas que con sus respectivas notas se expresan:
     </p>
 </div>
