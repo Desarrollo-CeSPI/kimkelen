@@ -4350,7 +4350,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway list</source>
                 <target>Promociones por excepción</target>
             </trans-unit>
-          </body>
+            <trans-unit>
                 <source>School</source>
                 <target>Escuela</target>
             </trans-unit>
