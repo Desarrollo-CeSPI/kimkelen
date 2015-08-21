@@ -2578,7 +2578,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Desplegar todos los cursos de ésta división</source>
-                <target>Desplegar todos las asignaturas de ésta división</target>
+                <target>Desplegar todas las asignaturas de esta división</target>
             </trans-unit>
 
             <trans-unit>
@@ -4422,6 +4422,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>There are no problematic students to resolve.</source>
                 <target>No hay alumnos problemáticos.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
             </trans-unit>
         </body>
     </file>

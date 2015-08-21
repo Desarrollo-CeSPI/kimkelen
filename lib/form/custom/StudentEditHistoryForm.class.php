@@ -42,7 +42,7 @@ class StudentEditHistoryForm extends sfFormPropel
     $this->examination_fields = $this->configureExaminationSubjects();
     $this->student_approved_career_subject = $this->configureStudentApprovedCareerSubject();
 
-    //$this->repproved_course_subjects = $this->configureRepprovedCourseSubjects();
+    $this->repproved_course_subjects = $this->configureRepprovedCourseSubjects();
 
     $this->getWidgetSchema()->setNameFormat('course_subject_student[%s]');
 
@@ -191,7 +191,7 @@ class StudentEditHistoryForm extends sfFormPropel
     return $fieldset;
   }
 
-  /* Esto se hizo para las previas, pero me parece que no tiene sentido poder editarlas
+
   public function canEditStudentRepprovedCourseSubjects()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
@@ -244,19 +244,29 @@ class StudentEditHistoryForm extends sfFormPropel
           $this->setWidget($name_absence, new sfWidgetFormInputCheckbox());
           $this->setValidator($name_absence, new sfValidatorBoolean(array('required' => false)));
           $this->setDefault($name_absence, $student_examination_repproved_subject->getIsAbsent());
-          $this->getWidget($name_absence)->setLabel(__('Is absence', array('%number%' => $i)));
+
+	        $this->getWidget($name_absence)->setLabel(__('Is absent'));
+
+	        $name_date = 'student_examination_repproved_subject_id_' . $student_examination_repproved_subject->getId() .'_date';
+	        $fields[] = $name_date;
+
+	        $this->setWidget($name_date, new csWidgetFormDateInput());
+	        $this->setValidator($name_date, new mtValidatorDateString(array('required' => false)));
+	        $this->setDefault($name_date, $student_examination_repproved_subject->getDate());
+	        $this->getWidget($name_date)->setLabel(__('Day'));
+
         }
 
         $this->getWidget($name)->setLabel(__('Mark', array('%number%' => $i)));
 
-        $fieldset[] = array('Examination repproved ' . $i => $fields);
+        $fieldset[] = array('Mesa de Previa/Libre ' . $i => $fields);
         $i++;
       }
     }
 
     return $fieldset;
   }
-  */
+
 
   public function getFormFieldsDisplay()
   {
@@ -269,6 +279,12 @@ class StudentEditHistoryForm extends sfFormPropel
     {
       $fields = array_merge($fields, $examination_field);
     }
+
+
+	  foreach ($this->repproved_course_subjects as $rcs_field)
+	  {
+		  $fields = array_merge($fields, $rcs_field);
+	  }
 
     $fields = array_merge($fields, array('Materia aprobada' => $this->student_approved_career_subject));
 
@@ -298,7 +314,7 @@ class StudentEditHistoryForm extends sfFormPropel
 
   public function canEdit()
   {
-    return $this->canEditMarks() || $this->canEditExaminationSubject();
+    return $this->canEditMarks() || $this->canEditExaminationSubject() || $this->canEditStudentRepprovedCourseSubjects();
   }
 
   public function save($con = null)
@@ -386,7 +402,7 @@ class StudentEditHistoryForm extends sfFormPropel
         }
       }
 
-      /* Esto se habia creado para las previas, pero no tiene sentido editarlas. Lo dejo comentado por si sirve para mas adelante.
+
       if ($this->canEditStudentRepprovedCourseSubjects())
       {
 
@@ -398,13 +414,18 @@ class StudentEditHistoryForm extends sfFormPropel
         $is_absence_name = 'student_examination_repproved_subject_' . $student_examination_repproved_subject->getId() .'_is_absent';
         $is_absence = isset($values[$is_absence_name]) ? $values[$is_absence_name] : null;
 
+	      $date = $values['student_examination_repproved_subject_id_' . $student_examination_repproved_subject->getId() . '_date'];
+
         if ($mark !== $student_examination_repproved_subject->getMark() || $is_absence !== $student_examination_repproved_subject->getIsAbsent())
         {
           $student_examination_repproved_subject->setMark($mark);
-          $student_examination_repproved_subject->setIsAbsence($is_absence);
+          $student_examination_repproved_subject->setIsAbsent($is_absence);
+
+	        $student_examination_repproved_subject->setDate($date);
+	        $student_examination_repproved_subject->save($con);
         }
       }
-      */
+
 
       $con->commit();
     }

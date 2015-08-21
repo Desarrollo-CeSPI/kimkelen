@@ -35,9 +35,9 @@
         jQuery('#division_courses_" . $division->getId() . "_ajax_show').hide();
       }
     });",
-    array('class' => 'show-more-link' , 'id' => "division_courses_".$division->getId()."_ajax_show", 'title' => __('Desplegar todos los cursos de la division'))) ?>
+    array('class' => 'show-more-link' , 'id' => "division_courses_".$division->getId()."_ajax_show", 'title' => __('Desplegar todas las materias de la división'))) ?>
 
-    <?php echo link_to_function('&gt; '.__('Ver cursos'), "jQuery('#division_courses_".$division->getId()."').toggle()", array('class' => 'show-more-link',  'id' => "division_courses_".$division->getId()."_show", 'style' => 'display: none','title' => __('Desplegar todos los cursos de ésta división'))) ?>
+    <?php echo link_to_function('&gt; '.__('Ver materias'), "jQuery('#division_courses_".$division->getId()."').toggle()", array('class' => 'show-more-link',  'id' => "division_courses_".$division->getId()."_show", 'style' => 'display: none','title' => __('Desplegar todas las materias de esta división'))) ?>
 
     <div id="division_courses_<?php echo $division->getId()?>" style="display: none;" class="more_info">
     </div>

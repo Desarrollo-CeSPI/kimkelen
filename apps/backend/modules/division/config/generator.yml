@@ -16,7 +16,7 @@ generator:
         id:
           label:  División
         division_courses:
-          label: Crear cursos
+          label: Crear materias
       list:
         title: Listado de divisiones
         display:           [id]
@@ -71,7 +71,7 @@ generator:
 
           division_courses:
             action: divisionCourses
-            credentils: [show_course]
+            credentials: [show_course]
 
           seeAttendanceSheet:
             label:   Show attendance sheet
@@ -159,8 +159,8 @@ generator:
 
           division_courses:
             action: divisionCourses
-            label:  Cursos
-            credentils: [show_course]
+            label:  Materias
+            credentials: [show_course]
 
           _delete:
             credentials: [delete_division]
@@ -171,7 +171,7 @@ generator:
         type: xls
         fieldSelection:
           title:
-            label: Titulo de división
+            label: Título de división
             method: getDivisionTitle
             decorator: text
           career:

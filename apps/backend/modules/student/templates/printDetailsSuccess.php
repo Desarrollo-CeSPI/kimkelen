@@ -51,7 +51,7 @@
   <?php foreach ($student->getStudentTutors() as $student_tutor): ?>
     <?php echo $student_tutor . ' ' ?>
     Telefono: <?php echo $student_tutor->getPhone() . ' ' ?>
-    Ocupacion: <?php echo $student_tutor->getOcupation() . ' ' ?>
+    Ocupación: <?php echo $student_tutor->getOcupation() . ' ' ?>
     <br>
   <?php endforeach; ?>
   <hr>

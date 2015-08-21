@@ -333,7 +333,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
         if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
         {
-          $student_repproved_course_subject->delete($con);
+	        $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
+
+	        if ($sers) {
+	          $sers->delete($con);
+          } else {
+            $student_repproved_course_subject->delete($con);
+          }
         }
       }
 

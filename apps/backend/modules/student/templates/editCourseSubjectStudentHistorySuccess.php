@@ -46,9 +46,7 @@
           <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
         <?php endif?>
         <?php if ($back_to !== ''):?>
-
           <li><?php echo link_to(__($back_to), "student/backToPreviousCourseSubjectStatus?course_subject_student_id=". $course_subject_student->getId(), array('class' => 'sf_admin_action_edit_student_history', 'confirm' => __('Are you sure? If you do this, some data is going to be deleted'))) ?></li>
-
         <?php endif ?>
       </ul>
 

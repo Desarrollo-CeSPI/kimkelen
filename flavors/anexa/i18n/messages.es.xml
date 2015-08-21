@@ -2099,7 +2099,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Not all the courses of the division, has the configuration of day assistance Or is not have any configuration</source>
-                <target>No se pueden manejar las asistencias, porque no todas las asignaturas de la división tienen esa configuración, o la configuración de la división no está cargada.</target>
+                <target>No se pueden manejar las asistencias, porque no todas las materias de la división tienen esa configuración, o la configuración de la división no está cargada.</target>
             </trans-unit>
 
             <trans-unit>
@@ -4254,6 +4254,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Print social card</source>
             <target>Imprimir ficha social</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
             </trans-unit>
         </body>
     </file>
