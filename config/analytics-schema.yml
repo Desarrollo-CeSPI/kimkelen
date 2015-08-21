@@ -1,0 +1,22 @@
+connection: propel
+description: Modelo de datos del guardado de los certificados analiticos
+
+classes:
+  Analytic:
+    tableName:            analytic
+    description:          Representa un certificado analitico emitido
+    columns:
+      id:
+      description:
+        description:      Alguna descripcion necesaria en el certificado
+        type: varchar(255)
+      career_student_id:
+        description:      Referencia al estudiante en la carrera
+        type:             integer
+        foreignTable:     career_student
+        foreignReference: id
+        required:         true
+      certificate:
+        description:      Archivo del certificado
+        type:             blob
+      created_at:
