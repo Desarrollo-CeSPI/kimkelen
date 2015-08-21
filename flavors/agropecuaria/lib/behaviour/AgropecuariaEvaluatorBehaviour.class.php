@@ -26,10 +26,26 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
   $_examination_number_short = array(
     self::DECEMBER => 'Diciembre',
     self::FEBRUARY => 'Febrero',
+    self::REPPROVED => 'L',
   );
 
   const POSTPONED_NOTE = 6;
   const PROMOTION_NOTE = 6;
+  const EXEMPT = 'Ex.';
+  const REPPROVED = 3;
+
+  protected
+  $_examination_number = array(
+    self::DECEMBER => 'Diciembre',
+    self::FEBRUARY => 'Febrero',
+    self::REPPROVED => 'L',
+  );
+
+
+  public function getExaminationNumbers()
+  {
+    return array_slice($this->_examination_number_short, 0, -1);
+  }
 
   /*
    * Returns if a student has approved or not the course subject
@@ -71,12 +87,15 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       if ($course_subject_student->hasSomeMarkFree())
       {
-        $examination_number = self::DECEMBER;
+        if (is_null(StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student)))
+        {
+          $srcs = new StudentRepprovedCourseSubject();
+          $srcs->setCourseSubjectStudent($course_subject_student);
+          $srcs->save();
+        }
       }
-      else
-      {
-        $examination_number = $this->getExaminationNumberFor($average);
-      }
+
+      $examination_number = $this->getExaminationNumberFor($average, $course_subject_student->hasSomeMarkFree());
 
       $student_disapproved_course_subject->setExaminationNumber($examination_number);
 
@@ -254,12 +273,53 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       else
       {
         // se crea una previa
-        $student_repproved_course_subject = new StudentRepprovedCourseSubject();
-        $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
-        $student_repproved_course_subject->save($con);
+        $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+        if (!$srcs && is_null($srcs->getStudentApprovedCareerSubject())) {
+           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
+           $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
+           $student_repproved_course_subject->save($con);
+        }
       }
     }
 
+  }
+
+    /**
+   * This method check the conditions of repetition of a year.
+   *
+   * @param Student $student
+   * @param StudentCareerSchoolYear $student_career_school_year
+   * @return boolean
+   */
+  public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
+  {
+    //IF the current year is the last year of the career.
+    if ($student_career_school_year->isLastYear())
+    {
+      return false;
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    //If previous count > than max count of previous allowed, then the student repeats
+    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
+
+    return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
+  }
+
+   public function getExemptString()
+  {
+    return self::EXEMPT;
+  }
+
+  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
+  {
+    if ($is_free)
+    {
+      return self::REPPROVED;
+    }
+
+    return (($average >= self::MIN_NOTE)) ? self::DECEMBER : self::FEBRUARY;
   }
 
 }

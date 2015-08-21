@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -24,7 +24,8 @@
       <ul style="margin-left: 9em;">
         <?php foreach ($students as $s): ?>
           <li><?php echo $s ?>
-            <?php echo ' (' . implode(' ,',$s->getCurrentDivisions($course->getCareerSchoolYear()->getId()))?>)</li>
+            <?php echo ' (' . implode(' ,',$s->getCurrentDivisions(($course->getCareerSchoolYear())? $course->getCareerSchoolYear()->getId(): null))?>)
+          </li>
         <?php endforeach ?>
       </ul>
     <?php else: ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -471,6 +471,39 @@ class shared_courseActions extends autoShared_courseActions
       }
     }
 
+  }
+
+  public function executeMoveStudents(sfWebRequest $request)
+  {
+    $this->origin_course_subject = CourseSubjectPeer::retrieveByPK($request->getParameter('id'));
+    $this->form = new MoveStudentsToCourseSubjectForm(array(), array('course_subject' => $this->origin_course_subject));
+  }
+
+  public function executeUpdateMoveStudents(sfWebRequest $request)
+  {
+    $this->origin_course_subject = CourseSubjectPeer::retrieveByPK($request->getParameter('id'));
+    $this->form = new MoveStudentsToCourseSubjectForm(array(), array('course_subject' => $this->origin_course_subject));
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid())
+    {
+      try
+      {
+        $parameters = $request->getParameter('move_students');
+        $destiny_course_subject = CourseSubjectPeer::retrieveByPK($parameters['destiny_course_subject_id']);
+        $students = $parameters['students'];
+        $destiny_course_subject->addStudentsFromCourseSubject($students, $this->origin_course_subject);
+        $this->getUser()->setFlash('notice', 'Los alumnos seleccionados han sido correctamente movidos de comisión.');
+      }
+      catch (Exception $e)
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron errores que no permitieron concretar la acción. Compruebe que las comisiones origen y destino no estén cerradas. Tampoco se permitirá mover alumnos si ya se calificó a alguno o si se pasó asistencia al curso origen.');
+      }
+    }
+    else
+    {
+      $this->setProcessFormErrorFlash();
+    }
+    $this->setTemplate('moveStudents');
   }
 
 }

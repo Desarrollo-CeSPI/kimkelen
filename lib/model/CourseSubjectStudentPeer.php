@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -114,12 +114,31 @@ class CourseSubjectStudentPeer extends BaseCourseSubjectStudentPeer
     return self::doSelectOne($c);
   }
 
-
-
   public static function retrieveByStudentApprovedCareerSubject($student_approved_career_subject, $school_year = null)
   {
     $career_subject_school_year = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($student_approved_career_subject->getCareerSubject(), $school_year);
-    
+
     return self::retrieveByCareerSubjectSchoolYearAndStudent($career_subject_school_year, $student_approved_career_subject->getStudentId());
+  }
+
+  public static function retrieveAverageableByCareerSchoolYearAndStudent(CareerSchoolYear $career_school_year, Student $student)
+  {
+    $c = self::retrieveCriteriaByCareerSchoolYearAndStudent($career_school_year, $student);
+    $c->add(self::IS_NOT_AVERAGEABLE, false);
+
+    return self::doSelect($c);
+  }
+
+
+  public static function countStudentInscriptionsForCareerSubjectSchoolYear($course_subject_id, $student_id)
+  {
+    $course_subject = CourseSubjectPeer::retrieveByPk($course_subject_id);
+    $c = new Criteria();
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $course_subject->getCareerSubjectSchoolYearId());
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student_id);
+    $c->addAnd(CourseSubjectPeer::ID, $course_subject_id, Criteria::NOT_EQUAL);
+
+    return CourseSubjectStudentPeer::doCount($c);
   }
 }

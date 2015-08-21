@@ -16,6 +16,12 @@ body {
     border: 1px solid #BBB;
 }
 
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
 a img
 {
     border: none;
@@ -1104,6 +1110,11 @@ table.list
     background-color: yellow !important;
 }
 
+.regular
+{
+    background-color: yellow !important;
+}
+
 .almost_free
 {
     background-color: greenyellow !important;
@@ -1124,13 +1135,13 @@ table.list
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: #F29A79 !important;
+    background-color: yellow !important;
 }
 .box_free
 {
     border: 1px solid black;
     padding: 1px;
-    background-color: yellow !important;
+    background-color: #F29A79 !important;
 }
 
 .box_justificated
@@ -1227,6 +1238,11 @@ table.list
 }
 
 .febrero
+{
+    background-color: red !important;
+}
+
+.reprobado
 {
     background-color: red !important;
 }
@@ -1403,6 +1419,14 @@ div.no_results_advice {
     padding: 1px;
 }
 
+.pathway_info
+{
+    position: absolute;
+    padding: 1px;
+    color: green;
+    text-transform: uppercase;
+}
+
 .sf_admin_form_row div
 {
     position:relative;
@@ -1418,6 +1442,14 @@ div.no_results_advice {
 {
   float: right;
   margin-left: 5px;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
 }
 
 .student_head .person_name
@@ -1788,6 +1820,11 @@ div.wc-cal-event{
   background-image: url('../images/school_year_close.png') !important;
 }
 
+.sf_admin_list .sf_admin_action_resolve_problematic_students a
+{
+    background-image: url('../images/puzzle--arrow.png') !important;
+}
+
 .sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
 {
   background-image: url('../images/enrolment.png') !important;
@@ -1833,4 +1870,43 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_show_assistance_report a
 {
   background-image: url('../images/report.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
+{
+  background-image: url('../images/unchain.png') !important;
+}
+
+.sf_admin_action_create_last_year_divisions a
+{
+  background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_add_subject a
+{
+  background-image: url('../images/admin-subjects.png') !important;
+}
+
+#change-role {
+  color: #FFF !important;
+}
+
+.sf_admin_list .sf_admin_action_open a
+{
+  background-image: url('../images/lock_open.png') !important;
+}
+
+.warning-button {
+    text-transform: uppercase;
+    display: block;
+    width: 6em;
+    padding: 0.2em;
+    line-height: 1.4;
+    background-color: #CC6666;
+    border: 1px solid black;
+    color: #fefefe !important;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none !important;
 }

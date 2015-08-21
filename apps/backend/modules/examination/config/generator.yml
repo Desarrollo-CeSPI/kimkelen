@@ -27,7 +27,6 @@ generator:
             label: Subjects
             action: examinationSubjects
             credentials: [show_examination_subject]
-            condition: canShowExaminationSubjects
           _delete:
             credentials: [edit_examination]
         actions:

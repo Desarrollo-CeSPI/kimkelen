@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -42,6 +42,7 @@ class Personal extends BasePersonal
    */
   public function __call($method, $arguments)
   {
+
     if (preg_match('/^getPerson(.*)/', $method, $matches) && isset($matches[1]))
     {
       $method = "get" . $matches[1];
@@ -150,11 +151,17 @@ class Personal extends BasePersonal
 
   }
 
-  public function getTelefon()
+  public function getPhone()
   {
     return $this->getPerson()->getPhone();
 
   }
+
+    public function getMessageCantBeDeleted()
+  {
+    return "User has some references you sholud delete first";
+  }
+
 
 }
 

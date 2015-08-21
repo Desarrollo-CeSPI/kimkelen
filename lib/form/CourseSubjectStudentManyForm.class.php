@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -67,6 +67,10 @@ class CourseSubjectStudentManyForm extends sfFormPropel
 
     $this->setValidator('course_subject_student_list', new sfValidatorPass());
 
+    $this->mergePostValidator(new sfValidatorCallback(array(
+          'callback' => array($this, 'postValidateAvailableStudents')
+        )));
+
     $this->widgetSchema->setNameFormat('course_subject[%s]');
   }
 
@@ -92,7 +96,6 @@ class CourseSubjectStudentManyForm extends sfFormPropel
 
   protected function doSave($con = null)
   {
-    //parent::doSave($con);
     $this->saveCourseSubjectStudentList($con);
   }
 
@@ -118,7 +121,7 @@ class CourseSubjectStudentManyForm extends sfFormPropel
 
     foreach ($this->getObject()->getCourseSubjectStudents() as $course_subject_student)
     {
-      //if student has marks, it can't be deleted from course
+      //if student has marks it can't be deleted from course
       if (!in_array($course_subject_student->getStudentId(), $this->values))
       {
         if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentMarks() == 0)
@@ -127,7 +130,7 @@ class CourseSubjectStudentManyForm extends sfFormPropel
         }
         else
         {
-          throw new Exception('Los alumnos seleccionados poseen datos que les impiden ser borrados de este curso.');
+          throw new Exception('El/Los alumno/s seleccionado/s poseen calificaciones cargadas que le/s impide/n ser borrado/s de este curso.');
         }
       }
     }
@@ -188,4 +191,29 @@ class CourseSubjectStudentManyForm extends sfFormPropel
     }
   }
 
+  /*
+   * Validates if chosen students are not already inscripted in a course for this subject
+   */
+  public function postValidateAvailableStudents(sfValidatorBase $validator, $values)
+  {
+    $duplicated_students = array();
+    $student_ids = $values['course_subject_student_list'];
+    $course_subject_id = $values['id'];
+
+    foreach ($student_ids as $student_id)
+    {
+      if (CourseSubjectStudentPeer::countStudentInscriptionsForCareerSubjectSchoolYear($course_subject_id, $student_id) != 0)
+      {
+        $duplicated_students[] = StudentPeer::retrieveByPk($student_id);
+      }
+    }
+
+    if ($duplicated_students)
+    {
+      $error = new sfValidatorError($validator, 'Los siguientes estudiantes seleccionados ya se encuentran inscriptos en otro curso para esta misma materia: ' . implode(',', $duplicated_students));
+        throw new sfValidatorErrorSchema($validator, array('course_subject_student_list' => $error));
+    }
+
+    return $values;
+  }
 }

@@ -47,6 +47,19 @@ body {
   padding:5px 0px;
 }
 
+.header_row .title2 {
+    float: left;
+    font-weight: bold;
+    font-size: 13px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.header_row .row-content {
+    float: left;
+    font-size: 13px;
+}
+
 .header_row .header_right
 {
   float:right;

@@ -592,7 +592,8 @@ class Division extends BaseDivision
     $this->copyPreceptorsToDivision($con, $copy_division);
     $this->copyCoursesToDivision($con, $copy_division, $career_school_year);
 
-    if ($this->getYear() < $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
+
+    if ($this->getYear() <= $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
     {
       $copy_division->createStudentsForNextYear($con, $this->getCareerSchoolYear());
     }
@@ -756,8 +757,12 @@ class Division extends BaseDivision
           $css_origin = $course_subject->getCourseSubjectStudent($student);
           $cs_destiny = $this->getCourseSubjectForCareerSubjectSchoolYear($cssy);
 
+	        $c = new Criteria();
+	   
+	        $c->add(StudentAttendancePeer::STUDENT_ID, $student);
+
           //para las asistencias
-          foreach ($course_subject->getStudentAttendances() as $sa)
+          foreach ($course_subject->getStudentAttendances($c) as $sa)
           {
             $sa->setCourseSubject($cs_destiny);
             $sa->save($con);
@@ -791,5 +796,34 @@ class Division extends BaseDivision
 
     return true;
   }
+
+  public function getStudentsWithAllSubjectsApproved()
+  {
+    $students = Array();
+    foreach ($this->getStudents() as $student)
+    {
+      $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this->getCareerSchoolYear());
+      if (!is_null($student_career_school_year->getAnualAverage()))
+      {
+        $students[]= $student;
+      }
+    }
+    return $students;
+  }
+
+  public function getStudentsWithDisapprovedSubjects()
+  {
+    $students = Array();
+    foreach ($this->getStudents() as $student)
+    {
+      $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this->getCareerSchoolYear());
+      if (is_null($student_career_school_year->getAnualAverage()))
+      {
+        $students[]= $student;
+      }
+    }
+    return $students;
+  }
+
 }
 sfPropelBehavior::add('Division', array('changelog'));

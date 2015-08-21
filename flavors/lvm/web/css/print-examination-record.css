@@ -83,39 +83,9 @@ body {
   border-left:1px solid #999;
 }
 
-/***table***/
-
-table.gridtable {
-  font-family:arial,sans-serif;
-  font-size:11px;
-  color:#333333;
-  border:none;
-  border-collapse: collapse;
-  width:100%;
-  text-align:center;
-}
-
-table.gridtable th {
-  padding: 3px;
-  border-bottom:1px solid #ccc;
-  font-size:13px;
-  background:#f2f2f2;
-}
 
 .th-subject-name {
   width:25%;
-}
-
-table.gridtable td {
-  padding: 3px;
-  border-bottom:1px solid #ccc;
-  background-color: #ffffff;
-}
-
-table.gridtable tr {
-  border-bottom:1px solid #ccc;
-  background-color: #ffffff;
-  text-align:center;
 }
 
 .subject_name
@@ -144,29 +114,22 @@ table.lefttable tr {
   float:right ;
 }
 
-.signature-right{
-  float:right !important;
-  margin-right: 80px;
-}
-
 .signature {
-  padding: 0 70px;
-  border-bottom-style: dotted;
-  border-bottom-width: thin;
+  float:left;
+  margin-top: 100px;
+  margin-right: 90px;
+  border-top-style: dotted;
+  border-top-width: thin;
+  min-width: 200px;
 }
 
-.signature-left{
-  float:left !important;
-  margin-left: 80px;
-}
-
-.signature-center{
-  float:center !important;
-  margin: 0px 320px;
+.signature-subtext {
+ font-size: 9px !important;
+ text-align: center;
 }
 
 .signature-text {
-  padding-bottom: 50px;
+ text-align: center;
 }
 
 .record-header .school-name
@@ -210,4 +173,32 @@ h2 {
   border:1px solid #ccc;
   padding: 1px 13px;
   margin-right: 4px;
+}
+
+table.gridtable_bordered {
+    font-family:arial,sans-serif;
+    font-size:14px;
+    color:#333333;
+    border:1px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    text-align:left;
+}
+
+table.gridtable_bordered th {
+    padding: 3px;
+    border:1px solid #ccc;
+    font-size:12px;
+}
+
+table.gridtable_bordered td {
+    padding: 3px;
+    border:1px solid #ccc;
+    background-color: #ffffff;
+}
+
+table.gridtable_bordered tr {
+    border:1px solid #ccc;
+    background-color: #ffffff;
+    text-align:center;
 }

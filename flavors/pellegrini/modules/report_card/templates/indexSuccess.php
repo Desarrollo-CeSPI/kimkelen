@@ -22,6 +22,10 @@
 
 <div class="non-printable">
   <div><a href="<?php echo url_for('@export_report_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a></div>
+  <?php if (count($students) > 1): ?>
+    <a href="<?php echo url_for('@export_totally_approved_report_cards?sf_format=pdf') ?>"><?php echo __('Export totally approved') ?></a> |
+    <a href="<?php echo url_for('@export_not_totally_approved_report_cards?sf_format=pdf') ?>"><?php echo __('Export not totally approved') ?></a></div>
+  <?php endif; ?>
   <div><a href="<?php echo url_for($back_url) ?>"><?php echo __('Go back') ?></a></div>
 </div>
 
@@ -78,14 +82,16 @@
       <div class="footer" style="width: 100%">
         <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
       </div>
+
+    </div>
+    <div class="report-content">
       <?php if ($has_to_show_repproveds): ?>
         <hr class="hr_break">
         <?php include_partial('career_subject_repproved_details', array('examination_repproveds' => $examination_repproveds)); ?>
       <?php endif; ?>
-    </div>
-    <hr class="hr_break">
-      <div style="page-break-before: always;"></div>
-    <div class="report-content">
+      <div style="clear:both"></div>
+      <hr class="hr_break">
+
 
       <div class="title"><?php echo __('Admonition details'); ?></div>
       <div style="clear:both"></div>
@@ -135,6 +141,6 @@
       <?php include_partial('signature_boxes'); ?>
     </div>
   </div>
-
+  <div style="clear:both"></div>
   <div style="page-break-before: always;"></div>
 <?php endforeach; ?>

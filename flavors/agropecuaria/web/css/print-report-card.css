@@ -209,7 +209,7 @@ table.lefttable tr {
 
 .colsright{
     width: auto;
-    margin-top:50px;
+    margin-top:10px;
 }
 
 .row{
@@ -340,8 +340,6 @@ table.lefttable tr {
   height:0;
   line-height:0px;
   font-size:0;
-  margin-bottom:15px;
-  margin-top: 15px;
   padding:0;
 }
 

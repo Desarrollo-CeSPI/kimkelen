@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -35,10 +35,6 @@
       </ul>
       <input type="hidden" id="id" name="id" value="<?php echo $course->getId() ?>"/>
       <input type="hidden" id="selected" name="selected" value="<?php echo $selected ?>"/>
-
-      <h3><?php echo __("Important") ?></h3>
-      <p><?php echo __("This action allows deletion of students only if them do not have associated information. For those cases, deletion won't be performed to avoid information loss.") ?></p>
-
       <div>
         <?php foreach ($course->getCourseSubjects() as $course_subject): ?>
           <?php if ($course_subject->getCareerSubject()->getHasOptions()): ?>
@@ -47,6 +43,16 @@
 
           <?php echo link_to($course_subject->getCareerSubjectToString(), "shared_course/courseSubjectStudent?id=" . $course->getId() . "&selected=" . $course_subject->getId(), array("confirm" => __("When you change tab, the changes not saved will be lost."), "class" => "tab" . ($course_subject->getId() == $selected ? " tab-selected" : ""))) ?>
         <?php endforeach ?>
+      </div>
+
+      <div>
+        <h3><?php echo __("Important") ?></h3>
+        <p><?php echo __("This action allows deletion of students from course only if them do not have associated information for this course. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one course to another.") ?>
+
+        <?php if ($course->canMoveStudents()): ?>
+        <span class="yellow_link"><a href="<?php echo url_for('move_course_students') . '?id=' . $selected; ?>"><?php echo __("Move students to other course subject") ?></a></s>
+        <?php endif; ?>
+        </p>
       </div>
 
       <?php foreach ($course_subjects as $course_subject): ?>

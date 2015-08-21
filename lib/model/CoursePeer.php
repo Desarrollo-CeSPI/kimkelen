@@ -72,6 +72,18 @@ class CoursePeer extends BaseCoursePeer
 
   }
 
+  static public function retrieveComissionsForCareerSchoolYear(CareerSchoolYear $career_school_year)
+  {
+    $c = new Criteria();
+    $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID, Criteria::INNER_JOIN);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID, Criteria::INNER_JOIN);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID, Criteria::INNER_JOIN);
+    $c->add(CoursePeer::DIVISION_ID, null, Criteria::ISNULL);
+    $c->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
+
+    return self::doSelect($c);
+  }
+
   static public function retrieveComissionsForSchoolYear(SchoolYear $school_year)
   {
     return self::doSelect(self::retrieveComissionsForSchoolYearCriteria($school_year));
@@ -110,10 +122,10 @@ class CoursePeer extends BaseCoursePeer
 
   static public function sorted(Criteria $c)
   {
-    $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
-    $c->addAscendingOrderByColumn(CareerSubjectPeer::YEAR);
+    //$c->addJoin(self::ID, CourseSubjectPeer::COURSE_ID, Criteria::INNER_JOIN);
+    //$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID, Criteria::INNER_JOIN);
+    //$c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID, Criteria::INNER_JOIN);
+    //$c->addAscendingOrderByColumn(CareerSubjectPeer::YEAR);
     $c->addAscendingOrderByColumn(self::NAME);
 
   }
@@ -126,5 +138,27 @@ class CoursePeer extends BaseCoursePeer
     return self::doSelect($c);
 
   }
+
+	/*
+ * This static method returns the criteria, for the students that are inscripted in any subject of the course_id
+ *
+ * @return Criteria
+ */
+
+	static public function retrievePathwayStudentsCriteria($course_id)
+	{
+		$course = CoursePeer::retrieveByPk($course_id);
+
+		$c = new Criteria();
+		$c->add(CourseSubjectPeer::COURSE_ID, $course_id);
+		$c->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID);
+		$c->addJoin(CourseSubjectStudentPathwayPeer::STUDENT_ID, StudentPeer::ID);
+		$c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+		$c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
+		$c->add(PersonPeer::IS_ACTIVE,true);
+		$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
+		return $c;
+
+	}
 
 }

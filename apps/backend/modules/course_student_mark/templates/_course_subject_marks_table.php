@@ -30,6 +30,7 @@
 </div>
 
 <div class="report-wrapper"  id="export_to_excel">
+
   <?php foreach ($course_subjects as $course_subject): ?>
     <?php $career = $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer(); ?>
     <?php $course = $course_subject->getCourse(); ?>
@@ -43,7 +44,7 @@
       <?php include_partial("course_student_mark/thead", array('course' => $course, "configuration" => $configuration)); ?>
       <?php include_partial("course_student_mark/tbody", array('course' => $course, "configuration" => $configuration, "course_subject" => $course_subject, "final_period" => $final_period)); ?>
     </table>
-  </div>
+
 
   <div class="report-wrapper">
     <?php if ($configuration->getCourseType() == CourseType::TRIMESTER): ?>
@@ -56,8 +57,10 @@
       <?php include_partial('quaterly_of_a_term_boxes'); ?>
     <?php endif; ?>
   </div>
+  <br><div style="clear:both"></div><br>
+  <div style="page-break-before: always;"></div>
 <?php endforeach; ?>
-
+ </div>
 <div style="clear:both"></div>
 <div class="non-printable">
   <span><a href="<?php echo url_for('course_student_mark/goBack') ?>"><?php echo __('Go back') ?></a></span>

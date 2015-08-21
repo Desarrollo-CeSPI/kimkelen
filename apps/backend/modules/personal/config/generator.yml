@@ -60,7 +60,7 @@ generator:
       list:
         title:             Listado de preceptores
         peer_method:       doSelectJoinAll
-        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, telefon, email  ]
+        display:           [ person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, phone, email  ]
         sort: [ person_lastname ]
         batch_actions:     []
 

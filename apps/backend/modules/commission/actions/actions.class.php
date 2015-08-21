@@ -314,10 +314,16 @@ class commissionActions extends autoCommissionActions
   {
     $this->redirectIf($this->getUser()->isTeacher());
     $course = $this->getRoute()->getObject();
-    $career_school_year_id = $course->getCareerSchoolYear()->getId();
-    $course_subject_id = array_shift($course->getCourseSubjectIds());
-    $year = $course->getYear();
-    $this->redirect("student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+    if (count($course->getCourseSubjects()) > 1){
+      $course_id = $course->getId();
+      $this->redirect("student_attendance/MultipleSubjectsCommissionAttendance?course=$course_id&division_id=");
+    }
+    else {
+      $career_school_year_id = $course->getCareerSchoolYear()->getId();
+      $course_subject_id = array_shift($course->getCourseSubjectIds());
+      $year = $course->getYear();
+      $this->redirect("student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+    }
   }
 
   public function executeShowStudents(sfWebRequest $request)
@@ -325,7 +331,50 @@ class commissionActions extends autoCommissionActions
     $course = CoursePeer::retrieveByPK($request->getParameter('id'));
 
     return $this->renderPartial('course_students', array('course' => $course));
-
   }
 
+  public function executeCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "commission");
+    $this->redirect("course_student_mark/calificateNonNumericalMark?id=" . $this->course->getId());
+  }
+
+  public function executeAddSubject(sfWebRequest $request)
+  {
+    if ($request->isMethod('post'))
+    {
+      $params = $request->getPostParameters();
+      $this->course = CoursePeer::retrieveByPk($params['course']['id']);
+      $this->form = new SubjectForCommissionForm($this->course);
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "New subject added to commission successfully");
+
+        $this->redirect("@commission");
+      }
+    }
+    else
+    {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->form = new SubjectForCommissionForm($this->course);
+    }
+  }
+
+   public function executeDeleteSubject(sfWebRequest $request)
+   {
+     $cs= CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+
+      try {
+        $cs->delete();
+        $this->getUser()->setFlash("notice", "The item was deleted successfully.");
+      } catch (PropelException $e) {
+        $this->getUser()->setFlash('error', 'A problem occurs when deleting the selected items.');
+      }
+     $this->redirect("@commission");
+   }
 }

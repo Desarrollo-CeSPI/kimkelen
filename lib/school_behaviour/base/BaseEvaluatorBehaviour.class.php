@@ -31,6 +31,9 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   const EXAMINATION_NOTE = 6;
   const MINIMUN_MARK = 0; //nota minima de un examen
   const MAXIMUN_MARK = 10; //nota maxima de un examen
+  const EXEMPT = 'Eximido';
+
+	const PATHWAY_PROMOTION_NOTE = 7;
 
   protected
   $_examination_number = array(
@@ -62,14 +65,14 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    *
    * @return Object $object
    * Este metodo se fija que la nota del promedio sea mayor o igual que el minimo de aprobacion de la carrera
-   * y que la ultima nota no sea un aplazo (menor que 4)
+   * y que la ultima nota no sea un aplazo (menor que self::POSTPONED_NOTE)
    */
 
   public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
   {
     $minimum_mark = $course_subject_student->getCourseSubject($con)->getCareerSubjectSchoolYear($con)->getConfiguration($con)->getCourseMinimunMark();
     return $average >= $minimum_mark
-      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() > $this->getPosponedNote;
+      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() > $this->getPosponedNote();
 
   }
 
@@ -149,7 +152,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   }
 
   /**
-   * This method check the conditions of repetition of a year.
+   * This method checks conditions of repetition.
    *
    * @param Student $student
    * @param StudentCareerSchoolYear $student_career_school_year
@@ -157,7 +160,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    */
   public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
   {
-    //IF the current year is the last year of the career.
+    //If current year is the last year of the career.
     if ($student_career_school_year->isLastYear())
     {
       return false;
@@ -171,35 +174,26 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       return true;
     }
 
-    //IF Previous is > than max count of previos permitted, then the student repeat
+    //If Previous count > max count of repproved subject allowed, then the student will repeat or go to pathways programs
     $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
 
     return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
 
   }
 
-  public function repprovedStudent(Student $student, $student_career_school_year, PropelPDO $con = null)
+  public function saveTentativeRepprovedStudent($student_career_school_year, PropelPDO $con = null)
   {
+    $tentative_repproved_student = new TentativeRepprovedStudent();
+	  $tentative_repproved_student->setStudentCareerSchoolYear($student_career_school_year);
+	  $tentative_repproved_student->save($con);
+  }
 
+	public function repproveStudent(Student $student, $student_career_school_year, PropelPDO $con = null){
     $student_career_school_year->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
     $student_career_school_year->save($con);
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
-    // se eliminan las materias aprobadas de este año lectivo solo las que se crearon para este año, no eliminar las aprobadas por previa
-    $c = new Criteria();
-    $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student->getId());
-    $c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $career_school_year->getSchoolYearId());
-    $c->addJoin(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
-    $c->add(CareerSubjectPeer::YEAR, $student_career_school_year->getYear());
-
-    $student_approveds = StudentApprovedCareerSubjectPeer::doSelect($c);
-
-    foreach ($student_approveds as $student_approved_career_subject)
-    {
-      $student_approved_career_subject->delete($con);
-    }
-
-    // se eliminan las previas qeu se habian generado en este año de cursada
+    // se eliminan las previas que se habian generado en este año de cursada
     $c = new Criteria();
     $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
@@ -225,8 +219,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       if ($this->checkRepeationCondition($student, $student_career_school_year))
       {
-        $this->repprovedStudent($student, $student_career_school_year);
-        return false;
+        $this->saveTentativeRepprovedStudent($student_career_school_year);
       }
       else
       {
@@ -240,6 +233,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         if ($next_year > $career_student->getCareer()->getMaxYear() && $previous == 0)
         {
           $career_student->setStatus(CareerStudentStatus::GRADUATE);
+          //se guarda el school_year en que termino esta carrera
+          $career_student->setGraduationSchoolYearId($school_year->getId());
           $career_student->save($con);
         }
         //Si no fue aprobado ya.
@@ -265,20 +260,23 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   {
     if ($result instanceof StudentApprovedCourseSubject)
     {
-      $student_approved_career_subject = new StudentApprovedCareerSubject();
-      $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
-      $student_approved_career_subject->setStudent($result->getStudent($con));
-      $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
-      $student_approved_career_subject->setMark($result->getMark());
+      if (is_null($student_approved_career_subject = $result->getStudentApprovedCareerSubject($con)))
+      {
+        $student_approved_career_subject = new StudentApprovedCareerSubject();
+        $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
+        $student_approved_career_subject->setStudent($result->getStudent($con));
+        $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
+        $student_approved_career_subject->setMark($result->getMark());
 
-      $result->setStudentApprovedCareerSubject($student_approved_career_subject);
+        $result->setStudentApprovedCareerSubject($student_approved_career_subject);
 
-      $student_approved_career_subject->save($con);
-      $result->save($con);
+        $student_approved_career_subject->save($con);
+        $result->save($con);
 
-      $student_approved_career_subject->clearAllReferences(true);
+        $student_approved_career_subject->clearAllReferences(true);
 
-      $result->clearAllReferences(true);
+        $result->clearAllReferences(true);
+      }
 
       unset($result);
       unset($student_approved_career_subject);
@@ -341,6 +339,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();
 
+
       // IF is null, is because the course_subject_student_examination has been created editing student history
       $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();
 
@@ -383,9 +382,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       else
       {
         // se crea una previa
-        $student_repproved_course_subject = new StudentRepprovedCourseSubject();
-        $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
-        $student_repproved_course_subject->save($con);
+        $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+        if (is_null($srcs)) {
+           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
+           $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
+           $student_repproved_course_subject->save($con);
+        }
       }
     }
 
@@ -464,6 +466,16 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
   }
 
+   /**
+    * This method returns a string for the result.
+    * @param StudentRepprovedCourseSubject $student_repproved_course_subject
+    * @return String
+    */
+   public function getStudentRepprovedResultString(StudentRepprovedCourseSubject $student_repproved_course_subject)
+   {
+     return __('Previous') . "/" . __('Free');
+   }
+
   /**
    * This method returns a string for the result.
    * @param StudentApprovedCourseSubject $student_approved_course_subject
@@ -471,7 +483,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
    */
   public function getStudentApprovedResultString(StudentApprovedCourseSubject $student_approved_course_subject)
   {
-    return 'Aprobado';
+    return __('Approved');
 
   }
 
@@ -606,7 +618,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     if ($this->hasApprovedAllCourseSubjects($student_career_school_year))
     {
       $sum = 0;
-      $course_subject_students = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent(
+
+      $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
         $student_career_school_year->getCareerSchoolYear(),
         $student_career_school_year->getStudent());
 
@@ -626,14 +639,14 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
   public function hasApprovedAllCourseSubjects($student_career_school_year)
   {
-    #Aca se cuentan las materias que curso el alumno
+    #Counts the subjects the student did
     $c = new Criteria();
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student_career_school_year->getStudentId());
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
     $c->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
 
-    #aca se cuentan todas las materias que tiene aprobadas en el año
+    #Counts the subjects approved by the student during this year
     $course_subject_students = CourseSubjectStudentPeer::doSelect($c);
     /* @var $course_subject_student CourseSubjectStudent */
     foreach ($course_subject_students as $course_subject_student)
@@ -751,6 +764,16 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
 
     return $class;
+  }
+
+   public function getExemptString()
+  {
+    return self::EXEMPT;
+  }
+
+   public function getFebruaryExaminationNumber()
+  {
+    return self::FEBRUARY;
   }
 
 }

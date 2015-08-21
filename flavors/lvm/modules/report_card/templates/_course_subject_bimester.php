@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -117,13 +117,7 @@
         <?php $mark = $student->getPromDef($course_result) ?>
       <?php endif ?>
 
-      <?php if ($is_historia && $first): ?>
-        <?php $first = false ?>
-        <td rowspan="2"><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getHistoriaDelArteMark($student, $student_career_school_year->getCareerSchoolYear()->getSchoolYear()); ?></td>
-      <?php elseif (!$is_historia): ?>
         <td><?php echo $mark ?></td>
-      <?php endif ?>
-
 
       <?php if (!$division->hasAttendanceForDay()): ?>
         <?php foreach ($periods[1] as $period): ?>

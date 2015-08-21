@@ -96,6 +96,12 @@ generator:
             condition: hasAttendanceForSubject
             credentials: [edit_absense_per_subject]
 
+          calificateNonNumericalMark:
+            label: Calificate non numerical mark
+            action: calificateNonNumericalMark
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
+
           _delete:
             condition:      canBeDeleted
             credentials:    [delete_division]

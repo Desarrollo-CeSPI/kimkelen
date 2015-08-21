@@ -34,6 +34,11 @@
         <strong><?php echo __("Is absent") ?></strong>
       </div>
     <?php endif ?>
+    <?php if ($course_subject_student_examination->getFolioNumber()): ?>
+      <div class="info_div">
+      <strong><?php echo __("Folio number") ?></strong> <em><?php echo $course_subject_student_examination->getFolioNumber() ?></em>
+      </div>
+    <?php endif; ?>
     <div class="info_div">
       <strong><?php echo __("Day") ?></strong> <em><?php echo $course_subject_student_examination->getDate('d/m/y')?></em>
     </div>

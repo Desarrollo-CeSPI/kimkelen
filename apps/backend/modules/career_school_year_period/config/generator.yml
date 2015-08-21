@@ -34,8 +34,7 @@ generator:
             action: back
           _new:
             credentials: [edit_school_year]
-      filter:
-        class:  false
+      filter: ~
       form:    ~
       edit:    ~
       new:

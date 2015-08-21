@@ -122,4 +122,31 @@ class CareerSubjectSchoolYearPeer extends BaseCareerSubjectSchoolYearPeer
 
   }
 
+	/**
+	 * Returns CareerSubjectSchoolYears for a given examination and year
+	 *
+	 * @param Examination $examination
+	 * @param Integer $year
+	 * @param PropelPDO $con
+	 * @return CareerSubjectSchoolYear[]
+	 */
+	public static function retrieveForExaminationAndYear(Examination $examination, $year, PropelPDO $con = null)
+	{
+		$con = is_null($con) ? Propel::getConnection() : $con;
+
+		$c = new Criteria();
+
+		$c->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, self::ID);
+
+		$c->addJoin(self::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+		$c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $examination->getSchoolYearId());
+		$c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $examination->getExaminationNumber());
+		$c->addJoin(CareerSubjectPeer::ID, self::CAREER_SUBJECT_ID);
+		$c->add(CareerSubjectPeer::YEAR, $year);
+		$c->setDistinct();
+
+		return self::doSelect($c, $con);
+	}
 }

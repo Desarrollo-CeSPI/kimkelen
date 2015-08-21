@@ -28,7 +28,7 @@
       var myThemePanelBase = '<?php echo $sf_request->getRelativeUrlRoot(); ?>' + '/pmJSCookMenuPlugin/images/' + theme +'/';
       var cmBase = myThemePanelBase;
     </script>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="<?php echo image_path("/images/favicon.ico") ?>" />
   </head>
 
   <body onLoad="setFontSize()">
@@ -37,6 +37,13 @@
       <div id="header">
         <div class="logo">
           <?php echo link_to(image_tag("UBA_kimkelen_white.png", array('alt' => __('Sistema Alumnos - CeSPI'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
+
+	        <?php $school_year = SchoolYearPeer::retrieveCurrent(); ?>
+	        <?php if ($school_year): ?>
+		        <div id="header-school-year">
+			        <?php echo __("Año lectivo vigente: %%school_year%%", array('%%school_year%%' => $school_year)); ?>
+		        </div>
+	        <?php endif; ?>
         </div>
 
         <div class="navigation">
@@ -81,7 +88,7 @@
 
       <?php if (sfConfig::get('app_testing')): ?>
         <div style="position:absolute; left: 300px; top: 0px; font-size:14px; ">
-          <center><div style="margin: 4px; width: 300px; background-color: yellow; border: solid 1px red; color: red; padding:4px; text-align: center; text-decoration: blink "> Versión de prueba: los datos son reiniciados periodicamente</div></center>
+          <div style="margin: 4px; width: 300px; background-color: yellow; border: solid 1px red; color: red; padding:4px; text-align: center; text-decoration: blink "> Versión de prueba: los datos son reiniciados periodicamente</div>
         </div>
       <?php endif ?>
 

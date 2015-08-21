@@ -41,7 +41,7 @@
                 <tr class ="<?php echo $free_class ?>">
                     <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), $period) ?>
 
-                    <td ROWSPAN="<?php echo count($absences) == 0 ? '' : count($absences); ?>">
+                    <td rowspan="<?php echo count($absences) == 0 ? '' : count($absences); ?>">
                         <div><?php echo $period->getName() ?></div>
                         <div><?php echo $period->getTermStr() ?></div>
                     </td>

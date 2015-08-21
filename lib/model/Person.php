@@ -148,13 +148,17 @@ class Person extends BasePerson
 
   /**
    * Delete a person
-   * Also deletes the person photo
+   * Also deletes the person user and photo
    * @param PropelPDO $con
    */
   public function delete(PropelPDO $con = null)
   {
     $photo_path = $this->getPhotoFullPath();
     parent::delete($con);
+    if ($this->getUserId()) {
+      $user = sfGuardUserPeer::retrieveByPK($this->getUserId());
+      $user->delete($con);
+    }
     $this->deletePhysicalImage($photo_path);
 
   }
@@ -163,7 +167,6 @@ class Person extends BasePerson
   {
     if (file_exists($photo_path))
       unlink($photo_path);
-
   }
 
   public function deleteImage()

@@ -62,13 +62,14 @@ class examination_repprovedActions extends autoExamination_repprovedActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->redirectUnless($this->getUser()->canCreateExaminationRepproved(), '@examination_repproved');
+    //$this->redirectUnless($this->getUser()->canCreateExaminationRepproved(), '@examination_repproved');
     parent::executeNew($request);
 
     $this->form->setDefault("school_year_id", $this->school_year->getId());
 
     $examination_number = ExaminationRepprovedPeer::getNextExaminationNumberFor($this->school_year);
     $this->form->setDefault("examination_number", $examination_number);
+
   }
 
   public function executeExaminationRepprovedSubjects(sfWebRequest $request)

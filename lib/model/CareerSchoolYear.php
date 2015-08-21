@@ -290,10 +290,8 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     catch (Exception $e)
     {
-      throw $e;
-
       $con->rollBack();
-      return $errors;
+      throw $e;
     }
     return true;
 
@@ -425,6 +423,9 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
         foreach ($students as $student)
         {
+
+          if ($student->getPerson()->getIsActive()) {
+          
           $shift = $student->getShiftForSchoolYear($last_school_year);
 
           if (!$student->getIsRegistered($this->getSchoolYear()))
@@ -436,6 +437,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
           $student->clearAllReferences(true);
           unset($student);
           unset($shift);
+        }
         }
 
         StudentPeer::clearInstancePool();
@@ -466,6 +468,21 @@ class CareerSchoolYear extends BaseCareerSchoolYear
     return $this->getSchoolYear()->getIsActive() && SchoolYearPeer::doCount(new Criteria()) > 1 && !$has_divisions && $has_students;
   }
 
+  /**
+  * This method checks:
+  * * If exists more than one school year
+  * * The school year is active
+  * * There are not commissions in the school year that belongs to this career school year
+  */
+  public function canCreateLastYearCommissions()
+  {
+    $has_students = $this->getSchoolYear()->countSchoolYearStudents() > 0;
+
+    $has_commissions = count(CoursePeer::retrieveComissionsForCareerSchoolYear($this))> 0;
+
+    return $this->getSchoolYear()->getIsActive() && SchoolYearPeer::doCount(new Criteria()) > 1 && !$has_commissions && $has_students;
+  }
+
   public function createLastYearDivisions()
   {
     $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
@@ -477,9 +494,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     try
     {
-
       $con->beginTransaction();
-
 
       $criteria = new Criteria();
       $criteria->add(DivisionPeer::CAREER_SCHOOL_YEAR_ID, $last_year_career_school_year->getId());
@@ -507,18 +522,30 @@ class CareerSchoolYear extends BaseCareerSchoolYear
       }
       unset($criteria);
 
-      $criteria = CoursePeer::retrieveComissionsForSchoolYearCriteria($last_year_career_school_year->getSchoolYear());
-      $pager = new sfPropelPager('Course', 10);
-      $pager->setCriteria($criteria);
-      $pager->init();
-      $last_page = $pager->getLastPage();
+      $con->commit();
+    }
+    catch (PropelException $e)
+    {
+      $con->rollback();
+      throw $e;
 
-      for ($i = 1; $i <= $last_page; $i++)
-      {
-        $pager->setPage($i);
-        $pager->init();
-        $commissions = $pager->getResults();
-        CoursePeer::clearInstancePool();
+    }
+  }
+
+    public function createLastYearCommissions()
+  {
+    $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
+    $last_year_career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($this->getCareer(), $last_year_school_year);
+
+    SchoolYearPeer::clearInstancePool();
+    CareerSchoolYearPeer::clearInstancePool();
+    $con = Propel::getConnection();
+
+    try
+    {
+      $con->beginTransaction();
+
+      $commissions = CoursePeer::retrieveComissionsForCareerSchoolYear($last_year_career_school_year);
 
         foreach ($commissions as $commission)
         {
@@ -527,7 +554,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
           unset($commission);
         }
         unset($commissions);
-      }
+
 
       $con->commit();
     }
@@ -538,6 +565,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     }
   }
+
   public function delete(PropelPDO $con = null)
   {
     #student_career_school_year
@@ -597,6 +625,30 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
     return $this->getCareerSchoolYearPeriods($c);
   }
+
+  public function canMatriculateGraduatedFromOtherCareer()
+  {
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
+
+    return $last_school_year && $last_school_year->getIsClosed() && CareerPeer::moreThanOneCareer();
+  }
+
+  public function getMessageCantMatriculateGraduatedFromOtherCareer()
+  {
+    $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
+
+     if ($last_school_year && !$last_school_year->getIsClosed())
+    {
+      return 'Last year school year is still open';
+    }
+    elseif (!($last_school_year)){
+      return 'No previous school year';
+    }
+    else {
+      return 'School has only one career';
+    }
+  }
+
 }
 
 

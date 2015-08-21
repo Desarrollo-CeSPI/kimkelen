@@ -38,6 +38,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
    * Returns if a student has approved or not the course subject
    *
    * In LVM a student of first year, if dissaproved only goes to december not to february.
+   * If a student is free in some period it always repproves the course_subject
    *
    * @param CourseSubjectStudent $course_subject_student
    * @param PropelPDO $con
@@ -66,7 +67,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() >= 4))
     {
 
-
       $school_year = $course_subject_student->getCourseSubject()->getCourse()->getSchoolYear();
 
       $student_approved_course_subject = new StudentApprovedCourseSubject();
@@ -88,46 +88,57 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
     else
     {
-      $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
-      $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
-      // si un alumno es de primer año, no puede ir a febrero siempre va a diciembre.
-      if ($year == 1)
-      {
-        $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
-      }
-      //Segundo a cuarto año
-      elseif ($year > 1 && $year < 5 && $course_subject_student->countCourseSubjectStudentMarks() == 3)
-      {
-        //Suma menor a 21 pero mayor o igual que 12: mesa de diciembre (examen regular)
-        if (($sum_marks < 21 && $sum_marks >= 12))
-        {
-          $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+      $school_year = $course_subject_student->getCourseSubject()->getCourse()->getSchoolYear();
+      $career_school_year = CareerSchoolYearPeer::retrieveBySchoolYear(null, $school_year);
+      if ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
+        if (is_null($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))){
+          $student_repproved_course_subject = new StudentRepprovedCourseSubject();
+          $student_repproved_course_subject->setCourseSubjectStudent($course_subject_student);
         }
-        //Suma igual o mayor a 21 pero nota del tercer termino menor a 4: mesa de diciembre (examen regular)
-        //$course_subject_student->countCourseSubjectStudentMarks() = 3
-        elseif (
-          $sum_marks >= 21 &&
-          $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() < 4)
-        {
-          $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
-        }
-        //Suma menor a 12: mesa de marzo (examen complementario)
-        elseif ($sum_marks < 12)
-        {
-          $student_disapproved_course_subject->setExaminationNumber(self::FEBRUARY);
-        }
-      }
-      else
-      {
-        $student_disapproved_course_subject->setExaminationNumber($this->getExaminationNumberFor($average));
-      }
-      unset($average);
-      unset($sum_marks);
 
-      //$student_disapproved_course_subject->save();
-      return $student_disapproved_course_subject;
+        return $student_repproved_course_subject;
+      }
+      else {
+        $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
+        $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
+        // si un alumno es de primer año, no puede ir a febrero siempre va a diciembre.
+        if ($year == 1)
+        {
+          $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+        }
+        //Segundo a cuarto año
+        elseif ($year > 1 && $year < 5 && $course_subject_student->countCourseSubjectStudentMarks() == 3)
+        {
+          //Suma menor a 21 pero mayor o igual que 12: mesa de diciembre (examen regular)
+          if (($sum_marks < 21 && $sum_marks >= 12))
+          {
+            $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+          }
+          //Suma igual o mayor a 21 pero nota del tercer termino menor a 4: mesa de diciembre (examen regular)
+          //$course_subject_student->countCourseSubjectStudentMarks() = 3
+          elseif (
+            $sum_marks >= 21 &&
+            $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() < 4)
+          {
+            $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+          }
+          //Suma menor a 12: mesa de marzo (examen complementario)
+          elseif ($sum_marks < 12)
+          {
+            $student_disapproved_course_subject->setExaminationNumber(self::FEBRUARY);
+          }
+        }
+        else
+        {
+          $student_disapproved_course_subject->setExaminationNumber($this->getExaminationNumberFor($average));
+        }
+        unset($average);
+        unset($sum_marks);
+
+        //$student_disapproved_course_subject->save();
+        return $student_disapproved_course_subject;
+      }
     }
-
   }
 
   public function getCurrentHistoriaDelArte()
@@ -236,11 +247,12 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $result = $course_subject_student->getCourseResult($con);
 
       if (!is_null($result))
+      {
         $result->close($con);
-
-      ###Liberando memoria ###
-      $result->clearAllReferences(true);
-      unset($result);
+        ###Liberando memoria ###
+        $result->clearAllReferences(true);
+        unset($result);
+      }
       $course_subject_student->clearAllReferences(true);
       unset($course_subject_student);
       ###########################
@@ -531,7 +543,10 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
   {
     if ($student_examination_repproved_subject->getMark() >= $this->getExaminationNote())
     {
+      $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent());
+      if (is_null($student_approved_career_subject)){
       $student_approved_career_subject = new StudentApprovedCareerSubject();
+      }
       $student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
       $student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
       $student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());

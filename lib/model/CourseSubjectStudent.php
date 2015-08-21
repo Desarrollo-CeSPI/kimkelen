@@ -61,7 +61,11 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function countValidCourseSubjectStudentMarks()
   {
     $c = new Criteria();
-    $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNOTNULL);
+    $criterion = $c->getNewCriterion(CourseSubjectStudentMarkPeer::IS_FREE, true, Criteria::EQUAL);
+    $criterion->addOr($c->getNewCriterion(CourseSubjectStudentMarkPeer::IS_CLOSED, true, Criteria::EQUAL));
+    $criterion->addOr($c->getNewCriterion(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNOTNULL));
+
+    $c->addOr($criterion);
     return $this->countCourseSubjectStudentMarks($c);
 
   }
@@ -218,7 +222,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
    */
   public function getFinalMark()
   {
-    if (!$this->areAllMarksClosed())
+    if (!$this->areAllMarksClosed() || $this->getIsNotAverageable())
       return '';
 
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
@@ -348,6 +352,16 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   {
     return SchoolBehaviourFactory::getEvaluatorInstance()->getAvailableCourseSubjectStudentMarks($this, $criteria);
 
+  }
+
+	public function getCourseSubjectStudentPathwayMark() {
+		$c = new Criteria();
+		$c->add(CourseSubjectStudentPathwayPeer::STUDENT_ID, $this->getStudentId());
+		$c->add(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
+		$c->addJoin(CourseSubjectStudentPathwayPeer::PATHWAY_STUDENT_ID, PathwayStudentPeer::ID, Criteria::INNER_JOIN);
+		$c->add(PathwayStudentPeer::PATHWAY_ID, PathwayPeer::retrieveCurrent()->getId());
+
+		return CourseSubjectStudentPathwayPeer::doSelect($c);
   }
 
   public function getTotalAbsences()
@@ -589,15 +603,14 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     foreach ($student_repproved_course_subject->getStudentExaminationRepprovedSubjects($crit) as $srcs)
     {
       if (!is_null($srcs->getDate())) {
-        $marks[] = $srcs->getShortValueString() . ' (' . $srcs->getDate('d/m/y') . ') ';
+        $marks[] = $srcs->getShortValueString() . ' (' . $srcs->getDate('d/m/Y') . ') ';
       }
       else {
         $marks[] = $srcs->getShortValueString();
       }
     }
-    $marks = implode($marks, ', ');
 
-    return $marks;
+    return $marks = $marks != "" ? implode($marks, ', '): $marks;
   }
 
   public function hasNotAbsense()

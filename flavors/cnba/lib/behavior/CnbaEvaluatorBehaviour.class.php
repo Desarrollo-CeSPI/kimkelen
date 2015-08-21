@@ -28,6 +28,7 @@ class CnbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
   const ED_FISICA = 22;
   const MAX_DISAPPROVED = 1;
   const EXAMINATION_NOTE = 4;
+  const EXEMPT = 'Ex.';
 
   public function getExcludeRepprovedSubjects()
   {
@@ -100,4 +101,8 @@ class CnbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
   }
 
+  public function getExemptString()
+  {
+    return self::EXEMPT;
+  }
 }

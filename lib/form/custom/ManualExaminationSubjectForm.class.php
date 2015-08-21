@@ -10,7 +10,6 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
   public function configure()
   {
     parent::configure();
-
     unset($this['is_closed']);
 
     $this->setWidget("examination_id", new sfWidgetFormInputHidden());
@@ -21,6 +20,7 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
 
     $this->setWidget("career_subject_school_year_id", new sfWidgetFormPropelChoice(array(
       'model' => 'CareerSubjectSchoolYear',
+        'method' => 'getFullToString',
       'add_empty' => false,
       'criteria' => $c
     )));
@@ -28,5 +28,12 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("multiple", true);
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("peer_method", 'doSelectActive');
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("renderer_class", "csWidgetFormSelectDoubleList");
+  }
+
+  protected function doSave($con = null)
+  {
+    ExaminationSubjectBehavior::disable();
+    parent::doSave($con);
+    ExaminationSubjectBehavior::enable();
   }
 }
