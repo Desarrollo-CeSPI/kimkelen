@@ -43,7 +43,7 @@
   <div class="gray-background">
     <span><strong><?php echo 'Exámenes de Alumnos'; ?></strong>:
       <strong>
-        <?php echo $examination_subject->getExamination()->getExaminationTypeStr();?>
+        <?php echo $examination_subject->getExamination(); ?>
       </strong>
     </span>
 
