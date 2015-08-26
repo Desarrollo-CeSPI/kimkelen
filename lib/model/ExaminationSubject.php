@@ -199,12 +199,16 @@ class ExaminationSubject extends BaseExaminationSubject
 
     public function getCareerSchoolYear()
     {
-        return $this->getCareerSubjectSchoolYear()->getCareerSchoolYear();
+      return $this->getCareerSubjectSchoolYear()->getCareerSchoolYear();
     }
 
 	  public function getYear() {
 	    return $this->getCareerSubjectSchoolYear()->getCareerSubject()->getYear();
     }
+
+		public function getSchoolYear() {
+			return $this->getCareerSchoolYear()->getSchoolYear();
+		}
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));

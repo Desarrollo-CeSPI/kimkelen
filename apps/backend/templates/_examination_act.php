@@ -75,7 +75,7 @@
         <tr>
           <td class="orden"><?php echo $i ?> </td>
           <td class="student"><?php echo $student ?> </td>
-          <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
+          <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getSchoolYear(), $student)); ?> </td>
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">
             <?php if ($examination_subject->getIsClosed()): ?>
