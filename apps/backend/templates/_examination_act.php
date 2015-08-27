@@ -54,7 +54,13 @@
       <strong><?php echo $examination_subject->getSubject() . ' - ' . $examination_subject->getYear() . ' año'  ?></strong>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
   </div>
-  <br>
+
+	<div class="gray-background">
+    <span><strong><?php echo __('Course minimun mark'); ?></strong>:
+      <span><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote(); ?></span>
+	</div>
+	<br>
+
   <table class="gridtable_bordered">
     <thead>
       <tr class="printColumns">
@@ -74,7 +80,7 @@
       <?php foreach ($students as $student): ?>
         <tr>
           <td class="orden"><?php echo $i ?> </td>
-          <td class="student"><?php echo $student ?> </td>
+          <td class="student" style="text-align: left"><?php echo $student ?> </td>
           <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getSchoolYear(), $student)); ?> </td>
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">

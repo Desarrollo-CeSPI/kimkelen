@@ -194,7 +194,7 @@ abstract class InterfaceSchoolBehaviour
  *******************************************************************************
  *******************************************************************************
  *
- * The following methods are for Student assignement to related entities
+ * The following methods are for Student assignment to related entities
  *
  *******************************************************************************
  *******************************************************************************
