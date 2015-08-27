@@ -33,6 +33,7 @@
         </div>
         <div id="header_analytical_data_right" class="title">
             <?php echo __('Certificado N°'); ?>
+            <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
         </div>
     </div>
 
