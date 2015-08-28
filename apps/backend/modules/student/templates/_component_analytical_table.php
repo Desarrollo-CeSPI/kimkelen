@@ -63,7 +63,7 @@
 
                         <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                        <td class="text-center"><?php echo ($css->getSchoolName()?$css->getSchoolName():'<hr/>') ?></td>
+                        <td class="text-center"><?php echo ($css->getSchoolName()?__($css->getSchoolName()):'<hr/>') ?></td>
 
                     </tr>
                 <?php endforeach ?>

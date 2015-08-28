@@ -2,6 +2,14 @@
     Created on : 18-ago-2015, 11:53:20
     Author     : lucianoc
 */
+.header_row .title {
+    padding-top: 2em;
+}
+
+.analytical
+{
+    padding: 2em;
+}
 
 #header_analytical_data_left
 {
@@ -20,7 +28,15 @@
 #header_analytical_data_center h1
 {
     display: inline;
+
+    background-color: white;
+    border-bottom: none;
+    border-top: none;
+    margin: 0;
+    padding: 0;
+    
 }
+
 .title dd.detail{
     font-weight: normal;
     padding-left: 1em;
@@ -36,7 +52,14 @@
     border-color: black;
     border-style: solid;
 }
-
+#analytical_footer
+{
+    clear: both;
+    float: left;
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+    width: 100%;
+}
 .report-content {
     float: left;
     margin-top: 1em;
@@ -48,12 +71,30 @@
     float: left;
 }
 
-@media print
+#promedio_gral
 {
-    .sf_admin_actions {
-        display: none;
-    }
-    .table {
-        margin-bottom: 1em;
-    }
+    text-align: center; 
+    width: 33%  !important; 
+    margin-left: 33%  !important;
+    font-weight: bold;
+}
+#promedio_gral_valor
+{
+    border: 1px solid;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+#analytic_signatures .signature
+{
+    float: left;
+    width: 39%;
+    height: 1.5em;
+    text-align: center;
+    padding-top: 5em;
+    border: 1px solid;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 2em;
 }
