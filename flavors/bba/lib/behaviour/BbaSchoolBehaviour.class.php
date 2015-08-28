@@ -104,6 +104,10 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 
   public function getAvailableStudentsForCourseSubjectCriteria(CourseSubject $course_subject, $criteria = null, $filter_by_orientation = true)
   {
+    if ($course_subject->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption() || $course_subject->getCareerSubjectSchoolYear()->getCareerSubject()->getHasOptions()){
+      $filter_by_orientation = false;
+    }
+
     return parent::getAvailableStudentsForCourseSubjectCriteria($course_subject, $criteria, false);
   }
 
@@ -215,4 +219,21 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 
   }
 
+	public function divideQuaterlyCourseSubjectStudents($course_subject_students, $marks_count)
+	{
+		$css_3_marks = array();
+		$css_2_marks = array();
+    foreach ($course_subject_students as $css) {
+
+    $subject_configuration = $css->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+    if (($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM) && ($subject_configuration->getCourseMarks() == 3)){
+	    $css_3_marks[] = $css;
+    } else {
+	    $css_2_marks[] = $css;
+	  }
+	}
+		if ($marks_count == 3)
+			return $css_3_marks;
+		else return $css_2_marks;
+  }
 }

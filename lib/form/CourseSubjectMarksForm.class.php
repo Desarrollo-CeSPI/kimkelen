@@ -52,7 +52,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         if ($course_subject_student_mark->getIsClosed())
         {
           $widgets[$widget_name] = new mtWidgetFormPlain(array(
-              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => true), array('class' => 'mark'));
+              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => false), array('class' => 'mark'));
           $widgets[$widget_name]->setAttribute('class', 'mark_note');
         }
         else
@@ -65,25 +65,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $name_free_element = 'course_student_mark_'. $this->getObject()->getId() . '_' . $free_widget_name;
           $widgets[$free_widget_name] = new sfWidgetFormInputCheckbox(array('default' => $course_subject_student_mark->getIsFree()), array('onChange' => "free_mark('$name_free_element','$name');"));
 
-
-         $student = $course_subject_student_mark->getCourseSubjectStudent()->getStudent();
-         $cssy = $course_subject_student_mark->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear();
-         $course_subject = $course_subject_student_mark->getCourseSubjectStudent()->getCourseSubject();
-         $course_type = $course_subject->getCourseType();
-         $periods = CareerSchoolYearPeriodPeer::getPeriodsArrayForCourseType($course_type, $cssy->getCareerSchoolYear()->getId());
-
-         $val = $course_subject_student_mark->getIsFree();
-          foreach ($periods as $period)
-          {
-            if ($val || $student->isFree($period, $course_subject, $cssy->getCareerSchoolYear()))
-            {
-              $val = true;
-              $widgets[$widget_name]->setAttribute('style', 'display:none');
-              continue;
-            }
-
-          }
-          $this->setDefault($free_widget_name, $val);
 
           if ($course_subject_student_mark->getIsFree())
           {
@@ -107,8 +88,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
   public function evaluationFinalProm($course_subject_student, $course_subject_student_mark, $tmp_sum){
     return $tmp_sum;
   }
-
-
 
   public function getJavaScripts()
   {
@@ -135,16 +114,19 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
     {
       foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks($c) as $course_subject_student_mark)
       {
-        $is_free = $values[$course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber()];
-        $value = $values[$course_subject_student->getId().'_'.$course_subject_student_mark->getMarkNumber()];
-        if($is_free)
+        $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
+        $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
+        if ((!is_null($is_free)))
         {
-          $value = 0;
-        }
+          if ($is_free)
+          {
+            $value = 0;
+          }
 
-        $course_subject_student_mark->setMark($value);
-        $course_subject_student_mark->setIsFree($is_free);
-        $course_subject_student_mark->save($con);
+          $course_subject_student_mark->setMark($value);
+          $course_subject_student_mark->setIsFree($is_free);
+          $course_subject_student_mark->save($con);
+        }
       }
     }
   }

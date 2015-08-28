@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -133,6 +133,19 @@ class CareerStudentPeer extends BaseCareerStudentPeer
     $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
 
     return self::doCountGraduatedForCareer($career_school_year->getCareer(), $c);
+  }
+
+  public static function retrieveLastYearCareerGraduatedStudents($career_school_year)
+  {
+    $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+    $c = new Criteria();
+
+    $c->addJoin(self::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+    $c->add(self::STATUS, CareerStudentStatus::GRADUATE);
+    $c->add(self::GRADUATION_SCHOOL_YEAR_ID, $last_year_school_year->getId());
+    $c->add(self::CAREER_ID, $career_school_year->getCareer()->getId());
+
+    return StudentPeer::doSelect($c);
   }
 
 }

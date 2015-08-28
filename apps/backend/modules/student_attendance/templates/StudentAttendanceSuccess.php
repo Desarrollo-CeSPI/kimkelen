@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -42,15 +41,15 @@
         <?php echo image_tag('../sfPropelPlugin/images/next.png') ?>
       </div>
 
-      <?php if (! $form->isAttendanceBySubject()):?>
+      <?php if (!$form->isAttendanceBySubject()): ?>
         <div class="division_move">
           <?php $next_division = $form->getNextDivision() ?>
           <?php $previous_division = $form->getPreviousDivision() ?>
 
-          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $previous_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="previous_division"/>
-          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $next_division)) ?>" onClick="return confirm('Se guardaran los cambios antes de cambiar de division. ¿ Esta seguro ?')" name="next_division"/>
+          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $previous_division)) ?>" onClick="return confirm('Se guardarán los cambios antes de cambiar de división. ¿Está seguro que quiere abandonar la página?')" name="previous_division"/>
+          <input type="submit" value="<?php echo __('Assistance to %division%', array('%division%' => $next_division)) ?>" onClick="return confirm('Se guardarán los cambios antes de cambiar de división. ¿Está seguro que quiere abandonar la página?')" name="next_division"/>
         </div>
-      <?php endif?>
+      <?php endif ?>
 
       <?php echo $form->renderHiddenFields() ?>
       <?php echo $form->renderGlobalErrors() ?>
@@ -61,8 +60,8 @@
       <?php $absence_for_period = $form->isAbsenceForPeriod(); ?>
 
       <?php if ($absence_for_period): ?>
-        <?php $career_school_year_perdiods = $form->getCareerSchoolYearPeriods(); ?>
-        <?php $count_career_school_year_perdiod = count($career_school_year_perdiods) ?>
+        <?php $career_school_year_periods = $form->getCareerSchoolYearPeriods(); ?>
+        <?php $count_career_school_year_period = count($career_school_year_periods) ?>
       <?php endif ?>
 
       <table id="student_attendance">
@@ -77,13 +76,17 @@
                 <?php if ($form->getDefault($name)): ?>
                   <script>disableDay(<?php echo $day ?>)</script>
                 <?php endif ?>
+                <?php if (HolidayPeer::isHoliday($day_i)): ?>
+                  <script>disableDayUneditable(<?php echo $day ?>)</script>
+                <?php endif; ?>
+
               </td>
             <?php endforeach ?>
 
             <?php if ($absence_for_period): ?>
-              <td colspan="<?php echo $count_career_school_year_perdiod ?>"></td>
-              <td colspan="<?php echo $count_career_school_year_perdiod ?>"></td>
-              <td colspan="<?php echo $count_career_school_year_perdiod ?>"></td>
+              <td colspan="<?php echo $count_career_school_year_period ?>"></td>
+              <td colspan="<?php echo $count_career_school_year_period ?>"></td>
+              <td colspan="<?php echo $count_career_school_year_period ?>"></td>
             <?php else: ?>
               <td></td>
               <td></td>
@@ -101,8 +104,8 @@
             <?php endforeach ?>
 
             <?php if ($absence_for_period): ?>
-              <?php foreach ($career_school_year_perdiods as $career_school_year_perdiod): ?>
-                <td class="period" colspan="3"><?php echo $career_school_year_perdiod->getShortName() ?></td>
+              <?php foreach ($career_school_year_periods as $career_school_year_period): ?>
+                <td class="period" colspan="3"><?php echo $career_school_year_period->getShortName() ?></td>
               <?php endforeach ?>
             <?php else: ?>
               <td colspan="3"></td>
@@ -117,15 +120,15 @@
             <?php endforeach ?>
 
             <?php if ($absence_for_period): ?>
-              <?php if ($count_career_school_year_perdiod): ?>
+              <?php if ($count_career_school_year_period): ?>
 
-                <?php for ($i = 1; $i <= $count_career_school_year_perdiod; $i++): ?>
+                <?php for ($i = 1; $i <= $count_career_school_year_period; $i++): ?>
                   <td><?php echo __("SJ") ?></td>
                   <td><?php echo __("J") ?></td>
                   <td><?php echo __("T") ?></td>
                 <?php endfor ?>
               <?php else: ?>
-                <td><?php echo __("El curso/Division no posee una configuracion de asistencias") ?></td>
+                <td><?php echo __("El curso/división no posee configuración de asistencias") ?></td>
                 <td></td>
                 <td></td>
               <?php endif ?>
@@ -154,18 +157,18 @@
                 </td>
               <?php endforeach ?>
               <?php if ($absence_for_period): ?>
-                <?php foreach ($career_school_year_perdiods as $career_school_year_perdiod): ?>
-                  <?php $free_class = $student->getFreeClass($career_school_year_perdiod, $course_subject, $career_school_year, $form->getDivision()) ?>
+                <?php foreach ($career_school_year_periods as $career_school_year_period): ?>
+                  <?php $free_class = $student->getFreeClass($career_school_year_period, $course_subject, $career_school_year, $form->getDivision()) ?>
 
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id, true) ?></td>
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id, false) ?></td>
-                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_perdiod, $course_subject_id) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, false) ?></td>
+                  <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, $career_school_year_period, $course_subject_id, false) ?></td>
                 <?php endforeach ?>
               <?php else: ?>
                 <?php $free_class = $student->getFreeClass(null, $course_subject, $career_school_year) ?>
-                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id, true) ?></td>
-                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, null, $course_subject_id) ?></td>
-                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id, false)?></td>
+                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id) ?></td>
+                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalJustificatedAbsences($form->career_school_year_id, null, $course_subject_id, false) ?></td>
+                <td class="<?php echo $free_class ?>"><?php echo $student->getTotalAbsences($form->career_school_year_id, null, $course_subject_id, false) ?></td>
               <?php endif ?>
 
               <td><?php include_partial("student_attendance/actions", array('student' => $student, 'course_subject' => $course_subject, 'career_school_year' => $career_school_year)) ?></td>

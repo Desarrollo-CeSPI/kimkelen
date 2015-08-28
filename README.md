@@ -11,15 +11,15 @@ Los datos que se visualizan son ficticios y la base de datos se rastaurara peri�
 # Instalación
 
 La instalación de **Kimkëlen** requiere de la configuración de un Servidor de aplicaciones Web, como puede ser [Apache](http://httpd.apache.org/), configurado correctamente para ejecutar el lenguaje de programación PHP, Server así como de un servidor de Base de Datos, como MySQL.
-Se recomienda recomienda la instalación del producto por parte de un usuario con conocimientos en los componenentes antes enunciados.
+Se recomienda la instalación del producto por parte de un usuario con conocimientos en los componenentes antes enunciados.
 
-Para usuarios que utilizan el sistema operativo Windows se recomienda la instalación de [Wamp](http://www.wampserver.com/) o [XAMP](http://www.apachefriends.org/es/xampp.html) que incluye los componentes enumerados y una rapida configuración de los mismos. Tenga a bien realizar la instalación y configuración como se indica en los mencionados productos. 
+Para usuarios que utilizan el sistema operativo Windows se recomienda la instalación de [Wamp](http://www.wampserver.com/) o [XAMP](http://www.apachefriends.org/es/xampp.html) que incluye los componentes enumerados y permite una rápida configuración de los mismos. Tenga a bien realizar la instalación y configuración como se indica en los mencionados productos. 
 
-Finalizada la instalación, como se indican en los pasos siguientes, el acceso al sistema deberá realizarce por medio de un navegador de internet, como Chrome, Firefox o Internet Explorer.
+Finalizada la instalación, como se indica en los pasos siguientes, el acceso al sistema deberá realizarse por medio de un navegador de internet, como Chrome, Mozilla Firefox o Internet Explorer.
 
 ## Descomprimir **Kimkëlen** 
 
-Antes de comenzar la confiración del sistema se debera descargar el archivo comprimido desde [Github](https://github.com/Desarrollo-CeSPI/kimkelen/) y descomprimirlo en el directorio de aplicaciones del Servidor Web seleccionado. 
+Antes de comenzar la configuración del sistema se deberá descargar el archivo comprimido desde [Github](https://github.com/Desarrollo-CeSPI/kimkelen/) y descomprimirlo en el directorio de aplicaciones del Servidor Web seleccionado. 
 
 
 ## Editar la configuración de la base de datos
@@ -33,7 +33,7 @@ cp config/databases.yml-default config/databases.yml
 cp config/propel.ini-default config/propel.ini
 ```
 
-Edite estos archivos según la configuración de su entorno.
+Edite estos archivos según la configuración de su entorno. Debe espesificar el dsn (nombre de la base de datos, host, usuario de la BBDD y contraseña de la BBDD)
 
 ## Ejemplo de `databases.yml`
 
@@ -57,7 +57,7 @@ all:
 ```yml
 propel.targetPackage       = lib.model
 propel.packageObjectModel  = true
-propel.project             = conservatorio
+propel.project             = alumnos
 propel.database            = mysql
 propel.database.driver     = mysql
 propel.database.url        = mysql:dbname=kimkelen;host=localhost
@@ -68,7 +68,7 @@ propel.database.encoding   = utf8
 ...
 ```
 
-*Es importante destacar que la base de datos debe crearla manualmente, no es
+*Es importante destacar que la base de datos debe crearla usted manualmente, no es
 creada por ninguno de los pasos siguientes*
 
 ## Instalar por primera vez
@@ -93,7 +93,7 @@ php symfony propel:insert-sql
 ## Actualizar la versión
 
 En el caso de que se desee actualizar la versión, no se deben ejecutar todos los comandos anteriores dado que algunos rearman la base de datos y se perderia información.
-Entonces, cuando ya se cuenta con Kimkelen y simplemente se actualiza a una nueva versión, se deberán ejecutar los siguientes comandos sobre la nueva:
+Entonces, cuando ya se cuenta con Kimkelen y simplemente se actualiza a una nueva versión, se deberán ejecutar solo los siguientes comandos sobre nuevamente:
 
 ```
 php symfony kimkelen:flavor <COMPORTAMIENTO>

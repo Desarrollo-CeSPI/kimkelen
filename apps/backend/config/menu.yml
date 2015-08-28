@@ -33,6 +33,10 @@ root:
             title:       Turnos
             url:         @shift
             credentials: [show_shift]
+          feriados:
+            title:       Días feriados
+            url:         @holiday
+            credentials: [show_holiday]
           orientations:
             title:       Orientation
             url:         @orientation
@@ -86,10 +90,6 @@ root:
             title: Grupos de usuarios
             url: sfGuardGroup/index
             credentials: [show_group]
-      backup:
-        title: Respaldo de datos (backup)
-        credentials: [backup]
-        url: @generate_backup
 
   academics:
     title: Académica
@@ -145,6 +145,18 @@ root:
             title: Nueva materia
             url: subject/new
             credentials: [edit_subject]
+      pathways:
+        title: Trayectorias
+        credentials: [show_pathway]
+        menu:
+          list:
+            title: Listado de trayectorias
+            url: pathway/index
+            credentials: [show_pathway]
+          new:
+            title: Nueva trayectoria
+            url: pathway/new
+            credentials: [edit_pathway]
       personal:
         title: Personal del colegio
         credentials: [[show_head_personal , show_personal, show_teacher]]
@@ -221,7 +233,16 @@ root:
       commissions:
         title: Comisiones
         credentials: [show_course]
-        url: commission/index
+        menu:
+          list:
+            title: Listado de comisiones
+            url: commission/index
+            credentials: [show_course]
+          student_pathways:
+            title: Listado de comisiones de trayectorias
+            credentials: [show_student_pathway]
+            url: pathway_commission/index
+
       student_attendance:
         title: Attendance
         url: @student_attendance_day
@@ -234,6 +255,10 @@ root:
         title: Attendance justification
         url: @attendance_justification
         credentials: [edit_attendance_justification]
+      sanctions:
+        title: Sanciones Disciplinarias
+        url: @sanction
+        credentials: [show_all_disciplinary_sanction]
       tutors:
         title: Listado de tutores
         url: tutor/index
@@ -244,7 +269,7 @@ root:
     credentials: []
     menu:
       glpi:
-        title: Ayuda y Soporte 
+        title: Ayuda y Soporte
         url: '<?php echo sfConfig::get('app_helpdesk_url','https://github.com/Desarrollo-CeSPI/kimkelen'); ?>'
         target: _blank
         icon: external

@@ -20,4 +20,4 @@ students:
   credentials: [edit_examination_repproved_subject_students]
 
 califications:
-  credentials: [edit_examination_repproved_subject_califications]
+  credentials: [edit_examination_repproved_subjects_califications]

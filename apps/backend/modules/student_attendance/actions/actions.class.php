@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -81,6 +81,12 @@ class student_attendanceActions extends sfActions
     $this->redirect('@student_reincorporation');
   }
 
+  public function executeMultipleSubjectsCommissionAttendance(sfWebRequest $request) {
+    $this->course = CoursePeer::retrieveByPk($request->getParameter('course'));
+    $this->course_subjects = $this->course->getCourseSubjects();
+
+  }
+
   public function executeStudentAttendance(sfWebRequest $request)
   {
     $params = $request->getParameter('multiple_student_attendance');
@@ -142,13 +148,15 @@ class student_attendanceActions extends sfActions
       $this->getUser()->setFlash('notice', 'The item was updated successfully.');
     }
 
+
     if ($request->hasParameter("previous_division"))
     {
-      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getPreviousDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&course_subject_id=");
+
+      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getPreviousDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id']  . "&day=" .$multiple_student_attendance['day']. "&course_subject_id=");
     }
     elseif ($request->hasParameter("next_division"))
     {
-      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&course_subject_id=");
+      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&day=" .$multiple_student_attendance['day'] . "&course_subject_id=");
     }
 
     $this->setTemplate('StudentAttendance');

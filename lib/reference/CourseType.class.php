@@ -41,7 +41,7 @@ class CourseType extends BaseCustomOptionsHolder
     self::TRIMESTER => 'Anual con Régimen Trimestral',
     self::QUATERLY => 'Anual con Régimen Cuatrimestral',
     self::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-    self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino'
+    self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término'
   );
 
   public static function getOption($key)
@@ -56,7 +56,7 @@ class CourseType extends BaseCustomOptionsHolder
       self::TRIMESTER => 'Anual con Régimen Trimestral',
       self::QUATERLY => 'Anual con Régimen Cuatrimestral',
       self::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-      self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino'
+      self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término'
     );
   }
 

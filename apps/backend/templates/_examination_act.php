@@ -51,7 +51,7 @@
   <br>
   <div class="gray-background">
     <span><strong><?php echo __('Subject'); ?></strong>:
-      <strong><?php echo $examination_subject->getSubject() ?></strong>
+      <strong><?php echo $examination_subject->getSubject() . ' - ' . $examination_subject->getYear() . ' año'  ?></strong>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
   </div>
   <br>
@@ -60,7 +60,7 @@
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
-        <th rowspan="2"><?php echo __('Division'); ?></th>
+        <th rowspan="2"><?php echo __('División'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
       </tr>
       <tr>
@@ -82,8 +82,6 @@
               <?php if (!$ess->getIsAbsent()): ?>
                 <?php echo $ess->getMark() ?>
               <?php endif; ?>
-            <?php else: ?>
-              <?php echo '-'; ?>
             <?php endif; ?>
           </td>
           <td class="calification text">

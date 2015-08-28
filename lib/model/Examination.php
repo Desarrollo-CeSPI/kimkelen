@@ -21,11 +21,6 @@
 
 class Examination extends BaseExamination
 {
-  public function canShowExaminationSubjects()
-  {
-    return ($this->countExaminationSubjects() != 0);
-  }
-
   public function getMessageCantShowExaminationSubjects()
   {
     return 'No students in a position to take the exam.';
@@ -56,6 +51,27 @@ class Examination extends BaseExamination
 		$examinations= SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNumbersLong();
 		return $examinations[$this->getExaminationNumber()];
 	}
-}
 
-sfPropelBehavior::add('Examination', array('examination'));
+  public function createExaminationSubjectsForYear($year)
+  {
+	  $career_subject_school_years = CareerSubjectSchoolYearPeer::retrieveForExaminationAndYear($this, $year);
+
+	  foreach ($career_subject_school_years as $career_subject_school_year)
+	  {
+		  $examination_subject = new ExaminationSubject();
+		  $examination_subject->setCareerSubjectSchoolYearId($career_subject_school_year->getId());
+
+		  $this->addExaminationSubject($examination_subject);
+	  }
+  }
+
+	public function countExaminationSubjectsForYear($year) {
+	  $c = new Criteria();
+
+	  $c->addJoin(ExaminationSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+		$c->addJoin(CareerSubjectPeer::ID, CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID);
+		$c->add(CareerSubjectPeer::YEAR, $year);
+
+		return $this->countExaminationSubjects($c);
+  }
+}

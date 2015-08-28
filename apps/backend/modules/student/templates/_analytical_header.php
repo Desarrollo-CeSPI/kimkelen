@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -18,34 +17,27 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-<div class="header_row">
-  
-  <div class="colsleft">
-        <dl class="dl-horizontal" >
-          <dt><?php echo __("Legajo N°")?>:</dt>
-          <dd><?php echo $career_student->getStudent()->getGlobalFileNumber() ?></dd>
-          <dt><?php echo __("Course")?>:</dt>
-          <dd><?php echo $career_student->getStudent()->getGlobalFileNumber() ?></dd>
-        </dl>
-  </div>
-   
-  <div class="colscenter">
-    <div class="colsleft logo" style="  width: 100px !important;">
-      <?php echo image_tag("kimkelen_logo_small.png", array('absolute' => true)) ?>
+<div class="report-header">
+    <div class="header_row">
+        <div class="title" id="header_analytical_data_left">
+            <dl class="dl-horizontal">
+                <dt><?php echo __("Legajo N°") ?>:</dt>
+                <dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
+                <dt><?php echo __("Course") ?>:</dt>
+                <dd class="detail"><?php echo $analytical->get_current_division_string() ?></dd>
+            </dl>
+        </div>
+        <div class="title" id="header_analytical_data_center">
+            <?php echo image_tag("kimkelen_logo_small.png", array( 'class'=>'school_logo', 'absolute' => true)) ?>
+            <h1><?php echo __($career_student->getCareer()->getCareerName()) ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
+        </div>
+        <div id="header_analytical_data_right" class="title">
+            <?php echo __('Certificado N°'); ?>
+            <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
+        </div>
     </div>
-    <div class="colsleft">
-      <h3 > <?php echo __($career_student->getCareer()->getCareerName()) ?></h3>
-      <p > <?php echo __("Universidad Nacional de La Plata") ?></p>
-    </div>
-  </div>
 
-  <div class="colsright">      
-    <dl class="col-lg-3 dl-horizontal" >
-          <dt><?php echo __("Certificado N°")?>:</dt>
-          <dd><?php echo $career_student->getStudent()->getFolioNumber() ?></dd>
-    </dl>
-  </div>
-</div>
-<div class="header_row">
-  <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student )) ?>
+    <div class="header_row">
+        <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
+    </div>
 </div>

@@ -29,12 +29,12 @@ class kimkelenFlavorTask extends sfBaseTask
 
     $this->namespace        = 'kimkelen';
     $this->name             = 'flavor';
-    $this->briefDescription = '';
+    $this->briefDescription = 'Sets flavor to be used';
     $this->detailedDescription = <<<EOF
 The [kimkelen:flavor|INFO] task sets a given [flavor|INFO] as the current one
 for this instance of Kimkëlen.
 
-  [php symfony kimkelen:initialize flavor|INFO]
+  [php symfony kimkelen:flavor|INFO]
 
 Where [flavor|INFO] is the name of a valid flavor, found in the [flavors/|INFO] directory
 inside the project root.
@@ -49,7 +49,7 @@ EOF;
 
     if (!is_dir($flavor))
     {
-      $this->logSection('Error', 'The provided flavor does not exist in the flavors/ directory', null, 'ERROR');
+      $this->logSection('Error', 'The provided flavor does not exist the flavors/ directory', null, 'ERROR');
 
       return false;
     }

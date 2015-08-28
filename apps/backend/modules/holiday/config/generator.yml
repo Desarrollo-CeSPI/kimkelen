@@ -1,0 +1,36 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           Holiday
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          holiday
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        day:
+          date_format: 'dd/MM/yyyy'
+      list:
+        title: Holidays
+        display: [day, description]
+        object_actions:
+          _edit:
+          _delete:
+        batch_actions: []
+      filter:  ~
+      form:    ~
+      edit:
+        actions:
+          _list:
+            label: Volver al listado de días feriados
+          _save:
+      new:
+        actions:
+          _list:
+            label: Volver al listado de días feriados
+          _save:

@@ -65,6 +65,12 @@ generator:
             credentials:    [edit_division_course_califications]
             condition:      canEditMarks
 
+          calificateNonNumericalMark:
+            label: Calificate non numerical mark
+            action: calificateNonNumericalMark
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
+
           printCalification:
             label:   Print califications
             action:  printCalification
@@ -100,6 +106,9 @@ generator:
             credentials:    [edit_course]
             condition:      canRelatedToDivision
 
+          add_subject:
+            action:         addSubject
+            credentials:    [edit_course]
 
           attendanceSubject:
             label: Load Attendances

@@ -66,7 +66,10 @@
             <div style="clear: both; margin-top: 1px;"></div>
             <?php echo $form["date"]->renderError() ?>
             <?php echo $form["date"]->renderLabel() ?><?php echo $form["date"] ?>
-            
+            <div style="clear: both; margin-top: 1px;"></div>
+            <?php echo $form["folio_number"]->renderError() ?>
+            <?php echo $form["folio_number"]->renderLabel() ?><?php echo $form["folio_number"] ?>
+
             <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $form->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent())) ?>
           </div>
 

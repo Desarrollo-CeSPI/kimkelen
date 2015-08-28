@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -19,70 +18,66 @@
  */ ?>
 <?php use_helper('Date') ?>
 
-  <?php if(0 == count($objects)):?>
-    
+<?php if ($object->is_empty()): ?>
+
     <div class="notice" style="padding: 20px; background-image: none; margin-bottom: 15px;">
-      <?php echo __('The student has no approved subjects')?>
+        <?php echo __('The student has no approved subjects') ?>
     </div>
-  
-  <?php else: ?>
-      <?php $year= 0; ?>
 
+<?php else: ?>
 
-      <?php foreach ($objects as $key => $subjects): ?>
-        
+    <?php foreach ($object->get_years_in_career() as $year): ?>
+
         <table class="table gridtable_bordered">
-          <thead>
-            <tr>
-                <th colspan="7"><?php echo __('Year '.$key) ?></th>
-            </tr>
-            <tr>
-              <th rowspan="2"><?php echo __("Condition") ?></th>
-              <th rowspan="2"><?php echo __("Fecha aprobación") ?></th>
-              <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
-              <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
-              <th colspan="2"><?php echo __("Calification") ?></th>
-              <th rowspan="2"><?php echo __("School") ?></th>
-            </tr>
-            <tr>
-              <th>Nro.</th>
-              <th>Letras</th>
-            </tr>
-          </thead> 
+            <thead>
+                <tr>
+                    <th colspan="7"><?php echo __('Year ' . $year) ?></th>
+                </tr>
+                <tr>
+                    <th rowspan="2"><?php echo __("Condition") ?></th>
+                    <th rowspan="2"><?php echo __("Mes") ?></th>
+                    <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
+                    <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
+                    <th colspan="2"><?php echo __("Calification") ?></th>
+                    <th rowspan="2"><?php echo __("Establecimiento") ?></th>
+                </tr>
+                <tr>
+                    <th>Nro.</th>
+                    <th>Letras</th>
+                </tr>
+            </thead>
 
-          <tbody>
-            <?php $school_year = null ?>
+            <tbody>
+                <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
+                    <tr>
 
-            <?php foreach ($subjects as $css): ?>
-                  <tr>
+                        <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
 
-                    <td class="text-center"><?php echo $css->getCondition() ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
 
-                    <td class="text-center"><?php echo $css->getApprovedDate() ?></td>
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
 
-                    <td class="text-center"><?php echo $css->getSchoolYear() ?></td>
+                        <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
 
-                    <td align="left" width="500px"><?php echo $css->getSubjectName() ?></td>
+                        <td class="text-center"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                    <td class="text-center"><?php echo $css->getMark() ?></td>
+                        <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                    <td class="text-center"><?php echo $css->getMarkAsSymbol()?></td>
+                        <td class="text-center"><?php echo ($css->getSchoolName()?$css->getSchoolName():'<hr/>') ?></td>
 
-                    <td class="text-center"><?php echo $css->getSchoolName() ?></td>
+                    </tr>
+                <?php endforeach ?>
 
-                  </tr>
-            <?php endforeach ?>
-              
-            <tr >
-              <th colspan="5" style="text-align:left !important;"><?php echo __('Course') ?></th>
-              <th colspan="2"><?php echo __('Average ') ?>: <?php echo "HACER" ?>    </th>
-              <th colspan="2"></th>
-            </tr>
-          
-          </tbody>
-      </table>
-      <?php $year++ ?>
+                <tr>
+                    <th colspan="5" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
+                    <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
+                </tr>
+
+            </tbody>
+        </table>
     <?php endforeach ?>
 
+<div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
+    
 <?php endif; ?>
 

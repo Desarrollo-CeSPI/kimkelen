@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -57,7 +57,7 @@ class PersonForm extends BasePersonForm
     $this->setValidator('email', new sfValidatorEmail(array('required' => false)));
 
    //identification number
-    $this->setValidator('identification_number', new sfValidatorNumber(array('required'=>false)));
+    //$this->setValidator('identification_number', new sfValidatorNumber(array('required'=>false)));
 
     //Birth country, state and city widgets
     $this->setWidget('birth_country', new sfWidgetFormPropelchoice(array(

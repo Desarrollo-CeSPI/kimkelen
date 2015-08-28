@@ -3,7 +3,7 @@ Instalación del proyecto:
 Requisitos mínimos:
 
   * Servidor Web con soporte de PHP. Apache 2.x recomendado.
-  * PHP versión 5.2.4 o superior.
+  * PHP versión >= 5.2.4 y < 5.4.
   * Servidor de base de datos Mysql. Es posible utilizar otro motor pero debe modificar la configuración de la aplicación Propel ORM.
   * Que se cumplan todos los requisitos que controla el script: php BASE_APLICACION/data/symfony/bin/check_configuration.php
   * Instalar [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/). Debe estar

@@ -313,3 +313,18 @@ table.gridtable_bordered tr {
     background-color: #ffffff;
     text-align:center;
 }
+
+.header_row .title2
+{
+  float:left;
+  font-weight:bold;
+  font-size:13px;
+  padding-right:5px;
+  padding-left: 5px;
+}
+
+.header_row .row-content
+{
+  float:left;
+  font-size:13px;
+}

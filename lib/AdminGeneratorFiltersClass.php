@@ -222,6 +222,7 @@ class AdminGeneratorFiltersClass
       ExaminationRepprovedSubjectPeer::sortedBySubject($criteria);
 
       if ($user->isTeacher())
+
       {
         $criteria->addJoin(ExaminationRepprovedSubjectPeer::ID, ExaminationRepprovedSubjectTeacherPeer::EXAMINATION_REPPROVED_SUBJECT_ID);
         $criteria->addJoin(ExaminationRepprovedSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
@@ -260,6 +261,8 @@ class AdminGeneratorFiltersClass
       */
       CoursePeer::sorted($criteria);
       $criteria->add(CoursePeer::DIVISION_ID, null, Criteria::ISNULL);
+      
+      $criteria->add(CoursePeer::IS_PATHWAY, false);
 
       if ($user->isPreceptor())
       {
@@ -271,7 +274,7 @@ class AdminGeneratorFiltersClass
       }
       if ($user->isHeadPreceptor())
       {
-        self::addCommissiionHeadPreceptorCriteria($criteria, $user);
+        self::addCommissionHeadPreceptorCriteria($criteria, $user);
       }
     }
     else if ($event->getSubject() instanceOf final_examinationActions)
@@ -374,13 +377,6 @@ class AdminGeneratorFiltersClass
       $career_school_year_id = sfContext::getInstance()->getUser()->getReferenceFor("career_school_year");
       $criteria->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
     }
-    else if ($event->getSubject() instanceOf sfGuardUserActions)
-    {
-      /*
-        $criteria->add(sfGuardUserGroupPeer::GROUP_ID,  sfGuardGroupPeer::personalizedGroups(), Criteria::NOT_IN);
-        $criteria->addJoin(sfGuardUserPeer::ID, sfGuardUserGroupPeer::USER_ID);
-       */
-    }
     else if ($event->getSubject() instanceOf student_freeActions)
     {
       $student_id = sfContext::getInstance()->getUser()->getReferenceFor("student");
@@ -397,6 +393,16 @@ class AdminGeneratorFiltersClass
       $examination_subject_id = sfContext::getInstance()->getUser()->getReferenceFor("examination_subject");
 
       $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $examination_subject_id);
+    }
+    else if ($event->getSubject() instanceOf student_examination_repproved_subjectActions)
+    {
+      $examination_repproved_subject_id = sfContext::getInstance()->getUser()->getReferenceFor("examination_repproved_subject");
+
+      $criteria->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $examination_repproved_subject_id);
+    }
+    else if ($event->getSubject() instanceOf pathway_commissionActions)
+    {
+      $criteria->add(CoursePeer::IS_PATHWAY, true);
     }
 
     return $criteria;
@@ -446,7 +452,7 @@ class AdminGeneratorFiltersClass
 
   }
 
-  public static function addCommissiionHeadPreceptorCriteria($criteria, $user)
+  public static function addCommissionHeadPreceptorCriteria($criteria, $user)
   {
     $personal_in = $user->getPersonalIds();
 

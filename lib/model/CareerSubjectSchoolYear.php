@@ -27,6 +27,11 @@ class CareerSubjectSchoolYear extends BaseCareerSubjectSchoolYear
     return $this->getCareerSubject() . ' | ' . $this->getSchoolYear();
   }
 
+   public function getFullToString()
+   {
+    return sprintf("%s | %s | %s", $this->getCareerSubject()->getCareer(), $this->getCareerSubject(),  $this->getSchoolYear());
+   }
+
   public function getSchoolYear()
   {
     return $this->getCareerSchoolYear()->getSchoolYear();

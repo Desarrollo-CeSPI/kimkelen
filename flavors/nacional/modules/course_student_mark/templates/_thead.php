@@ -21,24 +21,20 @@
 
 <tr class="head" valign="bottom">
   <td align="center" width="42%" height="22" colspan="2"><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName()?></td>
-  <td align="center" width="42%" height="22" colspan="<?php echo $configuration->getCourseMarks() + ($is_block? 6 : 5)?>">Planilla de calificaciones <?php echo date('Y')?></td>
-  <td align="center" width="42%" height="22" colspan="2">
-    Nivel: <?php echo $course->getYear()?> Div: <?php echo is_null($course->getDivision())? '' : $course->getDivision()->getDivisionTitle()?><br/>
-    <?php echo $course->getSubjectsStr() ?><br/>
-    Profesor/a: <?php echo $course->getTeachersStr() ?>
-  </td>
+  <td align="center" width="42%" height="22" colspan="<?php echo $configuration->getCourseMarks() + ($is_block? 10 : 9)?>">Planilla de calificaciones <?php echo date('Y')?></td>
+
 </tr>
 <tr class="head" valign="bottom">
   <td align="center" width="40%" height="22" colspan="2"></td>
-  <td align="center" width="18%" colspan="<?php echo $configuration->getCourseMarks()?>">Terminos</td>
+  <td align="center" width="18%" colspan="<?php echo $configuration->getCourseMarks()?>">Términos</td>
   <td align="center" width="20%" colspan="2">Promedio Anual</td>
 
   <?php if ($is_block):?>
     <td align="center" width="30%" colspan="3">Per. de acompañam. y eval.</td>
   <?php endif?>
 
-  <td align="center" width="20%"  colspan="3">Notas de examenes</td>
-  <td align="center" width="10%">Calificacion</td>
+  <td align="center" width="20%"  colspan="3">Notas de exámenes</td>
+  <td align="center" width="10%">Calificación</td>
   <td align="center" width="20%">Observaciones</td>
 </tr>
 <tr class="head" valign="bottom">

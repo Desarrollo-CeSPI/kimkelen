@@ -158,6 +158,12 @@ body {
     color:#fff;
 }
 
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
 /***content***/
 
 #content {
@@ -1184,14 +1190,14 @@ table.list
 {
   border: 1px solid black;
   padding: 1px;
-  background-color:  #F29A79 !important;
+  background-color: yellow !important;
 }
 
 .box_free
 {
   border: 1px solid black;
   padding: 1px;
-  background-color: yellow !important;
+  background-color: #F29A79 !important;
 }
 
 .box_justificated
@@ -1857,7 +1863,7 @@ div.wc-cal-event{
   background-image: url('../images/undo_withdraw.png') !important;
 }
 
-.sf_admin_action_matriculate_graduated_students_from_other_career a
+.sf_admin_action_matriculate_graduated_from_other_career a
 {
   background-image: url('../images/matriculate_graduated.png') !important;
 }
@@ -1880,4 +1886,70 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_show_assistance_report a
 {
   background-image: url('../images/report.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
+{
+  background-image: url('../images/unchain.png') !important;
+}
+
+.sf_admin_action_create_last_year_divisions a
+{
+  background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_add_subject a
+{
+  background-image: url('../images/admin-subjects.png') !important;
+}
+
+#change-role {
+  color: #FFF !important;
+}
+
+.sf_admin_list .sf_admin_action_open a
+{
+  background-image: url('../images/lock_open.png') !important;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
+}
+
+.sf_admin_list .sf_admin_action_resolve_problematic_students a
+{
+  background-image: url('../images/puzzle--arrow.png') !important;
+}
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
+}
+
+#header-school-year
+{
+  padding-top: 12px;
+  font-size: 13px;
+}
+
+.warning-button {
+    text-transform: uppercase;
+    display: block;
+    width: 6em;
+    padding: 0.2em;
+    line-height: 1.4;
+    background-color: #CC6666;
+    border: 1px solid black;
+    color: #fefefe !important;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration: none !important;
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -64,5 +64,15 @@ class BbaFormFactory extends BaseFormFactory
   public function getMultipleStudentAttendanceForm()
   {
     return 'BbaMultipleStudentAttendanceForm';
+  }
+
+   /**
+   * Returns form used by student new|edit action
+   *
+   * @return string represents a Form PHPClass
+   */
+  public function getStudentForm()
+  {
+    return 'BbaStudentForm';
   }
 }

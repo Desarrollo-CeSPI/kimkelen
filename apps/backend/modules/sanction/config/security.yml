@@ -1,0 +1,2 @@
+all:
+  credentials: [show_all_disciplinary_sanction]

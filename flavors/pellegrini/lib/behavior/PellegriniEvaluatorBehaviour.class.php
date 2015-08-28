@@ -33,6 +33,7 @@ class PellegriniEvaluatorBehaviour extends BaseEvaluatorBehaviour
   const LAST_INTEGRATOR_MARK = 4; //nota del examen integrador
   const MIN_NOTE = 3;
   const MEDIUM_NOTE = 6;
+  const EXEMPT = 'Ex.';
 
   protected
   $_examination_number = array(
@@ -176,6 +177,34 @@ class PellegriniEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       $student_approved_career_subject->save($con);
     }
+  }
+
+      /**
+   * This method check the conditions of repetition of a year.
+   *
+   * @param Student $student
+   * @param StudentCareerSchoolYear $student_career_school_year
+   * @return boolean
+   */
+  public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
+  {
+    //If current year is the last year of the career
+    if ($student_career_school_year->isLastYear())
+    {
+      return false;
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    //IF Previous is > than max count of previous allowed, then student repeats year
+    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
+
+    return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
+  }
+
+  public function getExemptString()
+  {
+    return self::EXEMPT;
   }
 
 }

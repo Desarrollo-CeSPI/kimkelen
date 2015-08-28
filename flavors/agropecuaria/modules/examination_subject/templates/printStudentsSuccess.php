@@ -46,7 +46,7 @@
         <?php endif; ?></span>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
     </div>
-    <p>Acta de los examenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
+    <p>Acta de los exámenes de la asignatura <strong><?php echo $examination_subject->getSubject() ?></strong></p>
     <p>Examinados los alumnos que se mencionan a continuación, han merecido las calificaciones consignadas en la presente Acta,
       que firman los señores profesores <strong><?php echo $examination_subject->getTeachersToString(); ?></strong>.
 
@@ -55,10 +55,10 @@
         <tr class="printColumns"></tr>
       <th>N°</th>
       <th><?php echo __('Student'); ?></th>
-      <th><?php echo __('Folio number'); ?></th>
       <th><?php echo __('Identification number'); ?></th>
       <th><?php echo __('Division') ?></th>
       <th><?php echo __('Calification') ?></th>
+      <th><?php echo __('Folio number'); ?></th>
       </thead>
       <tbody>
         <?php $i = 1; ?>
@@ -66,15 +66,15 @@
           <tr>
             <td><?php echo $i ?> </td>
             <td><?php echo $student ?> </td>
-            <td><?php echo $student->getPerson()->getStudent()->getFolioNumber() ?> </td>
             <td><?php echo $student->getPerson()->getIdentificationNumber() ?> </td>
             <td><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear(), $student)); ?> </td>
             <?php $csse = $examination_subject->getExaminationNoteForStudent($student); ?>
-            <?php if ($csse->getIsAbsent()): ?>
+              <?php if ($csse->getIsAbsent()): ?>
               <td><?php echo __('Is absent') ?></td>
             <?php else: ?>
               <td> <?php echo $examination_subject->getExaminationNoteForStudent($student)->getMark() ?> </td>
             <?php endif; ?>
+            <td><?php echo $csse->getFolioNumber() ?></td>
           </tr>
           <?php $i++; ?>
         <?php endforeach; ?>

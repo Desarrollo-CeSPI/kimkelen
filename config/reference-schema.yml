@@ -218,3 +218,15 @@ classes:
       short_name:
         type: varchar(255)
         required: true
+
+  Holiday:
+    tableName: holiday
+    description:          Cada tupla representa un día feriado
+    columns:
+      id:
+      day:
+        required: true
+        type: date
+      description:
+        required: false
+        type: varchar(50)

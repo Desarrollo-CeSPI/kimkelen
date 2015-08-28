@@ -130,6 +130,20 @@ class CourseSubject extends BaseCourseSubject
 
   }
 
+  public function getPathwayStudents()
+  {
+    $ret = array();
+    foreach ($this->getCourseSubjectStudentPathways() as $css)
+    {
+      if ($css->getStudent()->getPerson()->getIsActive())
+      {
+        $ret[] = $css->getStudent();
+      }
+    }
+    return $ret;
+
+  }
+
   public function getAllMarksForStudent($student)
   {
     $criteria = new Criteria();
@@ -200,7 +214,7 @@ class CourseSubject extends BaseCourseSubject
     {
       $mark = $course_subject_student->getMarkFor($current_period);
 
-      if ($mark->getMark() != '')
+      if ($mark && $mark->getMark() != '')
       {
         $mark->setIsClosed(true);
         $mark->save($con);
@@ -242,6 +256,7 @@ class CourseSubject extends BaseCourseSubject
     $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNULL);
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getId());
+    $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(StudentPeer::ID,CourseSubjectStudentPeer::STUDENT_ID);
 		$c->addJoin(StudentPeer::PERSON_ID,PersonPeer::ID);
 		$c->add(PersonPeer::IS_ACTIVE,true);
@@ -320,79 +335,20 @@ class CourseSubject extends BaseCourseSubject
     return CourseSubjectStudentPeer::doSelectOne($c);
   }
 
-  /**
-   * Gets an array of CourseSubjectStudent objects which contain a foreign key that references this object.
-   *
-   * The student references in the array are ordered by lastname.
-   * If this collection has already been initialized with an identical Criteria, it returns the collection.
-   * Otherwise if this CourseSubject has previously been saved, it will retrieve
-   * related CourseSubjectStudents from storage. If this CourseSubject is new, it will return
-   * an empty collection or the current collection, the criteria is ignored on a new object.
-   *
-   * @param      PropelPDO $con
-   * @param      Criteria $criteria
-   * @return     array CourseSubjectStudent[]
-   * @throws     PropelException
-   */
   public function getCourseSubjectStudents($criteria = null, PropelPDO $con = null)
   {
     if ($criteria === null)
     {
-      $criteria = new Criteria(CourseSubjectPeer::DATABASE_NAME);
-    }
-    elseif ($criteria instanceof Criteria)
-    {
-      $criteria = clone $criteria;
+      $criteria = new Criteria();
     }
 
-    if ($this->collCourseSubjectStudents === null)
-    {
-      if ($this->isNew())
-      {
-        $this->collCourseSubjectStudents = array();
-      }
-      else
-      {
+    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+    $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+    $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+    $criteria->add(PersonPeer::IS_ACTIVE, true);
+    $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
-        $criteria->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->id);
-
-        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-        $criteria->add(PersonPeer::IS_ACTIVE, true);
-        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-
-        CourseSubjectStudentPeer::addSelectColumns($criteria);
-        $this->collCourseSubjectStudents = CourseSubjectStudentPeer::doSelect($criteria, $con);
-      }
-    }
-    else
-    {
-
-      // criteria has no effect for a new object
-      if (!$this->isNew())
-      {
-        // the following code is to determine if a new query is
-        // called for.  If the criteria is the same as the last
-        // one, just return the collection.
-
-        $criteria->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->id);
-
-        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-        $criteria->add(PersonPeer::IS_ACTIVE, true);
-        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-
-        CourseSubjectStudentPeer::addSelectColumns($criteria);
-        if (!isset($this->lastCourseSubjectStudentCriteria) || !$this->lastCourseSubjectStudentCriteria->equals($criteria))
-        {
-          $this->collCourseSubjectStudents = CourseSubjectStudentPeer::doSelect($criteria, $con);
-        }
-      }
-    }
-    $this->lastCourseSubjectStudentCriteria = $criteria;
-
-    return $this->collCourseSubjectStudents;
-
+    return parent::getCourseSubjectStudents($criteria);
   }
 
   public function getCourseSubjectConfigurationDivisionForm()
@@ -763,4 +719,91 @@ class CourseSubject extends BaseCourseSubject
     }
     return $total;
   }
+
+
+  public function addStudentsFromCourseSubject($students, $origin_course_subject, $con = null)
+  {
+    if (!$this->getCourse()->canMoveStudents())
+    {
+      throw (new Exception());
+    }
+
+    if (is_null($con))
+      $con = Propel::getConnection();
+
+    $con->beginTransaction();
+    try
+    {
+      foreach ($students as $student_id)
+      {
+        $css_origin = CourseSubjectStudentPeer::retrieveByCourseSubjectAndStudent($origin_course_subject->getId(), $student_id);
+        $css_origin->setCourseSubjectId($this->getId());
+        $css_origin->save($con);
+
+        //para las asistencias
+        $c = new Criteria();
+	      $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
+        foreach ($origin_course_subject->getStudentAttendances($c) as $sa)
+        {
+          $sa->setCourseSubject($this);
+          $sa->save($con);
+        }
+      }
+      $con->commit();
+    }
+    catch (Exception $e)
+    {
+      $con->rollBack();
+      throw $e;
+    }
+  }
+
+  public function getCourseSubjectAndTeacherToString()
+  {
+    return sprintf('%s, %s (%s)', $this->getCourse(), $this->getCareerSubjectToString(), $this->getCourse()->getTeachersStr());
+  }
+
+	public function pathwayClose(PropelPDO $con)
+	{
+		foreach ($this->getCourseSubjectStudentPathways() as $course_subject_student_pathway)
+		{
+			$evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();
+
+				if ($course_subject_student_pathway->getMark() >= constant("{$evaluator_instance}::PATHWAY_PROMOTION_NOTE"))
+				{
+
+					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();
+
+					//$final_mark = $course_subject_student_pathway->getMark();
+
+					$course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($original_course_subject_student, $con);
+					$final_mark = bcdiv($course_subject_student_pathway->getMark() + $course_marks_avg, 2, 2);
+
+					$sacs = new StudentApprovedCareerSubject();
+					$sacs->setCareerSubject($this->getCareerSubjectSchoolYear()->getCareerSubject());
+					$sacs->setMark($final_mark);
+					$sacs->setStudent($course_subject_student_pathway->getStudent());
+					$sacs->setSchoolYear($this->getCourse()->getSchoolYear());
+					$original_course_subject_student->getCourseResult()->setStudentApprovedCareerSubject($sacs);
+					$original_course_subject_student->save($con);
+
+					$srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($original_course_subject_student);
+					if (is_null($srcs)) {
+						$srcs = new StudentRepprovedCourseSubject();
+						$srcs->setCourseSubjectStudent($original_course_subject_student);
+					}
+					$srcs->setStudentApprovedCareerSubject($sacs);
+					$srcs->save($con);
+					$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($srcs);
+					// TODO: pongo en blanco la referencia a una mesa de previa??
+					if (is_null($sers)) {
+						$sers = new StudentExaminationRepprovedSubject();
+						$sers->setStudentRepprovedCourseSubject($srcs);
+					}
+					$sers->setMark($course_subject_student_pathway->getMark());
+					$sers->setExaminationRepprovedSubject(null);
+					$sers->save($con);
+				}
+		}
+	}
 }

@@ -1,6 +1,79 @@
+pathway_commission:
+  class: sfPropelRouteCollection
+  options:
+    model:                Course
+    module:               pathway_commission
+    prefix_path:          pathway_commission
+    column:               id
+    with_wildcard_routes: true
+
+pathway:
+  class: sfPropelRouteCollection
+  options:
+    model:                Pathway
+    module:               pathway
+    prefix_path:          pathway
+    column:               id
+    with_wildcard_routes: true
+
+student_examination_repproved_subject:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentExaminationRepprovedSubject
+    module:               student_examination_repproved_subject
+    prefix_path:          student_examination_repproved_subject
+    column:               id
+    with_wildcard_routes: true
+
+add:
+  url: /add
+  param: { module: commission, action: add }
+
+holiday:
+  class: sfPropelRouteCollection
+  options:
+    model:                Holiday
+    module:               holiday
+    prefix_path:          holiday
+    column:               id
+    with_wildcard_routes: true
+
+student_disciplinary_sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+
+sanction:
+  class: sfPropelRouteCollection
+  options:
+    model:                StudentDisciplinarySanction
+    module:               sanction
+    prefix_path:          sanction
+    column:               id
+    with_wildcard_routes: true
+student_print_analytical:
+  url:  /student/:id/printAnalytical
+  param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
+
+move_course_students:
+  url:  move_course_students
+  param:  { module: shared_course, action: moveStudents }
+
+save_calificate_non_numerical_mark:
+  url:  course_student_mark/saveCalificateNonNumericalMark
+  param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
+
+save_resolve_problematic_students:
+  url:  tentative_repproved_student/save
+  param:  { module: tentative_repproved_student, action: save }
 
 rating_report:
   url:  rating_report
@@ -53,6 +126,10 @@ print_table:
   url:   /printTable
   param: { module: course_student_mark, action: printTable }
 
+print_pathway_marks:
+  url:   /printPathwayMarks
+  param: { module: pathway_commission, action: printPathwayMarks }
+
 division_show_courses:
   url:  /showCourses
   param:  {module: division, action: showCourses}
@@ -82,6 +159,18 @@ sanction_type:
 report_card:
   url: /report_card
   param: { module: report_card, action: index }
+
+social_card:
+  url: /student/:id/printSocialCard
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait, page-size:Legal }
+
+export_not_totally_approved_report_cards:
+  url: /report_card/Boletines_adeudan_materias.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf }
+
+export_totally_approved_report_cards:
+  url: /report_card/Boletines_aprobados.pdf
+  param: { module: report_card, action: subsetReportCardsToPDF, sf_format: pdf, all_approved: true }
 
 export_report_cards:
   url: /report_card/Boletines.pdf
@@ -239,7 +328,7 @@ commission:
   options:
     model:                Course
     module:               commission
-    prefix_path:          comisiones
+    prefix_path:          commission
     column:               id
     with_wildcard_routes: true
 
@@ -508,11 +597,6 @@ create_course_division:
   requirements:
     career_subject_id: \d+
 
-generate_backup:
-  url:  /generar-backup-del-sistema
-  params:
-    module: mainBackend
-    action: generateBackup
 
 personal:
   class: sfPropelRouteCollection

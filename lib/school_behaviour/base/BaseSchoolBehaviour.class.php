@@ -296,7 +296,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
    * @param Boolean $filter_by_orientation
    * @return Criteria
    */
-  public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation)
+  public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation = true)
   {
     return StudentPeer::doSelect($this->getAvailableStudentsForDivisionCourseSubjectCriteria($course_subject, $criteria, $filter_by_orientation));
 
@@ -1045,6 +1045,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
     $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
     CareerSubjectSchoolYearPeer::sorted($c);
 

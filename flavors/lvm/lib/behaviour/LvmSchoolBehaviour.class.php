@@ -109,7 +109,7 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
    * @param Boolean $filter_by_orientation
    * @return Criteria
    */
-  public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation)
+  public function getAvailableStudentsForDivisionCourseSubject(CourseSubject $course_subject, $criteria = null, $filter_by_orientation = false)
   {
     $filter_by_orientation = false;
     return StudentPeer::doSelect($this->getAvailableStudentsForDivisionCourseSubjectCriteria($course_subject, $criteria, $filter_by_orientation));
@@ -151,17 +151,11 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
 
     $results = array();
 
-    //var_dump($course_type);
-    //die(var_dump($course_subject_students));
     foreach ($course_subject_students as $css)
     {
       if ($css->getCourseSubject()->getCourseType() == $course_type)
       {
         $results[] = $css;
-      }
-      else
-      {
-      //  var_dump($css->getCourseSubject()->getCourseType());
       }
 
     }

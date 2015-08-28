@@ -32,45 +32,46 @@
         <?php echo __('Student'); ?>
       </th>
       <?php $subject_configuration = $course_subject->getCareerSubjectSchoolYear()->getConfiguration(); ?>
-      
-      <?php for ($i = 1; $i <= $subject_configuration->getCourseMarks(); $i++): ?>
-        <th>
-          <?php if(($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM) && ($i == $subject_configuration->getCourseMarks())): ?>
-            <?php echo __('Final mark'); ?>
-          <?php else: ?>
-            <?php echo __('Mark %number%', array('%number%' => $i));?>
-          <?php endif; ?>
-        </th>
-      <?php endfor; ?>
-      <?php if ($final_period ): ?>
-        <?php if($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM): ?>
-          <th><?php echo __('Final average') ?></th>
-        <?php else: ?>
-          <th><?php echo __('Average') ?></th>
-        <?php endif; ?>
-        <th><?php echo __('Result'); ?></th>
-      <?php endif; ?>
+
+	    <?php for ($i = 1; $i <= $subject_configuration->getCourseMarks(); $i++): ?>
+		    <th>
+			    <?php if(($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM) && ($i == 3)): ?>
+				    <?php echo __('Final mark'); ?>
+			    <?php else: ?>
+				    <?php echo __('Mark %number%', array('%number%' => $i));?>
+			    <?php endif; ?>
+		    </th>
+	    <?php endfor; ?>
+
+	    <?php if ($final_period ): ?>
+		    <?php if($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM): ?>
+			    <th><?php echo __('Final average') ?></th>
+		    <?php else: ?>
+			    <th><?php echo __('Average') ?></th>
+		    <?php endif; ?>
+		    <th><?php echo __('Result'); ?></th>
+	    <?php endif; ?>
     </tr>
   </thead>
-  <tbody>
-    <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
-      <?php $course_result = $course_subject_student->getCourseResult(); ?>
+	<tbody>
+	<?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
+		<?php $course_result = $course_subject_student->getCourseResult(); ?>
 
-      <tr<?php echo (($final_period && !is_null($course_result)) ? " class='".$course_result->getClass()."'" : ""); ?>>
+		<tr<?php echo (($final_period && !is_null($course_result)) ? " class='".$course_result->getClass()."'" : ""); ?>>
 
-        <td><?php echo $course_subject_student->getStudent()->getFileNumber($career); ?></td>
-        <td><?php echo $course_subject_student->getStudent(); ?></td>
-        <?php $tmp_sum = 0; ?>
+			<td><?php echo $course_subject_student->getStudent()->getFileNumber($career); ?></td>
+			<td><?php echo $course_subject_student->getStudent(); ?></td>
+			<?php $tmp_sum = 0; ?>
 
-        <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm): ?>
-          <td><?php echo $cssm->getStringMark(); ?></td>
-          <?php $tmp_sum += $cssm->getStringMark();?>
-        <?php endforeach; ?>
-        <?php if ($final_period ): ?>
-          <td><?php echo $course_subject_student->getMarksAverage(); ?></td>
-          <td><?php echo $course_result; ?></td>
-        <?php endif; ?>
-      </tr>
-    <?php endforeach; ?>
-  </tbody>
+			<?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm): ?>
+				<td><?php echo $cssm->getStringMark(); ?></td>
+				<?php $tmp_sum += $cssm->getStringMark();?>
+			<?php endforeach; ?>
+			<?php if ($final_period ): ?>
+				<td><?php echo $course_subject_student->getMarksAverage(); ?></td>
+				<td><?php echo $course_result; ?></td>
+			<?php endif; ?>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
 </table>

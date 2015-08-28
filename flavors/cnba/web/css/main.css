@@ -1195,14 +1195,14 @@ table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
 {
   border: 1px solid black;
   padding: 1px;
-  background-color:  #F29A79 !important;
+  background-color: yellow !important;
 }
 
 .box_free
 {
   border: 1px solid black;
   padding: 1px;
-  background-color: yellow !important;
+  background-color: #F29A79 !important;
 }
 
 .box_justificated
@@ -1945,4 +1945,31 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_show_assistance_report a
 {
   background-image: url('../images/report.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
+{
+  background-image: url('../images/unchain.png') !important;
+}
+
+.sf_admin_action_create_last_year_divisions a
+{
+  background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_add_subject a
+{
+  background-image: url('../images/admin-subjects.png') !important;
+}
+
+#change-role {
+  color: #FFF !important;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
 }

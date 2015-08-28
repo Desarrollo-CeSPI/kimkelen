@@ -21,6 +21,12 @@
 
 class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
 {
+
+  public function __toString()
+  {
+    return SchoolBehaviourFactory::getEvaluatorInstance()->getStudentRepprovedResultString($this);
+  }
+
   public function getStudent()
   {
     return $this->getCourseSubjectStudent()->getStudent();
@@ -33,6 +39,11 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     $c->add(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, $this->getId());
 
     return StudentExaminationRepprovedSubjectPeer::doSelectOne($c);
+  }
+
+  public function getClass()
+  {
+    return 'reprobado';
   }
 
   public function getSubject()

@@ -74,6 +74,9 @@ classes:
       current_period:
         type: integer
         default:  1
+      is_pathway:
+        type: boolean
+        default: false
       _indexes:
         course_division: [school_year_id, division_id]
 
@@ -185,6 +188,10 @@ classes:
         required:         false
         onUpdate:         cascade
         onDelete:         setnull
+      is_not_averageable:
+        description: El alumno no será calificado numéricamente en este curso
+        type: boolean
+        default:  false
       _uniques:
         course_subject_student_unique: [ course_subject_id, student_id ]
       _indexes:
@@ -260,13 +267,12 @@ classes:
       id:
       created_at:
       course_subject_student_id:
-        description:      Referencia a la cursada_alumno
-        type:             integer
-        foreignTable:     course_subject_student
-        foreignReference: id
-        required:         true
-        onUpdate:         cascade
-        onDelete:         cascade
+        type:              integer
+        foreignTable:      course_subject_student
+        foreignReference:  id
+        required:          true
+        onDelete:          cascade
+        onUpdate:          cascade
       mark_number:
         description:      Posicion de la nota, 1era, 2da, etc
         type:             integer
@@ -469,6 +475,8 @@ classes:
         default: false
       _indexes:
         examination_career_subject_school_year: [career_subject_school_year_id, examination_id]
+      _uniques:
+        examination_subject_unique: [ examination_id, career_subject_school_year_id ]
 
   ExaminationSubjectTeacher:
     tablename: examination_subject_teacher
@@ -537,10 +545,16 @@ classes:
         description:  Fecha en que el alumno rinde la materia
         type: date
         required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
+        required: false
       _indexes:
         course_subject_student_subject_examination_number: [course_subject_student_id, examination_subject_id, examination_number]
         course_subject_student_examination_number: [course_subject_student_id, examination_number]
         course_subject_student_id: [course_subject_student_id, examination_subject_id]
+      _uniques:
+        csse_unique: [ course_subject_student_id, examination_subject_id, examination_number ]
 
   StudentRepprovedCourseSubject:
     tableName:            student_repproved_course_subject
@@ -682,4 +696,8 @@ classes:
       date:
         description:  Fecha en que el alumno rinde
         type: date
+        required: false
+      folio_number:
+        description: Número de folio del examen
+        type: varchar(20)
         required: false

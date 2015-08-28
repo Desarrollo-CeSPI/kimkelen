@@ -93,9 +93,9 @@ class sfGuardGroupPeer extends PluginsfGuardGroupPeer
 
     return self::doSelect($c);
   }
-  
+
   static public function personalizedGroups()
   {
-    return array(self::ADMIN, self::PRECEPTOR, self::PROFESOR, self::JEFE_PRECEPTOR, self::OFICINA_ALUMNOS);
+    return array(self::PRECEPTOR, self::PROFESOR, self::JEFE_PRECEPTOR, self::OFICINA_ALUMNOS);
   }
 }

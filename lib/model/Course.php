@@ -146,6 +146,23 @@ class Course extends BaseCourse
 
   }
 
+	/**
+	 * String representation of the cantBeClosed cause
+	 * @return string
+	 */
+	public function getMessageCantClosePathway()
+	{
+		if ($this->countPathwayStudents() == 0)
+		{
+			return 'The course hasnt any student inscripted.';
+		}
+		else
+		{
+			return 'You must calificate all the students in the course.';
+		}
+
+	}
+
   /**
    * String representation of the cantBeDeleted cause
    *
@@ -169,6 +186,13 @@ class Course extends BaseCourse
     return CourseSubjectStudentPeer::doCount($criteria);
 
   }
+
+	public function countPathwayStudents()
+	{
+		$criteria = CoursePeer::retrievePathwayStudentsCriteria($this->getId());
+		return CourseSubjectStudentPathwayPeer::doCount($criteria);
+
+	}
 
   /*
    * This method returns how many students has been qualified. At any courseSubject
@@ -200,6 +224,19 @@ class Course extends BaseCourse
 
   }
 
+	/**
+	 * Return if the course marks can be edited.
+	 *
+	 * @param PropelPDO $con
+	 *
+	 * return boolean
+	 */
+	public function canEditPathwayMarks(PropelPDO $con = null)
+	{
+		return ($this->countPathwayStudents()) && (!$this->getIsClosed());
+
+	}
+
   /**
    * Return if the course marks can be edited.
    *
@@ -209,7 +246,7 @@ class Course extends BaseCourse
    */
   public function canEditMarks(PropelPDO $con = null)
   {
-    return ($this->countStudents()) && (!$this->getIsClosed()) && $this->isCurrentSchoolYear();
+    return ($this->countStudents()) && (!$this->getIsClosed()) && ($this->isCurrentSchoolYear());
 
   }
 
@@ -283,6 +320,7 @@ class Course extends BaseCourse
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+    $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(StudentPeer::PERSON_ID,  PersonPeer::ID);
     $c->addJoin(PersonPeer::IS_ACTIVE,true);
 
@@ -412,6 +450,7 @@ class Course extends BaseCourse
     $c->add(CourseSubjectStudentMarkPeer::IS_CLOSED, true);
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->add(CourseSubjectPeer::COURSE_ID, $this->getId());
     $c->addDescendingOrderByColumn(CourseSubjectStudentMarkPeer::MARK_NUMBER);
 
@@ -723,8 +762,7 @@ class Course extends BaseCourse
 
   public function canBackPeriodCommission(PropelPDO $con = null)
   {
-
-    if ($this->getCareerSchoolYear()->getIsProcessed())
+    if ($this->getCareerSchoolYear() && $this->getCareerSchoolYear()->getIsProcessed())
       return false;
 
     return $this->getCurrentPeriod() != 1 && $this->isCurrentSchoolYear();
@@ -956,5 +994,81 @@ class Course extends BaseCourse
 
     return CourseSubjectPeer::doSelectOne($c);
   }
+
+  public function canMoveStudents()
+  {
+    return !$this->getIsClosed();
+  }
+  
+  public function isPathway()
+  {
+      return $this->getIsPathway();
+  }
+  
+  public function getPathways()
+  {
+      $pathways = null;
+      if ($this->isPathway())
+      {
+          if ($school_year = $this->getSchoolYear())
+          {
+              $pathways = $school_year->getPathways();
+          }
+      }
+      
+      return $pathways;
+  }
+
+  public function canManagePathwayCourseStudents()
+  {
+      return ( count($this->getCourseSubject()) > 0 );
+  }
+
+	public function CanClosePathway(PropelPDO $con = null)
+	{
+		if ($this->getIsClosed())
+			return false;
+
+
+		if ($this->countPathwayStudents() == 0)
+			return false;
+
+		$c = new Criteria();
+		$c->addJoin(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectStudentPathwayPeer::STUDENT_ID, StudentPeer::ID);
+		$c->addJoin(StudentPeer::PERSON_ID,  PersonPeer::ID);
+		$c->addJoin(PersonPeer::IS_ACTIVE,true);
+
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, $this->getId());
+
+		$c->add(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNULL);
+
+		return CourseSubjectStudentPathwayPeer::doCount($c) == 0;
+
+	}
+
+	public function pathwayClose()
+	{
+		$con = Propel::getConnection();
+		try
+		{
+			$con->beginTransaction();
+			$course_subjects = $this->getCourseSubjects();
+			foreach ($course_subjects as $cs)
+			{
+				$cs->pathwayClose($con);
+			}
+
+			$this->setIsClosed(true);
+			$this->save($con);
+			$con->commit();
+		}
+		catch (Exception $e)
+		{
+			throw $e;
+			$con->rollBack();
+		}
+
+	}
 }
 sfPropelBehavior::add('Course', array('changelog'));

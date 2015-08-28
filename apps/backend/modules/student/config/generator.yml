@@ -155,6 +155,7 @@ generator:
           analytical:
             credentials:  [show_equivalence]
             action: analytical
+            condition: canBeManagedForCareerSubjectAllowed
 
           activate:
             label: Set active

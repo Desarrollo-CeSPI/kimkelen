@@ -203,12 +203,13 @@ table.lefttable tr {
 
 .colsleft{
     float:left;
-    width: 33%;
+    margin-bottom: 15px;
+    width: auto;
 }
 
 .colsright{
-    float:right;
-    width: 60%
+    width: auto;
+    margin-top:50px;
 }
 
 .row{
@@ -260,9 +261,9 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 30px !important;
+  padding:0px 15px !important;
   height: 159px;
-width: 274px;
+  width: 300px;
 }
 
 .rowfirm_responsible{
@@ -270,17 +271,17 @@ width: 274px;
   float:left;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 20px !important;
   height: 159px;
-width: 274px;
+  width: 274px;
+  padding:0px 15px;
 }
 
 .rownotice{
-  border:1px solid #ccc;
-  float:left;
-  margin-top:10px;
-  padding:0px 8px;
-  height:115px;
+    border:1px solid #ccc;
+    float:left;
+    margin-top:10px;
+    padding:0px 8px;
+    height:115px;
 }
 
 .report-header .school-year
@@ -291,13 +292,13 @@ width: 274px;
     float:right;
 
 }
+
 .titletable_signature
 {
     font-size:12px;
     font-weight:bold;
     display:block;
-    padding-left: 20%;
-    padding-top: 42%;
+    padding-top: 130px;
 }
 
 .report-header .school-name-title
@@ -395,4 +396,10 @@ table.gridtable_bordered tr {
   font-size:12px;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+#sfWebDebug,
+.non-printable
+{
+    display: none !important;
 }

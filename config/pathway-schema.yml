@@ -1,0 +1,90 @@
+connection: propel
+description: Modelo de datos de la representacion de programa de trayectorias/excepciones
+
+classes:
+  Pathway:
+    tableName:            pathway
+    description:          Representa una trayectoria
+    columns:
+      id:
+      name:
+        type: varchar(255)
+      school_year_id:
+        description:      Referencia el año lectivo
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required:         true
+
+
+  PathwayStudent:
+    tableName: pathway_student
+    description: Representa la inscripción de un alumno en una trayectoria
+    columns:
+      id:
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+      pathway_id:
+        description:      Referencia a la trayectoria
+        type:             integer
+        foreignTable:     pathway
+        foreignReference: id
+        required:         true
+      year:
+        description: Representa el año para el cual el alumno se inscribe en trayectoria
+        type: integer
+      _uniques:
+        pathway_student: [ pathway_id, student_id ]
+      _indexes:
+        pathway_student_index: [ pathway_id, student_id ]
+
+  CourseSubjectStudentPathway:
+    tableName: course_subject_student_pathway
+    description: Representa la inscripción de un alumno en un curso de trayectoria
+    columns:
+      id:
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+      course_subject_id:
+        description:      Referencia a la materia dentro del curso
+        type:             integer
+        foreignTable:     course_subject
+        foreignReference: id
+        required:         true
+      mark:
+        description: Representa la nota que obtiene el alumno en la trayectoria. Se aprueba con 7 (CNLP).
+        type: decimal
+        size:             5
+        scale:            2
+      approval_date:
+        description: Representa la fecha de aprobación del curso trayectoria
+        type: date
+      pathway_student_id:
+        description:      Referencia a la trayectoria
+        type:             integer
+        foreignTable:     pathway_student
+        foreignReference: id
+        required:         true
+
+  TentativeRepprovedStudent:
+    tableName: tentative_repproved_student
+    description: Representa un alumno que puede llegar a repetir o a ser marcado como trayectoria
+    columns:
+      id:
+      created_at:
+      student_career_school_year_id:
+        type:             integer
+        foreignTable:     student_career_school_year
+        foreignReference: id
+        required:         true
+      is_deleted:
+        type: boolean
+        default: false

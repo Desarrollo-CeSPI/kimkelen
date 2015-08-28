@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -24,7 +24,12 @@ class StudentFree extends BaseStudentFree
   public function __toString()
   {
     sfContext::getInstance()->getConfiguration()->loadHelpers('I18N');
+    if (!is_null($this->getCareerSchoolYearPeriod())) {
     return __('The student is free in the %period%', array('%period%' => $this->getCareerSchoolYearPeriod()));
+    }
+    else {
+      return __('The student is free');
+    }
   }
 
   public function renderChangeLog()

@@ -17,8 +17,6 @@ generator:
         title:      Carreras del año lectivo
         display:    [career]
         object_actions:
-
-
           close:
             action:       close
             condition:    canClose
@@ -56,6 +54,18 @@ generator:
             label:          Create the same last year divisions
             credentials:    [edit_school_year]
             condition:      canCreateLastYearDivisions
+
+          create_last_year_commissions:
+            action:         createLastYearCommissions
+            label:          Create the same last year commissions
+            credentials:    [edit_school_year]
+            condition:      canCreateLastYearCommissions
+
+          matriculate_graduated_from_other_career:
+            action:         matriculateGraduatedFromOtherCareer
+            label:          Matriculate graduated from other career
+            credentials:    [edit_school_year]
+            condition:      canMatriculateGraduatedFromOtherCareer
 
           subjects:
             action:         careerCareerSubjectSchoolYear

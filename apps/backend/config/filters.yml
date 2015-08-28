@@ -9,6 +9,9 @@ state:
   param:
     default_policy: allow
 
+save_output:
+  class: saveOutputFilter
+  
 pm_pdfkit:
   class: pmPDFKitFilter
 

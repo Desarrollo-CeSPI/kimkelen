@@ -54,9 +54,9 @@ class PHPExcel_Shared_OLE_PPS_File extends PHPExcel_Shared_OLE_PPS
 	*/
 	public function __construct($name)
 	{
-		$this->_tmp_dir = '';
+		$this->_tmp_dir = '/tmp';
 		parent::__construct(
-			null, 
+			null,
 			$name,
 			PHPExcel_Shared_OLE::OLE_PPS_TYPE_FILE,
 			null,

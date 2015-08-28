@@ -192,6 +192,12 @@ classes:
         type:             integer
         default:          0
         description:      El estado de un alumno en una carrera (CURSANDO , GRADUADO)
+      graduation_school_year_id:
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+        required: false
+        default: null
       _uniques:
         career_student_unique: [ career_id, student_id ]
       _indexes:
@@ -623,7 +629,7 @@ classes:
         foreignReference: id
         required:         false
         default:          null
-        onDelete:         restrict
+        onDelete:         setnull
       school_year_id:
         type: integer
         foreignTable: school_year

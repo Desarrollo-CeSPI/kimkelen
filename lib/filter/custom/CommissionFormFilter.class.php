@@ -12,10 +12,16 @@ class CommissionFormFilter extends BaseCourseFormFilter
 {
   public function configure()
   {
-    unset($this['starts_at'], $this['quota'], $this['division_id'], $this['related_division_id']);
+    unset($this['starts_at'], $this['quota'], $this['division_id'], $this['related_division_id'], $this['is_pathway']);
 
     $this->getWidget('name')->setOption('with_empty', false);
-    $this->getWidgetSchema()->setHelp('name', 'Se buscara por nombre de comision o por nombre de materia.');
+    $this->getWidgetSchema()->setHelp('name', 'Se buscará por nombre de la comisión.');
+
+    $this->setWidget('subject', new sfWidgetFormFilterInput());
+    $this->getWidget('subject')->setOption('with_empty', false);
+    $this->getWidgetSchema()->setHelp('subject', 'Se buscará por materias de la comisión.');
+
+    $this->setValidator('subject', new sfValidatorPass(array('required' => false)));
     $this->setWidget('year', new sfWidgetFormFilterInput(array('with_empty' => false)));
     $this->setValidator('year', new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))));
 
@@ -25,14 +31,7 @@ class CommissionFormFilter extends BaseCourseFormFilter
     $this->setWidget('current_period', new sfWidgetFormFilterInput(array('with_empty' => false)));
     $this->setValidator('current_period', new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))));
 
-    $w = new sfWidgetFormChoice(array('choices' => array()));
-    $this->setWidget('career_school_year', new dcWidgetAjaxDependence(array(
-        'dependant_widget' => $w,
-        'observe_widget_id' => 'course_filters_school_year_id',
-        "message_with_no_value" => "Seleccione un año electivo y apareceran las carreras que correspondan",
-        'get_observed_value_callback' => array(get_class($this), 'getYears')
-      )));
-
+    $this->setWidget('career_school_year', new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYear', 'criteria' => $this->getCareersCriteria(), 'add_empty' => true)));
 
     $this->setValidator('career_school_year', new sfValidatorPropelChoice(array('required' => false, 'model' => 'CareerSchoolYear', 'column' => 'id')));
 
@@ -45,31 +44,34 @@ class CommissionFormFilter extends BaseCourseFormFilter
 
     $this->getWidgetSchema()->setLabel('current_period', 'Período');
     $this->getWidgetSchema()->setLabel('career_school_year', 'Carrera');
-    $this->getWidgetSchema()->setHelp('career_school_year', 'seleccione alguna de las carreras habilitadas');
+    $this->getWidgetSchema()->setHelp('career_school_year', 'Seleccione alguna de las carreras habilitadas');
+
+    $this->setWidget('teacher', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectTeacher')));
+    $this->setValidator('teacher', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));
+
   }
 
-  public static function getYears($widget, $values)
+  public static function getCareersCriteria()
   {
-    $career_school_years = CareerSchoolYearPeer::retrieveBySchoolYear(null, SchoolYearPeer::retrieveByPK($values));
+    $criteria = new Criteria();
+    $school_year = SchoolYearPeer::retrieveCurrent();
 
-    $choices = array();
-    foreach ($career_school_years as $career_school_year)
-    {
-      $choices[$career_school_year->getId()] = $career_school_year;
-    }
-    $widget->setOption('choices', $choices);
+    $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
 
+    return $criteria;
   }
 
   public function getFields()
   {
     return array_merge(parent::getFields(), array(
         'name' => 'Text',
+        'subject' => 'Text',
         'year' => 'Number',
         'career_school_year' => 'ForeignKey',
         'current_period' => 'Number',
         'school_year_id' => 'ForeignKey',
         'division' => 'ForeignKey',
+        'teacher' => 'ForeignKey',
         'student' => 'ForeignKey'));
 
   }
@@ -82,6 +84,8 @@ class CommissionFormFilter extends BaseCourseFormFilter
       $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID, Criteria::INNER_JOIN);
       $criteria->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $value);
     }
+
+    $criteria->setDistinct(CoursePeer::ID);
   }
 
   public function addStudentColumnCriteria(Criteria $criteria, $field, $value)
@@ -96,11 +100,23 @@ class CommissionFormFilter extends BaseCourseFormFilter
     }
   }
 
+  public function addTeacherColumnCriteria($criteria, $field, $value)
+  {
+    if ($value !== null)
+    {
+      $criteria->addJoin(TeacherPeer::PERSON_ID, PersonPeer::ID);
+      $criteria->addJoin(CourseSubjectTeacherPeer::TEACHER_ID, TeacherPeer::ID);
+      $criteria->addJoin(CourseSubjectTeacherPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+      $criteria->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
+      $criteria->add(PersonPeer::ID,$value);
+    }
+  }
+
   public function addDivisionColumnCriteria(Criteria $criteria, $field, $value)
   {
     if ($value !== null)
     {
-      #Recupero a todos los estudiantes de esa divicion
+      #Recupero a todos los estudiantes de esa division
       $c = New Criteria();
       $c->add(DivisionPeer::ID, $value);
       $c->addJoin(DivisionPeer::ID, DivisionStudentPeer::DIVISION_ID);
@@ -136,15 +152,27 @@ class CommissionFormFilter extends BaseCourseFormFilter
     if ($value['text'] != '')
     {
       $value = $value['text'];
+
+      $criteria->add(CoursePeer::NAME, "%$value%", Criteria::LIKE);
+
+    }
+
+    $criteria->setDistinct(CoursePeer::ID);
+  }
+
+  public function addSubjectColumnCriteria($criteria, $field, $value)
+  {
+    if ($value['text'] != '')
+    {
+      $value = $value['text'];
       $criteria->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
       $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
       $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
       $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID, Criteria::INNER_JOIN);
 
-      $criterion = $criteria->getNewCriterion(CoursePeer::NAME, "%$value%", Criteria::LIKE);
-      $criterion->addOr($criteria->getNewCriterion(SubjectPeer::NAME, "%$value%", Criteria::LIKE));
+      $criterion = $criteria->getNewCriterion(SubjectPeer::NAME, "%$value%", Criteria::LIKE);
 
-      $criteria->add($criterion);
+      $criteria->addOr($criterion);
       $criteria->setDistinct();
     }
   }

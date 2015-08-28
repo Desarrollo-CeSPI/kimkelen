@@ -161,13 +161,13 @@ h2 {
 
 .little-box {
   border:1px solid #ccc;
-  padding: 1px 13px;
+  padding: 7px 22px;
   margin-right: 4px;
 }
 
 table.gridtable_bordered {
     font-family:arial,sans-serif;
-    font-size:11px;
+    font-size:14px;
     color:#333333;
     border:1px solid #ccc;
     border-collapse: collapse;

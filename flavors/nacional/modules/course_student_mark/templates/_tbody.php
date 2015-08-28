@@ -30,7 +30,8 @@
     <?php endforeach; ?>
     
     <td><?php echo ($final_period)? $course_subject_student->getMarksAverage() : '' ?></td>
-    <td></td>
+	  <?php $c = new num2text(); ?>
+	  <td><?php echo ($final_period)? $c->num2str($course_subject_student->getMarksAverage()) : '' ?></td>
     <td></td>
     <td></td>
     <?php if ($is_block):?>

@@ -25,8 +25,6 @@
  */
 class ExaminationSubjectStudentForm extends sfFormPropel
 {
-  //static $_students = array();
-
   public function getAvailableStudentsForDivision()
   {
     return array_merge($this->getObject()->getStudents(), SchoolBehaviourFactory::getInstance()->getAvailableStudentsForExaminationSubject($this->getObject()));
