@@ -4304,6 +4304,38 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>School</source>
                 <target>Escuela</target>
             </trans-unit>
+            <trans-unit>
+                <source>Curso C</source>
+                <target>Curso completo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Curso I</source>
+                <target>Curso incompleto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_ciudad</source>
+                <target>La Plata</target>
+            </trans-unit>
+            <trans-unit>
+                <source>nombre_ultimo_anio_primario</source>
+                <target>6º año de la EPB</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_1</source>
+                <target>Vicedirector/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_2</source>
+                <target>Director/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_3</source>
+                <target>Jefe/a del Dpto. de Alumnos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_4</source>
+                <target>Secretario/a</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
