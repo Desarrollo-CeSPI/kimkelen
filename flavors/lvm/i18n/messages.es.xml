@@ -4386,6 +4386,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>analytic_signature_4</source>
                 <target>Secretario/a</target>
             </trans-unit>
+            <trans-unit>
+                <source>escuela_nombre</source>
+                <target>Liceo Víctor Mercante</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

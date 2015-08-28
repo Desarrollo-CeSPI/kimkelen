@@ -150,8 +150,6 @@ class BaseSubjectStudentAnalytic
 
     public function getSchoolName()
     {
-        //$career_student->getCareer()->getCareerName()
-        //$this->css->getSchoolName();
         if ($this->approved)
         {
             if ($this->approved->getIsEquivalence())
@@ -160,8 +158,7 @@ class BaseSubjectStudentAnalytic
             }
             else
             {
-                //die(get_class($this->css));
-                return $this->css->getStudent()->getCareerStudent()->getCareer()->getCareerName();
+                return 'escuela_nombre'; //$this->css->getStudent()->getCareerStudent()->getCareer()->getCareerName();
             }
         }
         return $this->getNullLabel();
