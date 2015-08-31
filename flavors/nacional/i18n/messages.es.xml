@@ -4300,6 +4300,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway mark is averaged with course subject average marks.</source>
                 <target>Se promedia la nota obtenida en trayectorias con el promedio de notas de cursada.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -4280,6 +4280,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway</source>
                 <target>Trayectoria</target>
             </trans-unit>
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

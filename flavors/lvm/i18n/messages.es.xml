@@ -4321,6 +4321,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway list</source>
                 <target>Promociones por excepción</target>
             </trans-unit>
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
           </body>
     </file>
 </xliff>

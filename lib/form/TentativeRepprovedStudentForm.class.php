@@ -12,13 +12,22 @@ class TentativeRepprovedStudentForm extends sfForm
 
 	public function configure()
 	{
+
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
-		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'peer_method' => 'getStudents',     'multiple'  => true,
+
+
+		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'peer_method' => 'getStudents', 'multiple'  => true,
 			"renderer_class"  => "csWidgetFormSelectDoubleList"
 		)));
 
-		$this->validatorSchema['students'] = new sfValidatorPass();
+
+
+
+		//$this->getWidgetSchema()->setDefault('pathway_student_list', array_map(create_function('$st', 'return $st;'), PathwayStudentPeer::getStudentsForSchoolYear(SchoolYearPeer::retrieveCurrent())));
+
+
+		$this->validatorSchema['pathway_student_list'] = new sfValidatorPass();
 		$this->validatorSchema->setOption('allow_extra_fields', true);
 
 		$this->getWidgetSchema()->setNameFormat('tentative_repproved_students[%s]');
@@ -26,9 +35,29 @@ class TentativeRepprovedStudentForm extends sfForm
 		$this->validatorSchema->setPostValidator(new sfValidatorCallback(array("callback" => array($this, "validatePathway"))));
 	}
 
+
+	public function updateDefaultsFromObject()
+	{
+		parent::updateDefaultsFromObject();
+
+		if (isset($this->widgetSchema['pathway_student_list']))
+		{
+			$values = array();
+			foreach ($this->object->getStudents() as $obj)
+			{
+				$values[$obj->getId()] = $obj->getId();
+			}
+
+			$this->setDefault('pathway_student_list', $values);
+		}
+
+	}
+
+
+
 	public function save($con = null)
 	{
-		if (!isset($this->widgetSchema['students']))
+		if (!isset($this->widgetSchema['pathway_student_list']))
 		{
 			// somebody has unset this widget
 			return;
@@ -47,15 +76,17 @@ class TentativeRepprovedStudentForm extends sfForm
 			{
 				foreach ($values as $value)
 				{
+
 					$c = new Criteria();
+
 					$c->addJoin(TentativeRepprovedStudentPeer::STUDENT_CAREER_SCHOOL_YEAR_ID, StudentCareerSchoolYearPeer::ID);
 					$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
 					$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $value);
 
-					$trs = TentativeRepprovedStudentPeer::doSelectOne($c);
+					$trs = TentativeRepprovedStudentPeer::doSelectOne($value);
 
 					$pathway_student = new PathwayStudent();
-					$pathway_student->setStudentId($value);
+					$pathway_student->setStudentId($trs->getStudentCareerSchoolYear()->getStudentId());
 					$pathway_student->setPathway(PathwayPeer::retrieveCurrent());
 					$pathway_student->setYear($trs->getStudentCareerSchoolYear()->getYear());
 					$pathway_student->save($con);

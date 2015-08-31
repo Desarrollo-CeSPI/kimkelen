@@ -40,6 +40,10 @@ generator:
             action:         califications
             credentials:    [edit_division_course_califications]
             condition:      canEditPathwayMarks
+
+          print_califications:
+            action: printCalifications
+
           close:
             label:        Close
             action:       close
