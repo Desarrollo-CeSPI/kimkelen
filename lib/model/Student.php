@@ -1331,6 +1331,19 @@ class Student extends BaseStudent
 		return $this->countPathwayStudents($c) > 0;
 	}
 
+	public function owsCorrelativeFor($career_subject) {
+    //obtengo las correlativas de la materia recibida por parámetro
+    $correlatives = $career_subject->getCorrelativeCareerSubjects();
+
+		$career_subjects_repproveds_array = array();
+
+		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
+			$career_subjects_repproveds_array[] = $repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject();
+		}
+
+		return count(array_intersect($correlatives, $career_subjects_repproveds_array)) > 0;
+	}
+
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

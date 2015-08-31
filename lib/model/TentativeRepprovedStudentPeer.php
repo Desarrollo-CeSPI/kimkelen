@@ -18,13 +18,16 @@ class TentativeRepprovedStudentPeer extends BaseTentativeRepprovedStudentPeer
 		$c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
 		$c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
+		$values = array();
 		foreach (self::doSelect($c) as $s)
 		{
-			$values[] = $s->getStudentCareerSchoolYear()->getStudent();
+			$values[$s->getId()] = $s;
 		}
 
 		return $values;
 	}
+
+
 
 	public static function doSelectNonDeleted() {
 		$c = new Criteria();
