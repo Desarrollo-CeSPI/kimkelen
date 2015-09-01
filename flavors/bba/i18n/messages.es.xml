@@ -4427,6 +4427,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Ows correlative</source>
                 <target>Debe correlativa</target>
             </trans-unit>
+            <trans-unit>
+                <source>Pathway commission list</source>
+                <target>Listado de comisiones de Promoción por excepción</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
