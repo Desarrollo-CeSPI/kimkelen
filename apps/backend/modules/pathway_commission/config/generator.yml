@@ -16,12 +16,12 @@ generator:
         pathways_list:
           label: "Trayectorias de la comisión"
       list:
-        title:              Listado de comisiones de trayectoria
+        title:             Pathway commission list
         display:           [name, _pathways_list]
         actions:
           _new:
             credentials:    [new_course]
-            label:          Nueva comisión de trayectoria
+            label:          Nueva comisión
         object_actions:
           _show:
             credentials:    [show_course]
@@ -55,20 +55,20 @@ generator:
         display: [name, school_year_id]
       form:    ~
       show:
-        title: "Comisión de trayectoria '%%name%%'"
+        title: "Comisión '%%name%%'"
         display: [ name, quota, school_year, division, _show_pathways_list]
       edit:
         actions:
           _list:
-            label:        Volver al listado de comisiones de trayectoria
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de comisiones de trayectoria
+            label:        Guardar y volver al listado
       new:
-        title: 'Nueva comisión de trayectoria'
+        title: 'Nueva comisión'
         actions:
           _list:
-            label:        Volver al listado de comisiones de trayectoria
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de comisiones de trayectoria
+            label:        Guardar y volver al listado
           _save_and_add:
-            label:        Guardar y agregar otra comisión de trayectoria
+            label:        Guardar y agregar otra comisión
