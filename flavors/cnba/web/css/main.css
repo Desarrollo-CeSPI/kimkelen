@@ -1973,3 +1973,8 @@ div.wc-cal-event{
     color: green;
     text-transform: uppercase;
 }
+
+.sf_admin_action_print_califications a
+{
+  background-image: url('../images/calification_sheet.png') !important;
+}
