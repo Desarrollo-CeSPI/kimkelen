@@ -776,4 +776,9 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return self::FEBRUARY;
   }
 
+	public function getPathwayPromotionNote()
+	{
+		return self::PATHWAY_PROMOTION_NOTE;
+	}
+
 }
