@@ -64,12 +64,12 @@
 		        <?php $final_mark = bcdiv($course_subject_student->getMark() + $course_marks_avg, 2, 2); ?>
 	        <?php else: ?>
 	          <?php $course_result = __('Dissaproved'); ?>
-		        <?php $final_mark = $course_subject_student->getMark(); ?>
+		        <?php $final_mark = $course_subject_student->getMark() == '0.00' ? 'L' : $course_subject_student->getMark(); ?>
 	        <?php endif; ?>
           <tr>
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
             <td><?php echo $course_subject_student->getStudent() ?></td>
-            <td><?php echo $course_subject_student->getMark(); ?></td>
+            <td><?php echo $course_subject_student->getMark() == '0.00' ? 'L' : $course_subject_student->getMark(); ?></td>
             <td><?php echo $final_mark ?></td>
             <td><?php echo $course_result ?></td>
           </tr>
