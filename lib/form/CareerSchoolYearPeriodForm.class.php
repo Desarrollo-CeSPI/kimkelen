@@ -42,7 +42,7 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
     $this->getWidget('career_school_year_period_id')->setLabel( 'Parent');
     $this->getWidgetSchema()->setHelp('career_school_year_period_id', 'Periodo padre contenedor, seleccionar solo cuando es un periodo bimestral');
 
-    $this->setWidget('start_at', new csWidgetFormDateInput());
+	  $this->setWidget('start_at', new csWidgetFormDateInput());
     $this->setValidator('start_at', new mtValidatorDateString());
 
     $this->setWidget('end_at', new csWidgetFormDateInput());
@@ -74,4 +74,18 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
     return $values;
 
   }
+
+	public function setParentWidget($career_school_year_id)
+	{
+
+		$c = new Criteria();
+
+		$c->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
+		$this->setWidget('career_school_year_period_id', new sfWidgetFormPropelChoice(array(
+			'model'     => 'CareerSchoolYearPeriod',
+			'criteria' => $c,
+		)));
+
+		$this->setValidator('career_school_year_period_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'column' => 'id', 'required' => false)));
+	}
 }

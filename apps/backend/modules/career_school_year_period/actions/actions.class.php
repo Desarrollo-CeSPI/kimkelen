@@ -64,6 +64,7 @@ class career_school_year_periodActions extends autoCareer_school_year_periodActi
     $this->form = $this->configuration->getForm();
     $this->career_school_year_period = $this->form->getObject();
     $this->form->setDefault('career_school_year_id', $this->getUser()->getReferenceFor('career_school_year'));
+	  $this->form->setParentWidget($this->getUser()->getReferenceFor('career_school_year'));
   }
 
   public function addSortCriteria($criteria)
@@ -79,7 +80,7 @@ class career_school_year_periodActions extends autoCareer_school_year_periodActi
     $career_school_year_period = $this->getRoute()->getObject();
     $career_school_year_period->close();
 
-    $this->getUser()->setFlash("notice", "El periodo fue cerrado existosamente.");
+    $this->getUser()->setFlash("notice", "El periodo fue cerrado exitosamente.");
     $this->redirect("@career_school_year_period");
   }
 
