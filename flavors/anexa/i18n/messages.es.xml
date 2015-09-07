@@ -4255,6 +4255,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Print social card</source>
             <target>Imprimir ficha social</target>
             </trans-unit>
+<<<<<<< HEAD
             <trans-unit>
                 <source>confirm</source>
                 <target>Confirmar</target>
@@ -4263,6 +4264,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Password changed successfuly</source>
                 <target>La contraseña fue restablecida satisfactoriamente.</target>
             </trans-unit>
+=======
+>>>>>>> d901a0adc39475fcfc6557645524d87988c99f40
         </body>
     </file>
 </xliff>
