@@ -99,6 +99,9 @@ root:
         title: Reportes
         credentials: [show_school_year]
         menu:
+          student_repproved_track:
+            title: Seguimiento de Previas
+            url: student_stats/filterForStudentRepprovedTrack
           student_reports:
             title: Reportes de estudiantes
             url: student_stats/filterForStudentStats

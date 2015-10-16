@@ -339,4 +339,5 @@ class MultipleStudentAttendanceForm extends sfForm
   {
     return array_merge(parent::getJavascripts(), array('student_attendance.js'));
   }
+
 }

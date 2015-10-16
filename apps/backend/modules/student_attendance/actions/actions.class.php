@@ -30,6 +30,27 @@
 class student_attendanceActions extends sfActions
 {
 
+  private function getDays($limit)
+  {
+    $days = array();
+
+    for ($i = 0; $i <= $limit; $i++)
+    {
+      $days[] = strtotime("+$i day", $start_date);
+    }
+
+    return $days;
+
+  }
+
+  public function executePrintAttendanceTemplate(sfWebRequest $request)
+  {
+    
+    $this->division = DivisionPeer::retrieveByPK($request->getParameter('division_id'));
+    $this->students = $this->division->getStudents();
+    $this->days = date("t"); // la funcion esta devuelve el numero de dias del mes actual
+  }
+
   public function executeSelectValuesForAttendanceDay(sfWebRequest $request)
   {
     $this->getUser()->clearAttribute('back_url');
@@ -157,6 +178,10 @@ class student_attendanceActions extends sfActions
     elseif ($request->hasParameter("next_division"))
     {
       $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&day=" .$multiple_student_attendance['day'] . "&course_subject_id=");
+    }
+    elseif ($request->hasParameter("print_attendance_template"))
+    {
+      $this->redirect("student_attendance/printAttendanceTemplate?division_id=" . $multiple_student_attendance['division_id']. " &year=");
     }
 
     $this->setTemplate('StudentAttendance');

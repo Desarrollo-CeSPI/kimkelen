@@ -32,6 +32,46 @@ require_once dirname(__FILE__) . '/../lib/student_statsGeneratorHelper.class.php
  */
 class student_statsActions extends autoStudent_statsActions
 {
+  
+  public function executeFilterForStudentRepprovedTrack(sfWebRequest $request)
+  {
+    $this->form = new StudentRepprovedTrackForm();
+    if ($request->isMethod('POST'))
+    {
+      $this->form->bind($request->getParameter($this->form->getNAme())); 
+      if ($this->form->isValid())
+      {
+        $params = $request->getParameter('student_repproved_track');
+
+        $this->getUser()->setReferenceFor($this, 'student_stats');
+        $this->redirect('student_stats/studentRepprovedTrack?id=' . $params['division_id']);
+      }     
+    }
+
+  }
+
+    public function executeStudentRepprovedTrack(sfWebRequest $request)
+  {
+    $this->setLayout('cleanLayout');
+
+    $this->division = DivisionPeer::retrieveByPk($request->getParameter('id'));
+
+    if (null === $this->division)
+    {
+      $this->getUser()->setFlash('error', 'No se ha indicado ninguna división');
+      $this->redirect('@student_repproved_track');
+    }
+
+    $this->buildRepprovedTrack();
+  }
+
+  public function buildRepprovedTrack()
+  {
+    $this->students = $this->division->getStudents();
+    $this->career_subjects = $this->division->getCareerSubjects(); // materias asoc a division
+    
+  }
+
   public function executeFilterForStudentStats(sfWebRequest $request)
   {
     $this->form = new StudentReportsForm();
