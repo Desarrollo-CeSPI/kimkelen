@@ -4287,7 +4287,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>School</source>
                 <target>Escuela</target>
             </trans-unit>
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
+            <trans-unit>
+                <source>confirm</source>
+                <target>Confirmar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
-

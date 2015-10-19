@@ -21,6 +21,10 @@ class CommissionFormFilter extends BaseCourseFormFilter
     $this->getWidget('subject')->setOption('with_empty', false);
     $this->getWidgetSchema()->setHelp('subject', 'Se buscará por materias de la comisión.');
 
+	  $this->setWidget('classroom_id', new sfWidgetFormPropelChoice(array('model' => 'Classroom', 'add_empty' => true)));
+	  $this->setValidator('classroom_id', new sfValidatorPass(array('required' => false)));
+	  $this->getWidgetSchema()->setLabel('classroom_id', 'Aula');
+
     $this->setValidator('subject', new sfValidatorPass(array('required' => false)));
     $this->setWidget('year', new sfWidgetFormFilterInput(array('with_empty' => false)));
     $this->setValidator('year', new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))));
@@ -70,6 +74,7 @@ class CommissionFormFilter extends BaseCourseFormFilter
         'career_school_year' => 'ForeignKey',
         'current_period' => 'Number',
         'school_year_id' => 'ForeignKey',
+	      'classroom_id' => 'ForeignKey',
         'division' => 'ForeignKey',
         'teacher' => 'ForeignKey',
         'student' => 'ForeignKey'));
@@ -185,4 +190,15 @@ class CommissionFormFilter extends BaseCourseFormFilter
       $criteria->addJoin(SchoolYearPeer::ID, CoursePeer::SCHOOL_YEAR_ID, Criteria::INNER_JOIN);
     }
   }
+
+	public function addClassroomIdColumnCriteria($criteria, $field, $value)
+	{
+		$criteria->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+		$criteria->addJoin(CourseSubjectPeer::ID, CourseSubjectDayPeer::COURSE_SUBJECT_ID, Criteria::INNER_JOIN);
+		$criteria->addJoin(CourseSubjectDayPeer::CLASSROOM_ID, ClassroomPeer::ID, Criteria::INNER_JOIN);
+		$criteria->add(ClassroomPeer::ID, $value);
+
+
+
+	}
 }

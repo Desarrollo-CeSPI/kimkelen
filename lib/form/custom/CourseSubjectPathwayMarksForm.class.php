@@ -49,6 +49,7 @@ class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 
 			  $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student->getMark()), array('class' => 'mark'));
         $validators[$widget_name] = new sfValidatorPass();
+			  $this->getWidgetSchema()->setHelp($widget_name, 'Para libre ingrese 0 (cero)');
 		}
 
 		$this->setWidgets($widgets);
@@ -80,7 +81,7 @@ class CourseSubjectPathwayMarksForm extends BaseCourseSubjectForm
 		foreach ($this->object->getCourseSubjectStudentPathways() as $course_subject_student)
 		{
 				$value = $values[$course_subject_student->getId()];
-			  if (($value == "") || ($value == "0.00")){
+			  if (($value == "")){
 				  $value = null;
 			  }
 				$course_subject_student->setMark($value);

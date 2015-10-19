@@ -769,7 +769,7 @@ class CourseSubject extends BaseCourseSubject
 		{
 			$evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();
 
-				if ($course_subject_student_pathway->getMark() >= constant("{$evaluator_instance}::PATHWAY_PROMOTION_NOTE"))
+				if ($course_subject_student_pathway->getMark() >= $evaluator_instance->getPathwayPromotionNote())
 				{
 
 					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();

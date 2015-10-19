@@ -61,8 +61,14 @@
             <div class="help">
               <?php echo $form["mark"]->renderHelp() ?>
             </div>
+
+	          <?php $course_subject_student = $form->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent(); ?>
+	          <div class="ows">
+		          <?php echo $course_subject_student->getStudent()->owsCorrelativeFor($examination_repproved_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?>
+	          </div>
+
             <div style="clear: both; margin-top: 1px;"></div>
-            <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $form->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent())) ?>
+            <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $course_subject_student)) ?>
           </div>
 
         <?php endforeach ?>

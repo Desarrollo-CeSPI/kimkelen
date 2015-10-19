@@ -4253,7 +4253,15 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Print social card</source>
-            <target>Imprimir ficha social</target>
+                <target>Imprimir ficha social</target>
+            </trans-unit>
+            <trans-unit>
+                <source>confirm</source>
+                <target>Confirmar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
             </trans-unit>
         </body>
     </file>

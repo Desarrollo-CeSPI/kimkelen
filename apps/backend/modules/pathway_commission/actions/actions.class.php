@@ -169,6 +169,16 @@ class pathway_commissionActions extends autoPathway_commissionActions
 
 	}
 
+	public function executePrintCalifications(sfWebRequest $request)
+	{
+		$this->setLayout('cleanLayout');
+
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "commission");
+
+		$this->course_subjects = $this->course->getCourseSubjects();
+  }
+
 	public function executeClose(sfWebRequest $request)
 	{
 		$this->course = $this->getRoute()->getObject();

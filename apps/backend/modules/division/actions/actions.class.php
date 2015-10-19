@@ -299,53 +299,54 @@ class divisionActions extends autoDivisionActions
     }
   }
 
-  public function executeExportCalificationTable(sfWebRequest $request)
-  {
-    $this->division = DivisionPeer::retrieveByPk($request->getParameter('id'));
-    $this->buildCalificationReport();
+	/*
+public function executeExportCalificationTable(sfWebRequest $request)
+{
+	$this->division = DivisionPeer::retrieveByPk($request->getParameter('id'));
+	$this->buildCalificationReport();
 
-    sfConfig::set('sf_web_debug', false);
+	sfConfig::set('sf_web_debug', false);
 
-    $this->setLayout(false);
+	$this->setLayout(false);
 
-    $renderer = new DivisionCalificationReportRenderer();
+	$renderer = new DivisionCalificationReportRenderer();
 
-    ini_set("max_execution_time",0);
+	ini_set("max_execution_time",0);
 
-    //Title & headers
-    $renderer->renderTitle(sprintf("Planilla de calificaciones - Fecha: %s", date("d/m/Y")));
-    $renderer->renderSubTitle(sprintf("Division %s, año lectivo %s", $this->division, $this->division->getSchoolYear()));
+	//Title & headers
+	$renderer->renderTitle(sprintf("Planilla de calificaciones - Fecha: %s", date("d/m/Y")));
+	$renderer->renderSubTitle(sprintf("Division %s, año lectivo %s", $this->division, $this->division->getSchoolYear()));
 
-    $renderer->renderColumnHeaders($this->course_subjects);
+	$renderer->renderColumnHeaders($this->course_subjects);
 
-    //Building column headers
-    $renderer->renderCourseSubjectHeader($this->configurations);
-    //Building body rows
-    foreach ($this->students as $student)
-    {
-      $renderer->renderStudentCalificationRow($student, $this->course_subjects);
-    }
+	//Building column headers
+	$renderer->renderCourseSubjectHeader($this->configurations);
+	//Building body rows
+	foreach ($this->students as $student)
+	{
+		$renderer->renderStudentCalificationRow($student, $this->course_subjects);
+	}
 
-    foreach($renderer->getHtmlHeaders() as $field => $name)
-    {
-      $this->getResponse()->setHttpHeader($field,$name);
-    }
+	foreach($renderer->getHtmlHeaders() as $field => $name)
+	{
+		$this->getResponse()->setHttpHeader($field,$name);
+	}
 
-    return $this->renderText($renderer->renderContent());
-  }
-  /*
-  public function executeExportCalificationTable(sfWebRequest $request)
-  {
-    $this->executePrintCalification($request);
+	return $this->renderText($renderer->renderContent());
+}
+*/
+public function executeExportCalificationTable(sfWebRequest $request)
+{
+	$this->executePrintCalification($request);
 
-    $response = $this->getResponse();
+	$response = $this->getResponse();
 
-    $response->setHttpHeader("Content-type","application/vnd.ms-excel; name='excel'; charset='utf-8'");
-    $response->setHttpHeader('Content-Disposition', 'attachment; filename="planilla_calificaciones.xls"');
-    $response->setHttpHeader("Pragma","no-cache");
-    $response->setHttpHeader("Expires","0");
-  }
-  */
+	$response->setHttpHeader("Content-type","application/vnd.ms-excel; name='excel'; charset='utf-8'");
+	$response->setHttpHeader('Content-Disposition', 'attachment; filename="planilla_calificaciones.xls"');
+	$response->setHttpHeader("Pragma","no-cache");
+	$response->setHttpHeader("Expires","0");
+}
+
 
   public function executeCourseConfiguration(sfWebRequest $request)
   {

@@ -1928,6 +1928,16 @@ div.wc-cal-event{
   background-image: url('../images/create-division.png') !important;
 }
 
+.sf_admin_action_create_last_year_divisions a
+{
+    background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_print_califications a
+{
+    background-image: url('../images/calification_sheet.png') !important;
+}
+
 .sf_admin_action_add_subject a
 {
   background-image: url('../images/admin-subjects.png') !important;

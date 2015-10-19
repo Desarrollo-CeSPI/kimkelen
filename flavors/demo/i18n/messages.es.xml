@@ -2934,7 +2934,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Course minimun mark</source>
-                <target>Nota minima para aprobar</target>
+                <target>Nota mínima para aprobar</target>
             </trans-unit>
             <trans-unit>
                 <source>Attendance for subject</source>
@@ -4243,7 +4243,26 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Pathway</source>
                 <target>Trayectoria</target>
             </trans-unit>
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Pathway commission list</source>
+                <target>Listado de comisiones de Promoción por excepción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>confirm</source>
+                <target>Confirmar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
-
