@@ -4281,6 +4281,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Trayectoria</target>
             </trans-unit>
             <trans-unit>
+                <source>School</source>
+                <target>Escuela</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Ows correlative</source>
                 <target>Debe correlativa</target>
             </trans-unit>

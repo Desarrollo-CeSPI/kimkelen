@@ -1,4 +1,6 @@
-<?php /*
+<?php
+
+/*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -15,18 +17,30 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php
+ */
 
-class studentComponents extends sfComponents
+/**
+ * Description of saveOutputFilter
+ *
+ * @author lucianoc
+ */
+class saveOutputFilter extends sfFilter
 {
 
-    public function executeComponent_analytical_table()
+    public function execute($filterChain)
     {
-        //De aca recupero el nombre del establecimiento
-        $this->career_student = $this->getVar('career_student');
-        $this->student = $this->career_student->getStudent();
-        $this->object = AnalyticalBehaviourFactory::getInstance($this->student);
+        $filterChain->execute($filterChain);
+        $action_name = $this->getContext()->getActionName();
+        $action = $this->getContext()->getController()->getActionStack()->getLastEntry()->getActionInstance();
+        $post_action_name = 'postExecute'.ucfirst($action_name);
+        
+        if (method_exists($action, $post_action_name))
+        {
+            $action->$post_action_name($this->getContext()->getRequest());
+        }
+        /*
+        $format = $this->getContext()->getRequest()->getParameter('sf_format');
+        */
     }
 
 }

@@ -4424,6 +4424,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>No hay alumnos problemáticos.</target>
             </trans-unit>
             <trans-unit>
+                <source>School</source>
+                <target>Escuela</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>

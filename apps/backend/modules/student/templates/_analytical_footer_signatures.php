@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -15,18 +16,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php
-
-class studentComponents extends sfComponents
-{
-
-    public function executeComponent_analytical_table()
-    {
-        //De aca recupero el nombre del establecimiento
-        $this->career_student = $this->getVar('career_student');
-        $this->student = $this->career_student->getStudent();
-        $this->object = AnalyticalBehaviourFactory::getInstance($this->student);
-    }
-
-}
+ *
+ */ 
+?>
+<div id="analytic_signatures">
+    <div id="signature_1" class="signature"><?php echo __('analytic_signature_1'); ?></div>
+    <div id="signature_2" class="signature"><?php echo __('analytic_signature_2'); ?></div>
+    <div id="signature_3" class="signature"><?php echo __('analytic_signature_3'); ?></div>
+    <div id="signature_4" class="signature"><?php echo __('analytic_signature_4'); ?></div>
+</div>

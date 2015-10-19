@@ -72,6 +72,20 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
 
   }
 
+  public static function retrieveByStudentAndCareerSubject($student, $career_subject, $criteria = null)
+  {
+    if(is_null($criteria))
+    {
+      $criteria = new Criteria();
+    }
+
+    $criteria->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject->getId());
+    $criteria->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student->getId());
+
+    return StudentApprovedCareerSubjectPeer::doSelectOne($criteria);
+  }
+
+
   static public function retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year)
   {
     $c = new Criteria();
@@ -83,42 +97,52 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
     return $c;
   }
 
-  static public function retrieveApprovationDate(StudentApprovedCareerSubject $studentApprovedCareerSubject)
+  static public function  retrieveApprovationDate(StudentApprovedCareerSubject $studentApprovedCareerSubject)
   {
-    $approvationInstance = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($studentApprovedCareerSubject);
-    if(!is_null($approvationInstance))
-    {
-      $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+    $approvationInstance = $studentApprovedCareerSubject->getApprovationInstance();
 
-      if(!is_null($period))
-      {
-        return $period->getEndAt();
-      }
-    }
+    switch(get_class($approvationInstance)) {
+      case 'StudentApprovedCourseSubject':
+        $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+        if(!is_null($period))
+        {
+          return $period->getEndAt();
+        }
+        break;
+      case 'StudentDisapprovedCourseSubject': 
+        $cssid = $approvationInstance->getCourseSubjectStudentId();
+        $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
+        $exam = $csse->getExaminationSubject()->getExamination();
 
-    $approvationInstance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($studentApprovedCareerSubject);
+        return $exam->getDateFrom();
+      case 'StudentRepprovedCourseSubject':
+        $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);
+        $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
 
-    if(!is_null($approvationInstance))
-    {
-      $cssid = $approvationInstance->getCourseSubjectStudentId();
-      $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
-      $exam = $csse->getExaminationSubject()->getExamination();
-
-      return $exam->getDateFrom();
-    }
-
-    $approvationInstance = StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($studentApprovedCareerSubject);
-    if(!is_null($approvationInstance))
-    {
-      $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);
-      $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
-
-      return $exam->getDateFrom();
+        return $exam->getDateFrom();
     }
 
     //couldn't find when was approved. return null ¿error?
     return;
   }
+
+
+  //Devuelve todas las approvedCarrearSubject para un student y un school_year
+  public static function retrieveByStudentAndSchoolYear(Student $student, $school_year = null)
+  {
+    $c = new Criteria();
+    $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(self::STUDENT_ID, $student->getId());
+
+
+    return self::doSelect($c);
+
+  }
+
+
+
 }
+
+
 
 sfPropelBehavior::add('StudentApprovedCareerSubjectPeer', array('changelog'));

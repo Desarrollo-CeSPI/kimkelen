@@ -2356,6 +2356,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
+            </trans-unit>
+
+            <trans-unit>
                 <source>Brother list</source>
                 <target>Listado de hermanos</target>
             </trans-unit>
@@ -4180,6 +4185,30 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Reporte de inasistencias</target>
             </trans-unit>
             <trans-unit>
+                <source>Year 1</source>
+                <target>PRIMER AÑO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 2</source>
+                <target>SEGUNDO AÑO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 3</source>
+                <target>TERCER AÑO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 4</source>
+                <target>CUARTO AÑO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 5</source>
+                <target>QUINTO AÑO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 6</source>
+                <target>SEXTO AÑO</target>
+            </trans-unit>
+            <trans-unit>   
                 <source>Format must be XX-XXXX</source>
                 <target>El formato debe ser XX-XXXX</target>
             </trans-unit>
@@ -4320,6 +4349,50 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Pathway list</source>
                 <target>Promociones por excepción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>School</source>
+                <target>Escuela</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Curso C</source>
+                <target>Curso completo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Curso I</source>
+                <target>Curso incompleto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_ciudad</source>
+                <target>La Plata</target>
+            </trans-unit>
+            <trans-unit>
+                <source>nombre_ultimo_anio_primario</source>
+                <target>6º año de la EPB</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_1</source>
+                <target>Vicedirector/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_2</source>
+                <target>Director/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_3</source>
+                <target>Jefe/a del Dpto. de Alumnos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_4</source>
+                <target>Secretario/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_nombre</source>
+                <target>Liceo Víctor Mercante</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
             </trans-unit>
             <trans-unit>
                 <source>Ows correlative</source>
