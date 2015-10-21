@@ -1,3 +1,4 @@
+
 printAttendanceTemplate:
   url: /student_attendance/PrintAttendanceTemplate
   param: { module: student_attendance, action: printAttendanceTemplate}

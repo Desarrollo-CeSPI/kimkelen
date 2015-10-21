@@ -4324,6 +4324,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Generate track</source>
                 <target>Generar seguimiento</target>
             </trans-unit>
+            <trans-unit>
+                <source>Print attendance template</source>
+                <target>Imprimir Hoja de Asistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Previous month</source>
+                <target>Mes anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Next month</source>
+                <target>Mes siguiente</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

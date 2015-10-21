@@ -22,7 +22,7 @@
 <?php #use_stylesheet('fix/jquery.dataTables.css')           ?>
 <?php use_javascript('fix/jquery.dataTables.js') ?>
 <?php use_javascript('fix/FixedColumns.js') ?>
-<?php use_stylesheet('print-attendance-sheet.css', 'last', array('media' => 'print')) ?>
+<?php use_stylesheet('print-attendance-template.css', 'last', array('media' => 'print')) ?>
 
 
 <div id="sf_admin_container">
@@ -33,10 +33,23 @@
     </ul>
   </div>
 
-  <h1><?php echo __('Attendance sheet for division: %division%', array('%division%' => $division)) ?></h1>
+  <?php if ($course_subject == null) : ?>
+    <h1 class="print-title"><?php echo __('Attendance sheet for division: %division%', array('%division%' => $division)) ?></h1>
+  <?php else: ?>
+    <h1 class="print-title"><?php echo __('Asistencias a la materia: %subject%', array('%subject%' => $course_subject)) ?></h1>
+  <?php endif; ?>
   
+  <div class="non-printable" style="margin-bottom: 10px;">
+    <div>
+      <?php echo image_tag('../sfPropelPlugin/images/previous.png') ?>
+      <?php echo link_to(__('Previous month'), 'student_attendance/PrintAttendanceTemplate', array('query_string' => "url=". $url ."&id=". $id ."&month=". $prevMonth ."")); ?>
+      <?php echo link_to(__('Next month'), 'student_attendance/PrintAttendanceTemplate', array('query_string' => "url=". $url ."&id=". $id ."&month=". $nextMonth ."")); ?>
+      <?php echo image_tag('../sfPropelPlugin/images/next.png') ?>
+    </div>
+  </div>
+
   <div id="sf_admin_content">
-      <table id="miTabla" cellspacing="0px;">
+      <table id="miTabla" class="print_table" cellspacing="0px;">
         <thead>
           <tr>
             <th><?php echo __('Students'); ?></th>
@@ -54,21 +67,14 @@
           <tr>
             <th class="student_fix" align='left'><?php echo $student ?></th>
             <?php foreach ($days as $day): ?>
-              <td class=""></td>
+              <td style="border: 1px solid #555"></td>
             <?php endforeach; ?>  
-            <td class=""></td>
-            <td class=""></td>
-            <td class=""></td>
+            <td style="border: 1px solid #555"></td>
+            <td style="border: 1px solid #555"></td>
+            <td style="border: 1px solid #555"></td>
           <?php endforeach; ?>
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="non-printable">
-      <ul class="sf_admin_actions">
-        <li><a href="javascript:history.go(-1)" class="sf_admin_action_go_back"><?php echo __('Back') ?></a></li>
-        <li><a href="#" onclick="window.print(); return false;" class="sf_admin_action_print"><?php echo __('Print') ?></a></li>
-      </ul>
-    </div>
   </div>
 </div>
