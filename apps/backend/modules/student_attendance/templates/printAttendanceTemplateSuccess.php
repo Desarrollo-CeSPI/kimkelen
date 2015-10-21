@@ -34,17 +34,15 @@
   </div>
 
   <h1><?php echo __('Attendance sheet for division: %division%', array('%division%' => $division)) ?></h1>
-  <h2><?php echo date("F"); echo $days ?></h2>
+  
   <div id="sf_admin_content">
-    <div id="mi_tabla_wrapper">
-
       <table id="miTabla" cellspacing="0px;">
         <thead>
           <tr>
             <th><?php echo __('Students'); ?></th>
-            <?php for($i = 1; $i <= $days; $i++) { ?>
-              <th class="attendance_day"><span class="date_first"><?php echo $i; ?></span><span class="date_separator">/</span><span class="date_last"><?php echo date('m'); ?></span></th>
-            <?php } ?>
+            <?php foreach ($days as $day): ?>
+              <th class="attendance_day"><span class="date_first"><?php echo date('d', $day); ?></span><span class="date_separator">/</span><span class="date_last"><?php echo date('m', $day); ?></span></th>
+            <?php endforeach; ?>
             <th class="attendance_day"><?php echo __('Total'); ?></th>
             <th class="attendance_day"><?php echo __('Total absences till today (without justification)'); ?></th>
             <th class="attendance_day"><?php echo __('Total absences till today'); ?></th>
@@ -53,16 +51,15 @@
         <tbody>
 
           <?php foreach ($students as $student) : ?>
-            <?php $total = 0; ?>
-            <tr>
-              <th class="student_fix" align='left'><?php echo $student ?></th>
-            <?php endforeach; ?>
-          </tr>
-          <tr class="non-printable">
-            <th><?php echo __('Students'); ?></th>
-            <th class="attendance_day"><?php echo __('Total'); ?></th>
-            <th class="attendance_day"><?php echo __('Total absences till today (without justification)'); ?></th>
-            <th class="attendance_day"><?php echo __('Total absences till today'); ?></th>
+          <tr>
+            <th class="student_fix" align='left'><?php echo $student ?></th>
+            <?php foreach ($days as $day): ?>
+              <td class=""></td>
+            <?php endforeach; ?>  
+            <td class=""></td>
+            <td class=""></td>
+            <td class=""></td>
+          <?php endforeach; ?>
           </tr>
         </tbody>
       </table>
@@ -75,32 +72,3 @@
     </div>
   </div>
 </div>
-
-<?php /*if (count($days) > 31): ?>
-  <script type="text/javascript">
-
-    jQuery(document).ready(function(){
-
-      var oTable = jQuery('#miTabla').dataTable( {
-        "sScrollX": "100%",
-
-        "bPaginate": false,
-        "bLengthChange": false,
-        "bFilter": false,
-        "bSort": false,
-        "bInfo": false,
-        "bAutoWidth": false,
-
-        "aoColumnDefs": [ { "sWidth": "15px", "aTargets": [ '_all' ] }]
-
-      } );
-
-      new FixedColumns( oTable, {
-        "sLeftWidth": 'relative',
-        "iLeftWidth": 16
-      } );
-    });
-
-  </script>
-
-<?php endif;*/ ?>

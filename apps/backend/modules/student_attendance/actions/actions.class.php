@@ -30,11 +30,13 @@
 class student_attendanceActions extends sfActions
 {
 
-  private function getDays($limit)
+  private function getDays($month)
   {
     $days = array();
+    $limit = date('t');
+    $start_date = strtotime("1-". date('m') ."-". date('Y') ."");
 
-    for ($i = 0; $i <= $limit; $i++)
+    for ($i = 0; $i < $limit; $i++)
     {
       $days[] = strtotime("+$i day", $start_date);
     }
@@ -48,7 +50,10 @@ class student_attendanceActions extends sfActions
     
     $this->division = DivisionPeer::retrieveByPK($request->getParameter('division_id'));
     $this->students = $this->division->getStudents();
-    $this->days = date("t"); // la funcion esta devuelve el numero de dias del mes actual
+    $month = date('m'); 
+    $this->days = $this->getDays($month);
+
+    $this->setLayout('cleanLayout');
   }
 
   public function executeSelectValuesForAttendanceDay(sfWebRequest $request)
