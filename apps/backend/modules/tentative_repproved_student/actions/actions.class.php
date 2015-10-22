@@ -16,6 +16,7 @@ class tentative_repproved_studentActions extends sfActions
 		$this->getUser()->setReferenceFor($this);
 
 		$this->form = new TentativeRepprovedStudentForm();
+		$this->students = PathwayStudentPeer::getStudentsForSchoolYear(SchoolYearPeer::retrieveCurrent());
 	}
 
 	public function executeSave(sfWebRequest $request, $con = null)
@@ -59,5 +60,21 @@ class tentative_repproved_studentActions extends sfActions
 		}
 
 		$this->redirect('schoolyear/index');
+	}
+
+	public function executeDeleteStudent(sfWebRequest $request, $con = null)
+	{
+		$ps= PathwayStudentPeer::retrieveByStudentAndSchoolYear($request->getParameter('student_id'));
+    $trs = TentativeRepprovedStudentPeer::retrieveByStudentId($request->getParameter('student_id'));
+
+		try {
+			$ps->delete();
+			$trs->setIsDeleted(false);
+			$trs->save();
+			$this->getUser()->setFlash("notice", "The item was deleted successfully.");
+		} catch (PropelException $e) {
+			$this->getUser()->setFlash('error', 'A problem occurs when deleting the selected items.');
+		}
+		$this->redirect("@school_year");
 	}
 }

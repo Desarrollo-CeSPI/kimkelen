@@ -11,9 +11,26 @@
 
 	<a href="<?php echo url_for('tentative_repproved_student/finish') ?>" class="warning-button" onclick="return (confirm('¿Está seguro? Los alumnos que no fueron seleccionados repetirán el año lectivo actual.'));"><?php echo __('Finalizar') ?></a>
 
-	<div id="sf_admin_content">
-		<form action="<?php echo url_for('tentative_repproved_student/save') ?>" method="POST">
 
+	<?php if (!empty($students)): ?>
+		<h3><?php echo __('Already selected students') ?></h3>
+
+		<div>
+			<table>
+				<?php foreach ($students as $student):?>
+					<tr>
+						<th><?php echo $student ?></th>
+						<td><?php echo link_to(__('Delete'), "tentative_repproved_student/deleteStudent?id=" . $student->getId() . "&student_id=" . $student->getId())?></td>
+					</tr>
+				<?php endforeach?>
+			</table>
+		</div>
+	<?php else: ?>
+		<h3><?php echo 'Aún no hay alumnos inscriptos.' ?></h3>
+	<?php endif; ?>
+
+	<div id="pathway">
+		<form action="<?php echo url_for('tentative_repproved_student/save') ?>" method="POST">
 			<fieldset>
 				<?php echo $form ?>
 			</fieldset>
