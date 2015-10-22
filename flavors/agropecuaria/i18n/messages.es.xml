@@ -4447,6 +4447,30 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Password changed successfuly</source>
                 <target>La contraseña fue restablecida satisfactoriamente.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Choose values for repproved track</source>
+                <target>Elección de parámetros para el seguimiento de previas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate track</source>
+                <target>Generar seguimiento</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print attendance template</source>
+                <target>Imprimir Hoja de Asistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Previous month</source>
+                <target>Mes anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Next month</source>
+                <target>Mes siguiente</target>
+            </trans-unit>
         </body>
     </file>
+<<<<<<< HEAD
 </xliff>
+=======
+</xliff>Print attendance template
+>>>>>>> 935ed0a1170dcb95a401d5885e18e8296459a072
