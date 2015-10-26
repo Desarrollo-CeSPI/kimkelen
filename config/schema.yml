@@ -476,6 +476,11 @@ classes:
         onDelete:         restrict
         required:         true
       created_at:
+      health_info:
+        description:      Especifica si el alumno entrego la ficha de salud
+        type:             boolean
+        required:         false
+        default:          null
       _uniques:
         unique: [student_id, school_year_id ]
       _indexes:
