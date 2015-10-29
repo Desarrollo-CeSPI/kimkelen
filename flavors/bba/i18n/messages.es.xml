@@ -4534,6 +4534,9 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Next month</source>
                 <target>Mes siguiente</target>
+	        <trans-unit>
+                <source>Health info</source>
+                <target>Estado de la ficha de salud</target>
             </trans-unit>
         </body>
     </file>

@@ -143,6 +143,7 @@ class studentActions extends autoStudentActions
       $school_year_student = new SchoolYearStudent();
       $school_year_student->setStudent($this->student);
       $school_year_student->setSchoolYear($csy);
+      
     }
     $this->form = new SchoolYearStudentForm($school_year_student);
   }
@@ -164,6 +165,7 @@ class studentActions extends autoStudentActions
       $this->redirect('@student');
     }
     $school_year_student = $this->student->getSchoolYearStudentForSchoolYear();
+
     if (is_null ($school_year_student))
     {
       $school_year_student = new SchoolYearStudent();

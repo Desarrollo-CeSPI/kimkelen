@@ -4467,10 +4467,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Next month</source>
                 <target>Mes siguiente</target>
             </trans-unit>
+	        <trans-unit>
+                <source>Health info</source>
+                <target>Estado de la ficha de salud</target>
+            </trans-unit>
         </body>
     </file>
-<<<<<<< HEAD
 </xliff>
-=======
-</xliff>Print attendance template
->>>>>>> 935ed0a1170dcb95a401d5885e18e8296459a072

@@ -589,7 +589,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Shift id</source>
                 <target>Turno</target>
             </trans-unit>
-
+	   
             <trans-unit>
                 <source>File number sequence</source>
                 <target>Siguiente número de alumno</target>
@@ -4403,6 +4403,9 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Next month</source>
                 <target>Mes siguiente</target>
+	        <trans-unit>
+                <source>Health info</source>
+                <target>Estado de la ficha de salud</target>
             </trans-unit>
         </body>
     </file>
