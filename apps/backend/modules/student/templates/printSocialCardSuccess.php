@@ -7,185 +7,274 @@
     
 <?php echo sfConfig::get('app_base')?>     
     <h1 style="text-align:center;font-size:400%" >Ficha Social Inicial</h1>
-    <pre style=" margin-left: 100px;"> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad 
+    <pre style=" margin-left: 100px;"> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad         
     y rápidez en la devolución de la información.
                                                                                                 <i>Departamento de Orientación Educativa</i>
      </pre>
  
   <pre>
-                                                                                                                                                 Fecha: <?php echo date('Y-m-d');?>     
+                                                                                                                                                  Fecha: <?php echo date('Y-m-d');?>     
 
-         <b> Nombres y apellido del alumno</b>: <?php echo $student ?>       <b>Año que cursa</b>: <?php echo $student->getCurrentCourseYear() ?>
+          <b>Nombres y apellido del alumno</b>: <?php echo $student ?>    <b>Sexo</b>: <?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()); ?>   <b>Año que cursa</b>: <?php echo $student->getCurrentCourseYear() ?>
+ 
+          <b>Tipo de Documento:</b>   <?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType());  ?>      <b>Nro. de Documento:</b>   <?php echo $student->getPerson()->getIdentificationNumber(); ?>      <b>Nro. de CUIL:</b> <?php echo (is_null($student->getPerson()->getCuil()) | $student->getPerson()->getCuil() == '') ? '.....................' : $student->getPerson()->getCuil()?>
 
-          <b>Domicilio:</b> <?php echo $student->getPersonAddress() ?>    <b>Teléfono:</b>......................................................<?php echo $student->getPersonPhone() ?>..... <b>Fecha nacimiento: </b>  <?php echo $student->getPersonFormattedBirthDate() ?>
-
+          <b>Fecha Nac.: </b> <?php echo (is_null($student->getPersonFormattedBirthDate()) | $student->getPersonFormattedBirthDate() == '') ? '.................' : $student->getPersonFormattedBirthDate();?>   <b>Lugar de Nac.: </b> <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? '' : $student->getPerson()->getBirthCityRepresentation() .','; ?>
+ <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? '' : $student->getPerson()->getBirthStateRepresentation() . ', '; ?>
+ <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? '' : $student->getPerson()->getBirthCountryRepresentation(); ?>
+ 
+          <b>Domicilio:</b> <?php echo (is_null($student->getPerson()->getAddress()) | $student->getPerson()->getAddress() == '') ? '.....................................................................' : $student->getPerson()->getAddress(); ?>     <b>Teléfono:</b>  <?php echo (is_null($student->getPersonPhone()) |  $student->getPersonPhone() == '') ? '..........................' : $student->getPersonPhone() ?>
+         
           
-          Establecimientos educativos de procendencia:.........................................................................................................
+          Establecimientos educativos de procendencia:.............................................................................................................
 
-          Dirección:.....................................................................................................................................................................
-
-          Teléfono:......................................................................................................................................................................
 </pre>
 
-    <p style="font-weight:bold; font-size:30px; margin-left: 50px"> A- DATOS FAMILIARES </p>
+	<p style="font-weight:bold; font-size:30px;"> A- DATOS FAMILIARES </p>
 
- <p style="font-size:30px">
+ <pre>
+		PADRE
 
-     <pre>
-    PADRE
+            Apellido y Nombre:........................................................................................................................................................
 
-            Nombre: .....................................................................................................................................................................
+            Fecha de nacimiento:....................................................................................................................................................
 
-            Apellido: ....................................................................................................................................................................
+            Nacionalidad:  <?php foreach($options_nationality as $n): ?> <input type="checkbox"><span style="font-size:25px"> <?php echo  $n;?></span><?php  endforeach?>
+            
 
-            Edad:.........................................................................................................................................................................                                                                                                        
+            Nivel educativo:                                                                                                                                             
+							 <table style="margin-left:80px;" >
+								<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?> 
+										<tr style="text-align: left;">
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td> 
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?></td> 
+										</tr>              
+								<?php }?>
+                               </table> 
+            Ocupación:                                                                                                                                                       
+			<table style="margin-left:80px;" >
+				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
+					<tr style="text-align: left;">
+						<td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?></td> 
+						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?> </td> 
+						<td style="font-size:24px">  <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>  
+					</tr> 
+				<?php }?>
+			</table>
+            
+            Vive con el niño (1):  <input type="checkbox"> SI <input type="checkbox"> NO                                                                                          
 
-            Nivel de estudios:..............................................................................................................................................................
+            Horario de trabajo:.........................................................................................................................................................
 
-            Nacionalidad: ...........................................................................................................................................................
+            Domicilio:.......................................................................................................................................................................
+            
+            Provincia:.......................................................................................................................................................................
+            
+            Ciudad:..........................................................................................................................................................................
+            
+            Teléfonos:                                                                                                                                             
+                                                                                                                                                                             
+                      Fijo:......................................................................................................................................................................
+                      
+                      Celular:................................................................................................................................................................
+            
+            Email:.............................................................................................................................................................................
+		
+		
+		MADRE	
 
-            Salud:........................................................................................................................................................................                                                        
+            Apellido y Nombre:........................................................................................................................................................
 
-            Ocupación:................................................................................................................................................................                                
+            Fecha de nacimiento:....................................................................................................................................................
 
-            Vive con el niño:........................................................................................................................................................                              
+            Nacionalidad:  <?php foreach($options_nationality as $n): ?> <input type="checkbox"><span style="font-size:25px"> <?php echo  $n;?></span><?php  endforeach?>
+            
+            
+            Nivel educativo:                                                                                                                                                       
+            <br></br> 
+            
+                                                                                                                                   
+							  <table style="margin-left:80px;" >
+								<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?> 
+										<tr style="text-align: left;">
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td> 
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?></td> 
+										</tr>              
+								<?php }?>
+                               </table>                                   
 
-            Horario de trabajo:.....................................................................................................................................................                                 
+            Ocupación:                                                                                                                                                               
+            <table style="margin-left:80px;" >
+				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
+					<tr style="text-align: left;">
+						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?></td> 
+						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?> </td> 
+						<td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>  
+					</tr> 
+				<?php }?>
+			</table>
+            
+            Vive con el niño (1):  <input type="checkbox"> SI <input type="checkbox"> NO                                                                                                  
+
+            Horario de trabajo:........................................................................................................................................................
+
+            Domicilio:......................................................................................................................................................................
+            
+            Provincia:......................................................................................................................................................................
+            
+            Ciudad:.........................................................................................................................................................................
+            
+            Teléfonos:                                                                                                                                                                   
+                                                                                                                                                                             
+                      Fijo:.....................................................................................................................................................................
+                      
+                      Celular:...............................................................................................................................................................
+            
+            Email:............................................................................................................................................................................
 
 
-    MADRE
+            
+     TUTOR
 
-            Nombre: ....................................................................................................................................................................
+            Apellido y Nombre:.......................................................................................................................................................
 
-            Apellido: ....................................................................................................................................................................
+            Fecha de nacimiento:...................................................................................................................................................
 
-            Edad:.........................................................................................................................................................................                                                                                                        
+            Nacionalidad:  <?php foreach($options_nationality as $n): ?> <input type="checkbox"><span style="font-size:25px"> <?php echo  $n;?></span><?php  endforeach?>
+            
 
-            Nivel de estudios:..............................................................................................................................................................
+            Nivel educativo:                                                                                                                                          
+							<table style="margin-left:80px;" >
+								<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?> 
+										<tr style="text-align: left;">
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td> 
+											<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?></td> 
+										</tr>              
+								<?php }?>
+                               </table>  
+            Ocupación:                                                                                                                                                          
+             <table style="margin-left:80px;" >
+				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
+					<tr style="text-align: left;">
+						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ;$i++;?></td> 
+						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i];$i++; ?></td> 
+						<td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>  
+					</tr> 
+				<?php }?>
+			</table>
+            
+            Vive con el niño (1):  <input type="checkbox"> SI <input type="checkbox"> NO                                                                                                  
 
-            Nacionalidad: ...........................................................................................................................................................
+            Horario de trabajo:........................................................................................................................................................
 
-            Salud:........................................................................................................................................................................                                                        
-
-            Ocupación:................................................................................................................................................................                                
-
-            Vive con el niño:........................................................................................................................................................                              
-
-            Horario de trabajo:....................................................................................................................................................                                 
-
-
-
-
-
-      </pre>
-</p>
-
-
-    <!--.............TABLA 2............... -->
-    <br></br>
-
-
-    <style type="text/css">
+            Domicilio:......................................................................................................................................................................
+            
+            Provincia:......................................................................................................................................................................
+            
+            Ciudad:.........................................................................................................................................................................
+            
+            Teléfonos:                                                                                                                                                                   
+                                                                                                                                                                             
+                      Fijo:.....................................................................................................................................................................
+                      
+ 
+ 
+ 
+                      Celular:...............................................................................................................................................................
+            
+            Email:............................................................................................................................................................................
+		<p style="margin-left:80px;font-size:25px">
+			(1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc. 
+			Esta información consignela en OBSERVACIONES, al final de la hoja 4.
+		</p>
+		HERMANOS
+		 <style type="text/css">
     .tg  {border-collapse:collapse;border-spacing:14;}
     .tg td{font-family:Arial, sans-serif;font-size:20px;padding:25px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
     .tg th{font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:20px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
     </style>
+    <table style="width:130%" class="tg" align="center">
+    <colgroup>
+		<col style="width: 100px">
+        <col style="width: 500px">
+        <col style="width: 100px">
+        <col style="width: 600px">
+        <col style="width: 600px">
+        <col style="width: 800px">
+        <col style="width: 800px">
+    </colgroup>
+      <tr>
+		<th class="tg-031e"></th> 
+        <th class="tg-031e">Apellido y Nombre </th>
+        <th class="tg-031e">Fecha de Nac.</th>
+        <th class="tg-031e">Nivel educativo (2)</th>
+        <th class="tg-031e">Salud</th>
+        <th class="tg-031e">Vive con el niño?</th>
+        <th class="tg-031e">Otras ocupaciones (3)</th>
+      </tr>
+      <tr>
+		<td class="tg-031e" rowspan="7">Hermanos</td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+      </tr>
+      <tr>
+		<td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+      </tr>
+      <tr>
+		<td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+      </tr>
+       <tr>
+		<td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+      </tr>
+       <tr>
+		<td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+        <td class="tg-031e"></td>
+      </tr>
+    </table>                                                                                                                                          
+	</pre>
+	
+	
+    <!--.............TABLA 2............... -->
+		
+   
 
-
-    <table class="tg" style="undefined;table-layout: fixed; width: 130%; font-size:25; margin-left: 100px" cellpadding="0" cellspacing="0" align="center">
-        <colgroup>
-        <col style="width: 150px;height:100px">
-        <col style="width: 170px;height:100px">
-        <col style="width: 80px;height:100px">
-        <col style="width: 400px;height:100px">
-        <col style="width: 100px;height:100px">
-        <col style="width: 100px;height:100px">
-        <col style="width: 219px;height:100px">
-        </colgroup>
-          <tr>
-            <th class="tg-031e"></th>
-            <th class="tg-031e">Nombre y apellido</th>
-            <th class="tg-031e">Edad</th>
-            <th class="tg-031e">Escolaridad, establecimientos Educativos a los que asiste o asistió</th>
-            <th class="tg-031e">Salud</th>
-            <th class="tg-031e">Vive c/ el niño</th>
-            <th class="tg-031e">Otras ocupaciones</th>
-          </tr>
-          <tr>
-            <td class="tg-031e" rowspan="7">Hermanos</td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-          <tr>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-            <td class="tg-031e"></td>
-          </tr>
-    </table>
-
-
-  
    <p style="font-weight:bold; font-size:250%"> Otras Personas que viven en la misma casa : </p>
     <!--.............TABLA 3...............-->
 
-    <table class="tg" align="center">
+    <table style="width:110%;" class="tg" align="center">
     <colgroup>
         <col style="width: 400px">
         <col style="width: 100px">
         <col style="width: 600px">
         <col style="width: 800px">
     </colgroup>
-      <tr>
+      <tr style="text-align:center">
         <th>Relación o parentesco</th>
-        <th class="tg-4mn7">Edad</th>
-        <th class="tg-4mn7">Ocupación</th>
+        <th class="tg-4mn7">Fecha de Nac.</th>
+        <th class="tg-4mn7">Ocupación (3)</th>
         <th class="tg-4mn7">Salud (Indicar si padece enfermedad crónica que requiere cuidados</th>
       </tr>
       <tr>
@@ -207,6 +296,37 @@
         <td></td>
       </tr>
     </table>
+    
+    <style type="text/css">
+		table{margin-left:100px;}
+		tr{text-align: left;}
+		td{font-size:23px;}   
+    </style>
+    <pre style="font-size:23px">
+          (2) Seleccione el número correspondiente al nivel educativo elegido.
+		<table style="width:130%;">
+			<?php $j= 1;for($i = 0 ; $i < count($options_study) ; $i++){ ?> 
+			<tr>
+				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td> 
+				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
+				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
+				<td><?php echo $j ."- ". $options_study[$i];$j++?> </td> 
+			</tr>              
+			<?php }?>
+        </table> 
+      (3) Seleccione el número correspondiente a la ocupacion elegida.
+		<table style="width:100%;">
+			<?php $j= 1;for($i = 0 ; $i < count($options_occupation) ; $i++){ ?> 
+			<tr>
+				<td><?php echo $j ."- ". $options_occupation[$i] ; $i++;$j++?>  </td> 
+				<td><?php echo $j ."- ". $options_occupation[$i] ; $i++;$j++?>  </td>
+				<td><?php echo ($options_occupation[$i] == "")? "" :$j ."- ". $options_occupation[$i];$j++?> </td> 
+			</tr>              
+			<?php }?>
+        </table> 
+    </pre>
+  
+    
 
     <br></br>
 
@@ -216,68 +336,67 @@
     
     <p style="text-align:justify">
         <pre>
-            Enfermedades que padece actualmente.................................................................................................................
+            Enfermedades que padece actualmente......................................................................................................................
 
-            Medicado?.................Operaciones.............................Accidentes...........................................................................
+            Medicado?.................Operaciones.............................Accidentes................................................................................
 
-            Prolemas sensoriales: auditivos.........................................visuales........................................................................
+            Prolemas sensoriales: auditivos.........................................visuales.............................................................................
 
-            Problemas en el sueño..........Cuáles?...................................................................... Cuántas horas duerme?.....
+            Problemas en el sueño..........Cuáles?...................................................................... Cuántas horas duerme?..........
 
-            Comparte la habitación?......................Con quién?................................................................................................
+            Comparte la habitación?......................Con quién?.....................................................................................................
+
+            Recibió o recibe asistencia: Foniátrica .....................................................Psicológica ..............................................
+            otra ...............................................................................................................................................................................
+
+            Manifiesta miedos? ........................................................A qué?..................................................................................
+
+            Tiene tics nerviosos? ..................Cuáles?...................................................................................................................
+
+            Características de la conducta: Subrayar todas las características que describe la conducta de su hijo:
+            Alegre- Inquieto- Obediente- Dócil- Tranquilo- Triste- Agresivo- Cariñoso- Nervioso- Consentido- Otras Causas
+
+
+			<br></br>
+			<br></br>
+
 
 
             USO DEL TIEMPO LIBRE:
+            
 
-            Con quién prefiere jugar?.........................................................................................................................................
+            Con quién prefiere jugar?............................................................................................................................................
 
-            Quién dirige el juego?.............................................................................................................................................
+            Quién dirige el juego?.................................................................................................................................................
    
-            Comparte sus juguetes/juegos? Dónde juega?.....................................................................................................
+            Comparte sus juguetes/juegos? Dónde juega?........................................................................................................
 
-            Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela?....................................
+            Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela?........................................
 
-            Características de la conducta: Subrayar todas las características que describe la conducta de su hijo
-            Alegre- Inquieto- Obediente- Dócil- Tranquilo- Triste- Agresivo- Cariñoso- Nervioso- Consentido- Otras
+            ......................................................................................................................................................................................
 
-            Miedos? ........................................................A qué?..............................................................................................
+            Quién se encarga del cuidado del niño en ausencia de sus padres? ......................................................................
 
-            Tiene tics nerviosos? ...........................................
-            Cuales?...................................................................................................................................................................
+            Número de horas que comparte diariamente con su hijo? ........................................................................................
 
-            Recibió o recibe asistencia: Foniatrica .....................................................Psicologica .........................................
-            otra ..........................................................................................................................................................................
+            Padre: ...........................................................................................................................................................................
 
+            Madre: ..........................................................................................................................................................................
 
+            Para realizar las tareas escolares, necesita orientación?  .........................................................................................
+            Quién lo orienta?  ........................................................................................................................................................
 
+            En qué momento?  ......................................................................................................................................................
 
+            Qué opinión tiene del desempeño escolar de su hijo/a?  ..........................................................................................
 
+            Madre:  ..........................................................................................................................................................................
 
+            Padre:  ..........................................................................................................................................................................
 
-            Causas
-
-            Quién se encarga del cuidado del niño en ausencia de sus padres? .................................................................
-
-            Número de horas que comparte diariamente con su hijo? ..................................................................................
-
-            Padre: .....................................................................................................................................................................
-
-            Madre: ....................................................................................................................................................................
-
-            Para realizar las tareas escolares, necesita orientación?  ...................................................................................
-            Quién lo orienta?  ..................................................................................................................................................
-
-            En qué momento?  ................................................................................................................................................
-
-            Qué opinión tiene del desempeño escolar de su hijo/a?  ....................................................................................
-
-            Madre:  ....................................................................................................................................................................
-
-            Padre:  ....................................................................................................................................................................
-
-            OBSERVACIONES: ...............................................................................................................................................
-            .................................................................................................................................................................................
-            .................................................................................................................................................................................
+            OBSERVACIONES: .....................................................................................................................................................
+            .......................................................................................................................................................................................
+            .......................................................................................................................................................................................
         
       </pre>
   </p>
