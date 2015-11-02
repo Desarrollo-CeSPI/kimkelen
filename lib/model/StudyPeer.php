@@ -24,6 +24,6 @@ class StudyPeer extends BaseStudyPeer
 	public static function getStudies()
 	{
 		$criteria = new Criteria();
-		BaseStudyPeer::doSelect($criteria);
+		return BaseStudyPeer::doSelect($criteria);
 	}
 }
