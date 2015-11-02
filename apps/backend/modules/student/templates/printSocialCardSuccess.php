@@ -275,7 +275,7 @@
         <th>Relación o parentesco</th>
         <th class="tg-4mn7">Fecha de Nac.</th>
         <th class="tg-4mn7">Ocupación (3)</th>
-        <th class="tg-4mn7">Salud (Indicar si padece enfermedad crónica que requiere cuidados</th>
+        <th class="tg-4mn7">Salud (Indicar si padece enfermedad crónica que requiere cuidados)</th>
       </tr>
       <tr>
         <td></td>
