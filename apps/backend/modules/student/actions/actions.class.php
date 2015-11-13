@@ -557,7 +557,9 @@ class studentActions extends autoStudentActions
   {
      $this->setLayout('cleanLayout');
      $this->student = StudentPeer::retrieveByPK($request->getParameter('id'));
-
+     $this->options_nationality = BaseCustomOptionsHolder::getInstance('Nationality')->getOptions();
+	 $this->options_occupation = OccupationCategoryPeer::getOccupationCategories();
+	 $this->options_study = StudyPeer::getStudies();
   }
 
   public function executeShowAssistanceAndSanctionReport($request)

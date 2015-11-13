@@ -1274,6 +1274,25 @@ class Student extends BaseStudent
   {
     return ($this->getIsRegistered())? 'Sí': 'No';
   }
+  public function getHealthInfoString()
+  {
+	
+		$school_year = SchoolYearPeer::retrieveCurrent();
+		$c = new Criteria();
+		$c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+		$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+
+		$school_year_student = SchoolYearStudentPeer::doSelectOne($c);
+
+		SchoolYearStudentPeer::clearInstancePool();
+
+		return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
+		
+
+		
+	
+		
+  }
 
   /**
    * This method returns the current or last StudentCareerSchoolYear.
