@@ -85,6 +85,10 @@ generator:
             label:  Orientación
             method: getStudentOrientationString
             decorator:  text
+          health_info:
+            label: Health info
+            method: getHealthInfoString
+            decorator: text
       fields:
         person:
         person_lastname:  { label: Lastname, column_name: PersonPeer::LASTNAME }

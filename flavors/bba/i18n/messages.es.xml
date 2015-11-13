@@ -4441,7 +4441,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 	    <trans-unit>
                 <source>Health info</source>
-                <target>Estado de la ficha de salud</target>
+                <target>Estado de la Ficha de Salud</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Date health info</source>
+                <target>Fecha de Devolución</target>
             </trans-unit>
         </body>
     </file>

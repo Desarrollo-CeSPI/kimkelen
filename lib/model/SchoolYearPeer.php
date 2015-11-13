@@ -27,8 +27,11 @@ class SchoolYearPeer extends BaseSchoolYearPeer
    * @return SchoolYear
    */
    static public $status = array(
-    '0' => 'Entregado',
-    '1' => 'Entregado con observaciones',
+    'No entregado' => 'No entregado',
+    'Entregado' => 'Entregado',
+    'Apta' => 'Apta',
+    'No apta' => 'No apta',
+    'Con observaciones' => 'Con observaciones'
   );
   
   public static function retrieveCurrent(){
