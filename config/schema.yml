@@ -110,6 +110,11 @@ classes:
         type: boolean
         default: 1
         required: false
+      numerical_mark:
+        description: Esta configuracion define si la nota es numerica 1 o con letras 0
+        type: integer
+        default: 1
+        required: false
 
   CareerYearConfiguration:
     tableName:            subject_year_configuration
