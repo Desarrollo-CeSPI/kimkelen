@@ -1988,3 +1988,7 @@ div.wc-cal-event{
     margin-bottom: 10px;
     text-decoration: none !important;
 }
+
+#sf_admin_container ul li {
+    list-style: none !important;
+}

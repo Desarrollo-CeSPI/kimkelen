@@ -40,7 +40,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
     $messages = array(
       'min'     => 'La calificación debe ser al menos %min%.',
       'max'     => 'La calificación debe ser a lo sumo %max%.',
-      'invalid' => 'El valor ingresado es inválido.'
+      'invalid' => 'El valor ingresado es inválido, solo se aceptan numeros enteros.'
     );
     $this->disableCSRFProtection();
     $tmp_sum = 0;
@@ -73,7 +73,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $validators[$free_widget_name] = new sfValidatorBoolean();
         }
         $tmp_sum = $this->evaluationFinalProm($course_subject_student, $course_subject_student_mark, $tmp_sum);
-        $validators[$widget_name] = new sfValidatorNumber($options, $messages);
+        $validators[$widget_name] = new sfValidatorInteger($options, $messages);
 
       }
       $tmp_sum = 0;

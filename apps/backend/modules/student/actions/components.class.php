@@ -1,5 +1,4 @@
-<?php 
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -22,25 +21,12 @@
 class studentComponents extends sfComponents
 {
 
-  public function executeComponent_analytical_table()
-  {
-    $this->career_student = $this->getVar('career_student');
-
-    $subjects = $this->career_student->getStudentApprovedCareerSubjects();
-
-    $this->objects = array();
-
-    foreach($subjects as $subject)
+    public function executeComponent_analytical_table()
     {
-      if(!isset($this->objects[$subject->getYear()]))
-      {
-        $this->objects[$subject->getYear()] = array();
-      }
-
-      $this->objects[$subject->getYear()][] = $subject;
+        //De aca recupero el nombre del establecimiento
+        $this->career_student = $this->getVar('career_student');
+        $this->student = $this->career_student->getStudent();
+        $this->object = AnalyticalBehaviourFactory::getInstance($this->student);
     }
-  }
 
 }
-
-?>

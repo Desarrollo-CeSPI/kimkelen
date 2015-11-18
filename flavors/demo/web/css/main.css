@@ -1940,10 +1940,10 @@ div.wc-cal-event{
 
 .student_head .pathway
 {
-    float: right;
-    padding: 5px 15px !important;
-    color: green;
-    text-transform: uppercase;
+  float: right;
+  padding: 5px 15px !important;
+  color: green;
+  text-transform: uppercase;
 }
 
 .pathway_info
@@ -1956,5 +1956,9 @@ div.wc-cal-event{
 
 .sf_admin_action_print_califications a
 {
-    background-image: url('../images/calification_sheet.png') !important;
+  background-image: url('../images/calification_sheet.png') !important;
+}
+
+#sf_admin_container ul li {
+  list-style: none !important;
 }

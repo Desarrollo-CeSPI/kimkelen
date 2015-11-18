@@ -27,6 +27,16 @@ class TentativeRepprovedStudentPeer extends BaseTentativeRepprovedStudentPeer
 		return $values;
 	}
 
+	public static function retrieveByStudentId($student_id) {
+		$c = new Criteria();
+    $student = StudentPeer::retrieveByPK($student_id);
+		$scsy = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($student, SchoolYearPeer::retrieveCurrent());
+
+		$c->add(self::STUDENT_CAREER_SCHOOL_YEAR_ID, $scsy[0]->getId());
+		$c->add(self::IS_DELETED, true, Criteria::EQUAL);
+
+		return self::doSelectOne($c);
+	}
 
 
 	public static function doSelectNonDeleted() {

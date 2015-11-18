@@ -1,0 +1,42 @@
+body {
+    font-family:Trebuchet MS, sans-serif;
+    font-size:9px;
+    color:#333;
+    background-color: #FFF !important;
+}
+
+.print_title {
+  font-size: 10px;
+}
+
+.print_page {
+  page-break-after: always;
+}
+
+.print_table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.print_table tr{
+    min-width: 2px;
+    min-height: 2px;
+}
+
+.print_table th{
+    border: 1px solid black !important;
+    padding: 3px;
+    font-weight: bold;
+    font-size: 8px;
+}
+
+.print_table td{
+    border: 1px solid black !important;
+    padding: 3px;
+}
+
+#sfWebDebug,
+.non-printable
+{
+  display: none !important;
+}
