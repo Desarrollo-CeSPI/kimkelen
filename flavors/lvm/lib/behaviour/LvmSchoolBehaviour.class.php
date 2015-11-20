@@ -24,7 +24,7 @@
  */
 class LvmSchoolBehaviour extends BaseSchoolBehaviour
 {
-  const school_name = "Liceo Victor Mercante";
+	protected $school_name = "Liceo Víctor Mercante";
 
   public function getListObjectActionsForSchoolYear()
   {
