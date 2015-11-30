@@ -65,6 +65,17 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
     return SchoolBehaviourFactory::getEvaluatorInstance()->getColorForCourseSubjectStudentMark($this);
   }
 
+  public function getMarkByConfig($config = null)
+  {
+    if ($config != null && !$config->isNumericalMark())
+    {
+      return BaseCustomOptionsHolder::getInstance('LetterMark')->getOption((Integer)$this->getMark());
+    }
+    else
+    {
+      return $this->getMark();
+    }
+  }
 
 }
 

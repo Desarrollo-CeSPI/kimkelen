@@ -84,7 +84,7 @@
             <?php endif ?>
 
             <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm): ?>
-              <td><?php echo ($cssm->getMark() ? $cssm : '-'); ?></td>
+              <td><?php echo (!$cssm->getMark()? '' : $cssm->getMarkByConfig($configuration)); ?></td>
             <?php endforeach; ?>
             <?php if ($final_period): ?>
               <?php if ($course_subject_student->getIsNotAverageable()): ?>

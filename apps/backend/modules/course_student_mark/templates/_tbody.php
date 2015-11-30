@@ -15,7 +15,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
+ */ 
+?>
 
 <tbody class="print_body">
   <?php $i = 0; ?>
@@ -27,7 +28,7 @@
         <td><?php echo $i ?></td>
         <td style="text-align: left; width: 30%"><?php echo $course_subject_student->getStudent() . ' (' . implode(' ,',$course_subject_student->getStudent()->getCurrentDivisions(($course->getCareerSchoolYear())? $course->getCareerSchoolYear()->getId(): null)). ')' ?></td>
         <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $key => $cssm): ?>
-          <td align="center"><?php echo ((!$cssm->getMark()) ? __('free') : $cssm->getMark() ? $cssm : ''); ?></td>
+              <td><?php echo ((!$cssm->getMark())? '' : $cssm->getMarkByConfig($configuration)); ?></td>
         <?php endforeach; ?>
         <td align="center"><?php echo ($final_period) ? $course_subject_student->getMarksAverage() : '' ?></td>
         <td></td>
