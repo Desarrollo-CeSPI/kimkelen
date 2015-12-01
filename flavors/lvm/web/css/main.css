@@ -1107,7 +1107,7 @@ table.list
 
 .free
 {
-    background-color: yellow !important;
+    background-color: #F29A79 !important;
 }
 
 .regular
@@ -1117,7 +1117,7 @@ table.list
 
 .almost_free
 {
-    background-color: greenyellow !important;
+    background-color: #FF0 !important;
 }
 
 .box
