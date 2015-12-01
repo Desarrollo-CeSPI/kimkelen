@@ -1,7 +1,3 @@
-/* 
-    Created on : 18-ago-2015, 11:53:20
-    Author     : lucianoc
-*/
 .sf_admin_actions, #header, #menu-div, #screen_header, #footer {
     display: none;
 }
@@ -12,11 +8,11 @@
 
 .table {
     margin-bottom: 1em;
-/*    page-break-inside: avoid; */
+    /*    page-break-inside: avoid; */
 }
 .table tr
 {
-        page-break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .table thead th{

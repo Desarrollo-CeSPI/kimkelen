@@ -47,7 +47,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="analytical_body_table">
                 <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
                     <tr>
 

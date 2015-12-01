@@ -89,7 +89,9 @@ class Person extends BasePerson
   {
     $criteria = new Criteria();
     $criteria->add(StatePeer::ID, $this->getBirthState());
-    return StatePeer::doSelectOne($criteria)->getName();
+    $birth_state = StatePeer::doSelectOne($criteria);
+	  if ($birth_state)
+	    return $birth_state->getName();
 
   }
 
@@ -102,7 +104,9 @@ class Person extends BasePerson
   {
     $criteria = new Criteria();
     $criteria->add(CityPeer::ID, $this->getBirthCity());
-    return CityPeer::doSelectOne($criteria)->getName();
+    $city = CityPeer::doSelectOne($criteria);
+	  if ($city)
+		  return $city->getName();
 
   }
 
