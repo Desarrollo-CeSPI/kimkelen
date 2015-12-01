@@ -19,7 +19,7 @@
  */ ?>
 <?php if (!is_null($marks)): ?>
   <?php foreach ($marks as $mark): ?>
-    <td class="mark <?php echo $mark->getColor() ?>"><?php echo $mark != '' ? $mark : '-' ?></td>
+    <td class="mark <?php echo $mark->getColor() ?>"><?php echo $mark != '' ? $mark->getMarkByConfig($configuration) : '-' ?></td>
   <?php endforeach; ?>
 
   <?php $course_subject_student = $mark->getCourseSubjectStudent(); ?>  
