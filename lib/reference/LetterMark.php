@@ -31,7 +31,7 @@ class LetterMark extends BaseCustomOptionsHolder
 
   protected
     $_options = array(
-        self::MARK_FREE => 'Libre',
+        self::MARK_FREE => 'L',
         self::MARK_A => 'A',
         self::MARK_S => 'S',
         self::MARK_B => 'B',
@@ -54,7 +54,7 @@ class LetterMark extends BaseCustomOptionsHolder
   public static function getOptionsInArray()
   {
     return array(
-        self::MARK_FREE => 'Libre',
+        self::MARK_FREE => 'L',
         self::MARK_A => 'A',
         self::MARK_S => 'S',
         self::MARK_B => 'B',

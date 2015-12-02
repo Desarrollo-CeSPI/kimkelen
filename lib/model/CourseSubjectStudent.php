@@ -631,4 +631,21 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     return is_null($course_result) ? '' : $course_result->getColor();
   }
 
+  public function getAverageByConfig($config = null)
+  {
+    if (!$this->areAllMarksClosed())
+    {
+      return '';
+    }
+    
+    if ($config != null && !$config->isNumericalMark())
+    {
+      return BaseCustomOptionsHolder::getInstance('LetterMark')->getOption($this->getMarksAverage());
+    }
+    else
+    {
+      return $this->getMarksAverage();
+    }
+  }
+
 }

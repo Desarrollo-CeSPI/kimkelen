@@ -23,7 +23,7 @@
   <?php endforeach; ?>
 
   <?php $course_subject_student = $mark->getCourseSubjectStudent(); ?>  
-  <td class="mark <?php echo $course_subject_student->getAvgColor() ?>"><?php echo $course_subject_student->getMarksAverage() ?></td>
+  <td class="mark <?php echo $course_subject_student->getAvgColor() ?>"><?php echo $course_subject_student->getAverageByConfig($configuration) ?></td>
 <?php else: ?>
   <?php for ($i = 1; $i <= $marksNumber; $i++): ?>
     <td>N/C</td>

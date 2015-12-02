@@ -91,7 +91,7 @@
                 <td></td>
                 <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
               <?php else: ?>
-                <td><?php echo $course_subject_student->getMarksAverage() ?></td>
+                <td><?php echo $course_subject_student->getAverageByConfig($configuration) ?></td>
                 <td><?php echo $course_result ?></td>
               <?php endif; ?>
             <?php endif; ?>
