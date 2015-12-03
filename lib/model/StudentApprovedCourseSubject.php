@@ -53,13 +53,15 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
 
   public function getResultStr()
   {
+    $config = $this->getCourseSubjectStudent()->getConfiguration();
+
     if ($this->getIsNotAverageable())
     {
       return "";
     }
     else
     {
-      return sprintf("%01.2f", $this->getMark());
+      return $this->getMarkByConfig($config);
     }
   }
 
@@ -104,6 +106,18 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
   public function getIsNotAverageable()
   {
     return $this->getCourseSubjectStudent()->getIsNotAverageable();
+  }
+
+  public function getMarkByConfig($config = null)
+  {
+    if ($config != null && !$config->isNumericalMark())
+    {
+      return BaseCustomOptionsHolder::getInstance('LetterMark')->getOption((Integer)$this->getMark());
+    }
+    else
+    {
+      return sprintf("%01.2f", $this->getMark());
+    }
   }
 
 }

@@ -105,9 +105,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function getMarkForIsClose($mark_number, PropelPDO $con = null)
   {
     $mark = $this->getMarkFor($mark_number);
+  
     if ($mark)
     {
-      return ($mark->getIsClosed()) ? $mark : null;
+      return ($mark->getIsClosed()) ? $mark->getMarkByConfig($this->getConfiguration()) : null;
     }
     else
     {
