@@ -4496,6 +4496,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Sexto año</target>
             </trans-unit>
             <trans-unit>
+                <source>Year 7</source>
+                <target>Séptimo año</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>

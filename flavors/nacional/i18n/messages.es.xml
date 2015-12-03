@@ -2788,8 +2788,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>File number</source>
-                <target>Numero de legajo</target>
+                <source>Global file number</source>
+                <target>Número de legajo</target>
             </trans-unit>
 
             <trans-unit>

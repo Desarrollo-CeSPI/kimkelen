@@ -22,7 +22,7 @@
 class BbaSchoolBehaviour extends BaseSchoolBehaviour
 {
 
-  const school_name = "Bachillerato de Bellas Artes";
+	protected $school_name = "Bachillerato de Bellas Artes";
 
   protected
   $_course_type_options = array(

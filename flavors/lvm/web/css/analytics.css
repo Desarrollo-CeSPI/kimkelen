@@ -9,6 +9,11 @@
 .analytical
 {
     padding: 2em;
+
+}
+
+.analytical_body_table {
+    font-size: 13px;
 }
 
 #header_analytical_data_left

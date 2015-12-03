@@ -1179,12 +1179,12 @@ table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
 
 .free
 {
-    background-color: red !important;
+    background-color: #F29A79 !important;
 }
 
 .almost_free
 {
-    background-color: yellow !important;
+    background-color: #FF0 !important;
 }
 
 .box
