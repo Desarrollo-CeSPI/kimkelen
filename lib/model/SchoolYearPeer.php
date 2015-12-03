@@ -27,14 +27,6 @@ class SchoolYearPeer extends BaseSchoolYearPeer
    * @return SchoolYear
    */
 
-   static public $status = array(
-    'No entregado' => 'No entregado',
-    'Entregado' => 'Entregado',
-    'Apta' => 'Apta',
-    'No apta' => 'No apta',
-    'Con observaciones' => 'Con observaciones'
-  );
-
   public static function retrieveCurrent(){
     $c = new Criteria();
     $c->add(SchoolYearPeer::IS_ACTIVE, true, Criteria::EQUAL);

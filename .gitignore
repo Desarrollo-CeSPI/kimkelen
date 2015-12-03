@@ -2,6 +2,8 @@ Gemfile.lock
 /apps/backend/config/pm_pdf_kit.yml
 /apps/backend/config/pdf_configs.yml
 /config/*xml
+/config/propel.ini-default
+/config/databases.yml-default
 /config/databases.yml
 /config/propel.ini
 /config/deploy*.rb
