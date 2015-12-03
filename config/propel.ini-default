@@ -3,10 +3,10 @@ propel.packageObjectModel  = true
 propel.project             = conservatorio
 propel.database            = mysql
 propel.database.driver     = mysql
-propel.database.url        = mysql:dbname=kimkelen_test;host=localhost
+propel.database.url        = mysql:dbname=#db_name#;host=#db_host#
 propel.database.creole.url = ${propel.database.url}
-propel.database.user       = root
-propel.database.password   = guarani
+propel.database.user       = #db_user#
+propel.database.password   = #db_password#
 propel.database.encoding   = utf8
 
 ; mysql options

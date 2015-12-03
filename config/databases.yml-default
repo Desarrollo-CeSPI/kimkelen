@@ -13,9 +13,9 @@ all:
     class:        sfPropelDatabase
     param:
       classname:  PropelPDO
-      dsn:        'mysql:dbname=kimkelen_test;host=localhost'
-      username:   root
-      password:   guarani
+      dsn:        'mysql:dbname=#db_name#;host=#db_host#'
+      username:   #db_user#
+      password:   #db_pass#
       encoding:   utf8
       persistent: true
       pooling:    true
