@@ -230,3 +230,15 @@ classes:
       description:
         required: false
         type: varchar(50)
+
+  LetterMark:
+    tablename:        letter_mark
+    description:      Representa la referencia de letras a numeros
+    columns:
+      id:
+      letter:
+        type: varchar(255)
+        required: true
+      value:
+        type: integer
+        required: true
