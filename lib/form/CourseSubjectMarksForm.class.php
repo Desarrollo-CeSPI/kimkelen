@@ -42,6 +42,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       'max'     => 'La calificación debe ser a lo sumo %max%.',
       'invalid' => 'El valor ingresado es inválido, solo se aceptan numeros enteros.'
     );
+
     $this->disableCSRFProtection();
     $tmp_sum = 0;
     foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
@@ -57,7 +58,10 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         }
         else
         {
+          //is numerical mark 
           $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student_mark->getMark()), array('class' => 'mark'));
+          //is letter mark
+         // $widgets[$widget_name] = new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('LetterMark')->getOptionsInArray()), array('class' => 'markLetter'));
 
           //IS FREE
           $free_widget_name = $course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber();

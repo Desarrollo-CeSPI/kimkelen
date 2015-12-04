@@ -30,7 +30,7 @@
         <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $key => $cssm): ?>
               <td><?php echo ((!$cssm->getMark())? '' : $cssm->getMarkByConfig($configuration)); ?></td>
         <?php endforeach; ?>
-        <td align="center"><?php echo ($final_period) ? $course_subject_student->getMarksAverage() : '' ?></td>
+        <td align="center"><?php echo ($final_period) ? $course_subject_student->getAverageByConfig($configuration) : '' ?></td>
         <td></td>
       </tr>
     <?php endif; ?>
