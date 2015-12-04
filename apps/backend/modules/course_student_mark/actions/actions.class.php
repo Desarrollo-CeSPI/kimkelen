@@ -70,7 +70,7 @@ class course_student_markActions extends sfActions
 
     foreach ($course_subjects as $course_subject)
     {
-
+      
       if ($is_pathway){
 	      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectPathwayMarksForm();
       } else {
