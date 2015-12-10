@@ -1368,15 +1368,17 @@ class Student extends BaseStudent
 
 	public function owsCorrelativeFor($career_subject) {
     //obtengo las correlativas de la materia recibida por parámetro
-    $correlatives = $career_subject->getCorrelativeCareerSubjects();
+    $correlative = $career_subject->getCorrelativeCareerSubject();
 
-		$career_subjects_repproveds_array = array();
-
+		if (!is_null($correlative)){
 		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
-			$career_subjects_repproveds_array[] = $repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject();
-		}
 
-		return count(array_intersect($correlatives, $career_subjects_repproveds_array)) > 0;
+			if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+			  return true;
+			}
+		}
+	}
+		return false;
 	}
 
 }

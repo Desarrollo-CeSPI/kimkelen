@@ -107,14 +107,14 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
 
 
-      elseif ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
+      /*elseif ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
         if (is_null($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))){
           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
           $student_repproved_course_subject->setCourseSubjectStudent($course_subject_student);
         }
 
         return $student_repproved_course_subject;
-      }
+      }*/
       else {
         $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
         $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
