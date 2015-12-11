@@ -54,8 +54,9 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         if ($course_subject_student_mark->getIsClosed())
         {
           $widgets[$widget_name] = new mtWidgetFormPlain(array(
-              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => false), array('class' => 'mark'));
+              'object' => $course_subject_student_mark, 'method' => 'getMarkByConfig', 'method_args' => $configuration, 'add_hidden_input' => false), array('class' => 'mark'));
           $widgets[$widget_name]->setAttribute('class', 'mark_note');
+
         }
         else
         {
@@ -66,7 +67,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           }
           else
           {
-            $widgets[$widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' =>  LetterMark::getPkByValue((Int)$course_subject_student_mark->getMark())));
+            $widgets[$widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' =>  LetterMarkPeer::getPkByValue((Int)$course_subject_student_mark->getMark())));
             $validators[$widget_name] = new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false));
           }
           //IS FREE
@@ -129,13 +130,19 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         
         if ((!is_null($is_free)))
         {
-          if (($is_free) || ($value == null))
+          if ($is_free)
           {
             $value = 0;
           }
           else
           {
-            $value = LetterMarkPeer::retrieveByPk($value)->getValue();
+            if($value != null)
+            {
+              if (!$course_subject_student->getConfiguration()->isNumericalMark())
+              {
+                $value = LetterMarkPeer::retrieveByPk($value)->getValue();
+              }
+            }
           }
 
           $course_subject_student_mark->setMark($value);

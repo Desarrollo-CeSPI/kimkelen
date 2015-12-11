@@ -641,7 +641,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     
     if ($config != null && !$config->isNumericalMark())
     {
-      return BaseCustomOptionsHolder::getInstance('LetterMark')->getOption($this->getMarksAverage());
+      return LetterMarkPeer::getOption($this->getMarksAverage());
     }
     else
     {

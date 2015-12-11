@@ -69,7 +69,7 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
   {
     if ($config != null && !$config->isNumericalMark())
     {
-      return BaseCustomOptionsHolder::getInstance('LetterMark')->getOption((Integer)$this->getMark());
+      return LetterMarkPeer::getOption((Integer)$this->getMark());
     }
     else
     {
