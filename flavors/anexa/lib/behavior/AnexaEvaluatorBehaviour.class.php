@@ -24,4 +24,33 @@
  */
 class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
+
+  public function getCourseSubjectStudentResult(CourseSubjectStudent $course_subject_student, PropelPDO $con = null)
+  {
+    if (!$course_subject_student->getConfiguration()->isNumericalMark())
+    {
+      $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($course_subject_student);
+      $average = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+      $average = $average->getValue();
+    }
+    else
+    {
+      $average = $course_subject_student->getMarksAverage($con);
+    }
+
+    if ($this->isApproved($course_subject_student, $average, $con))
+    {
+      return $this->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
+    }
+    else
+    {
+      $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
+      $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
+      $student_disapproved_course_subject->setExaminationNumber($this->getExaminationNumberFor($average, false, $course_subject_student));
+
+      return $student_disapproved_course_subject;
+    }
+
+  }
+
 }

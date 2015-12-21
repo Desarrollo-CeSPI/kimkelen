@@ -6,5 +6,5 @@ class LetterMark extends BaseLetterMark
 	{
 		return $this->getLetter();
 	}
-
+	
 }
