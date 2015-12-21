@@ -112,7 +112,8 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
   {
     if ($config != null && !$config->isNumericalMark())
     {
-      return LetterMarkPeer::getOption((Integer)$this->getMark());
+      $letter_mark = LetterMarkPeer::getLetterMarkByValue((Integer)$this->getMark());
+      return $letter_mark->getLetter();
     }
     else
     {

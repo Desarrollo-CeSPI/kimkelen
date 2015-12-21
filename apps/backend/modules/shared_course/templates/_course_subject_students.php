@@ -74,7 +74,6 @@
       <tbody>
         <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
           <?php $course_result = $course_subject_student->getCourseResult(); ?>
-
           <tr<?php echo (($final_period && !is_null($course_result)) ? " class='" . $course_result->getClass() . "'" : ""); ?>>
 
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
