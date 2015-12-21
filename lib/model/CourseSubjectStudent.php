@@ -209,7 +209,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     /* Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
      * Eso lo sabe el behavior
      */
-
+    
     return SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this, $con);
 
   }
@@ -641,7 +641,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     
     if ($config != null && !$config->isNumericalMark())
     {
-      return LetterMarkPeer::getOption($this->getMarksAverage());
+      $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
+      $letter_mark = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+      
+      return $letter_mark->getLetter();
     }
     else
     {
