@@ -93,9 +93,17 @@ class BaseSubjectStudentAnalytic
             case 'StudentApprovedCourseSubject':
                 return 'Regular';
             case 'StudentDisapprovedCourseSubject':
-                return 'Mesa';
+							  if ($instance->getExaminationNumber() == 1) {
+                return 'R. Dic.';
+							  } else {
+								  return 'R. Comp.';
+							  }
             case 'StudentRepprovedCourseSubject':
-                return 'Previa';
+	            if ($instance->getentExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1) {
+		            return 'R. Prev.';
+	            } else {
+		            return 'Libre';
+	            }
         }
         return;
     }

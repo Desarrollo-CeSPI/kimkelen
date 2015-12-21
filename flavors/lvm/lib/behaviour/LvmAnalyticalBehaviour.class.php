@@ -20,5 +20,7 @@
 
 class LvmAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
-    
+	public function showCertificate() {
+		return true;
+	}
 }
