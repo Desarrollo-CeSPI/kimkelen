@@ -22,7 +22,7 @@ CREATE TABLE `alumnos`.`letter_mark_average`
 	`letter_mark_3` INTEGER NOT NULL , 
 	`letter_mark_average` INTEGER NOT NULL , 
 	PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+) ENGINE = InnoDB COMMENT='Representa la grilla de letras y su promedio final';
 
 INSERT INTO `letter_mark_average` 
 (
