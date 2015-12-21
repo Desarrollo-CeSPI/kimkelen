@@ -65,7 +65,6 @@ class SubjectConfigurationForm extends BaseSubjectConfigurationForm
     $this->setWidget('numerical_mark', new sfWidgetFormChoice(array('choices' => $choice)));
     $this->setValidator('numerical_mark', new sfValidatorChoice(array('choices' => array_keys($choice), 'required' => true)));
     $this->widgetSchema->setLabel('numerical_mark', 'Tipo de Nota');
-//    $this->setDefault('course_type',SchoolBehaviourFactory::getInstance()->getDefaultCourseType());
 
     $this->setWidget('when_disapprove_show_string', new sfWidgetFormChoice(array('choices' => array(0=>'Muestra texto', 1=>'Muestra numero'), 'multiple'=>false,'expanded'=>true)));
     $this->getWidget('when_disapprove_show_string')->setDefault($this->getObject()->getWhenDisapproveShowString());
@@ -80,7 +79,7 @@ class SubjectConfigurationForm extends BaseSubjectConfigurationForm
     $this->widgetSchema->setHelp('course_marks','Cantidad de notas de un alumno dentro de la cursada.');
     $this->widgetSchema->setHelp('final_examination_required','Indica si un alumno necesita un examen final luego de aprobar la cursada para tener aprobada la materia.');
     $this->widgetSchema->setHelp('course_required','Indica si la cursada es requerida o en caso negativo se puede rendir el final sin tener la cursada previamente aprobada.');
-    $this->widgetSchema->setHelp('course_minimun_mark','Nota minima de aprobacion del curso.');
+    $this->widgetSchema->setHelp('course_minimun_mark','Nota minima de aprobacion del curso. Si el tipo de nota de la materia es "Con letras" indique como nota minima 7.');
     $this->widgetSchema->setHelp('course_examination_count','Cantidad de mesas para que un alumno pueda aprobar la cursada.');
     $this->widgetSchema->setHelp('max_previous', 'Superado este número, el alumno debe repetir el año.');
     $this->widgetSchema->setHelp('max_disciplinary_sanctions', 'Superado este número, el alumno debe quedar libre.');
