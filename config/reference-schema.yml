@@ -242,3 +242,21 @@ classes:
       value:
         type: integer
         required: true
+
+  LetterMarkAverage:
+    tablename:        letter_mark_average
+    description:
+    columns:
+      id:
+      letter_mark_1:
+        type: integer
+        required: true
+      letter_mark_2:
+        type: integer
+        required: true
+      letter_mark_3:
+        type: integer
+        required: true
+      letter_mark_average:
+        type: integer
+        required: true
