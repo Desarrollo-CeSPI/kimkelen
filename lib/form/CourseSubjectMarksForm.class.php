@@ -68,7 +68,11 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           else
           {
             $letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$course_subject_student_mark->getMark());
-            $widgets[$widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' => $letter_mark->getId()));
+            
+            if(!is_null($letter_mark)) {
+              $this->setDefault($widget_name, $letter_mark->getId());
+            }
+            $widgets[$widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true));
             $validators[$widget_name] = new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false));
           }
           //IS FREE
