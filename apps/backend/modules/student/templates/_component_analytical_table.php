@@ -39,7 +39,7 @@
                     <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
                     <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
                     <th colspan="2"><?php echo __("Calification") ?></th>
-                    <th rowspan="2"><?php echo __("Establecimiento") ?></th>
+
                 </tr>
                 <tr>
                     <th>Nro.</th>
@@ -47,7 +47,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="analytical_body_table">
                 <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
                     <tr>
 
@@ -63,7 +63,6 @@
 
                         <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
 
-                        <td class="text-center"><?php echo ($css->getSchoolName()?__($css->getSchoolName()):'<hr/>') ?></td>
 
                     </tr>
                 <?php endforeach ?>
@@ -76,8 +75,8 @@
             </tbody>
         </table>
     <?php endforeach ?>
-
-<div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
-    
+<?php if ($object->has_completed_career()): ?>
+  <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
+<?php endif; ?>
 <?php endif; ?>
 

@@ -152,7 +152,7 @@ class BaseAnalyticalBehaviour
             $current_year = $this->get_current_school_year();
             foreach ($years as $year)
             {
-                if ($current_year->getYear() < $year)
+                if ($current_year->getYear() <= $year)
                 {
                     $this->remaining_years[] = $year;
                 }
@@ -339,4 +339,8 @@ class BaseAnalyticalBehaviour
             }
         }
     }
+
+	public function showCertificate() {
+		return false;
+	}
 }

@@ -13,7 +13,7 @@ all:
     class:        sfPropelDatabase
     param:
       classname:  PropelPDO
-      dsn:        mysql:dbname=#db_name#;host=#db_host#
+      dsn:        'mysql:dbname=#db_name#;host=#db_host#'
       username:   #db_user#
       password:   #db_pass#
       encoding:   utf8

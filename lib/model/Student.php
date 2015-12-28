@@ -1274,6 +1274,20 @@ class Student extends BaseStudent
   {
     return ($this->getIsRegistered())? 'Sí': 'No';
   }
+  
+  public function getHealthInfoString()
+  {
+	
+	$school_year = SchoolYearPeer::retrieveCurrent();
+	$c = new Criteria();
+	$c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+	$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+	$school_year_student = SchoolYearStudentPeer::doSelectOne($c);
+	SchoolYearStudentPeer::clearInstancePool();
+
+	return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
+		
+  }
 
   /**
    * This method returns the current or last StudentCareerSchoolYear.
@@ -1349,15 +1363,17 @@ class Student extends BaseStudent
 
 	public function owsCorrelativeFor($career_subject) {
     //obtengo las correlativas de la materia recibida por parámetro
-    $correlatives = $career_subject->getCorrelativeCareerSubjects();
+    $correlative = $career_subject->getCorrelativeCareerSubject();
 
-		$career_subjects_repproveds_array = array();
-
+		if (!is_null($correlative)){
 		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
-			$career_subjects_repproveds_array[] = $repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject();
-		}
 
-		return count(array_intersect($correlatives, $career_subjects_repproveds_array)) > 0;
+			if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+			  return true;
+			}
+		}
+	}
+		return false;
 	}
 
 }

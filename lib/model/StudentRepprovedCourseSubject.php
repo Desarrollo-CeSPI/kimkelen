@@ -95,6 +95,11 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
 
     return $this->getStudentExaminationRepprovedSubjects($c);
   }
+
+	public function getResultStr()
+	{
+		return $this->getMarksStr();
+	}
 }
 
 sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));

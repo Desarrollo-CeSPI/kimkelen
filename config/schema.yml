@@ -482,10 +482,14 @@ classes:
         required:         true
       created_at:
       health_info:
-        description:      Especifica si el alumno entrego la ficha de salud
-        type:             boolean
+        description:      Especifica el estado de la ficha de salud
+        type:             varchar(50)
+        required:         true
+        default:          'No entregado'
+      date_health_info:
+        description:      Especifica la fecha de devolucion de la ficha de salud
+        type:             date
         required:         false
-        default:          null
       _uniques:
         unique: [student_id, school_year_id ]
       _indexes:

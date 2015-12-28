@@ -21,4 +21,9 @@
 
 class OccupationCategoryPeer extends BaseOccupationCategoryPeer
 {
+	public static function getOccupationCategories()
+	{
+		$criteria = new Criteria();
+		return BaseOccupationCategoryPeer::doSelect($criteria);
+	}
 }

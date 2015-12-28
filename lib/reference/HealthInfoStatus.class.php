@@ -17,17 +17,28 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php include_stylesheets_for_form($form) ?>
-<?php include_javascripts_for_form($form) ?>
+<?php
 
-<div class="sf_admin_form">
-  <?php include_partial('student/show_form_actions', array('student' => $student, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>
+class HealthInfoStatus extends BaseCustomOptionsHolder
+{
 
-  <h2><?php echo __('Alumno') ?></h2>
-  <?php slot('sf_admin.current_show_student_show_tabs') ?>
-    <?php echo get_partial('student/student_show_tabs', array('type' => 'list', 'student' => $student)) ?>
-  <?php end_slot(); ?>
-  <?php include_slot('sf_admin.current_show_student_show_tabs') ?>
+  const
+    HEALTH_INFO_NO_COMMITED = 'No entregado',
+    HEALTH_INFO_COMMITED = 'Entregado',
+    HEALTH_INFO_SUITABLE = 'Apta',
+    HEALTH_INFO_NO_SUITABLE = 'No apta',
+    HEALTH_INFO_OBSERVATIONS = 'Con observaciones',
+    HEALTH_INFO_INVALID = 'Invalido';
 
-  <?php include_partial('student/show_form_actions', array('student' => $student, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>
-</div>
+
+  protected
+    $_options = array(
+        self::HEALTH_INFO_NO_COMMITED   => 'No entregado',
+        self::HEALTH_INFO_COMMITED  	=> 'Entregado',
+        self::HEALTH_INFO_SUITABLE  	=> 'Apta',
+        self::HEALTH_INFO_NO_SUITABLE 	=> 'No apta',
+        self::HEALTH_INFO_OBSERVATIONS	=> 'Con observaciones',
+        self::HEALTH_INFO_INVALID	=> 'Inválido',
+      );
+
+}

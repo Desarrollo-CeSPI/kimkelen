@@ -15,14 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- *  */ 
-// @TODO: Agregar nacionalidad (por el momento se tiene el dato de pais de nacimiento). Cambiar "nacido en" por "de nacionalidad"
+ *  */
 // @TODO: Agregar escuela de origen (origin_school de student?)
 ?>
 <?php use_helper('Date') ?>
 <div>
     <p class="header-text"> El/La director/a del
-        <span><?php echo __($career_student->getCareer()->getCareerName()) ?></span>
+        <span><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?></span>
         de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que
         <strong><?php echo $student ?></strong> <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?></strong> sexo <strong><?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()) ?></strong>
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,

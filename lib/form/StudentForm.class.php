@@ -54,13 +54,12 @@ class StudentForm extends BaseStudentForm
 
   public function unsetFields()
   {
-    unset($this['global_file_number'],
-          $this['person_id']);
+    unset($this['person_id']);
   }
 
   public function getFormFieldsDisplay()
   {
-    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'origin_school', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state', 'person-birth_city', 'person-photo', 'person-observations' );
+    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'global_file_number', 'origin_school', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state', 'person-birth_city', 'person-photo', 'person-observations' );
 
     if($this->getObject()->getPerson()->getPhoto())
     {

@@ -4496,6 +4496,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Sexto año</target>
             </trans-unit>
             <trans-unit>
+                <source>Year 7</source>
+                <target>Séptimo año</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>
@@ -4537,7 +4541,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 	        <trans-unit>
                 <source>Health info</source>
-                <target>Estado de la ficha de salud</target>
+                <target>Estado de la Ficha de Salud</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Date health info</source>
+                <target>Fecha de Devolución</target>
             </trans-unit>
         </body>
     </file>

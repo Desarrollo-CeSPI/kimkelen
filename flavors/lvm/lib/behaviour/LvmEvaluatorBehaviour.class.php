@@ -90,14 +90,31 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       $school_year = $course_subject_student->getCourseSubject()->getCourse()->getSchoolYear();
       $career_school_year = CareerSchoolYearPeer::retrieveBySchoolYear(null, $school_year);
-      if ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
+
+	    if ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption() && $year == 6) {
+
+	    $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
+		  $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+	    $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
+
+
+	    unset($average);
+	    unset($sum_marks);
+
+	    return $student_disapproved_course_subject;
+
+
+    }
+
+
+      /*elseif ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
         if (is_null($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))){
           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
           $student_repproved_course_subject->setCourseSubjectStudent($course_subject_student);
         }
 
         return $student_repproved_course_subject;
-      }
+      }*/
       else {
         $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
         $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
