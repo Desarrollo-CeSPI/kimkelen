@@ -2,12 +2,10 @@
 
 <body>
 <?php use_stylesheet('social-card.css') ?>
-
-<?php echo image_tag("logo-kimkelen-negro.png", array('width' => 240, 'height' => 70, 'absolute' => true)); ?>
-
+<br><br><?php echo image_tag("logo-kimkelen-negro.png", array('width' => 240, 'height' => 70, 'absolute' => true)); ?>
 <?php echo sfConfig::get('app_base')?>
 <h1 style="text-align:center;font-size:400%" >Ficha Social Inicial</h1>
-    <pre style=" margin-left: 100px;"> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad
+    <pre> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad
     y rápidez en la devolución de la información.
                                                                                                 <i>Departamento de Orientación Educativa</i>
      </pre>
@@ -30,7 +28,7 @@
 
 </pre>
 
-<p style="font-weight:bold; font-size:30px;"> A- DATOS FAMILIARES </p>
+<p style="font-weight:bold; font-size:30px" > A- DATOS FAMILIARES </p>
 
  <pre>
 		PADRE
@@ -43,7 +41,7 @@
 
 
 		Nivel educativo:
-							 <table style="margin-left:80px;" >
+							 <table style="margin-left:30px;" >
 								 <?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 									 <tr style="text-align: left;">
 										 <td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td>
@@ -52,12 +50,11 @@
 								 <?php }?>
 							 </table>
             Ocupación:
-			<table style="margin-left:80px;" >
+			<table style="margin-left:30px;" >
 				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 					<tr style="text-align: left;">
-						<td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?></td>
-						<td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?> </td>
-						<td style="font-size:24px">  <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>
+						<td style="font-size:20px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?></td>
+						<td style="font-size:20px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
 					</tr>
 				<?php }?>
 			</table>
@@ -94,7 +91,7 @@
             <br></br>
 
 
-							  <table style="margin-left:80px;" >
+							  <table style="margin-left:30px;" >
 								  <?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 									  <tr style="text-align: left;">
 										  <td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td>
@@ -104,12 +101,11 @@
 							  </table>
 
             Ocupación:
-            <table style="margin-left:80px;" >
+            <table style="margin-left:30px;" >
 	            <?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 		            <tr style="text-align: left;">
-			            <td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?></td>
-			            <td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?> </td>
-			            <td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>
+			            <td style="font-size:20px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; $i++?></td>
+			            <td style="font-size:20px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i];?> </td>
 		            </tr>
 	            <?php }?>
             </table>
@@ -144,21 +140,20 @@
 
 
 		Nivel educativo:
-							<table style="margin-left:80px;" >
+							<table style="margin-left:30px;" >
 								<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 									<tr style="text-align: left;">
-										<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td>
-										<td style="font-size:25px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?></td>
+										<td style="font-size:20px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?></td>
+										<td style="font-size:20px"><?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?></td>
 									</tr>
 								<?php }?>
 							</table>
             Ocupación:
-             <table style="margin-left:80px;" >
+             <table style="margin-left:30px;" >
 	             <?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 		             <tr style="text-align: left;">
-			             <td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ;$i++;?></td>
-			             <td style="font-size:24px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i];$i++; ?></td>
-			             <td style="font-size:24px"> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ?> </td>
+			             <td style="font-size:20px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ;$i++;?></td>
+			             <td style="font-size:20px"><?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; ?></td>
 		             </tr>
 	             <?php }?>
              </table>
@@ -183,17 +178,17 @@
                       Celular:...............................................................................................................................................................
 
             Email:............................................................................................................................................................................
-		<p style="margin-left:80px;font-size:25px">
+		<p style="margin-left:30px;font-size:20px">
 			(1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc.
 			Esta información consignela en OBSERVACIONES, al final de la hoja 4.
 		</p>
 		HERMANOS
 		 <style type="text/css">
-			 .tg  {border-collapse:collapse;border-spacing:14;}
-			 .tg td{font-family:Arial, sans-serif;font-size:20px;padding:25px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-			 .tg th{font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:20px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+			 .tg  {border-collapse:collapse}
+			 .tg td{font-family:Arial, sans-serif;font-size:20px;padding:15px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+			 .tg th{font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:15px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 		 </style>
-    <table style="width:130%" class="tg" align="center">
+    <table style="width:80%" class="tg" align="center">
 	    <colgroup>
 		    <col style="width: 100px">
 		    <col style="width: 500px">
@@ -264,7 +259,7 @@
 <p style="font-weight:bold; font-size:250%"> Otras Personas que viven en la misma casa : </p>
 <!--.............TABLA 3...............-->
 
-<table style="width:110%;" class="tg" align="center">
+<table style="width:80%;" class="tg" align="center">
 	<colgroup>
 		<col style="width: 400px">
 		<col style="width: 100px">
@@ -300,11 +295,11 @@
 <style type="text/css">
 	table{margin-left:100px;}
 	tr{text-align: left;}
-	td{font-size:23px;}
+	td{font-size:20px;}
 </style>
-    <pre style="font-size:23px">
+    <pre style="font-size:20px">
           (2) Seleccione el número correspondiente al nivel educativo elegido.
-		<table style="width:130%;">
+		<table style="width:80%;">
 			<?php $j= 1;for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 				<tr>
 					<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
@@ -315,10 +310,9 @@
 			<?php }?>
 		</table>
       (3) Seleccione el número correspondiente a la ocupacion elegida.
-		<table style="width:100%;">
+		<table style="width:80%;">
 			<?php $j= 1;for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
 				<tr>
-					<td><?php echo $j ."- ". $options_occupation[$i] ; $i++;$j++?>  </td>
 					<td><?php echo $j ."- ". $options_occupation[$i] ; $i++;$j++?>  </td>
 					<td><?php echo ($options_occupation[$i] == "")? "" :$j ."- ". $options_occupation[$i];$j++?> </td>
 				</tr>
