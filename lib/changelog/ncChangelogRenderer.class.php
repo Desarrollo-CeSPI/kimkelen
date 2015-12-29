@@ -53,7 +53,7 @@ class ncChangelogRenderer
 
         if (is_callable($callable))
         {
-          return call_user_func_array($callable, array($object, $options));
+          return call_user_func_array($callable, array($object));
         }
       }
     }
