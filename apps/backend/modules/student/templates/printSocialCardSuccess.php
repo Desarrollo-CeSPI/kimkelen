@@ -42,7 +42,7 @@
 			<label> Año que cursa: </label> <?php echo $student->getCurrentCourseYear() ?>
 		</div>
 		<div>
-		 	<label> Establecimientos educativos de procendencia: </label>  .....................................................
+		 	<label> Establecimientos educativos de procendencia: </label>  <span>................................................................................</span>
 		</div>
 </div> <!--  fin de datos personales -->
 
@@ -51,10 +51,10 @@
 	<div>
 		<h3> PADRE </h3>
 		<div>
-			<label> Apellido y Nombre: </label> <span>...........................................................................................</span>
+			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-			<label> Fecha de nacimiento: </label> .......................................................................................
+			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
 		</div>
 		<div>
 			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
@@ -85,36 +85,36 @@
   		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
   	</div>
   	<div>
-  		<label> Horario de trabajo: </label> ....................................................................................................
+  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Domicilio: </label> ........................................................................................................
+  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Provincia: </label> ................................................................................................
+  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
- 			<label> Ciudad: </label>.......................................................................................................
+ 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
  		</div>
  		<div id="tel">
  			<section>
   			<label> Teléfonos: </label>
     	</section>
-    	<label> Fijo: </label> <span>........................................</span>
-    	<label> Celular: </label> <span>........................................</span>
+    	<label> Fijo: </label> <span>....................................................................</span>
+    	<label> Celular: </label> <span>.................................................................</span>
 		</div>
 		<div>
- 	 		<label> Email: </label> ..............................................................................................................
+ 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
  	 	</div>
  	</div> <!--  fin PADRE -->
 
  	<div>
 		<h3> MADRE </h3>
 		<div>
-			<label> Apellido y Nombre: </label> <span>...........................................................................................</span>
+			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-			<label> Fecha de nacimiento: </label> .......................................................................................
+			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
 		</div>
 		<div>
 			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
@@ -145,36 +145,36 @@
   		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
   	</div>
   	<div>
-  		<label> Horario de trabajo: </label> ....................................................................................................
+  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Domicilio: </label> ........................................................................................................
+  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Provincia: </label> ................................................................................................
+  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
- 			<label> Ciudad: </label>.......................................................................................................
+ 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
  		</div>
- 		<div>
+ 		<div id="tel">
  			<section>
   			<label> Teléfonos: </label>
     	</section>
-    	<label> Fijo: </label> <span>........................................</span>
-    	<label> Celular: </label> <span>........................................</span>
+    	<label> Fijo: </label> <span>....................................................................</span>
+    	<label> Celular: </label> <span>.................................................................</span>
 		</div>
 		<div>
- 	 		<label> Email: </label> ..............................................................................................................
+ 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
  	 	</div>
  	</div> <!--  fin MADRE -->
 
 	<div>
 		<h3> TUTOR </h3>
 		<div>
-			<label> Apellido y Nombre: </label> <span>...........................................................................................</span>
+			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-			<label> Fecha de nacimiento: </label> .......................................................................................
+			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
 		</div>
 		<div>
 			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
@@ -205,30 +205,32 @@
   		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
   	</div>
   	<div>
-  		<label> Horario de trabajo: </label> ....................................................................................................
+  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Domicilio: </label> ........................................................................................................
+  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Provincia: </label> ................................................................................................
+  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
- 			<label> Ciudad: </label>.......................................................................................................
+ 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
  		</div>
- 		<div>
+ 		<div id="tel">
  			<section>
   			<label> Teléfonos: </label>
     	</section>
-    	<label> Fijo: </label> <span>........................................</span>
-    	<label> Celular: </label> <span>........................................</span>
+    	<label> Fijo: </label> <span>....................................................................</span>
+    	<label> Celular: </label> <span>.................................................................</span>
 		</div>
 		<div>
- 	 		<label> Email: </label> ..............................................................................................................
+ 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
  	 	</div>
 	</div> <!--  fin TUTOR -->
-
-	<p> (1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc. Esta información consignela en OBSERVACIONES, al final de la hoja 4. </p>
+	
+	<div>
+		<p> (1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc. Esta información consignela en OBSERVACIONES, al final de la hoja 4. </p>
+	</div>
 
 	<div>
 		<h4> HERMANOS </h4>
@@ -343,7 +345,9 @@
 			</tr>
 			<?php }?>
 		</table>
-		
+	</div>
+	
+	<div>
 		<h4> (3) Seleccione el número correspondiente a la ocupacion elegida. </h4>
 		<table>
 			<?php $j= 1;for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
@@ -360,88 +364,113 @@
 <div id="datos-salud"> 
 	<h2> B- DATOS PERSONALES DEL ALUMNO  </h2>
 	<div>
-		<label>Enfermedades que padece actualmente</label> <span>..............................................................................</span>
-  </div>
-  <div>
-  	<section>
-  		<label>Medicado?</label> <span>..................................................</span>
-  	</section>
-  	<label>Operaciones?</label> <span>................................................</span>
-  	<label>Accidentes?</label> <span>.................................................</span>
-	</div>
-	<div>
-		<section>
-			<label>Problemas sensoriales:</label> 
-		</section>	
-		<label>Auditivos?</label> <span>.....................................................</span>
-		<label>Visuales?</label> <span>......................................................</span>
-  </div>
-  <div>
-  	<section>
-  		<label>Problemas en el sueño?</label>..........
-  		<label>Cuántas horas duerme?</label>..........
-  	</section>
-  	<label>Cuáles?</label>...............................................................
-  </div>
-	<div>
-		<label>Comparte la habitación?</label>......................<label>Con quién?</label>............................
-	</div>
-	<div>
-		<label>Recibió o recibe asistencia:</label> 
-			<label>Foniátrica</label> .............
-			<label>Psicológica</label> ...............
-    	<label>Otra</label> ...................
-	</div>
-	<div>
-		<label>Manifiesta miedos?</label> ................. <label>A qué?</label>..................................................................................
-	</div>
-	<div>
-		<label>Tiene tics nerviosos?</label> .................. <label>Cuáles?</label>...........................................................
-	</div>
-	<div>
 		<div>
-			<label>Características de la conducta:</label> <span>Subrayar todas las características que describe la conducta de su hijo</span>
-    </div>
-    <div>
-    	<span>Alegre- Inquieto- Obediente- Dócil- Tranquilo- Triste- Agresivo- Cariñoso- Nervioso- Consentido- Otras Causas</span>
+			<label> Enfermedades que padece actualmente: </label> <span>...........................................................................................</span>
+	  </div>
+	  <div>
+	  	<label> Medicado? </label> <span>...............................</span>
+	  	<label> Operaciones? </label> <span>.............................</span>
+	  	<label> Accidentes? </label> <span>................................</span>
 		</div>
-	</div>
+		<div>
+			<section>
+				<label> Problemas sensoriales: </label> 
+			</section>	
+			<label> Auditivos? </label> <span>..............................................................</span>
+			<label> Visuales? </label> <span>..............................................................</span>
+	  </div>
+	  <div>
+	  	<label> Problemas en el sueño? </label> <span>..........</span>
+	  	<label> Cuáles? </label> <span>......................................</span>
+	  	<label> Cuántas horas duerme? </label> <span>..........</span>
+	  </div>
+		<div>
+			<label> Comparte la habitación? </label> <span>..........</span>
+			<label> Con quién? </label> <span>......................................................................................</span>
+		</div>
+		<div>
+			<section>
+				<label> Recibió o recibe asistencia: </label> 
+			</section>
+				<label> Foniátrica? </label> <span>....................</span>
+				<label> Psicológica? </label> <span>....................</span>
+	    	<label> Otra: </label> <span>.................................................................</span>
+		</div>
+		<div>
+			<label> Manifiesta miedos? </label>  <span>....................</span>
+			<label> A qué? </label> <span>.............................................................................................</span>
+		</div>
+		<div>
+			<label> Tiene tics nerviosos? </label> <span>....................</span>
+			<label> Cuáles? </label> <span>........................................................................................</span>
+		</div>
+		<div>
+			<div>
+				<label> Características de la conducta: </label> <span id="aclaracion"> (Subrayar todas las características que describe la conducta de su hijo.) </span>
+	    </div>
+	    <div>
+	    	<p> Alegre - Inquieto - Obediente - Dócil - Tranquilo - Triste - Agresivo - Cariñoso - Nervioso - Consentido - Otras Causas </p>
+			</div>
+		</div>
+	</div>   <!--  fin de datos de salud generales -->
 	
-	<h3> USO DEL TIEMPO LIBRE: </h3>
 	<div>
-		<label>Con quién prefiere jugar?</label>.................................................
-	</div>
-	<div>
-		<label>Quién dirige el juego?</label>...............................................
-	</div>
-	<div>
-		<label>Comparte sus juguetes/juegos? Dónde juega?</label>........................................................................................
-	</div>
-	<div>
-		<label>Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela?</label>...........................
-	</div>
-	<div>
-		<label>Quién se encarga del cuidado del niño en ausencia de sus padres?</label> ......................................................................
-	</div>
-	<div>
-		<label>Número de horas que comparte diariamente con su hijo?</label>
-			<label>Padre:</label> ............................................................................................................
-			<label>Madre:</label> ............................................................................................
-	</div>
-	<div>
-		<label>Para realizar las tareas escolares, necesita orientación?</label>  ........................ 
-			<label>Quién lo orienta?</label> ........................................................           
-			<label>En qué momento?</label>  .................................................................................
-	</div>
-	<div>
-		<label>Qué opinión tiene del desempeño escolar de su hijo/a?</label> 
-			<label>Madre:</label>  ............................................................................................................................
-			<label>Padre:</label>  ...............................................................................................
-	</div>
-	<div>
-		<label>OBSERVACIONES:</label> .......................................................................................................................
-	</div>
+		<h3> USO DEL TIEMPO LIBRE: </h3>
+		<div>
+			<label> Con quién prefiere jugar? </label> <span>.....................................................................................................................</span>
+		</div>
+		<div>
+			<label> Quién dirige el juego? </label> <span>...........................................................................................................................</span>
+		</div>
+		<div>
+			<label> Comparte sus juguetes/juegos? Dónde juega? </label> <span>.................................................................................</span>
+		</div>
+		<div>
+			<section>
+				<label> Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela? </label>
+			</section>
+			<span>....................................................................................................................................................................</span>
+		</div>
+		<div>
+			<section>
+				<label> Quién se encarga del cuidado del niño en ausencia de sus padres? </label>
+			</section>
+			<span>....................................................................................................................................................................</span>
+		</div>
+		<div>
+			<section>
+				<label>Número de horas que comparte diariamente con su hijo?</label>
+			</section>
+				<label>Padre:</label> <span>...................................................................</span>
+				<label>Madre:</label> <span>...................................................................</span>
+		</div>
+		<div>
+			<section>
+				<label> Para realizar las tareas escolares, necesita orientación? </label> <span>..............................................................</span>
+			</section>	
+				<label> Quién lo orienta? </label> <span>...............................................</span>      
+				<label> En qué momento? </label> <span>................................................</span>
+		</div>
+		<div>
+			<section>
+				<label>Qué opinión tiene del desempeño escolar de su hijo/a?</label> 
+			</section>	
+				<label>Madre:</label> <span>...................................................................</span>
+				<label>Padre:</label> <span>...................................................................</span>
+		</div>
+	</div> <!-- fin de tiempo libre -->
 </div> <!--  fin de Datos Salud -->
+
+<div id="observacion">
+	<section>
+		<label>OBSERVACIONES:</label>
+	</section>
+	<span>....................................................................................................................................................................</span>
+	<span>....................................................................................................................................................................</span>
+	<span>....................................................................................................................................................................</span>
+	<span>....................................................................................................................................................................</span>
+	<span>....................................................................................................................................................................</span>
+</div> <!-- fin de observaciones -->
 
 </body>
 
