@@ -2,18 +2,20 @@
 <html>
 <body>
 
-<?php use_stylesheet('print-social-card.css') ?>
+<header>
+	<?php use_stylesheet('print-social-card.css') ?>
 
-<?php echo image_tag("logo-kimkelen-negro.png", array('width' => 240, 'height' => 70, 'absolute' => true)); ?>
+	<?php echo image_tag("logo-kimkelen-negro.png", array('width' => 240, 'height' => 70, 'absolute' => true)); ?>
 
-<?php echo sfConfig::get('app_base')?>
+	<?php echo sfConfig::get('app_base')?>
 
-<h1> Ficha Social Inicial </h1>
+	<h1> Ficha Social Inicial </h1>
 
-<div id="nota"> 
-	<p> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad y rápidez en la devolución de la información.</p>
-	<p id="firma"> Departamento de Orientación Educativa. </p>
-</div>
+	<div id="nota"> 
+		<p> Sres Padres: para conocer las características y atender mejor a las necesidades de su hijo, necesitamos claridad y rápidez en la devolución de la información.</p>
+		<p id="firma"> Departamento de Orientación Educativa. </p>
+	</div>
+</header>
 
 <div id="datos-personales">
 		<div id="fecha">
@@ -26,17 +28,17 @@
 		<div>
 			<label> Tipo de Documento: </label>  <?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType());  ?>
 			<label> Nro. de Documento: </label>   <?php echo $student->getPerson()->getIdentificationNumber(); ?> 
-			<label> Nro. de CUIL: </label> <?php echo (is_null($student->getPerson()->getCuil()) | $student->getPerson()->getCuil() == '') ? '....................' : $student->getPerson()->getCuil()?>
+			<label> Nro. de CUIL: </label> <?php echo (is_null($student->getPerson()->getCuil()) | $student->getPerson()->getCuil() == '') ? '......................................' : $student->getPerson()->getCuil()?>
 		</div>
 		<div>
-			<label> Fecha Nac.: </label> <?php echo (is_null($student->getPersonFormattedBirthDate()) | $student->getPersonFormattedBirthDate() == '') ? '....................' : $student->getPersonFormattedBirthDate();?>   
-			<label> Lugar de Nac.: </label> <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? '....................' : $student->getPerson()->getBirthCityRepresentation() .','; ?>
-		  <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? '....................' : $student->getPerson()->getBirthStateRepresentation() . ', '; ?>
-		  <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? '....................' : $student->getPerson()->getBirthCountryRepresentation(); ?>
+			<label> Fecha Nac.: </label> <?php echo (is_null($student->getPersonFormattedBirthDate()) | $student->getPersonFormattedBirthDate() == '') ? '....................................' : $student->getPersonFormattedBirthDate();?>   
+			<label> Lugar de Nac.: </label> <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? '........................ ,' : $student->getPerson()->getBirthCityRepresentation() .','; ?>
+		  <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? '....................... ,' : $student->getPerson()->getBirthStateRepresentation() . ', '; ?>
+		  <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? '.......................' : $student->getPerson()->getBirthCountryRepresentation(); ?>
 		</div>
 		<div>
-			<label> Domicilio: </label> <?php echo (is_null($student->getPerson()->getAddress()) | $student->getPerson()->getAddress() == '') ? '........................................' : $student->getPerson()->getAddress(); ?>     
-			<label> Teléfono: </label>  <?php echo (is_null($student->getPersonPhone()) |  $student->getPersonPhone() == '') ? '....................' : $student->getPersonPhone() ?>
+			<label> Domicilio: </label> <?php echo (is_null($student->getPerson()->getAddress()) | $student->getPerson()->getAddress() == '') ? '......................................................................' : $student->getPerson()->getAddress(); ?>     
+			<label> Teléfono: </label>  <?php echo (is_null($student->getPersonPhone()) |  $student->getPersonPhone() == '') ? '......................................................' : $student->getPersonPhone() ?>
 		</div>
 		<div>
 			<label> Año que cursa: </label> <?php echo $student->getCurrentCourseYear() ?>
@@ -48,192 +50,10 @@
 
 <div id="datos-familiares">	
 	<h2> A- DATOS FAMILIARES </h2>
-	<div>
-		<h3> PADRE </h3>
-		<div>
-			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
-		</div>
-		<div>
-			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
-		</div>
-		<div class="seleccion">
-			<label> Nivel educativo: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-  	</div>
-  	<div class="seleccion">
-  		<label> Ocupación: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-		</div>
-		<div>
-  		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
-  	</div>
-  	<div>
-  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Ciudad: </label> <span>..............................................................</span>
- 			<label> Provincia: </label> <span>..............................................................</span>
- 		</div>
- 		<div id="tel">
-    	<label> Tel. Fijo: </label> <span>................................................................</span>
-    	<label> Celular: </label> <span>..............................................................</span>
-		</div>
-		<div>
- 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
- 	 	</div>
- 	</div> <!--  fin PADRE -->
-  
-  <div style="clear:both;"></div>
-  <div style="page-break-before: always;"></div>
- 	
- 	<div style="padding-top:40px;">
-		<h3> MADRE </h3>
-		<div>
-			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
-		</div>
-		<div>
-			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
-		</div>
-		<div class="seleccion">
-			<label> Nivel educativo: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-  	</div>
-  	<div class="seleccion">
-  		<label> Ocupación: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-		</div>
-		<div>
-  		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
-  	</div>
-  	<div>
-  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
- 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
- 		</div>
- 		<div id="tel">
-    	<label> Tel. Fijo: </label> <span>................................................................</span>
-    	<label> Celular: </label> <span>..............................................................</span>
-		</div>
-		<div>
- 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
- 	 	</div>
- 	</div> <!--  fin MADRE -->
 
-  <div style="clear:both;"></div>
-  <div style="page-break-before: always;"></div>
+	<?php include_partial("student/family_info", array("titles" => array("PADRE", "MADRE", "TUTOR"), "options_nationality" => $options_nationality, "options_study" => $options_study, "options_occupation" => $options_occupation)) ?>
 
-	<div style="padding-top:40px;">
-		<h3> TUTOR </h3>
-		<div>
-			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-			<label> Fecha de nacimiento: </label> <span>.........................................................................................................................</span>
-		</div>
-		<div>
-			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
-		</div>
-		<div class="seleccion">
-			<label> Nivel educativo: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-  	</div>
-  	<div class="seleccion">
-  		<label> Ocupación: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
-					</tr>
-				<?php } ?>
-				</table>
-		</div>
-		<div>
-  		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
-  	</div>
-  	<div>
-  		<label> Horario de trabajo: </label> <span>.............................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
-  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
- 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
- 		</div>
- 		<div id="tel">
-    	<label> Tel. Fijo: </label> <span>................................................................</span>
-    	<label> Celular: </label> <span>..............................................................</span>
-		</div>
-		<div>
- 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
- 	 	</div>
-	</div> <!--  fin TUTOR -->
-	
-	<div>
-		<p> (1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc. Esta información consignela en OBSERVACIONES, al final de la hoja 4. </p>
-	</div>
-
-	<div style="clear:both;"></div>
-  <div style="page-break-before: always;"></div>
-	
-	<div style="padding-top:40px;">
+	<div class="form-info">
 		<h4> HERMANOS </h4>
 	  <table class="tabla">
 		  <colgroup>
@@ -365,7 +185,7 @@
 <div style="clear:both;"></div>
 <div style="page-break-before: always;"></div>
 
-<div id="datos-salud" style="padding-top:40px;"> 
+<div id="datos-salud"> 
 	<h2> B- DATOS PERSONALES DEL ALUMNO  </h2>
 	<div>
 		<div>
@@ -458,9 +278,17 @@
 		<div>
 			<section>
 				<label>Qué opinión tiene del desempeño escolar de su hijo/a?</label> 
-			</section>	
-				<label>Madre:</label> <span>...................................................................</span>
-				<label>Padre:</label> <span>...................................................................</span>
+			</section>
+			<section>
+				<label>Madre:</label> <span>.....................................................................................................................................................</span>
+				<span>....................................................................................................................................................................</span>
+				<span>....................................................................................................................................................................</span>
+			</section>
+			<section>
+				<label>Padre:</label> <span>......................................................................................................................................................</span>
+				<span>....................................................................................................................................................................</span>
+				<span>....................................................................................................................................................................</span>
+			</section>
 		</div>
 	</div> <!-- fin de tiempo libre -->
 </div> <!--  fin de Datos Salud -->
