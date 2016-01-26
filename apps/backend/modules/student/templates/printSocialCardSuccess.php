@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<?php use_stylesheet('social-card.css') ?>
+<?php use_stylesheet('print-social-card.css') ?>
 
 <?php echo image_tag("logo-kimkelen-negro.png", array('width' => 240, 'height' => 70, 'absolute' => true)); ?>
 
@@ -64,8 +64,9 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 					<tr>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -75,8 +76,8 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 					<tr>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -91,24 +92,22 @@
   		<label> Domicilio: </label> <span>.............................................................................................................................................</span>
 		</div>
 		<div>
-  		<label> Provincia: </label> <span>.............................................................................................................................................</span>
-		</div>
-		<div>
- 			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
+  		<label> Ciudad: </label> <span>..............................................................</span>
+ 			<label> Provincia: </label> <span>..............................................................</span>
  		</div>
  		<div id="tel">
- 			<section>
-  			<label> Teléfonos: </label>
-    	</section>
-    	<label> Fijo: </label> <span>....................................................................</span>
-    	<label> Celular: </label> <span>.................................................................</span>
+    	<label> Tel. Fijo: </label> <span>................................................................</span>
+    	<label> Celular: </label> <span>..............................................................</span>
 		</div>
 		<div>
  	 		<label> Email: </label> <span>...................................................................................................................................................</span>
  	 	</div>
  	</div> <!--  fin PADRE -->
-
- 	<div>
+  
+  <div style="clear:both;"></div>
+  <div style="page-break-before: always;"></div>
+ 	
+ 	<div style="padding-top:40px;">
 		<h3> MADRE </h3>
 		<div>
 			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
@@ -124,8 +123,9 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 					<tr>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -135,8 +135,8 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 					<tr>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -157,18 +157,18 @@
  			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
  		</div>
  		<div id="tel">
- 			<section>
-  			<label> Teléfonos: </label>
-    	</section>
-    	<label> Fijo: </label> <span>....................................................................</span>
-    	<label> Celular: </label> <span>.................................................................</span>
+    	<label> Tel. Fijo: </label> <span>................................................................</span>
+    	<label> Celular: </label> <span>..............................................................</span>
 		</div>
 		<div>
  	 		<label> Email: </label> <span>...................................................................................................................................................</span>
  	 	</div>
  	</div> <!--  fin MADRE -->
 
-	<div>
+  <div style="clear:both;"></div>
+  <div style="page-break-before: always;"></div>
+
+	<div style="padding-top:40px;">
 		<h3> TUTOR </h3>
 		<div>
 			<label> Apellido y Nombre: </label> <span>.............................................................................................................................</span>
@@ -184,8 +184,9 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 					<tr>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo ($options_study[$i] == "")? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
+						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -195,8 +196,8 @@
 				<table>
 				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
 					<tr>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo ($options_occupation[$i] == "")? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
+						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
 					</tr>
 				<?php } ?>
 				</table>
@@ -217,11 +218,8 @@
  			<label> Ciudad: </label> <span>.................................................................................................................................................</span>
  		</div>
  		<div id="tel">
- 			<section>
-  			<label> Teléfonos: </label>
-    	</section>
-    	<label> Fijo: </label> <span>....................................................................</span>
-    	<label> Celular: </label> <span>.................................................................</span>
+    	<label> Tel. Fijo: </label> <span>................................................................</span>
+    	<label> Celular: </label> <span>..............................................................</span>
 		</div>
 		<div>
  	 		<label> Email: </label> <span>...................................................................................................................................................</span>
@@ -232,7 +230,10 @@
 		<p> (1) En caso de separación de los padres, especificarlo e indicar con quién vive el niño, régimen de visitas , etc. Esta información consignela en OBSERVACIONES, al final de la hoja 4. </p>
 	</div>
 
-	<div>
+	<div style="clear:both;"></div>
+  <div style="page-break-before: always;"></div>
+	
+	<div style="padding-top:40px;">
 		<h4> HERMANOS </h4>
 	  <table class="tabla">
 		  <colgroup>
@@ -361,7 +362,10 @@
 
 </div> <!--  fin de datos familiares -->
 
-<div id="datos-salud"> 
+<div style="clear:both;"></div>
+<div style="page-break-before: always;"></div>
+
+<div id="datos-salud" style="padding-top:40px;"> 
 	<h2> B- DATOS PERSONALES DEL ALUMNO  </h2>
 	<div>
 		<div>

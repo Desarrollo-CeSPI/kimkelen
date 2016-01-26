@@ -4,7 +4,7 @@ body {
 }
 
 img {
-  margin: 40px;
+  margin-top: 40px;
 }
 
 
@@ -23,7 +23,6 @@ h3 {
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-  margin-top: 50px;
 }
 
 h4 {
@@ -34,7 +33,7 @@ h4 {
 }
 
 #nota {
-  margin-top: 50px;
+  margin-top: 40px;
   margin-left: 75px;
   margin-right: 75px;
   text-align: left;
