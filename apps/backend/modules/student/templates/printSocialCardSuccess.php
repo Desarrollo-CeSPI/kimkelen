@@ -54,7 +54,8 @@
 	<?php include_partial("student/family_info", array("titles" => array("PADRE", "MADRE", "TUTOR"), "options_nationality" => $options_nationality, "options_study" => $options_study, "options_occupation" => $options_occupation)) ?>
 
 	<div class="form-info">
-		<h4> HERMANOS </h4>
+		<h3> HERMANOS </h3>
+	  
 	  <table class="tabla">
 		  <colgroup>
 			  <col style="width: 100px">
@@ -119,7 +120,7 @@
 	</div> <!--  fin Tabla HERMANOS -->
 
 	<div>
-		<h4> Otras Personas que viven en la misma casa </h4>
+		<h3> Otras Personas que viven en la misma casa </h3>
 		<table class="tabla">
 			<colgroup>
 				<col style="width: 400px">
@@ -155,7 +156,7 @@
 	</div> <!--  fin Tabla Otras Personas -->
 
 	<div>
-		<h4> (2) Seleccione el número correspondiente al nivel educativo elegido. </h4>
+		<h3> (2) Seleccione el número correspondiente al nivel educativo elegido. </h3>
 		<table>
 			<?php $j= 1;for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 			<tr>
@@ -169,7 +170,7 @@
 	</div>
 	
 	<div>
-		<h4> (3) Seleccione el número correspondiente a la ocupacion elegida. </h4>
+		<h3> (3) Seleccione el número correspondiente a la ocupacion elegida. </h3>
 		<table>
 			<?php $j= 1;for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
 			<tr>
