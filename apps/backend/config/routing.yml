@@ -745,6 +745,10 @@ homepage:
   url:   /
   param: { module: mainBackend, action: index }
 
+changelog_helper:
+  url: /changelog_helper
+  param: { module: changelog_helper, action: index }
+
 default_index:
   url:   /:module
   param: { action: index }

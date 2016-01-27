@@ -36,8 +36,10 @@ class SchoolYearStudentForm extends BaseSchoolYearStudentForm
    
     unset($this['created_at'], $this['school_year_id'], $this['student_id']);
     $this->getWidget('shift_id')->setOption('add_empty',false);
-   
-  
-    
+
+	  $this->setWidget('health_info',  new sfWidgetFormSelect(array(
+		  'choices'  => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions()
+	  )));
+
   }
 }
