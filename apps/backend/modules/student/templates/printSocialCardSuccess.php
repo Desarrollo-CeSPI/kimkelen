@@ -158,12 +158,12 @@
 	<div>
 		<h3> (2) Seleccione el número correspondiente al nivel educativo elegido. </h3>
 		<table>
-			<?php $j= 1;for($i = 0 ; $i < count($options_study) ; $i++){ ?>
+			<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
 			<tr>
-				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
-				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
-				<td><?php echo $j ."- ". $options_study[$i] ; $i++;$j++?>  </td>
-				<td><?php echo $j ."- ". $options_study[$i];$j++?> </td>
+				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
+				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
+				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
+				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ;?>  </td>
 			</tr>
 			<?php }?>
 		</table>
@@ -172,10 +172,10 @@
 	<div>
 		<h3> (3) Seleccione el número correspondiente a la ocupacion elegida. </h3>
 		<table>
-			<?php $j= 1;for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
+			<?php for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
 			<tr>
-				<td><?php echo $j ."- ". $options_occupation[$i] ; $i++;$j++?>  </td>
-				<td><?php echo ($options_occupation[$i] == "")? "" :$j ."- ". $options_occupation[$i];$j++?> </td>
+				<td><?php echo (!isset($options_occupation[$i]))? "": $i+1 ."- ". $options_occupation[$i] ; $i++;?>  </td>
+				<td><?php echo (!isset($options_occupation[$i]))? "": $i+1 ."- ". $options_occupation[$i] ;?>  </td>
 			</tr>
 			<?php }?>
 		</table>
