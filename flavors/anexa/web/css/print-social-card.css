@@ -72,8 +72,22 @@ label {
   margin-left: 5px;
 }
 
-.seleccion table {
-  margin-left: 75px;
+.seleccion-3columnas ul {
+  width: 700px;
+}
+
+.seleccion-3columnas ul li {
+  display: inline-block;
+  width: 200px;
+}
+
+.seleccion-2columnas ul {
+  width: 700px;
+}
+
+.seleccion-2columnas ul li {
+  display: inline-block;
+  width: 300px;
 }
 
 .tabla  {

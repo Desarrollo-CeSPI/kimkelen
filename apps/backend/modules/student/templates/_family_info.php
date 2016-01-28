@@ -17,28 +17,21 @@
 		<div>
 			<label> Nacionalidad: </label> <?php foreach($options_nationality as $n): ?> <input type="checkbox"> <span> <?php echo  $n;?> </span> <?php  endforeach?>
 		</div>
-		<div class="seleccion">
+		<div class="seleccion-3columnas">
 			<label> Nivel educativo: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;$i++;?> </td>
-						<td> <?php echo (!isset($options_study[$i]))? "":'<input type="checkbox"> '. $options_study[$i] ;?> </td>
-					</tr>
-				<?php } ?>
-				</table>
+			<ul>
+			<?php foreach ($options_study as $op):?>
+				<li> <input type="checkbox"> <span> <?php echo  $op;?> </span> </li> 
+			<?php endforeach; ?>
+			</ul>
   	</div>
-  	<div class="seleccion">
+  	<div class="seleccion-2columnas">
   		<label> Ocupación: </label>
-				<table>
-				<?php for($i = 0 ; $i < count($options_occupation);$i++){ ?>
-					<tr>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i] ; $i++?> </td>
-						<td> <?php echo (!isset($options_occupation[$i]))? "":'<input type="checkbox"> '. $options_occupation[$i]; ?> </td>
-					</tr>
-				<?php } ?>
-				</table>
+			<ul>
+			<?php foreach ($options_occupation as $op):?>
+				<li> <input type="checkbox"> <span> <?php echo  $op;?> </span> </li> 
+			<?php endforeach; ?>
+			</ul>
 		</div>
 		<div>
   		<label> Vive con el niño (1): </label> <input type="checkbox"> SI <input type="checkbox"> NO
@@ -58,7 +51,7 @@
     	<label> Celular: </label> <span>..............................................................</span>
 		</div>
 		<div>
- 	 		<label> Email: </label> <span>...................................................................................................................................................</span>
+ 	 		<label> Email: </label> <span>....................................................................................................................................................</span>
  	 	</div>
  	</div>
 

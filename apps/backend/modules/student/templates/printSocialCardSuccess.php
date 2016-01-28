@@ -22,23 +22,23 @@
 	  	<label> Fecha: </label> <?php echo date('Y-m-d');?>
 		</div>
 		<div>
-			<label> Nombres y apellido del alumno: </label> <?php echo $student ?>    
+			<label> Nombres y Apellido del Alumno: </label> <?php echo $student ?>    
 			<label> Sexo: </label> <?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()); ?>
+			
 		</div>
 		<div>
-			<label> Tipo de Documento: </label>  <?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType());  ?>
-			<label> Nro. de Documento: </label>   <?php echo $student->getPerson()->getIdentificationNumber(); ?> 
-			<label> Nro. de CUIL: </label> <?php echo (is_null($student->getPerson()->getCuil()) | $student->getPerson()->getCuil() == '') ? '......................................' : $student->getPerson()->getCuil()?>
+			<label> Tipo  y Nro. de Documento: </label> <?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType());?>  <?php echo $student->getPerson()->getIdentificationNumber(); ?>   
+			<label> CUIL: </label> <?php echo (is_null($student->getPerson()->getCuil()) | $student->getPerson()->getCuil() == '') ? '...............................................................................' : $student->getPerson()->getCuil()?>
 		</div>
 		<div>
-			<label> Fecha Nac.: </label> <?php echo (is_null($student->getPersonFormattedBirthDate()) | $student->getPersonFormattedBirthDate() == '') ? '....................................' : $student->getPersonFormattedBirthDate();?>   
-			<label> Lugar de Nac.: </label> <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? '........................ ,' : $student->getPerson()->getBirthCityRepresentation() .','; ?>
-		  <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? '....................... ,' : $student->getPerson()->getBirthStateRepresentation() . ', '; ?>
-		  <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? '.......................' : $student->getPerson()->getBirthCountryRepresentation(); ?>
+			<label> Fecha  y Lugar de Nac.: </label> <?php echo (is_null($student->getPersonFormattedBirthDate()) | $student->getPersonFormattedBirthDate() == '') ? '....................................' : $student->getPersonFormattedBirthDate();?>   
+		  <?php echo (is_null($student->getPerson()->getBirthCity()) | $student->getPerson()->getBirthCity() == '') ? '........................... ,' : $student->getPerson()->getBirthCityRepresentation() .','; ?>
+		  <?php echo (is_null($student->getPerson()->getBirthState()) | $student->getPerson()->getBirthState() == '') ? '.......................... ,' : $student->getPerson()->getBirthStateRepresentation() . ', '; ?>
+		  <?php echo (is_null($student->getPerson()->getBirthCountry()) | $student->getPerson()->getBirthCountry() == '') ? '.........................' : $student->getPerson()->getBirthCountryRepresentation(); ?>
 		</div>
 		<div>
-			<label> Domicilio: </label> <?php echo (is_null($student->getPerson()->getAddress()) | $student->getPerson()->getAddress() == '') ? '......................................................................' : $student->getPerson()->getAddress(); ?>     
 			<label> Teléfono: </label>  <?php echo (is_null($student->getPersonPhone()) |  $student->getPersonPhone() == '') ? '......................................................' : $student->getPersonPhone() ?>
+			<label> Domicilio: </label> <?php echo (is_null($student->getPerson()->getAddress()) | $student->getPerson()->getAddress() == '') ? '......................................................................' : $student->getPerson()->getAddress(); ?>     	
 		</div>
 		<div>
 			<label> Año que cursa: </label> <?php echo $student->getCurrentCourseYear() ?>
@@ -155,32 +155,24 @@
 		</table>
 	</div> <!--  fin Tabla Otras Personas -->
 
-	<div>
+	<div class="seleccion-3columnas">
 		<h3> (2) Seleccione el número correspondiente al nivel educativo elegido. </h3>
-		<table>
-			<?php for($i = 0 ; $i < count($options_study) ; $i++){ ?>
-			<tr>
-				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
-				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
-				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ; $i++;?>  </td>
-				<td><?php echo (!isset($options_study[$i]))? "": $i+1 ."- ". $options_study[$i] ;?>  </td>
-			</tr>
-			<?php }?>
-		</table>
+		<ul>
+			<?php foreach ($options_study as $key => $op):?>
+			<li> <span> <?php echo $key+1 ."- ". $op ?> </span> </li> 
+			<?php endforeach; ?>
+		</ul>
+  </div>
+	
+	<div class="seleccion-2columnas">
+  	<h3> (3) Seleccione el número correspondiente a la ocupacion elegida. </h3>
+		<ul>
+			<?php foreach ($options_occupation as $key => $op):?>
+			<li> <?php echo  $key+1 ."- ". $op;?> </span> </li> 
+			<?php endforeach; ?>
+		</ul>
 	</div>
 	
-	<div>
-		<h3> (3) Seleccione el número correspondiente a la ocupacion elegida. </h3>
-		<table>
-			<?php for($i = 0 ; $i < count($options_occupation) ; $i++){ ?>
-			<tr>
-				<td><?php echo (!isset($options_occupation[$i]))? "": $i+1 ."- ". $options_occupation[$i] ; $i++;?>  </td>
-				<td><?php echo (!isset($options_occupation[$i]))? "": $i+1 ."- ". $options_occupation[$i] ;?>  </td>
-			</tr>
-			<?php }?>
-		</table>
-	</div> <!--  fin de numeracion de opciones -->
-
 </div> <!--  fin de datos familiares -->
 
 <div style="clear:both;"></div>
@@ -190,44 +182,46 @@
 	<h2> B- DATOS PERSONALES DEL ALUMNO  </h2>
 	<div>
 		<div>
-			<label> Enfermedades que padece actualmente: </label> <span>...........................................................................................</span>
+			<label> Enfermedades que padece actualmente: </label> <span>..............................................................................................</span>
 	  </div>
 	  <div>
-	  	<label> Medicado? </label> <span>...............................</span>
-	  	<label> Operaciones? </label> <span>.............................</span>
-	  	<label> Accidentes? </label> <span>................................</span>
+	  	<label> ¿Medicado? </label> <span>...............................</span>
+	  	<label> ¿Operaciones? </label> <span>............................</span>
+	  	<label> ¿Accidentes? </label> <span>..............................</span>
 		</div>
 		<div>
 			<section>
 				<label> Problemas sensoriales: </label> 
 			</section>	
-			<label> Auditivos? </label> <span>..............................................................</span>
-			<label> Visuales? </label> <span>..............................................................</span>
+			<label> ¿Auditivos? </label> <span>.............................................................</span>
+			<label> ¿Visuales? </label> <span>..............................................................</span>
 	  </div>
 	  <div>
-	  	<label> Problemas en el sueño? </label> <span>..........</span>
-	  	<label> Cuáles? </label> <span>......................................</span>
-	  	<label> Cuántas horas duerme? </label> <span>..........</span>
+	  	<section>
+	  		<label> ¿Problemas en el sueño? </label> <span>.........................................................................................................................</span>
+	  	</section>
+	  	<label> ¿Cuáles? </label> <span>...................................................................................</span>
+	  	<label> ¿Cuántas horas duerme? </label> <span>....................</span>
 	  </div>
 		<div>
-			<label> Comparte la habitación? </label> <span>..........</span>
-			<label> Con quién? </label> <span>......................................................................................</span>
+			<label> ¿Comparte la habitación? </label> <span>..........</span>
+			<label> ¿Con quién? </label> <span>......................................................................................</span>
 		</div>
 		<div>
 			<section>
 				<label> Recibió o recibe asistencia: </label> 
 			</section>
-				<label> Foniátrica? </label> <span>....................</span>
-				<label> Psicológica? </label> <span>....................</span>
+				<label> ¿Foniátrica? </label> <span>....................</span>
+				<label> ¿Psicológica? </label> <span>....................</span>
 	    	<label> Otra: </label> <span>.................................................................</span>
 		</div>
 		<div>
-			<label> Manifiesta miedos? </label>  <span>....................</span>
-			<label> A qué? </label> <span>.............................................................................................</span>
+			<label> ¿Manifiesta miedos? </label>  <span>....................</span>
+			<label> ¿A qué? </label> <span>............................................................................................</span>
 		</div>
 		<div>
-			<label> Tiene tics nerviosos? </label> <span>....................</span>
-			<label> Cuáles? </label> <span>........................................................................................</span>
+			<label> ¿Tiene tics nerviosos? </label> <span>....................</span>
+			<label> ¿Cuáles? </label> <span>........................................................................................</span>
 		</div>
 		<div>
 			<div>
@@ -242,53 +236,54 @@
 	<div>
 		<h3> USO DEL TIEMPO LIBRE: </h3>
 		<div>
-			<label> Con quién prefiere jugar? </label> <span>.....................................................................................................................</span>
+			<label> ¿Con quién prefiere jugar? </label> <span>.....................................................................................................................</span>
 		</div>
 		<div>
-			<label> Quién dirige el juego? </label> <span>...........................................................................................................................</span>
+			<label> ¿Quién dirige el juego? </label> <span>...........................................................................................................................</span>
 		</div>
 		<div>
-			<label> Comparte sus juguetes/juegos? Dónde juega? </label> <span>.................................................................................</span>
+			<label> ¿Comparte sus juguetes/juegos? ¿Dónde juega? </label> <span>...............................................................................</span>
+			<span>......................................................................................................................................................................</span>
 		</div>
 		<div>
 			<section>
-				<label> Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela? </label>
+				<label> ¿Qué actividades extraescolares realiza su hijo, fuera de las propuestas por la escuela? </label>
 			</section>
-			<span>....................................................................................................................................................................</span>
+			<span>......................................................................................................................................................................</span>
 		</div>
 		<div>
 			<section>
-				<label> Quién se encarga del cuidado del niño en ausencia de sus padres? </label>
+				<label> ¿Quién se encarga del cuidado del niño en ausencia de sus padres? </label>
 			</section>
-			<span>....................................................................................................................................................................</span>
+			<span>......................................................................................................................................................................</span>
 		</div>
 		<div>
 			<section>
-				<label>Número de horas que comparte diariamente con su hijo?</label>
+				<label>¿Número de horas que comparte diariamente con su hijo?</label>
 			</section>
-				<label>Padre:</label> <span>...................................................................</span>
-				<label>Madre:</label> <span>...................................................................</span>
+				<label>Padre:</label> <span>.....................................................................</span>
+				<label>Madre:</label> <span>....................................................................</span>
 		</div>
 		<div>
 			<section>
-				<label> Para realizar las tareas escolares, necesita orientación? </label> <span>..............................................................</span>
+				<label> ¿Para realizar las tareas escolares, necesita orientación? </label> <span>...............................................................</span>
 			</section>	
-				<label> Quién lo orienta? </label> <span>...............................................</span>      
-				<label> En qué momento? </label> <span>................................................</span>
+				<label> ¿Quién lo orienta? </label> <span>...............................................</span>      
+				<label> ¿En qué momento? </label> <span>................................................</span>
 		</div>
 		<div>
 			<section>
-				<label>Qué opinión tiene del desempeño escolar de su hijo/a?</label> 
+				<label>¿Qué opinión tiene del desempeño escolar de su hijo/a?</label> 
 			</section>
 			<section>
-				<label>Madre:</label> <span>.....................................................................................................................................................</span>
-				<span>....................................................................................................................................................................</span>
-				<span>....................................................................................................................................................................</span>
+				<label>Madre:</label> <span>.......................................................................................................................................................</span>
+				<span>......................................................................................................................................................................</span>
+				<span>......................................................................................................................................................................</span>
 			</section>
 			<section>
-				<label>Padre:</label> <span>......................................................................................................................................................</span>
-				<span>....................................................................................................................................................................</span>
-				<span>....................................................................................................................................................................</span>
+				<label>Padre:</label> <span>........................................................................................................................................................</span>
+				<span>......................................................................................................................................................................</span>
+				<span>......................................................................................................................................................................</span>
 			</section>
 		</div>
 	</div> <!-- fin de tiempo libre -->
@@ -298,11 +293,11 @@
 	<section>
 		<label>OBSERVACIONES:</label>
 	</section>
-	<span>....................................................................................................................................................................</span>
-	<span>....................................................................................................................................................................</span>
-	<span>....................................................................................................................................................................</span>
-	<span>....................................................................................................................................................................</span>
-	<span>....................................................................................................................................................................</span>
+	<span>......................................................................................................................................................................</span>
+	<span>......................................................................................................................................................................</span>
+	<span>......................................................................................................................................................................</span>
+	<span>......................................................................................................................................................................</span>
+	<span>......................................................................................................................................................................</span>
 </div> <!-- fin de observaciones -->
 
 </body>
