@@ -19,11 +19,11 @@
  */ ?>
 <?php if (!is_null($marks)): ?>
   <?php foreach ($marks as $mark): ?>
-    <td class="mark <?php echo $mark->getColor() ?>"><?php echo $mark != '' ? $mark : '-' ?></td>
+    <td class="mark <?php echo $mark->getColor() ?>"><?php echo $mark != '' ? $mark->getMarkByConfig($configuration) : '-' ?></td>
   <?php endforeach; ?>
 
   <?php $course_subject_student = $mark->getCourseSubjectStudent(); ?>  
-  <td class="mark <?php echo $course_subject_student->getAvgColor() ?>"><?php echo $course_subject_student->getMarksAverage() ?></td>
+  <td class="mark <?php echo $course_subject_student->getAvgColor() ?>"><?php echo $course_subject_student->getAverageByConfig($configuration) ?></td>
 <?php else: ?>
   <?php for ($i = 1; $i <= $marksNumber; $i++): ?>
     <td>N/C</td>
