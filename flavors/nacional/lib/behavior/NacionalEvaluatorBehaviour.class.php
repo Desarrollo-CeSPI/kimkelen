@@ -35,12 +35,12 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
    */
   public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
   {
-  	if (CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType() && $course_subject_student->getCourseSubject()->getYear() > 4)
-  	{
-    	$last_mark_value = self::BIMESTER_POSTPONED_NOTE;
+  	if (CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()
+		  && $course_subject_student->getCourseSubject()->getYear() > 4
+		  && ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption())) {
+    	  $last_mark_value = self::BIMESTER_POSTPONED_NOTE;
     }
-  	else
-  	{
+  	else {
 			$last_mark_value = self::POSTPONED_NOTE;
   	}
 
