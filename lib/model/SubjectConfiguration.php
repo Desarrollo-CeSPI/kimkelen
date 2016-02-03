@@ -117,13 +117,7 @@ class SubjectConfiguration extends BaseSubjectConfiguration
 
   public function isNumericalMark()
   {
-    if($this->getNumericalMark() == 1) 
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return ($this->getNumericalMark()) ? true : false;
   }
+  
 }
