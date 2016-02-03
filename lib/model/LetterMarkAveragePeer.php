@@ -11,9 +11,19 @@ class LetterMarkAveragePeer extends BaseLetterMarkAveragePeer
 
   	$criteria = new Criteria();
   	$criteria->add(LetterMarkAveragePeer::LETTER_MARK_1, $marks[1]->getId());
-  	$criteria->add(LetterMarkAveragePeer::LETTER_MARK_2, $marks[2]->getId());
-  	$criteria->add(LetterMarkAveragePeer::LETTER_MARK_3, $marks[3]->getId());
+
+    if (array_key_exists($i, $marks)) {
+  	  $criteria->add(LetterMarkAveragePeer::LETTER_MARK_2, $marks[2]->getId());
+    } else {
+      $criteria->add(LetterMarkAveragePeer::LETTER_MARK_2, null, Criteria::ISNULL);
+    }
+  	   if (array_key_exists($i, $marks)) {
+      $criteria->add(LetterMarkAveragePeer::LETTER_MARK_3, $marks[2]->getId());
+    } else {
+      $criteria->add(LetterMarkAveragePeer::LETTER_MARK_3, null, Criteria::ISNULL);
+    }
   	$result = LetterMarkAveragePeer::doSelectOne($criteria);
+
   	return $result;
   }
 
