@@ -39,7 +39,7 @@ class LvmStudentFormFilter extends StudentFormFilter
       $this['busy_ends_at'],
       $this['order_of_merit'],
       $this['folio_number'],
-      $this['origin_school'],
+      $this['origin_school_id'],
       $this['educational_dependency'],
       $this['student_career_subject_allowed_list'],
       $this['blood_group'],
