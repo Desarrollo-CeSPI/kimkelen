@@ -71,6 +71,8 @@ class StudentEditHistoryForm extends sfFormPropel
           $this->setWidget($name, new sfWidgetFormInput());
           $this->setValidator($name, new sfValidatorInteger(array('required' => false)));
           $this->setDefault($name, $cssm->getMark());
+          
+          $this->getWidgetSchema()->setHelp($name, 'Mark should de 0 (zero) if you want the student to be free at this period');
         }
         else
         {
@@ -86,10 +88,7 @@ class StudentEditHistoryForm extends sfFormPropel
         $this->setDefault($name, $cssm->getMark());
       }
 
-
-
       $this->getWidget($name)->setLabel(__('Mark %number%', array('%number%' => $i)));
-      $this->getWidgetSchema()->setHelp($name, 'Mark should de 0 (zero) if you want the student to be free at this period');
       $i++;
     }
 
@@ -334,6 +333,13 @@ class StudentEditHistoryForm extends sfFormPropel
         foreach ($this->getObject()->getSortedCourseSubjectStudentMarks() as $cssm)
         {
           $mark = $values['mark_' . $cssm->getId()];
+
+          $configuration = $this->getObject()->getConfiguration();
+          if(!$configuration->isNumericalMark())
+          {
+            $mark = LetterMarkPeer::retrieveByPk($mark)->getValue();
+          }
+         
           if ($cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
