@@ -61,7 +61,8 @@
             <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
 
           <?php else: ?>
-            <td><?php echo ($mark = $course_subject_student->getMarkFor($i)) ? $mark : "-" ?></td>
+            <?php $mark = $course_subject_student->getMarkFor($i) ?>
+            <td><?php echo (!$mark->getMark()) ? "-" : $mark->getMarkByConfig($course_subject_student->getConfiguration()) ?></td>
           <?php endif; ?>
         <?php endfor ?>
 
@@ -69,7 +70,7 @@
           <td></td>
 
         <?php else: ?>
-          <td><?php echo $course_subject_student->getMarksAverage() ?></td>
+          <td><?php echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration()) ?></td>
         <?php endif; ?>
 
         <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>

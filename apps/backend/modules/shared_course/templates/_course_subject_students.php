@@ -74,7 +74,6 @@
       <tbody>
         <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
           <?php $course_result = $course_subject_student->getCourseResult(); ?>
-
           <tr<?php echo (($final_period && !is_null($course_result)) ? " class='" . $course_result->getClass() . "'" : ""); ?>>
 
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
@@ -84,14 +83,14 @@
             <?php endif ?>
 
             <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm): ?>
-              <td><?php echo ($cssm->getMark() ? $cssm : '-'); ?></td>
+              <td><?php echo (!$cssm->getMark()? '' : $cssm->getMarkByConfig($configuration)); ?></td>
             <?php endforeach; ?>
             <?php if ($final_period): ?>
               <?php if ($course_subject_student->getIsNotAverageable()): ?>
                 <td></td>
                 <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
               <?php else: ?>
-                <td><?php echo $course_subject_student->getMarksAverage() ?></td>
+                <td><?php echo $course_subject_student->getAverageByConfig($configuration) ?></td>
                 <td><?php echo $course_result ?></td>
               <?php endif; ?>
             <?php endif; ?>

@@ -22,12 +22,12 @@
       
   <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $course_subject_student_mark): ?>
     <div class="info_div">
-      <strong><?php echo __("Mark %%mark_number%%", array("%%mark_number%%" => $course_subject_student_mark->getMarkNumber())) ?></strong> <em><?php echo ($mark = $course_subject_student_mark->getMark()) ? $mark : "-" ?></em>
+      <strong><?php echo __("Mark %%mark_number%%", array("%%mark_number%%" => $course_subject_student_mark->getMarkNumber())) ?></strong> <em><?php echo ($mark = $course_subject_student_mark->getMarkByConfig($course_subject_student->getConfiguration())) ? $mark : "-" ?></em>
     </div>
   <?php endforeach ?>
 
   <div class="info_div">
-    <strong><?php echo __("Average") ?></strong> <em><?php echo ($avg = $course_subject_student->getMarksAverage()) ? $avg : "-" ?></em>
+    <strong><?php echo __("Average") ?></strong> <em><?php echo ($avg = $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration())) ? $avg : "-" ?></em>
   </div>
 
   <div class="info_div">
