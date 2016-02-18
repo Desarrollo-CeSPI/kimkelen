@@ -105,9 +105,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function getMarkForIsClose($mark_number, PropelPDO $con = null)
   {
     $mark = $this->getMarkFor($mark_number);
+  
     if ($mark)
     {
-      return ($mark->getIsClosed()) ? $mark : null;
+      return ($mark->getIsClosed()) ? $mark->getMarkByConfig($this->getConfiguration()) : null;
     }
     else
     {
@@ -208,7 +209,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     /* Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
      * Eso lo sabe el behavior
      */
-
+    
     return SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this, $con);
 
   }
@@ -629,6 +630,26 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $course_result = $this->getCourseResult();
 
     return is_null($course_result) ? '' : $course_result->getColor();
+  }
+
+  public function getAverageByConfig($config = null)
+  {
+    if (!$this->areAllMarksClosed())
+    {
+      return '';
+    }
+    
+    if ($config != null && !$config->isNumericalMark())
+    {
+      $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
+      $letter_mark = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+      
+      return $letter_mark->getLetter();
+    }
+    else
+    {
+      return $this->getMarksAverage();
+    }
   }
 
 }

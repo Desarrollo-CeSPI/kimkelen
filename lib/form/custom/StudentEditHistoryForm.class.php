@@ -62,20 +62,33 @@ class StudentEditHistoryForm extends sfFormPropel
     {
       $name = 'mark_' . $cssm->getId();
       $fields[] = $name;
+      
+      $configuration = $this->getObject()->getConfiguration();
       if ($this->canEditMarks())
       {
-        $this->setWidget($name, new sfWidgetFormInput());
+        if($configuration->isNumericalMark())
+        {
+          $this->setWidget($name, new sfWidgetFormInput());
+          $this->setValidator($name, new sfValidatorInteger(array('required' => false)));
+          $this->setDefault($name, $cssm->getMark());
+          
+          $this->getWidgetSchema()->setHelp($name, 'Mark should de 0 (zero) if you want the student to be free at this period');
+        }
+        else
+        {
+          $letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$cssm->getMark());
+          $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' => $letter_mark->getId())));
+          $this->setValidator($name, new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false)));
+        }
       }
       else
       {
-        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $cssm, 'method' => 'getMark', 'add_hidden_input' => true)));
+        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $cssm, 'method' => 'getMarkByConfig', 'method_args' => $configuration, 'add_hidden_input' => true)));
+        $this->setValidator($name, new sfValidatorInteger(array('required' => false)));
+        $this->setDefault($name, $cssm->getMark());
       }
 
-      $this->setValidator($name, new sfValidatorNumber(array('required' => false)));
-      $this->setDefault($name, $cssm->getMark());
-
       $this->getWidget($name)->setLabel(__('Mark %number%', array('%number%' => $i)));
-      $this->getWidgetSchema()->setHelp($name, 'Mark should de 0 (zero) if you want the student to be free at this period');
       $i++;
     }
 
@@ -320,6 +333,13 @@ class StudentEditHistoryForm extends sfFormPropel
         foreach ($this->getObject()->getSortedCourseSubjectStudentMarks() as $cssm)
         {
           $mark = $values['mark_' . $cssm->getId()];
+
+          $configuration = $this->getObject()->getConfiguration();
+          if(!$configuration->isNumericalMark())
+          {
+            $mark = LetterMarkPeer::retrieveByPk($mark)->getValue();
+          }
+         
           if ($cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
