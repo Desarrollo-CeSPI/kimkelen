@@ -179,7 +179,7 @@ class examination_subjectActions extends autoExamination_subjectActions
     /* @var $examination_subject ExaminationSubject */
     $this->examination_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_subject->getStudents();
-    
+    sort($this->students, SORT_STRING);
     $this->setLayout('cleanLayout');
 
   }
