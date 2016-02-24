@@ -4412,6 +4412,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
+            <trans-unit>
+                <source>Evaluation type</source>
+                <target>Tipo de evaluación</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
