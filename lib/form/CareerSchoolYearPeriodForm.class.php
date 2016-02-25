@@ -79,13 +79,14 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
 	{
 
 		$c = new Criteria();
-
 		$c->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
-		$this->setWidget('career_school_year_period_id', new sfWidgetFormPropelChoice(array(
-			'model'     => 'CareerSchoolYearPeriod',
-			'criteria' => $c,
-		)));
+		
+    $this->setWidget('career_school_year_period_id', new sfWidgetFormPropelChoice(array(
+			                                                                                   'model'     => 'CareerSchoolYearPeriod',
+			                                                                                   'criteria' => $c,
+                                                                                         'add_empty' => true
+		                                                                                    )));
 
-		$this->setValidator('career_school_year_period_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'column' => 'id', 'required' => false)));
-	}
+    $this->setValidator('career_school_year_period_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'column' => 'id', 'required' => false)));
+  }
 }
