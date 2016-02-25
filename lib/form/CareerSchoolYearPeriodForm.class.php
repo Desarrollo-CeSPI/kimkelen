@@ -88,5 +88,6 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
 		                                                                                    )));
 
     $this->setValidator('career_school_year_period_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'column' => 'id', 'required' => false)));
+    $this->getWidget('career_school_year_period_id')->setLabel( 'Parent');
   }
 }
