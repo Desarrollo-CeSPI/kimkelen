@@ -83,12 +83,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
           $course_subject_student_mark = new CourseSubjectStudentMark();
           $course_subject_student_mark->setCourseSubjectStudent($this);
           $course_subject_student_mark->setMarkNumber($i);
-          
-          if($this->getCourseSubject()->getCourse()->getIsClosed())
-          {
-            $course_subject_student_mark->setIsClosed(true);
-          }
-          
+                    
           $course_subject_student_mark->save($con);
         }
       }
