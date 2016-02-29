@@ -75,6 +75,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     try
     {
       $con->beginTransaction();
+      
       if ($this->countCourseSubjectStudentMarks() == 0)
       {
         for ($i = 1; $i <= $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks(); $i++)
@@ -82,6 +83,13 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
           $course_subject_student_mark = new CourseSubjectStudentMark();
           $course_subject_student_mark->setCourseSubjectStudent($this);
           $course_subject_student_mark->setMarkNumber($i);
+          
+          $last_period_close = $this->getCourseSubject()->getCourse()->getCurrentPeriod()-1;
+          if ($i <= $last_period_close)
+          {
+            $course_subject_student_mark->setIsClosed(true); // se pone la nota como cerrada
+          }
+          
           $course_subject_student_mark->save($con);
         }
       }
