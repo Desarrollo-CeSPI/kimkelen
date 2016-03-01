@@ -34,7 +34,6 @@ generator:
             action: back
             label:      Volver a listado de años lectivos
           _new:
-            condition: canCreateExamination
             credentials: [edit_examination]
             label:      Nueva mesa de examen
       filter:
