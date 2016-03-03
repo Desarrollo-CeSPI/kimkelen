@@ -285,7 +285,7 @@ class BaseAnalyticalBehaviour
     protected function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
-
+		
         //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
         $this->init();
         $avg_mark_for_year = array();
@@ -293,7 +293,8 @@ class BaseAnalyticalBehaviour
         foreach ($this->student_career_school_years as $scsy)
         {
             //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
-            //Siempre tomo el año "Aprobado" - Ver si esta bien asi o si deberia quedarme con el ultimo
+            //Siempre tomo el año "Aprobado" y "Cursando"
+            
             if ($scsy->getStatus() == 1)
             {
 
@@ -336,7 +337,26 @@ class BaseAnalyticalBehaviour
                     $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
                 }
                 $this->process_total_average($avg_mark_for_year);
-            }
+            }else{
+				if($scsy->getStatus() == 0 ){
+					
+					//recupero en año en curso
+					$year_in_career = $scsy->getYear();
+					$this->add_year_in_career($year_in_career);
+					$career_school_year = $scsy->getCareerSchoolYear();
+					$school_year = $career_school_year->getSchoolYear();
+					
+					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+
+					foreach ($csss as $css)
+					{
+						// No tiene nota -> el curso está incompleto
+						$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+						$this->add_subject_to_year($year_in_career, $css);
+						
+					}
+				}
+			}
         }
     }
 

@@ -231,6 +231,34 @@ classes:
         required: false
         type: varchar(50)
 
+  OriginSchool:
+    tableName:            origin_school
+    description:          Representa una escuela primaria de la que provienen los alumnos
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+      email:
+        type: varchar(80)
+        required: true
+      phone:
+        type: varchar(25)
+        required: true
+      cue:
+        type: integer
+        required: true
+      sector:
+        type: integer
+        required: true
+      field:
+        type: integer
+        required: true
+      address:
+        type: varchar(255)
+      _indexes:
+        cue: [cue]
+  
   LetterMark:
     tablename:        letter_mark
     description:      Representa la referencia de letras a numeros

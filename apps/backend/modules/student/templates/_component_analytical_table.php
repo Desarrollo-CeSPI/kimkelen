@@ -24,7 +24,7 @@
         <?php echo __('The student has no approved subjects') ?>
     </div>
 
-<?php else: ?>
+<?php else:?>
 
     <?php foreach ($object->get_years_in_career() as $year): ?>
 
@@ -48,7 +48,7 @@
             </thead>
 
             <tbody class="analytical_body_table">
-                <?php foreach ($object->get_subjects_in_year($year) as $css): ?>
+                <?php foreach ($object->get_subjects_in_year($year) as $css):?>
                     <tr>
 
                         <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>

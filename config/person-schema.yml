@@ -156,9 +156,12 @@ classes:
         foreignReference: id
         onDelete:         restrict
         default:          null
-      origin_school:
-        type: varchar(255)
-        required: false
+      origin_school_id:
+        type:             integer
+        foreignTable:     origin_school
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
       educational_dependency:
         type: varchar(255)
         required: false

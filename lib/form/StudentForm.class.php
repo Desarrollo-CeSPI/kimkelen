@@ -50,6 +50,11 @@ class StudentForm extends BaseStudentForm
 
     $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
     $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
+
+	  $this->setWidget('origin_school_id', new dcWidgetFormPropelJQuerySearch(array('model' => 'OriginSchool', 'column' => array('name'), 'peer_method' => 'doSelect')));
+	  $this->setValidator('origin_school_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'OriginSchool', 'column' => 'id')));
+
+	  $this->getWidgetSchema()->setLabel('origin_school_id','Origin school');
   }
 
   public function unsetFields()
@@ -59,7 +64,7 @@ class StudentForm extends BaseStudentForm
 
   public function getFormFieldsDisplay()
   {
-    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'global_file_number', 'origin_school', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state', 'person-birth_city', 'person-photo', 'person-observations' );
+    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'global_file_number', 'origin_school_id', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state', 'person-birth_city', 'person-photo', 'person-observations' );
 
     if($this->getObject()->getPerson()->getPhoto())
     {

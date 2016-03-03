@@ -297,7 +297,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   {
     $course_subject_student_examination = new CourseSubjectStudentExamination();
     $course_subject_student_examination->setCourseSubjectStudent($course_subject_student);
-//El if creo que no deberia existir para manter la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
+//El if creo que no deberia existir para mantener la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
 //    if (!is_null($course_subject_student->getCourseResult()))
 //    {
     $examination_number = $course_subject_student->getCourseResult()->getExaminationNumber();
