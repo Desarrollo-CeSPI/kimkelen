@@ -511,7 +511,7 @@
             </trans-unit>
             <trans-unit>
                 <source>Course List</source>
-                <target>Listado de asignaturas</target>
+                <target>Listado de materias</target>
             </trans-unit>
             <trans-unit>
                 <source>Has correlative previous year</source>
@@ -627,12 +627,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Edit Course</source>
-                <target>Editar asignatura</target>
+                <target>Editar materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New Course</source>
-                <target>Asignatura nueva</target>
+                <target>Materia nueva</target>
             </trans-unit>
 
             <trans-unit>
@@ -647,7 +647,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Show Course</source>
-                <target>Ver asignatura</target>
+                <target>Ver materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -830,7 +830,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Edit Division course</source>
-                <target>Editar asignatura</target>
+                <target>Editar materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -840,7 +840,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Division course List</source>
-                <target>Asignaturas de la división</target>
+                <target>Materias de la división</target>
             </trans-unit>
 
             <trans-unit>
@@ -855,7 +855,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Teachers configuration of the %course%</source>
-                <target>Configuración de los profesores de la asignatura %course%</target>
+                <target>Configuración de los profesores de la materia %course%</target>
             </trans-unit>
             <trans-unit>
                 <source>Set inactive</source>
@@ -913,7 +913,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course actions</source>
-                <target>Acciones de la asignatura</target>
+                <target>Acciones de la materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -938,7 +938,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Add division students to all courses</source>
-                <target>Agregar estudiantes de la división, a todos las asignaturas posibles.</target>
+                <target>Agregar estudiantes de la división, a todas las materias posibles.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1027,7 +1027,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Close Course %course%</source>
-                <target>Cerrar Asignatura %course%</target>
+                <target>Cerrar materia %course%</target>
             </trans-unit>
 
             <trans-unit>
@@ -1243,7 +1243,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The career can't be closed because some courses haven't been closed.</source>
-                <target>No se pueden cerrar las cursadas de la carrera porque algunas asignaturas no fueron cerrados o porque las cursadas ya fueron cerradas.</target>
+                <target>No se pueden cerrar las cursadas de la carrera porque algunas materias no fueron cerradas o porque las cursadas ya fueron cerradas.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1447,7 +1447,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course: %%course%%</source>
-                <target>Asignatura: %%course%%</target>
+                <target>Materia: %%course%%</target>
             </trans-unit>
 
             <trans-unit>
@@ -1477,7 +1477,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The student is not inscripted to any course.</source>
-                <target>El alumno no fue inscripto en ninguna asignatura.</target>
+                <target>El alumno no fue inscripto en ninguna materia.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1592,7 +1592,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The course does not have any subject.</source>
-                <target>La asignatura no tiene ninguna materia.</target>
+                <target>El curso no tiene ninguna materia.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2103,7 +2103,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Not all the courses of the division, has the configuration of day assistance Or is not have any configuration</source>
-                <target>No se pueden manejar las asistencias, porque no todas las asignaturas de la division tienen esa configuración, o la configuración de la división no está cargada.</target>
+                <target>No se pueden manejar las asistencias porque no todas las materias de la división tienen esa configuración, o la configuración de la división no está cargada.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2519,117 +2519,117 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Courses that are not created for the division</source>
-                <target>Asignaturas no creadas para la división</target>
+                <target>Materias no creadas para la división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Debe seleccionar un curso para configurar sus profesorres</source>
-                <target>Debe seleccionar una asignatura para configurar sus profesorres</target>
+                <target>Debe seleccionar una materia para configurar sus profesores</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Los profesores seleccionados fueron exitosamente asignados al curso.</source>
-                <target>Los profesores seleccionados fueron exitosamente asignados a la asignatura.</target>
+                <target>Los profesores seleccionados fueron exitosamente asignados a la materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cursos extraordinarios</source>
-                <target>Asignaturas extraordinarias</target>
+                <target>Materias extraordinarias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Listado completo de cursos extraordinarios</source>
-                <target>Listado completo de asignaturas extraordinarias</target>
+                <target>Listado completo de materias extraordinarias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Crear nuevo curso extraordinario</source>
-                <target>Crear nueva asignatura extraordinaria</target>
+                <target>Crear nueva materia extraordinaria</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Configuración de los alumnos del curso %course%</source>
-                <target>Configuración de los alumnos de la asignatura %course%</target>
+                <target>Configuración de los alumnos de la materia %course%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Debe seleccionar un curso para editar sus calificaciones.</source>
-                <target>Debe seleccionar una asignatura para editar sus calificaciones.</target>
+                <target>Debe seleccionar una materia para editar sus calificaciones.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>El curso seleccionado no permite la edición de notas: o bien no tiene alumnos o bien el año lectivo al que pertenece no permite la edición de calificaciones.</source>
-                <target>La asignatura seleccionada no permite la edición de notas: o bien no tiene alumnos o bien el año lectivo al que pertenece no permite la edición de calificaciones.</target>
+                <target>La materia seleccionada no permite la edición de notas: o bien no tiene alumnos o bien el año lectivo al que pertenece no permite la edición de calificaciones.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Calificaciones del curso %course%</source>
-                <target>Calificaciones de la asignatura %course%</target>
+                <target>Calificaciones de la materia %course%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Tiene cursos</source>
-                <target>Tiene asignaturas</target>
+                <target>Tiene materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Ver cursos</source>
-                <target>Ver asignaturas</target>
+                <target>Ver materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Desplegar todos los cursos de ésta división</source>
-                <target>Desplegar todos las asignaturas de ésta división</target>
+                <target>Desplegar todos las materias de esta división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>El curso no tiene alumnos inscriptos.</source>
-                <target>La asignatura no tiene alumnos inscriptos.</target>
+                <target>La materia no tiene alumnos inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>El curso no puede editarse porque tiene alumnos inscriptos</source>
-                <target>La asignatura no puede editarse porque tiene alumnos inscriptos</target>
+                <target>La materia no puede editarse porque tiene alumnos inscriptos</target>
             </trans-unit>
 
             <trans-unit>
                 <source>El curso no puede eliminarse porque ya esta en estado cerrado</source>
-                <target>La asignatura no puede eliminarse porque ya esta en estado cerrado</target>
+                <target>La materia no puede eliminarse porque ya esta en estado cerrado</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Nota minima de aprobacion del curso.</source>
-                <target>Nota mínima de aprobacion de la asignatura.</target>
+                <target>Nota mínima de aprobación de la materia.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Volver al listado de cursos</source>
-                <target>Volver al listado de asignaturas</target>
+                <target>Volver al listado de materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Guardar y volver al listado de cursos</source>
-                <target>Guardar y volver al listado de asignaturas</target>
+                <target>Guardar y volver al listado de materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Guardar y agregar otro curso</source>
-                <target>Guardar y agregar otro asignatura</target>
+                <target>Guardar y agregar otra materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Nuevo curso</source>
-                <target>Nueva asignatura</target>
+                <target>Nueva materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Crear cursos</source>
-                <target>Crear asignaturas</target>
+                <target>Crear materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cursos</source>
-                <target>Asignaturas</target>
+                <target>Materias</target>
             </trans-unit>
 
             <trans-unit>
@@ -2654,12 +2654,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Courses</source>
-                <target>Asignaturas</target>
+                <target>Materias</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Shared course subject List</source>
-                <target>Asignaturas</target>
+                <target>Materias</target>
             </trans-unit>
 
             <trans-unit>
@@ -2674,22 +2674,22 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Courses of %teacher%</source>
-                <target>Asignaturas de %teacher%</target>
+                <target>Materias de %teacher%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cant manage because, the course is closed.</source>
-                <target>No se pueden modificar los alumnos, porque la asignatura esta cerrada.</target>
+                <target>No se pueden modificar los alumnos, porque la materia está cerrada.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cant copy from division, because the course is closed.</source>
-                <target>No se puede copiar los alumnos de la división, porque la asignatura está cerrada.</target>
+                <target>No se puede copiar los alumnos de la división, porque la materia está cerrada.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cant copy from division, because all the students are already inscripted.</source>
-                <target>No se puede copiar los alumnos de la división, porque todos los estudiantes ya están inscriptos.</target>
+                <target>No se pueden copiar los alumnos de la división, porque todos los estudiantes ya están inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2805,12 +2805,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The license is not active.</source>
-                <target>La licencia no esta activa.</target>
+                <target>La licencia no está activa.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The license is already activated.</source>
-                <target>La licencia ya esta activada.</target>
+                <target>La licencia ya está activa.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2935,7 +2935,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Return to course list</source>
-                <target>Volver al listado de asignaturas</target>
+                <target>Volver al listado de materias</target>
             </trans-unit>
 
             <trans-unit>
@@ -3226,12 +3226,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course subject configuration</source>
-                <target>Configuracion de asignatura</target>
+                <target>Configuracion de materia</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Course configuration of the %course%</source>
-                <target>Configuracion de la asignatura %course%</target>
+                <target>Configuración de la materia %course%</target>
             </trans-unit>
 
             <trans-unit>
@@ -3773,7 +3773,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Division courses</source>
-                <target>Asignaturas</target>
+                <target>Materias</target>
             </trans-unit>
             <trans-unit>
                 <source>Disabled</source>
@@ -4543,7 +4543,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Health info</source>
                 <target>Estado de la Ficha de Salud</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>

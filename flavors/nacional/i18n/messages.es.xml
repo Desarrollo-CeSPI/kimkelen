@@ -2097,7 +2097,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Not all the courses of the division, has the configuration of day assistance Or is not have any configuration</source>
-                <target>No se pueden manejar las asistencias porque no todos las asignaturas de la división tienen esa configuración, o la configuración de la división no esta cargada</target>
+                <target>No se pueden manejar las asistencias porque no todas las materias de la división tienen esa configuración, o la configuración de la división no esta cargada</target>
             </trans-unit>
             <trans-unit>
                 <source>Photo</source>
@@ -4295,6 +4295,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>here</source>
                 <target>aquí</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student approved career subject</source>
+                <target>Materia aprobada</target>
             </trans-unit>
             <trans-unit>
                 <source>Pathway mark is averaged with course subject average marks.</source>

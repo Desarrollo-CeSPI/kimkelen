@@ -397,9 +397,15 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $result->save($con);
 
       //Se busca si había una previa creada para esta materia, se debe eliminar
+
       if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
       {
-        $student_repproved_course_subject->delete($con);
+	      $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
+	      if ($sers) {
+		      $sers->delete($con);
+	      } else {
+		      $student_repproved_course_subject->delete($con);
+	      }
       }
     }
     else
@@ -441,19 +447,19 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       if ($student_career_school_year->getYear() == 4)
       {
         $sum = 0;
-        $sum_introcuccion = 0;
+        $sum_introduccion = 0;
         foreach ($student_approved_career_subjects as $student_approved_career_subject)
         {
           if (in_array($student_approved_career_subject->getCareerSubject()->getSubject()->getId(), $this->_introduccion))
           {
-            $sum_introcuccion += $student_approved_career_subject->getMark();
+            $sum_introduccion += $student_approved_career_subject->getMark();
           }
           else
           {
             $sum += $student_approved_career_subject->getMark();
           }
         }
-        $sum += $sum_introcuccion / 3;
+        $sum += $sum_introduccion / 3;
         $count = count($student_approved_career_subjects) - 2;
       }
       elseif ($student_career_school_year->getYear() == 6)

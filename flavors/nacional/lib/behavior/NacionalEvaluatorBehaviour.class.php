@@ -24,7 +24,6 @@
  */
 class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
-  const BIMESTER_POSTPONED_NOTE = 6;
   /*
    * Returns if a student has approved or not the course subject
    *
@@ -35,6 +34,7 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
    */
   public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
   {
+
   	if (CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()
 		  && $course_subject_student->getCourseSubject()->getYear() > 4
 		  && ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption())) {
@@ -42,6 +42,12 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
   	else {
 			$last_mark_value = self::POSTPONED_NOTE;
+
+	  $correct_last_note = true;
+  	if (!(CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()))
+  	{
+		  $correct_last_note = $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= self::POSTPONED_NOTE;
+
   	}
 
   	$correct_last_note = $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= $last_mark_value;
