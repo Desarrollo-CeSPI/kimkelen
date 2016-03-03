@@ -35,6 +35,12 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
     // agrego esto porque hay unas funciones que buscan al periodo por su nombre. Ver si
     // se pueden mejorar dichas funciones. - están en Student.php, lineas 607 y 624 aprox.
 
+    // se hace este if por si viene por el editar, para que carge los periodos padres de su carrera solamente.
+    if ($this->object->getCareerSchoolYear() != NULL)
+    {
+      $this->setParentWidget($this->object->getCareerSchoolYear()->getId());
+    }
+
     $this->getWidgetSchema()->setHelp('name', 'Ingrese: Primer Trimestre, Segundo Trimestre, Tercer Trimestre, Primer Cuatrimestre, Segundo Cuatrimestre, Primer Bimestre o Segundo Bimestre');
 
     $this->setWidget('career_school_year_id', new sfWidgetFormInputHidden());
