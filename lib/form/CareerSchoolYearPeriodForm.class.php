@@ -36,7 +36,7 @@ class CareerSchoolYearPeriodForm extends BaseCareerSchoolYearPeriodForm
     // se pueden mejorar dichas funciones. - están en Student.php, lineas 607 y 624 aprox.
 
     // se hace este if por si viene por el editar, para que carge los periodos padres de su carrera solamente.
-    if ($this->object->getCareerSchoolYear() != NULL)
+    if (!is_null($this->object->getCareerSchoolYear()))
     {
       $this->setParentWidget($this->object->getCareerSchoolYear()->getId());
     }
