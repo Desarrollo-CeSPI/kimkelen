@@ -443,6 +443,9 @@ class StudentEditHistoryForm extends sfFormPropel
 
 	        $student_examination_repproved_subject->setDate($date);
 	        $student_examination_repproved_subject->save($con);
+
+          SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubject($student_examination_repproved_subject, $con);
+          
         }
       }
 
