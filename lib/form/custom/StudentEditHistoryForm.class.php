@@ -349,17 +349,16 @@ class StudentEditHistoryForm extends sfFormPropel
         foreach ($this->getObject()->getSortedCourseSubjectStudentMarks() as $cssm)
         {
           $mark = $values['mark_' . $cssm->getId()];
-
           $configuration = $this->getObject()->getConfiguration();
           if(!$configuration->isNumericalMark())
           {
             $mark = LetterMarkPeer::retrieveByPk($mark)->getValue();
           }
-         
-          if ($cssm->getMark() !== $mark)
+
+          if ((INT)$cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
-
+           
             if ($mark == 0){
               $cssm->setIsFree(true);
             }
@@ -371,10 +370,10 @@ class StudentEditHistoryForm extends sfFormPropel
           }
         }
 
-
         if ($any_change && $this->getObject()->areAllMarksClosed())
         {
           //Creo de nuevo el result porque cambiaron las notas
+
           $course_result = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this->getObject(), $con);
           $course_result->save($con);
 

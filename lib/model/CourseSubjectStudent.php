@@ -178,6 +178,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   public function getCourseResult(PropelPDO $con = null)
   {
+
     /* Si tengo alguna materia sin cerrar devuelvo null */
     if (!$this->areAllMarksClosed())
     {
@@ -185,8 +186,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
 
     /* Si tiene aprobada la cursada, entonces retornamos la cursada aprobada */
-
-    if ($this->getStudentApprovedCourseSubject($con))
+   
+    if (!is_null($this->getStudentApprovedCourseSubject($con)))
     {
       return $this->getStudentApprovedCourseSubject($con);
     }
@@ -198,7 +199,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       $c->add(StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
       $c->add(StudentApprovedCourseSubjectPeer::SCHOOL_YEAR_ID, $this->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
 
-      if ($result = StudentApprovedCourseSubjectPeer::doSelectOne($c))
+      if (!is_null($result = StudentApprovedCourseSubjectPeer::doSelectOne($c)))
       {
         //aca encontramos la cursada aprobada y se la asociamos al course_subject_student
         $this->setStudentApprovedCourseSubject($result);
@@ -206,6 +207,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
         return $result;
       }
     }
+
     /* Si desaprobò la cursada entonces retornamos la cursada desaprobada */
     if ($this->countStudentDisapprovedCourseSubjects(null, false, $con))
     {
@@ -213,11 +215,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       return array_shift($disapproveds);
     }
-
+    
     /* Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
      * Eso lo sabe el behavior
      */
-    
     return SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this, $con);
 
   }
@@ -504,6 +505,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       if (!is_null($student_approved_career_subject))
       {
+        
 	      $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this);
 
 	      if (!is_null($srcs)) {
@@ -523,7 +525,6 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       {
         //IF Exist course result
         $course_result = $this->getCourseResult();
-
         if (!is_null($course_result))
         {
           $course_result->delete($con);

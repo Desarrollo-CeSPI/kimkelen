@@ -79,6 +79,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   public function getCourseSubjectStudentResult(CourseSubjectStudent $course_subject_student, PropelPDO $con = null)
   {
     $average = $course_subject_student->getMarksAverage($con);
+    
     if ($this->isApproved($course_subject_student, $average, $con))
     {
       return $this->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
@@ -288,22 +289,18 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
       if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
       {
-        $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
+        $this->createCourseSubjectStudentExamination($result, $con);
       }
     }
   }
 
-  public function createCourseSubjectStudentExamination(CourseSubjectStudent $course_subject_student, $con)
+  public function createCourseSubjectStudentExamination(StudentDisapprovedCourseSubject $student_disapproved_course_subject, $con)
   {
+    
     $course_subject_student_examination = new CourseSubjectStudentExamination();
-    $course_subject_student_examination->setCourseSubjectStudent($course_subject_student);
-//El if creo que no deberia existir para mantener la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
-//    if (!is_null($course_subject_student->getCourseResult()))
-//    {
-    $examination_number = $course_subject_student->getCourseResult()->getExaminationNumber();
+    $course_subject_student_examination->setCourseSubjectStudent($student_disapproved_course_subject->getCourseSubjectStudent());
+    $examination_number = $student_disapproved_course_subject->getExaminationNumber();
     $course_subject_student_examination->setExaminationNumber($examination_number);
-//    }
-
     $course_subject_student_examination->save($con);
 
     //Libero memoria
