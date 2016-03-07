@@ -151,7 +151,10 @@ class StudentEditHistoryForm extends sfFormPropel
     $fieldset = array();
     $last_examination_number = $this->getObject()->countCourseSubjectStudentExaminations();
 
-    foreach ($this->getObject()->getCourseSubjectStudentExaminations() as $course_subject_student_examination)
+    $criteria = new Criteria(CourseSubjectStudentPeer::DATABASE_NAME);
+    $criteria->addAscendingOrderByColumn('examination_number');
+
+    foreach ($this->getObject()->getCourseSubjectStudentExaminations($criteria) as $course_subject_student_examination)
     {
       $fields = array();
       $name = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_mark';
@@ -407,7 +410,7 @@ class StudentEditHistoryForm extends sfFormPropel
           $folio = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_folio_number'];
 
 
-          if ($mark !== $course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
+          if ($mark !== (FLOAT)$course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
           {
             $course_subject_student_examination->setExaminationSubject(ExaminationSubjectPeer::retrieveByCourseSubjectStudentExamination($course_subject_student_examination));
             $course_subject_student_examination->setMark($mark);
@@ -421,7 +424,7 @@ class StudentEditHistoryForm extends sfFormPropel
         }
       }
 
-
+      //if para la edicion de notas en mesas de previa
       if ($this->canEditStudentRepprovedCourseSubjects())
       {
 
