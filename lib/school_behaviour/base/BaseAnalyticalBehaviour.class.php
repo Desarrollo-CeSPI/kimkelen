@@ -299,15 +299,17 @@ class BaseAnalyticalBehaviour
             {
 
                 $year_in_career = $scsy->getYear();
+                
+               
                 $this->add_year_in_career($year_in_career);
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
 
                 $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
                 $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
-
+				
                 foreach ($csss as $css)
-                {
+				{	
                     if (!isset($this->objects[$year_in_career]))
                     {
                         // Inicialización por año
