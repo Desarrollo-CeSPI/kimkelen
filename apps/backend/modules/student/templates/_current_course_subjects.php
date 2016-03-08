@@ -61,8 +61,7 @@
             <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
 
           <?php else: ?>
-            <?php $mark = $course_subject_student->getMarkFor($i) ?>
-            <td><?php echo (!$mark->getMark()) ? "-" : $mark->getMarkByConfig($course_subject_student->getConfiguration()) ?></td>
+            <td><?php echo ($mark = $course_subject_student->getMarkFor($i)) ? $mark->getMarkByConfig($course_subject_student->getConfiguration()) : "-" ?></td>
           <?php endif; ?>
         <?php endfor ?>
 
