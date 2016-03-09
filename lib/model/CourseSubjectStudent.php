@@ -505,31 +505,56 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       if (!is_null($student_approved_career_subject))
       {
-        
 	      $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this);
 
 	      if (!is_null($srcs)) {
 	        $srcs->setStudentApprovedCareerSubject(null);
 	        $srcs->save($con);
 	      }
+
         $student_approved_career_subject->delete($con);
       }
-
-      //IF exists course_subject_student_examination
-      if ($this->countCourseSubjectStudentExaminations())
+      
+      $student_repproved_course_subject = $this->getStudentRepprovedCourseSubject();
+      // si es previa
+      if (!is_null($student_repproved_course_subject))
       {
-        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();
-        $course_subject_student_examination->delete($con);
+        $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
+        //si existe una mesa de previa
+        if (!is_null($student_examination_repproved_subject))
+        {
+          $student_examination_repproved_subject->delete($con);
+        }
+        else
+        {
+          $student_repproved_course_subject->delete($con);
+        }
       }
       else
       {
-        //IF Exist course result
-        $course_result = $this->getCourseResult();
-        if (!is_null($course_result))
+        //si es examination
+        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();   
+        //si existe alguna mesa de examination
+        if (!is_null($course_subject_student_examination))
         {
-          $course_result->delete($con);
+          $course_subject_student_examination->delete($con);
+        }
+        else
+        {
+          if ($this->countCourseSubjectStudentExaminations() < 1)
+          { 
+            $course_result = $this->getCourseResult();
+        
+            if (!is_null($course_result))
+            {
+              $course_result->delete($con);
+            }
+          }
         }
       }
+
+
+      
       $con->commit();
     }
     catch (PropelException $e)

@@ -314,9 +314,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $con = is_null($con) ? Propel::getConnection() : $con;
 
     $course_subject_student = $course_subject_student_examination->getCourseSubjectStudent();
-
+    
     // si aprueba la mesa de examen
-
     if ($course_subject_student_examination->getMark() >= $this->getExaminationNote())
     {
       $result = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
@@ -386,10 +385,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       {
         // se crea una previa
         $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+
         if (is_null($srcs)) {
            $student_repproved_course_subject = new StudentRepprovedCourseSubject();
            $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
            $student_repproved_course_subject->save($con);
+
         }
       }
     }
@@ -465,6 +466,10 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       $student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
 
       $student_approved_career_subject->save($con);
+    }
+    else
+    {
+      //aca va si desaprueba la previa, deberia crear otra instancia de previa o eseprar a que se cree otra mesa de previa.
     }
 
   }

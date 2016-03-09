@@ -134,8 +134,9 @@ class StudentEditHistoryForm extends sfFormPropel
   public function canEditExaminationSubject()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
+    $student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
 
-    if (!is_null($student_approved_career_subject))
+    if (!is_null($student_approved_career_subject) || !is_null($student_repproved_course_subject))
     {
 
       return false;
@@ -211,9 +212,9 @@ class StudentEditHistoryForm extends sfFormPropel
   public function canEditStudentRepprovedCourseSubjects()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
-
+    
     $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
-
+    
     if (is_null($student_repproved_course_subject))
     {
       return false;
@@ -231,11 +232,10 @@ class StudentEditHistoryForm extends sfFormPropel
 
     if (!is_null($student_repproved_course_subject))
     {
+      
       $i = 1;
       $last_student_examination_repproved_subjects = $student_repproved_course_subject->countStudentExaminationRepprovedSubjects();
-
       $student_examination_repproved_subjects = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
-
 
       foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject)
       {
@@ -429,9 +429,9 @@ class StudentEditHistoryForm extends sfFormPropel
       {
 
         $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
-
+        
         $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
-
+        
         $mark = $values['student_examination_repproved_subject_' . $student_examination_repproved_subject->getId() .'_mark'];
         $is_absence_name = 'student_examination_repproved_subject_' . $student_examination_repproved_subject->getId() .'_is_absent';
         $is_absence = isset($values[$is_absence_name]) ? $values[$is_absence_name] : null;
