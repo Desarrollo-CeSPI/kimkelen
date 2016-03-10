@@ -320,7 +320,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     {
       $result = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
 
-      if (is_null($result)){
+      if (is_null($result))
+      {
         $result = new StudentApprovedCareerSubject();
         $result->setCareerSubject($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
         $result->setStudent($course_subject_student->getStudent());
@@ -329,10 +330,16 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
         if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
         {
-	        $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
+          
+          $sers = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
+	        //$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
 
-	        if ($sers) {
-	          $sers->delete($con);
+	        if ($sers > 1) 
+          {
+	          foreach ($sers as $student_examination_repproved_subject) 
+            {
+              $student_examination_repproved_subject->delete($con);
+            }
           } else {
             $student_repproved_course_subject->delete($con);
           }
@@ -467,10 +474,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       $student_approved_career_subject->save($con);
     }
-    else
-    {
-      //aca va si desaprueba la previa, deberia crear otra instancia de previa o eseprar a que se cree otra mesa de previa.
-    }
+
 
   }
 
@@ -679,6 +683,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $new_course_subject_student_examination->setMark(null);
     $new_course_subject_student_examination->setExaminationSubjectId(null);
     $new_course_subject_student_examination->setIsAbsent(false);
+    $new_course_subject_student_examination->setFolioNumber(null);
     $new_course_subject_student_examination->save($con);
 
   }

@@ -513,6 +513,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 	      }
 
         $student_approved_career_subject->delete($con);
+
       }
       
       $student_repproved_course_subject = $this->getStudentRepprovedCourseSubject();
@@ -520,12 +521,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       if (!is_null($student_repproved_course_subject))
       {
         $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
-        //si existe una mesa de previa
-        if (!is_null($student_examination_repproved_subject))
-        {
-          $student_examination_repproved_subject->delete($con);
-        }
-        else
+        //si no existe una mesa de previa
+        if (is_null($student_examination_repproved_subject))
         {
           $student_repproved_course_subject->delete($con);
         }
@@ -537,24 +534,22 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
         //si existe alguna mesa de examination
         if (!is_null($course_subject_student_examination))
         {
+
           $course_subject_student_examination->delete($con);
         }
         else
         {
-          if ($this->countCourseSubjectStudentExaminations() < 1)
-          { 
-            $course_result = $this->getCourseResult();
-        
-            if (!is_null($course_result))
-            {
-              $course_result->delete($con);
-            }
+          // habilita la edicion para notas del año!
+          $course_result = $this->getCourseResult();
+
+          if (!is_null($course_result))
+          {
+            $course_result->delete($con);
           }
+          
         }
       }
 
-
-      
       $con->commit();
     }
     catch (PropelException $e)

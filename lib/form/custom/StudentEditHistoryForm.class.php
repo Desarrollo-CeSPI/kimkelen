@@ -134,14 +134,13 @@ class StudentEditHistoryForm extends sfFormPropel
   public function canEditExaminationSubject()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
-    $student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
-
-    if (!is_null($student_approved_career_subject) || !is_null($student_repproved_course_subject))
+    
+    if (!is_null($student_approved_career_subject))
     {
 
       return false;
     }
-
+   
     return $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
     //return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
   }
@@ -160,8 +159,8 @@ class StudentEditHistoryForm extends sfFormPropel
       $fields = array();
       $name = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_mark';
       $fields[] = $name;
-
-      if ($i < $last_examination_number ||  !$this->canEditExaminationSubject())
+      
+      if ($i < $last_examination_number || !$this->canEditExaminationSubject())
       {
         $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getValueString', 'add_hidden_input' => true)));
         $this->setValidator($name, new sfValidatorPass());
@@ -358,7 +357,7 @@ class StudentEditHistoryForm extends sfFormPropel
             $mark = LetterMarkPeer::retrieveByPk($mark)->getValue();
           }
 
-          if ((INT)$cssm->getMark() !== $mark)
+          if ($cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
            
@@ -410,7 +409,7 @@ class StudentEditHistoryForm extends sfFormPropel
           $folio = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_folio_number'];
 
 
-          if ($mark !== (FLOAT)$course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
+          if ($mark !== $course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
           {
             $course_subject_student_examination->setExaminationSubject(ExaminationSubjectPeer::retrieveByCourseSubjectStudentExamination($course_subject_student_examination));
             $course_subject_student_examination->setMark($mark);
