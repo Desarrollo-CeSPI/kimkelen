@@ -383,7 +383,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     $last_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->getSchoolYear());
 
-    return $last_school_year && $last_school_year->getIsClosed() && $this->countStudentCareerSchoolYears() == 0;
+    return $last_school_year && $last_school_year->getIsClosed();
   }
 
   public function getMessageCantMatriculateStudentsFromLastYear()

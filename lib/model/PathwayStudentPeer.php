@@ -5,7 +5,8 @@ class PathwayStudentPeer extends BasePathwayStudentPeer
 
 	public static function getStudentsForSchoolYear($school_year) {
 		$c = new Criteria();
-		$c->addJoin(PathwayPeer::SCHOOL_YEAR_ID, $school_year->getId());
+		$c->addJoin(PathwayPeer::ID, self::PATHWAY_ID, Criteria::INNER_JOIN);
+		$c->add(PathwayPeer::SCHOOL_YEAR_ID, $school_year->getId());
 
 		$values = array();
 		foreach (self::doSelect($c) as $sp)
