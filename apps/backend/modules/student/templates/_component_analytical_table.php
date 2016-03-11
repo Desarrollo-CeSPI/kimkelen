@@ -48,9 +48,7 @@
             </thead>
 
             <tbody class="analytical_body_table">
-				<?php if($year == 5): var_dump($object->get_subjects_in_year($year)); endif;?>
                 <?php foreach ($object->get_subjects_in_year($year) as $css):?>
-                
                     <tr>
 
                         <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>

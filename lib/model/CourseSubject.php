@@ -557,7 +557,7 @@ class CourseSubject extends BaseCourseSubject
   public function getCareerSchoolYearPeriods()
   {
     if ($this->hasAttendanceForSubject())
-    {
+    {	
       $c = new Criteria();
       $c->addJoin(CareerSchoolYearPeriodPeer::ID, CourseSubjectConfigurationPeer::CAREER_SCHOOL_YEAR_PERIOD_ID);
       $c->add(CourseSubjectConfigurationPeer::COURSE_SUBJECT_ID, $this->getId());
@@ -565,7 +565,11 @@ class CourseSubject extends BaseCourseSubject
       $c->addAscendingOrderByColumn(CareerSchoolYearPeriodPeer::START_AT);
 
       $periods = CareerSchoolYearPeriodPeer::doSelect($c);
-
+   
+      if(count($periods) == 0){
+		$periods = $this->getCareerSchoolYear()->getCareerSchoolYearPeriodsForYearAndCourseType($this->getYear(), $this->getCourseType());
+	  }
+	 
       return $periods;
     }
     else

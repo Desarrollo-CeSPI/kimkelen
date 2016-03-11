@@ -111,14 +111,15 @@ class BaseSubjectStudentAnalytic
     public function getApprovedDate($as_label = true)
     {
         if ($this->approved_date)
-        {
+        {	
             return $this->approved_date;
         }
         if ($this->approved)
-        {
+        {	
             $approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
+			
             if ($approvation_date)
-            {
+            {	
                 return $this->approved ? $this->approved_date = new DateTime(StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved)) : ($as_label ? $this->getNullLabel() : null);
             }
         }

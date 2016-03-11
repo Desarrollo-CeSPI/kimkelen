@@ -299,8 +299,7 @@ class BaseAnalyticalBehaviour
             {
 
                 $year_in_career = $scsy->getYear();
-                
-               
+                 
                 $this->add_year_in_career($year_in_career);
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
@@ -329,6 +328,7 @@ class BaseAnalyticalBehaviour
                             $this->add_missing_subject($css);
                         }
                     }
+                   
                     $this->add_subject_to_year($year_in_career, $css);
                     $this->check_last_exam_date($css->getApprovedDate(false));
                 }

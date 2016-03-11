@@ -103,6 +103,7 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
 
     switch(get_class($approvationInstance)) {
       case 'StudentApprovedCourseSubject':
+      
         $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
         if(!is_null($period))
         {

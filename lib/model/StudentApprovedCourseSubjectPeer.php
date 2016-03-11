@@ -52,9 +52,10 @@ class StudentApprovedCourseSubjectPeer extends BaseStudentApprovedCourseSubjectP
     {
       $criteria = new Criteria();
     }
-
+	 
     $criteria->add(StudentApprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, $studentApprovedCareerSubject->getId());
-
+	
+	
     return StudentApprovedCourseSubjectPeer::doSelectOne($criteria);
   }
 }
