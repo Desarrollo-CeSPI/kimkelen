@@ -1037,7 +1037,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
   public function getCourseSubjectStudentsForCourseTypeArray($student, $course_type = null, $school_year = null)
   {
     if (is_null($school_year))
-    {
+    {	
       $school_year = SchoolYearPeer::retrieveCurrent();
     }
 
@@ -1048,7 +1048,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
     CareerSubjectSchoolYearPeer::sorted($c);
-
+	
     return $student->getCourseSubjectStudents($c);
 
   }
