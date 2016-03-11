@@ -83,7 +83,7 @@ class DivisionForm extends BaseDivisionForm
 
     $this->setValidator('division_courses', new sfValidatorPass());
 
-	  $this->getWidgetSchema()->setLabel('division_title_ids', __('Division'));
+	  //$this->getWidgetSchema()->setLabel('division_title_ids', __('Division'));
   }
 
   public static function getYears($widget, $values)
