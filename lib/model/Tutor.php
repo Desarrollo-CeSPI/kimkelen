@@ -77,7 +77,13 @@ class Tutor extends BaseTutor
   }
 
   public function getStudentTutorsString()
-  {
-    return implode(',', $this->getStudentTutors());
+  { 
+    $students = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $students[] = $student_tutor->getStudent();
+    }
+
+    return implode(',  ', $students);
   }
 }
