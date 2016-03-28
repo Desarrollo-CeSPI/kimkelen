@@ -92,7 +92,7 @@ class careerActions extends autoCareerActions
       $this->career = $this->getRoute()->getObject()->getCopy();
       $this->career->setCareerName($this->career->getCareerName().' (copia)');
       $this->career->setPlanName($this->career->getPlanName().' (copia)');
-      $this->career->setFileNumberSequence(0);
+      $this->career->setFileNumberSequence(1);
       $this->career->save();
       $this->getUser()->setFlash('info',"Se copió la carrera ".$this->getRoute()->getObject().' en '.$this->career);
       $this->redirect("@career");
