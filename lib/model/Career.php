@@ -231,7 +231,7 @@ class Career extends BaseCareer
     foreach ($this->getCareerSubjects() as $relObj) {
         /* @var $relObj CareerSubject */
       if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-        $career_subject = $relObj->copy(true);
+        $career_subject = $relObj->copy(false);
         $career_subject->clearCareerSubjectSchoolYears();
         $copy->addCareerSubject($career_subject);
       }
