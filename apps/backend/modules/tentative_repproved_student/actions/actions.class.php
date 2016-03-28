@@ -52,12 +52,30 @@ class tentative_repproved_studentActions extends sfActions
 	public function executeFinish(sfWebRequest $request, $con = null)
 	{
     $all_tentative_repproved_students = TentativeRepprovedStudentPeer::doSelectNonDeleted();
+    
+    $con = is_null($con) ? Propel::getConnection() : $con;
+    
+	 	try
+    {
+      $con->beginTransaction();
 
-		foreach ($all_tentative_repproved_students as $trs) {
-      $trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::REPPROVED);
-			$trs->setIsDeleted(true);
-			$trs->save();
-		}
+      foreach ($all_tentative_repproved_students as $trs) {
+
+      	$student_career_school_year = $trs->getStudentCareerSchoolYear();
+      	$student = $student_career_school_year->getStudent();
+      	
+      	SchoolBehaviourFactory::getEvaluatorInstance()->repproveStudent($student, $student_career_school_year, $con);
+
+				$trs->setIsDeleted(true);
+				$trs->save();
+			}
+
+      $con->commit();
+    }
+    catch (PropelException $e)
+    {
+      $con->rollBack();
+    }
 
 		$this->redirect('schoolyear/index');
 	}
