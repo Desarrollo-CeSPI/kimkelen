@@ -181,7 +181,8 @@ class CareerStudent extends BaseCareerStudent
     $c->addJoin(CareerSchoolYearPeer::ID, StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getStudentId());
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+    
     return StudentCareerSchoolYearPeer::doSelectOne($c, $con);
 
   }
