@@ -51,7 +51,7 @@ class StudentForm extends BaseStudentForm
     $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
     $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
 
-	  $this->setWidget('origin_school_id', new dcWidgetFormPropelJQuerySearch(array('model' => 'OriginSchool', 'column' => array('name'), 'peer_method' => 'doSelect')));
+	  $this->setWidget('origin_school_id', new dcWidgetFormPropelJQuerySearch(array('model' => 'OriginSchool', 'column' => array('name'),'peer_method' => 'doSelect')));
 	  $this->setValidator('origin_school_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'OriginSchool', 'column' => 'id')));
 
 	  $this->getWidgetSchema()->setLabel('origin_school_id','Origin school');

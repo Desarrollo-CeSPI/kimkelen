@@ -20,5 +20,216 @@
 
 class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
+    public function processWithOutCBFE()
+    {
+        $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
+		
+        //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
+        $this->init();
+        $avg_mark_for_year = array();
+		
+		
+        
+        foreach ($this->student_career_school_years as $scsy)
+        {
+            //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
+            //Siempre tomo el año "Aprobado" y "Cursando"
+        
+            //chequeo que la carrera no sea el ciclo basico.
+            $career_school_year = $scsy->getCareerSchoolYear();
+			
+			
+			//tomo la carrera
+			$career = $career_school_year->getCareer();
+			$school_year = $career_school_year->getSchoolYear();
+            
+            if($career->getCareerName() != 'Ciclo Básico de Formación Estética')
+            {
+				if ($scsy->getStatus() == 1)
+				{
+					//tomo el año
+					$year_in_career = $scsy->getYear();
+			
+					$this->add_year_in_career($year_in_career);
+					
+					$approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
+					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+					
+					foreach ($csss as $css) // $css CareerSubjectStudent
+					{	
+						if (!isset($this->objects[$year_in_career]))
+						{
+							// Inicialización por año
+							$this->set_year_status($year_in_career, self::YEAR_COMPLETE);
+							$avg_mark_for_year[$year_in_career]['sum'] = 0;
+							$avg_mark_for_year[$year_in_career]['count'] = 0;
+						}
+						
+						if ($this->subject_is_averageable($css))
+						{
+							$avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
+							$avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
+							if (!$css->getMark(false))
+							{
+								// No tiene nota -> el curso está incompleto
+								$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+								$this->add_missing_subject($css);
+							}
+						}
+						
+						//si la materia no tiene orientacion es general.
+						if(is_null($css->getOrientation()))
+						{ 
+							$this->add_general_subject_to_year($year_in_career, $css);
+						}else{
+							//chequeo si es propia de la especialidad / suborientacion
+							
+							if(is_null($css->getSubOrientation()))
+							{	
+								$this->add_specific_subject_to_year($year_in_career, $css);
+							}else{
+								$this->add_suborientation_subject_to_year($year_in_career, $css);
+							}
+							
+						}
+						
+						$this->check_last_exam_date($css->getApprovedDate(false));
+					}
+
+					// Cálculo del promedio por año
+					foreach ($this->objects as $year => $data)
+					{
+						$this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
+					}
+					$this->process_total_average($avg_mark_for_year);
+					
+				
+				}else{
+					if($scsy->getStatus() == 0 ){
+						
+						//recupero en año en curso
+						$year_in_career = $scsy->getYear();
+
+						$this->add_year_in_career($year_in_career);
+					
+						
+						$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+
+						foreach ($csss as $css)
+						{
+							// No tiene nota -> el curso está incompleto
+							$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+							
+							//si la materia no tiene orientacion es general.
+							if(is_null($css->getOrientation()))
+							{ 
+								$this->add_general_subject_to_year($year_in_career, $css);
+							}else{
+								//chequeo si es propia de la especialidad / suborientacion
+								if(is_null($css->getSubOrientation()))
+								{	
+									$this->add_specific_subject_to_year($year_in_career, $css);
+								}else{
+									$this->add_suborientation_subject_to_year($year_in_career, $css);
+								}
+								
+							}
+							
+						}
+							
+					}
+				}
+				
+				$this->add_school_year_to_year($year_in_career,$school_year);
+				$divisions = $this->get_student()->getCurrentDivisions( $career_school_year->getId());
+		
+				foreach ($divisions as  $d)
+				{ 
+					$this->add_division_to_year($year_in_career ,$d->getName());
+				}
+			}         
+        }
+    }
+    protected function add_school_year_to_year($year, $school_year)
+    {
+        if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+        }
+        $this->objects[$year]['school_year'] = $school_year;
+    }
+    protected function add_general_subject_to_year($year, $css)
+    {
+        if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['general_subjects'] = array();
+        }
+        $this->objects[$year]['general_subjects'][] = $css;
+    }
     
+    protected function add_specific_subject_to_year($year, $css)
+    {
+        if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['specific_subjects'] = array();
+        }
+        $this->objects[$year]['specific_subjects'][] = $css;
+    }
+    protected function add_division_to_year($year,$division)
+    {
+		if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+         
+        }
+        $this->objects[$year]['division'] = $division;
+	}
+    
+    public function add_suborientation_subject_to_year($year, $css)
+    {
+		
+		if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['suborientation_subjects'] = array();
+        }
+        $this->objects[$year]['suborientation_subjects'][] = $css;
+	}
+    
+    public function get_general_subjects_in_year($year)
+    {
+        return $this->objects[$year]['general_subjects'];
+    }
+    
+    public function get_specific_subjects_in_year($year)
+    {
+        return $this->objects[$year]['specific_subjects'];
+    }
+    
+    public function get_suborientation_subjects_in_year($year)
+    {
+        return $this->objects[$year]['suborientation_subjects'];
+    }
+    public function get_career_name($year)
+    {
+		if($year > 3)
+		{
+			return "Educacion Secundaria Superior";
+		}else{
+			return "Educacion Secundaria Básica";
+		}
+		
+	}
+	public function get_school_year($year)
+	{
+		return $this->objects[$year]['school_year'];
+	}
+	
+	public function get_division($year)
+	{
+		return $this->objects[$year]['division'];
+	}
+	
 }

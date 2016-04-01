@@ -50,7 +50,7 @@
             <tbody class="analytical_body_table">
                 <?php foreach ($object->get_subjects_in_year($year) as $css):?>
                     <tr>
-
+						
                         <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
 
                         <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
