@@ -47,9 +47,16 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
       $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
       $student_disapproved_course_subject->setExaminationNumber($this->getExaminationNumberFor($average, false, $course_subject_student));
-
+      
       return $student_disapproved_course_subject;
     }
+
+  }
+
+  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
+  {
+    // en graduada solo existe una mesa y se utiliza la de febrero.
+    return self::FEBRUARY;
 
   }
 
