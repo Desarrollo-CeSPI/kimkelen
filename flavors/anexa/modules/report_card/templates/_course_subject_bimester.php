@@ -72,7 +72,6 @@
 			<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
 
 			<td>
-
 					<?php echo $student->getPromDef($course_result) ?>
 			</td>
 			<?php if (!$division->hasAttendanceForDay()): ?>
@@ -93,7 +92,6 @@
 	<?php if (count($course_subject_students_second_q = $student->getCourseSubjectStudentsForBimesterSecondQuaterly($student_career_school_year)) > 0): ?>
 		<tr>
 
-
 			<?php if (isset($course_subject_students_second_q) && !is_null($course_subject_students_second_q)): ?>
 				<th class='th-subject-name'><?php echo __('Áreas-Materias') ?> - 2°C</th>
 				<?php $max_marks = 0 ?>
@@ -106,14 +104,12 @@
 
 				<th><?php echo __('Prom.') ?></th>
 				<th><?php echo __('Ex.R.') ?></th>
-
 				<th><?php echo __('Prom.Def.') ?></th>
-
 
 			<?php endif; ?>
 
+		</tr>
 
-				</tr>
 		<?php #Calculo el maximo de notas que va a tener el boletin en el SEGUNDO bimester ?>
 		<?php $max_marks_second_q = 0 ?>
 		<?php foreach ($course_subject_students_second_q as $course_subject_student): ?>
@@ -130,21 +126,19 @@
 			<?php endfor; ?>
 			<?php #Completo los casilleros extras que  tienen si mi materia tiene menos notas que  el maximo del bimestre?>
 			<?php if ($max_marks_second_q > $course_subject_student->getCourseSubject()->countMarks()): ?>
-				<?php $dif = ($max_marks_first_q - $course_subject_student->getCourseSubject()->countMarks()) ?>
+				<?php $dif = ($max_marks_second_q - $course_subject_student->getCourseSubject()->countMarks()) ?>
 				<?php for ($extra_td = 1; $extra_td <= $dif; $extra_td++): ?>
 					<td></td>
 				<?php endfor; ?>
 			<?php endif; ?>
 
 
-			<td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
-			<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
-				<td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject() ?></td>
+			<td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : 'aa' ?></td>
+			<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
+			<!-- <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject() ?></td> -->
 
 			<td>
-
 					<?php echo $student->getPromDef($course_result) ?>
-
 			</td>
 			<?php if (!$division->hasAttendanceForDay()): ?>
 				<?php foreach ($periods[1] as $period): ?>
