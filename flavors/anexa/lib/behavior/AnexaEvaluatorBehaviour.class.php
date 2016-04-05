@@ -60,4 +60,23 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   }
 
+  public function getColorForCourseSubjectStudentMark(CourseSubjectStudentMark $course_subject_student_mark)
+  {
+    if (! $course_subject_student_mark->getIsClosed() || is_null($course_subject_student_mark->getMark()))
+    {
+      return '';
+    }
+
+    if ($course_subject_student_mark->getMark() >= $this->getExaminationNote())
+    {
+      $class = 'mark_green';
+    }
+    else
+    {
+      $class = 'mark_red';
+    }
+
+    return $class;
+  }
+
 }
