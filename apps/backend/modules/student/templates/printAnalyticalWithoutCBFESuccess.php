@@ -17,4 +17,41 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-<?php include("printAnalyticalSuccess.php") ?>
+<?php include_partial("student/assets") ?>
+<?php use_stylesheet('report-card.css', 'first', array('media' => 'screen')) ?>
+<?php use_stylesheet('print-report-card.css', 'last', array('media' => 'print')) ?>
+<?php use_stylesheet('analytics.css', 'last', array('media' => 'all')) ?>
+<?php use_stylesheet('print-analytics.css', 'last', array('media' => 'all')) ?>
+
+<div class="report-wrapper"> 
+
+    <div class="analytical">
+        <?php include_partial("analyticalWithoutCBFE_header", array('career_student' => $career_student, 'analytical' => $analytical, 'analytic' => $analytic)) ?>
+        <div class="report-content">
+            <?php include_component('student', 'component_analytical_table', array('career_student' => $career_student)) ?>
+        </div>
+        <?php include_partial('analyticalWithoutCBFE_footer', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
+    </div>
+
+    <div id="sf_admin_container">
+        <ul class="sf_admin_actions">
+            <li class="sf_admin_action_print">
+                <a href="#" onclick="imprimir()"><?php echo __('Imprimir analitico') ?></a><br>
+            </li>
+            <li class="sf_admin_action_list">
+                <?php echo link_to(__('Volver al listado alumnos', array(), 'messages'), '@student', array()) ?>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function imprimir()
+    {
+        jQuery(".sf_admin_actions").hide(300, function () {
+            window.print();
+            jQuery(".sf_admin_actions").show();
+        });
+
+    }
+</script>
