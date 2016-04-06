@@ -38,7 +38,7 @@
 <div class="analytical">
     <?php include_partial('analyticalWithoutCBFE_header', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
     <div class="report-content">
-        <?php include_component('student', 'component_analytical_table', array('career_student' => $career_student)) ?>
+         <?php include_component('student', 'component_analytical_table_WithoutCBFE', array('career_student' => $career_student)) ?>
     </div>
     <?php include_partial('analyticalWithoutCBFE_footer', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
 </div>    
