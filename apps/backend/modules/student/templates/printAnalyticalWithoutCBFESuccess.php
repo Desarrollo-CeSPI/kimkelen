@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -16,33 +15,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */
+ */ ?>
 
-
-class AnalyticalBehaviourFactory
-{
-
-    private static $analyticals = array();
-    
-    
-    private function __construct()
-    {
-        
-    }
-
-    
-
-    static public function getInstance(Student $a_student)
-    {  
-        if (isset(self::$analyticals[$a_student->getId()]))
-        {
-            return self::$analyticals[$a_student->getId()];
-        }
-        
-        $behavior = ucwords(sfConfig::get("nc_flavor_flavors_current", "demo"));
-        $clazz = $behavior . "AnalyticalBehaviour";
-		
-		return self::$analyticals[$a_student->getId()] = new $clazz($a_student);
-		    
-    }
-}
+<?php include("printAnalyticalSuccess.php") ?>

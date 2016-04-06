@@ -16,33 +16,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */
+ *
+ */ 
+?>
+<div id="analytic_signatures">
+    <div id="signature_4" class="signatureWithoutCBFE"><?php echo __('analytic_signature_4'); ?></div>
+    <div id="signature_1" class="signatureWithoutCBFE"><?php echo __('analytic_signature_1'); ?></div>
+    <div id="signature_2" class="signatureWithoutCBFE sig"><?php echo __('analytic_signature_2'); ?></div>  
 
-
-class AnalyticalBehaviourFactory
-{
-
-    private static $analyticals = array();
-    
-    
-    private function __construct()
-    {
-        
-    }
-
-    
-
-    static public function getInstance(Student $a_student)
-    {  
-        if (isset(self::$analyticals[$a_student->getId()]))
-        {
-            return self::$analyticals[$a_student->getId()];
-        }
-        
-        $behavior = ucwords(sfConfig::get("nc_flavor_flavors_current", "demo"));
-        $clazz = $behavior . "AnalyticalBehaviour";
-		
-		return self::$analyticals[$a_student->getId()] = new $clazz($a_student);
-		    
-    }
-}
+</div>

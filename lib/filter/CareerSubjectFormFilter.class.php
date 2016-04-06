@@ -37,7 +37,7 @@ class CareerSubjectFormFilter extends BaseCareerSubjectFormFilter
     $this->setWidget('sub_orientation_id', new dcWidgetAjaxDependencePropel(array(
       'dependant_widget' => $widget,
       'observe_widget_id' => 'career_subject_filters_orientation_id',
-      'related_column' => 'orientation_id'
+      'related_column' => 'orientation_id',
     )));
   }
 
