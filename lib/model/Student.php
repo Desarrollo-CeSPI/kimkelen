@@ -399,27 +399,26 @@ class Student extends BaseStudent
 
   }
 
-  public function getRemainingAbsenceFor(CareerSchoolYearPeriod $period = null, $course_subject = null, $exclude_justificated = true, $career_school_year, $divison = null)
+  public function getRemainingAbsenceFor(CareerSchoolYearPeriod $period = null, $course_subject = null, $exclude_justificated = true, $career_school_year, $division = null)
   {
-    $min_max_absence = 0;
+    $max_absence = 0;
 
     $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($this, $career_school_year);
 
-
-    if (is_null($course_subject) && is_null($divison))
+    if (is_null($course_subject) && is_null($division))
     {
       //ME QUEDO CON LA CONFIGURACION MINIMA PARA ESE PERIODO, en caso de que este anotado en mas de una división
       $max_absence = $student_career_school_year->getMaxAbsenceForPeriod($period);
     }
-    elseif (!is_null($divison))
+    elseif (!is_null($division))
     {
 
-      $configuration = CourseSubjectConfigurationPeer::retrieveByDivisionAndPeriod($divison->getId(), $period->getId());
+      $configuration = CourseSubjectConfigurationPeer::retrieveByDivisionAndPeriod($division->getId(), $period->getId());
 
 //      Si la division no tiene el maximo de  asistencias permitidas se lo  pido ala configuracion del anio
       if (is_null($configuration))
       {
-        $max_absence = $career_school_year->getMaxAbsenceInYear($divison->getYear());
+        $max_absence = $career_school_year->getMaxAbsenceInYear($division->getYear());
       }
       else
       {
@@ -433,7 +432,7 @@ class Student extends BaseStudent
     }
 
     $total_absences = $this->getTotalAbsences($career_school_year->getId(), $period, $course_subject, $exclude_justificated);
-
+    
     return $max_absence - $total_absences;
 
   }
@@ -500,14 +499,15 @@ class Student extends BaseStudent
 
   }
 
-  public function isAlmostFree(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year = null, $divison = null)
+  public function isAlmostFree(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year = null, $division = null)
   {
 //    var_dump($career_school_year);
-    return ($this->getRemainingAbsenceFor($career_school_year_period, $course_subject, true, $career_school_year, $divison) < 2);
+    die(var_dump($this->getRemainingAbsenceFor($career_school_year_period, $course_subject, true, $career_school_year, $division)));
+    return ($this->getRemainingAbsenceFor($career_school_year_period, $course_subject, true, $career_school_year, $division) < 2);
 
   }
 
-  public function getFreeClass(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year, $divison = null)
+  public function getFreeClass(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year, $division = null)
   {
     if ($this->isFree($career_school_year_period, $course_subject, $career_school_year))
     {
@@ -516,7 +516,7 @@ class Student extends BaseStudent
     }
     else
     {
-      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $divison))
+      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $division))
       {
         return 'almost_free';
       }
