@@ -649,6 +649,12 @@ class CareerSchoolYear extends BaseCareerSchoolYear
     }
   }
 
+  public function isAttendanceForDay()
+  {
+    return $this->getSubjectConfiguration()?$this->getSubjectConfiguration()->getAttendanceType() == SchoolBehaviourFactory::getInstance()->getAttendanceDay():null;
+
+  }
+
 }
 
 

@@ -92,6 +92,7 @@ generator:
           show_assistance_report:
             label: Student assistance report
             action: showAssistanceReport
+            condition: canManageAttendance
 
           printCalification:
             label:   Print califications

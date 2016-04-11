@@ -137,6 +137,7 @@ class student_attendanceActions extends sfActions
 
   public function executeStudentAttendance(sfWebRequest $request)
   {
+    
     $params = $request->getParameter('multiple_student_attendance');
     unset($params['_csrf_token']);
 
@@ -149,7 +150,6 @@ class student_attendanceActions extends sfActions
       $params['course_subject_id'] = $request->getParameter('course_subject_id') == '' ? null : $request->getParameter('course_subject_id');
       $params['career_school_year_id'] = $request->getParameter('career_school_year_id');
     }
-
 
     $multiple_student_attendance_form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceForm();
 
@@ -196,15 +196,16 @@ class student_attendanceActions extends sfActions
       $this->getUser()->setFlash('notice', 'The item was updated successfully.');
     }
 
-
+    //formateo el dia yyyy-mm-dd para poderlo agregar a la url sin problemas //
+    $day = str_replace('/', '-', $multiple_student_attendance['day']);
+  
     if ($request->hasParameter("previous_division"))
     {
-
-      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getPreviousDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id']  . "&day=" .$multiple_student_attendance['day']. "&course_subject_id=");
+      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getPreviousDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id']  . "&day=" .$day. "&course_subject_id=");
     }
     elseif ($request->hasParameter("next_division"))
     {
-      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&day=" .$multiple_student_attendance['day'] . "&course_subject_id=");
+      $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&day=" .$day. "&course_subject_id=");
     }
     elseif ($request->hasParameter("print_attendance_template"))
     {
