@@ -24,11 +24,11 @@ class CareerStudentStatus extends BaseCustomOptionsHolder
   const
     REGULAR      = 0,
     GRADUATE     = 1;
-
+	
   protected 
     $_options = array(
         self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado'
+        self::GRADUATE       => 'Egresado',
       );
   
   public function getOptions($include_blank = false, $no_graduate = false)
