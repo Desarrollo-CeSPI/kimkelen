@@ -104,7 +104,21 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
     $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
     $c->add(StudentCareerSubjectAllowedPeer::CAREER_SUBJECT_ID, $ids, Criteria::IN);
 
-    StudentCareerSubjectAllowedPeer::doDelete($c, $con);
+    $allowed = StudentCareerSubjectAllowedPeer::doSelectOne($c, $con);
+
+    if ($allowed)
+    {
+      // Se consulta si el alumno esta en trayectorias antes de eliminarlo 
+      $student_id = $this->object->getPrimaryKey();
+      $criteria = new Criteria();
+      $criteria->add(PathwayStudentPeer::STUDENT_ID, $student_id);
+      $pathway = PathwayStudentPeer::doSelectOne($criteria, $con);
+
+      if (!$pathway)
+      {
+        StudentCareerSubjectAllowedPeer::doDelete($c, $con);
+      }
+    }
 
     $year = $this->getValue('year');
     $career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear(CareerPeer::retrieveByPK($this->getValue('career_id')), SchoolYearPeer::retrieveCurrent());
