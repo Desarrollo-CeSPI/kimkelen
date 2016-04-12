@@ -60,13 +60,16 @@
         <tbody>
 
           <?php foreach ($students as $student) : ?>
-            <?php $total = 0; ?>
+            <?php $total = 0; 
+                  $total_justificated = 0;?>
             <tr>
               <th class="student_fix" align='left'><?php echo $student ?></th>
               <?php foreach ($days as $day): ?>
-
+				
                 <?php if ($user_course_subject): ?>
+                
                   <?php if (is_null($period)): ?>
+                  
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $course_subject->getCourseType()); ?>
                     <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id)); ?>
                   <?php elseif ($period->getEndAt() < date('Y-m-d', $day)): ?>
@@ -74,6 +77,8 @@
                     <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
                   <?php endif ?>
                 <?php else: ?>
+                <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $division->getCourseType()); ?>
+                <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
                   <?php if (is_null($period)): ?>
                     <?php $period = CareerSchoolYearPeriodPeer::retrieveByDay($day, $division->getCourseType()); ?>
                     <?php $clasz = (is_null($period)) ? '' : $student->getFreeClass($period, $course_subject, CareerSchoolYearPeer::retrieveByPk($career_school_year_id), $division); ?>
@@ -84,12 +89,14 @@
                 <?php endif ?>
 
                 <?php $student_attendance = StudentAttendancePeer::retrieveByDateAndStudent(date('Y-m-d', $day), $student, $course_subject_id, $career_school_year_id) ?>
-
+				
                 <?php if ($student_attendance): ?>
 
                   <?php $total = $total + $student_attendance->getValue(); ?>
+                  <?php if ($student_attendance->getStudentAttendanceJustification()) $total_justificated = $total_justificated  + $student_attendance->getValue() ; ?>
                   <td  class="<?php echo ($student_attendance->getStudentAttendanceJustification()) ? 'box_justificated' : $clasz ?>"  style="text-align:center">
                     <?php echo SchoolBehaviourFactory::getInstance()->getFormattedAssistanceValue($student_attendance); ?>
+                    
                   </td>
 
                 <?php else: ?>
@@ -97,8 +104,8 @@
                 <?php endif; ?>
               <?php endforeach; ?>
               <td style="text-align:center"><?php echo round($total, 2) ?></td>
-              <td style="text-align:center"><?php echo $student->getTotalAbsences($career_school_year_id, null, $course_subject_id, false) ?></td>
-              <td style="text-align:center"><?php echo round($student->getTotalAbsences($career_school_year_id, null, $course_subject_id), 2) ?></td>
+              <td style="text-align:center"><?php echo round($total - $total_justificated, 2)?></td>
+              <td style="text-align:center"><?php echo round($total_justificated, 2) ?></td>
             <?php endforeach; ?>
           </tr>
           <tr class="non-printable">

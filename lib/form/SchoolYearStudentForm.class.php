@@ -40,6 +40,5 @@ class SchoolYearStudentForm extends BaseSchoolYearStudentForm
 	  $this->setWidget('health_info',  new sfWidgetFormSelect(array(
 		  'choices'  => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions()
 	  )));
-
   }
 }

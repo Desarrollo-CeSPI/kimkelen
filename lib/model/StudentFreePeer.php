@@ -65,8 +65,8 @@ class StudentFreePeer extends BaseStudentFreePeer
     $c->add(self::IS_FREE, true);
     $c->add(self::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
 
-    if (!is_null($career_school_year_period))
-    {
+    if ( !is_null($career_school_year_period) && !is_null($career_school_year_period->getMaxAbsences()))
+    { 
       $c->add(self::CAREER_SCHOOL_YEAR_PERIOD_ID, $career_school_year_period->getId());  
     }    
 
