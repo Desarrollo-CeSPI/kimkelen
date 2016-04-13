@@ -503,7 +503,7 @@ class Student extends BaseStudent
   {
 //    var_dump($career_school_year);
 
-    return ($this->getRemainingAbsenceFor($career_school_year_period, $course_subject, true, $career_school_year, $divison) < 2);
+    return ($this->getRemainingAbsenceFor($career_school_year_period, $course_subject, true, $career_school_year, $division) < 2);
   }
   
   public function getFreeClass(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year, $division = null)
