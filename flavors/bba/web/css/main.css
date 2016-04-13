@@ -1962,3 +1962,8 @@ div.wc-cal-event{
 #sf_admin_container ul li {
     list-style: none !important;
 }
+
+.sf_admin_list .sf_admin_action_analytical_without_cbfe a
+{
+    background-image: url('../images/certificate.png') !important;
+}

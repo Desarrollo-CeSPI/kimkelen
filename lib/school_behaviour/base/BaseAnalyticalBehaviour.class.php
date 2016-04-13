@@ -49,7 +49,6 @@ class BaseAnalyticalBehaviour
     public function __construct(Student $a_student)
     {
         $this->student = $a_student;
-        $this->process();
     }
     
     public function is_empty()
@@ -150,13 +149,18 @@ class BaseAnalyticalBehaviour
             $this->remaining_years = array();
             $years = $this->get_career_student()->getCareer()->getYearsRange();
             $current_year = $this->get_current_school_year();
-            foreach ($years as $year)
+            
+            if(!is_null($current_year))
             {
-                if ($current_year->getYear() <= $year)
-                {
-                    $this->remaining_years[] = $year;
-                }
-            }
+				foreach ($years as $year)
+				{
+					if ($current_year->getYear() <= $year)
+					{
+						$this->remaining_years[] = $year;
+					}
+				}	
+			}
+            
         }
         return $this->remaining_years;
     }
@@ -282,7 +286,7 @@ class BaseAnalyticalBehaviour
         $this->total_average = ($sum/$count);
     }
     
-    protected function process()
+    public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
 		

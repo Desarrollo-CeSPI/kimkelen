@@ -32,6 +32,10 @@ class BaseSubjectStudentAnalytic
         $this->school_year = $this->css->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear();
 
         $this->approvationInstance = null;
+        
+        $this->orientation = $this->css->getCourseSubject()->getCareerSubject()->getOrientation();
+        
+        $this->sub_orientation =  $this->css->getCourseSubject()->getCareerSubject()->getSubOrientation();
     }
 
     public function approvationInstance()
@@ -172,5 +176,15 @@ class BaseSubjectStudentAnalytic
         }
         return $this->getNullLabel();
     }
+    
+    public function getOrientation()
+    {
+		return $this->orientation;
+	}
+	
+	public function getSubOrientation()
+	{
+		return $this->sub_orientation;
+	}
 
 }

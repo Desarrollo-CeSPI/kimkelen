@@ -86,7 +86,7 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
-#analytic_signatures .signature
+#analytic_signatures .signature 
 {
     float: left;
     width: 39%;
@@ -99,6 +99,22 @@
     margin-top: 2em;
 }
 
+#analytic_signatures .signatureWithoutCBFE
+{
+	float: left;
+	width: 39%;
+	text-align: center;
+	padding-top: 1em;
+	border-top: 1px solid;
+	margin-right: 5%;
+	margin-left: 5%;
+	margin-top: 10em;
+}
+
+#analytic_signatures .signatureWithoutCBFE.sig
+{
+	margin-left: 30%;	
+}
 .analytical_body_table {
     font-size: 13px;
 }

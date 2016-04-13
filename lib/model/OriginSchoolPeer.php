@@ -3,3 +3,5 @@
 class OriginSchoolPeer extends BaseOriginSchoolPeer
 {
 }
+
+

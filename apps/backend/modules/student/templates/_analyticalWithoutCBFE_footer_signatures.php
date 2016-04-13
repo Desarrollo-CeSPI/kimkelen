@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -16,29 +16,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php
+ *
+ */ 
+?>
+<div id="analytic_signatures">
+    <div id="signature_4" class="signatureWithoutCBFE"><?php echo __('analytic_signature_4'); ?></div>
+    <div id="signature_1" class="signatureWithoutCBFE"><?php echo __('analytic_signature_1'); ?></div>
+    <div id="signature_2" class="signatureWithoutCBFE sig"><?php echo __('analytic_signature_2'); ?></div>  
 
-class CareerStudentStatus extends BaseCustomOptionsHolder
-{
-  const
-    REGULAR      = 0,
-    GRADUATE     = 1;
-	
-  protected 
-    $_options = array(
-        self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado',
-      );
-  
-  public function getOptions($include_blank = false, $no_graduate = false)
-  {
-    $options = ($no_graduate)?$this->_options_no_graduate:$this->_options;
-    if ($include_blank !== false && !is_null($include_blank))
-    {
-      return array('' => (is_string($include_blank) ? $include_blank : '')) + $options;
-    }
-
-    return $options;
-  }
-}
+</div>

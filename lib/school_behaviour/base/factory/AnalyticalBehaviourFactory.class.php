@@ -33,7 +33,7 @@ class AnalyticalBehaviourFactory
     
 
     static public function getInstance(Student $a_student)
-    {
+    {  
         if (isset(self::$analyticals[$a_student->getId()]))
         {
             return self::$analyticals[$a_student->getId()];
@@ -41,7 +41,8 @@ class AnalyticalBehaviourFactory
         
         $behavior = ucwords(sfConfig::get("nc_flavor_flavors_current", "demo"));
         $clazz = $behavior . "AnalyticalBehaviour";
-
-        return self::$analyticals[$a_student->getId()] = new $clazz($a_student);
+		
+		return self::$analyticals[$a_student->getId()] = new $clazz($a_student);
+		    
     }
 }

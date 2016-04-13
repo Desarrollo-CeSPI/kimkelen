@@ -39,6 +39,6 @@
     </div>
 
     <div class="header_row">
-        <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
+        <?php include_partial('analyticalWithoutCBFE_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
     </div>
 </div>

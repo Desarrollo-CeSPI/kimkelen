@@ -17,28 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
 
-class CareerStudentStatus extends BaseCustomOptionsHolder
-{
-  const
-    REGULAR      = 0,
-    GRADUATE     = 1;
-	
-  protected 
-    $_options = array(
-        self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado',
-      );
-  
-  public function getOptions($include_blank = false, $no_graduate = false)
-  {
-    $options = ($no_graduate)?$this->_options_no_graduate:$this->_options;
-    if ($include_blank !== false && !is_null($include_blank))
-    {
-      return array('' => (is_string($include_blank) ? $include_blank : '')) + $options;
-    }
+<?php use_stylesheet('/css/bootstrap.css') ?>
 
-    return $options;
-  }
-}
+<div id="analytical_footer" class="misma_pagina">
+    <?php include_partial('analyticalWithoutCBFE_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
+    <?php include_partial('analyticalWithoutCBFE_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
+</div>
