@@ -22,11 +22,20 @@
 <div class="student_head">
   <div class="person_name"><strong><?php echo link_to($student, 'student/show?id=' . $student->getId())?></strong></div>
 
-	<div class="active"><strong><?php echo __("Is Active?") ?></strong> <em><?php include_partial("student/is_active", array("student" => $student)) ?></em></div>
-
-	<?php if ($student->getBelongsToPathway()): ?>
-	<div class="pathway"><strong><?php echo __("Pathway") ?></strong>
+	<div class="active"><strong><?php echo __("Is Active?") ?></strong> 
+		<em><?php include_partial("student/is_active", array("student" => $student)) ?></em>
+	
+		<?php if ($student->getHealthInfoString() == 'No entregado'): ?>
+		<div class="health"><strong> <?php echo __("Health card not received") ?></strong></div>
 		<?php endif; ?>
+		
+	</div>
+	
+	<?php if ($student->getBelongsToPathway()): ?>
+	<div class="pathway"><strong><?php echo __("Pathway") ?></strong></div>
+		<?php endif; ?>
+	
+	
 </div>
 
 <?php if (!($sf_user->isTeacher())): ?>
@@ -48,5 +57,6 @@
     <div class="info_div"><?php include_partial("student/commisions", array("student" => $student)) ?></div>
     <div class="info_div"><?php include_partial("student/disciplinary_sanctions", array("student" => $student)); ?></div>
     <div class="info_div"><?php include_partial("student/absences", array("student" => $student)); ?></div>
+    
   </div>
 </div>

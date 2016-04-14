@@ -23,7 +23,11 @@
     <?php if (count($students = $division->getStudents())): ?>
       <ul style="margin-left: 9em;">
         <?php foreach ($students as $s): ?>
-          <li><?php echo $s ?></li>
+          <li><?php echo $s ; ?>
+          <?php if ($s->getHealthInfoString() == 'No entregado'): ?>
+			 - <span style="color:#FF0000;"> <?php echo __("Health card not received") ?></span>
+			<?php endif; ?>
+		 </li> 
         <?php endforeach ?>
       </ul>
     <?php else: ?>

@@ -146,7 +146,7 @@
 
           <?php foreach ($form->students as $student): ?>
             <tr>
-              <td><?php echo $student ?></td>
+              <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student ?></td>
               <?php foreach ($form->days as $day => $day_i): ?>
                 <td class="day_<?php echo $day ?> ">
                   <?php $name = 'student_attendance_' . $student->getId() . '_' . $day ?>

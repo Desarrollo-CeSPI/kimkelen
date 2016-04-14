@@ -1288,6 +1288,33 @@ class Student extends BaseStudent
 	return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
 		
   }
+  
+  public function getHealthCardStatusClass()
+  {	  
+	if($this->getHealthInfoString() == 'No entregado')
+	{
+		return 'student_health_info';
+			
+	}else{
+		
+		return 'student_fix';
+	}
+  
+  }
+  
+  public function getHealthCardStatusAttendanceClass()
+  {	  
+	if($this->getHealthInfoString() == 'No entregado')
+	{
+		return 'student_health_info_attendance';
+			
+	}else{
+		
+		return '';
+	}
+  
+  }
+  
 
   /**
    * This method returns the current or last StudentCareerSchoolYear.

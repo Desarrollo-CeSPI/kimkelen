@@ -4291,6 +4291,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
+            <trans-unit>
+                <source>Health card not received</source>
+                <target>No entregó la Ficha de Salud</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
