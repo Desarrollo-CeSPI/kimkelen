@@ -1225,6 +1225,12 @@ table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
     background-color: greenyellow !important;
 }
 
+.box_health_info
+{
+	border: 1px solid black;
+    padding: 1px;
+    background-color: #F51A00 !important;
+}
 .nc_changelog_tooltip
 {
     display: block;
@@ -1488,6 +1494,11 @@ div.no_results_advice {
     margin-left: 5px;
 }
 
+.student_head .active .health
+{
+    color:#FF0000;
+    max-width: 100px;
+}
 .student_head .person_name
 {
     float: left;
@@ -1991,4 +2002,7 @@ div.wc-cal-event{
 
 #sf_admin_container ul li {
     list-style: none !important;
+}
+.student_health_info_attendance{
+	color: #DA1A03;
 }

@@ -4416,6 +4416,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Evaluation type</source>
                 <target>Tipo de evaluación</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Health card not received</source>
+                <target>No entregó la Ficha de Salud</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Health card not received</source>
+                <target>No entregó la Ficha de Salud</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
