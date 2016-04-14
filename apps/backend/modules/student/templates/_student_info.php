@@ -25,7 +25,7 @@
 	<div class="active"><strong><?php echo __("Is Active?") ?></strong> 
 		<em><?php include_partial("student/is_active", array("student" => $student)) ?></em>
 	
-		<?php if ($student->getHealthInfoString() == 'No entregado'): ?>
+		<?php if ($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED): ?>
 		<div class="health"><strong> <?php echo __("Health card not received") ?></strong></div>
 		<?php endif; ?>
 		

@@ -24,7 +24,7 @@
       <ul style="margin-left: 9em;">
         <?php foreach ($students as $s): ?>
           <li><?php echo $s ; ?>
-          <?php if ($s->getHealthInfoString() == 'No entregado'): ?>
+          <?php if ($s->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED): ?>
 			 - <span style="color:#FF0000;"> <?php echo __("Health card not received") ?></span>
 			<?php endif; ?>
 		 </li> 

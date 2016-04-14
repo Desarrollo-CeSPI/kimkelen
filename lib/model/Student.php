@@ -1291,7 +1291,7 @@ class Student extends BaseStudent
   
   public function getHealthCardStatusClass()
   {	  
-	if($this->getHealthInfoString() == 'No entregado')
+	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
 	{
 		return 'student_health_info';
 			
@@ -1304,7 +1304,7 @@ class Student extends BaseStudent
   
   public function getHealthCardStatusAttendanceClass()
   {	  
-	if($this->getHealthInfoString() == 'No entregado')
+	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
 	{
 		return 'student_health_info_attendance';
 			
