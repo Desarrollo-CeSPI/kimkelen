@@ -36,6 +36,8 @@ class BaseSubjectStudentAnalytic
         $this->orientation = $this->css->getCourseSubject()->getCareerSubject()->getOrientation();
         
         $this->sub_orientation =  $this->css->getCourseSubject()->getCareerSubject()->getSubOrientation();
+        
+        $this->option = $this->css->getCourseSubject()->getCareerSubject()->getIsOption();
     }
 
     public function approvationInstance()
@@ -185,6 +187,11 @@ class BaseSubjectStudentAnalytic
 	public function getSubOrientation()
 	{
 		return $this->sub_orientation;
+	}
+	
+	public function getOption()
+	{
+		return $this->option;
 	}
 
 }
