@@ -167,7 +167,7 @@ class DivisionPeer extends BaseDivisionPeer
       $i++;
     }
 
-    if (is_null($divisions[$i +1]))
+    if ($i == count($divisions)-1)
     {
       return $divisions[0];      
     }
@@ -188,10 +188,11 @@ class DivisionPeer extends BaseDivisionPeer
     {
       $i++;
     }
-
+    
     if ($i == 0)
     {
-      return $divisions[count($divisions)];      
+      //return $divisions[count($divisions)-1];      
+      return end($divisions);
     }
 
     return $divisions[$i - 1];
