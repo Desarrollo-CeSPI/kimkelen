@@ -405,7 +405,7 @@ class Student extends BaseStudent
 
     $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($this, $career_school_year);
     
-    if (is_null($course_subject))
+    if (is_null($course_subject) && is_null($division))
     {
       //ME QUEDO CON LA CONFIGURACION MINIMA PARA ESE PERIODO, en caso de que este anotado en mas de una división
       $max_absence = $student_career_school_year->getMaxAbsenceForPeriod($period);
