@@ -45,7 +45,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             
             if($career->getCareerName() != 'Ciclo Básico de Formación Estética')
             {
-				if ($scsy->getStatus() == 1)
+				if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED )
 				{
 					//tomo el año
 					$year_in_career = $scsy->getYear();
@@ -77,18 +77,25 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 							}
 						}
 						
-						//si la materia no tiene orientacion es general.
-						if(is_null($css->getOrientation()))
+						//si la materia no tiene orientacion y optativas es general.
+						if(is_null($css->getOrientation()) && ! $css->getOption())
 						{ 
 							$this->add_general_subject_to_year($year_in_career, $css);
 						}else{
-							//chequeo si es propia de la especialidad / suborientacion
 							
-							if(is_null($css->getSubOrientation()))
+							//chequeo si es una asignatura optativa
+							if($css->getOption())
 							{	
-								$this->add_specific_subject_to_year($year_in_career, $css);
+								$this->add_optional_subject_to_year($year_in_career, $css);
 							}else{
-								$this->add_suborientation_subject_to_year($year_in_career, $css);
+								//chequeo si es propia de la especialidad / suborientacion
+								if(is_null($css->getSubOrientation()))
+								{
+									$this->add_specific_subject_to_year($year_in_career, $css);
+								}else{
+									$this->add_suborientation_subject_to_year($year_in_career, $css);
+								}
+								
 							}
 							
 						}
@@ -105,7 +112,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 					
 				
 				}else{
-					if($scsy->getStatus() == 0 ){
+					if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE ){
 						
 						//recupero en año en curso
 						$year_in_career = $scsy->getYear();
@@ -120,17 +127,25 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 							// No tiene nota -> el curso está incompleto
 							$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
 							
-							//si la materia no tiene orientacion es general.
-							if(is_null($css->getOrientation()))
+							//si la materia no tiene orientacion y optativas es general.
+							if(is_null($css->getOrientation()) && ! $css->getOption())
 							{ 
 								$this->add_general_subject_to_year($year_in_career, $css);
 							}else{
-								//chequeo si es propia de la especialidad / suborientacion
-								if(is_null($css->getSubOrientation()))
+								
+								//chequeo si es una asignatura optativa
+								if($css->getOption())
 								{	
-									$this->add_specific_subject_to_year($year_in_career, $css);
+									$this->add_optional_subject_to_year($year_in_career, $css);
 								}else{
-									$this->add_suborientation_subject_to_year($year_in_career, $css);
+									//chequeo si es propia de la especialidad / suborientacion
+									if(is_null($css->getSubOrientation()))
+									{
+										$this->add_specific_subject_to_year($year_in_career, $css);
+									}else{
+										$this->add_suborientation_subject_to_year($year_in_career, $css);
+									}
+									
 								}
 								
 							}
@@ -158,6 +173,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         }
         $this->objects[$year]['school_year'] = $school_year;
     }
+    
     protected function add_general_subject_to_year($year, $css)
     {
         if (!isset($this->objects[$year]))
@@ -168,6 +184,16 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         $this->objects[$year]['general_subjects'][] = $css;
     }
     
+    protected function add_optional_subject_to_year($year, $css)
+    {
+		if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['optional_subjects'] = array();
+        }
+        $this->objects[$year]['optional_subjects'][] = $css;
+	}
+	
     protected function add_specific_subject_to_year($year, $css)
     {
         if (!isset($this->objects[$year]))
@@ -177,6 +203,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         }
         $this->objects[$year]['specific_subjects'][] = $css;
     }
+    
     protected function add_division_to_year($year,$division)
     {
 		if (!isset($this->objects[$year]))
@@ -212,6 +239,12 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     {
         return $this->objects[$year]['suborientation_subjects'];
     }
+    
+    public function get_optional_subjects_in_year($year)
+    {
+		return $this->objects[$year]['optional_subjects'];
+	}
+	
     public function get_career_name($year)
     {
 		if($year > 3)
@@ -222,6 +255,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 		}
 		
 	}
+	
 	public function get_school_year($year)
 	{
 		return $this->objects[$year]['school_year'];

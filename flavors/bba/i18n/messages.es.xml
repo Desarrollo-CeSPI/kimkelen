@@ -4563,6 +4563,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Suborientation Subjects</source>
                 <target>Asignaturas de la Especialidad</target>
             </trans-unit>
+            <trans-unit>
+                <source>Health card not received</source>
+                <target>No entregó la Ficha de Salud</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Optional Subjects</source>
+                <target>Asignaturas Optativas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

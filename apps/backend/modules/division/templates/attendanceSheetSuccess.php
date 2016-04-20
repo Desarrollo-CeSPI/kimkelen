@@ -63,7 +63,7 @@
             <?php $total = 0; 
                   $total_justificated = 0;?>
             <tr>
-              <th class="student_fix" align='left'><?php echo $student ?></th>
+              <th class="<?= $student->getHealthCardStatusClass()?>"  align='left'><?php echo $student ?></span></th>
               <?php foreach ($days as $day): ?>
 				
                 <?php if ($user_course_subject): ?>

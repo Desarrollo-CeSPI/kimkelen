@@ -96,6 +96,29 @@
 					<?php endforeach ?>
 					
 			<?php } ?>
+			<?php if(!is_null($object->get_optional_subjects_in_year($year))){?>
+			</tbody>
+				<thead>
+	 
+					<tr>
+						<th class="text-left" colspan="7"><?php echo __("Optional Subjects") ?> </th>
+					</tr>
+
+				</thead>
+
+				<tbody class="analytical_body_table">
+					<?php foreach ($object->get_optional_subjects_in_year($year) as $css):?>
+						<tr>
+							<td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
+
+							<td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+
+							<td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+						</tr>
+					<?php endforeach ?>
+					
+			<?php } ?>
+			
 					<tr>
 						<th colspan="5" style="text-align:left !important;">Año: <?php echo $object->get_school_year($year) .'   Curso: ' . $object->get_division($year) ?></th>
 						<th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>

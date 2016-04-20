@@ -18,6 +18,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <div class="box">
+  <span class='box_health_info'><?php echo __('Health card not received')?></span>
   <span class='box_free'><?php echo __('Free')?></span>
   <span class='box_almost_free'><?php echo __('Almost free')?></span>
   <span class='box_justificated_student_show'><?php echo __('Justificated absences')?></span>
