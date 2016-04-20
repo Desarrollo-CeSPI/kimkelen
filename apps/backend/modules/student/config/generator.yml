@@ -220,6 +220,7 @@ generator:
             credentials: [edit_student]
             action: undoWithdrawStudent
             condition: canUndoWithdrawn
+            
       filter:
 
       form:    ~

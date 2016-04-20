@@ -624,4 +624,5 @@ class studentActions extends autoStudentActions
       $this->analytic->setCertificate($analytical_document);
       $this->analytic->save();
   }
+
 }
