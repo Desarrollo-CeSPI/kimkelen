@@ -811,15 +811,17 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
     $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
 
-    if ($course_subject_id instanceof CourseSubject)
+    if (!is_null($course_subject_id))
     {
-      $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id->getId());
+      if ($course_subject_id instanceof CourseSubject)
+      {
+        $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id->getId());
+      }
+      else
+      {
+        $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
+      }
     }
-    else
-    {
-      $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
-    }
-
 
     $c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
 
