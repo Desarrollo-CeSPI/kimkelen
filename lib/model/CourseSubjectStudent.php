@@ -517,17 +517,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       }
       
       $student_repproved_course_subject = $this->getStudentRepprovedCourseSubject();
-      // si es previa
-      if (!is_null($student_repproved_course_subject))
-      {
-        $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
-        //si no existe una mesa de previa
-        if (is_null($student_examination_repproved_subject))
-        {
-          $student_repproved_course_subject->delete($con);
-        }
-      }
-      else
+
+      if (is_null($student_repproved_course_subject))
       {
         //si es examination
         $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();   
