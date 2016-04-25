@@ -4420,6 +4420,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Evaluation type</source>
                 <target>Tipo de evaluación</target>
             </trans-unit>
+            <trans-unit>
+                <source>Edit last repproved examination</source>
+                <target>Editar ultima mesa de previa</target>
+            </trans-unit> 
         </body>
     </file>
 </xliff>

@@ -4299,6 +4299,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>
+            <trans-unit>
+                <source>Edit last repproved examination</source>
+                <target>Editar ultima mesa de previa</target>
+            </trans-unit> 
         </body>
     </file>
 </xliff>

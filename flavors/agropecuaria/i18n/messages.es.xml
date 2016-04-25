@@ -4463,17 +4463,21 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Next month</source>
                 <target>Mes siguiente</target>
             </trans-unit>
-	        <trans-unit>
+	          <trans-unit>
                 <source>Health info</source>
                 <target>Estado de la Ficha de Salud</target>
             </trans-unit>
-	    <trans-unit>
+	          <trans-unit>
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>
+            <trans-unit>
+                <source>Edit last repproved examination</source>
+                <target>Editar ultima mesa de previa</target>
+            </trans-unit> 
         </body>
     </file>
 </xliff>
