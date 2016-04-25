@@ -137,12 +137,10 @@ class StudentEditHistoryForm extends sfFormPropel
     
     if (!is_null($student_approved_career_subject))
     {
-
       return false;
     }
    
-    return $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
-    //return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
+    return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
   }
 
   public function configureExaminationSubjects()
@@ -308,7 +306,13 @@ class StudentEditHistoryForm extends sfFormPropel
 
   public function getBackTo()
   {
-    if ( $this->getObject()->countCourseSubjectStudentExaminations() )
+    $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
+    
+    if ( !is_null($student_repproved_course_subject) && $student_repproved_course_subject->countStudentExaminationRepprovedSubjects() )
+    { 
+      return __('Edit last repproved examination');
+    }
+    elseif ( $this->getObject()->countCourseSubjectStudentExaminations() )
     {
       return __('Edit previous examination');
     }
