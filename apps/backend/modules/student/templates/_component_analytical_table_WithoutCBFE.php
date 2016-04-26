@@ -79,7 +79,7 @@
 				<thead>
 	 
 					<tr>
-						<th class="text-left" colspan="7"><?php echo __("Suborientation Subjects") ?> </th>
+						<th class="text-left" colspan="7"><?php  echo ($student->getStudentSpecialityString()? __("%speciality% subjects", array("%speciality%" => $student->getStudentSpecialityString())): __("Suborientation Subjects"))?> </th>
 					</tr>
 
 				</thead>
