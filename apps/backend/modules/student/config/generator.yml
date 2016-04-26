@@ -220,6 +220,12 @@ generator:
             credentials: [edit_student]
             action: undoWithdrawStudent
             condition: canUndoWithdrawn
+            
+          change_student_status:
+            label: Change student status
+            credentials: [edit_student]
+            action: changeStudentStatus
+            
       filter:
 
       form:    ~

@@ -1402,7 +1402,18 @@ class Student extends BaseStudent
 	}
 		return false;
 	}
+	
+	public function getStudentCareerSchoolYearByYearInCareer($year_in_career)
+	{
+		$c = new Criteria();
+		
+		$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
+		$c->add(StudentCareerSchoolYearPeer::YEAR, $year_in_career);
+		
+		$object = StudentCareerSchoolYearPeer::doSelectOne($c);
 
+		return $object;
+	}
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

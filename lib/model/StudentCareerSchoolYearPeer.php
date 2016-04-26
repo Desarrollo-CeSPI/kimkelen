@@ -137,5 +137,14 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
     }
     return self::doCount($c, $con);
   }
+  
+  public static function getLastStudentCareerSchoolYear(Student $student, CareerSchoolYear $career_school_year)
+  {
+    $c = new Criteria();
+    $c->add(self::STUDENT_ID, $student->getId());
+    $c->addDescendingOrderByColumn(self::YEAR);
+
+    return self::doSelectOne($c);
+  }
 
 }

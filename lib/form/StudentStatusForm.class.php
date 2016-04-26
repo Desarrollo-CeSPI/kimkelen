@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,23 +19,24 @@
  */ ?>
 <?php
 
-class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
+/**
+ * SchoolYearStudent form.
+ *
+ * @package    sistema de alumnos
+ * @subpackage form
+ * @author     Your name here
+ */
+class StudentStatusForm extends BaseStudentStatusForm
 {
-  const
-    IN_COURSE       		= 0,
-    APPROVED       			= 1,
-    REPPROVED       		= 2,
-    LAST_YEAR_REPPROVED     = 3,
-    WITHDRAWN       		= 4,
-    WITHDRAWN_WITH_RESERVE	= 5;
-
-  protected
-    $_options = array(
-        self::IN_COURSE       		 => 'Cursando',
-        self::APPROVED       		 => 'Aprobado',
-        self::REPPROVED      		 => 'Repitio este año',
-        self::LAST_YEAR_REPPROVED 	 => 'Repetidor del año pasado, pero cursando año lectivo actual',
-        self::WITHDRAWN				 => 'Retirado de la institución',
-        self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco'
-      );
+  public function configure()
+  {
+    $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
+    $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
+    $this->getWidgetSchema()->setFormFormatterName('Revisited');
+    
+    $this->setWidget('status',  new sfWidgetFormSelect(array(
+		  'choices'  => BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptions(),	
+	  )));
+	
+  }
 }
