@@ -330,24 +330,22 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
         if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
         {
-          
           $sers = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
 	        //$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
 
-	        if ($sers > 1) 
+	        if ($sers >= 1) 
           {
 	          foreach ($sers as $student_examination_repproved_subject) 
             {
               $student_examination_repproved_subject->delete($con);
             }
-          } else {
-            $student_repproved_course_subject->delete($con);
           }
+          $student_repproved_course_subject->delete($con);
+          
         }
       }
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();
-
 
       // IF is null, is because the course_subject_student_examination has been created editing student history
       $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();
@@ -366,7 +364,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       // se guarda la NOTA FINAL de la materia
       if ($course_subject_student_examination->getExaminationNumber() == self::FEBRUARY)
       {
-
         $this->setFebruaryApprovedResult($result, $average, $course_subject_student_examination->getMark());
       }
       else
