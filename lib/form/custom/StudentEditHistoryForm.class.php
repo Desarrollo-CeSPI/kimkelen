@@ -140,7 +140,8 @@ class StudentEditHistoryForm extends sfFormPropel
       return false;
     }
    
-    return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
+    //return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
+    return $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
   }
 
   public function configureExaminationSubjects()
