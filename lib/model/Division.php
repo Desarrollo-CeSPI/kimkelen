@@ -295,17 +295,21 @@ class Division extends BaseDivision
     {
       return false;
     }
-    $result = true;
-    foreach ($this->getCourses() as $course)
+
+    if (count($this->getCourses()) != 0)
     {
-      if ($course->canManageAttendanceForDay())
+      foreach ($this->getCourses() as $course)
       {
-        return true;
+        if ($course->canManageAttendanceForDay())
+        {
+          return true;
+        }
       }
     }
-
-    return false;
-
+    else
+    {
+      return $this->getCareerSchoolYear()->isAttendanceForDay();
+    }
   }
 
   public function getMessageCantManageAttendance()
@@ -484,9 +488,17 @@ class Division extends BaseDivision
   public function hasAttendanceForDay()
   {
     $result = false;
-    foreach ($this->getCourses() as $course)
+
+    if ( count($this->getCourses()) != 0 )
     {
-      $result = $result || $course->hasAttendanceForDay();
+      foreach ($this->getCourses() as $course)
+      {
+        $result = $result || $course->hasAttendanceForDay();
+      }
+    }
+    else
+    {
+      $result = $this->getCareerSchoolYear()->isAttendanceForDay();
     }
 
     return $result;
