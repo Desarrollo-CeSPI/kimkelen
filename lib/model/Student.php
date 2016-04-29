@@ -1291,7 +1291,10 @@ class Student extends BaseStudent
   
   public function getHealthCardStatusClass()
   {	  
-	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+	$health_info =$this->getHealthInfoString();
+	
+	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
 	{
 		return 'student_health_info';
 			
@@ -1303,8 +1306,11 @@ class Student extends BaseStudent
   }
   
   public function getHealthCardStatusAttendanceClass()
-  {	  
-	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+  {	 
+	$health_info =$this->getHealthInfoString();
+	
+	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
 	{
 		return 'student_health_info_attendance';
 			

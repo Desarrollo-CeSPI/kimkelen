@@ -26,7 +26,7 @@
     <?php echo __($title, array('%division%' => $form->getDivision(), '%subject%' => $form->getCourseSubject())) ?>
   </h1>
   <div id="sf_admin_content">
-    <?php include_partial('student/information_box') ?>
+    <?php include_partial('division/information_box') ?>
     <form action="<?php echo url_for('@save_student_attendance?back_url=' . $back_url) ?>" method="post" >
       <ul class="sf_admin_actions">
 

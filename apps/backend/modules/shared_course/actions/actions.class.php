@@ -460,8 +460,6 @@ class shared_courseActions extends autoShared_courseActions
         $this->course_subject_id = $this->course_subject->getId();
         $this->students = $this->course_subject->getStudents();
 
-        $this->setTemplate('attendanceSheet', 'division');
-
         $this->setLayout('cleanLayout');
       }
       else
