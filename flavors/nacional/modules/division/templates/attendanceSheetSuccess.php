@@ -40,7 +40,7 @@
   <?php endif; ?>
   <h2><?php echo __('from date %from_date% to date %to_date%', array('%from_date%' => $from_date, '%to_date%' => $to_date)) ?></h2>
   <div class="non-printable">
-    <?php include_partial('student/information_box') ?>
+    <?php include_partial('information_box') ?>
   </div>
   <div id="sf_admin_content">
     <div id="mi_tabla_wrapper">
@@ -63,7 +63,7 @@
             <?php $total = 0; 
                   $total_justificated = 0;?>
             <tr>
-              <th class="student_fix"  align='left'><?php echo $student ?></span></th>
+              <th class="<?= $student->getHealthCardStatusClass()?>"  align='left'><?php echo $student ?></span></th>
               <?php foreach ($days as $day): ?>
 				
                 <?php if ($user_course_subject): ?>

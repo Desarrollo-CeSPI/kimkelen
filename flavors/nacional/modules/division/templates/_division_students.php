@@ -24,6 +24,13 @@
       <ul style="margin-left: 9em;">
         <?php foreach ($students as $s): ?>
           <li><?php echo $s ; ?>
+          <?php if ($s->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED): ?>
+			 - <span style="color:#FF0000;"> <?php echo __("Health card not received") ?></span>
+		  <?php elseif($s->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE): ?>
+		     - <span style="color:#FF0000;"> <?php echo __("No suitable") ?></span>
+		       <?php elseif($s->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT): ?>
+				- <span style="color:#FF0000;"> <?php echo $s->getHealthInfoString(); ?></span>
+		  <?php endif; ?>
 		 </li> 
         <?php endforeach ?>
       </ul>

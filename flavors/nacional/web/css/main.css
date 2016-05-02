@@ -2006,3 +2006,12 @@ div.wc-cal-event{
 .student_health_info_attendance{
 	color: #DA1A03;
 }
+.student_health_info
+{
+  background-color: #E61800 !important;
+}
+
+.justificated
+{
+  background-color:#ADFF2F !important;
+}

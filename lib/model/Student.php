@@ -1285,7 +1285,10 @@ class Student extends BaseStudent
   
   public function getHealthCardStatusClass()
   {	  
-	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+	$health_info =$this->getHealthInfoString();
+	
+	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
 	{
 		return 'student_health_info';
 			
@@ -1297,8 +1300,11 @@ class Student extends BaseStudent
   }
   
   public function getHealthCardStatusAttendanceClass()
-  {	  
-	if($this->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+  {	 
+	$health_info =$this->getHealthInfoString();
+	
+	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
 	{
 		return 'student_health_info_attendance';
 			
@@ -1395,6 +1401,25 @@ class Student extends BaseStudent
 		}
 	}
 		return false;
+	}
+	
+	public function hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)
+	{
+		$c = new Criteria();
+		$c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
+		$c->add(StudentAttendancePeer::STUDENT_ID, $this->getId());
+		$c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
+		$c->add(StudentAttendancePeer::STUDENT_ATTENDANCE_JUSTIFICATION_ID, null, Criteria::ISNOTNULL);
+		$c->add(StudentAttendancePeer::VALUE, 0, Criteria::GREATER_THAN);
+		$c->add(StudentAttendancePeer::DAY, $day, Criteria::EQUAL);
+		
+		return StudentAttendancePeer::doSelectOne($c);
+	
+	}
+	
+	public function getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year, $day, $course_subject_id)
+	{
+		return (is_null($this->hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)) ? '' : 'justificated');
 	}
 
 }
