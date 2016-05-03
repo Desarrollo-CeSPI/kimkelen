@@ -655,13 +655,16 @@ class studentActions extends autoStudentActions
 				$career_student = CareerStudentPeer::retrieveByCareerAndStudent($student_career_school_year->getCareerSchoolYear()->getCareer()->getId(), $this->student->getId());
 				$career_student->deleteStudentsCareerSubjectAlloweds();
 				$career_student->deleteDivisionStudent();
-				$career_student->deleteCourseSubjectStudent();
+				
+				//$career_student->deleteCourseSubjectStudent();  ------------------> REVISAR
+				//$career_student->setStatus(CareerStudentStatus::WITHDRAWN);
+				//$career_student->save();
 				
 				//cambio el estado y process
 				$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
 				$student_career_school_year->setIsProcessed(true);
-				$student_career_school_year->save();
-			
+				$student_career_school_year->save();	
+				
 				//desmatricular
 				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
 				$s->delete();

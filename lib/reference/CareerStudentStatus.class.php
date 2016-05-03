@@ -23,12 +23,14 @@ class CareerStudentStatus extends BaseCustomOptionsHolder
 {
   const
     REGULAR      = 0,
-    GRADUATE     = 1;
+    GRADUATE     = 1,
+    WITHDRAWN    = 2;
 	
   protected 
     $_options = array(
         self::REGULAR        => 'Regular',
         self::GRADUATE       => 'Egresado',
+        self::WITHDRAWN		 => 'Retirado de la institución',
       );
   
   public function getOptions($include_blank = false, $no_graduate = false)
