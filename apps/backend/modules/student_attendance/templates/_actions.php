@@ -32,4 +32,7 @@
       </li>
     <?php endif?>
   <?php endif?>
+  <li>
+	  <?php echo link_to("Ver reporte de inasistencias", 'student/showAssistanceAndSanctionReport?id='. $student->getId());?>
+  </li>
 </ul>

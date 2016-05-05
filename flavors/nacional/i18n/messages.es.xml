@@ -4428,6 +4428,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>No suitable</source>
                 <target>No apto</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Admonition details</source>
+                <target>Informe de sanciones</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

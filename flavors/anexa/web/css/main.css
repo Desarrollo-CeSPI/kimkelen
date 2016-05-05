@@ -1967,3 +1967,49 @@ div.wc-cal-event{
     margin-bottom: 10px;
     text-decoration: none !important;
 }
+
+.student_head .active .health
+{
+    color:#FF0000;
+    max-width: 100px;
+}
+
+.student_health_info
+{
+  background-color: #E61800 !important;
+}
+
+.student_health_info_attendance{
+	color: #DA1A03;
+}
+
+.day_1.justificated
+{
+  background-color:#ADFF2F !important;
+}
+
+.day_2.justificated
+{
+  background-color:#ADFF2F !important;
+}
+.day_3.justificated
+{
+  background-color:#ADFF2F !important;
+}
+
+.day_4.justificated
+{
+  background-color:#ADFF2F !important;
+}
+
+.day_5.justificated
+{
+  background-color:#ADFF2F !important;
+}
+
+.box_health_info
+{
+  border: 1px solid black;
+  padding: 1px;
+  background-color: #E61800  !important;
+}
