@@ -4442,6 +4442,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
+	    <trans-unit>
+                <source>No suitable</source>
+                <target>No apto</target>
+            </trans-unit>
           </body>
     </file>
 </xliff>
