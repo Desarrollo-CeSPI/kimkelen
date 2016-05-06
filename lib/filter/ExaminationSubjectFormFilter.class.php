@@ -22,13 +22,45 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
     $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
     $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));
 
-    
+    $this->setWidget('career_school_year', new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYear','criteria' => $this->getCareersCriteria(), 'add_empty' => true)));
+    $this->setValidator('career_school_year', new sfValidatorPropelChoice(array('required' => false, 'model' => 'CareerSchoolYear', 'column' => 'id')));
+  
+  }
+
+  public static function getCareersCriteria()
+  {
+    $criteria = new Criteria();
+    $school_year = SchoolYearPeer::retrieveCurrent();
+
+    $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
+
+    return $criteria;
   }
 
   public function getFields()
   {
-    return array('subject_name' => 'Text', /*'year' => 'Number',*/ 'is_closed' => 'Boolean', 'student' => 'ForeignKey');
+    return array(
+      'subject_name' => 'Text', 
+      /*'year' => 'Number',*/ 
+      'is_closed' => 'Boolean', 
+      'student' => 'ForeignKey',
+      'career_school_year' => 'ForeignKey',
+      );
+
   }
+
+  public function addCareerSchoolYearColumnCriteria($criteria, $field, $value)
+  {
+    if ($value !== null)
+    {
+      $criteria->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID, Criteria::INNER_JOIN);
+      $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID, Criteria::INNER_JOIN);
+      $criteria->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $value);
+    }
+   
+    $criteria->setDistinct(CoursePeer::ID); die(var_dump($criteria));
+  }
+
 
   public function addSubjectNameColumnCriteria($criteria, $field, $value)
   {
