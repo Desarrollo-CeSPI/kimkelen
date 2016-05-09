@@ -2910,7 +2910,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Occupation category id</source>
-                <target>Categoria ocupacional</target>
+                <target>Categoría ocupacional</target>
             </trans-unit>
             <trans-unit>
                 <source>Study id</source>
@@ -2918,11 +2918,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>New Occupation category</source>
-                <target>Nueva categoria ocupacional</target>
+                <target>Nueva categoría ocupacional</target>
             </trans-unit>
             <trans-unit>
                 <source>Edit Occupation category</source>
-                <target>Editar categoria ocupacional</target>
+                <target>Editar categoría ocupacional</target>
             </trans-unit>
             <trans-unit>
                 <source>New Study</source>
@@ -4442,9 +4442,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>No suitable</source>
                 <target>No apto</target>
+            <trans-unit>
+                <source>Order</source>
+                <target>Orden</target>
             </trans-unit>
           </body>
     </file>

@@ -4575,9 +4575,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>%speciality% subjects</source>
                 <target>Asignaturas de %speciality%</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>No suitable</source>
                 <target>No apto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Order</source>
+                <target>Orden</target>
             </trans-unit>
         </body>
     </file>

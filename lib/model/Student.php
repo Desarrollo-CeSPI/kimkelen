@@ -147,6 +147,12 @@ class Student extends BaseStudent
 
   }
 
+	public function canShowCBFE()
+	{
+		return SchoolBehaviourFactory::getInstance()->canShowCBFE();
+
+	}
+
   /**
    * Registers the student for the given career.
    *

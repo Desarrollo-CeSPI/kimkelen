@@ -164,7 +164,7 @@ generator:
           analytical_without_CBFE:
             credentials:  [show_analytic_without_cbfe]
             action: analyticalWithoutCBFE
-            condition: canBeManagedForCareerSubjectAllowed
+            condition: canShowCBFE
             
           activate:
             label: Set active
