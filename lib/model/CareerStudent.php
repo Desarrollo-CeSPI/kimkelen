@@ -353,6 +353,40 @@ class CareerStudent extends BaseCareerStudent
     }
 
   }
+  
+  public function deleteCourseSubjectStudentByCareerSchoolYear($career_school_year)
+  {
+    $con = Propel::getConnection();
+
+    try
+    {
+      $con->beginTransaction();
+      $criteria = new Criteria();
+      $criteria->add(CareerPeer::ID, $this->getCareerId());
+      $criteria->addJoin(CareerPeer::ID, CareerSchoolYearPeer::CAREER_ID);
+      $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,CareerSchoolYearPeer::ID);
+      $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID,  CareerSubjectSchoolYearPeer::ID);
+      $criteria->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPeer::COURSE_SUBJECT_ID);
+      $criteria->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getStudentId());
+	  $criteria->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$career_school_year->getId());
+
+
+      foreach (CourseSubjectStudentPeer::doSelect($criteria) as $course_subject_student)
+      {
+
+        $course_subject_student->delete($con);
+
+      }
+
+      $con->commit();
+    }
+    catch (PropelException $e)
+    {
+      $con->rollBack();
+      throw $e;
+    }
+
+  }
 
 }
 sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));
