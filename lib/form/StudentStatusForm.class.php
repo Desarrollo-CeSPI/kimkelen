@@ -35,7 +35,7 @@ class StudentStatusForm extends BaseStudentStatusForm
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
     
     $this->setWidget('status',  new sfWidgetFormSelect(array(
-		  'choices'  => BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptions(),	
+		  'choices'  => BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect(),	
 	  )));
 	
   }

@@ -628,78 +628,92 @@ class studentActions extends autoStudentActions
   public function executeChangeStudentStatus(sfWebRequest $request)
   {
 	$this->student = $this->getRoute()->getObject();
-    $this->form = new StudentStatusForm($this->student);  
+    $csy= CareerSchoolYearPeer::retrieveBySchoolYear();
+    $student_career_school_year = $this->student->getLastStudentCareerSchoolYear($this->student,$csy);
+    $this->form = new StudentStatusForm($student_career_school_year);  
   }
   
   public function executeUpdateStudentStatus(sfWebRequest $request)
   {
     $this->student = StudentPeer::retrieveByPK($request->getParameter('student_id'));
-    //en student_career_school_year column year esta el año del alumno.
-    $this->year = $request->getParameter('student[year]');
-    $this->status = $request->getParameter('student[status]');
+    $this->year = $request->getParameter('student_career_school_year[year]');
+    $this->status = $request->getParameter('student_career_school_year[status]');
+    $this->observations = $request->getParameter('student_career_school_year[observations]');
     
     $student_career_school_year = $this->student->getStudentCareerSchoolYearByYearInCareer($this->year);
     
     if(is_null($student_career_school_year))
     {
-		$this->getUser()->setFlash('error', 'El alumno no ha cursado el año seleccionado');
-		
+		$this->getUser()->setFlash('error', 'El alumno no ha cursado el año seleccionado');	
 	}
 	else
 	{	
 		$last_scsy = StudentCareerSchoolYearPeer::getLastStudentCareerSchoolYear($this->student,$student_career_school_year->getCareerSchoolYear());
-		if(StudentCareerSchoolYearStatus::WITHDRAWN == $this->status)
-		{
-			//chequeo que sea el ultimo año en curso del alumno.
-			
-			if($this->year == $last_scsy->getYear())
-			{
-				//lo elimino de la division
-				$career_student = CareerStudentPeer::retrieveByCareerAndStudent($student_career_school_year->getCareerSchoolYear()->getCareer()->getId(), $this->student->getId());
-				$career_student->deleteStudentsCareerSubjectAlloweds();
-				$career_student->deleteDivisionStudent();
+		
+		switch($this->status){
+			case StudentCareerSchoolYearStatus::WITHDRAWN:
+				//Retirado
 				
-				//lo elimino de las comisiones del año
-				$career_student->deleteCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
+				//chequeo que sea el ultimo año en curso del alumno.
+				if($this->year == $last_scsy->getYear())
+				{
+					//lo elimino de la division
+					$career_student = CareerStudentPeer::retrieveByCareerAndStudent($student_career_school_year->getCareerSchoolYear()->getCareer()->getId(), $this->student->getId());
+					$career_student->deleteStudentsCareerSubjectAlloweds();
+					$career_student->deleteDivisionStudent();
+					
+					//lo elimino de las comisiones del año
+					$career_student->deleteCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
+					
+					//cambio el estado y process
+					$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
+					$student_career_school_year->setObservations($this->observations);
+					$student_career_school_year->setIsProcessed(true);
+					$student_career_school_year->save();	
+					
+					//desmatricular
+					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+					$s->delete();
 				
-				//cambio el estado y process
-				$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
-				$student_career_school_year->setIsProcessed(true);
-				$student_career_school_year->save();	
+					//deshabilito la persona
+					$this->student->getPerson()->setIsActive(false);
+					$this->student ->getPerson()->save();
+					$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
+		  
+				}
+				else
+				{
+					$this->getUser()->setFlash('error',  'Debe seleccionar el ultimo año en curso del alumno.');	
+				}
+				break;
 				
-				//desmatricular
-				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-				$s->delete();
-			
-				//deshabilito la persona
-				$this->student->getPerson()->setIsActive(false);
-				$this->student ->getPerson()->save();
-				$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
-      
-			}
-			else
-			{
-				$this->getUser()->setFlash('error',  'Debe seleccionar el ultimo año en curso del alumno.');	
-			}
-			
-		}
-		else
-		{	//retirar con reserva de banco
-			if(StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE == $this->status)
-			{	
+			case StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE:
+				//Retirado con reserva de banco
+	
 				//chequeo que sea el ultimo año en curso del alumno.	
 				if($this->year == $last_scsy->getYear())
 				{
-					$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
-					$student_career_school_year->save();
+					
+					//cambio el estado
+					$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
+					$student_career_school_year->setObservations($this->observations);
+					$student_career_school_year->save();	
+				
+					//desmatricular
+					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+					$s->delete();
+					
 					$this->getUser()->setFlash('info','The item was updated successfully.');
 				}
 				else
 				{
 					$this->getUser()->setFlash('error',  'Debe seleccionar el ultimo año en curso del alumno.');
 				}	
-			}
+			
+				break;
+			
 		}
+		
 	}
 	
 	$this->redirect('student/changeStudentStatus?id='.$this->student->getId());   

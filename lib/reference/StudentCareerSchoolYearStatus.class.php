@@ -38,4 +38,17 @@ class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
         self::WITHDRAWN				 => 'Retirado de la institución',
         self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco'
       );
+      
+   
+  public function getOptionsSelect()
+  {
+    return array(
+        self::IN_COURSE       		 => 'Cursando',
+        self::APPROVED       		 => 'Aprobado',
+        self::LAST_YEAR_REPPROVED 	 => 'Repetidor del año pasado, pero cursando año lectivo actual',
+        self::WITHDRAWN				 => 'Retirado de la institución',
+        self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco'
+      );
+   
+  }
 }

@@ -242,6 +242,11 @@ classes:
       is_processed:
         type: boolean
         default: false
+      observations:
+        description:      Especifica observaciones en el cambio de estado
+        type:             varchar(255)
+        required:         false
+        default:          null
       _uniques:
         student_career_school_year_unique: [ career_school_year_id, student_id, year ]
       _indexes:

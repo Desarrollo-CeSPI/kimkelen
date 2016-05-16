@@ -4431,6 +4431,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Change student status</source>
                 <target>Cambiar estado del alumno</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Withdraw with reserve</source>
+                <target>Retirado con reserva de banco</target>
             </trans-unit>     
         </body>
     </file>

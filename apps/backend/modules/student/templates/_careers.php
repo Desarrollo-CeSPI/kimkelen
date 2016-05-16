@@ -28,6 +28,7 @@
       <div class="student_year"><?php echo __('Year: %year%', array('%year%' => $cs->getCurrentStudentCareerSchoolYear()->getYear())) ?></div>
       <div class="student_career_repproved"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->getIsRepproved() and print __('Repproved') ?></div>
       <div class="student_career_withdraw"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsWithdraw() and print __('Withdraw') ?></div>
+      <div class="student_career_withdraw"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsWithdrawWithReserve() and print __('Withdraw with reserve') ?></div>
     <?php elseif ($cs->isGraduate()): ?>
       <div class="student_career_graduate"><strong><?php echo __('Graduate') ?></div>
     <?php endif ?>
