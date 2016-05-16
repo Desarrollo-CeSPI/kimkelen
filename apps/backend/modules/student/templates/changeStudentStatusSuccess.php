@@ -27,7 +27,7 @@
 
       <input type="hidden" name="student_id" value="<?php echo $student->getId() ?>" />
       <fieldset>
-        <?php  echo $form ?>
+        <?php echo $form ?>
       </fieldset>
 
 

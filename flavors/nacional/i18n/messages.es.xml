@@ -4435,7 +4435,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 	    <trans-unit>
                 <source>Withdraw with reserve</source>
                 <target>Retirado con reserva de banco</target>
-            </trans-unit>     
+            </trans-unit>    
         </body>
     </file>
 </xliff>

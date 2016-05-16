@@ -673,7 +673,9 @@ class studentActions extends autoStudentActions
 					
 					//desmatricular
 					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-					$s->delete();
+					if(! is_null($s)){
+						$s->delete();
+					}
 				
 					//deshabilito la persona
 					$this->student->getPerson()->setIsActive(false);
@@ -701,7 +703,9 @@ class studentActions extends autoStudentActions
 				
 					//desmatricular
 					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-					$s->delete();
+					if(! is_null($s)){
+						$s->delete();
+					}
 					
 					$this->getUser()->setFlash('info','The item was updated successfully.');
 				}
@@ -711,7 +715,6 @@ class studentActions extends autoStudentActions
 				}	
 			
 				break;
-			
 		}
 		
 	}

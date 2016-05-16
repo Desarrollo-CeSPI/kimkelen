@@ -2006,3 +2006,7 @@ div.wc-cal-event{
 .student_health_info_attendance{
 	color: #DA1A03;
 }
+.sf_admin_action_change_student_status a
+{
+	background-image: url('../images/change_status.png') !important;
+}
