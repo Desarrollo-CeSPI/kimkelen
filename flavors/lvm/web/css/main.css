@@ -6,22 +6,6 @@ body {
     margin:0px 0px 0px 0px;
 }
 
-#change-role{
-    display:inline;
-    color: #EEEEEE;
-    padding: 2%;
-}
-
-#change-role select, input{
-    border: 1px solid #BBB;
-}
-
-#header-school-year {
-    font-size: 15px;
-    padding: 6px;
-    color: white;
-}
-
 a img
 {
     border: none;
@@ -45,7 +29,7 @@ a img
     height:auto;
     margin:0;
     padding:0;
-    background-color:#003F2D;
+    background-color: #172983;
 }
 
 /* logo */
@@ -83,14 +67,14 @@ a img
 #header .top_navigation a{
     font-family:Trebuchet MS,sans-serif;
     font-size:12px;
-    color:#DED9C2;
+    color:white;
     font-weight:bold;
     text-decoration:none;
 }
 
 #header .top_navigation a:hover{
     font-size:12px;
-    color:#DED9C2;
+    color:#000;
 }
 
 #header .user {
@@ -101,7 +85,7 @@ a img
     border:0px solid red;
     clear:both;
     text-align:right;
-    color:#DED9C2;
+    color:white;
 }
 
 #header .version {
@@ -112,7 +96,13 @@ a img
     border:0px solid red;
     clear:both;
     text-align:right;
-    color:#DED9C2;
+    color:#000;
+}
+
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
 }
 
 /***content***/
@@ -315,7 +305,9 @@ a img
     background-image: url('../images/clipboard-list.png') !important;
 }
 
-.sf_admin_action_optional_career_subjects a{
+.sf_admin_action_subject_options a, .sf_admin_action_optionals a
+
+{
     background-image: url('../images/node.png') !important;
 }
 
@@ -371,8 +363,8 @@ a img
 .sf_admin_list .sf_admin_action_change_to_invalid a,
 .sf_admin_list .sf_admin_action_change_state a,
 .sf_admin_list .sf_admin_action_change_status a,
-.sf_admin_list .sf_admin_action_back_to_new a,
 .sf_admin_list .sf_admin_action_change_to_not_valid a,
+.sf_admin_list .sf_admin_action_back_to_new a,
 .sf_admin_list .sf_admin_action_change_to_inactive_status a,
 .sf_admin_list .sf_admin_action_change_to_active_status a,
 .sf_admin_list .sf_admin_action_back_to_valid a,
@@ -406,7 +398,6 @@ a img
 {
     background-image: url('../images/deshabilitar.png') !important;
 }
-
 .sf_admin_actions .sf_admin_action_activate a,
 .sf_admin_list .sf_admin_action_activate a
 {
@@ -571,7 +562,7 @@ a img
     background-image: url('../images/printer.png') !important;
 }
 
-.sf_admin_list .sf_admin_action_correlatives a
+.sf_admin_list .sf_admin_action_correlatives a,
 .sf_admin_actions .sf_admin_action_correlatives a
 {
     background-image: url('../images/node-select-child.png') !important;
@@ -587,9 +578,8 @@ a img
 {
     background-image: url('../images/clipboard--pencil.png') !important;
 }
-
-.sf_admin_actions .sf_admin_action_division_courses a,
 .sf_admin_actions .sf_admin_action_register_student_course a,
+.sf_admin_actions .sf_admin_action_division_courses a,
 .sf_admin_list .sf_admin_action_division_courses a,
 .sf_admin_list .sf_admin_action_register_student_course a
 {
@@ -607,6 +597,11 @@ a img
 .sf_admin_list .sf_admin_action_division_preceptors a
 {
     background-image: url('../images/user-black.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_division_attendance_per_day a
+{
+    background-image: url('../images/clipboard-list.png') !important;
 }
 
 .sf_admin_action_teacher
@@ -666,7 +661,7 @@ table.list
 
 .double_list select
 {
-    width: 500px;
+    width: 300px;
 }
 
 .course-marks ul{
@@ -819,16 +814,6 @@ table.list
     background-image: url('../images/sanction.png') !important;
 }
 
-.sf_admin_list .sf_admin_action_print_details a
-{
-    background-image: url('../images/student_details.png') !important;
-}
-
-.sf_admin_list .sf_admin_action_analytical a
-{
-    background-image: url('../images/analytic.png') !important;
-}
-
 #sf_admin_container ul li.sf_admin_action_back a,
 #sf_admin_container ul li.sf_admin_action_return a
 {
@@ -942,15 +927,6 @@ table.list
     background-color: #fff;
 }
 
-.info_div
-{
-    width:600px;
-}
-.info_text_div
-{
-    font-style: italic;
-}
-
 .info_title
 {
     font-weight: bold;
@@ -982,23 +958,6 @@ table.list
 {
     background-image:url("../images/arrow-circle-double-135.png") !important;
 }
-
-.study_plan
-{
-    width: 100% !important;
-    text-size: 10em !important;
-}
-.study_plan body
-{
-    border-color: #DDDDDD !important;
-    border-left: 0 none !important;
-    border-right: 0 none!important;
-    border-style: solid none!important;
-    border-width: 1px 0!important;
-    text-align: left!important;
-    vertical-align: middle!important;
-}
-
 .disabled
 {
     color: #ddd;
@@ -1050,7 +1009,35 @@ table.list
 {
     background-color: white!important;
 }
+.study_plan
+{
+    width: 100% !important;
+    text-size: 10em !important;
+}
+.study_plan body
+{
+    border-color: #DDDDDD !important;
+    border-left: 0 none !important;
+    border-right: 0 none!important;
+    border-style: solid none!important;
+    border-width: 1px 0!important;
+    text-align: left!important;
+    vertical-align: middle!important;
+}
+.analytical_odd
+{
+    background-color: #EEEEEE !important;
+}
+.analytical_even:hover
+{
+    background-color: white!important;
+}
 
+.analytical
+{
+    width: 100% !important;
+    text-size: 10em !important;
+}
 
 .marks-fieldset .error_list
 {
@@ -1065,12 +1052,6 @@ table.list
 .mark-container
 {
     margin-left: 9em !important;
-
-}
-
-.info-mark-container
-{
-    margin-left: 10em !important;
 }
 
 .tab
@@ -1099,20 +1080,106 @@ table.list
     background-image: url('../images/document-table.png') !important;
 }
 
+.info_div strong
+{
+    font-size: 14px;
+}
+
+.subject_actions
+{
+    margin-top: 5px;
+}
+
+.subject_actions th.actions
+{
+    width: 200px;
+}
+
+.subject_actions td,
+.subject_actions th
+{
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.subject_actions ul
+{
+    margin: 0 !important;
+}
+.subject_actions li
+{
+    list-style: none !important;
+}
+
+.subject_actions a
+{
+    padding-left: 0 !important;
+}
+
+.diciembre
+{
+    background-color: yellow !important;
+}
+
+.febrero
+{
+    background-color: red !important;
+}
+
+.absent
+{
+    background-color: #3BB9FF !important;
+}
+
+table.dc_horizontal_table
+{
+    margin: 0.5em;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row
+{
+    border: none !important;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
+{
+    padding: 0 0 0 3px !important;
+    border: none !important;
+}
+
+.close_student
+{
+    display: block;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 3px !important;
+    margin: 3px 3px 3px 9em !important;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.close_student .close_student_result
+{
+    background-color: #39f;
+    padding: 3px;
+    color: #fff;
+    display: inline-block;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
 .sf_admin_action_manage_students_regularity a,
 .sf_admin_action_manage_regularity a
 {
     background-image: url('../images/calendar-task.png') !important;
 }
 
+
 .free
 {
     background-color: #F29A79 !important;
-}
-
-.regular
-{
-    background-color: yellow !important;
 }
 
 .almost_free
@@ -1157,6 +1224,13 @@ table.list
     padding: 1px;
     background-color: greenyellow !important;
 }
+
+.box_health_info
+{
+	border: 1px solid black;
+    padding: 1px;
+    background-color: #F51A00 !important;
+}
 .nc_changelog_tooltip
 {
     display: block;
@@ -1197,6 +1271,7 @@ table.list
 }
 
 
+
 .sf_admin_list .sf_admin_action_justificate a
 {
     background-image: url('../images/sanction.png') !important;
@@ -1206,6 +1281,7 @@ table.list
 {
     color:  #AAAAAA !important;
 }
+
 
 #sf_admin_action_justificate a
 {
@@ -1230,26 +1306,6 @@ table.list
 .attendance_justificated
 {
     color:#CCC;
-}
-
-.diciembre
-{
-    background-color: yellow !important;
-}
-
-.febrero
-{
-    background-color: red !important;
-}
-
-.reprobado
-{
-    background-color: red !important;
-}
-
-.absent
-{
-    background-color: #3BB9FF !important;
 }
 
 .sf_admin_action_show_calendar a
@@ -1307,7 +1363,7 @@ table.list
 
 div.no_results_advice {
     font-weight: bolder !important;
-    padding-left:  40px !important;
+    padding-left: 40px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     border-top: 1px solid #DDDDDD;
@@ -1318,21 +1374,18 @@ div.no_results_advice {
     background-image: url('../images/arrow-circle-double-135.png') !important;
 }
 
-.sf_admin_action_student_conduct a
-{
-    background-image: url('../images/conducta.gif') !important;
-}
-
 .result
 {
-    margin-bottom: 7px;
-    margin-top: 7px;
-    padding-left: 10px;
+    margin-bottom: 10px;
 }
 .search-content
 {
     text-align: right;
     display:inline;
+}
+.sf_admin_action_student_conduct a
+{
+    background-image: url('../images/conducta.gif') !important;
 }
 
 .print_table *
@@ -1387,10 +1440,8 @@ div.no_results_advice {
     text-align: left !important;
 }
 
-
 .absence_subject_a
 {
-
     font-weight: bold !important;
     color: #3399FF !important;
 }
@@ -1399,10 +1450,12 @@ div.no_results_advice {
     border-style: ridge;
     border-width: 2px;
 }
+
 .student_is_free
 {
     background-color:  #FFFF00 !important;
 }
+
 .student_is_free_title
 {
     font-size: 16px !important;
@@ -1410,6 +1463,7 @@ div.no_results_advice {
     text-align:center !important;
     background-color:  #FFFF00 !important;
 }
+
 .free_info
 {
     margin-top: 20px;
@@ -1419,101 +1473,94 @@ div.no_results_advice {
     padding: 1px;
 }
 
-.pathway_info
-{
-    position: absolute;
-    padding: 1px;
-    color: green;
-    text-transform: uppercase;
-}
-
 .sf_admin_form_row div
 {
     position:relative;
 }
 
+.block_screen
+{
+    text-align: center;
+}
 
 .student_head
 {
-  width: 100%;
+    width: 100%;
 }
 
 .student_head .active
 {
-  float: right;
-  margin-left: 5px;
-}
-
-.student_head .pathway
-{
     float: right;
-    padding: 5px 15px !important;
-    color: green;
-    text-transform: uppercase;
+    margin-left: 5px;
 }
 
+.student_head .active .health
+{
+    color:#FF0000;
+    max-width: 100px;
+}
 .student_head .person_name
 {
-  float: left;
-  font-size: 1.2em;
+    float: left;
+    font-size: 1.2em;
 }
 .student_head .person_name a
 {
-  font-weight: bold;
-  color: #0093DD !important;
+    font-weight: bold;
+    color: #0093DD !important;
 }
 
 
 .student_info
 {
-  overflow: hidden;
-  margin-bottom: 10px;
-  clear: both;
+    overflow: hidden;
+    margin-bottom: 10px;
+    clear: both;
 }
 
 .student_current_info
 {
-  float: right;
-  width: 45%;
-  margin-left: -2px;
-  padding-left: 10px;
+    float: right;
+    width: 45%;
+    margin-left: -2px;
+    padding-left: 10px;
 }
 
 .student_personal_info
 {
-  float: left;
-  width: 50%;
-  border-right: 2px solid #ddd;
+    float: left;
+    width: 50%;
+    border-right: 2px solid #ddd;
 }
 
 .student_tutor
 {
-  border-top: 2px solid #ddd;
-  width: 70%;
+    border-top: 2px solid #ddd;
+    width: 70%;
 }
 
 .student_tutor .tutor
 {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .student_career_repproved
 {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
 }
 
 .student_career_graduate
 {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: blue;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: blue;
 }
 
 .no_available
 {
-  background-color: silver;
+    background-color: silver;
 }
 
 .sf_admin_actions .sf_admin_action_course_delete_configuration
@@ -1523,25 +1570,24 @@ div.no_results_advice {
 
 .sf_admin_list .sf_admin_action_see_attendance_sheet a
 {
-  background-image: url('../images/tick.png') !important;
+    background-image: url('../images/tick.png') !important;
 }
 
 .sf_admin_action_aggregate_preceptor a
 {
-  background-image: url('../images/user-gray.png') !important;
+    background-image: url('../images/user-gray.png') !important;
 }
-
 
 .many_disciplinary_sanctions
 {
-  color: #fb2929;
-  font-weight: bold;
-  font-size: 14px;
+    color: #fb2929;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 #name_blank
 {
-    width: 210px !important;
+    width: 220px !important;
     display:block !important;
     float: left;
     padding: 10px 0px !important;
@@ -1566,6 +1612,8 @@ div.no_results_advice {
     display:block;
 }
 
+
+
 .attendance_week span
 {
     width: 210px;
@@ -1580,6 +1628,12 @@ div.no_results_advice {
     width: 100%;
     border-bottom: 1px solid #E2E2E2;
 }
+.attendance_week_input
+{
+    max-width: 70px;
+    margin-left: 7px !important;
+
+}
 
 .sf_admin_action_attendance_day a
 {
@@ -1589,7 +1643,6 @@ div.no_results_advice {
 {
     background-image: url('../images/report--pencil.png') !important;
 }
-
 .week_move
 {
     float: right;
@@ -1636,17 +1689,25 @@ div.no_results_advice {
   color: #E2E2E2;
   text-transform:uppercase;
 }
-.attendance_week_input
-{
-    max-width: 70px;
-    margin-left: 7px !important;
-}
 
 .sf_admin_list .sf_admin_action_student_assistance_sanction_report a
 {
   background-image: url('../images/report.png') !important;
 }
 
+.info-mark-container
+{
+    margin-left: 10em !important;
+}
+.print_student_examination
+{
+    float: left;
+    text-align: center;
+}
+.sf_admin_action_print_students a
+{
+      background-image: url('../images/printer.png') !important;
+}
 
 .student_divisions
 {
@@ -1658,15 +1719,14 @@ div.no_results_advice {
   font-weight: bolder;
 }
 
-.print_student_examination
+.sf_admin_list .sf_admin_action_print_details a
 {
-    float: left;
-    text-align: center;
+    background-image: url('../images/student_details.png') !important;
 }
 
-.sf_admin_action_print_students a
+.sf_admin_list .sf_admin_action_analytical a
 {
-      background-image: url('../images/printer.png') !important;
+    background-image: url('../images/analytic.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_periods a
@@ -1704,6 +1764,7 @@ div.wc-cal-event{
 {
     background-image: url('../images/cross-circle-frame.png') !important;
 }
+
 
 #student_attendance
 {
@@ -1794,6 +1855,7 @@ div.wc-cal-event{
   padding-right: 2px !important;
 }
 
+
 .sf_admin_action_edit_student_history
 {
     background: url("../images/eraser.png") no-repeat 0 0 !important;
@@ -1818,11 +1880,6 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_close_year a
 {
   background-image: url('../images/school_year_close.png') !important;
-}
-
-.sf_admin_list .sf_admin_action_resolve_problematic_students a
-{
-    background-image: url('../images/puzzle--arrow.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
@@ -1882,6 +1939,16 @@ div.wc-cal-event{
   background-image: url('../images/create-division.png') !important;
 }
 
+.sf_admin_action_create_last_year_divisions a
+{
+    background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_print_califications a
+{
+    background-image: url('../images/calification_sheet.png') !important;
+}
+
 .sf_admin_action_add_subject a
 {
   background-image: url('../images/admin-subjects.png') !important;
@@ -1894,6 +1961,28 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_open a
 {
   background-image: url('../images/lock_open.png') !important;
+}
+
+.student_head .pathway
+{
+    float: right;
+    padding: 5px 15px !important;
+    color: green;
+    text-transform: uppercase;
+
+}
+
+.sf_admin_list .sf_admin_action_resolve_problematic_students a
+{
+  background-image: url('../images/puzzle--arrow.png') !important;
+}
+
+.pathway_info
+{
+  position: absolute;
+  padding: 1px;
+  color: green;
+  text-transform: uppercase;
 }
 
 .warning-button {
@@ -1911,11 +2000,13 @@ div.wc-cal-event{
     text-decoration: none !important;
 }
 
-.sf_admin_action_print_califications a
- {
-     background-image: url('../images/calification_sheet.png') !important;
- }
-
 #sf_admin_container ul li {
     list-style: none !important;
+}
+.student_health_info_attendance{
+	color: #DA1A03;
+}
+.sf_admin_action_change_student_status a
+{
+	background-image: url('../images/change_status.png') !important;
 }

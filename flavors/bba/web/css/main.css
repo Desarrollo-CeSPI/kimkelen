@@ -1,15 +1,183 @@
+body {
+    text-align:center;
+    font-family:Trebuchet MS, sans-serif;
+    font-size:11px;
+    color:#333;
+    margin:0px 0px 0px 0px;
+}
+
 a img
 {
     border: none;
 }
 
-html *
-{
-    outline: 0;
+/* wrapper */
+
+#wrapper{
+    border:0px solid blue;
+    text-align:left;
+    width:100%;
+    margin:auto;
+    padding:0px;
+    border:0px solid #ccc;
 }
 
+/* header */
+
+#header {
+    width:100%;
+    height:auto;
+    margin:0;
+    padding:0;
+    background-color: #172983;
+}
+
+/* logo */
+
+#header .logo {
+    float:left;
+    margin:18px;
+    padding:0;
+    border:0px solid #ccc;
+}
+
+/* navegation */
+
+#header .navigation {
+    float:right;
+    width:20%;
+    height:auto;
+    margin-top:10px;
+    margin-right:20px;
+    padding:0;
+    border:0px solid red;
+}
+
+#header .top_navigation{
+    float:right;
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:3px 10px 3px 10px;
+    text-align:center;
+    border:1px solid #fff;
+    background-color:none;
+}
+
+#header .top_navigation a{
+    font-family:Trebuchet MS,sans-serif;
+    font-size:12px;
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+#header .top_navigation a:hover{
+    font-size:12px;
+    color:#000;
+}
+
+#header .user {
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:5px 0px 5px 8px;
+    border:0px solid red;
+    clear:both;
+    text-align:right;
+    color:white;
+}
+
+#header .version {
+    width:auto;
+    height:auto;
+    margin:0;
+    padding:5px 0px 5px 8px;
+    border:0px solid red;
+    clear:both;
+    text-align:right;
+    color:#000;
+}
+
+#header-school-year {
+    font-size: 15px;
+    padding: 6px;
+    color: white;
+}
+
+/***content***/
+
+#content {
+    float:left;
+    width:97%;
+    height:auto;
+    background-color:none;
+    margin:20px;
+    border:0px solid #ccc;
+    text-align:justify;
+    font-size:12px;
+    padding:0px;
+}
+
+
+/* menu */
+
+#jscookmenu {
+    float:left;
+    width:100%;
+    height:24px;
+    background-color:#F7F3F7;
+    border-top:3px solid #fff;
+    border-bottom:1px solid #ccc;
+}
+
+#jscookmenu .content {
+    margin-left:10px;
+}
+
+#jscookmenu .buton {
+    display:block;
+    color:#E61F17;
+    padding:6px 10px 6px 10px;
+    width:auto;
+    border-right:2px solid #fff;
+    float:left;
+}
+
+#jscookmenu .buton a{
+    color:#E61F17;
+    font-weight:bold;
+    font-size:11px;
+    text-decoration:none;
+}
+
+#menu-div .buton:hover{
+    color:#FFF;
+    background-color:#E2E2E2;
+    font-weight:bold;
+    font-size:11px;
+    text-decoration:none;
+}
+
+/* footer */
+
+#footer {
+    width:100%;
+    clear:both;
+    height:40px;
+    padding-top:15px;
+    text-align:center;
+    color:#555;
+    border-top:4px solid #DED9C2;
+    margin:0px;
+}
+
+/******
+ * sf *
+ ******/
+
 #sf_admin_container fieldset h2 {
-    background-color:#F37321!important;
+    background-color:#003F2D!important;
 }
 
 #sf_admin_container .list th {
@@ -61,177 +229,6 @@ html *
     min-width:200px;
 }
 
-body {
-    text-align:center;
-    font-family:Trebuchet MS, sans-serif;
-    font-size:11px;
-    color:#333;
-    margin:0px 0px 0px 0px;
-    background-color:#f2f2f2;
-}
-
-/* wrapper */
-
-#wrapper{
-    border:0px solid blue;
-    text-align:left;
-    width:100%;
-    margin:auto;
-    padding:0px;
-    border:0px solid #ccc;
-}
-
-/* header */
-
-#header {
-    width:100%;
-    height:auto;
-    margin:0;
-    padding:0;
-    background-color:#F37321;
-}
-
-/* logo */
-
-#header .logo {
-    float:left;
-    margin:8px;
-    padding:0;
-    border:0px solid #ccc;
-}
-
-/* navegation */
-
-#header .navigation {
-    float:right;
-    width:20%;
-    height:auto;
-    margin-top:10px;
-    margin-right:20px;
-    padding:0;
-    border:0px solid red;
-}
-
-#header .top_navigation{
-    float:right;
-    width:auto;
-    height:auto;
-    margin:0;
-    padding:3px 10px 3px 10px;
-    text-align:center;
-    border:1px solid #fff;
-    background-color:none;
-}
-
-#header .top_navigation a{
-    font-family:Trebuchet MS,sans-serif;
-    font-size:12px;
-    color:#fff;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-#header .top_navigation a:hover{
-    font-size:12px;
-    color:#fff;
-}
-
-#header .user {
-    width:auto;
-    height:auto;
-    margin:0;
-    padding:5px 0px 5px 8px;
-    border:0px solid red;
-    clear:both;
-    text-align:right;
-    color:#fff;
-}
-
-#header .version {
-    width:auto;
-    height:auto;
-    margin:0;
-    padding:5px 0px 5px 8px;
-    border:0px solid red;
-    clear:both;
-    text-align:right;
-    color:#fff;
-}
-
-#header-school-year {
-    font-size: 15px;
-    padding: 6px;
-    color: white;
-}
-
-/***content***/
-
-#content {
-    padding-bottom:20px;
-    float:left;
-    width:97%;
-    height:auto;
-    background-color:none;
-    margin:20px;
-    border:0px solid #ccc;
-    text-align:justify;
-    font-size:12px;
-}
-
-
-/* menu */
-
-#jscookmenu {
-    float:left;
-    width:100%;
-    height:25px;
-    background-color:#F2F2F2!important;
-    border-top:1px solid #CCC;
-    border-bottom:1px solid #CCC;
-    padding-top:2px;
-}
-
-#jscookmenu .content {
-    margin-left:10px;
-}
-
-#jscookmenu .buton {
-    display:block;
-    color:#000;
-    padding:6px 10px 6px 10px;
-    width:auto;
-    border-right:1px solid #ccc;
-    float:left;
-}
-
-#jscookmenu .buton a{
-    color:#000;
-    font-weight:bold;
-    font-size:11px;
-    text-decoration:none;
-}
-
-#menu-div .buton:hover{
-    color:#FFF;
-    background-color:#E2E2E2;
-    font-weight:bold;
-    font-size:11px;
-    text-decoration:none;
-}
-
-/* footer */
-
-#footer {
-    width:100%;
-    clear:both;
-    height:40px;
-    padding-top:15px;
-    text-align:center;
-    color:#555;
-    border-top:4px solid #f2f2f2;
-    margin:0px;
-}
-
 .career_view_title{
     padding-top:10px;
     padding-bottom:10px;
@@ -246,10 +243,6 @@ body {
 
 .sf_career_table{
     width:100%;
-    background-color: #fafafa;
-    border: 1px #000000 solid;
-    border-collapse: collapse;
-    border-spacing: 0px;
 }
 
 .sf_career_ul{
@@ -288,6 +281,11 @@ body {
     background-image: url('../images/calendar-cross.png') !important;
 }
 .sf_admin_action_exporttoexcel a
+{
+    background-image: url('../images/xls.png') !important;
+}
+
+.sf_admin_action_export_to_excel a
 {
     background-image: url('../images/xls.png') !important;
 }
@@ -363,8 +361,6 @@ body {
 .sf_admin_list .sf_admin_action_change_to_valid a,
 .sf_admin_list .sf_admin_action_change_to_new a,
 .sf_admin_list .sf_admin_action_change_to_invalid a,
-.sf_admin_list .sf_admin_action_change_to_inactive_status a,
-.sf_admin_list .sf_admin_action_change_to_active_status a,
 .sf_admin_list .sf_admin_action_change_state a,
 .sf_admin_list .sf_admin_action_change_status a,
 .sf_admin_list .sf_admin_action_change_to_not_valid a,
@@ -402,7 +398,6 @@ body {
 {
     background-image: url('../images/deshabilitar.png') !important;
 }
-
 .sf_admin_actions .sf_admin_action_activate a,
 .sf_admin_list .sf_admin_action_activate a
 {
@@ -551,7 +546,6 @@ body {
 
 .sf_admin_list .sf_admin_action_marks a,
 .sf_admin_list .sf_admin_action_course_marks a,
-.sf_admin_list .sf_admin_action_marks a,
 .sf_admin_actions .sf_admin_action_marks a
 {
     background-image: url('../images/clipboard-list.png') !important;
@@ -584,9 +578,8 @@ body {
 {
     background-image: url('../images/clipboard--pencil.png') !important;
 }
-
-.sf_admin_actions .sf_admin_action_division_courses a,
 .sf_admin_actions .sf_admin_action_register_student_course a,
+.sf_admin_actions .sf_admin_action_division_courses a,
 .sf_admin_list .sf_admin_action_division_courses a,
 .sf_admin_list .sf_admin_action_register_student_course a
 {
@@ -828,9 +821,7 @@ table.list
 }
 
 .sf_admin_action_go_back
-
 {
-
     background: url("../images/arrow-180.png") no-repeat 0 0 !important;
 }
 
@@ -900,13 +891,6 @@ table.list
 .center-box-list{
     width: 90%!important;
     margin:0 auto!important;
-}
-
-/** eliminamos campos del formulario por estilos... */
-#sf_fieldset_datos_ocupacionales,
-.sf_admin_form_field_discharge
-{
-    display: none;
 }
 
 .show-more
@@ -1040,13 +1024,19 @@ table.list
     text-align: left!important;
     vertical-align: middle!important;
 }
-.study_plan_odd
+.analytical_odd
 {
     background-color: #EEEEEE !important;
 }
-.study_plan_even:hover
+.analytical_even:hover
 {
     background-color: white!important;
+}
+
+.analytical
+{
+    width: 100% !important;
+    text-size: 10em !important;
 }
 
 .marks-fieldset .error_list
@@ -1062,7 +1052,6 @@ table.list
 .mark-container
 {
     margin-left: 9em !important;
-
 }
 
 .tab
@@ -1142,6 +1131,106 @@ table.list
     background-color: #3BB9FF !important;
 }
 
+table.dc_horizontal_table
+{
+    margin: 0.5em;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row
+{
+    border: none !important;
+}
+
+table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
+{
+    padding: 0 0 0 3px !important;
+    border: none !important;
+}
+
+.close_student
+{
+    display: block;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 3px !important;
+    margin: 3px 3px 3px 9em !important;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.close_student .close_student_result
+{
+    background-color: #39f;
+    padding: 3px;
+    color: #fff;
+    display: inline-block;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.sf_admin_action_manage_students_regularity a,
+.sf_admin_action_manage_regularity a
+{
+    background-image: url('../images/calendar-task.png') !important;
+}
+
+
+.free
+{
+    background-color: #F29A79 !important;
+}
+
+.almost_free
+{
+    background-color: #FF0 !important;
+}
+
+.box
+{
+    text-align: right !important;
+}
+.total_absence
+{
+    font-size: 16px !important;
+    font-weight: bold;
+    background-color:  #F2F2F2 ;
+}
+
+.box_almost_free
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: yellow !important;
+}
+.box_free
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: #F29A79 !important;
+}
+
+.box_justificated
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: greenyellow !important;
+}
+
+.box_justificated_student_show
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: greenyellow !important;
+}
+
+.box_health_info
+{
+	border: 1px solid black;
+    padding: 1px;
+    background-color: #F51A00 !important;
+}
 .nc_changelog_tooltip
 {
     display: block;
@@ -1165,55 +1254,6 @@ table.list
     background-image: url('../images/calendar-task.png') !important;
 }
 
-.free
-{
-  background-color: #F29A79 !important;
-}
-.almost_free
-{
-  background-color: #FF0 !important;
-}
-
-.box
-{
-  text-align: right !important;
-}
-
-.total_absence
-{
-  font-size: 16px !important;
-  font-weight: bold;
-  background-color:  #F2F2F2;
-}
-
-.box_almost_free
-{
-  border: 1px solid black;
-  padding: 1px;
-  background-color: yellow !important;
-}
-
-.box_free
-{
-  border: 1px solid black;
-  padding: 1px;
-  background-color: #F29A79 !important;
-}
-
-.box_justificated
-{
-  border: 1px solid black;
-  padding: 1px;
-  background-color: greenyellow !important;
-}
-
-.box_justificated_student_show
-{
-    border: 1px solid black;
-    padding: 1px;
-    background-color: greenyellow !important;
-}
-
 .sf_admin_list .sf_admin_action_preceptors a
 {
     background-image: url('../images/user-gray.png') !important;
@@ -1228,6 +1268,18 @@ table.list
 .student_attendance_justificated
 {
     background-color: greenyellow !important;
+}
+
+
+
+.sf_admin_list .sf_admin_action_justificate a
+{
+    background-image: url('../images/sanction.png') !important;
+}
+
+.justification_help
+{
+    color:  #AAAAAA !important;
 }
 
 
@@ -1331,16 +1383,6 @@ div.no_results_advice {
     text-align: right;
     display:inline;
 }
-.sf_admin_list .sf_admin_action_aggregate_profesor a
-{
-    background-image: url('../images/user-white.png') !important;
-}
-
-.sf_admin_list .sf_admin_action_aggregate_preceptor a
-{
-    background-image: url('../images/user-black.png') !important;
-
-}
 .sf_admin_action_student_conduct a
 {
     background-image: url('../images/conducta.gif') !important;
@@ -1393,32 +1435,33 @@ div.no_results_advice {
 #mark-subject  td,
 #mark-subject th
 {
-  width: 30% !important;
-  min-width: 30% !important;
-  text-align: left !important;
+    width: 30% !important;
+    min-width: 30% !important;
+    text-align: left !important;
 }
 
 .absence_subject_a
 {
-  font-weight: bold !important;
-  color: #3399FF !important;
+    font-weight: bold !important;
+    color: #3399FF !important;
 }
-.course_subject_absence_show
 .course_subject_absence_show
 {
-  border-style: ridge;
-  border-width: 2px;
+    border-style: ridge;
+    border-width: 2px;
 }
+
 .student_is_free
 {
-  background-color:  #FFFF00 !important;
+    background-color:  #FFFF00 !important;
 }
+
 .student_is_free_title
 {
-  font-size: 16px !important;
-  font-weight: bold !important;
-  background-color:  #FFFF00 !important;
-  text-align: center !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    text-align:center !important;
+    background-color:  #FFFF00 !important;
 }
 
 .free_info
@@ -1432,83 +1475,92 @@ div.no_results_advice {
 
 .sf_admin_form_row div
 {
-  position:relative;
+    position:relative;
 }
 
+.block_screen
+{
+    text-align: center;
+}
 
 .student_head
 {
-  width: 100%;
+    width: 100%;
 }
 
 .student_head .active
 {
-  float: right;
-  margin-left: 5px;
+    float: right;
+    margin-left: 5px;
 }
 
+.student_head .active .health
+{
+    color:#FF0000;
+    max-width: 100px;
+}
 .student_head .person_name
 {
-  float: left;
-  font-size: 1.2em;
+    float: left;
+    font-size: 1.2em;
 }
 .student_head .person_name a
 {
-  font-weight: bold;
-  color: #0093DD !important;
+    font-weight: bold;
+    color: #0093DD !important;
 }
 
 
 .student_info
 {
-  overflow: hidden;
-  margin-bottom: 10px;
-  clear: both;
+    overflow: hidden;
+    margin-bottom: 10px;
+    clear: both;
 }
 
 .student_current_info
 {
-  float: right;
-  width: 45%;
-  margin-left: -2px;
-  padding-left: 10px;
+    float: right;
+    width: 45%;
+    margin-left: -2px;
+    padding-left: 10px;
 }
 
 .student_personal_info
 {
-  float: left;
-  width: 50%;
-  border-right: 2px solid #ddd;
+    float: left;
+    width: 50%;
+    border-right: 2px solid #ddd;
 }
 
 .student_tutor
 {
-  border-top: 2px solid #ddd;
-  width: 70%;
+    border-top: 2px solid #ddd;
+    width: 70%;
 }
 
 .student_tutor .tutor
 {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .student_career_repproved
 {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: red;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: red;
 }
 
 .student_career_graduate
 {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: blue;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: blue;
 }
 
 .no_available
 {
-  background-color: silver;
+    background-color: silver;
 }
 
 .sf_admin_actions .sf_admin_action_course_delete_configuration
@@ -1518,24 +1570,24 @@ div.no_results_advice {
 
 .sf_admin_list .sf_admin_action_see_attendance_sheet a
 {
-  background-image: url('../images/tick.png') !important;
+    background-image: url('../images/tick.png') !important;
 }
 
 .sf_admin_action_aggregate_preceptor a
 {
-  background-image: url('../images/user-gray.png') !important;
+    background-image: url('../images/user-gray.png') !important;
 }
 
 .many_disciplinary_sanctions
 {
-  color: #fb2929;
-  font-weight: bold;
-  font-size: 14px;
+    color: #fb2929;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 #name_blank
 {
-    width: 210px !important;
+    width: 220px !important;
     display:block !important;
     float: left;
     padding: 10px 0px !important;
@@ -1553,7 +1605,6 @@ div.no_results_advice {
 {
     float: left;
 }
-
 
 .student_attendance_period{
     width: 200px;
@@ -1577,7 +1628,12 @@ div.no_results_advice {
     width: 100%;
     border-bottom: 1px solid #E2E2E2;
 }
+.attendance_week_input
+{
+    max-width: 70px;
+    margin-left: 7px !important;
 
+}
 
 .sf_admin_action_attendance_day a
 {
@@ -1587,16 +1643,14 @@ div.no_results_advice {
 {
     background-image: url('../images/report--pencil.png') !important;
 }
+.week_move
+{
+    float: right;
+}
 
 .sf_admin_action_related_to_a_division a
 {
  background-image: url('../images/puzzle--arrow.png') !important;
-}
-
-
-.week_move
-{
-    float: right;
 }
 
 .mark_green
@@ -1609,8 +1663,7 @@ div.no_results_advice {
 }
 .mark_red
 {
-  /* background-color: #f30; */
-   background-color: tomato;
+  background-color: tomato;
 }
 #sf_admin_container .double_list_select, #sf_admin_container .double_list_select-selected
 {
@@ -1642,11 +1695,6 @@ div.no_results_advice {
   background-image: url('../images/report.png') !important;
 }
 
-.attendance_week_input
-{
-    max-width: 70px;
-    margin-left: 7px !important;
-}
 .info-mark-container
 {
     margin-left: 10em !important;
@@ -1688,16 +1736,8 @@ div.no_results_advice {
 div.wc-cal-event{
     line-height: 100% !important;
 }
-
-#mi_tabla_wrapper{
-    margin: 30px 30px 30px 30px !important;
-}
 .attendance_day{
     text-align: center !important;
-}
-.student_fix {
-
-
 }
 
 .sf_admin_list .sf_admin_action_tags a
@@ -1815,6 +1855,7 @@ div.wc-cal-event{
   padding-right: 2px !important;
 }
 
+
 .sf_admin_action_edit_student_history
 {
     background: url("../images/eraser.png") no-repeat 0 0 !important;
@@ -1863,7 +1904,7 @@ div.wc-cal-event{
   background-image: url('../images/undo_withdraw.png') !important;
 }
 
-.sf_admin_action_matriculate_graduated_from_other_career a
+.sf_admin_action_matriculate_graduated_students_from_other_career a
 {
   background-image: url('../images/matriculate_graduated.png') !important;
 }
@@ -1898,6 +1939,16 @@ div.wc-cal-event{
   background-image: url('../images/create-division.png') !important;
 }
 
+.sf_admin_action_create_last_year_divisions a
+{
+    background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_print_califications a
+{
+    background-image: url('../images/calification_sheet.png') !important;
+}
+
 .sf_admin_action_add_subject a
 {
   background-image: url('../images/admin-subjects.png') !important;
@@ -1918,6 +1969,7 @@ div.wc-cal-event{
     padding: 5px 15px !important;
     color: green;
     text-transform: uppercase;
+
 }
 
 .sf_admin_list .sf_admin_action_resolve_problematic_students a
@@ -1931,12 +1983,6 @@ div.wc-cal-event{
   padding: 1px;
   color: green;
   text-transform: uppercase;
-}
-
-#header-school-year
-{
-  padding-top: 12px;
-  font-size: 13px;
 }
 
 .warning-button {
@@ -1954,16 +2000,13 @@ div.wc-cal-event{
     text-decoration: none !important;
 }
 
-.sf_admin_action_print_califications a
-{
-    background-image: url('../images/calification_sheet.png') !important;
-}
-
 #sf_admin_container ul li {
     list-style: none !important;
 }
-
-.sf_admin_list .sf_admin_action_analytical_without_cbfe a
+.student_health_info_attendance{
+	color: #DA1A03;
+}
+.sf_admin_action_change_student_status a
 {
-    background-image: url('../images/certificate.png') !important;
+	background-image: url('../images/change_status.png') !important; 
 }
