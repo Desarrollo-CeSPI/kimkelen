@@ -630,7 +630,7 @@ class studentActions extends autoStudentActions
 	$this->student = $this->getRoute()->getObject();
     $csy= CareerSchoolYearPeer::retrieveBySchoolYear();
     $student_career_school_year = $this->student->getLastStudentCareerSchoolYear($this->student,$csy);
-    $this->form = new StudentStatusForm($student_career_school_year);  
+    $this->form = new StudentCareerSchoolYearForm($student_career_school_year);  
   }
   
   public function executeUpdateStudentStatus(sfWebRequest $request)
