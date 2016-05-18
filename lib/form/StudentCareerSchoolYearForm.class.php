@@ -46,7 +46,6 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
 	$this->setWidget('status',  new sfWidgetFormSelect(array('choices'  => BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect())));
 	$this->setWidget('observations', new sfWidgetFormTextarea());
    
-  
 	$this->setValidators(array(
       'student_id'       => new sfValidatorPropelChoice(array('model' => 'Student', 'column' => 'id', 'required' => false)),
       'status'   		 => new sfValidatorString(array('max_length' => 50)),
