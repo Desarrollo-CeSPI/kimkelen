@@ -34,7 +34,7 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
    
-    unset($this['created_at'], $this['career_school_year_id'], $this['is_processed']);
+    unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id']);
    
     $max = CareerPeer::getMaxYear();
     $years = array();

@@ -662,14 +662,31 @@ class studentActions extends autoStudentActions
 					$career_student->deleteStudentsCareerSubjectAlloweds();
 					$career_student->deleteDivisionStudent();
 					
+					//elimno de course subject examination los cursos del año
+					$career_student->deleteCourseSubjectStundentExaminationByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
+					
+					//elimino los cursos de la tabla student_desapproved_course_subject
+					$career_student->deleteDespprovedCourseSubjectStundentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
+					
+					//elimino los cursos de la tabla repproved
+					$career_student->deleteRepprovedCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
+					
 					//lo elimino de las comisiones del año
 					$career_student->deleteCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
 					
 					//cambio el estado y process
-					$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
-					$student_career_school_year->setObservations($this->observations);
-					$student_career_school_year->setIsProcessed(true);
-					$student_career_school_year->save();	
+					$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+					$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+					
+					$a = $this->form->save();
+						 //$this->getUser()->setFlash('info','The item was updated successfully.');
+						 
+					//debo tomar el ultimo año en el que repitio.
+					
+					//$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN);
+					//$student_career_school_year->setObservations($this->observations);
+					//$student_career_school_year->setIsProcessed(true);
+					//$student_career_school_year->save();	
 					
 					//desmatricular
 					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
@@ -695,7 +712,6 @@ class studentActions extends autoStudentActions
 				//chequeo que sea el ultimo año en curso del alumno.	
 				if($this->year == $last_scsy->getYear())
 				{
-					
 					//cambio el estado
 					$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
 					$student_career_school_year->setObservations($this->observations);

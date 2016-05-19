@@ -1409,7 +1409,7 @@ class Student extends BaseStudent
 		
 		$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
 		$c->add(StudentCareerSchoolYearPeer::YEAR, $year_in_career);
-		
+		$c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
 		$object = StudentCareerSchoolYearPeer::doSelectOne($c);
 
 		return $object;
