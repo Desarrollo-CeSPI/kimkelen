@@ -22,7 +22,7 @@
 ?>
 
 <div class="history_school_year">
-  <?php if ($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN): ?>
+
     <h2><?php echo __("School year %%school_year%% | %%career%%", array("%%school_year%%" => $student_career_school_year->getCareerSchoolYear()->getSchoolYear(), "%%career%%" => $student_career_school_year->getCareerSchoolYear()->getCareer())) ?></h2>
 
     <div class="info_div">
@@ -76,6 +76,5 @@
     <div class="info_div">
       <strong><?php echo __("Anual average") ?></strong> <em><?php echo $anual_average ?></em>
     </div>
-<?php endif ?>
 </div>
 <?php endif; ?>
