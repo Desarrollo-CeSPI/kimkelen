@@ -67,22 +67,24 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
 
   public function getMarkByConfig($config = null)
   {
-    if ($this->getMark() != 0)
-    {
-      if ($config != null && !$config->isNumericalMark())
-      {
-        $letter_mark = LetterMarkPeer::getLetterMarkByValue((Integer)$this->getMark());
-        return $letter_mark->getLetter();
-      }
-      else
-      {
-        return $this->getMark();
-      }
-    }
-    else
-    {
-      return "Libre";
-    }
+	  if ($this->getMark() != 0)
+	  {
+		  if ($config != null && !$config->isNumericalMark())
+		  {
+			  $letter_mark = LetterMarkPeer::getLetterMarkByValue((Integer)$this->getMark());
+			  return $letter_mark->getLetter();
+		  }
+		  else
+		  {
+			  return $this->getMark();
+		  }
+	  }
+	  elseif ($this->getIsFree())
+	  {
+		  return "Libre";
+	  } else {
+		  return '';
+	  }
   }
 
 }
