@@ -31,26 +31,42 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
   public function configure()
   {
 	$sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
+   
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
    
-    unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id']);
-   
-    $max = CareerPeer::getMaxYear();
-    $years = array();
-    for ($i = 1; $i <= $max; $i++)
-      $years[$i] = $i;
-     
+    unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id'], $this['year']);
+  
 	$this->setWidget('student_id', new sfWidgetFormInputHidden());
-	$this->setWidget('year', new sfWidgetFormChoice(array('choices' => $years)));
-	$this->setWidget('status',  new sfWidgetFormSelect(array('choices'  => BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect())));
-	$this->setWidget('observations', new sfWidgetFormTextarea());
+	$status = BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect();
+
+	$this->setWidget('status',  new sfWidgetFormSelect(array('choices'  => $status)));
+    
+    $w = new sfWidgetFormChoice(array('choices' => array()));
+    $this->setWidget('change_status_motive_id', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $w,
+        'observe_widget_id' => 'student_career_school_year_status',
+        'message_with_no_value' => 'Seleccione un estado y aparecerán los motivos correspondientes',
+        'get_observed_value_callback' => array(get_class($this), 'getMotives')
+      )));
    
 	$this->setValidators(array(
-      'student_id'       => new sfValidatorPropelChoice(array('model' => 'Student', 'column' => 'id', 'required' => false)),
-      'status'   		 => new sfValidatorString(array('max_length' => 50)),
-      'year'		     => new sfValidatorChoice(array('choices' => array_keys($years))),
-      'observations'     => new sfValidatorString(array('required' => false)),
+      'student_id'              => new sfValidatorPropelChoice(array('model' => 'Student', 'column' => 'id', 'required' => false)),
+      'status'   		        => new sfValidatorChoice(array('choices' => array_keys($status))),
+      'change_status_motive_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ChangeStatusMotive','column' => 'id')),
     ));
   }
+  
+  public function getMotives($widget, $values){
+	
+	$motives = ChangeStatusMotivePeer::getMotivesByStatusId($values);
+	$choices = array();
+	
+	foreach ($motives as $m):
+		$choices[$m->getId()] = $m->getName(); 
+	endforeach;	
+	
+    $widget->setOption('choices', $choices);
+  }
 }
+    

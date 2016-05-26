@@ -179,8 +179,9 @@ class dcWidgetAjaxDependence extends sfWidgetForm
     {
       return $this->getOption('message_with_no_value');
     }
-    elseif (!$this->getOption('observed_boolean_widget_has_empty') && empty($observed_value)&&!$this->getOption('observe_widget_is_boolean'))
+    elseif (!$this->getOption('observed_boolean_widget_has_empty') && is_null($observed_value)  &&!$this->getOption('observe_widget_is_boolean'))
     {
+		echo 'entro por aca';
       return $this->getOption('message_with_no_value');
     }
     if (!is_null($this->getOption('get_observed_value_callback')))

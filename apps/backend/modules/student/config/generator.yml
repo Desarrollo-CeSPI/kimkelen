@@ -213,6 +213,7 @@ generator:
             label: Change student status
             credentials: [edit_student]
             action: changeStudentStatus
+            condition: canChangeStudentStatus
             
       filter:
 

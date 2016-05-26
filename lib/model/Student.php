@@ -1388,31 +1388,29 @@ class Student extends BaseStudent
 		return $this->countPathwayStudents($c) > 0;
 	}
 
-	public function owsCorrelativeFor($career_subject) {
+	public function owsCorrelativeFor($career_subject) 
+	{
     //obtengo las correlativas de la materia recibida por parámetro
     $correlative = $career_subject->getCorrelativeCareerSubject();
 
-		if (!is_null($correlative)){
-		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
+		if (!is_null($correlative))
+		{
+		
+			foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) 
+			{
 
-			if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
-			  return true;
+				if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+				  return true;
+				}
 			}
 		}
-	}
 		return false;
 	}
 	
-	public function getStudentCareerSchoolYearByYearInCareer($year_in_career)
+	public function canChangeStudentStatus()
 	{
-		$c = new Criteria();
-		
-		$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
-		$c->add(StudentCareerSchoolYearPeer::YEAR, $year_in_career);
-		$c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
-		$object = StudentCareerSchoolYearPeer::doSelectOne($c);
-
-		return $object;
+		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
+		 
 	}
 }
 

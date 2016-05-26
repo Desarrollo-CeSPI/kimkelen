@@ -4571,13 +4571,21 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Withdraw with reserve</source>
                 <target>Retirado con reserva de banco</target>
             </trans-unit>
-	    <trans-unit>
+			<trans-unit>
                 <source>Change student status</source>
                 <target>Cambiar el estado del alumno</target>
             </trans-unit>
-	    <trans-unit>
+			<trans-unit>
                 <source>Change %student% status</source>
                 <target>Cambiar el estado de %student%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change status motive id</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Status id</source>
+                <target>Estado</target>
             </trans-unit>
         </body>
     </file>

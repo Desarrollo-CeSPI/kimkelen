@@ -20,10 +20,10 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('Change %student% status', array("%student%" => $student)) ?></h1>
+  <h1><?php echo __('Change %student% status', array("%student%" => $student)) .' en ' . __('Year ' . $student->getLastCareerStudent()->getCurrentStudentCareerSchoolYear()->getYear()) ?></h1>
 
   <div id="sf_admin_content">
-    <form action="<?php echo url_for('student/updateStudentStatus') ?>" method="post">
+    <form action="<?php echo url_for('student/updateChangeStudentStatus') ?>" method="post">
 
       <input type="hidden" name="student_id" value="<?php echo $student->getId() ?>" />
       <fieldset>
