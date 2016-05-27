@@ -1394,21 +1394,26 @@ class Student extends BaseStudent
 		return $this->countPathwayStudents($c) > 0;
 	}
 
-	public function owsCorrelativeFor($career_subject) {
+	public function owsCorrelativeFor($career_subject) 
+	{
     //obtengo las correlativas de la materia recibida por parámetro
     $correlative = $career_subject->getCorrelativeCareerSubject();
 
-		if (!is_null($correlative)){
-		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
+		if (!is_null($correlative))
+		{
+		
+			foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) 
+			{
 
-			if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
-			  return true;
+				if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+				  return true;
+				}
 			}
 		}
-	}
 		return false;
 	}
 	
+
 	public function hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)
 	{
 		$c = new Criteria();
@@ -1426,6 +1431,23 @@ class Student extends BaseStudent
 	public function getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year, $day, $course_subject_id)
 	{
 		return (is_null($this->hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)) ? '' : 'justificated');
+	}
+
+
+	public function canChangeStudentStatus()
+	{
+		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
+		 
+	}
+	
+	public function getCountStudentRepprovedCourseSubject()
+	{
+		$c = new Criteria();
+		$c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+		$c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+		$c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+	
+		return StudentRepprovedCourseSubjectPeer::doCount($c);
 	}
 
 }

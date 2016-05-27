@@ -153,7 +153,7 @@ class pathway_commissionActions extends autoPathway_commissionActions
         catch (Exception $e)
         {
             $con->rollBack();
-            $this->getUser()->setFlash('error', $e->getMessage());
+            $this->getUser()->setFlash('error', $e->getMessage() . 'hjgjh');
         }
 
         $this->setTemplate('courseSubjectStudent');

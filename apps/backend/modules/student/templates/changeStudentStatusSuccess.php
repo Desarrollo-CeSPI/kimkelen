@@ -20,26 +20,33 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('School year register') ?></h1>
+  <h1><?php echo __('Change %student% status', array("%student%" => $student)) .' en ' . __('Year ' . $student->getLastCareerStudent()->getCurrentStudentCareerSchoolYear()->getYear()) ?></h1>
+
+	<div>
+		<?php echo __('El estado Retirado de la institución lo desmatriculará y desactivará.') ?>
+	</div>
+	<div>
+		<?php echo __('El estado Retirado de la institución con reserva de banco lo desmatriculará.') ?>
+	</div>
+	<div>
+		<?php echo __('El estado Libre debe ser usado para aquéllos alumnos que terminaron la escuela debiendo materias.') ?>
+	</div>
 
   <div id="sf_admin_content">
-    <h2><?php echo $form->getObject()->isNew() ? __("Register %student% in current school year", array("%student%" => $student)) : __("Current school year registration status for %student%", array("%student%" => $student)) ?></h2>
-    <form action="<?php echo url_for('student/updateRegistrationForCurrentSchoolYear') ?>" method="post">
+    <form action="<?php echo url_for('student/updateChangeStudentStatus') ?>" method="post">
 
       <input type="hidden" name="student_id" value="<?php echo $student->getId() ?>" />
       <fieldset>
-        <?php  echo $form ?>
+        <?php echo $form ?>
       </fieldset>
 
-      <?php if (!$form->getObject()->isNew() && $student->getCurrentDIvisions()): ?>
-        <br>
-        <div class="warning"><?php echo __('Recuerde eliminar al alumno de la división actual si va a desmatricularlo del año lectivo.') ?></div>
-      <?php endif; ?>
+
       <ul class="sf_admin_actions">
         <?php echo $helper->linkToList(array('label' => __('Go back'), 'params' => array(), 'class_suffix' => 'list',)) ?>
-        <li class="sf_admin_action_delete"> <?php echo link_to(__('Change status'), 'student/changeStudentStatus?id='. $student->getId()) ?> </li>
         <?php echo $helper->linkToSave($form->getObject(), array('params' => array(), 'class_suffix' => 'save_and_list', 'label' => __('Save'),)) ?>
       </ul>
+
+	  </div>
     </form>
   </div>
 </div>

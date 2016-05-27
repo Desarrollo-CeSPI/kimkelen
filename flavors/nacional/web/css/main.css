@@ -2013,3 +2013,8 @@ div.wc-cal-event{
   padding: 1px;
   background-color: #E61800  !important;
 }
+
+.sf_admin_action_change_student_status a
+{
+	background-image: url('../images/change_status.png') !important;
+}

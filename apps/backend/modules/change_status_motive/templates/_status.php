@@ -17,30 +17,11 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
 
-class CareerStudentStatus extends BaseCustomOptionsHolder
-{
-  const
-    REGULAR      = 0,
-    GRADUATE     = 1;
- 
-	
-  protected 
-    $_options = array(
-        self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado',
+  <div>
+      <?php  
+		$status= BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptions(); 
+        echo $status[$change_status_motive->getStatusId()];
+      ?>
+  </div>
 
-      );
-  
-  public function getOptions($include_blank = false, $no_graduate = false)
-  {
-    $options = ($no_graduate)?$this->_options_no_graduate:$this->_options;
-    if ($include_blank !== false && !is_null($include_blank))
-    {
-      return array('' => (is_string($include_blank) ? $include_blank : '')) + $options;
-    }
-
-    return $options;
-  }
-}

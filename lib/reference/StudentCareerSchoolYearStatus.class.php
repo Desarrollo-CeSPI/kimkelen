@@ -42,16 +42,15 @@ class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
 
 	);
 
-
-	public function getOptionsSelect()
-	{
-		return array(
-			self::IN_COURSE       		 => 'Cursando',
-			self::APPROVED       		 => 'Aprobado',
-			self::WITHDRAWN				 => 'Retirado de la institución',
-			self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco'
-		);
-
-	}
-
+  public function getOptionsSelect()
+  {
+    return array(
+        self::IN_COURSE       		 => 'Cursando',
+        self::APPROVED       		 => 'Aprobado',
+        self::WITHDRAWN				 => 'Retirado de la institución',
+        self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco',
+        self::FREE					 => 'Libre',
+      );
+   
+  }
 }

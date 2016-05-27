@@ -19,28 +19,14 @@
  */ ?>
 <?php
 
-class CareerStudentStatus extends BaseCustomOptionsHolder
+/**
+ * change_status_motive module helper.
+ *
+ * @package    symfony
+ * @subpackage change_status_motive
+ * @author     Your name here
+ * @version    SVN: $Id: helper.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class change_status_motiveGeneratorHelper extends BaseChange_status_motiveGeneratorHelper
 {
-  const
-    REGULAR      = 0,
-    GRADUATE     = 1;
- 
-	
-  protected 
-    $_options = array(
-        self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado',
-
-      );
-  
-  public function getOptions($include_blank = false, $no_graduate = false)
-  {
-    $options = ($no_graduate)?$this->_options_no_graduate:$this->_options;
-    if ($include_blank !== false && !is_null($include_blank))
-    {
-      return array('' => (is_string($include_blank) ? $include_blank : '')) + $options;
-    }
-
-    return $options;
-  }
 }

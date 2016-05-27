@@ -1,0 +1,44 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           ChangeStatusMotive
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          change_status_motive
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:
+        name:
+          label:           Nombre
+      list:
+        title:             Motivos de cambio de estado
+        display:           [name, _status]
+        object_actions:
+          _edit:
+            credentials:   [edit_change_status_motive]
+          _delete:
+            credentials:   [edit_change_status_motive]
+        batch_actions:     []
+        actions:
+          _new:
+            label:         Nuevo motivo de cambio de estado
+            credentials:   [new_change_status_motive]
+      filter:
+        class:             false
+      form:
+        actions:
+          _list:
+            label:         Volver
+          _save_and_list:
+            label:         Guardar y volver a listado
+          _save_and_add:
+            label:         Guardar y agregar otro motivo
+      edit:
+        title:             Editar motivo de cambio de estado: %%name%%
+      new:
+        title:             Nuevo motivo de cambio de estado

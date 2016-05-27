@@ -1,3 +1,12 @@
+change_status_motive:
+  class: sfPropelRouteCollection
+  options:
+    model:                ChangeStatusMotive
+    module:               change_status_motive
+    prefix_path:          change_status_motive
+    column:               id
+    with_wildcard_routes: true
+
 
 printAttendanceTemplate:
   url: /student_attendance/PrintAttendanceTemplate

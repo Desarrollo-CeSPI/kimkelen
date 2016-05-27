@@ -19,28 +19,17 @@
  */ ?>
 <?php
 
-class CareerStudentStatus extends BaseCustomOptionsHolder
+require_once dirname(__FILE__).'/../lib/change_status_motiveGeneratorConfiguration.class.php';
+require_once dirname(__FILE__).'/../lib/change_status_motiveGeneratorHelper.class.php';
+
+/**
+ * occupation_category actions.
+ *
+ * @package    sistema de alumnos
+ * @subpackage occupation_category
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class change_status_motiveActions extends autoChange_status_motiveActions
 {
-  const
-    REGULAR      = 0,
-    GRADUATE     = 1;
- 
-	
-  protected 
-    $_options = array(
-        self::REGULAR        => 'Regular',
-        self::GRADUATE       => 'Egresado',
-
-      );
-  
-  public function getOptions($include_blank = false, $no_graduate = false)
-  {
-    $options = ($no_graduate)?$this->_options_no_graduate:$this->_options;
-    if ($include_blank !== false && !is_null($include_blank))
-    {
-      return array('' => (is_string($include_blank) ? $include_blank : '')) + $options;
-    }
-
-    return $options;
-  }
 }
