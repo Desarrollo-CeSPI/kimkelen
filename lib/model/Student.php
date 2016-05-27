@@ -1412,6 +1412,16 @@ class Student extends BaseStudent
 		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
 		 
 	}
+	
+	public function getCountStudentRepprovedCourseSubject()
+	{
+		$c = new Criteria();
+		$c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+		$c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+		$c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+	
+		return StudentRepprovedCourseSubjectPeer::doCount($c);
+	}
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

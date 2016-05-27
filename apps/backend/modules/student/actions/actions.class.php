@@ -704,12 +704,34 @@ class studentActions extends autoStudentActions
 				$this->getUser()->setFlash('info','The item was updated successfully.');	
 			
 				break;
+				
 			case StudentCareerSchoolYearStatus::FREE:
 				//Libre
 				
-				//chequear que este en 6to y que deba materias.
+				$max_year = $student_career_school_year->getCareerSchoolYear()->getCareer()->getMaxYear();
+				//chequeo que sea el ultimo año.
+				if($student_career_school_year->getYear() == $max_year)
+				{	
+					//chequeo que deba materias.
+					if($this->student->getCountStudentRepprovedCourseSubject() > 0)
+					{
+						//cambio el estado
+						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+						$a = $this->form->save();
+						$this->getUser()->setFlash('info','The item was updated successfully.');
+					}
+					else
+					{
+						$this->getUser()->setFlash('error','El alumno no debe materias.');	
+					}
 					
-			
+				}
+				else
+				{
+					$this->getUser()->setFlash('error', 'Debe ser sel ultimo año del alumno.');
+				}	
+				
 				break;
 		}
 		
