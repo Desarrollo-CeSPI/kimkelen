@@ -28,7 +28,8 @@ class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
 		LAST_YEAR_REPPROVED     = 3,
 		WITHDRAWN       		= 4,
 		WITHDRAWN_WITH_RESERVE	= 5,
-	  FREE = 6;
+		FREE = 6;
+
 	protected
 		$_options = array(
 		self::IN_COURSE       		 => 'Cursando',

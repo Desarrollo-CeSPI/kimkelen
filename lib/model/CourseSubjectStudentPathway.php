@@ -5,9 +5,10 @@ class CourseSubjectStudentPathway extends BaseCourseSubjectStudentPathway
   public function countValidCourseSubjectStudentPathwayMarks()
   {
     $c = new Criteria();
-    $criterion = $c->getNewCriterion(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNOTNULL);
+    $c->add(CourseSubjectStudentPathwayPeer::STUDENT_ID, $this->getStudent()->getId());
+    $c->add(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID , $this->getCourseSubject()->getId());
+    $c->add(CourseSubjectStudentPathwayPeer::MARK, null, Criteria::ISNOTNULL);
 
-    $c->addOr($criterion);
     return CourseSubjectStudentPathwayPeer::doCount($c);
 
   }
