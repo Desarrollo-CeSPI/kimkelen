@@ -100,6 +100,10 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
 	{
 		return $this->getMarksStr();
 	}
+
+	public function getCareerSchoolYear() {
+		$this->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear();
+	}
 }
 
 sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));
