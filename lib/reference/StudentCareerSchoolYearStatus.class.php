@@ -34,7 +34,7 @@ class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
 		$_options = array(
 		self::IN_COURSE       		 => 'Cursando',
 		self::APPROVED       		 => 'Aprobado',
-		self::REPPROVED      		 => 'Repitió este año',
+		self::REPPROVED      		 => 'Repitió',
 		self::LAST_YEAR_REPPROVED 	 => 'Repetidor del año pasado, pero cursando año lectivo actual',
 		self::WITHDRAWN				 => 'Retirado de la institución',
 		self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco',

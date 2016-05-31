@@ -3284,7 +3284,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Current status</source>
-                <target>Estado actual</target>
+                <target>Estado</target>
             </trans-unit>
             <trans-unit>
                 <source>If is checked, then will show only students graduated in some career.</source>
