@@ -1313,7 +1313,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examination repproved</source>
-                <target>Previas</target>
+                <target>Previas y libres</target>
             </trans-unit>
             <trans-unit>
                 <source>Close subject</source>
@@ -1322,7 +1322,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examination repproved List</source>
-                <target>Mesas de previas</target>
+                <target>Mesas de previas y libres</target>
             </trans-unit>
             <trans-unit>
                 <source>Examination subject cant be closed, because some students were not calificated</source>
