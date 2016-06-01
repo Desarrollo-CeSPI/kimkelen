@@ -2018,3 +2018,9 @@ div.wc-cal-event{
 {
 	background-image: url('../images/change_status.png') !important;
 }
+
+.warning.prueba
+{
+  width: 35% !important;
+  display:block !important;
+}

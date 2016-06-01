@@ -34,10 +34,30 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
    
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
-   
-    unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id'], $this['year']);
+	unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id'], $this['year']);
+    
+    $this->setWidget('start_date_reserve', new sfWidgetFormDate(array('format'=>'%day%/%month%/%year%')));
+  
+	//si ya tiene reserva muestro la fecha
+	if($this->getObject()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+	{
+		$c = new Criteria();
+		$c->add(StudentReserveStatusRecordPeer::STUDENT_ID,$this->getObject()->getStudentId());
+		$reserve= StudentReserveStatusRecordPeer::doSelectOne($c);
+		
+		if(!is_null($reserve))
+		{ 
+			$start_date = new DateTime($reserve->getStartDate());
+			$this->getWidget('start_date_reserve')->setOption('empty_values', array('year' =>  $start_date->format('Y'), 'month' => $start_date->format('m'), 'day' => $start_date->format('d')));
+		}
+	}
+    
   
 	$this->setWidget('student_id', new sfWidgetFormInputHidden());
+    
+
+  
+	$this->setValidator('start_date_reserve', new sfValidatorDate(array('required' => false)));
 	$status = BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect();
 
 	$this->setWidget('status',  new sfWidgetFormSelect(array('choices'  => $status)));
@@ -55,6 +75,8 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
       'status'   		        => new sfValidatorChoice(array('choices' => array_keys($status))),
       'change_status_motive_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ChangeStatusMotive','column' => 'id')),
     ));
+    
+    $this->validatorSchema->setOption("allow_extra_fields", true);
   }
   
   public static function getMotives($widget, $values){

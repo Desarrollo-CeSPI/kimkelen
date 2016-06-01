@@ -4327,6 +4327,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Status id</source>
                 <target>Estado</target>
             </trans-unit>
+            <trans-unit>
+                <source>Start date reserve</source>
+                <target>Fecha de inicio de la reserva</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

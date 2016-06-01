@@ -638,7 +638,8 @@ class studentActions extends autoStudentActions
     $this->student = StudentPeer::retrieveByPK($request->getParameter('student_id'));
     $this->status = $request->getParameter('student_career_school_year[status]');
     $this->motive = $request->getParameter('student_career_school_year[change_status_motive_id]');
-    
+
+	$this->start_date   = $request->getParameter('student_career_school_year[start_date_reserve]');
     $student_career_school_year = $this->student->getLastStudentCareerSchoolYear();
     
     if(is_null($student_career_school_year))
@@ -683,7 +684,7 @@ class studentActions extends autoStudentActions
 				
 				//deshabilito la persona
 				$this->student->getPerson()->setIsActive(false);
-				$this->student ->getPerson()->save();
+				$this->student->getPerson()->save();
 				$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
 		  
 				break;
@@ -691,19 +692,50 @@ class studentActions extends autoStudentActions
 			case StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE:
 				//Retirado con reserva de banco
 				
-				//cambio el estado
-				$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-				$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-				$a = $this->form->save();
-
-				//desmatricular
-				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-				if(! is_null($s))
+				//chequeo que este guardada la fecha de la reserva
+				if(empty($this->start_date))
 				{
-					$s->delete();
-				}	
-				$this->getUser()->setFlash('info','The item was updated successfully.');	
-			
+					$this->getUser()->setFlash('error','El campo Fecha de inicio de la reserva es obligatorio.');	
+				}
+				else
+				{
+					//cambio el estado
+					$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+					$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+					$a = $this->form->save();
+
+					//Si no existe la reserva la creo.
+					$student_reserve = StudentReserveStatusRecordPeer::retrieveByStudentId($request->getParameter('student_id'));
+					
+					if(is_null($student_reserve))
+					{ 
+						$student_reserve = new StudentReserveStatusRecord();
+						$student_reserve->setStudentId($this->student->getId());
+							
+						$year= $this->start_date['year'];
+						$month=$this->start_date['month'];
+						$day=$this->start_date['day'];
+						
+						$date = $year.'-'.$month.'-'.$day;
+						$student_reserve->setStartDate($date);
+						StudentReserveStatusRecordPeer::doInsert($student_reserve);
+					}
+					else
+					{	//solo modifico la fecha.
+						$student_reserve->setStartDate($date);
+						$student_reserve->save();
+					}
+					
+					//desmatricular
+					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+					if(! is_null($s))
+					{
+						$s->delete();
+					}
+				
+					$this->getUser()->setFlash('info','The item was updated successfully.' );	
+				}
+				
 				break;
 				
 			case StudentCareerSchoolYearStatus::FREE:

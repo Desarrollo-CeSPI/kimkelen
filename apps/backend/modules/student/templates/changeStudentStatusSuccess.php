@@ -21,16 +21,18 @@
 
 <div id="sf_admin_container">
   <h1><?php echo __('Change %student% status', array("%student%" => $student)) .' en ' . __('Year ' . $student->getLastCareerStudent()->getCurrentStudentCareerSchoolYear()->getYear()) ?></h1>
-
-	<div>
+  <div >
+	<div class="warning prueba">
 		<?php echo __('El estado Retirado de la institución lo desmatriculará y desactivará.') ?>
 	</div>
-	<div>
+	<div class="warning prueba">
 		<?php echo __('El estado Retirado de la institución con reserva de banco lo desmatriculará.') ?>
 	</div>
-	<div>
+	<div class="warning prueba">
 		<?php echo __('El estado Libre debe ser usado para aquéllos alumnos que terminaron la escuela debiendo materias.') ?>
 	</div>
+  </div>
+	
 
   <div id="sf_admin_content">
     <form action="<?php echo url_for('student/updateChangeStudentStatus') ?>" method="post">
