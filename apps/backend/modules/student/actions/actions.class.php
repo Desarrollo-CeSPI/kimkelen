@@ -652,11 +652,6 @@ class studentActions extends autoStudentActions
 			case StudentCareerSchoolYearStatus::WITHDRAWN:
 				//Retirado
 				
-				//lo elimino de la division
-				$career_student = CareerStudentPeer::retrieveByCareerAndStudent($student_career_school_year->getCareerSchoolYear()->getCareer()->getId(), $this->student->getId());
-				$career_student->deleteStudentsCareerSubjectAlloweds();
-				$career_student->deleteDivisionStudent();
-				
 				//cambio el estado
 				$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
 				$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
