@@ -28,12 +28,14 @@ class ExaminationRepprovedType extends BaseCustomOptionsHolder
 {
   const
     REPPROVED      = 1,
-    FREE       = 2;
+    FREE       = 2,
+	  FREE_GRADUATED = 3;
 
   protected
     $_options = array(
         self::REPPROVED       => 'Previa',
-        self::FREE        => 'Libre'
+        self::FREE        => 'Libre',
+	      self::FREE_GRADUATED  => 'Libre egresado'
       );
   
   public function getOptionsWithout($without = array(), $include_blank = false)

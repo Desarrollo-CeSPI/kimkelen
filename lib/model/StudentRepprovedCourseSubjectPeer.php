@@ -21,12 +21,12 @@
 
 class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjectPeer
 {
-  public function getAvalilableForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
+  public function getAvailableForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
   {
-    return StudentRepprovedCourseSubjectPeer::doSelect(self::getAvalilableForExaminationRepprovedSubjectCriteria($examination_repproved_subject));
+    return StudentRepprovedCourseSubjectPeer::doSelect(self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject));
   }
 
-  static public function getAvalilableForExaminationRepprovedSubjectCriteria(ExaminationRepprovedSubject $examination_repproved_subject)
+  static public function getAvailableForExaminationRepprovedSubjectCriteria(ExaminationRepprovedSubject $examination_repproved_subject)
   {
     $c = new Criteria();
     $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
@@ -38,11 +38,17 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     return $c;
   }
 
-  static public function getAvalilableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
+  static public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
   {
-    $c = self::getAvalilableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
+    $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
 
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+
+	  if($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::FREE_GRADUATED) {
+
+		  $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
+		  $c->add(StudentCareerSchoolYearPeer::STATUS, ExaminationRepprovedType::FREE, Criteria::EQUAL);
+	  }
 
     return StudentPeer::doSelect($c);
   }

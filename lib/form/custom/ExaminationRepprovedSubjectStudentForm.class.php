@@ -29,7 +29,7 @@ class ExaminationRepprovedSubjectStudentForm extends sfFormPropel
 
   public static function setAvailableStudentsForDivision($examination_repproved_subject)
   {
-    self::$_students = StudentRepprovedCourseSubjectPeer::getAvalilableStudentsForExaminationRepprovedSubject($examination_repproved_subject);
+    self::$_students = StudentRepprovedCourseSubjectPeer::getAvailableStudentsForExaminationRepprovedSubject($examination_repproved_subject);
   }
 
   public static function getCriteriaForAvailableStudentsForExaminationSubjectIds()
