@@ -571,12 +571,6 @@ class studentActions extends autoStudentActions
     $this->setLayout('cleanLayout');
   }
 
-  public function executePrintDetails()
-  {
-    $this->setLayout('cleanLayout');
-    $this->student = $this->getRoute()->getObject();
-  }
-
   public function executeWithdrawStudent()
   {
     $student = $this->getRoute()->getObject();

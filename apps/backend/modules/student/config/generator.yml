@@ -204,10 +204,6 @@ generator:
             label: Student assistance and sanction report
             action: showAssistanceAndSanctionReport
             condition: canGenerateReport
-
-          print_details:
-            label: print details of student
-            action: printDetails
             
           change_student_status:
             label: Change student status
