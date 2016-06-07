@@ -40,7 +40,7 @@ class examination_repprovedActions extends autoExamination_repprovedActions
   {
     if (!$this->getUser()->getReferenceFor('schoolyear'))
     {
-      $this->getUser()->setFlash('warning', 'Debe seleccionar un año lectivo para poder administrar las mesas de previas.');
+      $this->getUser()->setFlash('warning', 'Debe seleccionar un año lectivo para poder administrar las mesas de previas y libres.');
       $this->redirect('@schoolyear');
     }
 
@@ -48,7 +48,7 @@ class examination_repprovedActions extends autoExamination_repprovedActions
 
     if (is_null($this->school_year))
     {
-      $this->getUser()->setFlash('warning', 'Debe seleccionar un año lectivo para poder administrar las mesas de previas.');
+      $this->getUser()->setFlash('warning', 'Debe seleccionar un año lectivo para poder administrar las mesas de previas y libres.');
       $this->redirect('@schoolyear');
     }
 
@@ -62,7 +62,6 @@ class examination_repprovedActions extends autoExamination_repprovedActions
 
   public function executeNew(sfWebRequest $request)
   {
-    //$this->redirectUnless($this->getUser()->canCreateExaminationRepproved(), '@examination_repproved');
     parent::executeNew($request);
 
     $this->form->setDefault("school_year_id", $this->school_year->getId());

@@ -638,8 +638,7 @@ class studentActions extends autoStudentActions
     $this->student = StudentPeer::retrieveByPK($request->getParameter('student_id'));
     $this->status = $request->getParameter('student_career_school_year[status]');
     $this->motive = $request->getParameter('student_career_school_year[change_status_motive_id]');
-
-	$this->start_date   = $request->getParameter('student_career_school_year[start_date_reserve]');
+	
     $student_career_school_year = $this->student->getLastStudentCareerSchoolYear();
     
     if(is_null($student_career_school_year))
@@ -657,26 +656,14 @@ class studentActions extends autoStudentActions
 				$career_student = CareerStudentPeer::retrieveByCareerAndStudent($student_career_school_year->getCareerSchoolYear()->getCareer()->getId(), $this->student->getId());
 				$career_student->deleteStudentsCareerSubjectAlloweds();
 				$career_student->deleteDivisionStudent();
-					
-				//elimno de course subject examination los cursos del año
-				$career_student->deleteCourseSubjectStundentExaminationByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
-					
-				//elimino los cursos de la tabla student_desapproved_course_subject
-				$career_student->deleteDespprovedCourseSubjectStundentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
-					
-				//elimino los cursos de la tabla repproved
-				$career_student->deleteRepprovedCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
-					
-				//lo elimino de las comisiones del año
-				$career_student->deleteCourseSubjectStudentByCareerSchoolYear($student_career_school_year->getCareerSchoolYear());
-					
+				
 				//cambio el estado
 				$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
 				$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
 				$a = $this->form->save();
 							
 				//desmatricular
-				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear());
 				if(! is_null($s))
 				{
 					$s->delete();
@@ -692,49 +679,57 @@ class studentActions extends autoStudentActions
 			case StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE:
 				//Retirado con reserva de banco
 				
-				//chequeo que este guardada la fecha de la reserva
-				if(empty($this->start_date))
-				{
-					$this->getUser()->setFlash('error','El campo Fecha de inicio de la reserva es obligatorio.');	
-				}
-				else
-				{
-					//cambio el estado
-					$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-					$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-					$a = $this->form->save();
-
-					//Si no existe la reserva la creo.
-					$student_reserve = StudentReserveStatusRecordPeer::retrieveByStudentId($request->getParameter('student_id'));
+				$this->start_date   = $request->getParameter('student_career_school_year[start_date_reserve]');
+				//Si no existe la reserva la creo.
+				$student_reserve = $this->student->hasActiveReserve();
+				
+				$year= $this->start_date['year'];
+				$month=$this->start_date['month'];
+				$day=$this->start_date['day'];
 					
-					if(is_null($student_reserve))
-					{ 
-						$student_reserve = new StudentReserveStatusRecord();
-						$student_reserve->setStudentId($this->student->getId());
-							
-						$year= $this->start_date['year'];
-						$month=$this->start_date['month'];
-						$day=$this->start_date['day'];
-						
-						$date = $year.'-'.$month.'-'.$day;
-						$student_reserve->setStartDate($date);
-						StudentReserveStatusRecordPeer::doInsert($student_reserve);
+				if(is_null($student_reserve))
+				{ 
+					if(empty($year) || empty($month) || empty($day))
+					{
+						$this->getUser()->setFlash('error','El campo Fecha de inicio de la reserva es obligatorio.');	
 					}
 					else
-					{	//solo modifico la fecha.
-						$student_reserve->setStartDate($date);
-						$student_reserve->save();
-					}
-					
-					//desmatricular
-					$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-					if(! is_null($s))
 					{
-						$s->delete();
-					}
-				
-					$this->getUser()->setFlash('info','The item was updated successfully.' );	
+						$date = $year.'-'.$month.'-'.$day;
+						$student_reserve = new StudentReserveStatusRecord();
+						$student_reserve->setStudentId($this->student->getId());
+						$student_reserve->setStartDate($date);
+						StudentReserveStatusRecordPeer::doInsert($student_reserve);
+						
+						//cambio el estado
+						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+						$a = $this->form->save();
+
+						//desmatricular
+						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+						if(! is_null($s))
+						{
+							$s->delete();
+						}
+					}	
+					
 				}
+				else
+				{	//Ya existe la reserva solo modifico la fecha
+					$start_date = new DateTime($student_reserve->getStartDate());
+					
+					$year = empty($this->start_date['year'])? $start_date->format('Y') : $this->start_date['year'];
+					$month = empty($this->start_date['month'])? $start_date->format('m') : $this->start_date['month'];
+					$day = empty($this->start_date['day'])? $start_date->format('d') : $this->start_date['day'];
+					$date = $year.'-'.$month.'-'.$day;
+					
+					$student_reserve->setStartDate($date);
+					$student_reserve->save();		
+					
+				}
+				
+				$this->getUser()->setFlash('info','The item was updated successfully.' );	
 				
 				break;
 				
@@ -752,6 +747,21 @@ class studentActions extends autoStudentActions
 						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
 						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
 						$a = $this->form->save();
+						
+						//si no esta activo, lo activo
+						if(!$this->student->getPerson()->getIsActive())
+						{
+							$this->student->getPerson()->setIsActive(true);
+							$this->student->getPerson()->save();	
+						}
+						
+						//desmatricular
+						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
+						if(! is_null($s))
+						{
+							$s->delete();
+						}
+						
 						$this->getUser()->setFlash('info','The item was updated successfully.');
 					}
 					else
@@ -764,6 +774,45 @@ class studentActions extends autoStudentActions
 				{
 					$this->getUser()->setFlash('error', 'Debe ser sel ultimo año del alumno.');
 				}	
+				
+				break;
+			
+			case StudentCareerSchoolYearStatus::IN_COURSE:
+				//En curso
+				
+				//Chequeo que el estado anterior sea Retirado con Reserva de Banco.
+				if($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+				{
+					$this->getUser()->setFlash('error', 'El estado anterior debe ser Retirado con reserva de Banco.');
+				}
+				else
+				{
+					$this->end_date = $request->getParameter('student_career_school_year[end_date_reserve]');
+					
+					$end_year= $this->end_date['year'];
+					$end_month=$this->end_date['month'];
+					$end_day=$this->end_date['day'];
+					
+					if(empty($end_year) || empty($end_month) || empty($end_day))
+					{
+						$this->getUser()->setFlash('error','El campo Fecha de fin de la reserva es obligatorio.');	
+					}
+					else
+					{
+						//guardo la fecha de fin de la reserva.
+						$student_reserve = $this->student->hasActiveReserve();
+						$date = $end_year.'-'.$end_month.'-'.$end_day;
+						$student_reserve->setEndDate($date);
+						$student_reserve->save();
+						
+						//cambio el estado
+						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+						$a = $this->form->save();
+						$this->getUser()->setFlash('info','The item was updated successfully.');		
+					}
+					
+				}
 				
 				break;
 		}

@@ -229,13 +229,25 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         $next_year = $student_career_school_year->getYear() + 1;
 
         $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
-        //EGRESADO
-        if ($next_year > $career_student->getCareer()->getMaxYear() && $previous == 0)
-        {
-          $career_student->setStatus(CareerStudentStatus::GRADUATE);
-          //se guarda el school_year en que termino esta carrera
-          $career_student->setGraduationSchoolYearId($school_year->getId());
-          $career_student->save($con);
+       
+        if ($next_year > $career_student->getCareer()->getMaxYear())
+        {	//EGRESADO
+			if( $previous == 0)
+			{  
+				  $career_student->setStatus(CareerStudentStatus::GRADUATE);
+				  //se guarda el school_year en que termino esta carrera
+				  $career_student->setGraduationSchoolYearId($school_year->getId());
+				  $career_student->save($con);
+				  
+				  $student_career_school_year->setStatus(StudentCareerSchoolYearStatus::APPROVED);
+				  $student_career_school_year->save($con);
+			}
+			else
+			{//LIBRE
+				$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::FREE);
+				$student_career_school_year->save($con);
+			}
+         
         }
         //Si no fue aprobado ya.
         elseif ($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::APPROVED)
@@ -244,11 +256,11 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
           $student->deleteAllCareerSubjectAlloweds($con);
           //Se agregan las materias que puede cursar el alumno.
           $career_student->createStudentsCareerSubjectAlloweds($next_year, $con);
-        }
-
-        // y decimos que aprobó
-        $student_career_school_year->setStatus(StudentCareerSchoolYearStatus::APPROVED);
-        $student_career_school_year->save($con);
+          
+          // y decimos que aprobó
+		  $student_career_school_year->setStatus(StudentCareerSchoolYearStatus::APPROVED);
+		  $student_career_school_year->save($con);
+        } 
       }
     }
 
@@ -596,7 +608,11 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       foreach ($students as $student)
       {
-        $this->stepToNextYear($student, $school_year, $con);
+		  if ($student->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+		  {
+			  $this->stepToNextYear($student, $school_year, $con);
+		  }
+        
       }
 
       $school_year->setIsClosed(true);

@@ -1436,8 +1436,22 @@ class Student extends BaseStudent
 
 	public function canChangeStudentStatus()
 	{
-		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
-		 
+		if($this->getLastCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE )
+		{ 
+			return false;
+		}
+		else
+		{
+			if (is_null($this->getLastStudentCareerSchoolYear()))
+			{
+				return false;
+			}
+			else
+			{
+				return ($this->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN);
+			}
+		}
+		
 	}
 	
 	public function getCountStudentRepprovedCourseSubject()
@@ -1448,6 +1462,34 @@ class Student extends BaseStudent
 		$c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
 	
 		return StudentRepprovedCourseSubjectPeer::doCount($c);
+	}
+	
+	public function hasActiveReserve(){
+		//tiene reserva de banco activa.
+		
+		$c = new Criteria();
+		$c->addJoin(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
+		$c->add(StudentReserveStatusRecordPeer::END_DATE, null, Criteria::ISNULL);
+
+		return StudentReserveStatusRecordPeer::doSelectOne($c);
+	}
+	
+	public function isNextToReturn()
+	{
+		$reserve = $this->hasActiveReserve();
+		$start_date = new DateTime($reserve->getStartDate());
+		
+		//sumo 1 año
+		$end_date = $start_date->add(new DateInterval('P1Y'));
+		//hoy
+		$now = new DateTime("now");
+		
+		$interval = $now->diff($end_date);
+		$days = $interval->format('%r%a');
+		
+		//30 dias . Podria ser configurable.
+		return ($days > 0 && $days <= 30);
+		
 	}
 
 }
