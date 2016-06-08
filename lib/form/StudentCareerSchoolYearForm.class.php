@@ -36,7 +36,6 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
 	
 	unset($this['created_at'], $this['career_school_year_id'], $this['is_processed'] , $this['id'], $this['year']);
     
-	$this->setWidget('last_status', new sfWidgetFormInputHidden());
 	$this->setWidget('student_id', new sfWidgetFormInputHidden());
 	$status = BaseCustomOptionsHolder::getInstance('StudentCareerSchoolYearStatus')->getOptionsSelect();
 	$this->setWidget('status',  new sfWidgetFormSelect(array('choices'  => $status)));

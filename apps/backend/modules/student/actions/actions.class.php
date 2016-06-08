@@ -804,6 +804,9 @@ class studentActions extends autoStudentActions
 				}
 				
 				break;
+			case StudentCareerSchoolYearStatus::APPROVED:
+				$this->getUser()->setFlash('info','Aprobado.');
+				break;
 		}
 		
 	}
