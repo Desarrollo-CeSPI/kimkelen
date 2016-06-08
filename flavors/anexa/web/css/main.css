@@ -748,6 +748,7 @@ table.list
 }
 
 
+
 /* Style for the career-student detail action */
 
 .career-student-content{
@@ -1105,7 +1106,7 @@ table.list
 
 .subject_actions ul
 {
-    margin: 0 !important;
+   margin: 0 !important;
 }
 .subject_actions li
 {
@@ -1368,7 +1369,6 @@ div.no_results_advice {
 {
     background-image: url('../images/arrow-circle-double-135.png') !important;
 }
-
 .result
 {
     margin-bottom: 10px;
@@ -1567,7 +1567,6 @@ div.no_results_advice {
 {
     background-image: url('../images/user-gray.png') !important;
 }
-
 .many_disciplinary_sanctions
 {
     color: #fb2929;
@@ -1777,7 +1776,6 @@ div.wc-cal-event{
     font-size: 11px;
     line-height: normal;
 }
-
 #tabs li
 {
     display: inline;
