@@ -32,11 +32,11 @@
 			<?php elseif($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT):?>
 			<div class="health"><strong> <?php echo $student->getHealthInfoString(); ?></strong></div>
 		<?php endif; ?>	
-		
-	
-		<?php if ($student->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE && $student->isNextToReturn()): ?>
-		  <div class="health"><strong> <?php echo  __('Próximo a regresar') ?></strong></div>
+
+		<?php if ($student->isInscriptedInCareer() && !is_null($student->getLastStudentCareerSchoolYear()) && $student->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE && $student->isNextToReturn()): ?>
+			<div class="health"><strong> <?php echo  __('Próximo a regresar') ?></strong></div>
 		<?php endif; ?>	
+	
 	</div>
 	
 	<?php if ($student->getBelongsToPathway()): ?>
