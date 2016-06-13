@@ -38,17 +38,29 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     return $c;
   }
 
+	static public function getFreeGraduatedStudentsCriteria(ExaminationRepprovedSubject $examination_repproved_subject)
+	{
+		$c = new Criteria();
+		$c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+		$c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
+		$c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
+		$c->add(StudentCareerSchoolYearPeer::STATUS, ExaminationRepprovedType::FREE, Criteria::EQUAL);
+
+		return $c;
+	}
+
   static public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
   {
-    $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
-
-    $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-
 	  if($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::FREE_GRADUATED) {
 
-		  $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
-		  $c->add(StudentCareerSchoolYearPeer::STATUS, ExaminationRepprovedType::FREE, Criteria::EQUAL);
+		  $c = self::getFreeGraduatedStudentsCriteria($examination_repproved_subject);
+
+	  }else{
+      $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
 	  }
+    $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
 
     return StudentPeer::doSelect($c);
   }

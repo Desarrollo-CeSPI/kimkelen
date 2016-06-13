@@ -1351,7 +1351,7 @@ class Student extends BaseStudent
     return implode(', ', array_map(create_function('$scsy', 'return $scsy->getCareerSchoolYear();'), $this->getStudentCareerSchoolYearsAscending()));
   }
 
- public function getStudentRepprovedCourseSubjectForRepordCards($school_year)
+ public function getStudentRepprovedCourseSubjectForReportCards($school_year)
   {
     $school_years = SchoolYearPeer::retrieveLastYearSchoolYears($school_year);
     $repproveds = array();
@@ -1402,7 +1402,7 @@ class Student extends BaseStudent
 		if (!is_null($correlative))
 		{
 		
-			foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) 
+			foreach ($this->getStudentRepprovedCourseSubjectForReportCards(SchoolYearPeer::retrieveCurrent()) as $repproved)
 			{
 
 				if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
