@@ -805,7 +805,7 @@ class studentActions extends autoStudentActions
 				
 				break;
 			case StudentCareerSchoolYearStatus::APPROVED:
-				
+				/*
 				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED )
 				{
 					$result=$this->student->isApproved($student_career_school_year->getCareerSchoolYear());
@@ -827,6 +827,7 @@ class studentActions extends autoStudentActions
 				{
 					$this->getUser()->setFlash('error','El alumno debe estar cursando.');
 				}
+				*/
 				break;
 		}
 		
