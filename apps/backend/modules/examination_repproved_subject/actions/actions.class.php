@@ -224,7 +224,6 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
   {
     $this->examination_repproved_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_repproved_subject->getStudents();
-
     $this->setLayout('cleanLayout');
 
   }
