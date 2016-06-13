@@ -26,8 +26,8 @@ class HealthInfoStatus extends BaseCustomOptionsHolder
     HEALTH_INFO_NO_COMMITED = 'No entregado',
     HEALTH_INFO_COMMITED = 'Entregado',
     HEALTH_INFO_SUITABLE = 'Apta',
+    HEALTH_INFO_OBSERVATIONS = 'Apta con observaciones',
     HEALTH_INFO_NO_SUITABLE = 'No apta',
-    HEALTH_INFO_OBSERVATIONS = 'Con observaciones',
     HEALTH_INFO_NO_SUITABLE_ACCIDENT = 'No apto - Accidente en el campo',
     HEALTH_INFO_INVALID = 'Invalido';
 
@@ -37,8 +37,8 @@ class HealthInfoStatus extends BaseCustomOptionsHolder
         self::HEALTH_INFO_NO_COMMITED   => 'No entregado',
         self::HEALTH_INFO_COMMITED  	=> 'Entregado',
         self::HEALTH_INFO_SUITABLE  	=> 'Apta',
+        self::HEALTH_INFO_OBSERVATIONS  => 'Apta con observaciones',
         self::HEALTH_INFO_NO_SUITABLE 	=> 'No apta',
-        self::HEALTH_INFO_OBSERVATIONS	=> 'Con observaciones',
         self::HEALTH_INFO_NO_SUITABLE_ACCIDENT => 'No apto - Accidente en el campo',
         self::HEALTH_INFO_INVALID	=> 'Inválido',
       );
