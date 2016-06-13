@@ -1450,6 +1450,15 @@ class Student extends BaseStudent
 		return StudentRepprovedCourseSubjectPeer::doCount($c);
 	}
 
+
+	public function getOptionalCourseSubjectStudents($student_career_school_year = null)
+	{
+		$school_year = is_null($student_career_school_year) ? null : $student_career_school_year->getCareerSchoolYear()->getSchoolYear();
+
+		return SchoolBehaviourFactory::getInstance()->getOptionalCourseSubjectStudents($this, $school_year);
+
+	}
+
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

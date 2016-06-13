@@ -70,8 +70,6 @@ class ExaminationRepprovedSubjectStudentForm extends sfFormPropel
 
     $this->validatorSchema[$name] = new sfValidatorPass();
 
- //   $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'validate'))));
-
     $this->validatorSchema->setOption('allow_extra_fields', true);
 
     $this->widgetSchema->setNameFormat('examination_repproved_subject[%s]');
