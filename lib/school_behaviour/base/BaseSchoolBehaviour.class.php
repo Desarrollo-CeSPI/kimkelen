@@ -822,6 +822,10 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
         $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
       }
     }
+    else
+    {
+		$c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, null, Criteria::ISNULL);
+	}
 
     $c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
 
