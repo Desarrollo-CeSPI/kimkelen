@@ -343,7 +343,14 @@ class StudentEditHistoryForm extends sfFormPropel
           $configuration = $this->getObject()->getConfiguration();
           if(!$configuration->isNumericalMark())
           {
-            $mark = LetterMarkPeer::retrieveByPk($mark)->getValue();
+            $letter_mark = LetterMarkPeer::retrieveByPk($mark);
+            if(is_null($letter_mark))
+            {	
+				$mark= null;
+			}
+			else{
+				$mark = $letter_mark->getValue();
+			}
           }
          
           if ($cssm->getMark() !== $mark)
