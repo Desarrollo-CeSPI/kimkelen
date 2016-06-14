@@ -76,8 +76,14 @@ class StudentEditHistoryForm extends sfFormPropel
         }
         else
         {
+		  
           $letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$cssm->getMark());
-          $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' => $letter_mark->getId())));
+          if(is_null($letter_mark)){
+			  $letter = null;
+		  }else{
+			$letter = $letter_mark->getId();
+		  }
+          $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true, 'default' => $letter)));
           $this->setValidator($name, new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false)));
         }
       }
