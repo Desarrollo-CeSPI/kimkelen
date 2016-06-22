@@ -1101,12 +1101,16 @@ class Student extends BaseStudent
     return CareerStudentPeer::doSelectOne($c);
   }
 
-  public function getLastStudentCareerSchoolYear()
+  public function getLastStudentCareerSchoolYear($career_school_year = null)
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
+    if(! is_null($career_school_year))
+    {
+		$c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId(), Criteria::LESS_THAN);
+	}
 
     return StudentCareerSchoolYearPeer::doSelectOne($c);
   }
@@ -1458,7 +1462,32 @@ class Student extends BaseStudent
 		return SchoolBehaviourFactory::getInstance()->getOptionalCourseSubjectStudents($this, $school_year);
 
 	}
-
+	
+	public function isRepproved()
+	{
+		$current_scsy = $this->getCurrentStudentCareerSchoolYear();
+		
+		(!is_null($current_scsy))? $last_scsy = $this->getLastStudentCareerSchoolYear($current_scsy->getCareerSchoolYear()) : null;
+			
+		if(!is_null($last_scsy) && !is_null($current_scsy))	
+			
+			return ($last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED || $current_scsy->getStatus() == StudentCareerSchoolYearStatus:: REPPROVED);
+		
+		else
+		{
+			if(!is_null($last_scsy))
+			{
+				return $last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
+			}
+			else
+			{
+				if(!is_null($current_scsy))
+					return $current_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
+				else
+					return false;
+			}
+		}
+	}
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
