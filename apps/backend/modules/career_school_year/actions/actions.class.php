@@ -279,6 +279,7 @@ class career_school_yearActions extends autoCareer_school_yearActions
   {
     $this->career_school_year = $this->getRoute()->getObject();
     $this->form = new MatriculateGraduatedStudentsForm();
+   
   }
 
   public function executeSaveMatriculateGraduatedFromOtherCareer(sfWebRequest $request)
@@ -299,8 +300,16 @@ class career_school_yearActions extends autoCareer_school_yearActions
 
       if ($this->form->isValid())
       {
-        $this->form->save();
-        $this->getUser()->setFlash('notice', 'Los egresados fueron matriculados en la carrera exitosamente.');
+        try
+        {
+          $this->form->save();
+          $this->getUser()->setFlash('notice', 'Los egresados fueron matriculados en la carrera exitosamente.');
+        }
+        catch (PropelException $e)
+        {
+          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+        }
+     
       }
       else
       {
