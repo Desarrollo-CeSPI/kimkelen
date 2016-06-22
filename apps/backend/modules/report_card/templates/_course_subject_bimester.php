@@ -47,7 +47,7 @@
 
       <?php $course_result = $course_subject_student->getCourseResult() ?>
       <?php if (!$course_subject_student->hasSomeMarkFree()): ?>
-        <td><?php echo ($course_result) ? $course_result->getResultStr() : '' ?></td>
+        <td><?php echo ($course_result) ? $course_result->getResultStr() .'': '' ?></td>
       <?php else: ?>
         <td></td>
       <?php endif; ?>
