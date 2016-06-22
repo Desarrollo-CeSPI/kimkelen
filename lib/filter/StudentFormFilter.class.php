@@ -200,10 +200,26 @@ class StudentFormFilter extends BaseStudentFormFilter
 
   public function addStatusColumnCriteria(Criteria $criteria, $field, $values)
   {
-    $school_year = SchoolYearPeer::retrieveCurrent();
-
     $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
-    $criteria->add(StudentCareerSchoolYearPeer::STATUS, $values);
+	
+	//si $values es Repetidor del año pasado pero cursando año lectivo actual
+	if($values == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED)
+	{
+		//chequea que en el año anterior tenga estado REPPROVED y para este año tenga matricula
+		$current_school_year = SchoolYearPeer::retrieveCurrent();
+		$school_year = SchoolYearPeer::retrieveLastYearSchoolYear($current_school_year);
+		$criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,CareerSchoolYearPeer::ID);
+		$criteria->addJoin(SchoolYearStudentPeer::STUDENT_ID,StudentPeer::ID);
+		$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
+		$criteria->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
+		$criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $current_school_year->getId());
+		
+	}else
+	{
+	 $criteria->add(StudentCareerSchoolYearPeer::STATUS, $values);
+	}
+    
+   
   }
 
   /**
