@@ -248,14 +248,35 @@ class student_attendanceActions extends sfActions
   
   public function executeStudentAttendanceShowDay(sfWebRequest $request)
   {
-	  $params = $request->getParameter('multiple_student_attendance');
+	$params = $request->getParameter('multiple_student_attendance');
 	  
-	  if(is_null($params))
-	  {
-		  $params['back_url'] = $request->getParameter('url');
-		  $params['']
-	  }
-  
+	if(is_null($params))
+	{
+	  $params['back_url'] = $request->getParameter('url');
+	  $params['year'] = $request->getParameter('year');
+	  $params['day'] = $request->getParameter('day') === null ? date('Y-m-d') : $request->getParameter('day');
+	  $params['division_id'] = $request->getParameter('division_id');
+	  $params['course_subject_id'] = $request->getParameter('course_subject_id') == '' ? null : $request->getParameter('course_subject_id');
+	  $params['career_school_year_id'] = $request->getParameter('career_school_year_id');
+		  
+	}
+	  
+	$multiple_student_attendance_day_form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceDayForm();
+
+	$this->form = new $multiple_student_attendance_day_form;
+	$this->form->setDefaults($params);
+	$this->form->configureStudents();
+
+	if (!isset($params['back_url']))
+	{
+	  $this->back_url = ($request->getParameter('back_url'))? $request->getParameter('back_url'): $this->getUser()->getAttribute('back_url'); ;
+	}
+	else
+	{
+	  $this->back_url = $params['back_url'];
+	}
+
+	$this->title = $this->form->isAttendanceBySubject() ? 'Load attendance for %subject%' : 'Load attendance day for %division%';
   }
 
 }
