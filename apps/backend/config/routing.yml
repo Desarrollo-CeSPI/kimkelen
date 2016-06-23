@@ -376,6 +376,10 @@ student_attendance_day:
   url: /inasistencias-por-dia
   param: { module: student_attendance, action: SelectValuesForAttendanceDay }
 
+student_attendance_day_show_day:
+  url: /inasistencias_por_dia
+  param: { module: student_attendance, action: SelectValuesForAttendanceDayShowDay }
+
 save_student_attendance:
   url: /student_attendance/SaveStudentAttendance
   param: { module: student_attendance, action: SaveStudentAttendance }
@@ -768,3 +772,5 @@ default_index:
 
 default:
   url:   /:module/:action/*
+
+

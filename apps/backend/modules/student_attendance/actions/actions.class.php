@@ -82,6 +82,8 @@ class student_attendanceActions extends sfActions
   {
     $this->getUser()->clearAttribute('back_url');
     $this->form = new SelectValuesForAttendanceDayForm();
+    $this->url_action = 'student_attendance/SelectValuesForAttendanceDay';
+    
     if ($request->isMethod('POST'))
     {
       $this->form->bind($request->getParameter($this->form->getName()));
@@ -222,6 +224,38 @@ class student_attendanceActions extends sfActions
     }
 
     $this->setTemplate('StudentAttendance');
+  }
+  
+  public function executeSelectValuesForAttendanceDayShowDay(sfWebRequest $request)
+  {
+	$this->getUser()->clearAttribute('back_url');
+    $this->form = new SelectValuesForAttendanceDayForm();
+    $this->url_action = 'student_attendance/SelectValuesForAttendanceDayShowDay';
+    
+    if ($request->isMethod('POST'))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $request->setParameter('back_url', 'student_attendance/SelectValuesForAttendanceDayShowDay');
+        $this->getUser()->setAttribute('back_url', 'student_attendance/SelectValuesForAttendanceDayShowDay');
+        $this->forward('student_attendance', 'StudentAttendanceShowDay');
+      }
+    }
+    
+    $this->setTemplate('SelectValuesForAttendanceDay');  
+  }
+  
+  public function executeStudentAttendanceShowDay(sfWebRequest $request)
+  {
+	  $params = $request->getParameter('multiple_student_attendance');
+	  
+	  if(is_null($params))
+	  {
+		  $params['back_url'] = $request->getParameter('url');
+		  $params['']
+	  }
+  
   }
 
 }
