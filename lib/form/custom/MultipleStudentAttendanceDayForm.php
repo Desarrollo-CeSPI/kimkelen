@@ -31,14 +31,46 @@
  */
 class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
 {
+	
+  public function configureStudents()
+  {
+    $this->year = $this->getDefault('year');
+    $this->division_id = $this->getDefault('division_id');
+    $this->course_subject_id = $this->getDefault('course_subject_id') == '' || $this->getDefault('course_subject_id') === null ? null : $this->getDefault('course_subject_id');
 
+    $this->division = DivisionPeer::retrieveByPK($this->division_id);
+    $this->course_subject = CourseSubjectPeer::retrieveByPK($this->course_subject_id);
+
+    $this->career_school_year_id = $this->getDefault('career_school_year_id');
+    $this->configureDays();
+
+    $sf_user = sfContext::getInstance()->getUser();
+    $this->students = $this->getStudents();
+    
+    foreach ($this->students as $student)
+    {
+      $name = 'student_name_' . $student->getId();
+      $this->setWidget($name, new mtWidgetFormPlain(array('object' => $student)));
+      $this->setValidator($name, new sfValidatorPass());
+
+      
+      $name = 'student_attendance_' . $student->getId() . '_' . $this->day;
+      $this->setAbsenceWidget($name);
+      $student_attendance = StudentAttendancePeer::retrieveByDateAndStudent($this->day, $student, $this->course_subject_id, $this->career_school_year_id);
+
+      if (!is_null($student_attendance))
+      {
+        $this->setAttendanceDefault($name, $student_attendance);  
+      }
+      
+    }
+  }
   public function configureDays()
   {
     $this->day = $this->getDefault('day');
     $this->day = str_replace('/', '-', $this->day);
     $this->day = date('Y-m-d', strtotime($this->day));
-    $this->day_of_week = date("w", strtotime($this->day));
-    
+
   }
 
   public function save()
@@ -53,11 +85,9 @@ class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
       {
           $student_attendance = StudentAttendancePeer::retrieveOrCreate($student, $this->course_subject_id,  $this->day, $this->career_school_year_id);
 
-          if (!$student_attendance->isNew())
-          {
-            $student_attendance->delete($con);
-          }
-        
+          $name = 'student_attendance_' . $student->getId() . '_' . $this->day;
+          $this->setStudentAttendanceValue($name, $student_attendance);
+          $student_attendance->save($con);
       }
 
       $con->commit();

@@ -251,7 +251,7 @@ root:
         credentials: [edit_student_attendance, edit_student_attendance_history]
         menu:
           attendance_show_day:
-            title: Asistencia por dia
+            title: Asistencia por día
             url: @student_attendance_day_show_day
             credentials: [edit_student_attendance, edit_student_attendance_history]
           attendance_show_week:
@@ -261,8 +261,16 @@ root:
             
       student_attendance_subject:
         title: Attendance (subject)
-        url: @student_attendance_subject
         credentials: [edit_student_attendance, edit_student_attendance_history]
+        menu:
+          attendance_show_day:
+            title: Asistencia por día
+            url: @student_attendance_subject_show_day
+            credentials: [edit_student_attendance, edit_student_attendance_history]
+          attendance_show_week:
+            title: Asistencia por semana
+            url: @student_attendance_subject
+            credentials: [edit_student_attendance, edit_student_attendance_history]
       attendance_justification:
         title: Attendance justification
         url: @attendance_justification

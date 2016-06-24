@@ -27,7 +27,7 @@
   </h1>
   <div id="sf_admin_content">
 
-    <form method="POST" action="<?php echo url_for('student_attendance/SelectValuesForAttendanceSubject') ?>">
+    <form method="POST" action="<?php echo url_for($url_action) ?>">
 
       <?php echo strtr($form->getWidgetSchema()->getFormFormatter()->getDecoratorFormat(), array("%content%" => (string) $form)) ?>
 
