@@ -104,6 +104,7 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
     $c = new Criteria();
     $c->addJoin(StudentPeer::ID, CareerStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
     $c->addAnd(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE, criteria::NOT_EQUAL);
+    $c->addAnd(CareerStudentPeer::CAREER_ID, $career_school_year->getCareer()->getId());
     $c->addAnd(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($school_year), Criteria::IN);
     return $c;
   }
