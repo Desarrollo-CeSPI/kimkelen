@@ -1977,3 +1977,13 @@ div.wc-cal-event{
 {
   background-image: url('../images/change_status.png') !important;
 }
+.warning.change_status
+{
+  width: 47% !important;
+  display:block !important;
+}
+.student_career_free {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #39F;
+}

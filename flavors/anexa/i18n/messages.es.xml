@@ -4327,6 +4327,38 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Status id</source>
                 <target>Estado</target>
             </trans-unit>
+            <trans-unit>
+                <source>Start date reserve</source>
+                <target>Fecha de inicio de la reserva</target>
+            </trans-unit>
+	       <trans-unit>
+                <source>End date reserve</source>
+                <target>Fecha de fin de la reserva</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 1</source>
+                <target>Primer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 2</source>
+                <target>Segundo año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 3</source>
+                <target>Tercer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 4</source>
+                <target>Cuarto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 5</source>
+                <target>Quinto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 6</source>
+                <target>Sexto año</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

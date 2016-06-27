@@ -67,7 +67,7 @@ a img
 #header .top_navigation a{
     font-family:Trebuchet MS,sans-serif;
     font-size:12px;
-    color:white;
+    color:#FFF;
     font-weight:bold;
     text-decoration:none;
 }
@@ -86,6 +86,7 @@ a img
     clear:both;
     text-align:right;
     color:white;
+
 }
 
 #header .version {
@@ -2041,3 +2042,21 @@ div.wc-cal-event{
     padding: 1px;
     background-color: #E61800  !important;
 }
+
+.sf_admin_action_change_student_status a
+{
+	background-image: url('../images/change_status.png') !important;
+}
+
+.warning.change_status
+{
+  width: 47% !important;
+  display:block !important;
+}
+.student_career_free 
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #39F;
+}
+

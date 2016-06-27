@@ -253,5 +253,8 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
     return DivisionPeer::doSelect($c);
   }
 
-
+   public function isFree()
+  {
+    return $this->getStatus() == StudentCareerSchoolYearStatus::FREE;
+  }
 }

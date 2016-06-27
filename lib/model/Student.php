@@ -1440,8 +1440,29 @@ class Student extends BaseStudent
 
 	public function canChangeStudentStatus()
 	{
-		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
-		 
+		if($this->isInscriptedInCareer())
+		{
+			if($this->getLastCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE )
+			{ 
+				return false;
+			}
+			else
+			{
+				if (is_null($this->getLastStudentCareerSchoolYear()))
+				{
+					return false;
+				}
+				else
+				{
+					return ($this->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN);
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+	
 	}
 	
 	public function getCountStudentRepprovedCourseSubject()
@@ -1452,6 +1473,122 @@ class Student extends BaseStudent
 		$c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
 	
 		return StudentRepprovedCourseSubjectPeer::doCount($c);
+	}
+	
+	public function hasActiveReserve(){
+		//tiene reserva de banco activa.
+		
+		$c = new Criteria();
+		$c->addJoin(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
+		$c->add(StudentReserveStatusRecordPeer::END_DATE, null, Criteria::ISNULL);
+
+		return StudentReserveStatusRecordPeer::doSelectOne($c);
+	}
+	
+	public function isNextToReturn()
+	{
+		$reserve = $this->hasActiveReserve();
+		$start_date = new DateTime($reserve->getStartDate());
+		
+		//sumo 1 año
+		$end_date = $start_date->add(new DateInterval('P1Y'));
+		//hoy
+		$now = new DateTime("now");
+		
+		$interval = $now->diff($end_date);
+		$days = $interval->format('%r%a');
+		
+		//30 dias . Podria ser configurable.
+		return ($days > 0 && $days <= 30);
+		
+	}
+	
+	public function isApproved($career_school_year)
+	{
+		$con = Propel::getConnection();
+		$con->beginTransaction();
+		
+		// materias de este año
+		$course_subject_students = $this->getCourseSubjectStudentsForSchoolYear($career_school_year->getSchoolYear());
+		
+		// para todas las materias cursadas este año
+		foreach ($course_subject_students as $course_subject_student)
+		{
+			if (!$course_subject_student->areAllMarksClosed())
+			{
+			  $con->rollBack();
+			  return 'El alumno tiene materias sin cerrar';
+			}
+			else
+			{
+				//Si tiene aprobada la cursada
+				if ($course_subject_student->getStudentApprovedCourseSubject())
+				{
+				  $student_approved_course_subject = $course_subject_student->getStudentApprovedCourseSubject();
+				  $student_approved_career_subject = $student_approved_course_subject->getStudentApprovedCareerSubject();
+				  /*  REVISAR POR QUE DA ERROR
+				  if (is_null($student_approved_career_subject))
+				  {
+					$student_approved_career_subject = new StudentApprovedCareerSubject();
+					$student_approved_career_subject->setCareerSubject($student_approved_course_subject->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
+					$student_approved_career_subject->setStudent($student_approved_course_subject->getStudent());
+					$student_approved_career_subject->setSchoolYear($student_approved_course_subject->getSchoolYear());
+					StudentApprovedCareerSubjectPeer::doInsert($student_approved_career_subject);
+					
+					
+					$student_approved_career_subject->setMark($student_approved_course_subject->getMark());
+
+					
+					$student_approved_career_subject->save();
+					$student_approved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
+					$student_approved_course_subject->save();
+					
+				  }*/
+				}
+				/*//    Esto seria por el caso en que  exista la aprobacion y por un error de versiones  no este asociada la aprobacion de la cursada con la cursada en realida!
+				else
+				{
+				  $c = new Criteria();
+				  $c->add(StudentApprovedCourseSubjectPeer::STUDENT_ID, $course_subject_student->getStudentId());
+				  $c->add(StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $course_subject_student->getCourseSubjectId());
+				  $c->add(StudentApprovedCourseSubjectPeer::SCHOOL_YEAR_ID, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
+
+				  if ($result = StudentApprovedCourseSubjectPeer::doSelectOne($c))
+				  {
+					//aca encontramos la cursada aprobada y se la asociamos al course_subject_student
+					$course_subject_student->setStudentApprovedCourseSubject($result);
+					$course_subject_student->save($con);
+					$result->close($con);
+				  }else
+				  {
+					  // Si desaprobò la cursada 
+						if ($course_subject_student->countStudentDisapprovedCourseSubjects(null, false, $con))
+						{
+							$con->rollBack();
+							return 'El alumno tiene cursadas desaprobadas';
+						}
+						else
+						{
+							// Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
+					
+							$average = $course_subject_student->getMarksAverage($con);
+							if (SchoolBehaviourFactory::getEvaluatorInstance()->isApproved($course_subject_student, $average, $con))
+							{
+								$student_approved_course_subject = SchoolBehaviourFactory::getEvaluatorInstance()->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
+								$student_approved_course_subject->close($con);
+							}else{
+								 $con->rollBack();
+								 return 'El alumno tiene cursadas desaprobadas';
+							}
+						
+						} 
+				  
+				  }
+				}*/  	
+			}
+		}  
+		
+		return true;
 	}
 
 

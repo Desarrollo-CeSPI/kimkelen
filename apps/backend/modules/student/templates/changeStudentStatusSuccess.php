@@ -20,17 +20,22 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('Change %student% status', array("%student%" => $student)) .' en ' . __('Year ' . $student->getLastCareerStudent()->getCurrentStudentCareerSchoolYear()->getYear()) ?></h1>
-
-	<div>
+  <h1><?php echo __('Change %student% status', array("%student%" => $student)) .' en ' . __('Year ' . $student->getLastStudentCareerSchoolYear()->getYear()) ?></h1>
+  <div >
+	<div class="warning change_status">
 		<?php echo __('El estado Retirado de la institución lo desmatriculará y desactivará.') ?>
 	</div>
-	<div>
-		<?php echo __('El estado Retirado de la institución con reserva de banco lo desmatriculará.') ?>
+	<div class="warning change_status">
+		<?php echo __('El estado Retirado de la institución con reserva de banco lo desmatriculará. La reserva es de 1 año a partir de la fecha de inicio de la reserva.') ?>
 	</div>
-	<div>
-		<?php echo __('El estado Libre debe ser usado para aquéllos alumnos que terminaron la escuela debiendo materias.') ?>
+	<div class="warning change_status">
+		<?php echo __('El estado Libre debe ser usado para aquellos alumnos que terminaron la escuela debiendo materias.') ?>
 	</div>
+	<div class="warning change_status">
+		<?php echo __('El estado Cursando debe ser usado para aquellos alumnos que vuelven de la Reserva de banco. Se debe indicar la fecha de fin de la misma.') ?>
+	</div>
+  </div>
+	
 
   <div id="sf_admin_content">
     <form action="<?php echo url_for('student/updateChangeStudentStatus') ?>" method="post">
