@@ -20,7 +20,7 @@
  */ 
 ?>
 <div id="analytic_signatures">
-    <div id="signature_4" class="signatureWithoutCBFE"><?php echo __('analytic_signature_4'); ?></div>
+    <div id="signature_4" class="signatureWithoutCBFE"><?php echo __('analytic_signature_1'); ?></div>
     <div id="signature_1" class="signatureWithoutCBFE"><?php echo __('analytic_signature_1'); ?></div>
     <div id="signature_2" class="signatureWithoutCBFE sig"><?php echo __('analytic_signature_2'); ?></div>  
 
