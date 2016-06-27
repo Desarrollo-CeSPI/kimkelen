@@ -775,4 +775,21 @@ classes:
         description:     Referencia el estado al cual esta asociado el motivo
         type:            integer
         required:        true
-      
+        
+  StudentReserveStatusRecord:
+    tableName:           student_reserve_status_record
+    description:         Cada tupla representa la reserva de banco de un alumno
+    columns:
+     id:
+     student_id:
+       required:         true
+       type:             integer
+       foreignTable:     student
+       foreignReference: id
+       onDelete:         cascade
+     start_date:
+       type:            date
+       required:        true
+     end_date:
+       type:            date
+       required:        true

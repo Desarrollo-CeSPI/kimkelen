@@ -277,4 +277,9 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
     return 'PathwayCommissionForm';
   }
+  
+  public function getMultipleStudentAttendanceDayForm()
+  {
+    return 'MultipleStudentAttendanceDayForm';
+  }
 }
