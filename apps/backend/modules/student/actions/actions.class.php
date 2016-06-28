@@ -805,16 +805,17 @@ class studentActions extends autoStudentActions
 				
 				break;
 			case StudentCareerSchoolYearStatus::APPROVED:
-				/*
-				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED )
+				
+				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED  || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE)
 				{
 					$result=$this->student->isApproved($student_career_school_year->getCareerSchoolYear());
 					if($result===true)
 					{
-						$student_career_school_year->setIsProcessed(true);
-						$student_career_school_year->setStatus(StudentCareerSchoolYearStatus::APPROVED);
-						$student_career_school_year->save();
-						$this->getUser()->setFlash('info','The item was updated successfully.');
+						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+						$a = $this->form->save();
+						
+						$this->getUser()->setFlash('info','The item was updated successfully.jhkj');
 					}
 					else
 					{
@@ -825,9 +826,9 @@ class studentActions extends autoStudentActions
 				}
 				else
 				{
-					$this->getUser()->setFlash('error','El alumno debe estar cursando.');
+					$this->getUser()->setFlash('error','El alumno debe estar cursando o estar Libre.');
 				}
-				*/
+				
 				break;
 		}
 		

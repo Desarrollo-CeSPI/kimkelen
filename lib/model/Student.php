@@ -1522,7 +1522,7 @@ class Student extends BaseStudent
 				{
 				  $student_approved_course_subject = $course_subject_student->getStudentApprovedCourseSubject();
 				  $student_approved_career_subject = $student_approved_course_subject->getStudentApprovedCareerSubject();
-				  /*  REVISAR POR QUE DA ERROR
+				    //REVISAR POR QUE DA ERROR
 				  if (is_null($student_approved_career_subject))
 				  {
 					$student_approved_career_subject = new StudentApprovedCareerSubject();
@@ -1539,9 +1539,9 @@ class Student extends BaseStudent
 					$student_approved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
 					$student_approved_course_subject->save();
 					
-				  }*/
+				  }
 				}
-				/*//    Esto seria por el caso en que  exista la aprobacion y por un error de versiones  no este asociada la aprobacion de la cursada con la cursada en realida!
+				//    Esto seria por el caso en que  exista la aprobacion y por un error de versiones  no este asociada la aprobacion de la cursada con la cursada en realida!
 				else
 				{
 				  $c = new Criteria();
@@ -1557,11 +1557,18 @@ class Student extends BaseStudent
 					$result->close($con);
 				  }else
 				  {
-					  // Si desaprobò la cursada 
+					  // Si desaprobò la cursada chequeo que la haya aprobado en las mesas siguientes
 						if ($course_subject_student->countStudentDisapprovedCourseSubjects(null, false, $con))
 						{
-							$con->rollBack();
-							return 'El alumno tiene cursadas desaprobadas';
+						
+						 	$student_disapproved_course_subject = $course_subject_student->getLastStudentDisapprovedCourseSubject();
+						 
+							if(! $student_disapproved_course_subject->isApproved())
+							{
+						    	$con->rollBack();
+								return 'El alumno debe materias.';
+						    }
+							
 						}
 						else
 						{
@@ -1573,14 +1580,19 @@ class Student extends BaseStudent
 								$student_approved_course_subject = SchoolBehaviourFactory::getEvaluatorInstance()->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
 								$student_approved_course_subject->close($con);
 							}else{
-								 $con->rollBack();
-								 return 'El alumno tiene cursadas desaprobadas';
-							}
+								 
+								$student_disapproved_course_subject = $course_subject_student->getLastStudentDisapprovedCourseSubject();
 						
+								if(! $student_disapproved_course_subject->isApproved())
+								{
+									$con->rollBack();
+									return 'El alumno debe materias.';
+								}
+							 }
 						} 
 				  
-				  }
-				}*/  	
+				   }
+			    } 	
 			}
 		}  
 		
