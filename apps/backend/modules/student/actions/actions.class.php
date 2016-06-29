@@ -701,6 +701,7 @@ class studentActions extends autoStudentActions
 						{
 							$s->delete();
 						}
+						$this->getUser()->setFlash('info','The item was updated successfully.' );
 					}	
 					
 				}
@@ -715,10 +716,10 @@ class studentActions extends autoStudentActions
 					
 					$student_reserve->setStartDate($date);
 					$student_reserve->save();		
-					
+					$this->getUser()->setFlash('info','The item was updated successfully.' );
 				}
 				
-				$this->getUser()->setFlash('info','The item was updated successfully.' );	
+					
 				
 				break;
 				
