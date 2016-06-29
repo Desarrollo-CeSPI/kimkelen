@@ -205,11 +205,11 @@ generator:
             action: showAssistanceAndSanctionReport
             condition: canGenerateReport
             
-          change_student_status:
-            label: Change student status
-            credentials: [edit_student]
-            action: changeStudentStatus
-            condition: canChangeStudentStatus
+          #change_student_status:
+          #  label: Change student status
+          #  credentials: [edit_student]
+          #  action: changeStudentStatus
+          #  condition: canChangeStudentStatus
             
       filter:
 
