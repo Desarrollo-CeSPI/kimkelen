@@ -761,7 +761,7 @@ class studentActions extends autoStudentActions
 				}
 				else
 				{
-					$this->getUser()->setFlash('error', 'Debe ser sel ultimo año del alumno.');
+					$this->getUser()->setFlash('error', 'El alumno debe estar en el ultimo año de la carrera.');
 				}	
 				
 				break;
@@ -806,23 +806,58 @@ class studentActions extends autoStudentActions
 				break;
 			case StudentCareerSchoolYearStatus::APPROVED:
 				
-				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED  || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE)
+				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE)
 				{
-					$result=$this->student->isApproved($student_career_school_year->getCareerSchoolYear());
-					if($result===true)
-					{
-						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-						$a = $this->form->save();
-						
-						$this->getUser()->setFlash('info','The item was updated successfully.jhkj');
-					}
-					else
-					{
-						$this->getUser()->setFlash('error',$result);
-					}
 					
+					if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE){
 						
+						//no debe materias.
+						if($this->student->getCountStudentRepprovedCourseSubject() == 0){
+							
+							//cambio el estado
+							$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+							$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+							$a = $this->form->save();
+							
+							//cambio el estado de la carrera.
+							$career = $student_career_school_year->getCareerSchoolYear()->getCareer();
+							$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $this->student->getId());
+							$career_student->setStatus(CareerStudentStatus::GRADUATE);
+							$current_school_year = SchoolYearPeer::retrieveCurrent();
+							$career_student->setGraduationSchoolYearId($current_school_year->getId());
+							$career_student->save(Propel::getConnection());
+							
+							//deshabilito la persona
+							$this->student->getPerson()->setIsActive(false);
+							$this->student->getPerson()->save();
+							
+							$this->getUser()->setFlash('info','The item was updated successfully.');
+						}	
+						else
+						{
+							$this->getUser()->setFlash('error','El alumno tiene materias previas sin aprobar.');
+					    }
+					    
+					}else{
+						/*SOLO CHEQUEA QUE TENGA LAS MATERIAS CERRADAS*/
+						
+						$course_subject_students = $this->student->getCourseSubjectStudentsForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear());
+						$css = array_shift($course_subject_students);
+						
+						/* Si tengo alguna materia sin cerrar */
+						if (!$css->areAllMarksClosed())
+						{
+							$this->getUser()->setFlash('error',"El alumno tiene cursadas sin cerrar.");
+						}
+						else
+						{
+							//cambio el estado
+							$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+							$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
+							$a = $this->form->save();
+							$this->getUser()->setFlash('info','The item was updated successfully.');
+						}
+					}		
 				}
 				else
 				{

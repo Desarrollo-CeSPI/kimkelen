@@ -34,6 +34,9 @@
 	<div class="warning change_status">
 		<?php echo __('El estado Cursando debe ser usado para aquellos alumnos que vuelven de la Reserva de banco. Se debe indicar la fecha de fin de la misma.') ?>
 	</div>
+	<div class="warning change_status">
+		<?php echo __('El estado Aprobado debe ser usado para aquellos alumnos Libres o Cursando. Si el estado era Libre, lo egresa y deshabilita.') ?>
+	</div>
   </div>
 	
 

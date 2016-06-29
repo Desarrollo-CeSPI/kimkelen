@@ -1498,106 +1498,72 @@ class Student extends BaseStudent
 		return ($days > 0 && $days <= 30);
 		
 	}
-	
+	/*
 	public function isApproved($career_school_year)
-	{
-		$con = Propel::getConnection();
-		$con->beginTransaction();
+	{	
 		
 		// materias de este año
 		$course_subject_students = $this->getCourseSubjectStudentsForSchoolYear($career_school_year->getSchoolYear());
 		
 		// para todas las materias cursadas este año
-		foreach ($course_subject_students as $course_subject_student)
+		foreach ($course_subject_students as $css)
 		{
-			if (!$course_subject_student->areAllMarksClosed())
+			/*
+			 * Se obtiene el resultado de la cursada. Si esta aprobada se crea el StudentApprovedCareerSubject.
+			 * Si esta desaprobada se crea la mesa de examen.
+			 */
+			 
+            /* Si tengo alguna materia sin cerrar */
+			/*if (!$css->areAllMarksClosed())
 			{
-			  $con->rollBack();
-			  return 'El alumno tiene materias sin cerrar';
+				return "El alumno tiene materias sin cerrar.";
 			}
-			else
+
+			/* Si tiene aprobada la cursada */
+			/*if (!is_null($sacs = $css->getStudentApprovedCourseSubject($con)))
 			{
-				//Si tiene aprobada la cursada
-				if ($course_subject_student->getStudentApprovedCourseSubject())
-				{
-				  $student_approved_course_subject = $course_subject_student->getStudentApprovedCourseSubject();
-				  $student_approved_career_subject = $student_approved_course_subject->getStudentApprovedCareerSubject();
-				    //REVISAR POR QUE DA ERROR
-				  if (is_null($student_approved_career_subject))
+				//si no tiene el StudentApprovedCareerSubject se lo creo
+				if (is_null($student_approved_career_subject = $sacs->getStudentApprovedCareerSubject($con)))
 				  {
 					$student_approved_career_subject = new StudentApprovedCareerSubject();
-					$student_approved_career_subject->setCareerSubject($student_approved_course_subject->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
-					$student_approved_career_subject->setStudent($student_approved_course_subject->getStudent());
-					$student_approved_career_subject->setSchoolYear($student_approved_course_subject->getSchoolYear());
-					StudentApprovedCareerSubjectPeer::doInsert($student_approved_career_subject);
+					$student_approved_career_subject->setCareerSubject($sacs->getCourseSubject($con)->getCareerSubject($con));
+					$student_approved_career_subject->setStudent($sacs->getStudent($con));
+					$student_approved_career_subject->setSchoolYear($sacs->getSchoolYear($con));
+					$student_approved_career_subject->setMark($sacs->getMark());
+					$student_approved_career_subject->save($con);
 					
-					
-					$student_approved_career_subject->setMark($student_approved_course_subject->getMark());
+					$sacs->setStudentApprovedCareerSubject($student_approved_career_subject);
+					$sacs->save($con);
 
-					
-					$student_approved_career_subject->save();
-					$student_approved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
-					$student_approved_course_subject->save();
-					
 				  }
-				}
-				//    Esto seria por el caso en que  exista la aprobacion y por un error de versiones  no este asociada la aprobacion de la cursada con la cursada en realida!
-				else
-				{
-				  $c = new Criteria();
-				  $c->add(StudentApprovedCourseSubjectPeer::STUDENT_ID, $course_subject_student->getStudentId());
-				  $c->add(StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $course_subject_student->getCourseSubjectId());
-				  $c->add(StudentApprovedCourseSubjectPeer::SCHOOL_YEAR_ID, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
-
-				  if ($result = StudentApprovedCourseSubjectPeer::doSelectOne($c))
-				  {
-					//aca encontramos la cursada aprobada y se la asociamos al course_subject_student
-					$course_subject_student->setStudentApprovedCourseSubject($result);
-					$course_subject_student->save($con);
-					$result->close($con);
-				  }else
-				  {
-					  // Si desaprobò la cursada chequeo que la haya aprobado en las mesas siguientes
-						if ($course_subject_student->countStudentDisapprovedCourseSubjects(null, false, $con))
-						{
-						
-						 	$student_disapproved_course_subject = $course_subject_student->getLastStudentDisapprovedCourseSubject();
-						 
-							if(! $student_disapproved_course_subject->isApproved())
-							{
-						    	$con->rollBack();
-								return 'El alumno debe materias.';
-						    }
-							
-						}
-						else
-						{
-							// Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
 					
-							$average = $course_subject_student->getMarksAverage($con);
-							if (SchoolBehaviourFactory::getEvaluatorInstance()->isApproved($course_subject_student, $average, $con))
-							{
-								$student_approved_course_subject = SchoolBehaviourFactory::getEvaluatorInstance()->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
-								$student_approved_course_subject->close($con);
-							}else{
-								 
-								$student_disapproved_course_subject = $course_subject_student->getLastStudentDisapprovedCourseSubject();
-						
-								if(! $student_disapproved_course_subject->isApproved())
-								{
-									$con->rollBack();
-									return 'El alumno debe materias.';
-								}
-							 }
-						} 
-				  
-				   }
-			    } 	
-			}
-		}  
+			}else{
+				/* Si desaprobó la cursada*/
+			/*	if ($css->countStudentDisapprovedCourseSubjects(null, false, $con))
+				{
+					$sdcs = array_shift($css->getStudentDisapprovedCourseSubjects(null, $con));
+					
+					$c = new Criteria();
+					$c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $sdcs->getExaminationNumber());
+					$c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $sdcs->getCourseSubjectStudent()->getId());
+					
+					//Si no esta la mesa creada se crea.
+					if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
+					{ 
+						$course_subject_student_examination = new CourseSubjectStudentExamination();
+						$course_subject_student_examination->setCourseSubjectStudent($css);
+						$examination_number = $css->getCourseResult()->getExaminationNumber();
+						$course_subject_student_examination->setExaminationNumber($examination_number);
+						$course_subject_student_examination->save($con);
+					}
+				}
+			}			
+		}
+       
+		$student_career_school_year->setIsProcessed(true);
+		$student_career_school_year->save($con);
 		
-		return true;
-	}
+	}*/
 
 }
 
