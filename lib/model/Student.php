@@ -1484,6 +1484,11 @@ class Student extends BaseStudent
 	public function isNextToReturn()
 	{
 		$reserve = $this->hasActiveReserve();
+		
+		if(is_null($reserve->getStartDate()))
+		{
+			return false;
+		}
 		$start_date = new DateTime($reserve->getStartDate());
 		
 		//sumo 1 año
