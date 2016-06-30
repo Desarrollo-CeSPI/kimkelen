@@ -812,7 +812,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
 
     if (!is_null($course_subject_id))
-    {
+    {	
       if ($course_subject_id instanceof CourseSubject)
       {
         $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id->getId());
@@ -1189,5 +1189,39 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 		return $results;
 
 	}
+	
+  public function getAbsencesReport($career_school_year_id, $student_id)
+  {
+    $c = new Criteria();
+    $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
+    $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
+	$c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
 
+    return $student_attendances = StudentAttendancePeer::doSelect($c);
+
+  }
+  
+  
+  public function getTotalAbsencesReport($career_school_year_id, $student_id, $exclude_justificated = true)
+  {
+    $absences = $this->getAbsencesReport($career_school_year_id, $student_id);
+    $rounder  = new StudentAttendanceRounder();
+    $total    = 0;
+
+    foreach ($absences as $absence)
+    {
+      // sacamos las justificadas, es decir se quiere el total SIN las justificadas
+      if ($exclude_justificated && $absence->hasJustification())
+      {
+        continue;
+      }
+
+      $total += $absence->getValue();
+      $rounder->process($absence);
+    }
+
+    $diff = $rounder->calculateDiff();
+
+    return $total + $diff;
+  }
 }
