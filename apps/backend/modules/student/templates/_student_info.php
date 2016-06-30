@@ -21,7 +21,7 @@
 
 <div class="student_head">
   <div class="person_name"><strong><?php echo link_to($student, 'student/show?id=' . $student->getId())?></strong></div>
-
+  <div class="student_global_file_number"><i><?php $student->getGlobalFileNumber() != '' and print __('Global file number %global_file_number%', array('%global_file_number%' => $student->getGlobalFileNumber())) ?></i></div>
 	<div class="active"><strong><?php echo __("Is Active?") ?></strong> 
 		<em><?php include_partial("student/is_active", array("student" => $student)) ?></em>	
 		
