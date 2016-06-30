@@ -2041,3 +2041,12 @@ div.wc-cal-event{
     padding: 1px;
     background-color: #E61800  !important;
 }
+
+.student_global_file_number {
+  font-size: 1.2em;
+  float: left;
+  border-left: 2px solid rgb(221, 221, 221);   
+  padding-left: 10px !important;
+  margin-left: 10px !important;
+  color: #0093DD !important;
+}
