@@ -1496,7 +1496,7 @@ div.no_results_advice {
 
 .student_tutor .tutor
 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .student_career_repproved
@@ -1975,10 +1975,9 @@ div.wc-cal-event{
     background-image: url('../images/certificate.png') !important;
 }
 
-.student_head .active .health
+.student_current_info .info_div .health
 {
-    color:#FF0000;
-    max-width: 100px;
+  color:#FF0000;
 }
 
 .student_health_info
@@ -2026,4 +2025,10 @@ div.wc-cal-event{
   padding-left: 10px !important;
   margin-left: 10px !important;
   color: #0093DD !important;
+}
+
+.student_tutor .tutor ul
+{
+  margin-top: 0em !important;
+  margin-bottom: 0em !important;
 }

@@ -1524,7 +1524,7 @@ div.no_results_advice {
 
 .student_tutor .tutor
 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .student_career_repproved
@@ -1970,4 +1970,15 @@ div.wc-cal-event{
   padding-left: 10px !important;
   margin-left: 10px !important;
   color: #0093DD !important;
+}
+
+.student_current_info .info_div .health
+{
+  color:#FF0000;
+}
+
+.student_tutor .tutor ul
+{
+  margin-top: 0em !important;
+  margin-bottom: 0em !important;
 }
