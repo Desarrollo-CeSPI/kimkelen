@@ -52,7 +52,7 @@
 
       <div class="report-title"><?php echo __('Absences') ?></div>
       <div style="clear:both"></div>
-      <?php if (count($student->getAbsences($student_career_school_year->getCareerSchoolYearId())) == 0): ?>
+      <?php if (count($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId())) == 0): ?>
         <div style="clear:both"></div>
         <span class="report-notice"><?php echo __('No se registraron inasistencias para este alumno.'); ?></span>
       <?php else: ?>
@@ -70,7 +70,7 @@
             </tr>
           </thead>
           <tbody class="print_body">
-            <?php foreach ($student->getAbsences($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
+            <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
               <tr>
                 <td><?php echo $absence->getFormattedDay(); ?></td>
                 <td><?php echo $absence->getValueString() ?></td>
@@ -86,17 +86,17 @@
           <tfoot>
             <tr>
               <td colspan="6" class="report-total">
-                <?php echo __('Total') . ': ' . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null, null, false), 2) ?>
+                <?php echo __('Total') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId(), false), 2) ?>
               </td>
             </tr>
             <tr>
               <td colspan="6" class="report-total">
-                <?php echo __('Total unjustified') . ': ' . round($student->getTotalAbsences($division->getCareerSchoolYearId(), null), 2) ?>
+                <?php echo __('Total unjustified') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId()), 2) ?>
               </td>
             </tr>
             <tr>
               <td colspan="6" class="report-total">
-                <?php echo __('Total justified') . ': ' . round($student->getTotalJustificatedAbsences($division->getCareerSchoolYearId(), null, null), 2) ?>
+                <?php echo __('Total justified') . ': ' . round($student->getTotalJustificatedAbsencesReport($division->getCareerSchoolYearId()), 2) ?>
               </td>
             </tr>
           </tfoot>
