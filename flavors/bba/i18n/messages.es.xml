@@ -4539,15 +4539,15 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Next month</source>
                 <target>Mes siguiente</target>
             </trans-unit>
-	        <trans-unit>
+            <trans-unit>
                 <source>Health info</source>
                 <target>Estado de la Ficha de Salud</target>
             </trans-unit>
-			<trans-unit>
+            <trans-unit>
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
-			<trans-unit>
+            <trans-unit>
                 <source>Analytical without CBFE</source>
                 <target>Certificado sin CBFE</target>
             </trans-unit>
@@ -4567,7 +4567,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
-	        <trans-unit>
+            <trans-unit>
                 <source>Optional Subjects</source>
                 <target>Asignaturas Optativas</target>
             </trans-unit>
@@ -4575,7 +4575,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>%speciality% subjects</source>
                 <target>Asignaturas de %speciality%</target>
             </trans-unit>
-	        <trans-unit>
+            <trans-unit>
                 <source>No suitable</source>
                 <target>No apto</target>
             </trans-unit>
@@ -4583,7 +4583,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Order</source>
                 <target>Orden</target>
             </trans-unit>
-	        <trans-unit>
+            <trans-unit>
                 <source>%speciality% subjects</source>
                 <target>Asignaturas de %speciality%</target>
             </trans-unit>
@@ -4591,11 +4591,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Withdraw with reserve</source>
                 <target>Retirado con reserva de banco</target>
             </trans-unit>
-			<trans-unit>
+            <trans-unit>
                 <source>Change student status</source>
                 <target>Cambiar el estado del alumno</target>
             </trans-unit>
-			<trans-unit>
+            <trans-unit>
                 <source>Change %student% status</source>
                 <target>Cambiar el estado de %student%</target>
             </trans-unit>
@@ -4611,9 +4611,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>next day</source>
                 <target>Día siguiente</target>
             </trans-unit>
-	    <trans-unit>
+            <trans-unit>
                 <source>previous day</source>
                 <target>Día anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Global file number %global_file_number%</source>
+                <target>Legajo: %global_file_number%</target>
             </trans-unit>
         </body>
     </file>

@@ -4336,6 +4336,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Order</source>
                 <target>Orden</target>
             </trans-unit>
+            <trans-unit>
+                <source>Global file number %global_file_number%</source>
+                <target>Legajo: %global_file_number%</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
