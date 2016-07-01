@@ -60,7 +60,9 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
 		if(!is_null($reserve))
 		{ 
 			$start_date = new DateTime($reserve->getStartDate());
-			$this->getWidget('start_date_reserve')->setOption('empty_values', array('year' =>  $start_date->format('Y'), 'month' => $start_date->format('m'), 'day' => $start_date->format('d')));
+			if(!is_null($start_date)){
+				$this->getWidget('start_date_reserve')->setOption('empty_values', array('year' =>  $start_date->format('Y'), 'month' => $start_date->format('m'), 'day' => $start_date->format('d')));
+			}	
 		}
 	}
     
