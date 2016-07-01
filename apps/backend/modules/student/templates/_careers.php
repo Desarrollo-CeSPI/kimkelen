@@ -18,9 +18,9 @@
  */ ?>
 <?php use_helper('I18N') ?>
 
-<div class="student_careers">
-<strong><?php echo __('Career') ?></strong>
-  <?php if ($cs = $student->getLastCareerStudent()): ?>
+<?php if ($cs = $student->getLastCareerStudent()): ?>
+  <div class="student_careers">
+    <strong><?php echo __('Career') ?></strong>
     <div style="margin-left:5px"><?php echo $cs->getCareer() ?></div>
     <div  style="margin-left:5px" class="student_career_orientation"><?php $cs->getOrientation() != '' and print __('Orientation: %orientation%', array('%orientation%' => $cs->getOrientation())) ?></div>
     <div style="margin-left:10px" class="student_career_orientation"><?php $cs->getSubOrientation() != '' and print __('Sub orientation: %sub_orientation%', array('%sub_orientation%' => $cs->getSubOrientation())) ?></div>
@@ -32,6 +32,5 @@
     <?php elseif ($cs->isGraduate()): ?>
       <div class="student_career_graduate"><strong><?php echo __('Graduate') ?></div>
     <?php endif ?>
-  <?php endif ?>
-
-</div>
+  </div>
+<?php endif ?>
