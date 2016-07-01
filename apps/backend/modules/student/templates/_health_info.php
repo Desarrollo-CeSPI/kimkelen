@@ -1,4 +1,5 @@
-<?php /*
+<?php 
+/*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -18,10 +19,16 @@
  */ ?>
 <?php use_helper('I18N') ?>
 
-<?php if ($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED): ?>
-	<div class="health"><strong> <?php echo __("Health card not received") ;?></strong></div>
-<?php elseif($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE):?>
-	<div class="health"><strong> <?php echo __("No suitable"); ?></strong></div>
-<?php elseif($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT):?>
-	<div class="health"><strong> <?php echo $student->getHealthInfoString(); ?></strong></div>
-<?php endif; ?>	
+
+<?php if ($student->getHealthInfoString() != " "): 
+
+		$health_info = $student->getHealthInfoString();
+		if (($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+			||($health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE)
+			||($health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT)):
+				
+				$class = "health";
+ 		endif; 
+	?>	
+	<div><strong><?php echo __('health info status:') ?></strong> <strong class="<?php echo $class ?>"><?php echo $student->getHealthInfoString() ?></strong></div>
+<?php endif ?>	
