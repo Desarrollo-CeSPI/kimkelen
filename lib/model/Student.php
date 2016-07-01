@@ -1467,8 +1467,8 @@ class Student extends BaseStudent
 	{
 		$current_scsy = $this->getCurrentStudentCareerSchoolYear();
 		
-		(!is_null($current_scsy))? $last_scsy = $this->getLastStudentCareerSchoolYear($current_scsy->getCareerSchoolYear()) : null;
-			
+		$last_scsy = (!is_null($current_scsy))? $this->getLastStudentCareerSchoolYear($current_scsy->getCareerSchoolYear()) : null;
+		
 		if(!is_null($last_scsy) && !is_null($current_scsy))	
 			
 			return ($last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED || $current_scsy->getStatus() == StudentCareerSchoolYearStatus:: REPPROVED);
