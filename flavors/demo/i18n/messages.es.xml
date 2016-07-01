@@ -4307,6 +4307,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Global file number %global_file_number%</source>
                 <target>Legajo: %global_file_number%</target>
             </trans-unit>
+            <trans-unit>
+                <source>this student has no tutors</source>
+                <target>No posee tutores en el sistema</target>
+            </trans-unit>
+            <trans-unit>
+                <source>health info status:</source>
+                <target>Ficha de salud:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

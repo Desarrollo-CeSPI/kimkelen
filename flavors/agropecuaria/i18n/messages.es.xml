@@ -4463,15 +4463,15 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Next month</source>
                 <target>Mes siguiente</target>
             </trans-unit>
-          <trans-unit>
+            <trans-unit>
                 <source>Health info</source>
                 <target>Estado de la Ficha de Salud</target>
             </trans-unit>
-          <trans-unit>
+            <trans-unit>
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
-          <trans-unit>
+            <trans-unit>
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
@@ -4482,6 +4482,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Global file number %global_file_number%</source>
                 <target>Legajo: %global_file_number%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>this student has no tutors</source>
+                <target>No posee tutores en el sistema</target>
+            </trans-unit>
+            <trans-unit>
+                <source>health info status:</source>
+                <target>Ficha de salud:</target>
             </trans-unit>
         </body>
     </file>
