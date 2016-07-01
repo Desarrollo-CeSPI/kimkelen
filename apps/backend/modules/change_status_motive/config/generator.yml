@@ -27,7 +27,7 @@ generator:
         actions:
           _new:
             label:         Nuevo motivo de cambio de estado
-            credentials:   [new_change_status_motive]
+            credentials:   [edit_change_status_motive]
       filter:
         class:             false
       form:
