@@ -63,7 +63,20 @@ class StudentApprovedCareerSubject extends BaseStudentApprovedCareerSubject
 
   public function getResult($with_mark = true)
   {
-    return ($with_mark) ? 'Aprobado ' . $this->getMark() : 'Aprobado';
+	$career_subject = CareerSubjectSchoolYearPeer::retrieveByCareerSubject($this->getCareerSubject());
+	$config = $career_subject->getConfiguration();
+	
+	if($config != null && !$config->isNumericalMark())
+	{
+		$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$this->getMark());
+		$mark = $letter_mark->getLetter();	
+	}
+	else
+	{  
+		$mark = $this->getMark();
+	}
+	
+    return ($with_mark) ? 'Aprobado ' . $mark : 'Aprobado';
 
   }
 
