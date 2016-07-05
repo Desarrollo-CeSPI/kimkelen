@@ -1524,7 +1524,7 @@ div.no_results_advice {
 
 .student_tutor .tutor
 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .student_career_repproved
@@ -1961,4 +1961,24 @@ div.wc-cal-event{
 
 #sf_admin_container ul li {
   list-style: none !important;
+}
+
+.student_global_file_number {
+  font-size: 1.2em;
+  float: left;
+  border-left: 2px solid rgb(221, 221, 221);   
+  padding-left: 10px !important;
+  margin-left: 10px !important;
+  color: #0093DD !important;
+}
+
+.student_current_info .info_div .health
+{
+  color: #F86363;
+}
+
+.student_tutor .tutor ul
+{
+  margin-top: 0em !important;
+  margin-bottom: 0em !important;
 }

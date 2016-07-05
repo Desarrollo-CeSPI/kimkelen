@@ -1494,11 +1494,11 @@ div.no_results_advice {
     margin-left: 5px;
 }
 
-.student_head .active .health
+.student_current_info .info_div .health
 {
-    color:#FF0000;
-    max-width: 100px;
+    color: #F86363;
 }
+
 .student_head .person_name
 {
     float: left;
@@ -1541,7 +1541,7 @@ div.no_results_advice {
 
 .student_tutor .tutor
 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .student_career_repproved
@@ -2040,4 +2040,19 @@ div.wc-cal-event{
     border: 1px solid black;
     padding: 1px;
     background-color: #E61800  !important;
+}
+
+.student_global_file_number {
+  font-size: 1.2em;
+  float: left;
+  border-left: 2px solid rgb(221, 221, 221);   
+  padding-left: 10px !important;
+  margin-left: 10px !important;
+  color: #0093DD !important;
+}
+
+.student_tutor .tutor ul
+{
+  margin-top: 0em !important;
+  margin-bottom: 0em !important;
 }

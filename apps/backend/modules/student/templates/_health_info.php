@@ -17,16 +17,18 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_helper('I18N')?>
-<?php /* @var $student Student */ ?>
-<?php $commisions = $student->getCommisions()?>
-<?php if (count($commisions)): ?>
-  <div class="student_year">
-  	<?php echo count($commisions) > 1 ?  __('Currently inscripted in commisions:') : __('Currently inscripted in commision:')?>
-  </div>
-  <div class="student_commisions">
-  	<?php foreach( $commisions as $course):?>
-    	<div style="margin-left:5px"><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
-    <?php endforeach ?>
-  </div>
-<?php endif ?>
+<?php use_helper('I18N') ?>
+
+
+<?php if ($student->getHealthInfoString() != " "): 
+
+		$health_info = $student->getHealthInfoString();
+		if (($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED)
+			||($health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE)
+			||($health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT)):
+				
+				$class = "health";
+ 		endif; 
+	?>	
+	<div><strong><?php echo __('health info status:') ?></strong> <strong class="<?php echo $class ?>"><?php echo $student->getHealthInfoString() ?></strong></div>
+<?php endif ?>	

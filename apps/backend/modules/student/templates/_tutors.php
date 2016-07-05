@@ -19,15 +19,22 @@
  */ ?>
 <div class="student_tutor">
   <h2><?php echo __("Tutors") ?></h2>
-  <?php foreach($student->getStudentTutors() as $st): ?>
-    <div class="tutor">
-      <div class="tutor_name"><?php echo $st->getTutor(); $st->getTutor()->getTutorType() != '' and print ' (' . __('%tutor_type%', array('%tutor_type%' => $st->getTutor()->getTutorType())) . ')'; ?></div>
-      <?php $person = $st->getTutor()->getPerson();?>
-      <div class="tutor_is_alive"><?php echo __('Is alive') . ($st->getTutor()->getIsAlive()? ' Sí' : ' No'); ?></div>
-      <div class="tutor_occupation"><?php $st->getTutor()->getOccupation() != '' and print __('Occupation %occupation%', array('%occupation%' => $st->getTutor()->getOccupation())) ?></div>
-      <div class="tutor_email"><?php $person->getEmail() != '' and print __('Email %email%', array('%email%' => $person->getEmail())) ?></div>
-      <div class="tutor_phone"><?php $person->getPhone() != '' and print __('Phone %phone_number%', array('%phone_number%' => $person->getPhone())); ?></div>
-    </div>
-  <?php endforeach ?>
+  <?php if($student->getStudentTutors()): ?>
+    <?php foreach($student->getStudentTutors() as $st): ?>
+      <?php if($st->getTutor()->getIsAlive()): ?>
+        <div class="tutor">
+          <div class="tutor_name"><strong><?php echo $st->getTutor(); $st->getTutor()->getTutorType() != '' and print ' (' . __('%tutor_type%', array('%tutor_type%' => $st->getTutor()->getTutorType())) . ')'; ?></strong></div>
+          <?php $person = $st->getTutor()->getPerson();?>
+          <ul>
+            <li><div class="tutor_occupation"><?php $st->getTutor()->getOccupation() != '' and print __('Occupation %occupation%', array('%occupation%' => $st->getTutor()->getOccupation())) ?></div></li>
+            <li><div class="tutor_email"><?php $person->getEmail() != '' and print __('Email %email%', array('%email%' => $person->getEmail())) ?></div></li>
+            <li><div class="tutor_phone"><?php $person->getPhone() != '' and print __('Phone %phone_number%', array('%phone_number%' => $person->getPhone())); ?></div></li>
+          </ul>
+        </div>
+      <?php endif ?>
+    <?php endforeach ?>
+  <?php else: ?>
+    <div class="tutor_empty"><strong><?php print __('this student has no tutors') ?></strong></div>
+  <?php endif ?>
   <div class="emergency_information"><?php $student->getEmergencyInformation() != '' and print __('Emergency information %extra_information%', array('%extra_information%' => $student->getEmergencyInformation())); ?></div>
 </div>

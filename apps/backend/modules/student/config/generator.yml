@@ -17,6 +17,10 @@ generator:
         title: Student list
         type: xls
         fieldSelection:
+          global_file_number:
+            label: Global file number
+            method: getGlobalFileNumber
+            decorator: text
           lastname:
             label: Lastname
             method: getPersonLastname

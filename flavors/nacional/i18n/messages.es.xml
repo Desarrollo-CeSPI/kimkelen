@@ -589,7 +589,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Shift id</source>
                 <target>Turno</target>
             </trans-unit>
-	   
+     
             <trans-unit>
                 <source>File number sequence</source>
                 <target>Siguiente número de alumno</target>
@@ -4404,11 +4404,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Next month</source>
                 <target>Mes siguiente</target>
             </trans-unit>
-	        <trans-unit>
+          <trans-unit>
                 <source>Health info</source>
                 <target>Estado de la Ficha de Salud</target>
             </trans-unit>
-	        <trans-unit>
+          <trans-unit>
                 <source>Date health info</source>
                 <target>Fecha de Devolución</target>
             </trans-unit>
@@ -4416,7 +4416,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Evaluation type</source>
                 <target>Tipo de evaluación</target>
             </trans-unit>
-	        <trans-unit>
+          <trans-unit>
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
@@ -4444,7 +4444,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Change student status</source>
                 <target>Cambiar estado del alumno</target>
             </trans-unit>
-			<trans-unit>
+            <trans-unit>
                 <source>Withdraw with reserve</source>
                 <target>Retirado con reserva de banco</target>
             </trans-unit>
@@ -4456,13 +4456,25 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Status id</source>
                 <target>Estado</target>
             </trans-unit>
-	    <trans-unit>
+            <trans-unit>
                 <source>next day</source>
                 <target>Día siguiente</target>
             </trans-unit>
-	    <trans-unit>
+            <trans-unit>
                 <source>previous day</source>
                 <target>Día anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Global file number %global_file_number%</source>
+                <target>Legajo: %global_file_number%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>this student has no tutors</source>
+                <target>No posee tutores en el sistema</target>
+            </trans-unit>
+            <trans-unit>
+                <source>health info status:</source>
+                <target>Ficha de salud:</target>
             </trans-unit>
         </body>
     </file>
