@@ -172,6 +172,9 @@ class AdminGeneratorFiltersClass
       $examination_id = sfContext::getInstance()->getUser()->getReferenceFor("examination");
 
       $criteria->add(ExaminationSubjectPeer::EXAMINATION_ID, $examination_id);
+      $criteria->addJoin(CareerSubjectSchoolYearPeer::ID, ExaminationSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID);
+      $criteria->addJoin(CareerSubjectPeer::ID, CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID);
+      $criteria->addAscendingOrderByColumn(CareerSubjectPeer::YEAR);
 
       if ($user->isTeacher())
       {
