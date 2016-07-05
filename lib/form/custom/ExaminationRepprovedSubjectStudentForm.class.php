@@ -29,7 +29,7 @@ class ExaminationRepprovedSubjectStudentForm extends sfFormPropel
 
   public static function setAvailableStudentsForDivision($examination_repproved_subject)
   {
-    self::$_students = StudentRepprovedCourseSubjectPeer::getAvalilableStudentsForExaminationRepprovedSubject($examination_repproved_subject);
+    self::$_students = StudentRepprovedCourseSubjectPeer::getAvailableStudentsForExaminationRepprovedSubject($examination_repproved_subject);
   }
 
   public static function getCriteriaForAvailableStudentsForExaminationSubjectIds()
@@ -69,8 +69,6 @@ class ExaminationRepprovedSubjectStudentForm extends sfFormPropel
     $this->getWidget($name)->setLabel('Alumnos');
 
     $this->validatorSchema[$name] = new sfValidatorPass();
-
- //   $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'validate'))));
 
     $this->validatorSchema->setOption('allow_extra_fields', true);
 

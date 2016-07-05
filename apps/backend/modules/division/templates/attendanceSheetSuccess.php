@@ -40,7 +40,7 @@
   <?php endif; ?>
   <h2><?php echo __('from date %from_date% to date %to_date%', array('%from_date%' => $from_date, '%to_date%' => $to_date)) ?></h2>
   <div class="non-printable">
-    <?php include_partial('student/information_box') ?>
+    <?php include_partial('division/information_box') ?>
   </div>
   <div id="sf_admin_content">
     <div id="mi_tabla_wrapper">

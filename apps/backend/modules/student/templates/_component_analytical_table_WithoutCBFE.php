@@ -79,7 +79,7 @@
 				<thead>
 	 
 					<tr>
-						<th class="text-left" colspan="7"><?php echo __("Suborientation Subjects") ?> </th>
+						<th class="text-left" colspan="7"><?php  echo ($student->getStudentSpecialityString()? __("%speciality% subjects", array("%speciality%" => $student->getStudentSpecialityString())): __("Suborientation Subjects"))?> </th>
 					</tr>
 
 				</thead>
@@ -120,7 +120,7 @@
 			<?php } ?>
 			
 					<tr>
-						<th colspan="5" style="text-align:left !important;">Año: <?php echo $object->get_school_year($year) .'   Curso: ' . $object->get_division($year) ?></th>
+						<th colspan="5" style="text-align:left !important;">Año: <?php echo $object->get_school_year($year) .' - '. __($object->get_str_year_status($year)) ?></th>
 						<th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
 					</tr>
 				</tbody>

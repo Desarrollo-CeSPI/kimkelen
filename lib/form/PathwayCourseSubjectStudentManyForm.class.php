@@ -139,6 +139,7 @@ class PathwayCourseSubjectStudentManyForm extends sfFormPropel
     foreach ($this->getObject()->getCourseSubjectStudentPathways() as $course_subject_student)
     {
       //if student has marks it can't be deleted from course
+      
       if (!in_array($course_subject_student->getStudentId(), $this->values))
       {
         if ($this->canDeleteCourseSubjectStudent($course_subject_student->getStudentId()) && $course_subject_student->countValidCourseSubjectStudentPathwayMarks() == 0)

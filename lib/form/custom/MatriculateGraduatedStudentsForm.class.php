@@ -40,8 +40,7 @@ class MatriculateGraduatedStudentsForm extends sfForm
     $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
     $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $last_year_school_year->getId());
     $c->add(CareerSchoolYearPeer::ID, $this->getOption('id'), Criteria::NOT_EQUAL);
-    $c->addJoin(CareerSchoolYearPeer::CAREER_ID, CareerStudentPeer::CAREER_ID, Criteria::INNER_JOIN);
-    $c->add(CareerStudentPeer::GRADUATION_SCHOOL_YEAR_ID, $last_year_school_year->getId());
+
     $this->setWidget('career_school_year_id', new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYear', 'add_empty' => true, 'criteria' => $c)));
     $this->setValidator('career_school_year_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYear','required'=> true)));
     $this->getWidgetSchema()->setLabel('career_school_year_id', 'Egresados de');
@@ -50,6 +49,7 @@ class MatriculateGraduatedStudentsForm extends sfForm
   public function save()
   {
     $origin_career_school_year = CareerSchoolYearPeer::retrieveByPk($this->getValue('career_school_year_id'));
+   
     $destiny_career_school_year = CareerSchoolYearPeer::retrieveByPk($this->getOption('destiny_career_id'));
     $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
 
@@ -60,7 +60,7 @@ class MatriculateGraduatedStudentsForm extends sfForm
     try
     {
       $con->beginTransaction();
-
+      
       foreach ($students as $student)
       {
         $student->registerToCareer($destiny_career_school_year->getCareer(), null, null, $destiny_career_school_year->getCareer()->getMinYear(), $con);

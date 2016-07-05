@@ -26,7 +26,7 @@
     <?php echo __($title, array('%division%' => $form->getDivision(), '%subject%' => $form->getCourseSubject())) ?>
   </h1>
   <div id="sf_admin_content">
-    <?php include_partial('student_attendance/information_box') ?>
+    <?php include_partial('division/information_box') ?>
     <form action="<?php echo url_for('@save_student_attendance?back_url=' . $back_url) ?>" method="post" >
       <ul class="sf_admin_actions">
 
@@ -148,7 +148,7 @@
             <tr>
               <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student ?></td>
               <?php foreach ($form->days as $day => $day_i): ?>
-                <td class="day_<?php echo $day ?> ">
+                <td class="day_<?php echo $day .' ' .$student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$day_i,$course_subject_id)?>">
                   <?php $name = 'student_attendance_' . $student->getId() . '_' . $day ?>
 
                   <?php echo $form[$name] ?>

@@ -590,6 +590,22 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $student_repproved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
       $student_repproved_course_subject->save($con);
 
+	    $career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
+	    ##se corrobora si la previa es la última y del último año, hay que egresarlo
+	    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
+	    if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getYear() >= CareerPeer::getMaxYear() && $previous == 0)
+	    {
+		    $career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
+		    $career_student->setStatus(CareerStudentStatus::GRADUATE);
+		    //se guarda el school_year en que termino esta carrera
+		    $career_student->setGraduationSchoolYearId(SchoolYearPeer::retrieveCurrent()->getId());
+		    $career_student->save($con);
+		    //se guarda el estado en el student_career_school_year
+		    $scsy = $student_repproved_course_subject->getCourseSubjectStudent()->getStudent()->getCurrentOrLastStudentCareerSchoolYear();
+		    $scsy->setStatus(StudentCareerSchoolYearStatus::APPROVED);
+		    $scsy->save();
+	    }
+
       ##se agrega el campo en student_disapproved_course_subject a el link del resultado final
       $student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
 

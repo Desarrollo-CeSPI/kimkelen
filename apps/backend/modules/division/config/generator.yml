@@ -102,7 +102,7 @@ generator:
           attendanceDay:
             label: Load Attendances
             action: attendanceDay
-            credentials:  [edit_course]
+            credentials:  [edit_absence_per_day]
             condition: canLoadAttendances
 
           _delete:

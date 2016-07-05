@@ -66,7 +66,7 @@ root:
             url:  @absence_type
             credentials:  [[new_absence_type, edit_absence_type]]
           disciplinary_sanction_types:
-            title:  Motivos de sancion
+            title:  Motivos de sanciones
             url:  @disciplinary_sanction_type
             credentials:  [[new_disciplinary_sanction_type, edit_disciplinary_sanction_type]]
           sanction_types:
@@ -77,6 +77,9 @@ root:
             title: Recurso para aulas
             url: @resources
             credentials: admin
+          change_status_motive:
+            title: Motivos de cambio de estado
+            url: @change_status_motive
       separator:
       users:
         title: Usuarios
@@ -240,17 +243,34 @@ root:
             credentials: [show_course]
           student_pathways:
             title: Listado de comisiones de trayectorias
-            credentials: [show_student_pathway]
+            credentials: [show_pathway]
             url: pathway_commission/index
 
       student_attendance:
         title: Attendance
-        url: @student_attendance_day
         credentials: [edit_student_attendance, edit_student_attendance_history]
+        menu:
+          attendance_show_day:
+            title: Asistencia por día
+            url: @student_attendance_day_show_day
+            credentials: [edit_student_attendance, edit_student_attendance_history]
+          attendance_show_week:
+            title: Asistencia por semana
+            url: @student_attendance_day
+            credentials: [edit_student_attendance, edit_student_attendance_history]
+            
       student_attendance_subject:
         title: Attendance (subject)
-        url: @student_attendance_subject
         credentials: [edit_student_attendance, edit_student_attendance_history]
+        menu:
+          attendance_show_day:
+            title: Asistencia por día
+            url: @student_attendance_subject_show_day
+            credentials: [edit_student_attendance, edit_student_attendance_history]
+          attendance_show_week:
+            title: Asistencia por semana
+            url: @student_attendance_subject
+            credentials: [edit_student_attendance, edit_student_attendance_history]
       attendance_justification:
         title: Attendance justification
         url: @attendance_justification

@@ -1313,7 +1313,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examination repproved</source>
-                <target>Previas</target>
+                <target>Previas y libres</target>
             </trans-unit>
             <trans-unit>
                 <source>Close subject</source>
@@ -1322,7 +1322,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examination repproved List</source>
-                <target>Mesas de previas</target>
+                <target>Mesas de previas y libres</target>
             </trans-unit>
             <trans-unit>
                 <source>Examination subject cant be closed, because some students were not calificated</source>
@@ -3416,7 +3416,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Current status</source>
-                <target>Estado actual</target>
+                <target>Estado</target>
             </trans-unit>
             <trans-unit>
                 <source>If is checked, then will show only students graduated in some career.</source>
@@ -4567,9 +4567,53 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Health card not received</source>
                 <target>No entregó la Ficha de Salud</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>Optional Subjects</source>
                 <target>Asignaturas Optativas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>%speciality% subjects</source>
+                <target>Asignaturas de %speciality%</target>
+            </trans-unit>
+	        <trans-unit>
+                <source>No suitable</source>
+                <target>No apto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Order</source>
+                <target>Orden</target>
+            </trans-unit>
+	        <trans-unit>
+                <source>%speciality% subjects</source>
+                <target>Asignaturas de %speciality%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Withdraw with reserve</source>
+                <target>Retirado con reserva de banco</target>
+            </trans-unit>
+			<trans-unit>
+                <source>Change student status</source>
+                <target>Cambiar el estado del alumno</target>
+            </trans-unit>
+			<trans-unit>
+                <source>Change %student% status</source>
+                <target>Cambiar el estado de %student%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change status motive id</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Status id</source>
+                <target>Estado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>next day</source>
+                <target>Día siguiente</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>previous day</source>
+                <target>Día anterior</target>
             </trans-unit>
         </body>
     </file>

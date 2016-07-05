@@ -18,29 +18,29 @@ generator:
         actions:
           _new:
             label: Nuevo usuario
-            credentials: [admin]
+            credentials: [edit_user]
         batch_actions:  []
         object_actions:
 
           activate:
             label: Set active
-            credentials: [admin]
+            credentials: [edit_user]
             action: activation
             condition: canActive
 
           inactive:
             label: Set inactive
-            credentials: [admin]
+            credentials: [edit_user]
             action: activation
             condition: canInactive
 
           _show:
             credentials: [admin]
           _edit:
-            credentials: [admin]
+            credentials: [edit_user]
             condition: canEdit
           _delete:
-            credentials: [admin]
+            credentials: [edit_user]
             condition: canEdit
 
       filter:

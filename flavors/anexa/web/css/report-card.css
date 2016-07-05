@@ -329,3 +329,12 @@ table.gridtable_bordered tr {
   float:left;
   font-size:13px;
 }
+
+.option
+{
+    font-size: 13px;
+    font-weight: bold;
+    padding:5px;
+    background:#f2f2f2;
+    border-bottom:1px solid #ccc;
+}

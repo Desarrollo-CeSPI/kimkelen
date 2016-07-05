@@ -104,6 +104,7 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
     $c = new Criteria();
     $c->addJoin(StudentPeer::ID, CareerStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
     $c->addAnd(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE, criteria::NOT_EQUAL);
+    $c->addAnd(CareerStudentPeer::CAREER_ID, $career_school_year->getCareer()->getId());
     $c->addAnd(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($school_year), Criteria::IN);
     return $c;
   }
@@ -136,6 +137,15 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
       $c->addAnd(self::STUDENT_ID, $ids, Criteria::NOT_IN);
     }
     return self::doCount($c, $con);
+  }
+  
+  public static function getLastStudentCareerSchoolYear(Student $student, CareerSchoolYear $career_school_year)
+  {
+    $c = new Criteria();
+    $c->add(self::STUDENT_ID, $student->getId());
+    $c->addDescendingOrderByColumn(self::YEAR);
+
+    return self::doSelectOne($c);
   }
 
 }

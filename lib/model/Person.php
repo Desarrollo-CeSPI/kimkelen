@@ -40,7 +40,17 @@ class Person extends BasePerson
    */
   public function getFullName()
   {
-    return $this->getLastname() . ', ' . $this->getFirstname();
+	
+	$names =  explode(" ", $this->getFirstname());
+	$fullname = '';
+	foreach ($names as $n)
+	{	if($n !== '')
+		{
+			$n[0] = strtoupper($n[0]);
+			$fullname .= $n . ' ';
+		}
+	}
+    return $this->getLastname() . ', ' . $fullname;
 
   }
 

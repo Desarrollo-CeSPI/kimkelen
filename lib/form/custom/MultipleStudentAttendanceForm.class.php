@@ -80,7 +80,7 @@ class MultipleStudentAttendanceForm extends sfForm
 
   }
 
-  private function getStudents()
+  protected function getStudents()
   {
     if ($this->isAttendanceBySubject())
     {

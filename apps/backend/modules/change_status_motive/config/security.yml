@@ -1,0 +1,14 @@
+index:
+  credentials: [show_change_status_motive]
+
+new:
+  credentials: [edit_change_status_motive]
+
+edit:
+  credentials: [edit_change_status_motive]
+
+delete:
+  credentials: [edit_change_status_motive]
+
+show:
+  credentials: [show_change_status_motive]

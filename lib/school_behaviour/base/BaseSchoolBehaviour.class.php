@@ -812,7 +812,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
 
     if (!is_null($course_subject_id))
-    {
+    {	
       if ($course_subject_id instanceof CourseSubject)
       {
         $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id->getId());
@@ -822,6 +822,10 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
         $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
       }
     }
+    else
+    {
+		$c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, null, Criteria::ISNULL);
+	}
 
     $c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
 
@@ -1150,4 +1154,74 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return false;
   }
 
+	public function canShowCBFE() {
+		return false;
+	}
+
+
+	public function getOptionalCourseSubjectStudents($student, $school_year = null)
+	{
+
+		if (is_null($school_year))
+		{
+			$school_year = SchoolYearPeer::retrieveCurrent();
+		}
+
+		$c = new Criteria();
+		$c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+		$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+		$c->addJoin(CareerSubjectPeer::ID, CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID);
+		$c->add(CareerSubjectPeer::IS_OPTION, true);
+		CareerSubjectSchoolYearPeer::sorted($c);
+
+		$course_subject_students = $student->getCourseSubjectStudents($c);
+
+
+		$results = array();
+		foreach ($course_subject_students as $css)
+		{
+				$results[] = $css;
+		}
+
+		return $results;
+
+	}
+	
+  public function getAbsencesReport($career_school_year_id, $student_id)
+  {
+    $c = new Criteria();
+    $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
+    $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
+	$c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
+
+    return $student_attendances = StudentAttendancePeer::doSelect($c);
+
+  }
+  
+  
+  public function getTotalAbsencesReport($career_school_year_id, $student_id, $exclude_justificated = true)
+  {
+    $absences = $this->getAbsencesReport($career_school_year_id, $student_id);
+    $rounder  = new StudentAttendanceRounder();
+    $total    = 0;
+
+    foreach ($absences as $absence)
+    {
+      // sacamos las justificadas, es decir se quiere el total SIN las justificadas
+      if ($exclude_justificated && $absence->hasJustification())
+      {
+        continue;
+      }
+
+      $total += $absence->getValue();
+      $rounder->process($absence);
+    }
+
+    $diff = $rounder->calculateDiff();
+
+    return $total + $diff;
+  }
 }

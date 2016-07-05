@@ -242,10 +242,15 @@ classes:
       is_processed:
         type: boolean
         default: false
+      change_status_motive_id:
+        description:      Especifica el motivo del cambio de estado
+        type:             integer
+        required:         false
+        default:          null
       _uniques:
         student_career_school_year_unique: [ career_school_year_id, student_id, year ]
       _indexes:
-        student_career_school_year: [student_id, career_school_year_id]
+        student_career_school_year: [student_id, career_school_year_id, change_status_motive_id]
 
 
   CareerSubject:
@@ -757,3 +762,34 @@ classes:
         required: false
       _indexes:
         career_school_year_course_type: [course_type, career_school_year_id]
+        
+  ChangeStatusMotive:
+    tableName:           change_status_motive
+    description:         Cada tupla representa un motivo por el cual el alumno cambio de estado
+    columns:
+      id:
+      name:
+        required:        true
+        type:            varchar(255)
+      status_id:
+        description:     Referencia el estado al cual esta asociado el motivo
+        type:            integer
+        required:        true
+        
+  StudentReserveStatusRecord:
+    tableName:           student_reserve_status_record
+    description:         Cada tupla representa la reserva de banco de un alumno
+    columns:
+     id:
+     student_id:
+       required:         true
+       type:             integer
+       foreignTable:     student
+       foreignReference: id
+       onDelete:         cascade
+     start_date:
+       type:            date
+       required:        true
+     end_date:
+       type:            date
+       required:        true

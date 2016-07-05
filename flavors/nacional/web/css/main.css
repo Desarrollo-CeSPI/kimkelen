@@ -484,7 +484,7 @@ a img
 
 .sf_admin_list .sf_admin_action_print_calification a
 {
-  background-image: url('../images/calification_sheet.png') !important;
+    background-image: url('../images/calification_sheet.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_boletines a,
@@ -1227,7 +1227,7 @@ table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
 
 .box_health_info
 {
-	border: 1px solid black;
+    border: 1px solid black;
     padding: 1px;
     background-color: #F51A00 !important;
 }
@@ -1650,49 +1650,49 @@ div.no_results_advice {
 
 .sf_admin_action_related_to_a_division a
 {
- background-image: url('../images/puzzle--arrow.png') !important;
+    background-image: url('../images/puzzle--arrow.png') !important;
 }
 
 .mark_green
 {
-  background-color: #12f447
+    background-color: #12f447
 }
 .mark_yellow
 {
-  background-color: #FFFF00;
+    background-color: #FFFF00;
 }
 .mark_red
 {
-  background-color: tomato;
+    background-color: tomato;
 }
 #sf_admin_container .double_list_select, #sf_admin_container .double_list_select-selected
 {
-  width: 40em;
-  height: 40em;
+    width: 40em;
+    height: 40em;
 }
 
 #go_back_action
 {
-  float:left;
-  margin-top:0% !important;
-  padding:4px !important;
+    float:left;
+    margin-top:0% !important;
+    padding:4px !important;
 }
 
 .attendance_sheet_footer
 {
-  padding:1%;
+    padding:1%;
 }
 
 .alert
 {
-  background-color: #C66;
-  color: #E2E2E2;
-  text-transform:uppercase;
+    background-color: #C66;
+    color: #E2E2E2;
+    text-transform:uppercase;
 }
 
 .sf_admin_list .sf_admin_action_student_assistance_sanction_report a
 {
-  background-image: url('../images/report.png') !important;
+    background-image: url('../images/report.png') !important;
 }
 
 .info-mark-container
@@ -1706,17 +1706,17 @@ div.no_results_advice {
 }
 .sf_admin_action_print_students a
 {
-      background-image: url('../images/printer.png') !important;
+    background-image: url('../images/printer.png') !important;
 }
 
 .student_divisions
 {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .student_year
 {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 .sf_admin_list .sf_admin_action_print_details a
@@ -1778,36 +1778,36 @@ div.wc-cal-event{
 
 #tabs
 {
-  min-height: 28px !important;
-  width: 100%;
-  background: #ccc;
-  font-size: 11px;
-  line-height: normal;
+    min-height: 28px !important;
+    width: 100%;
+    background: #ccc;
+    font-size: 11px;
+    line-height: normal;
 }
 
 #tabs li
 {
-  display: inline;
-  margin: 0;
-  padding: 0;
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 #tabs a
 {
-  float: left;
-  background: url(../images/tableft1.gif) no-repeat left top;
-  margin: 0;
-  padding: 5px 2px 2px 0 !important;
-  text-decoration: none;
+    float: left;
+    background: url(../images/tableft1.gif) no-repeat left top;
+    margin: 0;
+    padding: 5px 2px 2px 0 !important;
+    text-decoration: none;
 }
 
 #tabs a span
 {
-  float: left;
-  display: block;
-  background: url(../images/tabright1.gif) no-repeat right top;
-  padding: 2px 20px 4px 4px;
-  color: #333;
+    float: left;
+    display: block;
+    background: url(../images/tabright1.gif) no-repeat right top;
+    padding: 2px 20px 4px 4px;
+    color: #333;
 }
 
 #tabs a:hover { background-position: 0% -42px; }
@@ -1820,39 +1820,39 @@ div.wc-cal-event{
 
 .tab_content
 {
-  display: none;
+    display: none;
 }
 
 .tab_content:first-child
 {
-  display: block;
+    display: block;
 }
 
 .tab_content table
 {
-  width: 100%;
+    width: 100%;
 }
 
 .item_career
 {
-  background-color: #e9f6f7;
-  text-transform: uppercase;
+    background-color: #e9f6f7;
+    text-transform: uppercase;
 }
 
 .th_stats
 {
-  background-color: gray !important;
+    background-color: gray !important;
 }
 
 .td_stats
 {
-  font-style: italic;
+    font-style: italic;
 }
 
 .info_div_label
 {
-  font-weight:bold;
-  padding-right: 2px !important;
+    font-weight:bold;
+    padding-right: 2px !important;
 }
 
 
@@ -1863,50 +1863,50 @@ div.wc-cal-event{
 
 .yellow_link
 {
-  text-decoration: none !important;
-  background-color: #fbec88 !important;
+    text-decoration: none !important;
+    background-color: #fbec88 !important;
 }
 
 .sf_admin_action_print_report_card a
 {
-  background-image: url('../images/report.png') !important;
+    background-image: url('../images/report.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_manual_examinations a
 {
-  background-image: url('../images/handmade.png') !important;
+    background-image: url('../images/handmade.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_close_year a
 {
-  background-image: url('../images/school_year_close.png') !important;
+    background-image: url('../images/school_year_close.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_matriculate_students_from_last_year a
 {
-  background-image: url('../images/enrolment.png') !important;
+    background-image: url('../images/enrolment.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_withdraw a
 {
-  background-image: url('../images/withdraw.png') !important;
+    background-image: url('../images/withdraw.png') !important;
 }
 
 .student_career_withdraw
 {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #F37321;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #F37321;
 }
 
 .sf_admin_list .sf_admin_action_undo_withdraw a
 {
-  background-image: url('../images/undo_withdraw.png') !important;
+    background-image: url('../images/undo_withdraw.png') !important;
 }
 
 .sf_admin_action_matriculate_graduated_students_from_other_career a
 {
-  background-image: url('../images/matriculate_graduated.png') !important;
+    background-image: url('../images/matriculate_graduated.png') !important;
 }
 
 .teacher_signature_box{
@@ -1921,22 +1921,22 @@ div.wc-cal-event{
 
 .sf_admin_list .sf_admin_action_show_disciplinary_sanction_report a
 {
-  background-image: url('../images/sanction.png') !important;
+    background-image: url('../images/sanction.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_show_assistance_report a
 {
-  background-image: url('../images/report.png') !important;
+    background-image: url('../images/report.png') !important;
 }
 
 .sf_admin_list .sf_admin_action_calificate_non_numerical_mark a
 {
-  background-image: url('../images/unchain.png') !important;
+    background-image: url('../images/unchain.png') !important;
 }
 
 .sf_admin_action_create_last_year_divisions a
 {
-  background-image: url('../images/create-division.png') !important;
+    background-image: url('../images/create-division.png') !important;
 }
 
 .sf_admin_action_create_last_year_divisions a
@@ -1951,16 +1951,16 @@ div.wc-cal-event{
 
 .sf_admin_action_add_subject a
 {
-  background-image: url('../images/admin-subjects.png') !important;
+    background-image: url('../images/admin-subjects.png') !important;
 }
 
 #change-role {
-  color: #FFF !important;
+    color: #FFF !important;
 }
 
 .sf_admin_list .sf_admin_action_open a
 {
-  background-image: url('../images/lock_open.png') !important;
+    background-image: url('../images/lock_open.png') !important;
 }
 
 .student_head .pathway
@@ -1974,15 +1974,15 @@ div.wc-cal-event{
 
 .sf_admin_list .sf_admin_action_resolve_problematic_students a
 {
-  background-image: url('../images/puzzle--arrow.png') !important;
+    background-image: url('../images/puzzle--arrow.png') !important;
 }
 
 .pathway_info
 {
-  position: absolute;
-  padding: 1px;
-  color: green;
-  text-transform: uppercase;
+    position: absolute;
+    padding: 1px;
+    color: green;
+    text-transform: uppercase;
 }
 
 .warning-button {
@@ -2004,5 +2004,40 @@ div.wc-cal-event{
     list-style: none !important;
 }
 .student_health_info_attendance{
-	color: #DA1A03;
+    color: #DA1A03;
+}
+.student_health_info
+{
+    background-color: #E61800 !important;
+}
+
+.day_1.justificated
+{
+    background-color:#ADFF2F !important;
+}
+
+.day_2.justificated
+{
+    background-color:#ADFF2F !important;
+}
+.day_3.justificated
+{
+    background-color:#ADFF2F !important;
+}
+
+.day_4.justificated
+{
+    background-color:#ADFF2F !important;
+}
+
+.day_5.justificated
+{
+    background-color:#ADFF2F !important;
+}
+
+.box_health_info
+{
+    border: 1px solid black;
+    padding: 1px;
+    background-color: #E61800  !important;
 }

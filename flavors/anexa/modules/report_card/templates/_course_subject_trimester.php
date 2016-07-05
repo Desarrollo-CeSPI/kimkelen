@@ -43,22 +43,26 @@
 	<?php foreach ($course_subject_students as $course_subject_student): ?>
 		<tr>
 
-			<td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
+			<?php if (!($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption())): ?>
+				<td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 
-			<?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-				<td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
-			<?php endfor; ?>
-			<?php $course_result = $course_subject_student->getCourseResult() ?>
-			<?php if (!$course_subject_student->hasSomeMarkFree()): ?>
-				<td><?php echo ($course_result) ? $course_result->getResultStr() : '' ?></td>
-			<?php else: ?>
-				<td></td>
+				<?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
+					<td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+				<?php endfor; ?>
+				<?php $course_result = $course_subject_student->getCourseResult() ?>
+				<?php if (!$course_subject_student->hasSomeMarkFree()): ?>
+					<td><?php echo ($course_result) ? $course_result->getResultStr() : '' ?></td>
+				<?php else: ?>
+					<td></td>
+				<?php endif; ?>
+				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
+
+			  <td></td>
 			<?php endif; ?>
-			<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
-		  <td></td>
-
 
 		</tr>
+
+
 	<?php endforeach; ?>
 
 	<?php endif; ?>

@@ -25,7 +25,7 @@ generator:
 
       list:
         title:  Alumnos
-        display:  [student]
+        display:  [student]  
         max_per_page: 50
         batch_actions: []
         object_actions: []
@@ -34,6 +34,8 @@ generator:
             label: Volver al listado de mesas
             action: back
           _user_export:
+        peer_method: doSelect
+        
       filter:
         class: false
       form:    ~

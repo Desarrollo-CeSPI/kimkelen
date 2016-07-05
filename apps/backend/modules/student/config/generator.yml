@@ -164,7 +164,7 @@ generator:
           analytical_without_CBFE:
             credentials:  [show_analytic_without_cbfe]
             action: analyticalWithoutCBFE
-            condition: canBeManagedForCareerSubjectAllowed
+            condition: canShowCBFE
             
           activate:
             label: Set active
@@ -204,22 +204,12 @@ generator:
             label: Student assistance and sanction report
             action: showAssistanceAndSanctionReport
             condition: canGenerateReport
-
-          print_details:
-            label: print details of student
-            action: printDetails
-
-          withdraw:
-            label: Withdraw student
-            credentials: [edit_student]
-            action: withdrawStudent
-            condition: canBeWithdrawn
-
-          undo_withdraw:
-            label: Undo withdraw student
-            credentials: [edit_student]
-            action: undoWithdrawStudent
-            condition: canUndoWithdrawn
+            
+          #change_student_status:
+          #  label: Change student status
+          #  credentials: [edit_student]
+          #  action: changeStudentStatus
+          #  condition: canChangeStudentStatus
             
       filter:
 

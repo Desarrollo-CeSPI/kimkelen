@@ -56,6 +56,17 @@
 
 			<?php endif; ?>
 
+
+	    <?php if ($course_subject_student_options = $student->getOptionalCourseSubjectStudents($student_career_school_year)): ?>
+      <p class="option"> Taller:
+		    <?php foreach ($course_subject_student_options as $css): ?>
+		       <?php echo $css->getCourseSubject(); ?>
+			  <?php endforeach; ?>
+	      </p>
+      <?php endif; ?>
+			<?php ?>
+
+
 			<?php if (!is_null($average = $student_career_school_year->getAnualAverage())): ?>
 				<?php include_partial('average', array('average' => $average)); ?>
 			<?php endif; ?>

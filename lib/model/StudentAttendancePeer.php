@@ -28,7 +28,13 @@ class StudentAttendancePeer extends BaseStudentAttendancePeer
     $c->add(self::DAY, $date);
     $c->add(self::STUDENT_ID, $student->getId());
 
-    $c->add(self::COURSE_SUBJECT_ID, $course_subject_id);
+	if(is_null($course_subject_id))
+	{	
+		$c->add(self::COURSE_SUBJECT_ID, null, Criteria::ISNULL);
+	}else{
+		$c->add(self::COURSE_SUBJECT_ID, $course_subject_id);
+	}
+   
 
     if (!is_null($career_school_year_id))
     {

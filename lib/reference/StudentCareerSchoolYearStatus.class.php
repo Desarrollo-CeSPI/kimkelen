@@ -21,19 +21,36 @@
 
 class StudentCareerSchoolYearStatus extends BaseCustomOptionsHolder
 {
-  const
-    IN_COURSE       = 0,
-    APPROVED        = 1,
-    REPPROVED       = 2,
-    LAST_YEAR_REPPROVED       = 3,
-    WITHDRAWN        = 4;
+	const
+		IN_COURSE       		= 0,
+		APPROVED       			= 1,
+		REPPROVED       		= 2,
+		LAST_YEAR_REPPROVED     = 3,
+		WITHDRAWN       		= 4,
+		WITHDRAWN_WITH_RESERVE	= 5,
+		FREE = 6;
 
-  protected
-    $_options = array(
-        self::IN_COURSE       => 'Cursando',
-        self::APPROVED        => 'Aprobado',
-        self::REPPROVED       => 'Repitio este año',
-        self::LAST_YEAR_REPPROVED => 'Repetidor del año pasado, pero cursando año lectivo actual',
-        self::WITHDRAWN => 'Retirado de la institución'
+	protected
+		$_options = array(
+		self::IN_COURSE       		 => 'Cursando',
+		self::APPROVED       		 => 'Aprobado',
+		self::REPPROVED      		 => 'Repitió',
+		self::LAST_YEAR_REPPROVED 	 => 'Repetidor del año pasado, pero cursando año lectivo actual',
+		self::WITHDRAWN				 => 'Retirado de la institución',
+		self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco',
+		self::FREE => 'Libre'
+
+	);
+
+  public function getOptionsSelect()
+  {
+    return array(
+        self::IN_COURSE       		 => 'Cursando',
+        self::APPROVED       		 => 'Aprobado',
+        self::WITHDRAWN				 => 'Retirado de la institución',
+        self::WITHDRAWN_WITH_RESERVE => 'Retirado de la institución con reserva de banco',
+        self::FREE					 => 'Libre',
       );
+   
+  }
 }

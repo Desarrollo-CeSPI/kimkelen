@@ -19,36 +19,17 @@
  */ ?>
 <?php
 
-/**
- * ExaminationRepprovedType
- *
- * @author gramirez
- */
-class ExaminationRepprovedType extends BaseCustomOptionsHolder
-{
-  const
-    REPPROVED      = 1,
-    FREE       = 2;
+require_once dirname(__FILE__).'/../lib/change_status_motiveGeneratorConfiguration.class.php';
+require_once dirname(__FILE__).'/../lib/change_status_motiveGeneratorHelper.class.php';
 
-  protected
-    $_options = array(
-        self::REPPROVED       => 'Previa',
-        self::FREE        => 'Libre'
-      );
-  
-  public function getOptionsWithout($without = array(), $include_blank = false)
-  {
-    $options = $this->getOptions($include_blank);
-    if(count($without))
-    {
-      foreach($without as $no)
-      {
-        if(isset($options[$no]))
-        {
-          unset($options[$no]);
-        }
-      }
-    }
-    return $options;
-  }
+/**
+ * occupation_category actions.
+ *
+ * @package    sistema de alumnos
+ * @subpackage occupation_category
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class change_status_motiveActions extends autoChange_status_motiveActions
+{
 }

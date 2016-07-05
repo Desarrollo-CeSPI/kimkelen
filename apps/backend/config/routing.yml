@@ -1,3 +1,12 @@
+change_status_motive:
+  class: sfPropelRouteCollection
+  options:
+    model:                ChangeStatusMotive
+    module:               change_status_motive
+    prefix_path:          change_status_motive
+    column:               id
+    with_wildcard_routes: true
+
 
 printAttendanceTemplate:
   url: /student_attendance/PrintAttendanceTemplate
@@ -363,13 +372,25 @@ student_attendance_subject:
   url: /inasistencias-por-materia
   param: { module: student_attendance, action: SelectValuesForAttendanceSubject }
 
+student_attendance_subject_show_day:
+  url: /inasistencias_por_materia
+  param: { module: student_attendance, action: SelectValuesForAttendanceSubjectShowDay }
+
 student_attendance_day:
   url: /inasistencias-por-dia
   param: { module: student_attendance, action: SelectValuesForAttendanceDay }
 
+student_attendance_day_show_day:
+  url: /inasistencias_por_dia
+  param: { module: student_attendance, action: SelectValuesForAttendanceDayShowDay }
+
 save_student_attendance:
   url: /student_attendance/SaveStudentAttendance
   param: { module: student_attendance, action: SaveStudentAttendance }
+
+save_student_attendance_show_day:
+  url: /student_attendance/SaveStudentAttendanceShowDay
+  param: { module: student_attendance, action: SaveStudentAttendanceShowDay }
 
 tag:
   class: sfPropelRouteCollection
@@ -759,3 +780,5 @@ default_index:
 
 default:
   url:   /:module/:action/*
+
+
