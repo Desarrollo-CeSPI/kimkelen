@@ -37,9 +37,7 @@
       <?php endif; ?>
       <ul class="sf_admin_actions">
         <?php echo $helper->linkToList(array('label' => __('Go back'), 'params' => array(), 'class_suffix' => 'list',)) ?>
-        <?php /* ?>
         <li class="sf_admin_action_delete"> <?php echo link_to(__('Change status'), 'student/changeStudentStatus?id='. $student->getId()) ?> </li>
-        <?php */ ?>
         <?php echo $helper->linkToSave($form->getObject(), array('params' => array(), 'class_suffix' => 'save_and_list', 'label' => __('Save'),)) ?>
       </ul>
     </form>
