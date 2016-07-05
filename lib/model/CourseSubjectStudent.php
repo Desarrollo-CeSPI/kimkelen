@@ -235,8 +235,28 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       return '';
 
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
-
-    return $student_approved_career_subject ? $student_approved_career_subject->getMark() : $this->getMarksAverage();
+   
+    $career_subject = CareerSubjectSchoolYearPeer::retrieveByCareerSubject($student_approved_career_subject->getCareerSubject());
+	$config = $career_subject->getConfiguration();
+	
+	if($config != null && !$config->isNumericalMark())
+	{
+		if(!is_null($student_approved_career_subject))
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$student_approved_career_subject->getMark());
+		}
+		else
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$this->getMarksAverage());
+		}
+		
+		return $letter_mark->getLetter();	
+	}
+	else
+	{
+	    return $student_approved_career_subject ? $student_approved_career_subject->getMark() : $this->getMarksAverage();
+	}
+		   
   }
 
   public function getFinalAvg()

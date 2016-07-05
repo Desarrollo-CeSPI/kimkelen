@@ -57,7 +57,7 @@
 				<?php endif; ?>
 				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
 
-			  <td></td>
+			  <td> <?php echo $student->getPromDef($course_result) ?></td>
 			<?php endif; ?>
 
 		</tr>

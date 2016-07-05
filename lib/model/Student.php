@@ -1130,20 +1130,48 @@ class Student extends BaseStudent
       return '';
     }
     if ($course_result instanceOf StudentApprovedCourseSubject)
-    {
-
+    { 
+	  $config = $course_result->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
       if ($course_result->getCareerSchoolYear()->getSubjectConfiguration()->getNecessaryStudentApprovedCareerSubjectToShowPromDef())
       {
-        return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? number_format($student_approved_career_subject->getMark(), 2, '.', '') : '&nbsp';
+		  if($config != null && !$config->isNumericalMark())
+		  {
+			  $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
+			  return $letter_mark->getLetter();	
+		  }
+		  else
+		  {
+		      return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? number_format($student_approved_career_subject->getMark(), 2, '.', '') : '&nbsp';
+		  }	  
       }
       else
       {
-        return number_format($course_result->getMark(), 2, '.', '');
+		
+	    if($config != null && !$config->isNumericalMark())
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getMark());
+			return $letter_mark->getLetter();	
+		}
+		else
+		{  
+			return number_format($course_result->getMark(), 2, '.', '');
+		}
       }
     }
     else
-    {
-      return ($course_result->getStudentApprovedCareerSubject()) ? number_format($course_result->getStudentApprovedCareerSubject()->getMark(), 2, '.', '') : '&nbsp';
+    { 
+		$career_subject = CareerSubjectSchoolYearPeer::retrieveByCareerSubject($course_result->getStudentApprovedCareerSubject()->getCareerSubject());
+		$config = $career_subject->getConfiguration();
+
+		if($config != null && !$config->isNumericalMark())
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
+			return $letter_mark->getLetter();	
+		}
+		else
+		{
+		    return ($course_result->getStudentApprovedCareerSubject()) ? number_format($course_result->getStudentApprovedCareerSubject()->getMark(), 2, '.', '') : '&nbsp';
+		}
     }
   }
 
