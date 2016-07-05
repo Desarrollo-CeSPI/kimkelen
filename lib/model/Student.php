@@ -1488,6 +1488,27 @@ class Student extends BaseStudent
 			}
 		}
 	}
+	
+  public function getAbsencesReport($career_school_year_id)
+  {
+
+    return SchoolBehaviourFactory::getInstance()->getAbsencesReport($career_school_year_id, $this->getId());
+
+  }
+  
+  public function getTotalAbsencesReport($career_school_year_id,$exclude_justificated = true)
+  {
+
+    return SchoolBehaviourFactory::getInstance()->getTotalAbsencesReport($career_school_year_id,$this->getId(),$exclude_justificated);
+
+  }
+  
+  public function getTotalJustificatedAbsencesReport($career_school_year_id)
+  {
+
+    return $this->getTotalAbsencesReport($career_school_year_id,false) - $this->getTotalAbsencesReport($career_school_year_id, true);
+
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
