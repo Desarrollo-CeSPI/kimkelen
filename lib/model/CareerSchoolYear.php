@@ -254,13 +254,20 @@ class CareerSchoolYear extends BaseCareerSchoolYear
             }
           }
           else
-          {
-            $student->closeCareerSchoolYear($this, $con);
-            $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this);
-            $student_career_school_year->setIsProcessed(true);
-            $student_career_school_year->save($con);
-            $student_career_school_year->clearAllReferences(true);
-            unset($student_career_school_year);
+          {	
+			$student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this);
+            //si el alumno tiene reserva de banco no deberia hacer nada.
+            
+            if($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+            {
+				$student->closeCareerSchoolYear($this, $con);
+            
+				$student_career_school_year->setIsProcessed(true);
+				$student_career_school_year->save($con);
+				$student_career_school_year->clearAllReferences(true);
+				unset($student_career_school_year);
+			}
+            
           }
           ####Liberando memoria###
           $student->clearAllReferences(true);
@@ -423,21 +430,25 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
         foreach ($students as $student)
         {
+			//no tiene reserva de banco y no es libre
+			  if($student->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN && $student->getLastStudentCareerSchoolYear()->getStatus()  != StudentCareerSchoolYearStatus::FREE)	 
+			  {
+				   if ($student->getPerson()->getIsActive()) {
+			  
+					  $shift = $student->getShiftForSchoolYear($last_school_year);
 
-          if ($student->getPerson()->getIsActive()) {
-          
-          $shift = $student->getShiftForSchoolYear($last_school_year);
+					  if (!$student->getIsRegistered($this->getSchoolYear()))
+					  {
+						$student->registerToSchoolYear($this->getSchoolYear(), $shift, $con);
+					  }
 
-          if (!$student->getIsRegistered($this->getSchoolYear()))
-          {
-            $student->registerToSchoolYear($this->getSchoolYear(), $shift, $con);
-          }
-
-          if (!is_null($shift)) $shift->clearAllReferences(true);
-          $student->clearAllReferences(true);
-          unset($student);
-          unset($shift);
-        }
+					  if (!is_null($shift)) $shift->clearAllReferences(true);
+					  $student->clearAllReferences(true);
+					  unset($student);
+					  unset($shift);
+					}
+			  }	
+         
         }
 
         StudentPeer::clearInstancePool();

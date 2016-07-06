@@ -96,10 +96,16 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     return $this->getStudentExaminationRepprovedSubjects($c);
   }
 
-	public function getResultStr()
-	{
-		return $this->getMarksStr();
-	}
+  public function getResultStr()
+  {
+	 return $this->getMarksStr();
+  }
+	
+  public function isApproved()
+  {
+    //If has the link to student_approved_career_subject means that the subject has been approved in examination
+    return ! is_null($this->getStudentApprovedCareerSubject());
+  }
 }
 
 sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));

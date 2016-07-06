@@ -1972,6 +1972,7 @@ div.wc-cal-event{
 .student_health_info_attendance{
   color: #DA1A03;
 }
+
 .sf_admin_action_change_student_status a
 {
   background-image: url('../images/change_status.png') !important;
@@ -1990,4 +1991,16 @@ div.wc-cal-event{
 {
   margin-top: 0em !important;
   margin-bottom: 0em !important;
+}
+
+.warning.change_status
+{
+  width: 47% !important;
+  display:block !important;
+}
+
+.student_career_free {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #39F;
 }

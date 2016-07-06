@@ -1468,8 +1468,29 @@ class Student extends BaseStudent
 
 	public function canChangeStudentStatus()
 	{
-		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
-		 
+		if($this->isInscriptedInCareer())
+		{
+			if($this->getLastCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE )
+			{ 
+				return false;
+			}
+			else
+			{
+				if (is_null($this->getLastStudentCareerSchoolYear()))
+				{
+					return false;
+				}
+				else
+				{
+					return ($this->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN);
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+	
 	}
 	
 	public function getCountStudentRepprovedCourseSubject()
@@ -1481,6 +1502,105 @@ class Student extends BaseStudent
 	
 		return StudentRepprovedCourseSubjectPeer::doCount($c);
 	}
+	
+	public function hasActiveReserve(){
+		//tiene reserva de banco activa.
+		
+		$c = new Criteria();
+		$c->addJoin(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
+		$c->add(StudentReserveStatusRecordPeer::END_DATE, null, Criteria::ISNULL);
+
+		return StudentReserveStatusRecordPeer::doSelectOne($c);
+	}
+	
+	public function isNextToReturn()
+	{
+		$reserve = $this->hasActiveReserve();
+		
+		if(is_null($reserve->getStartDate()))
+		{
+			return false;
+		}
+		$start_date = new DateTime($reserve->getStartDate());
+		
+		//sumo 1 año
+		$end_date = $start_date->add(new DateInterval('P1Y'));
+		//hoy
+		$now = new DateTime("now");
+		
+		$interval = $now->diff($end_date);
+		$days = $interval->format('%r%a');
+		
+		//30 dias . Podria ser configurable.
+		return ($days > 0 && $days <= 30);
+		
+	}
+	/*
+	public function isApproved($career_school_year)
+	{	
+		
+		// materias de este año
+		$course_subject_students = $this->getCourseSubjectStudentsForSchoolYear($career_school_year->getSchoolYear());
+		
+		// para todas las materias cursadas este año
+		foreach ($course_subject_students as $css)
+		{
+			/*
+			 * Se obtiene el resultado de la cursada. Si esta aprobada se crea el StudentApprovedCareerSubject.
+			 * Si esta desaprobada se crea la mesa de examen.
+			 */
+			 
+            /* Si tengo alguna materia sin cerrar */
+			/*if (!$css->areAllMarksClosed())
+			{
+				return "El alumno tiene materias sin cerrar.";
+			}
+
+			/* Si tiene aprobada la cursada */
+			/*if (!is_null($sacs = $css->getStudentApprovedCourseSubject($con)))
+			{
+				//si no tiene el StudentApprovedCareerSubject se lo creo
+				if (is_null($student_approved_career_subject = $sacs->getStudentApprovedCareerSubject($con)))
+				  {
+					$student_approved_career_subject = new StudentApprovedCareerSubject();
+					$student_approved_career_subject->setCareerSubject($sacs->getCourseSubject($con)->getCareerSubject($con));
+					$student_approved_career_subject->setStudent($sacs->getStudent($con));
+					$student_approved_career_subject->setSchoolYear($sacs->getSchoolYear($con));
+					$student_approved_career_subject->setMark($sacs->getMark());
+					$student_approved_career_subject->save($con);
+					
+					$sacs->setStudentApprovedCareerSubject($student_approved_career_subject);
+					$sacs->save($con);
+
+				  }
+					
+			}else{
+				/* Si desaprobó la cursada*/
+			/*	if ($css->countStudentDisapprovedCourseSubjects(null, false, $con))
+				{
+					$sdcs = array_shift($css->getStudentDisapprovedCourseSubjects(null, $con));
+					
+					$c = new Criteria();
+					$c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $sdcs->getExaminationNumber());
+					$c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $sdcs->getCourseSubjectStudent()->getId());
+					
+					//Si no esta la mesa creada se crea.
+					if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
+					{ 
+						$course_subject_student_examination = new CourseSubjectStudentExamination();
+						$course_subject_student_examination->setCourseSubjectStudent($css);
+						$examination_number = $css->getCourseResult()->getExaminationNumber();
+						$course_subject_student_examination->setExaminationNumber($examination_number);
+						$course_subject_student_examination->save($con);
+					}
+				}
+			}			
+		}
+       
+		$student_career_school_year->setIsProcessed(true);
+		$student_career_school_year->save($con);
+		
+	}*/
 
 
 	public function getOptionalCourseSubjectStudents($student_career_school_year = null)
