@@ -102,9 +102,6 @@ root:
         title: Reportes
         credentials: [show_school_year]
         menu:
-          student_reports:
-            title: Reportes de estudiantes
-            url: student_stats/filterForStudentStats
           division_rating_reports:
             title: Planillon de calificaciones por división
             url: rating_report/filterForDivision
