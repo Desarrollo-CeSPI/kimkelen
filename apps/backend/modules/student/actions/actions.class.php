@@ -263,9 +263,15 @@ class studentActions extends autoStudentActions
     $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
     if ($this->form->isValid())
     {
-      $this->form->save();
-
-      $this->getUser()->setFlash("notice", "The item was updated successfully.");
+      try
+      {
+        $this->form->save();
+        $this->getUser()->setFlash("notice", "The item was updated successfully.");
+      }
+      catch (Exception $e)
+      {
+        $this->getUser()->setFlash('error', 'Ocurrio un error al intentar agregar las materias a cursar.');
+      }      
     }
 
     $this->redirect("student/manageCareerSubjectAllowed?id=".$this->student->getId());
