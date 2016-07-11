@@ -14,9 +14,14 @@ class TeacherFormFilter extends BaseTeacherFormFilter
   public function removeFields()
   {
     unset(
-      $this['final_examination_subject_teacher_list'], $this['examination_subject_teacher_list'], $this['examination_repproved_subject_teacher_list'], $this['person_id'], $this['salary'], $this['aging_institution'], $this['file_number'] 
+      $this['final_examination_subject_teacher_list'], 
+      $this['examination_subject_teacher_list'], 
+      $this['examination_repproved_subject_teacher_list'], 
+      $this['person_id'], 
+      $this['salary'], 
+      $this['aging_institution'], 
+      $this['file_number'] 
     );
-
   }
 
   public function configure()
