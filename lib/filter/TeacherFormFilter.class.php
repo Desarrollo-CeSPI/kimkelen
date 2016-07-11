@@ -33,6 +33,9 @@ class TeacherFormFilter extends BaseTeacherFormFilter
     $this->setWidget('identification_number', new sfWidgetFormInput());
     $this->setValidator('identification_number', new sfValidatorNumber(array('required' => false)));
 
+    $this->setWidget('username', new sfWidgetFormInput());
+    $this->setValidator('username', new sfValidatorString(array('required' => false)));
+
     $this->setWidget('is_active', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 0 => 'No'))));
     $this->setValidator('is_active', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
 
@@ -44,6 +47,7 @@ class TeacherFormFilter extends BaseTeacherFormFilter
     $this->getWidgetSchema()->setHelp('lastname', 'Se filtrara por apellido del docente.');
     $this->getWidgetSchema()->setHelp('firstname', 'Se filtrara por nombre del docente.');
     $this->getWidgetSchema()->setHelp('identification_number', 'Se filtrara por numero de documento del docente.');
+    $this->getWidgetSchema()->setHelp('username', 'Se filtrara por el nombre de usuario del docente');
     $this->getWidgetSchema()->setHelp('subject', 'Se filtrara por materia que dicta el docente.');
 
     $this->validatorSchema->setOption('allow_extra_fields', true);
@@ -52,7 +56,7 @@ class TeacherFormFilter extends BaseTeacherFormFilter
 
   public function getFields()
   {
-    return array_merge(parent::getFields(), array('lastname' => 'Text', 'firstname' => 'Text', 'identification_number' => 'Number', 'is_active' => 'Boolean', 'subject' => 'Number'));
+    return array_merge(parent::getFields(), array('lastname' => 'Text', 'firstname' => 'Text', 'identification_number' => 'Number', 'username' => 'Text', 'is_active' => 'Boolean', 'subject' => 'Number'));
 
   }
 
@@ -96,6 +100,20 @@ class TeacherFormFilter extends BaseTeacherFormFilter
       $criteria->setDistinct();
     }
 
+  }
+
+  public function addUsernameColumnCriteria(Criteria $criteria, $field, $value)
+  {
+     $value = trim($value);
+    if ($value != '')
+    {
+      $value = "%$value%";
+      $criteria->setIgnoreCase(true);
+      $criteria->addJoin(TeacherPeer::PERSON_ID, PersonPeer::ID);
+      $criteria->addJoin(PersonPeer::USER_ID,  sfGuardUserPeer::ID );
+      $criterion = $criteria->getNewCriterion(sfGuardUserPeer::USERNAME, $value, Criteria::LIKE);
+      $criteria->add($criterion);
+    }
   }
 
   public function addIsActiveColumnCriteria(Criteria $criteria, $field, $value)
