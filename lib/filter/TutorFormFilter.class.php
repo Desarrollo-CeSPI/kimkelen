@@ -15,13 +15,17 @@ class TutorFormFilter extends BaseTutorFormFilter
   {
     unset($this['person_id'], $this['person'], $this['occupation_category_id'], $this['nationality'], $this['occupation_id'], $this['study_id']);
 
-    $this->setWidget('student', new sfWidgetFormInput());
-    $this->setValidator('student', new sfValidatorString(array('required' => false)));
+    $this->setWidget('is_alive', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 2 => 'No'))));
+    $this->setValidator('is_alive', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 2))));
+
+    $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
+    $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));  
 
     $this->setWidget('lastname', new sfWidgetFormInput());
     $this->setValidator('lastname', new sfValidatorString(array('required' => false)));
-    $this->setWidget('name', new sfWidgetFormInput());
-    $this->setValidator('name', new sfValidatorString(array('required' => false)));
+
+    $this->setWidget('firstname', new sfWidgetFormInput());
+    $this->setValidator('firstname', new sfValidatorString(array('required' => false)));
 
     $this->setWidget('division_id', new sfWidgetFormPropelChoice(array('model' => 'Division', 'peer_method' => 'retrieveSchoolYearDivisions', 'add_empty' => true)));
     $this->setValidator('division_id', new sfValidatorPropelChoice(array('model' => 'Division', 'required' => false)));
@@ -30,11 +34,11 @@ class TutorFormFilter extends BaseTutorFormFilter
 
   public function getFields()
   {
-    return array_merge(parent::getFields(), array('student' => 'Text', 'division_id' => 'Number', 'lastname' => 'text','name' => 'text'));
+    return array_merge(parent::getFields(), array('is_alive' => 'Boolean', 'lastname' => 'text', 'firstname' => 'text', 'student' => 'ForeignKey', 'division_id' => 'Number'));
 
   }
 
-  public function addNameColumnCriteria(Criteria $criteria, $field, $value)
+  public function addFirstnameColumnCriteria(Criteria $criteria, $field, $value)
   {
     $value = trim($value);
     if ($value != '')
@@ -57,38 +61,13 @@ class TutorFormFilter extends BaseTutorFormFilter
 
   public function addStudentColumnCriteria(Criteria $criteria, $field, $value)
   {
-    $value = trim($value);
-    if ($value != '')
-    {
-      $student = explode(', ', $value);
-      $c = new Criteria();
-      $c->setIgnoreCase(true);
-      $c->addJoin(StudentTutorPeer::TUTOR_ID, TutorPeer::ID);
-      $c->addJoin(StudentTutorPeer::STUDENT_ID, StudentPeer::ID);
-      $c->addJoin(PersonPeer::ID, StudentPeer::PERSON_ID);
-
-      if (key_exists(1, $student))
-      {
-        $criterion = $c->getNewCriterion(PersonPeer::FIRSTNAME, $student[1], Criteria::EQUAL);
-        $criterion->addAnd($c->getNewCriterion(PersonPeer::LASTNAME, $student[0], Criteria::EQUAL));
-      }
-      else
-      {
-        $student[0] = "%$student[0]%";
-        $criterion = $c->getNewCriterion(PersonPeer::FIRSTNAME, $student[0], Criteria::LIKE);
-        $criterion->addOr($c->getNewCriterion(PersonPeer::LASTNAME, $student[0], Criteria::LIKE));
-      }
-
-      $criterion->addOr($c->getNewCriterion(PersonPeer::IDENTIFICATION_NUMBER, $value, Criteria::LIKE));
-      $c->add($criterion);
-      $c->clearSelectColumns();
-      $c->addSelectColumn(TutorPeer::ID);
-      $stmt = StudentPeer::doSelectStmt($c);
-      $tutor_ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
-      $criteria->add(TutorPeer::ID, $tutor_ids, Criteria::IN);
-    }
+    $criteria->add(StudentPeer::PERSON_ID, $value);
+    $criteria->addJoin(StudentTutorPeer::STUDENT_ID, StudentPeer::ID);
+    $criteria->addJoin(TutorPeer::ID, StudentTutorPeer::TUTOR_ID);
 
   }
+
+  
 
   public function addDivisionIdColumnCriteria(Criteria $criteria, $field, $value)
   {
