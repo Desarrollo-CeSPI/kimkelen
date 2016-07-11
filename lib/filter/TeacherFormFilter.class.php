@@ -52,7 +52,7 @@ class TeacherFormFilter extends BaseTeacherFormFilter
 
   public function getFields()
   {
-    return array_merge(parent::getFields(), array('lastname' => 'Text', 'firstname' => 'Text', 'identification_number' => 'Text', 'is_active' => 'Boolean', 'subject' => 'Number'));
+    return array_merge(parent::getFields(), array('lastname' => 'Text', 'firstname' => 'Text', 'identification_number' => 'Number', 'is_active' => 'Boolean', 'subject' => 'Number'));
 
   }
 
