@@ -147,11 +147,11 @@ class Student extends BaseStudent
 
   }
 
-	public function canShowCBFE()
-	{
-		return SchoolBehaviourFactory::getInstance()->canShowCBFE();
+    public function canShowCBFE()
+    {
+        return SchoolBehaviourFactory::getInstance()->canShowCBFE();
 
-	}
+    }
 
   /**
    * Registers the student for the given career.
@@ -511,7 +511,7 @@ class Student extends BaseStudent
   public function getFreeClass(CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null, $career_school_year, $division = null)
   {
     if ($this->isFree($career_school_year_period, $course_subject, $career_school_year))
-    {	
+    {   
       return 'free';
     }
     else
@@ -966,7 +966,7 @@ class Student extends BaseStudent
     $results = $this->getStudentDisapprovedCourseSubject();
     $text = '';
 
-	  if ($results){
+      if ($results){
       /* @var $result StudentDisapprovedCourseSubject */
       foreach ($results as $result)
       {
@@ -979,24 +979,24 @@ class Student extends BaseStudent
 
   }
 
-	public function getStudentDisapprovedCourseSubject()
-	{
-		$last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
-		if (!is_null($last_year_school_year)) {
-			$criteria = new Criteria();
+    public function getStudentDisapprovedCourseSubject()
+    {
+        $last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+        if (!is_null($last_year_school_year)) {
+            $criteria = new Criteria();
 
-			$criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-			$criteria->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+            $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
+            $criteria->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
 
-			$criteria->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-			$criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-			$criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+            $criteria->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+            $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+            $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
 
-			$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $last_year_school_year->getId());
+            $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $last_year_school_year->getId());
 
-			return StudentDisapprovedCourseSubjectPeer::doSelect($criteria);
-		}
-	}
+            return StudentDisapprovedCourseSubjectPeer::doSelect($criteria);
+        }
+    }
 
   public function getAmountStudentAttendanceUntilDay($day, $school_year = null)
   {
@@ -1109,8 +1109,8 @@ class Student extends BaseStudent
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
     if(! is_null($career_school_year))
     {
-		$c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId(), Criteria::LESS_THAN);
-	}
+        $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId(), Criteria::LESS_THAN);
+    }
 
     return StudentCareerSchoolYearPeer::doSelectOne($c);
   }
@@ -1124,54 +1124,51 @@ class Student extends BaseStudent
 
   public function getPromDef($course_result)
   {
-
     if (is_null($course_result))
     {
       return '';
     }
+    
+    $config = $course_result->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+    
     if ($course_result instanceOf StudentApprovedCourseSubject)
     { 
-	  $config = $course_result->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
       if ($course_result->getCareerSchoolYear()->getSubjectConfiguration()->getNecessaryStudentApprovedCareerSubjectToShowPromDef())
       {
-		  if($config != null && !$config->isNumericalMark())
-		  {
-			  $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
-			  return $letter_mark->getLetter();	
-		  }
-		  else
-		  {
-		      return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? number_format($student_approved_career_subject->getMark(), 2, '.', '') : '&nbsp';
-		  }	  
+        if($config != null && !$config->isNumericalMark())
+        {
+          $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
+          return $letter_mark->getLetter(); 
+        }
+        else
+        {
+          return ($student_approved_career_subject = $course_result->getStudentApprovedCareerSubject()) ? number_format($student_approved_career_subject->getMark(), 2, '.', '') : '&nbsp';
+        }   
       }
       else
       {
-		
-	    if($config != null && !$config->isNumericalMark())
-		{
-			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getMark());
-			return $letter_mark->getLetter();	
-		}
-		else
-		{  
-			return number_format($course_result->getMark(), 2, '.', '');
-		}
+        if($config != null && !$config->isNumericalMark())
+        {
+          $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getMark());
+          return $letter_mark->getLetter();   
+        }
+        else
+        {  
+          return number_format($course_result->getMark(), 2, '.', '');
+        }
       }
     }
     else
     { 
-		$career_subject = CareerSubjectSchoolYearPeer::retrieveByCareerSubject($course_result->getStudentApprovedCareerSubject()->getCareerSubject());
-		$config = $career_subject->getConfiguration();
-
-		if($config != null && !$config->isNumericalMark())
-		{
-			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
-			return $letter_mark->getLetter();	
-		}
-		else
-		{
-		    return ($course_result->getStudentApprovedCareerSubject()) ? number_format($course_result->getStudentApprovedCareerSubject()->getMark(), 2, '.', '') : '&nbsp';
-		}
+      if($config != null && !$config->isNumericalMark())
+      {
+        $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
+        return $letter_mark->getLetter();   
+      }
+      else
+      {
+        return ($course_result->getStudentApprovedCareerSubject()) ? number_format($course_result->getStudentApprovedCareerSubject()->getMark(), 2, '.', '') : '&nbsp';
+      }
     }
   }
 
@@ -1309,47 +1306,47 @@ class Student extends BaseStudent
   
   public function getHealthInfoString()
   {
-	
-	$school_year = SchoolYearPeer::retrieveCurrent();
-	$c = new Criteria();
-	$c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
-	$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
-	$school_year_student = SchoolYearStudentPeer::doSelectOne($c);
-	SchoolYearStudentPeer::clearInstancePool();
+    
+    $school_year = SchoolYearPeer::retrieveCurrent();
+    $c = new Criteria();
+    $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+    $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $school_year_student = SchoolYearStudentPeer::doSelectOne($c);
+    SchoolYearStudentPeer::clearInstancePool();
 
-	return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
-		
+    return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
+        
   }
   
   public function getHealthCardStatusClass()
-  {	  
-	$health_info =$this->getHealthInfoString();
-	
-	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
-	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
-	{
-		return 'student_health_info';
-			
-	}else{
-		
-		return 'student_fix';
-	}
+  {   
+    $health_info =$this->getHealthInfoString();
+    
+    if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+    $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
+    {
+        return 'student_health_info';
+            
+    }else{
+        
+        return 'student_fix';
+    }
   
   }
   
   public function getHealthCardStatusAttendanceClass()
-  {	 
-	$health_info =$this->getHealthInfoString();
-	
-	if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
-	$health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
-	{
-		return 'student_health_info_attendance';
-			
-	}else{
-		
-		return '';
-	}
+  {  
+    $health_info =$this->getHealthInfoString();
+    
+    if($health_info == HealthInfoStatus::HEALTH_INFO_NO_COMMITED || $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE || 
+    $health_info == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT )
+    {
+        return 'student_health_info_attendance';
+            
+    }else{
+        
+        return '';
+    }
   
   }
   
@@ -1411,112 +1408,112 @@ class Student extends BaseStudent
   }
 
 
-	/**
-	 * Returns if the student is inscripted in pathway program for current school year
-	 *
-	 * @return boolean
-	 */
-	public function getBelongsToPathway()
-	{
-		$c = new Criteria();
-		$c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
-		//$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
-		//$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+    /**
+     * Returns if the student is inscripted in pathway program for current school year
+     *
+     * @return boolean
+     */
+    public function getBelongsToPathway()
+    {
+        $c = new Criteria();
+        $c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
+        //$c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
+        //$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
 
-		return $this->countPathwayStudents($c) > 0;
-	}
+        return $this->countPathwayStudents($c) > 0;
+    }
 
-	public function owsCorrelativeFor($career_subject) 
-	{
+    public function owsCorrelativeFor($career_subject) 
+    {
     //obtengo las correlativas de la materia recibida por parámetro
     $correlative = $career_subject->getCorrelativeCareerSubject();
 
-		if (!is_null($correlative))
-		{
-		
-			foreach ($this->getStudentRepprovedCourseSubjectForReportCards(SchoolYearPeer::retrieveCurrent()) as $repproved)
-			{
+        if (!is_null($correlative))
+        {
+        
+            foreach ($this->getStudentRepprovedCourseSubjectForReportCards(SchoolYearPeer::retrieveCurrent()) as $repproved)
+            {
 
-				if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
-				  return true;
-				}
-			}
-		}
-		return false;
-	}
-	
+                if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+                  return true;
+                }
+            }
+        }
+        return false;
+    }
+    
 
-	public function hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)
-	{
-		$c = new Criteria();
-		$c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
-		$c->add(StudentAttendancePeer::STUDENT_ID, $this->getId());
-		$c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
-		$c->add(StudentAttendancePeer::STUDENT_ATTENDANCE_JUSTIFICATION_ID, null, Criteria::ISNOTNULL);
-		$c->add(StudentAttendancePeer::VALUE, 0, Criteria::GREATER_THAN);
-		$c->add(StudentAttendancePeer::DAY, $day, Criteria::EQUAL);
-		
-		return StudentAttendancePeer::doSelectOne($c);
-	
-	}
-	
-	public function getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year, $day, $course_subject_id)
-	{
-		return (is_null($this->hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)) ? '' : 'justificated');
-	}
-
-
-	public function canChangeStudentStatus()
-	{
-		return $this->getCurrentStudentCareerSchoolYear() ? true : false;
-		 
-	}
-	
-	public function getCountStudentRepprovedCourseSubject()
-	{
-		$c = new Criteria();
-		$c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-		$c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
-		$c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
-	
-		return StudentRepprovedCourseSubjectPeer::doCount($c);
-	}
+    public function hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)
+    {
+        $c = new Criteria();
+        $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
+        $c->add(StudentAttendancePeer::STUDENT_ID, $this->getId());
+        $c->add(StudentAttendancePeer::COURSE_SUBJECT_ID, $course_subject_id);
+        $c->add(StudentAttendancePeer::STUDENT_ATTENDANCE_JUSTIFICATION_ID, null, Criteria::ISNOTNULL);
+        $c->add(StudentAttendancePeer::VALUE, 0, Criteria::GREATER_THAN);
+        $c->add(StudentAttendancePeer::DAY, $day, Criteria::EQUAL);
+        
+        return StudentAttendancePeer::doSelectOne($c);
+    
+    }
+    
+    public function getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year, $day, $course_subject_id)
+    {
+        return (is_null($this->hasJustificatedAbsencePerSubjectAndDay($career_school_year, $day, $course_subject_id)) ? '' : 'justificated');
+    }
 
 
-	public function getOptionalCourseSubjectStudents($student_career_school_year = null)
-	{
-		$school_year = is_null($student_career_school_year) ? null : $student_career_school_year->getCareerSchoolYear()->getSchoolYear();
+    public function canChangeStudentStatus()
+    {
+        return $this->getCurrentStudentCareerSchoolYear() ? true : false;
+         
+    }
+    
+    public function getCountStudentRepprovedCourseSubject()
+    {
+        $c = new Criteria();
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+    
+        return StudentRepprovedCourseSubjectPeer::doCount($c);
+    }
 
-		return SchoolBehaviourFactory::getInstance()->getOptionalCourseSubjectStudents($this, $school_year);
 
-	}
-	
-	public function isRepproved()
-	{
-		$current_scsy = $this->getCurrentStudentCareerSchoolYear();
-		
-		$last_scsy = (!is_null($current_scsy))? $this->getLastStudentCareerSchoolYear($current_scsy->getCareerSchoolYear()) : null;
-		
-		if(!is_null($last_scsy) && !is_null($current_scsy))	
-			
-			return ($last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED || $current_scsy->getStatus() == StudentCareerSchoolYearStatus:: REPPROVED);
-		
-		else
-		{
-			if(!is_null($last_scsy))
-			{
-				return $last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
-			}
-			else
-			{
-				if(!is_null($current_scsy))
-					return $current_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
-				else
-					return false;
-			}
-		}
-	}
-	
+    public function getOptionalCourseSubjectStudents($student_career_school_year = null)
+    {
+        $school_year = is_null($student_career_school_year) ? null : $student_career_school_year->getCareerSchoolYear()->getSchoolYear();
+
+        return SchoolBehaviourFactory::getInstance()->getOptionalCourseSubjectStudents($this, $school_year);
+
+    }
+    
+    public function isRepproved()
+    {
+        $current_scsy = $this->getCurrentStudentCareerSchoolYear();
+        
+        $last_scsy = (!is_null($current_scsy))? $this->getLastStudentCareerSchoolYear($current_scsy->getCareerSchoolYear()) : null;
+        
+        if(!is_null($last_scsy) && !is_null($current_scsy)) 
+            
+            return ($last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED || $current_scsy->getStatus() == StudentCareerSchoolYearStatus:: REPPROVED);
+        
+        else
+        {
+            if(!is_null($last_scsy))
+            {
+                return $last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
+            }
+            else
+            {
+                if(!is_null($current_scsy))
+                    return $current_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED;
+                else
+                    return false;
+            }
+        }
+    }
+    
   public function getAbsencesReport($career_school_year_id)
   {
 
