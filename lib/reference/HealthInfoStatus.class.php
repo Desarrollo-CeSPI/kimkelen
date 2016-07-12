@@ -29,7 +29,8 @@ class HealthInfoStatus extends BaseCustomOptionsHolder
     HEALTH_INFO_OBSERVATIONS = 'Apta con observaciones',
     HEALTH_INFO_NO_SUITABLE = 'No apta',
     HEALTH_INFO_NO_SUITABLE_ACCIDENT = 'No apto - Accidente en el campo',
-    HEALTH_INFO_INVALID = 'Invalido';
+    HEALTH_INFO_INVALID = 'Invalido',
+    HEALTH_INFO_RETURNED = 'Devuelta';
 
 
   protected
@@ -41,6 +42,7 @@ class HealthInfoStatus extends BaseCustomOptionsHolder
         self::HEALTH_INFO_NO_SUITABLE 	=> 'No apta',
         self::HEALTH_INFO_NO_SUITABLE_ACCIDENT => 'No apto - Accidente en el campo',
         self::HEALTH_INFO_INVALID	=> 'Inválido',
+        self::HEALTH_INFO_RETURNED	=> 'Devuelta'
       );
 
 }
