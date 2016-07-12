@@ -1517,7 +1517,7 @@ class Student extends BaseStudent
 	{
 		$reserve = $this->hasActiveReserve();
 		
-		if(is_null($reserve->getStartDate()))
+		if(is_null($reserve) || is_null($reserve->getStartDate()))
 		{
 			return false;
 		}
