@@ -46,7 +46,7 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
 		$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
 		$c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
 		$c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
-		$c->add(StudentCareerSchoolYearPeer::STATUS, ExaminationRepprovedType::FREE, Criteria::EQUAL);
+		$c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::FREE, Criteria::EQUAL);
 
 		return $c;
 	}
