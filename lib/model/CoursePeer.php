@@ -38,7 +38,7 @@ class CoursePeer extends BaseCoursePeer
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
     $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
     $c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
-    $c->add(PersonPeer::IS_ACTIVE,true);
+    //$c->add(PersonPeer::IS_ACTIVE,true);
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
     return $c;
 
