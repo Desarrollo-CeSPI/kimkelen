@@ -15,26 +15,32 @@ class TutorFormFilter extends BaseTutorFormFilter
   {
     unset($this['person_id'], $this['person'], $this['occupation_category_id'], $this['nationality'], $this['occupation_id'], $this['study_id']);
 
-    $this->setWidget('is_alive', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 2 => 'No'))));
-    $this->setValidator('is_alive', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 2))));
-
-    $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
-    $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));  
-
     $this->setWidget('lastname', new sfWidgetFormInput());
     $this->setValidator('lastname', new sfValidatorString(array('required' => false)));
 
     $this->setWidget('firstname', new sfWidgetFormInput());
     $this->setValidator('firstname', new sfValidatorString(array('required' => false)));
 
+    $this->setWidget('is_alive', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 2 => 'No'))));
+    $this->setValidator('is_alive', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 2))));
+
+    $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
+    $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));  
+
     $this->setWidget('division_id', new sfWidgetFormPropelChoice(array('model' => 'Division', 'peer_method' => 'retrieveSchoolYearDivisions', 'add_empty' => true)));
     $this->setValidator('division_id', new sfValidatorPropelChoice(array('model' => 'Division', 'required' => false)));
-
+    
+    //widgets options
+    $this->getWidgetSchema()->setHelp('lastname', 'Se filtrara por apellido del tutor.');
+    $this->getWidgetSchema()->setHelp('firstname', 'Se filtrara por nombre del tutor.');
+    $this->getWidgetSchema()->setHelp('identification_number', 'Se filtrara por numero de documento del tutor.');
+    $this->getWidgetSchema()->setHelp('student', 'Se filtrara por el alumno a cargo.');
+    $this->getWidgetSchema()->setHelp('division_id', 'Se filtrara por la division del alumno a cargo.');
   }
 
   public function getFields()
   {
-    return array_merge(parent::getFields(), array('is_alive' => 'Boolean', 'lastname' => 'text', 'firstname' => 'text', 'student' => 'ForeignKey', 'division_id' => 'Number'));
+    return array_merge(parent::getFields(), array('lastname' => 'text', 'firstname' => 'text', 'is_alive' => 'Boolean', 'student' => 'ForeignKey', 'division_id' => 'Number'));
 
   }
 
