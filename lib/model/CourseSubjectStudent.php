@@ -235,28 +235,27 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       return '';
 
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
-   
-    $career_subject = CareerSubjectSchoolYearPeer::retrieveByCareerSubject($student_approved_career_subject->getCareerSubject());
-	$config = $career_subject->getConfiguration();
-	
-	if($config != null && !$config->isNumericalMark())
-	{
-		if(!is_null($student_approved_career_subject))
-		{
-			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$student_approved_career_subject->getMark());
-		}
-		else
-		{
-			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$this->getMarksAverage());
-		}
-		
-		return $letter_mark->getLetter();	
-	}
-	else
-	{
-	    return $student_approved_career_subject ? $student_approved_career_subject->getMark() : $this->getMarksAverage();
-	}
-		   
+    
+    $config = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+  	
+  	if($config != null && !$config->isNumericalMark())
+  	{
+  		if(!is_null($student_approved_career_subject))
+  		{
+  			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$student_approved_career_subject->getMark());
+  		}
+  		else
+  		{
+  			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$this->getMarksAverage());
+  		}
+  		
+  		return $letter_mark->getLetter();	
+  	}
+  	else
+  	{
+  	 return $student_approved_career_subject ? $student_approved_career_subject->getMark() : $this->getMarksAverage();
+  	}
+  		   
   }
 
   public function getFinalAvg()
@@ -625,8 +624,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
 
     $crit = new Criteria();
-    $crit->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID);
-    $crit->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID);
+    $crit->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID, Criteria::LEFT_JOIN);
+    $crit->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID, Criteria::LEFT_JOIN);
     $crit->addAscendingOrderByColumn(ExaminationRepprovedPeer::EXAMINATION_NUMBER);
 
     foreach ($student_repproved_course_subject->getStudentExaminationRepprovedSubjects($crit) as $srcs)
