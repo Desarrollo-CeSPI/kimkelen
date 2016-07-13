@@ -15,19 +15,19 @@ class CommissionFormFilter extends BaseCourseFormFilter
     unset($this['starts_at'], $this['quota'], $this['division_id'], $this['related_division_id'], $this['is_pathway']);
 
     $this->getWidget('name')->setOption('with_empty', false);
-    $this->getWidgetSchema()->setHelp('name', 'Se buscará por nombre de la comisión.');
-
+    
     $this->setWidget('subject', new sfWidgetFormFilterInput());
     $this->getWidget('subject')->setOption('with_empty', false);
-    $this->getWidgetSchema()->setHelp('subject', 'Se buscará por materias de la comisión.');
+    $this->setValidator('subject', new sfValidatorPass(array('required' => false)));
 
 	  $this->setWidget('classroom_id', new sfWidgetFormPropelChoice(array('model' => 'Classroom', 'add_empty' => true)));
 	  $this->setValidator('classroom_id', new sfValidatorPass(array('required' => false)));
-	  $this->getWidgetSchema()->setLabel('classroom_id', 'Aula');
-
-    $this->setValidator('subject', new sfValidatorPass(array('required' => false)));
+	  
     $this->setWidget('year', new sfWidgetFormFilterInput(array('with_empty' => false)));
     $this->setValidator('year', new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))));
+
+    $this->setWidget('is_closed', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 0 => 'No'))));
+    $this->setValidator('is_closed', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
 
     $this->setWidget('school_year_id', new sfWidgetFormPropelChoice(array('model' => 'SchoolYear', 'add_empty' => false)));
     $this->setValidator('school_year_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'SchoolYear', 'column' => 'id')));
@@ -36,23 +36,22 @@ class CommissionFormFilter extends BaseCourseFormFilter
     $this->setValidator('current_period', new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))));
 
     $this->setWidget('career_school_year', new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYear', 'criteria' => $this->getCareersCriteria(), 'add_empty' => true)));
-
     $this->setValidator('career_school_year', new sfValidatorPropelChoice(array('required' => false, 'model' => 'CareerSchoolYear', 'column' => 'id')));
-
-    $this->setWidget('division', new sfWidgetFormPropelChoice(array('model' => 'division', 'add_empty' => true)));
-    $this->setValidator('division', new sfValidatorPropelChoice(array('required' => false, 'model' => 'division', 'column' => 'id')));
-
 
     $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
     $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));
 
-    $this->getWidgetSchema()->setLabel('current_period', 'Período');
-    $this->getWidgetSchema()->setLabel('career_school_year', 'Carrera');
-    $this->getWidgetSchema()->setHelp('career_school_year', 'Seleccione alguna de las carreras habilitadas');
-
     $this->setWidget('teacher', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectTeacher')));
     $this->setValidator('teacher', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));
 
+    $this->getWidgetSchema()->setLabel('classroom_id', 'Aula');
+    $this->getWidgetSchema()->setLabel('current_period', 'Período');
+    $this->getWidgetSchema()->setLabel('career_school_year', 'Carrera');
+    $this->getWidgetSchema()->setHelp('name', 'Se filtrara por nombre de la comisión.');
+    $this->getWidgetSchema()->setHelp('subject', 'Se filtrara por materias que contiene la comisión.');
+    $this->getWidgetSchema()->setHelp('career_school_year', 'Seleccione alguna de las carreras habilitadas');
+    $this->getWidgetSchema()->setHelp('current_period', 'Se filtrara por el periodo actual de la comisión.');
+    $this->getWidgetSchema()->setHelp('year', 'Se filtrara por el año de la materia que contiene la comisión.');
   }
 
   public static function getCareersCriteria()
@@ -71,11 +70,11 @@ class CommissionFormFilter extends BaseCourseFormFilter
         'name' => 'Text',
         'subject' => 'Text',
         'year' => 'Number',
+        'is_closed' => 'Boolean',
         'career_school_year' => 'ForeignKey',
         'current_period' => 'Number',
         'school_year_id' => 'ForeignKey',
 	      'classroom_id' => 'ForeignKey',
-        'division' => 'ForeignKey',
         'teacher' => 'ForeignKey',
         'student' => 'ForeignKey'));
 
@@ -114,30 +113,6 @@ class CommissionFormFilter extends BaseCourseFormFilter
       $criteria->addJoin(CourseSubjectTeacherPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
       $criteria->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
       $criteria->add(PersonPeer::ID,$value);
-    }
-  }
-
-  public function addDivisionColumnCriteria(Criteria $criteria, $field, $value)
-  {
-    if ($value !== null)
-    {
-      #Recupero a todos los estudiantes de esa division
-      $c = New Criteria();
-      $c->add(DivisionPeer::ID, $value);
-      $c->addJoin(DivisionPeer::ID, DivisionStudentPeer::DIVISION_ID);
-      #Lo transformo en un arreglo de ids
-      $c->clearSelectColumns();
-      $c->addSelectColumn(DivisionStudentPeer::STUDENT_ID);
-      $stm = DivisionStudentPeer::doSelectStmt($c);
-      while ($row = $stm->fetch(PDO::FETCH_NUM))
-        $students_id[] = $row[0];
-
-      #Pregunto si existe algun alumno en esta division
-      $criteria->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
-      $criteria->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPeer::COURSE_SUBJECT_ID);
-      $criteria->add(CourseSubjectStudentPeer::STUDENT_ID, $students_id, Criteria::IN);
-      #elimino lo repetidos
-      $criteria->setDistinct(CoursePeer::ID);
     }
   }
 
