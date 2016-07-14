@@ -64,7 +64,7 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
       $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
 	  }
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
-    //die(var_dump($c->toString()));
+    
     return StudentPeer::doSelect($c);
   }
 
