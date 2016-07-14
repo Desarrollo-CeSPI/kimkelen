@@ -345,7 +345,7 @@ class CourseSubject extends BaseCourseSubject
     $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
     $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-    $criteria->add(PersonPeer::IS_ACTIVE, true);
+    //$criteria->add(PersonPeer::IS_ACTIVE, true);
     $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
     return parent::getCourseSubjectStudents($criteria);

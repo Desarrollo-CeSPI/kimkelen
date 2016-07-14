@@ -41,8 +41,8 @@
 
     <div style="clear:both"></div>
     <table width="100%" class="gridtable_bordered">
-      <?php include_partial("course_student_mark/thead", array('course' => $course, "configuration" => $configuration)); ?>
-      <?php include_partial("course_student_mark/tbody", array('course' => $course, "configuration" => $configuration, "course_subject" => $course_subject, "final_period" => $final_period)); ?>
+      <?php include_partial("thead", array('course' => $course, "configuration" => $configuration)); ?>
+      <?php include_partial("tbody", array('course' => $course, "configuration" => $configuration, "course_subject" => $course_subject, "final_period" => $final_period)); ?>
     </table>
 
 
