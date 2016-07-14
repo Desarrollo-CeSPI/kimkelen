@@ -1469,19 +1469,10 @@ class Student extends BaseStudent
     {
       if($this->getLastCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE )
       {
+
         return false;
       }
-      else
-      {
-        if (is_null($this->getLastStudentCareerSchoolYear()))
-        {
-          return false;
-        }
-        else
-        {
-          return ($this->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN);
-        }
-      }
+      return true;
     }
     else
     {
