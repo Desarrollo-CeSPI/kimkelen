@@ -23,7 +23,7 @@ class CoursePeer extends BaseCoursePeer
 {
 
   /*
-   * This static method returns the criteria, for the students that are inscripted in any subject of the course_id
+   * This static method returns the criteria, for the students that are inscripted in any subject of the course_id with status <> to withdrawn or withdrawn with reserve
    *
    * @return Criteria
    */
@@ -38,7 +38,10 @@ class CoursePeer extends BaseCoursePeer
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
     $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
     $c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
-    $c->add(PersonPeer::IS_ACTIVE,true);
+    $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
+    $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::NOT_EQUAL);
+    $c->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
+    $c->setDistinct();
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
     return $c;
 
