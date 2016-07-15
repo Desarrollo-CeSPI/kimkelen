@@ -345,7 +345,10 @@ class CourseSubject extends BaseCourseSubject
     $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
     $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-    $criteria->add(PersonPeer::IS_ACTIVE, true);
+    $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
+    $criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::NOT_EQUAL);
+    $criteria->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
+    $criteria->setDistinct();
     $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
     return parent::getCourseSubjectStudents($criteria);

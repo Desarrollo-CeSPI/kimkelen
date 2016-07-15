@@ -37,6 +37,7 @@ class DivisionPeer extends BaseDivisionPeer
     $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
     $criteria->addJoin(self::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
     $criteria->addAscendingOrderByColumn(self::YEAR);
+    $criteria->addAscendingOrderByColumn(self::DIVISION_TITLE_ID);
 
     return self::doSelect($criteria);
   }

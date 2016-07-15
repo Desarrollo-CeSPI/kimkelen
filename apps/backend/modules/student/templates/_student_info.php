@@ -23,15 +23,7 @@
   <div class="person_name"><strong><?php echo link_to($student, 'student/show?id=' . $student->getId())?></strong></div>
   <div class="student_global_file_number"><i><?php $student->getGlobalFileNumber() != '' and print __('Global file number %global_file_number%', array('%global_file_number%' => $student->getGlobalFileNumber())) ?></i></div>
 	<div class="active"><strong><?php echo __("Is Active?") ?></strong> 
-		<em><?php include_partial("student/is_active", array("student" => $student)) ?></em>	
-
-		<?php if ($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_COMMITED): ?>
-		<div class="health"><strong> <?php echo __("Health card not received") ;?></strong></div>
-		<?php elseif($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE):?>
-		<div class="health"><strong> <?php echo __("No suitable"); ?></strong></div>
-			<?php elseif($student->getHealthInfoString() == HealthInfoStatus::HEALTH_INFO_NO_SUITABLE_ACCIDENT):?>
-			<div class="health"><strong> <?php echo $student->getHealthInfoString(); ?></strong></div>
-		<?php endif; ?>	
+		<em><?php include_partial("student/is_active", array("student" => $student)) ?></em>
 
 		<?php if ($student->isInscriptedInCareer() && !is_null($student->getLastStudentCareerSchoolYear()) && $student->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE && $student->isNextToReturn()): ?>
 			<div class="health"><strong> <?php echo  __('Próximo a regresar') ?></strong></div>

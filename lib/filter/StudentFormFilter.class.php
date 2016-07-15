@@ -102,6 +102,9 @@ class StudentFormFilter extends BaseStudentFormFilter
       AdminGeneratorFiltersClass::addDivisionTeacherCriteria($criteria, $user);
     }
 
+    $criteria->addAscendingOrderByColumn(DivisionPeer::YEAR);
+    $criteria->addAscendingOrderByColumn(DivisionPeer::DIVISION_TITLE_ID);
+
     return $criteria;
   }
 

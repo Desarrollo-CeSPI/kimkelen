@@ -277,16 +277,16 @@ generator:
             credentials:  [show_equivalence]
             condition:     canManageEquivalence
             action: equivalence
-          activate:
-            label: Set active
-            credentials: [edit_student]
-            action: personActivation
-            condition: canPersonBeActivated
-          deactivate:
-            label: Set inactive
-            credentials: [edit_student]
-            action: personDeactivation
-            condition: canPersonBeDeactivated
+          #activate:
+            #label: Set active
+            #credentials: [edit_student]
+            #action: personActivation
+            #condition: canPersonBeActivated
+          #deactivate:
+            #label: Set inactive
+            #credentials: [edit_student]
+            #action: personDeactivation
+            #condition: canPersonBeDeactivated
           print_report_card:
             label:  print report card
             action: printReportCard
