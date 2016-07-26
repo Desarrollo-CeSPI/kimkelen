@@ -65,6 +65,13 @@ class TentativeRepprovedStudentForm extends sfForm
 
 					$trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::APPROVED);
 					$trs->getStudentCareerSchoolYear()->save($con);
+
+					$student_id = $trs->getStudentCareerSchoolYear()->getStudentId();
+					$career_id = $trs->getStudentCareerSchoolYear()->getCareerSchoolYear()->getCareerId();
+					$next_year = $trs->getStudentCareerSchoolYear()->getYear() + 1;
+					$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student_id);
+        	
+					$career_student->createStudentsCareerSubjectAlloweds($next_year, $con);
 				}
 
 			}
