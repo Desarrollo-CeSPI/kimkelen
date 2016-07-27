@@ -71,6 +71,10 @@ class TentativeRepprovedStudentForm extends sfForm
 					$next_year = $trs->getStudentCareerSchoolYear()->getYear() + 1;
 					$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student_id);
         	
+        	// Creo los Allowed para la trayectoria del alumno
+        	$career_student->createStudentsCareerSubjectAllowedPathways($trs->getStudentCareerSchoolYear()->getYear(), $con);
+					// Creo los allowed para la cursada normal del alumno
+					$career_student->deleteStudentsCareerSubjectAlloweds();
 					$career_student->createStudentsCareerSubjectAlloweds($next_year, $con);
 				}
 
