@@ -383,12 +383,14 @@ class CareerStudent extends BaseCareerStudent
 
       foreach ($career_subjects as $career_subject)
       {
-        $student_career_subject_allowed_pathway = new StudentCareerSubjectAllowedPathway();
-        $student_career_subject_allowed_pathway->setStudent($this->getStudent($con));
-        $student_career_subject_allowed_pathway->setCareerSubject($career_subject);
-        $student_career_subject_allowed_pathway->save($con);
-
-        unset($student_career_subject_allowed_pathway);
+        if (!$this->isApprovedCareerSubject($career_subject, $this->getStudent()))
+        {
+          $student_career_subject_allowed_pathway = new StudentCareerSubjectAllowedPathway();
+          $student_career_subject_allowed_pathway->setStudent($this->getStudent($con));
+          $student_career_subject_allowed_pathway->setCareerSubject($career_subject);
+          $student_career_subject_allowed_pathway->save($con);
+          unset($student_career_subject_allowed_pathway);
+        }
       }
 
       $con->commit();
@@ -399,6 +401,15 @@ class CareerStudent extends BaseCareerStudent
       throw $e;
     }
 
+  }
+
+  public function isApprovedCareerSubject(CareerSubject $career_subject, Student $student)
+  {
+    $c = new Criteria();
+    $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student->getId());
+    $c->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject->getId());
+    
+    return (StudentApprovedCareerSubjectPeer::doSelectOne($c)) ? true : false;
   }
 
 }
