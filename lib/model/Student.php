@@ -1582,6 +1582,18 @@ class Student extends BaseStudent
     return $this->getTotalAbsencesReport($career_school_year_id,false) - $this->getTotalAbsencesReport($career_school_year_id, true);
 
   }
+
+  public function deleteAllCareerSubjectAllowedPathways(PropelPDO $con)
+  {
+    $c = new Criteria();
+    $c->add(StudentCareerSubjectAllowedPathwayPeer::STUDENT_ID, $this->getId());
+
+    StudentCareerSubjectAllowedPathwayPeer::doDelete($c, $con);
+
+    StudentCareerSubjectAllowedPathwayPeer::clearInstancePool();
+    unset($c);
+
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

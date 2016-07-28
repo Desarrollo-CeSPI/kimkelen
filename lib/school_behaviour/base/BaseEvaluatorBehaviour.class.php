@@ -252,8 +252,9 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         //Si no fue aprobado ya.
         elseif ($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::APPROVED)
         {
-          // se eliminan los allowed de este año
+          // Elimina los Allowed y Allowed Pathway del alumno.
           $student->deleteAllCareerSubjectAlloweds($con);
+          $student->deleteAllCareerSubjectAllowedPathways($con);
           //Se agregan las materias que puede cursar el alumno.
           $career_student->createStudentsCareerSubjectAlloweds($next_year, $con);
           
