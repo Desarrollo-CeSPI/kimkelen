@@ -249,15 +249,23 @@ classes:
         type: integer
         required: true
       sector:
+        description:      0=Estatal, 1=Privado, 2=Activo, 3=Social/Cooperativa
         type: integer
         required: true
       field:
+        description:      0=Rural, 1=Urbano
         type: integer
         required: true
       address:
         type: varchar(255)
+      city_id:
+        type: integer(11)
+        foreignClass: city
+        foreignReference: id
+        required: true     
       _indexes:
         cue: [cue]
+        city: [city_id]
   
   LetterMark:
     tablename:        letter_mark
