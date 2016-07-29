@@ -88,3 +88,31 @@ classes:
       is_deleted:
         type: boolean
         default: false
+
+  StudentCareerSubjectAllowedPathway:
+    tableName:            student_career_subject_allowed_pathway
+    description:          Representa que materias puede cursar en trayectoria un alumno
+    columns:
+      id:
+      career_subject_id:
+        description:      Referencia a la materia de una carrera
+        type:             integer
+        foreignTable:     career_subject
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         restrict
+        primaryKey: true
+      student_id:
+        description:      Referencia al estudiante
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         cascade
+        onDelete:         cascade
+        primaryKey: true
+      _uniques:
+        career_subject_student: [ career_subject_id, student_id ]
+      _indexes:
+        career_subject_student_index: [student_id, career_subject_id]

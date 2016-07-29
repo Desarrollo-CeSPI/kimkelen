@@ -74,6 +74,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $this['busy_starts_at'],
       $this['busy_ends_at'],
       $this['student_career_subject_allowed_list'],
+      $this['student_career_subject_allowed_pathway_list'],
       $this['blood_group'],
       $this['blood_factor'],
       $this['emergency_information'],
