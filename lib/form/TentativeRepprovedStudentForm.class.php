@@ -13,9 +13,14 @@ class TentativeRepprovedStudentForm extends sfForm
 	{
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
-		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'expanded' => true, 'peer_method' => 'getStudents', 'multiple'  => true
-,  'renderer_options' =>array('class' => 'checkbox')
-		)));
+		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 
+																																		'expanded' => true, 
+																																		'peer_method' => 'getStudents', 
+																																		'multiple'  => true,
+																																		'renderer_options' =>array('class' => 'checkbox')
+																																		)));
+
+		$this->getWidgetSchema()->setLabel('students', false);
 
 		$this->validatorSchema['students'] = new sfValidatorPass();
 		$this->validatorSchema->setOption('allow_extra_fields', true);

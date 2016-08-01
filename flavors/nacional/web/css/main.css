@@ -2060,7 +2060,7 @@ div.wc-cal-event{
 
 .sf_admin_action_change_student_status a
 {
-	background-image: url('../images/change_status.png') !important;
+  background-image: url('../images/change_status.png') !important;
 }
 
 .warning.change_status
@@ -2071,8 +2071,16 @@ div.wc-cal-event{
 
 .student_career_free 
 {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #39F;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #39F;
 }
 
+#pathway-list {
+  border: 2px solid black; 
+  padding-left: 1% !important;
+}
+
+#pathway-info-list {
+  list-style: disc !important;
+}
