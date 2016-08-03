@@ -50,7 +50,7 @@ class Course extends BaseCourse
     $all_equals = true;
     foreach ($course_subjects as $course_subject)
     {
-      $all_equals = $all_equals && ($course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear() === $career_school_year);
+      $all_equals = $all_equals && ($course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYearId() == $career_school_year->getId());
     }
 
     return $all_equals ? $career_school_year : null;
