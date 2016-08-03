@@ -42,6 +42,7 @@ class LvmStudentFormFilter extends StudentFormFilter
       $this['origin_school_id'],
       $this['educational_dependency'],
       $this['student_career_subject_allowed_list'],
+      $this['student_career_subject_allowed_pathway_list'],
       $this['blood_group'],
       $this['blood_factor'],
       $this['emergency_information'],
