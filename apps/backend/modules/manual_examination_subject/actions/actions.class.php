@@ -169,7 +169,7 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
     /* @var $examination_subject ExaminationSubject */
     $this->examination_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_subject->getStudents();
-
+    $this->previous_url = $request->getReferer();
     $this->setLayout('cleanLayout');
 
   }

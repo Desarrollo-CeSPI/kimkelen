@@ -60,10 +60,7 @@ class Division extends BaseDivision
     $c->add(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($this->getSchoolYear()), Criteria::IN);
     $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
     $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
-    $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
-    $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::NOT_EQUAL);
-    $c->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
-    $c->setDistinct();
+    $c->add(PersonPeer::IS_ACTIVE, true);
 
     $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
     $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);

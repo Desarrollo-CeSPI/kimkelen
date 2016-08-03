@@ -17,4 +17,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php include_partial('global/examination_act',array('examination_subject'=>$examination_repproved_subject, 'students'=>$students)); ?>
+<?php include_partial('global/examination_act',array('examination_subject'=>$examination_repproved_subject, 'students'=>$students, 'previous_url'=>$previous_url)); ?>
