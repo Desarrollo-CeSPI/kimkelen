@@ -4379,6 +4379,30 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Year 6</source>
                 <target>Sexto año</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Origin school state id</source>
+                <target>Provincia de escuela de de origen</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Origin school department id</source>
+                <target>Partido de escuela de origen</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Origin school city id</source>
+                <target>Ciudad de escuela de origen</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Birth department</source>
+                <target>Partido de nacimiento</target>
+            </trans-unit>
+	     <trans-unit>
+                <source>Department id</source>
+                <target>Partido</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Select a department first</source>
+                <target>Seleccione un partido</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -258,7 +258,7 @@ classes:
       address:
         type: varchar(255)
       city_id:
-        type: integer(11)
+        type: integer
         foreignClass: city
         foreignReference: id
         required: true     
@@ -304,12 +304,12 @@ classes:
       name:
         type: varchar(255)
       state_id:
-        type: integer(11)
+        type: integer
         foreignClass: state
         foreignReference: id
         required: true
-      condition
-        type: char(1)
+      condition:
+        type: varchar(1)
       _indexes:
         state: [state_id]
         name: [name]

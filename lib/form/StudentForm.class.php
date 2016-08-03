@@ -50,11 +50,71 @@ class StudentForm extends BaseStudentForm
 
     $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
     $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
+	/*
+	$c = new Criteria();
+    $c->addAscendingOrderByColumn('name');
+    $c->add(StatePeer::COUNTRY_ID,Country::ARGENTINA);
+    
+    $this->setWidget('origin_school_state_id', new sfWidgetFormPropelchoice(array(
+        'model'     => 'State',
+        'add_empty' => true,
+        'criteria' => $c
+    )));
+	$this->setValidator('origin_school_state_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'State', 'column' => 'id')));
 	
-	$this->setWidget('origin_school_id', new dcWidgetFormPropelJQuerySearch(array('model' => 'OriginSchool', 'column' => array('name'),'peer_method'=> 'doSelect')));
+	$c= new Criteria();
+	$c->addAscendingOrderByColumn('name');
+	
+	$widget_origin_school_department = new sfWidgetFormPropelChoice(array(
+      'model'      => 'Department',
+      'add_empty'  => true,
+      'criteria' => $c
+    ));
+    
+    $this->setWidget('origin_school_department_id', new dcWidgetAjaxDependencePropel(array(
+        'related_column'     => 'state_id',
+        'dependant_widget'   => $widget_origin_school_department,
+        'observe_widget_id'  => 'origin_school_state_id',
+        'message_with_no_value' => __('Select a state first'),
+        )));
+        
+	$this->setValidator('origin_school_department_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')));
+	
+	*/
+	$this->setWidget('origin_school_state_id',  new sfWidgetFormSelect(array('choices'  => StatePeer::retrieveByCountryId(Country::ARGENTINA))));
+	$this->setValidator('origin_school_state_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'State', 'column' => 'id')));
+	
+	$d = new sfWidgetFormChoice(array('choices' => array()));
+    $this->setWidget('origin_school_department_id', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $d,
+        'observe_widget_id' => 'student_origin_school_state_id',
+        'message_with_no_value' => 'Seleccione una provincia y apareceran los partidos correspondientes.',
+        'get_observed_value_callback' => array(get_class($this), 'getDepartments')
+      )));
+	$this->setValidator('origin_school_department_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')));
+	
+	$c = new sfWidgetFormChoice(array('choices' => array()));
+	$this->setWidget('origin_school_city_id', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $d,
+        'observe_widget_id' => 'student_origin_school_department_id',
+        'message_with_no_value' => 'Seleccione un partido y aparecerán las ciudades correspondientes.',
+        'get_observed_value_callback' => array(get_class($this), 'getCities')
+      )));
+	$this->setValidator('origin_school_city_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'City', 'column' => 'id')));
+
+	
+	//$this->setWidget('origin_school_id', new dcWidgetFormPropelJQuerySearch(array('model' => 'OriginSchool', 'column' => array('name'),'peer_method'=> 'doSelect')));
+	$o = new sfWidgetFormChoice(array('choices' => array()));
+	$this->setWidget('origin_school_id', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $o,
+        'observe_widget_id' => 'student_origin_school_city_id',
+        'message_with_no_value' => 'Seleccione una ciudad y aparecerán las escuelas correspondientes.',
+        'get_observed_value_callback' => array(get_class($this), 'getOriginSchools')
+      )));
 	$this->setValidator('origin_school_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'OriginSchool', 'column' => 'id')));
 
 	$this->getWidgetSchema()->setLabel('origin_school_id','Origin school');
+	$this->validatorSchema->setOption("allow_extra_fields", true);
   }
 
   public function unsetFields()
@@ -64,7 +124,7 @@ class StudentForm extends BaseStudentForm
 
   public function getFormFieldsDisplay()
   {
-    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'global_file_number', 'origin_school_id', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state', 'person-birth_city', 'person-photo', 'person-observations' );
+    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-sex', 'global_file_number','origin_school_state_id' ,'origin_school_department_id','origin_school_city_id','origin_school_id', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department', 'person-birth_city', 'person-photo', 'person-observations' );
 
     if($this->getObject()->getPerson()->getPhoto())
     {
@@ -92,4 +152,45 @@ class StudentForm extends BaseStudentForm
         }
     }
   }
+  
+  public static function getDepartments($widget, $values){
+	
+	$departments = DepartmentPeer::retrieveByStateId($values);
+	$choices = array();
+	$choices[0] = '';
+	foreach ($departments as $d):
+		$choices[$d->getId()] = $d->getName(); 
+	endforeach;	
+	
+    $widget->setOption('choices', $choices);
+  }
+  
+   public static function getCities($widget, $values){
+	
+	$cities = CityPeer::retrieveByDepartmentId($values);
+	$choices = array();
+	$choices[0] = '';
+	foreach ($cities as $c):
+		$choices[$c->getId()] = $c->getName(); 
+	endforeach;	
+	
+    $widget->setOption('choices', $choices);
+  }
+  
+   public static function getOriginSchools($widget, $values){
+	
+	$schools = OriginSchoolPeer::retrieveByCityId($values);
+	$choices = array();
+	
+	$choices[0] = $avlues;
+
+	foreach ($schools as $s):
+		$choices[$s->getId()] = $s->getName() . ' - ' . $s->getAddress(); 
+	endforeach;	
+	
+	
+    $widget->setOption('choices', array_unique($choices));
+  }
+  
+  
 }

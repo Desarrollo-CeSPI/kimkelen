@@ -21,4 +21,20 @@
 
 class StatePeer extends BaseStatePeer
 {
+	public static function retrieveByCountryId($country_id)
+	{
+		$c = new Criteria();
+		$c->add(self::COUNTRY_ID, $country_id);
+		$c->addAscendingOrderByColumn('name');
+		
+		$statesList = self::doSelect($c);
+		$states = array();
+		foreach ($statesList as $s)
+		{
+			$states[$s->getId()] = $s->getName();
+		}
+		
+		return $states;
+	
+	}
 }

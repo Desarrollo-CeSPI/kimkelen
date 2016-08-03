@@ -39,6 +39,8 @@ classes:
         type:               varchar(255)
       birth_state:
         type:               varchar(255)
+      birth_department:
+        type:               varchar(255)
       birth_city:
         type:               varchar(255)
       observations:
@@ -311,6 +313,10 @@ classes:
       state_id:
         type:             integer
         foreignTable:     state
+        foreignReference: id
+      department_id:
+        type:             integer
+        foreignTable:     department
         foreignReference: id
       city_id:
         type:             integer
