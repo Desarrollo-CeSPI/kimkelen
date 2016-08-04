@@ -53,8 +53,3 @@
   	<strong><?php echo $pathway ?></strong>
   <?php endforeach ?>
 </div>
-
-<?php if ($course->hasAttendanceForSubject() && $course->countCourseSubjectConfigurations() == 0): ?>
-	<div class='info_div'><span class="alert"><?php echo __('This course has attendance for subject and may not be properly configurated') ?></span>
-	</div>
-<?php endif ?>
