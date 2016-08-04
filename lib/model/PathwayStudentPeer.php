@@ -22,9 +22,10 @@ class PathwayStudentPeer extends BasePathwayStudentPeer
 			$school_year_id = SchoolYearPeer::retrieveCurrent()->getId();
 		}
 		$c = new Criteria();
+		$c->addJoin(PathwayPeer::ID, self::PATHWAY_ID, Criteria::INNER_JOIN);
+		$c->add(PathwayPeer::SCHOOL_YEAR_ID, $school_year_id);
 		$c->add(PathwayStudentPeer::STUDENT_ID, $student_id);
-		$c->addJoin(PathwayPeer::SCHOOL_YEAR_ID, $school_year_id);
-
+		
 		return self::doSelectOne($c);
 	}
 }

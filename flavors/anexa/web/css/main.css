@@ -2048,3 +2048,12 @@ div.wc-cal-event{
     font-weight: bold;
     color: #39F;
 }
+
+#pathway-list {
+  border: 2px solid black; 
+  padding-left: 1% !important;
+}
+
+#pathway-info-list {
+  list-style: disc !important;
+}

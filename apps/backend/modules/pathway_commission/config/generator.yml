@@ -17,7 +17,10 @@ generator:
           label: "Trayectorias de la comisión"
       list:
         title:             Pathway commission list
-        display:           [name, _pathways_list]
+        display:           [name]
+        layout:             stacked
+        params:             |
+          %%_pathway_commission_info%%
         actions:
           _new:
             credentials:    [new_course]
