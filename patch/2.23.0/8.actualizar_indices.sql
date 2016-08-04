@@ -1,8 +1,10 @@
 /*actualizo los indices de la tabla address */
 update address a , migra_city m  set a.city_id = m.codigo_nuevo, a.department_id = m.department_id, a.state_id = m.state_id where a.city_id = m.city_id;
+update address set state_id = null, department_id = null where city_id is NULL;
 
 /*actualizo los indices de la tabla person*/
 update person p, migra_city m  set p.birth_city = m.codigo_nuevo , p.birth_department = m.department_id , p.birth_state = m.state_id , p.birth_country = m.country_id where birth_city = m.city_id;
+update person set birth_state = null , birth_country = null , birth_department= null where birth_city is NULL;
 
 /*agrego indices eliminados.*/
 ALTER TABLE `address` ADD INDEX ( `city_id` ) ;

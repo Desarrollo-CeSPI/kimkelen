@@ -50,37 +50,7 @@ class StudentForm extends BaseStudentForm
 
     $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
     $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
-	/*
-	$c = new Criteria();
-    $c->addAscendingOrderByColumn('name');
-    $c->add(StatePeer::COUNTRY_ID,Country::ARGENTINA);
-    
-    $this->setWidget('origin_school_state_id', new sfWidgetFormPropelchoice(array(
-        'model'     => 'State',
-        'add_empty' => true,
-        'criteria' => $c
-    )));
-	$this->setValidator('origin_school_state_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'State', 'column' => 'id')));
-	
-	$c= new Criteria();
-	$c->addAscendingOrderByColumn('name');
-	
-	$widget_origin_school_department = new sfWidgetFormPropelChoice(array(
-      'model'      => 'Department',
-      'add_empty'  => true,
-      'criteria' => $c
-    ));
-    
-    $this->setWidget('origin_school_department_id', new dcWidgetAjaxDependencePropel(array(
-        'related_column'     => 'state_id',
-        'dependant_widget'   => $widget_origin_school_department,
-        'observe_widget_id'  => 'origin_school_state_id',
-        'message_with_no_value' => __('Select a state first'),
-        )));
-        
-	$this->setValidator('origin_school_department_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Department', 'column' => 'id')));
-	
-	*/
+
 	$this->setWidget('origin_school_state_id',  new sfWidgetFormSelect(array('choices'  => StatePeer::retrieveByCountryId(Country::ARGENTINA))));
 	$this->setValidator('origin_school_state_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'State', 'column' => 'id')));
 	
