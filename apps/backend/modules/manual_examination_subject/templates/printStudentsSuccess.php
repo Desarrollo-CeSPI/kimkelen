@@ -19,5 +19,5 @@
  */ ?>
 
 
-<?php include_partial('global/examination_act',array('examination_subject'=>$examination_subject, 'students'=>$students)); ?>
+<?php include_partial('global/examination_act',array('examination_subject'=>$examination_subject, 'students'=>$students, 'previous_url'=>$previous_url)); ?>
 

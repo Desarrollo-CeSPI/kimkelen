@@ -1982,3 +1982,12 @@ div.wc-cal-event{
   margin-top: 0em !important;
   margin-bottom: 0em !important;
 }
+
+#pathway-list {
+  border: 2px solid black; 
+  padding-left: 1% !important;
+}
+
+#pathway-info-list {
+  list-style: disc !important;
+}

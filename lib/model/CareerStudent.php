@@ -354,5 +354,63 @@ class CareerStudent extends BaseCareerStudent
 
   }
 
+  public function createStudentsCareerSubjectAllowedPathways($start_year = null, PropelPDO $con = null)
+  {
+    if (is_null($start_year))
+    {
+      $start_year = CareerSubjectPeer::FIRST_YEAR;
+    }
+
+    if ($con == null)
+    {
+      $con = Propel::getConnection(StudentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+
+    try
+    {
+      $con->beginTransaction();
+      $c = new Criteria();
+      $c->add(CareerSubjectPeer::YEAR, $start_year);
+
+      //This criterion checks if the careerSubject has orientation, if has an orientation then filters for studentCareer orientation.
+      $criterion = $c->getNewCriterion(CareerSubjectPeer::ORIENTATION_ID, null, Criteria::ISNULL);
+      $criterion->addOr($c->getNewCriterion(CareerSubjectPeer::ORIENTATION_ID, $this->getOrientationId()));
+      $c->add($criterion);
+
+      $career_subjects = $this->getCareer()->getCareerSubjects($c, $con);
+      CareerSubjectPeer::clearInstancePool();
+      unset($c);
+
+      foreach ($career_subjects as $career_subject)
+      {
+        if (!$this->isApprovedCareerSubject($career_subject, $this->getStudent()))
+        {
+          $student_career_subject_allowed_pathway = new StudentCareerSubjectAllowedPathway();
+          $student_career_subject_allowed_pathway->setStudent($this->getStudent($con));
+          $student_career_subject_allowed_pathway->setCareerSubject($career_subject);
+          $student_career_subject_allowed_pathway->save($con);
+          unset($student_career_subject_allowed_pathway);
+        }
+      }
+
+      $con->commit();
+    }
+    catch (PropelException $e)
+    {
+      $con->rollBack();
+      throw $e;
+    }
+
+  }
+
+  public function isApprovedCareerSubject(CareerSubject $career_subject, Student $student)
+  {
+    $c = new Criteria();
+    $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student->getId());
+    $c->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject->getId());
+    
+    return (StudentApprovedCareerSubjectPeer::doSelectOne($c)) ? true : false;
+  }
+
 }
 sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));

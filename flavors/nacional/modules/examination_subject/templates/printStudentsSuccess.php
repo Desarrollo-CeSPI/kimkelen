@@ -20,7 +20,7 @@
 <?php use_stylesheet('print-examination-record.css', 'last', array('media' => 'print')) ?>
 
 <div class="non-printable">
-  <a href="<?php echo url_for('examination_subject') ?>"><?php echo __('Go back') ?></a>
+  <a href="<?php echo url_for($previous_url) ?>"><?php echo __('Go back') ?></a>
   <a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a>
 </div>
 

@@ -101,27 +101,6 @@ course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }
 
-export_student_stats:
-  url: /student_stats/ReportesEstudiantes.pdf
-  param: { module: student_stats, action: studentReportsToPDF, sf_format: pdf }
-
-set_student_filters:
-  url:  /set_student_filters
-  param:  {module: student_stats, action: setStudentFilters}
-
-student_reports:
-  url:  /student_reports
-  param:  {module: student_stats, action: studentReports}
-
-student_stats:
-  class: sfPropelRouteCollection
-  options:
-    model:                Student
-    module:               student_stats
-    prefix_path:          student_stats
-    column:               id
-    with_wildcard_routes: true
-
 resources:
   class: sfPropelRouteCollection
   options:

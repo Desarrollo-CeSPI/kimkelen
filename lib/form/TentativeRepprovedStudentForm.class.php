@@ -13,9 +13,14 @@ class TentativeRepprovedStudentForm extends sfForm
 	{
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
-		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'expanded' => true, 'peer_method' => 'getStudents', 'multiple'  => true
-,  'renderer_options' =>array('class' => 'checkbox')
-		)));
+		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 
+																																		'expanded' => true, 
+																																		'peer_method' => 'getStudents', 
+																																		'multiple'  => true,
+																																		'renderer_options' =>array('class' => 'checkbox')
+																																		)));
+
+		$this->getWidgetSchema()->setLabel('students', false);
 
 		$this->validatorSchema['students'] = new sfValidatorPass();
 		$this->validatorSchema->setOption('allow_extra_fields', true);
@@ -65,6 +70,20 @@ class TentativeRepprovedStudentForm extends sfForm
 
 					$trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::APPROVED);
 					$trs->getStudentCareerSchoolYear()->save($con);
+
+					$student_id = $trs->getStudentCareerSchoolYear()->getStudentId();
+					$career_id = $trs->getStudentCareerSchoolYear()->getCareerSchoolYear()->getCareerId();
+					$next_year = $trs->getStudentCareerSchoolYear()->getYear() + 1;
+					$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student_id);
+        	
+        	// Elimino los Allowed y Allowed Pathway del alumno.
+					$career_student->getStudent()->deleteAllCareerSubjectAllowedPathways($con);
+					$career_student->getStudent()->deleteAllCareerSubjectAlloweds($con);
+
+        	// Creo los Allowed Pathway del alumno.
+        	$career_student->createStudentsCareerSubjectAllowedPathways($trs->getStudentCareerSchoolYear()->getYear(), $con);
+					// Creo los Allowed para la cursada normal del alumno.
+					$career_student->createStudentsCareerSubjectAlloweds($next_year, $con);
 				}
 
 			}
