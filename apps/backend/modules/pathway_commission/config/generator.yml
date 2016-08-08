@@ -26,8 +26,9 @@ generator:
             credentials:    [new_course]
             label:          Nueva comisión
         object_actions:
-          _show:
-            credentials:    [show_course]
+          _edit:
+#            condition:      canBeEdited
+            credentials:    [edit_course]
           manage_students:
             action:         courseSubjectStudent
             credentials:    [edit_course]
@@ -36,24 +37,20 @@ generator:
             action:         addSubject
             credentials:    [edit_course]
 #            condition:      canCourseSubjectStudent
-          _edit:
-#            condition:      canBeEdited
-            credentials:    [edit_course]
           califications:
             action:         califications
-            credentials:    [edit_division_course_califications]
             condition:      canEditPathwayMarks
-
+            credentials:    [edit_division_course_califications]
           print_califications:
-            action: printCalifications
-
+            action:         printCalifications
           close:
-            label:        Close
-            action:       close
-            condition:    canClosePathway
+            label:          Close
+            action:         close
+            condition:      canClosePathway
           _delete:
-#            condition:      canBeDeleted
+            condition:      canBeDeleted
             credentials:    [edit_course]
+
       filter:
         display: [name, school_year_id]
       form:    ~
