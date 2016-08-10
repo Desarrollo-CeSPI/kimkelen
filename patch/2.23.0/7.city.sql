@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `city` (
   PRIMARY KEY (`id`),
   KEY `department_id` (`department_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Representa una ciudad' AUTO_INCREMENT=186998999 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Representa una ciudad' AUTO_INCREMENT=186998999 ;
 
 --
 -- Volcado de datos para la tabla `city`
@@ -72162,8 +72162,12 @@ INSERT INTO `city` (`id`, `name`, `short_name`, `department_id`) VALUES
 (175898998, 'Indeterminada', 'Indeterminada', 175898998),
 (176798998, 'Indeterminada', 'Indeterminada', 176798998),
 (178498998, 'Indeterminada', 'Indeterminada', 178498998),
-(186998998, 'Indeterminada', 'Indeterminada', 186998998);
-
+(186998998, 'Indeterminada', 'Indeterminada', 186998998),
+(186998999, 'Balde las Carpas','Balde las Carpas',5450098),
+(186999000,'Paraje Rabiola','Paraje Rabiola',5482042),
+(186999001, 'Puesto F. Tello', 'Puesto F. Tello',186999014),
+(186999002, 'Misiones', 'Misiones',5466049),
+(186999003,'Campo Iturraspe','Campo Iturraspe',5402000);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

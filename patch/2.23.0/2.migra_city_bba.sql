@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `migra_city` (
   `department_id` int(11) DEFAULT NULL,
   `state_id` int(11) DEFAULT NULL,
   `country_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `migra_city`
@@ -72,7 +72,7 @@ INSERT INTO `migra_city` (`city_id`, `codigo_nuevo`, `department_id`, `state_id`
 ('1153', 1942, 5482042, 5482, 54),
 ('1228', 2022, 5414182, 5414, 54),
 ('1174', 1963, 5482042, 5482, 54),
-('1149', 5482998, 5482998, 5482, 54),
+('1149', 186999000, 5482042, 5482, 54),
 ('20130', 16371, 5406532, 5406, 54),
 ('20649', 16841, 5406049, 5406, 54),
 ('20706', 16890, 5406595, 5406, 54),

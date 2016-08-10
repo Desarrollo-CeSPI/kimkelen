@@ -152,7 +152,7 @@ class StudentForm extends BaseStudentForm
 	$schools = OriginSchoolPeer::retrieveByCityId($values);
 	$choices = array();
 	
-	$choices[0] = $avlues;
+	$choices[0] = '';
 
 	foreach ($schools as $s):
 		$choices[$s->getId()] = $s->getName() . ' - ' . $s->getAddress(); 

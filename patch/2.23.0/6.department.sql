@@ -11388,7 +11388,8 @@ INSERT INTO `department` (`id`, `name`, `state_id`, `condition`) VALUES
 (186999010, 'Comuna 12', 5406, 'A'),
 (186999011, 'Comuna 13', 5406, 'A'),
 (186999012, 'Comuna 14', 5406, 'A'),
-(186999013, 'Comuna 15', 5406, 'A');
+(186999013, 'Comuna 15', 5406, 'A'),
+(186999014, 'Puesto F. Tello', 5450, 'A');
 
 --
 -- Restricciones para tablas volcadas

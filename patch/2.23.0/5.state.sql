@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `state` (
   PRIMARY KEY (`id`),
   KEY `country` (`country_id`),
   KEY `country_id` (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Representa una provincia' AUTO_INCREMENT=1000000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Representa una provincia' AUTO_INCREMENT=1000000 ;
 
 --
 -- Volcado de datos para la tabla `state`
