@@ -4379,6 +4379,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Year 6</source>
                 <target>Sexto año</target>
             </trans-unit>
+            <trans-unit>
+                <source>Edit orientation</source>
+                <target>Editar especialidad</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New Resources</source>
+              <target>Nuevo recurso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -4631,9 +4631,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Start date reserve</source>
                 <target>Fecha de inicio de la reserva</target>
             </trans-unit>
-	        <trans-unit>
+            <trans-unit>
                 <source>End date reserve</source>
                 <target>Fecha de fin de la reserva</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New Resources</source>
+              <target>Nuevo recurso</target>
             </trans-unit>
         </body>
     </file>
