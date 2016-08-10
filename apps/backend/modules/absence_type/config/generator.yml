@@ -24,22 +24,28 @@ generator:
             credentials:   [edit_absence_type]
           _delete:
             credentials:   [new_absence_type]
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:
-            label:         Nuevo tipo de ausencias
+            label:         Nuevo tipo de ausencia
             credentials:   [new_absence_type]
       filter:
         class:             false
       form:
+      edit:
+        title: Editar tipo de ausencia
         actions:
           _list:
-            label:         Volver al listado de tipos de ausencias
+            label:         Volver al listado
           _save_and_list:
-            label:         Guardar y volver a listado de tipos de ausencias
+            label:         Guardar tipo de ausencia
+      new:
+        title: Nuevo tipo de ausencia
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar tipo de ausencia
           _save_and_add:
             label:         Guardar y agregar otro tipo de ausencia
-      edit:
-        title:             Editar tipo de ausencia: %%name%%
-      new:
-        title:             Nuevo tipo de ausencia

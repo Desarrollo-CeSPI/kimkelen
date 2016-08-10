@@ -20,30 +20,30 @@ generator:
         object_actions:
           _edit:
             credentials:    [edit_classroom]
+          show_calendar:
+            action: showCalendar
           _delete:
             credentials:    [edit_classroom]
             condition:      canBeDeleted
-          show_calendar:
-            action: showCalendar
         actions:
           _new:
-            label:          Nueva aula
+            label: Nueva aula
             credentials:    [show_classroom]
       filter:
         class: false
       form:    ~
       edit:
-        title:              Editar aula
+        title: Editar aula
         actions:
           _list:
-            label:          Volver al listado de aulas
+            label:          Volver al listado
           _save_and_list:
             label:          Guardar aula
       new:
-        title:              Nueva aula
+        title: Nueva aula
         actions:
           _list:
-            label:          Volver al listado de aulas
+            label:          Volver al listado
           _save_and_list:
             label:          Guardar aula
           _save_and_add:

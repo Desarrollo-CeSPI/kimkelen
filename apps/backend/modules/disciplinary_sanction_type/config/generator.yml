@@ -26,6 +26,8 @@ generator:
             credentials:   [new_disciplinary_sanction_type]
       filter:
         class:             false
-      form:
+      form:   ~
       edit: ~
-      new: ~
+      new:
+        actions:
+          _list: volver

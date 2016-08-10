@@ -26,10 +26,23 @@ generator:
           back:
             action: back
           _new:
+            label:  Nueva orientación
       filter:
         class: false
       form:    ~
       edit:
         title: Edit sub orientation
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar orientación
       new:
         title: New sub orientation
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar orientación
+          _save_and_add:
+            label:              Guardar y agregar otra orientación

@@ -25,9 +25,22 @@ generator:
             condition:    canBeDeleted
         actions:
           _new:
+            label: Nuevo estudio cursado
             credentials: [edit_study]
       filter:
         class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        actions:
+          _list:
+            label:         Volver al Listado
+          _save_and_list:
+            label:         Guardar estudio cursado
+      new:
+        actions:
+          _list:
+            label:         Volver al Listado
+          _save_and_list:
+            label:         Guardar estudio cursado
+          _save_and_add:
+            label:         Guardar y agregar otro estudio cursado

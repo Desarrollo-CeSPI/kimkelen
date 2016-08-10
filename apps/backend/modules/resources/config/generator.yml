@@ -14,11 +14,28 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [name]
+        batch_actions:      []
+        display:            [name]
         object_actions:
           _edit:
           _delete:
-      filter:  ~
+        actions:
+          _new:
+            label: Nuevo recurso
+      filter:
+          class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar recurso
+      new:
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar recurso
+          _save_and_add:
+            label:              Guardar y agregar otro recurso

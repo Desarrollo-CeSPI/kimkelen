@@ -34,16 +34,16 @@ generator:
         title: Editar obra social
         actions:
           _list:
-            label: Volver al listado de obras sociales
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de obras sociales
+            label:        Guardar obra social
       new:
         title: Nueva obra social
         actions:
           _list:
-            label: Volver al listado de obras sociales
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de obras sociales
+            label:        Guardar obra social
           _save_and_add:
             label:        Guardar y agregar otra obra social
       show: ~

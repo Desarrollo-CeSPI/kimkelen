@@ -34,16 +34,16 @@ generator:
         title: Editar tipo de tutor
         actions:
           _list:
-            label: Volver al listado de tipos de tutores
+            label: Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de tipos de tutores
+            label:        Guardar tipo de tutor
       new:
-        title: Nueva tipo de tutor
+        title: Nuevo tipo de tutor
         actions:
           _list:
-            label: Volver al listado de tipos de tutores
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de tipos de tutores
+            label:        Guardar tipo de tutor
           _save_and_add:
             label:        Guardar y agregar otro tipo de tutor
       show: ~

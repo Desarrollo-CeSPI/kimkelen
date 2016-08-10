@@ -15,7 +15,7 @@ generator:
       fields:  ~
       list:
         batch_actions: []
-        title: Listado de nombres de divisiones
+        title: Listado de nombres de division
         display: [name]
         object_actions:
           _edit:
@@ -35,16 +35,16 @@ generator:
         title: Editar nombre de división
         actions:
           _list:
-            label: Volver al listado de nombres de divisiones
+            label:          Volver al listado
           _save_and_list:
-            label: Guardar nombre de división
+            label:          Guardar nombre de división
 
       new:
         title: Nuevo nombre de división
         actions:
           _list:
-            label: Volver al listado de nombres de divisiones
+            label:          Volver al listado
           _save_and_list:
-            label: Guardar nombre de división
+            label:          Guardar nombre de división
           _save_and_add:
-            label: Guardar y agregar otro nombre de división
+            label:          Guardar y agregar otro nombre de división

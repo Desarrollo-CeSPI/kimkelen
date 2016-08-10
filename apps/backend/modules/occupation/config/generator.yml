@@ -34,15 +34,15 @@ generator:
         title: Editar ocupación
         actions:
           _list:
-            label: Volver al listado de ocupaciones
+            label:          Volver al listado
           _save_and_list:
-            label: Guardar ocupación
+            label:          Guardar ocupación
       new:
         title: Nueva ocupación
         actions:
           _list:
-            label: Volver al listado de ocupaciones
+            label:          Volver al listado
           _save_and_list:
-            label: Guardar ocupación
+            label:          Guardar ocupación
           _save_and_add:
-            label: Guardar y agregar otra ocupación
+            label:          Guardar y agregar otra ocupación
