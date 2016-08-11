@@ -23,6 +23,7 @@ generator:
             credentials:   [edit_change_status_motive]
           _delete:
             credentials:   [edit_change_status_motive]
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:

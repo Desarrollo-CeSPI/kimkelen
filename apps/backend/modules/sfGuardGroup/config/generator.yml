@@ -20,39 +20,36 @@ generator:
         display: [name, description]
         batch_actions: []
         object_actions:
+          _show:
+            credentials: [show_group]
           _edit:
             credentials: [edit_group]
           _delete:
             credentials: [edit_group]
-            
-          _show:
-            credentials: [show_group]
         actions:
           _new:
-            label:          Nuevo grupo de usuarios
+            label:       Nuevo grupo de usuarios
             credentials: [edit_group]
 
       edit:
-        title: Editando grupo "%%name%%"
-        actions:
-          _delete:
-            credentials: [edit_group]
-          _list:
-            label:          Volver al listado de grupos de usuarios
-          _save:
-          _save_and_add:
-
-      new:
-        title: Crear nuevo grupo de usuarios
+        title: Editar grupo de usuarios
         actions:
           _list:
-            label:          Volver al listado de grupos de usuarios
+            label:          Volver al listado
           _save_and_list:
+            label:          Guardar grupo de usuarios
+      new:
+        title: Crear grupo de usuarios
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar grupo de usuarios
           _save_and_add:
-
+            label:          Guardar y agregar otro grupo de usuarios
       show:
-        title: Ver grupo "%%name%%"
+        title: Detalles del grupo de usuarios
         display: [name, description, _sf_guard_user_group_list, _sf_guard_group_permission_list]
         actions:
           _list:
-            label:          Volver al listado de grupos de usuarios
+            label:          Volver al listado

@@ -82,7 +82,7 @@ class sfGuardGroupPeer extends PluginsfGuardGroupPeer
   {
     $c = new Criteria();
     $c->add(sfGuardUserGroupPeer::GROUP_ID, $id);
-    return self::doCount($c);
+    return !(self::doCount($c));
   }
 
   static public function retrieveGroups()

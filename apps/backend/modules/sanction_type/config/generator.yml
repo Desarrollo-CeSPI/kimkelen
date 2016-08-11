@@ -20,6 +20,7 @@ generator:
             credentials:   [edit_disciplinary_sanction_type]
           _delete:
             credentials:   [new_disciplinary_sanction_type]
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:

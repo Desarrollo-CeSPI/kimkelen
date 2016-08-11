@@ -21,6 +21,7 @@ generator:
             credentials: [edit_sub_orientation]
           _delete:
             credentials: [edit_sub_orientation]
+            condition:   canBeDeleted
         batch_actions: []
         actions:
           back:

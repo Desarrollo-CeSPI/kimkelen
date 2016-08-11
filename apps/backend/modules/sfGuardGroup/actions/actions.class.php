@@ -28,7 +28,7 @@ class sfGuardGroupActions extends BasesfGuardGroupActions
 
     if(!sfGuardGroupPeer::canBeDeleted($request->getParameter('id')))
     {
-      $this->getUser()->setFlash('warning','No se puede borrar el grupo seleccionado. Es un grupo definido por el sistema.');
+      $this->getUser()->setFlash('error','No se puede borrar el grupo seleccionado. Existen usuarios asociados al grupo.');
       $this->redirect('@sf_guard_group');
     }
 

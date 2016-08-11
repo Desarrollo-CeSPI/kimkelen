@@ -19,6 +19,7 @@ generator:
         object_actions:
           _edit:
           _delete:
+            condition:      canBeDeleted
         actions:
           _new:
             label: Nuevo recurso
