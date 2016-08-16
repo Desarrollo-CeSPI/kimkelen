@@ -72,13 +72,13 @@ class Teacher extends BaseTeacher
 
   }
 
-  public function haveCourses()
+  public function canShowCourses()
   {
     return $this->countCourseSubjectTeachers();
 
   }
 
-  public function getMessageCantHaveCourses()
+  public function getMessageCantShowCourses()
   {
     return 'Dont have any course assigned';
 
