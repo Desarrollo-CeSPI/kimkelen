@@ -45,7 +45,6 @@ generator:
             credentials: [edit_head_personal]
             action: personActivation
             condition: canPersonBeActivated
-            params: confirm='Are you sure?'
 
           deactivate:
             label: Set inactive
@@ -57,16 +56,32 @@ generator:
         actions:
           _new:
             credentials:   [edit_personal]
+            label:         Nuevo jefe de preceptores
       filter:
        class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Editar jefe de preceptores
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar jefe de preceptores
+      new:
+        title: Nuevo jefe de preceptores
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar jefe de preceptores
+          _save_and_add:
+            label:         Guardar y agregar otro jefe de preceptores
       show:
+        title:  Detalles del jefe de preceptores
         display:
           Datos personales:           [_person]
           Datos postales:             [_address]
           Datos institucionales:      [file_number, salary, aging_institution]
         actions:
           _list:
-            label:               Volver al listado de preceptores
+            label:               Volver al listado

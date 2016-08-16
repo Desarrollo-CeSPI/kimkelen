@@ -20,12 +20,26 @@ generator:
             credentials:   [edit_disciplinary_sanction_type]
           _delete:
             credentials:   [new_disciplinary_sanction_type]
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:
+            label: Nuevo tipo de sanción
             credentials:   [new_disciplinary_sanction_type]
       filter:
         class:             false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar tipo de sanción
+      new:
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar tipo de sanción
+          _save_and_add:
+            label:              Guardar y agregar otro tipo de sanción

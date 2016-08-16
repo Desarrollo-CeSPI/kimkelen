@@ -4484,6 +4484,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>End date reserve</source>
                 <target>Fecha de fin de la reserva</target>
             </trans-unit>
+            <trans-unit>
+                <source>Edit orientation</source>
+                <target>Editar especialidad</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Dont have any course assigned</source>
+              <target>No posee materias asignadas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

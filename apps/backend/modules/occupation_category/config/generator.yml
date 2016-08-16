@@ -25,9 +25,22 @@ generator:
             condition:    canBeDeleted
         actions:
           _new:
+            label: Nueva categoria ocupacional
             credentials: [edit_occupation]
       filter:
         class: false
-      form:    ~
-      edit:    ~
-      new:     ~
+      form:
+      edit:
+        actions:
+          _list:
+            label:         Volver al Listado
+          _save_and_list:
+            label:         Guardar categoria ocupacional
+      new:
+        actions:
+          _list:
+            label:         Volver al Listado
+          _save_and_list:
+            label:         Guardar categoria ocupacional
+          _save_and_add:
+            label:         Guardar y agregar otra categoria ocupacional

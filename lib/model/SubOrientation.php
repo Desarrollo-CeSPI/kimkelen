@@ -25,4 +25,13 @@ class SubOrientation extends BaseSubOrientation
   {
     return $this->getName();
   }
+
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(CareerStudentPeer::SUB_ORIENTATION_ID, $this->getId());
+    
+    return !(CareerStudentPeer::doCount($criteria));
+  }
+
 }

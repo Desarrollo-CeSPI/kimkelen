@@ -25,4 +25,12 @@ class Tag extends BaseTag
   {
     return $this->getName();
   }
+
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(StudentTagPeer::TAG_ID, $this->getId());
+    
+    return !(StudentTagPeer::doCount($criteria));
+  }
 }

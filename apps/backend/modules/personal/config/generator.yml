@@ -70,7 +70,7 @@ generator:
           _edit:
             credentials:   [edit_personal]
           _delete:
-            condition: canBeDeleted
+            condition:     canBeDeleted
             credentials:   [edit_personal]
 
           licenses:
@@ -105,27 +105,24 @@ generator:
       filter:
 
       form:     ~
-
       edit:
-        title:                   Edición de preceptor "%%person%%"
+        title: Editar preceptor
         actions:
           _list:
-            label:               Volver al listado de preceptores
+            label:               Volver al listado
           _save_and_list:
-            label:                Guardar y volver al listado de preceptores
-
+            label:                Guardar preceptor
       new:
-        title:             Nuevo preceptor
+        title: Nuevo preceptor
         actions:
           _list:
-            label:               Volver al listado de preceptores
+            label:               Volver al listado
           _save_and_list:
-            label:                Guardar y volver al listado de preceptores
+            label:                Guardar preceptor
           _save_and_add:
             label:                Guardar y agregar otro preceptor
-
       show:
-        title:        Detalle del preceptor "%%person%%"
+        title: Detalles del preceptor
         display:
           Datos personales:           [_person]
           Datos postales:             [_address]
@@ -133,4 +130,4 @@ generator:
           Licencias:                  [_licenses]
         actions:
           _list:
-            label:               Volver al listado de preceptores
+            label:               Volver al listado

@@ -162,6 +162,17 @@ class Personal extends BasePersonal
     return "User has some references you sholud delete first";
   }
 
+  public function canPersonBeActivated()
+  {
+    return $this->getPerson()->getIsActive() == false;
+
+  }
+
+  public function canPersonBeDeactivated()
+  {
+    return $this->getPerson()->getIsActive() == true;
+
+  }
 
 }
 

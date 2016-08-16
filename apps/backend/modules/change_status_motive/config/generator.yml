@@ -23,6 +23,7 @@ generator:
             credentials:   [edit_change_status_motive]
           _delete:
             credentials:   [edit_change_status_motive]
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:
@@ -31,14 +32,19 @@ generator:
       filter:
         class:             false
       form:
+      edit:
+        title:             Editar motivo de cambio de estado
         actions:
           _list:
-            label:         Volver
+            label:         Volver al listado
           _save_and_list:
-            label:         Guardar y volver a listado
-          _save_and_add:
-            label:         Guardar y agregar otro motivo
-      edit:
-        title:             Editar motivo de cambio de estado: %%name%%
+            label:         Guardar motivo de cambio de estado
       new:
         title:             Nuevo motivo de cambio de estado
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar motivo de cambio de estado
+          _save_and_add:
+            label:         Guardar y agregar otro motivo de cambio de estado

@@ -25,4 +25,13 @@ class SanctionType extends BaseSanctionType
   {
     return $this->getName();
   }
+  
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(StudentDisciplinarySanctionPeer::SANCTION_TYPE_ID, $this->getId());
+    
+    return !(StudentDisciplinarySanctionPeer::doCount($criteria));
+  }
+
 }

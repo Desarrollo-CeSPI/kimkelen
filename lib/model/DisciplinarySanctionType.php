@@ -24,4 +24,13 @@ class DisciplinarySanctionType extends BaseDisciplinarySanctionType
   public function  __toString() {
     return $this->getName();
   }
+  
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(StudentDisciplinarySanctionPeer::DISCIPLINARY_SANCTION_TYPE_ID, $this->getId());
+    
+    return !(StudentDisciplinarySanctionPeer::doCount($criteria));
+  }
+
 }
