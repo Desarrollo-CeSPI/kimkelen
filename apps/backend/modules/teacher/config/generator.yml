@@ -95,7 +95,7 @@ generator:
           course:
             label: Courses
             action: courses
-            condition: haveCourses
+            condition: canShowCourses
 
           activate:
             label: Set active
@@ -108,6 +108,7 @@ generator:
             credentials: [edit_teacher]
             action: personActivation
             condition: canPersonBeDeactivated
+            params: confirm='Are you sure?'
       filter:
       form:
       edit:
