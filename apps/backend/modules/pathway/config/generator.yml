@@ -16,37 +16,40 @@ generator:
         school_year:  { label: Año lectivo que se recupera }
       list:
         title:             Pathway list
-        sort:              [name, asc]
+        sort:              [name, desc]
         display:           [name, school_year]
         batch_actions:     []
         actions:
           _new:
             credentials: [edit_pathway]
+            label: Nueva
         object_actions:
-          _edit:
           _show:
+          _edit:
           _delete:
             condition: canBeDeleted
       filter:
         class: false
       form:    ~
       edit:
-        title:             Edición de "%%name%%"
+        title: Edit pathway
         display:           [name, school_year_id]
         actions:
           _list:
-            label:        Volver al listado de trayectorias
+            label:         Volver al listado
           _save_and_list:
+            label:         Guardar
       new:
-        title:             Crear una nueva trayectoria
+        title: New pathway
         display:           [name, school_year_id]
         actions:
           _list:
-            label:        Volver al listado de trayectorias
+            label:         Volver al listado
           _save_and_list:
+            label:         Guardar
       show:
-          title: Ver "%%name%%"
+          title: Show pathway
           display: [school_year, _student_list]
           actions:
             _list:
-              label:        Volver al listado de trayectorias
+              label:        Volver al listado
