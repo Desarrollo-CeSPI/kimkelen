@@ -4319,7 +4319,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Pathway</source>
-								<target>Trayectoria</target>
+								<target>Promoción por excepción</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Resolve problematic students</source>
@@ -4332,7 +4332,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Students that will go to pathway plan</source>
-								<target>Alumnos a inscribir en Promoción por excepción</target>
+								<target>Alumnos a inscribir en promoción por excepción</target>
 						</trans-unit>
 						<trans-unit>
 								<source>here</source>
@@ -4340,7 +4340,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Create pathway if it does not exist from</source>
-								<target>Crear plan de promoción por excepción desde</target>
+								<target>Crear nueva promoción por excepción desde</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Pathway mark is averaged with course subject average marks.</source>
@@ -4348,7 +4348,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Pathway list</source>
-								<target>Promociones por excepción</target>
+								<target>Listado de promociones por excepción</target>
 						</trans-unit>
 						<trans-unit>
 								<source>School</source>
@@ -8812,7 +8812,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway</source>
-                <target>Trayectoria</target>
+                <target>Promoción por excepción</target>
             </trans-unit>
             <trans-unit>
                 <source>Resolve problematic students</source>
@@ -8825,7 +8825,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Students that will go to pathway plan</source>
-                <target>Alumnos a inscribir en Promoción por excepción</target>
+                <target>Alumnos a inscribir en promoción por excepción</target>
             </trans-unit>
             <trans-unit>
                 <source>here</source>
@@ -8833,7 +8833,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Create pathway if it does not exist from</source>
-                <target>Crear plan de promoción por excepción desde</target>
+                <target>Crear nueva promoción por excepción desde</target>
             </trans-unit>
             <trans-unit>
                 <source>Pathway mark is averaged with course subject average marks.</source>
@@ -8893,7 +8893,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway commission list</source>
-                <target>Listado de comisiones de Promoción por excepción</target>
+                <target>Listado de comisiones de promoción por excepción</target>
             </trans-unit>
             <trans-unit>
                 <source>confirm</source>
@@ -8982,6 +8982,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Dont have any course assigned</source>
               <target>No posee cursos asignados</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New pathway</source>
+              <target>Nueva promoción por excepción</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Edit pathway</source>
+              <target>Editar promoción por excepción</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Show pathway</source>
+              <target>Detalles de la promoción por excepción</target>
             </trans-unit>
           </body>
     </file>

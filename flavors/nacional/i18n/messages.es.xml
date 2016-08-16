@@ -4261,7 +4261,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Students that will go to pathway plan</source>
-                <target>Alumnos que se inscriben en Trayectorias</target>
+                <target>Alumnos a incribir en Trayectoria</target>
             </trans-unit>
             <trans-unit>
                 <source>There are no problematic students to resolve.</source>
@@ -4277,7 +4277,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway list</source>
-                <target>Trayectorias</target>
+                <target>Listado de trayectorias</target>
             </trans-unit>
             <trans-unit>
                 <source>Can't create two pathways for the same school year</source>
@@ -4290,7 +4290,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Create pathway if it does not exist from</source>
-                <target>Crear una nueva trayectoria desde</target>
+                <target>Crear nueva trayectoria desde</target>
             </trans-unit>
             <trans-unit>
                 <source>here</source>
@@ -4298,7 +4298,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway mark is averaged with course subject average marks.</source>
-                <target>Se promedia la nota obtenida en trayectorias con el promedio de notas de cursada.</target>
+                <target>Se promedia la nota obtenida en trayectoria con el promedio de notas de cursada.</target>
             </trans-unit>
             <trans-unit>
                 <source>School</source>
@@ -4491,6 +4491,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Dont have any course assigned</source>
               <target>No posee materias asignadas</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New pathway</source>
+              <target>Nueva trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Edit pathway</source>
+              <target>Editar trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Show pathway</source>
+              <target>Detalles de la trayectoria</target>
             </trans-unit>
         </body>
     </file>
