@@ -4639,6 +4639,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>New Resources</source>
               <target>Nuevo recurso</target>
             </trans-unit>
+            <trans-unit>
+              <source>Dont have any course assigned</source>
+              <target>No posee materias asignadas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
