@@ -35,15 +35,18 @@ generator:
         display:           [name, school_year_id]
         actions:
           _list:
+            label:        Volver al listado de trayectorias
           _save_and_list:
       new:
         title:             Crear una nueva trayectoria
         display:           [name, school_year_id]
         actions:
           _list:
+            label:        Volver al listado de trayectorias
           _save_and_list:
       show:
           title: Ver "%%name%%"
           display: [school_year, _student_list]
           actions:
             _list:
+              label:        Volver al listado de trayectorias
