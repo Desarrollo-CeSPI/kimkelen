@@ -17,12 +17,6 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `nacio_prueba`
---
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `city`
 --
 
