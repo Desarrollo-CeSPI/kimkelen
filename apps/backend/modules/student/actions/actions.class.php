@@ -200,7 +200,8 @@ class studentActions extends autoStudentActions
       $s = SchoolYearStudentPeer::retrieveByPK($request->getParameter('school_year_student_id'));
       if ( !is_null ($s) )
       {
-        $s->delete();
+        $s->setIsDeleted(true);
+		$s->save(Propel::getConnection());
         $this->getUser()->setFlash('info','The item was deleted successfully.');
         $this->redirect('@student');
       }
@@ -659,14 +660,12 @@ class studentActions extends autoStudentActions
 							
 				//desmatricular
 				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear());
-				if(! is_null($s))
-				{
-					$s->delete();
-				}
+				$s->setIsDeleted(true);
+				$s->save(Propel::getConnection());
 				
 				//deshabilito la persona
 				$this->student->getPerson()->setIsActive(false);
-				$this->student->getPerson()->save();
+				$this->student->getPerson()->save(Propel::getConnection());
 				$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
 		  
 				break;
@@ -703,10 +702,9 @@ class studentActions extends autoStudentActions
 
 						//desmatricular
 						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-						if(! is_null($s))
-						{
-							$s->delete();
-						}
+						$s->setIsDeleted(true);
+						$s->save(Propel::getConnection());
+						
 						$this->getUser()->setFlash('info','The item was updated successfully.' );
 					}	
 					
@@ -748,15 +746,13 @@ class studentActions extends autoStudentActions
 						if(!$this->student->getPerson()->getIsActive())
 						{
 							$this->student->getPerson()->setIsActive(true);
-							$this->student->getPerson()->save();	
+							$this->student->getPerson()->save(Propel::getConnection());	
 						}
 						
 						//desmatricular
 						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-						if(! is_null($s))
-						{
-							$s->delete();
-						}
+						$s->setIsDeleted(true);
+						$s->save(Propel::getConnection());
 						
 						$this->getUser()->setFlash('info','The item was updated successfully.');
 					}
@@ -835,8 +831,8 @@ class studentActions extends autoStudentActions
 							$career_student->save(Propel::getConnection());
 							
 							//deshabilito la persona
-							//$this->student->getPerson()->setIsActive(false);
-							$this->student->getPerson()->save();
+							$this->student->getPerson()->setIsActive(false);
+							$this->student->getPerson()->save(Propel::getConnection());
 							
 							$this->getUser()->setFlash('info','The item was updated successfully.');
 						}	

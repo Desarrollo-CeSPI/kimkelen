@@ -65,6 +65,7 @@ class Student extends BaseStudent
     }
     $criteria = new Criteria();
     $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
+    $criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
     return $this->countSchoolYearStudents($criteria) == 1;
 
   }
@@ -84,6 +85,7 @@ class Student extends BaseStudent
     }
     $criteria = new Criteria();
     $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
+    $criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
     $array = $this->getSchoolYearStudents($criteria);
     return array_shift($array);
 
@@ -915,6 +917,7 @@ class Student extends BaseStudent
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
 
     $school_year_student = SchoolYearStudentPeer::doSelectOne($c);
 
@@ -1174,9 +1177,11 @@ class Student extends BaseStudent
 
   public function canBeDeactivated()
   {
+	  /*is_deleted = false*/
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
 
     return (count(SchoolYearStudentPeer::doSelect($c)) == 0) && ($this->getPerson()->getIsActive());
   }

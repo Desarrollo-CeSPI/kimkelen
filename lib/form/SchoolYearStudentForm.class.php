@@ -34,7 +34,7 @@ class SchoolYearStudentForm extends BaseSchoolYearStudentForm
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
    
-    unset($this['created_at'], $this['school_year_id'], $this['student_id']);
+    unset($this['created_at'], $this['school_year_id'], $this['student_id'],$this['is_deleted']);
     $this->getWidget('shift_id')->setOption('add_empty',false);
 
 	  $this->setWidget('health_info',  new sfWidgetFormSelect(array(

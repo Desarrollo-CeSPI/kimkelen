@@ -149,10 +149,12 @@ class CareerStudent extends BaseCareerStudent
 
   public function createStudentCareerSchoolYear(PropelPDO $con)
   {
+	/*is_deleted = false*/
     $c = new Criteria();
     $c->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
     $c->add(SchoolYearPeer::IS_ACTIVE, true);
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getStudentId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
 
     $school_year_student = SchoolYearStudentPeer::doSelectOne($c, $con);
 
