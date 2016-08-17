@@ -60,18 +60,20 @@ class PersonForm extends BasePersonForm
     //$this->setValidator('identification_number', new sfValidatorNumber(array('required'=>false)));
 
     //Birth country, state and city widgets
+    $c = new Criteria();
+    $c->addAscendingOrderByColumn('name');
+    
     $this->setWidget('birth_country', new sfWidgetFormPropelchoice(array(
         'model'     => 'Country',
-        'add_empty' => true
+        'add_empty' => true,
+        'criteria' => $c
     )));
 
     $this->setDefault('birth_country',  SchoolBehaviourFactory::getInstance()->getDefaultCountryId());
 
-    $widget_birth_state = new imWidgetFormPropelChoiceOrCreatePopUp(array(
+    $widget_birth_state = new sfWidgetFormPropelChoice(array(
       'model' => 'State',
-      'add_empty' => true,
-      'url' =>'state/new',
-      'new_label'=>'Nueva provincia'
+      'add_empty' => true
       ));
 
     #This string is necesary to assemble the id needed for the html object
@@ -92,6 +94,22 @@ class PersonForm extends BasePersonForm
 
     $this->setDefault('birth_state',  SchoolBehaviourFactory::getInstance()->getDefaultStateId());
 
+	$c= new Criteria();
+	$c->addAscendingOrderByColumn('name');
+	
+	$widget_birth_department = new sfWidgetFormPropelChoice(array(
+      'model'      => 'Department',
+      'add_empty'  => true,
+      'criteria' => $c
+    ));
+    
+    $this->setWidget('birth_department', new dcWidgetAjaxDependencePropel(array(
+        'related_column'     => 'state_id',
+        'dependant_widget'   => $widget_birth_department,
+        'observe_widget_id'  => $related_class.'birth_state',
+        'message_with_no_value' => __('Select a state first'),
+        )));
+	
     $c = new Criteria();
     $c->addAscendingOrderByColumn('name');
 
@@ -102,10 +120,10 @@ class PersonForm extends BasePersonForm
     ));
 
     $this->setWidget('birth_city', new dcWidgetAjaxDependencePropel(array(
-        'related_column'     => 'state_id',
+        'related_column'     => 'department_id',
         'dependant_widget'   => $widget_birth_city,
-        'observe_widget_id'  => $related_class.'birth_state',
-        'message_with_no_value' => __('Select a state first'),
+        'observe_widget_id'  => $related_class.'birth_department',
+        'message_with_no_value' => __('Select a department first'),
         )));
     $this->setDefault('birth_city',  SchoolBehaviourFactory::getInstance()->getDefaultCityId());
 

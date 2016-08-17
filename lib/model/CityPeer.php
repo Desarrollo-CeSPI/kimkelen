@@ -33,4 +33,14 @@ class CityPeer extends BaseCityPeer
     }
     return $cities;
   }
+  
+  public static function retrieveByDepartmentId($department_id)
+	{
+		$c = new Criteria();
+		$c->add(self::DEPARTMENT_ID, $department_id);
+		$c->addAscendingOrderByColumn('name');
+		
+		return self::doSelect($c);
+	
+	}
 }

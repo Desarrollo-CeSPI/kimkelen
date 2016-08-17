@@ -7,19 +7,18 @@ classes:
     description:          Representa una ciudad
     columns:
       id:
-      zip_code:
-        type: varchar(255)
-        required: true
       name:
         type: varchar(255)
         required: true
-      state_id:
+      short_name:
+        type: varchar(255)
+      department_id:
         type: integer
-        foreignTable: state
+        foreignTable: department
         foreignReference: id
         required: true
       _indexes:
-        state: [state_id]
+        department: [department_id]
         name: [name]
 
   State:
@@ -249,15 +248,23 @@ classes:
         type: integer
         required: true
       sector:
+        description:      0=Estatal, 1=Privado, 2=Activo, 3=Social/Cooperativa
         type: integer
         required: true
       field:
+        description:      0=Rural, 1=Urbano
         type: integer
         required: true
       address:
         type: varchar(255)
+      city_id:
+        type: integer
+        foreignClass: city
+        foreignReference: id
+        required: true     
       _indexes:
         cue: [cue]
+        city: [city_id]
   
   LetterMark:
     tablename:        letter_mark
@@ -288,3 +295,21 @@ classes:
       letter_mark_average:
         type: integer
         required: true
+
+  Department:
+    tablename: department
+    description:  Representa el partido/departamento de una provincia
+    columns:
+      id:
+      name:
+        type: varchar(255)
+      state_id:
+        type: integer
+        foreignClass: state
+        foreignReference: id
+        required: true
+      condition:
+        type: varchar(1)
+      _indexes:
+        state: [state_id]
+        name: [name]

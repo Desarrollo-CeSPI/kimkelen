@@ -21,9 +21,9 @@
 
 class City extends BaseCity
 {
-  const LA_PLATA = 408;
-  const BUENOS_AIRES = 2;
-  const CORDOBA = 12682;
+  const LA_PLATA = 1159;
+  const BUENOS_AIRES = 1;
+  const CORDOBA = 10460;
 
   public function __toString(){
     $array = explode(chr(32),$this->getName());
@@ -32,6 +32,6 @@ class City extends BaseCity
     {
       $chain .= ucfirst($array[$i]).' ';
     }
-    return ucfirst($chain.' (CP:'.$this->getZipCode().')');
+    return ucfirst($chain);
   }
 }
