@@ -85,7 +85,16 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
   public function getForms(ExaminationRepprovedSubject $examination_repproved_subject)
   {
     $forms = array();
-    foreach ($examination_repproved_subject->getStudentExaminationRepprovedSubjects() as $student_examination_repproved_subject)
+    
+    //agrego el orden alfabetico para el listado de alumnos.
+    $criteria = new Criteria(ExaminationRepprovedSubjectPeer::DATABASE_NAME);
+    $criteria->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID);
+    $criteria->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID,  StudentPeer::ID);
+    $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+    $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+    
+    foreach ($examination_repproved_subject->getStudentExaminationRepprovedSubjects($criteria) as $student_examination_repproved_subject)
     {
       $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentExaminationRepprovedSubjectForm();
       $form = new $form_name($student_examination_repproved_subject);

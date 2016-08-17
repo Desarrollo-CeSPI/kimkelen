@@ -79,4 +79,9 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 		return sprintf("%01.2f", $student_disapproved_course_subject->getCourseSubjectStudent()->getMarksAverage());
 	}
 
+	public function getPathwayPromotionNote ()
+	{
+		return self::PATHWAY_PROMOTION_NOTE;
+	}
+
 }

@@ -159,40 +159,45 @@ class pathway_commissionActions extends autoPathway_commissionActions
         $this->setTemplate('courseSubjectStudent');
     }
 
-	public function executeCalifications(sfWebRequest $request)
-	{
-		$this->course = $this->getRoute()->getObject();
-
-		$this->getUser()->setAttribute("referer_module", "pathway_commission");
-
-		$this->redirect("course_student_mark/index?id=" . $this->course->getId());
-
-	}
-
-	public function executePrintCalifications(sfWebRequest $request)
-	{
-		$this->setLayout('cleanLayout');
-
+  public function executeCalifications(sfWebRequest $request)
+  {
     $this->course = $this->getRoute()->getObject();
-    $this->getUser()->setAttribute("referer_module", "commission");
 
-		$this->course_subjects = $this->course->getCourseSubjects();
+    $this->getUser()->setAttribute("referer_module", "pathway_commission");
+
+    $this->redirect("course_student_mark/index?id=" . $this->course->getId());
+
   }
 
-	public function executeClose(sfWebRequest $request)
-	{
-		$this->course = $this->getRoute()->getObject();
-	}
+  public function executePrintCalifications(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->course_subjects = $this->course->getCourseSubjects();
+    $this->setLayout('cleanLayout');
+    $this->getUser()->setAttribute("referer_module", "commission");
+    
+    if (count($this->course_subjects) <= 0)
+    {
+      $this->getUser()->setFlash('error', 'La comision no posee materia/s.');
+      $this->redirect("@pathway_commission");
+    }
 
-	public function executeSaveClose(sfWebRequest $request)
-	{
-		// TODO
-		// si es mayor que 7 crear el student approved career subject. si no mandarlo a previa.
-		sfContext::getInstance()->getConfiguration()->loadHelpers('I18N');
-		$this->course = CoursePeer::retrieveByPk($request->getParameter('id'));
-		$this->course->pathwayClose();
-		$this->getUser()->setFlash('notice', __('The course has been closed successfuly'));
-		$this->setTemplate('close');
-	}
+  }
+
+  public function executeClose(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+  }
+
+  public function executeSaveClose(sfWebRequest $request)
+  {
+    // TODO
+    // si es mayor que 7 crear el student approved career subject. si no mandarlo a previa.
+    sfContext::getInstance()->getConfiguration()->loadHelpers('I18N');
+    $this->course = CoursePeer::retrieveByPk($request->getParameter('id'));
+    $this->course->pathwayClose();
+    $this->getUser()->setFlash('notice', __('The course has been closed successfuly'));
+    $this->setTemplate('close');
+  }
 
 }

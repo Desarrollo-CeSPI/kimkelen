@@ -22,15 +22,22 @@ generator:
           _edit:
           _delete:
         batch_actions: []
+        actions:
+          _new:
+            label: Nuevo día feriado
       filter:  ~
       form:    ~
       edit:
         actions:
           _list:
-            label: Volver al listado de días feriados
-          _save:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar día feriado
       new:
         actions:
           _list:
-            label: Volver al listado de días feriados
-          _save:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar día feriado
+          _save_and_add:
+            label:         Guardar y agregar otro día feriado

@@ -51,4 +51,12 @@ class Shift extends BaseShift
     }
     return $student_ids;
   }
+
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(DivisionPeer::SHIFT_ID, $this->getId());
+    
+    return !(DivisionPeer::doCount($criteria));
+  }
 }

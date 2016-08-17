@@ -95,7 +95,7 @@ generator:
           course:
             label: Courses
             action: courses
-            condition: haveCourses
+            condition: canShowCourses
 
           activate:
             label: Set active
@@ -108,32 +108,29 @@ generator:
             credentials: [edit_teacher]
             action: personActivation
             condition: canPersonBeDeactivated
-
+            params: confirm='Are you sure?'
       filter:
-
       form:
       edit:
-        title:             Editar datos del docente "%%person%%"
+        title:             Editar docente
         actions:
           _list:
-            label:            Volver al listado de docentes
+            label:            Volver al listado
           _save_and_list:
-            label:            Guardar y volver al listado de docentes
-
+            label:            Guardar docente
       new:
-        title:                Crear un nuevo docente
+        title:                Crear docente
         actions:
           _list:
-            label:            Volver al listado de docentes
+            label:            Volver al listado
           _save_and_list:
-            label:            Guardar y volver al listado de docentes
+            label:            Guardar docente
           _save_and_add:
             label:            Guardar y agregar otro docente
-
       show:
-        title:              Detalle del docente "%%person%%"
+        title:              Detalles del docente
         display:
           "Datos personales": [_person]
         actions:
           _list:
-            label:            Volver al listado de docentes
+            label:            Volver al listado

@@ -22,11 +22,23 @@ generator:
           _delete:
             credentials: [edit_justification_type]
             condition: canBeDeleted
+        actions:
+          _new:
+            label: Nuevo tipo de justificación
       filter:
         class:  false
       form:    ~
       edit:
         actions:
           _list:
+            label:              Volver al listado
           _save_and_list:
-      new:     ~
+            label:              Guardar tipo de justificación
+      new:
+        actions:
+          _list:
+            label:              Volver al listado
+          _save_and_list:
+            label:              Guardar tipo de justificación
+          _save_and_add:
+            label:              Guardar y agregar otro tipo de justificación

@@ -19,11 +19,27 @@ generator:
         object_actions:
           _edit:
           _delete:
+            condition: canBeDeleted
         batch_actions: []
+        actions:
+          _new:
+            label: Nueva etiqueta
       filter:
         class: false
       form:    ~
       edit:
         title: Edit tag
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar etiqueta
       new:
         title: New tag
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar etiqueta
+          _save_and_add:
+            label:          Guardar y agregar otra etiqueta

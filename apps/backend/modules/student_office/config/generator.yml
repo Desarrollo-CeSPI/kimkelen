@@ -51,6 +51,7 @@ generator:
             credentials: [edit_personal]
             action: personActivation
             condition: canPersonBeDeactivated
+            
 
         actions:
           _new:
@@ -60,5 +61,22 @@ generator:
       filter:
         class:             false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar personal
+      new:
+        actions:
+          _list:
+            label:         Volver al listado
+          _save_and_list:
+            label:         Guardar personal
+          _save_and_add:
+            label:         Guardar y agregar otro personal
+      show:
+        title: Detalles del personal de la oficina de alumnos
+        actions:
+          _list:
+            label:         Volver al listado

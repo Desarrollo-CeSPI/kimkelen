@@ -26,4 +26,13 @@ class Resources extends BaseResources
     return $this->getName();
 
   }
+  
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(ClassroomResourcesPeer::RESOURCE_ID, $this->getId());
+    
+    return !(ClassroomResourcesPeer::doCount($criteria));
+  }
+
 }

@@ -14,36 +14,36 @@ generator:
       actions: ~
       fields:  ~
       list:
-        title:              Listado de turnos
-        batch_actions:      []
-        display:            [name]
+        title:             Listado de turnos
+        batch_actions:     []
+        display:           [name]
         object_actions:
           _edit:
-            credentials: [edit_shift]
+            credentials:   [edit_shift]
           _delete:
-            credentials: [edit_shift]
+            credentials:   [edit_shift]
+            condition:   canBeDeleted
         actions:
           _new:
             label: Nuevo turno
-            credentials: [edit_shift]
+            credentials:   [edit_shift]
 
       filter:
           class: false
       form:    ~
       edit:
-        title:              Editar turno
+        title: Editar turno
         actions:
           _list:
-            label:          Volver al listado de turnos
+            label:         Volver al listado
           _save_and_list:
-            label:          Guardar turno
-
+            label:         Guardar turno
       new:
-        title:              Nuevo turno
+        title: Nuevo turno
         actions:
           _list:
-            label:          Volver al listado de turnos
+            label:         Volver al listado
           _save_and_list:
-            label:          Guardar turno
+            label:         Guardar turno
           _save_and_add:
-            label:          Guardar y agregar otro turno
+            label:         Guardar y agregar otro turno

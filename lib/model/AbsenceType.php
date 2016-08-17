@@ -47,4 +47,12 @@ class AbsenceType extends BaseAbsenceType
 
   }
 
+  public function canBeDeleted(PropelPDO $con = null)
+  {
+    $criteria = new Criteria();
+    $criteria->add(StudentAttendancePeer::ABSENCE_TYPE_ID, $this->getId());
+    
+    return !(StudentAttendancePeer::doCount($criteria));
+  }
+
 }

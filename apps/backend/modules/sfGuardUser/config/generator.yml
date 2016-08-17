@@ -53,11 +53,10 @@ generator:
         class: sfGuardUserCustomForm
         display:
       edit:
-        title:                       Edición de usuario "%%username%%"
+        title: Editar usuario
         actions:
-          _delete:
           _list:
-            label:                     Volver al listado de usuarios
+            label:                     Volver al listado
           _save_and_list:
             label:                     Guardar usuario
 
@@ -65,18 +64,18 @@ generator:
         title: Crear Usuario
         actions:
           _list:
-            label:                     Volver al listado de usuarios
+            label:                     Volver al listado
           _save_and_list:
             label:                     Guardar usuario
           _save_and_add:
             label:                     Guardar y agregar otro usuario
 
       show:
-        title: Vista de usuario "%%username%%"
+        title: Detalles del usuario
         display:
           "Información de usuario":    [username, is_active, created_at]
           "Perteneciente al grupo":    [_show_groups]
         actions:
           _list:
-            label:                     Volver al listado de usuarios
+            label:                     Volver al listado
 

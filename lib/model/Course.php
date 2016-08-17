@@ -125,8 +125,7 @@ class Course extends BaseCourse
 
   public function canBeDeleted(PropelPDO $con = null)
   {
-    return $this->countStudents() == 0;
-
+    return ($this->isPathway())? $this->countPathwayStudents() == 0 : $this->countStudents() == 0;
   }
 
   /**

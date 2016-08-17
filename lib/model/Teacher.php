@@ -60,19 +60,25 @@ class Teacher extends BaseTeacher
    * Returns if this person can be set to active. This will be only when is not active
    * @return boolean
    */
-  public function canBeActivated()
+  public function canPersonBeActivated()
   {
-    return $this->getIsActive() == false;
+    return $this->getPerson()->getIsActive() == false;
 
   }
 
-  public function haveCourses()
+  public function canPersonBeDeactivated()
+  {
+    return $this->getPerson()->getIsActive() == true;
+
+  }
+
+  public function canShowCourses()
   {
     return $this->countCourseSubjectTeachers();
 
   }
 
-  public function getMessageCantHaveCourses()
+  public function getMessageCantShowCourses()
   {
     return 'Dont have any course assigned';
 
