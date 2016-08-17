@@ -16,7 +16,9 @@ class CareerSubjectFormFilter extends BaseCareerSubjectFormFilter
       $this["created_at"],
       $this["career_id"],
       $this["has_correlative_previous_year"],
-      $this["student_career_subject_allowed_list"]
+      $this["student_career_subject_allowed_list"],
+      $this["sub_orientation_id"],
+      $this["student_career_subject_allowed_pathway_list"]
     );
 
     $this->widgetSchema["subject_id"] = new sfWidgetFormInput();
@@ -27,6 +29,12 @@ class CareerSubjectFormFilter extends BaseCareerSubjectFormFilter
       "required" => false
     ));
 
+    $this->setWidget('has_options', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('has_options', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
+
+    $this->setWidget('is_option', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('is_option', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
+
     $this->validatorSchema["year"] = new sfValidatorPass();
 
     $widget = new sfWidgetFormPropelChoice(array(
@@ -34,11 +42,6 @@ class CareerSubjectFormFilter extends BaseCareerSubjectFormFilter
       'add_empty' => true
     ));
 
-    $this->setWidget('sub_orientation_id', new dcWidgetAjaxDependencePropel(array(
-      'dependant_widget' => $widget,
-      'observe_widget_id' => 'career_subject_filters_orientation_id',
-      'related_column' => 'orientation_id',
-    )));
   }
 
   public function addSubjectIdColumnCriteria($criteria, $field, $value)

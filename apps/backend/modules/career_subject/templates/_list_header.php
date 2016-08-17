@@ -19,7 +19,7 @@
  */ ?>
 <h3>Plan de estudio: <?php echo $pager->getParameter('career')?></h3>
 <div>
-    Una vez que el plan de estudio no es modificable, las materias del mismo no se podrán cambiar debido a que ya existen años lectivos o incluso alumnos inscriptos en él.
-    Sólo será posible crear nuevas materias que sean opcionales; las materias optativas con sus opciones se editarán desde cada
-    <strong><?php echo link_to("año lectivo",'@school_year')?></strong>.
+    <p>Una vez que el plan de estudio no es modificable, las materias del mismo no se podrán cambiar debido a que ya existen años lectivos o incluso alumnos inscriptos en él.</br>
+			 Sólo será posible crear nuevas materias que sean opcionales, las materias optativas con sus opciones se editarán desde cada <strong><?php echo link_to("año lectivo",'@school_year')?></strong>.
+		</p>
 </div>
