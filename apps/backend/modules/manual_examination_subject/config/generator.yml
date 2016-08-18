@@ -16,7 +16,7 @@ generator:
         examination_subject_teacher_list:
           label: Teachers
       list:
-        title: Subjects (manual)
+        title: Listado de materias de la mesa de examen (manejo manual)
         layout: stacked
         params: |
           %%_information%%
@@ -51,7 +51,7 @@ generator:
         actions:
           back:
             action: back
-            label:  Volver al listado de mesas de examen
+            label:  Volver al listado
           _new:
       filter:
       form:

@@ -29,10 +29,11 @@ generator:
             credentials: [show_examination_subject]
           _delete:
             credentials: [edit_examination]
+            condition: canBeDeleted
         actions:
           back:
             action: back
-            label:      Volver a listado de años lectivos
+            label:      Volver a listado
           _new:
             credentials: [edit_examination]
             label:      Nueva mesa de examen
@@ -40,14 +41,18 @@ generator:
         class: false
       form:    ~
       edit:
+        title: Editar mesa de examen
         actions:
-          _list:           { label: Volver al listado de mesas de examen }
+          _list:
+            label:          Volver al listado
           _save_and_list:
             label:          Guardar mesa de examen
           _save_and_add:
             label:          Guardar y agregar otra mesa de examen
       new:
+        title: Nueva mesa de examen
         actions:
-          _list:           { label: Volver al listado de mesas de examen }
+          _list:
+            label:          Volver al listado
           _save_and_list:
             label:          Guardar mesa de examen

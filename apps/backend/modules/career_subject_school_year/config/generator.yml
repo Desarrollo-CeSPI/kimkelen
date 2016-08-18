@@ -67,8 +67,15 @@ generator:
           _user_export:
       filter:  ~
       form:
+      edit:
         actions:
           _list:
+            label:          Volver al listado
           _save_and_list:
-      edit:    ~
-      new:     ~
+            label:          Guardar
+      new:
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar

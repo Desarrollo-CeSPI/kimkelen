@@ -23,6 +23,6 @@
 <?php endif?>
 <ul class="sf_admin_actions">
   <li class="sf_admin_action_go_back">
-    <?php echo link_to(__("Volver al listado de años lectivos"), "@school_year") ?>
+    <?php echo link_to(__("Volver"), "@school_year") ?>
   </li>
 </ul>

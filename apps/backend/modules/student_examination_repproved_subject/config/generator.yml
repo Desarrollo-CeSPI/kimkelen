@@ -24,18 +24,18 @@ generator:
             decorator: text
 
       list:
-        title:  Alumnos
-        display:  [student]  
+        title:  Listado de alumnos inscriptos
+        display:  [student]
         max_per_page: 50
         batch_actions: []
         object_actions: []
         actions:
           back:
-            label: Volver al listado de mesas
+            label: Volver al listado
             action: back
           _user_export:
         peer_method: doSelect
-        
+
       filter:
         class: false
       form:    ~

@@ -17,4 +17,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<h2>Mesa de examen: <?php echo $pager->getParameter('manual_examination')?> (manejo manual)</h2>
+<h2>Mesa: <?php echo $pager->getParameter('manual_examination')?> (manejo manual)</h2>

@@ -38,10 +38,11 @@ generator:
 
           back:
             action: back
-            label:        Volver al listado años lectivos
+            label:        Volver al listado
 
           _new:
-            condition: canCreateExaminationRepproved
+            label:        Nueva mesa
+            condition:    canCreateExaminationRepproved
             credentials:  [edit_examination_repproved]
 
       filter:
@@ -51,10 +52,15 @@ generator:
         title:  Edit repproved examination
         actions:
           _list:
+            label:        Volver al listado
           _save_and_list:
+            label:        Guardar mesa
       new:
         title:  New repproved examination
         actions:
           _list:
+            label:        Volver al listado
           _save_and_list:
+            label:        Guardar mesa
           _save_and_add:
+            label:        Guardar y agregar otro mesa

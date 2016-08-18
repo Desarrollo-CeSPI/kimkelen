@@ -14,7 +14,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        title: Subjects
+        title: Listado de materias de la mesa
         layout: stacked
         params: |
           %%_information%%
@@ -55,13 +55,25 @@ generator:
           back:
             action: back
           _new:
+            label: Nueva materia para la mesa
             condition: canCreateExaminationRepprovedSubject
 
       filter:
         class:  false
       form:    ~
       edit:
+        title: Editar materia de la mesa
         actions:
           _list:
-          _save:
-      new:     ~
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar materia
+      new:
+        title: Nueva materia de la mesa
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar materia
+          _save_and_add:
+            label:        Guardar y agregar otra materia

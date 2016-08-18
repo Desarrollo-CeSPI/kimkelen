@@ -28,7 +28,7 @@
   <div id="sf_admin_content">
     <form action="<?php echo url_for('career_subject_school_year/updateConfiguration') ?>" method="post">
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Volver al listado de materias'), '@career_subject_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Volver al listado'), '@career_subject_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Guardar') ?>" /></li>
       </ul>
       <input type="hidden" name="id" value="<?php echo $career_subject_school_year->getId() ?>" />
@@ -43,7 +43,7 @@
       </fieldset>
 
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Volver al listado de materias'), '@career_subject_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Volver al listado'), '@career_subject_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Guardar') ?>" /></li>
       </ul>
     </form>
