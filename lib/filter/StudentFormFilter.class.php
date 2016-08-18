@@ -139,6 +139,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $c->add(SchoolYearPeer::ID , SchoolYearPeer::retrieveCurrent()->getId());
       $c->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
       $c->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID);
+      $c->add(SchoolYearStudentPeer::IS_DELETED,false);
       $c->clearSelectColumns();
       $c->addSelectColumn(StudentPeer::ID);
       $stmt = StudentPeer::doSelectStmt($c);
