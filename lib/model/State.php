@@ -21,9 +21,9 @@
 
 class State extends BaseState
 {
-  const CIUDAD_AUTONOMA = 1;
-  const BUENOS_AIRES = 2;
-  const CORDOBA = 5;
+  const CIUDAD_AUTONOMA = 5402;
+  const BUENOS_AIRES = 5406;
+  const CORDOBA = 5414;
   
   public function __toString(){
     return $this->getName();
