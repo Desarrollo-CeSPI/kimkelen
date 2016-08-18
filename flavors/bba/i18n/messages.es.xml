@@ -2007,8 +2007,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>Max absence</source>
-                <target>Cantidad de ausencias.</target>
+                <source>Max absences</source>
+                <target>Cantidad de ausencias</target>
             </trans-unit>
 
             <trans-unit>
@@ -4658,6 +4658,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Show pathway</source>
               <target>Detalles de la trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Examination %examination%</source>
+              <target>Mesa: %examination%</target>
             </trans-unit>
         </body>
     </file>

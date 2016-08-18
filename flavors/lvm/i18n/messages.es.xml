@@ -3911,10 +3911,6 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 							<target>Si no completa los campos de búsqueda se generarán los reportes para todos los resultados posibles. Rellene los campos si desea acotar los reportes.</target>
 						</trans-unit>
 						<trans-unit>
-							<source>Max absences</source>
-							<target>Máxima cantidad de ausencias permitidas</target>
-						</trans-unit>
-						<trans-unit>
 							<source>The student has no approved subjects</source>
 							<target>El estudiante no posee materias aprobadas</target>
 						</trans-unit>
@@ -6495,8 +6491,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>Max absence</source>
-                <target>Cantidad de ausencias.</target>
+                <source>Max absences</source>
+                <target>Cantidad de ausencias</target>
             </trans-unit>
 
             <trans-unit>
@@ -8994,6 +8990,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Show pathway</source>
               <target>Detalles de la promoción por excepción</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Examination %examination%</source>
+              <target>Mesa: %examination%</target>
             </trans-unit>
           </body>
     </file>
