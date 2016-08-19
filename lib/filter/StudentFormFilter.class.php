@@ -272,6 +272,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     if($values)
     {
 		$criteria->addJoin(StudentPeer::ID,SchoolYearStudentPeer::STUDENT_ID);
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
 				
 	}
