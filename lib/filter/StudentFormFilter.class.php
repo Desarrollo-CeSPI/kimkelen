@@ -218,6 +218,7 @@ class StudentFormFilter extends BaseStudentFormFilter
 		$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
 		$criteria->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
 		$criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $current_school_year->getId());
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		
 	}else
 	{
