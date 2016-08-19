@@ -14,34 +14,29 @@ generator:
       actions: ~
       fields:  ~
       list:
+        title:            Repproved examination
         batch_actions: []
         layout: stacked
         params: |
           %%_information%%
         display: [examination_repproved]
         object_actions:
-
           _edit:
             credentials:  [edit_examination_repproved]
             condition: canEdit
-
           subjects:
             label: Subjects
             action: examinationRepprovedSubjects
             credentials:  [show_examination_repproved_subjects]
-
           _delete:
             credentials:  [edit_examination_repproved]
             condition: canDelete
-
         actions:
-
           back:
             action: back
             label:        Volver al listado
-
           _new:
-            label:        Nueva mesa
+            label:        Nueva mesa de exámen
             condition:    canCreateExaminationRepproved
             credentials:  [edit_examination_repproved]
 

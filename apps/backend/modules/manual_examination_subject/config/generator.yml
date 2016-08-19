@@ -53,6 +53,7 @@ generator:
             action: back
             label:  Volver al listado
           _new:
+            label: Nueva
       filter:
       form:
         class: ManualExaminationSubjectForm

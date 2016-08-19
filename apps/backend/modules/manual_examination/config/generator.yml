@@ -36,7 +36,7 @@ generator:
             label:      Volver a listado
           _new:
             credentials: [edit_examination]
-            label:      Nueva mesa de examen
+            label:      Nueva mesa de exámen
       filter:
         class: false
       form:    ~
