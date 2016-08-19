@@ -49,13 +49,13 @@ generator:
           _list:
             label:        Volver al listado
           _save_and_list:
-            label:        Guardar mesa
+            label:        Guardar mesa de exámen
       new:
-        title:  New repproved examination
+        title: New repproved examination
         actions:
           _list:
             label:        Volver al listado
           _save_and_list:
-            label:        Guardar mesa
+            label:        Guardar mesa de exámen
           _save_and_add:
-            label:        Guardar y agregar otro mesa
+            label:        Guardar y agregar otro mesa de exámen

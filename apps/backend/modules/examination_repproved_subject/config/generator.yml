@@ -14,7 +14,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        title: Listado de materias de la mesa
+        title: Listado de materias de la mesa de exámen (previos/libres)
         layout: stacked
         params: |
           %%_information%%
@@ -22,54 +22,46 @@ generator:
         object_actions:
           _edit:
             credentials: [edit_examination_repproved_subject]
-
           manage_students:
             action: manageStudents
             condition: canEditStudents
             credentials: [edit_examination_subject_califications]
-
           students:
             action: students
             credentials: [edit_examination_subject_califications]
-
           califications:
             action: califications
             credentials: [[edit_examination_repproved_subject_califications, edit_closed_examination]]
-
           close:
             action: close
             condition: canBeClosed
             label: Close examination
             credentials: [edit_examination_repproved_subject]
-
           print_students:
             label: Print students
             action: printStudents
-
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
-
         batch_actions: []
         actions:
           back:
             action: back
           _new:
-            label: Nueva materia para la mesa
+            label: Nueva materia de la mesa de exámen
             condition: canCreateExaminationRepprovedSubject
-
       filter:
         class:  false
       form:    ~
       edit:
-        title: Editar materia de la mesa
+        title: Editar materia de la mesa de exámen
         actions:
           _list:
             label:        Volver al listado
           _save_and_list:
             label:        Guardar materia
       new:
-        title: Nueva materia de la mesa
+        title: Nueva materia de la mesa de exámen
         actions:
           _list:
             label:        Volver al listado

@@ -18,22 +18,19 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php $examination = $pager->getParameter('examination'); ?>
-<h2>Mesa de examen: <?php echo $examination?></h2>
+<h2>Mesa de exámen: <?php echo $examination?></h2>
 
 <ul>
-
-		<div class="info-box">
-			<div class="info-box-title">
-				<strong><?php echo link_to_function(__("Create examinations"), "jQuery('#not_created_examination_subjects').toggle();") ?></strong>
-			</div>
-
-			<div class="info-box-collapsable" style="display: block" id="not_created_examination_subjects" >
-
-				<?php for ($i=1; $i <= CareerPeer::getMaxYear(); $i++): ?>
-					<?php if ($examination->countExaminationSubjectsForYear($i) == 0 ): ?>
-					  <li><?php echo link_to( __("Create examination subjects for %year%° year", array('%year%' => $i)), 'examination/createExaminationSubjects?year='. $i.'&id='.$examination->getId())?></li>
-				  <?php endif; ?>
-					<?php endfor; ?>
-			</div>
+	<div class="info-box">
+		<div class="info-box-title">
+			<strong><?php echo link_to_function(__("Create examinations"), "jQuery('#not_created_examination_subjects').toggle();") ?></strong>
 		</div>
+		<div class="info-box-collapsable" style="display: block" id="not_created_examination_subjects" >
+			<?php for ($i=1; $i <= CareerPeer::getMaxYear(); $i++): ?>
+				<?php if ($examination->countExaminationSubjectsForYear($i) == 0 ): ?>
+					<li><?php echo link_to( __("Create examination subjects for %year%° year", array('%year%' => $i)), 'examination/createExaminationSubjects?year='. $i.'&id='.$examination->getId())?></li>
+				<?php endif; ?>
+			<?php endfor; ?>
+		</div>
+	</div>
 </ul>

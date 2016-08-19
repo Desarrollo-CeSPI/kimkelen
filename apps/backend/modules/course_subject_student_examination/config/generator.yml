@@ -36,7 +36,7 @@ generator:
         object_actions: []
         actions:
           back:
-            label: Volver al listado de mesas
+            label: Volver al listado
             action: back
           _user_export:
       filter:

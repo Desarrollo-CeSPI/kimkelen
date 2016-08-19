@@ -16,7 +16,7 @@ generator:
         examination_subject_teacher_list:
           label: Teachers
       list:
-        title: Listado de materias de la mesa de examen (manejo manual)
+        title: Listado de materias de la mesa de exámen (manejo manual)
         layout: stacked
         params: |
           %%_information%%
@@ -24,23 +24,22 @@ generator:
         batch_actions: []
         object_actions:
           _edit:
-            label: Teachers
-            credentials: [edit_examination_subject]
-          close:
-            action: close
-            label: Close subject
-            condition: canBeClosed
             credentials: [edit_examination_subject]
           manage_students:
             action: manageStudents
             condition: canManageStudents
             credentials: [edit_examination_subject_califications]
-          califications:
-            action: califications
-            credentials: [[edit_examination_subject_califications, edit_closed_examination]]
           students:
             action: students
             credentials: [edit_examination_subject_califications]
+          califications:
+            action: califications
+            credentials: [[edit_examination_subject_califications, edit_closed_examination]]
+          close:
+            action: close
+            label: Close examination
+            condition: canBeClosed
+            credentials: [edit_examination_subject]
           print_students:
             label: Print students
             action: printStudents
@@ -51,9 +50,9 @@ generator:
         actions:
           back:
             action: back
-            label:  Volver al listado
+            label:  Volver
           _new:
-            label: Nueva
+            label: Nueva materia de la mesa de exámen
       filter:
       form:
         class: ManualExaminationSubjectForm
@@ -61,5 +60,19 @@ generator:
           _list:
             label: Back
           _save:
-      edit:    ~
-      new:     ~
+      edit:
+        title: Editar materia de la mesa de exámen
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar materia
+      new:
+        title: Nueva materia de la mesa de exámen
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar materia
+          _save_and_add:
+            label:        Guardar y agregar otra materia

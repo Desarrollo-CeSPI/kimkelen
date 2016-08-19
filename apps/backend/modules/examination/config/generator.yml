@@ -41,12 +41,14 @@ generator:
         class: false
       form:    ~
       edit:
+        title:              Edit examination
         actions:
           _list:
             label:          Volver al listado
           _save_and_list:
             label:          Guardar mesa de exámen
       new:
+        title:              New examination
         actions:
           _list:
             label:          Volver al listado

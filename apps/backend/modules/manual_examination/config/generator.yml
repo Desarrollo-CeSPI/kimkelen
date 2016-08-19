@@ -41,18 +41,18 @@ generator:
         class: false
       form:    ~
       edit:
-        title: Editar mesa de examen
+        title: Editar mesa de exámen (manejo manual)
         actions:
           _list:
             label:          Volver al listado
           _save_and_list:
-            label:          Guardar mesa de examen
-          _save_and_add:
-            label:          Guardar y agregar otra mesa de examen
+            label:          Guardar mesa de exámen
       new:
-        title: Nueva mesa de examen
+        title: Nueva mesa de exámen (manejo manual)
         actions:
           _list:
             label:          Volver al listado
           _save_and_list:
-            label:          Guardar mesa de examen
+            label:          Guardar mesa de exámen
+          _save_and_add:
+            label:          Guardar y agregar otra mesa de exámen
