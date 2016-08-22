@@ -1263,7 +1263,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examinations</source>
-                <target>Mesas de examen</target>
+                <target>Mesas de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1282,13 +1282,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>New Examination</source>
-                <target>Nueva mesa de examen</target>
+                <source>New examination</source>
+                <target>Nueva mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
-                <source>Edit Examination</source>
-                <target>Editar mesa de examen</target>
+                <source>Edit examination</source>
+                <target>Editar mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1322,7 +1322,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Close subject</source>
-                <target>Cerrar mesa de examen</target>
+                <target>Cerrar materia</target>
             </trans-unit>
 
             <trans-unit>
@@ -1336,7 +1336,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Edit repproved examination</source>
-                <target>Editar mesa</target>
+                <target>Editar mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
@@ -1346,7 +1346,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>New repproved examination</source>
-                <target>Nueva mesa</target>
+                <target>Nueva mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
@@ -4060,7 +4060,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Examinations (manual)</source>
-              <target>Mesas de examen (manejo manual)</target>
+              <target>Mesas de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Examination number</source>
@@ -4438,6 +4438,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Examination %examination%</source>
               <target>Mesa: %examination%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Repproved examination</source>
+                <target>Mesas de exámen previo y libre</target>
             </trans-unit>
         </body>
     </file>

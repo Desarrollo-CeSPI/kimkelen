@@ -1258,7 +1258,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examinations</source>
-                <target>Mesas de examen</target>
+                <target>Mesas de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1277,13 +1277,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>New Examination</source>
-                <target>Nueva mesa de examen</target>
+                <source>New examination</source>
+                <target>Nueva mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
-                <source>Edit Examination</source>
-                <target>Editar mesa de examen</target>
+                <source>Edit examination</source>
+                <target>Editar mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1317,7 +1317,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Close subject</source>
-                <target>Cerrar mesa de examen</target>
+                <target>Cerrar mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1326,12 +1326,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Examination subject cant be closed, because some students were not calificated</source>
-                <target>La mesa de examen no puede cerrarse, porque algunos alumnos no fueron calificados</target>
+                <target>La mesa de exámen no puede cerrarse, porque algunos alumnos no fueron calificados</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Edit repproved examination</source>
-                <target>Editar mesa</target>
+                <target>Editar mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
@@ -1341,12 +1341,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>New repproved examination</source>
-                <target>Nueva mesa</target>
+                <target>Nueva mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The examination subject can't be closed because it's already closed.</source>
-                <target>La mesa de examen no puede cerrarse porque ya está cerrada.</target>
+                <target>La mesa de exámen no puede cerrarse porque ya está cerrada.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1487,17 +1487,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The subject is not approved yet. The student is not inscripted to any examination.</source>
-                <target>La materia no está aprobada todavía. El alumno no está inscripto a ninguna mesa de examen.</target>
+                <target>La materia no está aprobada todavía. El alumno no está inscripto a ninguna mesa de exámen.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Examination subject is not closed yet.</source>
-                <target>La mesa de examen todavía no cerró.</target>
+                <target>La mesa de exámen todavía no cerró.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Repproved examination subject is not closed yet.</source>
-                <target>La mesa de examen previo todavía no cerró.</target>
+                <target>La mesa de exámen previo todavía no cerró.</target>
             </trans-unit>
 
             <trans-unit>
@@ -3548,7 +3548,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>The examination subject cant be moddify because it's closed.</source>
-                <target>La mesa de examen, no puede ser modificada porque ya esta cerrada.</target>
+                <target>La mesa de exámen, no puede ser modificada porque ya esta cerrada.</target>
             </trans-unit>
             <trans-unit>
                 <source>Disciplinary sanctions</source>
@@ -3937,7 +3937,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Edit Examination subject</source>
-                <target>Editar mesa de examen</target>
+                <target>Editar mesa de exámen</target>
             </trans-unit>
             <trans-unit>
                 <source>When disapprove show string</source>
@@ -4121,7 +4121,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Edit previous examination</source>
-              <target>Editar mesa de examen anterior</target>
+              <target>Editar mesa de exámen anterior</target>
             </trans-unit>
             <trans-unit>
               <source>Edit marks</source>
@@ -4179,7 +4179,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Examinations (manual)</source>
-              <target>Mesas de examen (manejo manual)</target>
+              <target>Mesas de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Examination number</source>
@@ -4187,11 +4187,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>New Manual examination subject</source>
-              <target>Nueva mesa de examen (manejo manual)</target>
+              <target>Nueva mesa de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Edit Manual examination subject</source>
-              <target>Editar mesa de examen (manejo manual)</target>
+              <target>Editar mesa de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Subjects (manual)</source>
@@ -4279,7 +4279,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Examination %%examination%%</source>
-                <target>Instancia de mesa de examen %%examination%%</target>
+                <target>Instancia de mesa de exámen %%examination%%</target>
             </trans-unit>
             <trans-unit>
                 <source>Mark should de 0 (zero) if you want the student to be free at this period</source>
@@ -4662,6 +4662,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
               <source>Examination %examination%</source>
               <target>Mesa: %examination%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Repproved examination</source>
+                <target>Mesas de exámen previo y libre</target>
             </trans-unit>
         </body>
     </file>
