@@ -2383,12 +2383,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Can do multiple justification, with only a student.</source>
-								<target>Solo puede hacerse multiple justificación, con faltas de un mismo estudiante.</target>
+								<target>Solo puede hacerse justificación multiple, con faltas de un mismo estudiante.</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Cant do multiple justification with diferent students</source>
-								<target>No puede realizarse multiple justificación con faltas de diferentes estudiantes.</target>
+								<target>No puede realizarse justificación multiple con faltas de diferentes estudiantes.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -4382,7 +4382,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Pathway commission list</source>
-								<target>Listado de comisiones de Promoción por excepción</target>
+								<target>Listado de comisiones de promoción por excepción</target>
 						</trans-unit>
 						<trans-unit>
 								<source>confirm</source>
@@ -4551,6 +4551,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Close subject</source>
                 <target>Cerrar materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Applicant</source>
+                <target>Solicitante</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanction type</source>
+                <target>Tipo de sanción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Edit pathway commission</source>
+                <target></target>
             </trans-unit>
           </body>
     </file>

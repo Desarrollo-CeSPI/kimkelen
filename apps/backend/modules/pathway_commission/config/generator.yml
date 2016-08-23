@@ -55,20 +55,21 @@ generator:
         display: [name, school_year_id]
       form:    ~
       show:
-        title: "Comisión '%%name%%'"
+        title: Detalles de la comisión
         display: [ name, quota, school_year, division, _show_pathways_list]
       edit:
+        title: Editar comisión
         actions:
           _list:
             label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado
+            label:        Guardar comisión
       new:
-        title: 'Nueva comisión'
+        title: Nueva comisión
         actions:
           _list:
             label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado
+            label:        Guardar comisión
           _save_and_add:
             label:        Guardar y agregar otra comisión

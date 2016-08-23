@@ -88,8 +88,8 @@ generator:
       edit:    ~
       new:     ~
       show:
-        title: Visualizar Sanción Disciplinaria
+        title: Detalles de Sanción Disciplinaria
         display: [ number, student, request_date, resolution_date, school_year, applicant, responsible, sanction_type, disciplinary_sanction_type, value, observation, _document_show ]
         actions:
           _list:
-            label: Volver al Listado de Sanciones
+            label: Volver al Listado

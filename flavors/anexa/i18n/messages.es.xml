@@ -2384,12 +2384,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Can do multiple justification, with only a student.</source>
-                <target>Solo puede hacerse multiple justificación, con faltas de un mismo estudiante.</target>
+                <target>Solo puede hacerse justificación multiple, con faltas de un mismo estudiante.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cant do multiple justification with diferent students</source>
-                <target>No puede realizarse multiple justificación con faltas de diferentes estudiantes.</target>
+                <target>No puede realizarse justificación multiple con faltas de diferentes estudiantes.</target>
             </trans-unit>
 
             <trans-unit>
@@ -4442,6 +4442,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Repproved examination</source>
                 <target>Mesas de exámen previo y libre</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Applicant</source>
+                <target>Solicitante</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanction type</source>
+                <target>Tipo de sanción</target>
             </trans-unit>
         </body>
     </file>

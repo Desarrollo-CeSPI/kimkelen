@@ -38,10 +38,9 @@ generator:
             condition:      canListStudents
             credentials:    [show_course]
 
-
           teachers:
             action:         courseTeachers
-            condition:    canTeachers
+            condition:      canTeachers
             credentials:    [edit_course]
 
           preceptors:
@@ -66,40 +65,40 @@ generator:
             condition:      canEditMarks
 
           calificateNonNumericalMark:
-            label: Calificate non numerical mark
-            action: calificateNonNumericalMark
-            credentials: [edit_division_course_califications]
-            condition:    canCalificate
+            label:          Calificate non numerical mark
+            action:         calificateNonNumericalMark
+            credentials:    [edit_division_course_califications]
+            condition:      canCalificate
 
           printCalification:
-            label:   Print califications
-            action:  printCalification
+            label:          Print califications
+            action:         printCalification
             credentials:    [show_division_course_califications]
 
           seeAttendanceSheet:
-            label:   Show attendance sheet
-            action:  attendanceSheetByCourseSubject
+            label:          Show attendance sheet
+            action:         attendanceSheetByCourseSubject
             credentials:    [show_course]
-            condition: canSeeAttendanceSheet
+            condition:      canSeeAttendanceSheet
 
           close:
-            label:        Close period
-            action:       close
-            credentials:  [close_course_period]
-            condition:    canBeClosed
+            label:          Close period
+            action:         close
+            credentials:    [close_course_period]
+            condition:      canBeClosed
 
           revert_period:
-            label:        Back to period
-            action:       backPeriod
-            credentials:   [back_period_course]
-            condition:    canBackPeriodCommission
-            params: confirm='Are you sure?'
+            label:          Back to period
+            action:         backPeriod
+            credentials:    [back_period_course]
+            condition:      canBackPeriodCommission
+            params:         confirm='Are you sure?'
 
           configuration:
-            label: Configuration course
-            action: courseConfiguration
-            credentials: [course_configuration]
-            condition:  canConfigurate
+            label:          Configuration course
+            action:         courseConfiguration
+            credentials:    [course_configuration]
+            condition:      canConfigurate
 
           related_to_a_division:
             action:         relatedToDivision
@@ -111,10 +110,9 @@ generator:
             credentials:    [edit_course]
 
           attendanceSubject:
-            label: Load Attendances
-            action: attendanceSubject
-            condition: hasAttendanceForSubject
-
+            label:          Load Attendances
+            action:         attendanceSubject
+            condition:      hasAttendanceForSubject
 
           _delete:
             condition:      canBeDeleted
@@ -129,14 +127,14 @@ generator:
       edit:
         actions:
           _list:
-            label:        Volver al listado de comisiones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de comisiones
+            label:        Guardar comisión
       new:
         actions:
           _list:
-            label:        Volver al listado de comisiones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de comisiones
+            label:        Guardar comisión
           _save_and_add:
             label:        Guardar y agregar otra comisión

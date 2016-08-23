@@ -239,7 +239,7 @@ root:
             url: commission/index
             credentials: [show_course]
           student_pathways:
-            title: Listado de comisiones de trayectorias
+            title: Pathway commission list
             credentials: [show_pathway]
             url: pathway_commission/index
 
