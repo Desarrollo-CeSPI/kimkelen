@@ -790,17 +790,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Inscription of the students to the %division%</source>
-								<target>Inscripción de alumnos a la %division%</target>
+								<target>Inscripción de alumnos a la división %division%</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Preceptors division configuration</source>
-								<target>Configuracón de los preceptores de la division</target>
+								<target>Configuración de los preceptores de la division</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Preceptors division configuration of %division%</source>
-								<target>Configuracón de los preceptores de la division %division%</target>
+								<target>Configuración de los preceptores de la division %division%</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1988,7 +1988,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Attendance type</source>
-								<target>Tipo de asistencia</target>
+								<target>Tipo de inasistencia</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -3015,7 +3015,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Student conduct</source>
-								<target>Conducta de estudiantes</target>
+								<target>Conducta de alumnos</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -3349,7 +3349,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Show attendance sheet</source>
-								<target>Planilla de asistencias</target>
+								<target>Planilla de inasistencias</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Please select a date range from below and press the show button.</source>
@@ -3690,11 +3690,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Load attendance for %subject%</source>
-								<target>Cargar asistencias para %subject%</target>
+								<target>Cargar inasistencias para %subject%</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Load attendance day for %division%</source>
-								<target>Cargar asistencias para %division%</target>
+								<target>Cargar inasistencias para %division%</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Currently inscripted in divisions:</source>
@@ -4212,7 +4212,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Choose student to calificate without numerical mark from %course%</source>
-								<target>Elija los estudiantes a eximir del curso %course%</target>
+								<target>Elija los alumnos a eximir del curso %course%</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Holidays of school year</source>
@@ -4289,7 +4289,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>Course subjects for commission</source>
-							<target>Materias asociadas a este curso</target>
+							<target>Materias asociadas a esta comisión</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Create examination subjects for %year%° year</source>
@@ -4402,7 +4402,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Print attendance template</source>
-								<target>Imprimir Hoja de Asistencias</target>
+								<target>Imprimir hoja de inasistencias</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Previous month</source>
@@ -4564,6 +4564,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Edit pathway commission</source>
                 <target></target>
             </trans-unit>
+						<trans-unit>
+								<source>Division title ids</source>
+								<target>Nombre de la división</target>
+						</trans-unit>
           </body>
     </file>
 </xliff>

@@ -25,7 +25,7 @@
   <?php include_javascripts_for_form($form) ?>
 <?php endforeach ?>
 <div id="sf_admin_container">
-  <h1><?php echo __('Configuración de los alumnos del curso %course%', array('%course%' => $course)) ?></h1>
+  <h1><?php echo __('Configuración de los alumnos de la comisión %course%', array('%course%' => $course)) ?></h1>
 
   <div id="sf_admin_content">
     <form action="<?php echo url_for('shared_course/updateCourseSubjectStudents') ?>" method="post">

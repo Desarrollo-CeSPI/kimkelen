@@ -15,16 +15,56 @@ generator:
       fields:  ~
       list:
         title:              Listado de comisiones
-        display:           [name]
+        display:            [name]
         layout:             stacked
         params:             |
           %%_commission_info%%
+        actions:
+          _new:
+            credentials:    [new_course]
+            label:          Nueva comisión
         batch_actions: []
         object_actions:
 
           _edit:
             condition:      canBeEdited
             credentials:    [edit_course]
+
+          add_subject:
+            action:         addSubject
+            credentials:    [edit_course]
+
+          configuration:
+            label:          Configuration course
+            action:         courseConfiguration
+            credentials:    [course_configuration]
+            condition:      canConfigurate
+
+          copy_students_from_other_course:
+            action:         copyStudentsFromOtherCourse
+            credentials:    [edit_course]
+            condition:      canCopyStudentsFromOtherCourse
+            label:          Copiar alumnos de otra comisión
+
+          manage_students:
+            action:         courseSubjectStudent
+            credentials:    [edit_course]
+            condition:      canCourseSubjectStudent
+
+          preceptors:
+            action:         preceptors
+            condition:      canPreceptors
+            credentials:    [edit_course_preceptors]
+
+          teachers:
+            action:         courseTeachers
+            condition:      canTeachers
+            credentials:    [edit_course]
+
+          related_to_a_division:
+            action:         relatedToDivision
+            credentials:    [edit_course]
+            condition:      canRelatedToDivision
 
           manage_course_days:
             action:         manageCourseDays
@@ -33,36 +73,10 @@ generator:
             credentials:    [edit_course_day]
 
           students:
-            label:          Listado de estudiantes
+            label:          Listado de alumnos
             action:         students
             condition:      canListStudents
             credentials:    [show_course]
-
-          teachers:
-            action:         courseTeachers
-            condition:      canTeachers
-            credentials:    [edit_course]
-
-          preceptors:
-            action:         preceptors
-            condition:      canPreceptors
-            credentials:    [edit_course_preceptors]
-
-          manage_students:
-            action:         courseSubjectStudent
-            credentials:    [edit_course]
-            condition:      canCourseSubjectStudent
-
-          copy_students_from_other_course:
-            action:         copyStudentsFromOtherCourse
-            credentials:    [edit_course]
-            condition:      canCopyStudentsFromOtherCourse
-            label:          Copiar alumnos de otra comisión
-
-          califications:
-            action:         califications
-            credentials:    [edit_division_course_califications]
-            condition:      canEditMarks
 
           calificateNonNumericalMark:
             label:          Calificate non numerical mark
@@ -70,22 +84,21 @@ generator:
             credentials:    [edit_division_course_califications]
             condition:      canCalificate
 
-          printCalification:
-            label:          Print califications
-            action:         printCalification
-            credentials:    [show_division_course_califications]
-
-          seeAttendanceSheet:
-            label:          Show attendance sheet
-            action:         attendanceSheetByCourseSubject
-            credentials:    [show_course]
-            condition:      canSeeAttendanceSheet
+          califications:
+            action:         califications
+            credentials:    [edit_division_course_califications]
+            condition:      canEditMarks
 
           close:
             label:          Close period
             action:         close
             credentials:    [close_course_period]
             condition:      canBeClosed
+
+          printCalification:
+            label:          Print califications
+            action:         printCalification
+            credentials:    [show_division_course_califications]
 
           revert_period:
             label:          Back to period
@@ -94,34 +107,21 @@ generator:
             condition:      canBackPeriodCommission
             params:         confirm='Are you sure?'
 
-          configuration:
-            label:          Configuration course
-            action:         courseConfiguration
-            credentials:    [course_configuration]
-            condition:      canConfigurate
-
-          related_to_a_division:
-            action:         relatedToDivision
-            credentials:    [edit_course]
-            condition:      canRelatedToDivision
-
-          add_subject:
-            action:         addSubject
-            credentials:    [edit_course]
-
           attendanceSubject:
             label:          Load Attendances
             action:         attendanceSubject
             condition:      hasAttendanceForSubject
 
+          seeAttendanceSheet:
+            label:          Show attendance sheet
+            action:         attendanceSheetByCourseSubject
+            credentials:    [show_course]
+            condition:      canSeeAttendanceSheet
+
           _delete:
             condition:      canBeDeleted
             credentials:    [edit_course]
 
-        actions:
-          _new:
-            credentials:    [new_course]
-            label:          Nueva comisión
       filter:
       form:    ~
       edit:

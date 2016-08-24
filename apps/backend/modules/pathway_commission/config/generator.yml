@@ -25,28 +25,35 @@ generator:
           _new:
             credentials:    [new_course]
             label:          Nueva comisión
+        batch_actions: []
         object_actions:
           _edit:
 #            condition:      canBeEdited
             credentials:    [edit_course]
-          manage_students:
-            action:         courseSubjectStudent
-            credentials:    [edit_course]
-            condition:      canManagePathwayCourseStudents
+
           add_subject:
             action:         addSubject
             credentials:    [edit_course]
 #            condition:      canCourseSubjectStudent
+
+          manage_students:
+            action:         courseSubjectStudent
+            credentials:    [edit_course]
+            condition:      canManagePathwayCourseStudents
+
           califications:
             action:         califications
             condition:      canEditPathwayMarks
             credentials:    [edit_division_course_califications]
+
           print_califications:
             action:         printCalifications
+
           close:
             label:          Close
             action:         close
             condition:      canClosePathway
+
           _delete:
             condition:      canBeDeleted
             credentials:    [edit_course]

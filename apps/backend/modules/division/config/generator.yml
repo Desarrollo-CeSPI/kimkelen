@@ -18,8 +18,8 @@ generator:
         division_courses:
           label: Crear cursos
       list:
-        title: Listado de divisiones
-        display:           [id]
+        title:              Listado de divisiones
+        display:            [id]
         layout:             stacked
         params:             |
           <div class='info_div'><strong>%%name%%</strong>
@@ -37,19 +37,11 @@ generator:
           _show:
             credentials: [show_course]
 
-          students:
-            label:          Listado de estudiantes
-            action:         students
-            condition:      canListStudents
-            credentials:    [show_course]
-
-          show_calendar:
-            action: showCalendar
-            credentials:   [show_course]
-
-          division_configure:
-            action: courseConfiguration
-            credentials:  [course_configuration]
+          division_students:
+            action: divisionStudents
+            label:  Administrar alumnos
+            condition: canDivisionStudents
+            credentials:  [edit_course]
 
           division_preceptors:
             action: divisionPreceptors
@@ -57,41 +49,19 @@ generator:
             condition: canDivisionPreceptors
             credentials:  [edit_division_preceptors]
 
-          division_students:
-            action: divisionStudents
-            label:  Students
-            condition: canDivisionStudents
-            credentials:  [edit_course]
+          show_calendar:
+            action: showCalendar
+            credentials:   [show_course]
 
-          student_conduct:
-            action: studentConduct
-            label: Student conduct
-            condition: canManageConduct
-            credentials: [edit_division_preceptors]
+          students:
+            label:          Listado de alumnos
+            action:         students
+            condition:      canListStudents
+            credentials:    [show_course]
 
           division_courses:
             action: divisionCourses
             credentils: [show_course]
-
-          seeAttendanceSheet:
-            label:   Show attendance sheet
-            action:  attendanceSheetByDay
-            credentials:    [show_course]
-            condition: canManageAttendance
-
-          boletines:
-            action: printReportCard
-            label:  Imprimir boletines division
-            credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
-            condition: canPrintReportCards
-
-          show_disciplinary_sanction_report:
-            label: Student disciplinary sanction report
-            action: showDisciplinarySanctionReport
-
-          show_assistance_report:
-            label: Student assistance report
-            action: showAssistanceReport
 
           printCalification:
             label:   Print califications
@@ -99,51 +69,76 @@ generator:
             credentials:    [[edit_division_course_califications, show_division_course_califications]]
             condition: canPrintCalification
 
+          boletines:
+            action: printReportCard
+            label:  Imprimir boletines division
+            credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
+            condition: canPrintReportCards
+
+          student_conduct:
+            action: studentConduct
+            label: Student conduct
+            condition: canManageConduct
+            credentials: [edit_division_preceptors]
+
+          show_disciplinary_sanction_report:
+            label: Student disciplinary sanction report
+            action: showDisciplinarySanctionReport
+
+          division_configure:
+            label:  Configuración de cantidad de inasistencias permitidas
+            action: courseConfiguration
+            credentials:  [course_configuration]
+
           attendanceDay:
             label: Load Attendances
             action: attendanceDay
             credentials:  [edit_absence_per_day]
             condition: canLoadAttendances
 
+          seeAttendanceSheet:
+            label:   Show attendance sheet
+            action:  attendanceSheetByDay
+            credentials:    [show_course]
+            condition: canManageAttendance
+
+          show_assistance_report:
+            label: Student assistance report
+            action: showAssistanceReport
+
           _delete:
             credentials: [delete_division]
             condition: canBeDeleted
 
-
-
       filter:
         class:  ~
-
       form:
       edit:
         title: Editar división
         actions:
           _list:
-            label: Volver al listado de divisiones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de divisiones
+            label:        Guardar división
       new:
         title: Nueva división
         actions:
           _list:
-            label: Volver al listado de divisiones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de divisiones
+            label:        Guardar división
           _save_and_add:
             label:        Guardar y agregar otra división
       show:
-        title: Ver división
+        title: Detalles de la división
         display: [_division_show_tabs]
         actions:
           _list:
-            label: Volver al listado de divisiones
-
-          students:
-            label:          Listado de estudiantes
-            action:         students
-            condition:      canListStudents
-            credentials:    [show_course]
-
+            label: Volver al listado
+          division_students:
+            action: divisionStudents
+            label:  Administrar alumnos
+            credentials:  [edit_course]
           show_calendar:
             action: showCalendar
             credentials:   [show_course]
@@ -151,17 +146,10 @@ generator:
             action: divisionPreceptors
             label:  Preceptors
             credentials:  [edit_division_preceptors]
-
-          division_students:
-            action: divisionStudents
-            label:  Students
-            credentials:  [edit_course]
-
           division_courses:
             action: divisionCourses
-            label:  Cursos
+            label:  Materias
             credentils: [show_course]
-
           _delete:
             credentials: [delete_division]
             condition: canBeDeleted
