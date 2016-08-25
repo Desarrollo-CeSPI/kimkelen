@@ -572,7 +572,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Register to a new career</source>
-								<target>Inscribir en nueva carrera</target>
+								<target>Inscribir en una nueva carrera</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -888,7 +888,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Manage allowed subjects to be coursed for %student%</source>
-								<target>Administrar materias a cursar por %student%</target>
+								<target>Administrar materias a cursar para %student%</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -938,12 +938,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Add division students</source>
-								<target>Agregar estudiantes de la division</target>
+								<target>Agregar alumnos de la division</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Add division students to all courses</source>
-								<target>Agregar estudiantes de la division, a todos las materias posibles.</target>
+								<target>Agregar alumnos de la division, a todos las materias posibles.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1642,7 +1642,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Marks cant be edited because the course dont have students inscripted.</source>
-								<target>No se pueden editar las calificaciones porque la materia no tiene estudiantes inscriptos.</target>
+								<target>No se pueden editar las calificaciones porque la materia no tiene alumnos inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1667,12 +1667,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Close student</source>
-								<target>Cerrar cursada del estudiante.</target>
+								<target>Cerrar cursada del alumno</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Close course student ?</source>
-								<target>¿ Cerrar cursada del alumno ?</target>
+								<target>¿Cerrar cursada del alumno?</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1736,7 +1736,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Calification of the students to the %final_examination_subject%</source>
-								<target>Calificar a los estudiantes de %final_examination_subject%</target>
+								<target>Calificar a los alumnos de %final_examination_subject%</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1763,12 +1763,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The final examination cant be closed, because no students are inscripted.</source>
-								<target>La mesa de final no puede ser cerrada, porque no tiene estudiantes inscriptos.</target>
+								<target>La mesa de final no puede ser cerrada, porque no tiene alumnos inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>The final examination cant be closed, because not all the students were calificated.</source>
-								<target>La mesa de final no puede ser cerrada, porque no todos los estudiantes fueron calificados.</target>
+								<target>La mesa de final no puede ser cerrada, porque no todos los alumnos fueron calificados.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1788,17 +1788,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The final examination has at least one student inscripted.</source>
-								<target>No se puede editar la mesa porque tiene al menos un estudiante inscripto.</target>
+								<target>No se puede editar la mesa porque tiene al menos un alumno inscripto.</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>The course hasnt any student inscripted.</source>
-								<target>La materia no tiene estudiantes inscriptos.</target>
+								<target>La materia no tiene alumnos inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Course student list</source>
-								<target>Listado de estudiantes de la materia</target>
+								<target>Listado de alumnos de la materia</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1813,7 +1813,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The student is not inscripted in at least one career</source>
-								<target>El estudiante tiene que estar inscripto en al menos una carrera.</target>
+								<target>El alumno tiene que estar inscripto en al menos una carrera.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1828,7 +1828,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The equivalence cant be deleted, becouse the student has approved some career_subject that have this for correlative.</source>
-								<target>La equivalencia no puede ser borrada, porque el estudiante tiene alguna materia aprobada que tiene a esta como correlativa.</target>
+								<target>La equivalencia no puede ser borrada, porque el alumno tiene alguna materia aprobada que tiene a esta como correlativa.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -1893,7 +1893,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The course cant be calificated, because dont have any students inscripted.</source>
-								<target>La materia no puede ser calificada, porque no tiene estudiantes inscriptos.</target>
+								<target>La materia no puede ser calificada, porque no tiene alumnos inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2023,7 +2023,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The division dont have students inscripted.</source>
-								<target>La división no puede editar las asistencias, porque no tiene estudiantes inscriptos.</target>
+								<target>La división no puede editar las asistencias, porque no tiene alumnos inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2058,7 +2058,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Manage Students Regularity for %%course_name%%</source>
-								<target>Administrar las regularidades de los estudiantes para el curso %%course_name%%</target>
+								<target>Administrar las regularidades de los alumnos para el curso %%course_name%%</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2217,7 +2217,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>There are students with this health coverage.</source>
-								<target>Hay estudiantes con esta obra social en el sistema.</target>
+								<target>Hay alumnos con esta obra social en el sistema.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2297,7 +2297,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The commission has no students.</source>
-								<target>La comisión no tiene estudiantes.</target>
+								<target>La comisión no tiene alumnos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2383,12 +2383,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Can do multiple justification, with only a student.</source>
-								<target>Solo puede hacerse justificación multiple, con faltas de un mismo estudiante.</target>
+								<target>Solo puede hacerse justificación multiple, con faltas de un mismo alumno.</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Cant do multiple justification with diferent students</source>
-								<target>No puede realizarse justificación multiple con faltas de diferentes estudiantes.</target>
+								<target>No puede realizarse justificación multiple con faltas de diferentes alumnos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2423,7 +2423,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>The student can not be removed because: id enrolled in a course, already has passed a subject or already has passed a course.</source>
-								<target>El estudiante no puede ser eliminado debido a que: está inscripto en un curso, ya tiene aprobado una materia o ya tiene aprobado un curso.</target>
+								<target>El alumno no puede ser eliminado debido a que: está inscripto en un curso, ya tiene aprobado una materia o ya tiene aprobado un curso.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2603,7 +2603,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Cant copy from division, because all the students are already inscripted.</source>
-								<target>No se puede copiar los alumnos de la division, porque todos los estudiantes ya están inscriptos.</target>
+								<target>No se puede copiar los alumnos de la division, porque todos los alumnos ya están inscriptos.</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2827,7 +2827,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Division student list</source>
-								<target>Listado de estudiantes de la división</target>
+								<target>Listado de alumnos de la división</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2847,7 +2847,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Commission student list</source>
-								<target>Listado de estudiantes de la comisión</target>
+								<target>Listado de alumnos de la comisión</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -2862,7 +2862,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>School year student list</source>
-								<target>Listado de estudiantes del año lectivo</target>
+								<target>Listado de alumnos del año lectivo</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -3005,12 +3005,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Conduct of students to the division</source>
-								<target>Conducta de  estudiantes por division</target>
+								<target>Conducta de alumnos por division</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>Conduct of the students to the %division%</source>
-								<target>Conducta de  estudiantes de %division%</target>
+								<target>Conducta de los alumnos de %division%</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -3077,7 +3077,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Course configuration of the %course%</source>
-								<target>Configuracion de la materia %course%</target>
+								<target>Configuración de la materia %course%</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Absences by period</source>
@@ -3143,7 +3143,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>Student free List</source>
-								<target>Estudiante libre</target>
+								<target>Alumno libre</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Career school year period</source>
@@ -3155,11 +3155,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>New Student free</source>
-								<target>Dejar libre un estudiante</target>
+								<target>Dejar libre a un alumno</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Edit Student free</source>
-								<target>Editar estudiante libre</target>
+								<target>Editar alumno libre</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Student free</source>
@@ -3742,7 +3742,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Print details of student</source>
-								<target>Imprimir detalles del estudiante</target>
+								<target>Imprimir detalles del alumno</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Export report cards</source>
@@ -3850,11 +3850,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>Course configuration of the %division%</source>
-							<target>Configuracón de cantidad de asistencias de la division %division%</target>
+							<target>Configuración de cantidad de inasistencias de la division %division%</target>
 						</trans-unit>
 						<trans-unit>
 							<source>The student can't present and dont have a mark.</source>
-							<target>El alumno debe  tener una nota o ausente</target>
+							<target>El alumno debe tener una nota o ausente</target>
 						</trans-unit>
 						<trans-unit>
 							<source>Resources str</source>
@@ -3886,7 +3886,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>Student reports</source>
-							<target>Reportes de estudiantes</target>
+							<target>Reportes de alumnos</target>
 						</trans-unit>
 						<trans-unit>
 							<source>Choose values for reports</source>
@@ -3902,7 +3902,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>The student has no approved subjects</source>
-							<target>El estudiante no posee materias aprobadas</target>
+							<target>El alumno no posee materias aprobadas</target>
 						</trans-unit>
 						<trans-unit>
 							<source>Add to current career school year</source>
@@ -4056,7 +4056,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Move students from division %division%</source>
-								<target>Mover estudiantes de la división %division%</target>
+								<target>Mover alumnos de la división %division%</target>
 						</trans-unit>
 						<trans-unit>
 							<source>This action allows deletion of students only if them do not have associated information. For those cases, deletion won't be performed to avoid information loss.</source>
@@ -4064,7 +4064,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>Move students to other division</source>
-							<target>Mover estudiantes a otra división</target>
+							<target>Mover alumnos a otra división</target>
 						</trans-unit>
 						<trans-unit>
 							<source>Teacher list</source>
@@ -4116,11 +4116,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 							<source>The student cant be withdrawn because it is still matriculated.</source>
-							<target>El estudiante no puede ser retirado porque aún está matriculado en el año lectivo.</target>
+							<target>El alumno no puede ser retirado porque aún está matriculado en el año lectivo.</target>
 						</trans-unit>
 						<trans-unit>
 							<source>Undo withdraw can be done only if student is withdrawn.</source>
-							<target>El estudiante no está en estado retirado.</target>
+							<target>El alumno no está en estado retirado.</target>
 						</trans-unit>
 						<trans-unit>
 							<source>This field represents the value of the disciplinary sanction</source>
@@ -4160,7 +4160,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Student doesn't have any disciplinary sanctions.</source>
-								<target>El estudiante no registra sanciones disciplinarias.</target>
+								<target>El alumno no registra sanciones disciplinarias.</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Student disciplinary sanction report</source>
@@ -4264,11 +4264,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>Move students from course %course%</source>
-								<target>Mover estudiantes del curso %course%</target>
+								<target>Mover alumnos del curso %course%</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Move students to other course subject</source>
-								<target>Mover estudiantes a otro curso</target>
+								<target>Mover alumnos a otro curso</target>
 						</trans-unit>
 						<trans-unit>
 								<source>This action allows deletion of students from course only if them do not have associated information for this course. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one course to another.</source>
@@ -4281,7 +4281,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 						<trans-unit>
 								<source>The student is free</source>
-								<target>El estudiante es LIBRE</target>
+								<target>El alumno es LIBRE</target>
 						</trans-unit>
 						<trans-unit>
 								<source>Origin school</source>
