@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<h2>Reincorporar estudiante <?php echo $pager->getParameter('student')?></h2>
+<h2>Reincorporar al alumno <?php echo $pager->getParameter('student')?></h2>
 <div>
-    Al crearse una reincorporación, el alumno dejará de ser libre y se le agregarán las faltas computadas.
+    <p>Al crearse una reincorporación, el alumno dejará de ser libre y se le agregarán las faltas computadas.</p>
 </div>

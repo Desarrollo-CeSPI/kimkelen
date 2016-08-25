@@ -21,7 +21,7 @@
 <?php include_partial('student_reincorporation/assets') ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('Edit reincorporation for %student%', array("%student"=> $student)) ?></h1>
+  <h1><?php echo __('Edit reincorporation for %student%', array("%student%"=> $student)) ?></h1>
 
   <?php include_partial('student_reincorporation/flashes') ?>
 

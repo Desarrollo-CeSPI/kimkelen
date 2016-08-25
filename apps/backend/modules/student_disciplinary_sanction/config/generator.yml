@@ -40,10 +40,10 @@ generator:
         display:          [request_date, number , name ,value, disciplinary_sanction_type, sanction_type]
         batch_actions:    []
         actions:
+          _back:
+            label:        Volver
           _new:
             label:        Nueva sanción
-          _back:
-            label:        Volver al listado de alumnos
       filter:
         class:            false
       form:    ~
@@ -51,16 +51,16 @@ generator:
         title:            Editar sanción
         actions:
           _list:
-            label:        Volver al listado de sanciones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de sanciones
+            label:        Guardar sanción
       new:
         title:            Nueva sanción
         actions:
           _list:
-            label:        Volver al listado de sanciones
+            label:        Volver al listado
           _save_and_list:
-            label:        Guardar y volver al listado de sanciones
+            label:        Guardar sanción
           _save_and_add:
             label:        Guardar y agregar otra sanción
       show:
@@ -68,4 +68,4 @@ generator:
         display:          [request_date, number, name, value, disciplinary_sanction_type, sanction_type ,applicant_str, responsible, _document_show, observation]
         actions:
           _list:
-            label:        Volver al listado de sanciones
+            label:        Volver al listado

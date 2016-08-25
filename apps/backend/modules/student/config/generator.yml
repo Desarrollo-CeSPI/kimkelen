@@ -149,7 +149,7 @@ generator:
             action: registerForCurrentSchoolYear
 
           manage_orientation:
-            label:  Cambiar orientacion
+            label:  Cambiar orientación
             credentials:  [edit_student]
             action: changeOrientation
             condition:  isInscriptedInCareer
@@ -164,12 +164,12 @@ generator:
             credentials:  [show_equivalence]
             action: analytical
             condition: canBeManagedForCareerSubjectAllowed
-          
+
           analytical_without_CBFE:
             credentials:  [show_analytic_without_cbfe]
             action: analyticalWithoutCBFE
             condition: canShowCBFE
-            
+
           activate:
             label: Set active
             credentials: [edit_student]
@@ -208,37 +208,33 @@ generator:
             label: Student assistance and sanction report
             action: showAssistanceAndSanctionReport
             condition: canGenerateReport
-            
+
           change_student_status:
             label: Change student status
             credentials: [edit_student]
             action: changeStudentStatus
             condition: canChangeStudentStatus
-            
+
       filter:
-
       form:    ~
-
       edit:
-        title:                  Edición de alumnos "%%person%%"
+        title: Editar al alumno "%%person%%"
         actions:
           _list:
-            label:              Volver al listado de alumnos
+            label:              Volver al listado
           _save_and_list:
-            label:              Guardar y volver al listado de alumnos
-
+            label:              Guardar alumno
       new:
-        title:                  Nuevo Alumno
+        title: Nuevo Alumno
         actions:
           _list:
-            label:               Volver al listado de alumnos
+            label:              Volver al listado
           _save_and_list:
-            label:              Guardar y volver al listado de alumnos
+            label:              Guardar alumno
           _save_and_add:
             label:              Guardar y agregar otro alumno
-
       show:
-        title:                   Detalle del alumno "%%person%%"
+        title: Detalles del alumno "%%person%%"
         display:
           Alumno:      [_student_show_tabs]
           #Datos postales:        [_address]
@@ -246,7 +242,7 @@ generator:
           #Historia academica:       [_career_student_histories]
         actions:
           _list:
-            label:              Volver al listado de alumnos
+            label: Volver al listado
           _edit:
             credentials: [edit_student]
           _delete:
@@ -261,13 +257,11 @@ generator:
             credentials: [edit_student]
             action: registerForCurrentSchoolYear
             credentials: [edit_student]
-
           manage_orientation:
             label:  Cambiar orientacion
             credentials:  [edit_student]
             action: changeOrientation
             condition:  isInscriptedInCareer
-
           manage_allowed_subjects:
             label: Subjects to be coursed
             credentials: [ edit_student ]
@@ -277,16 +271,6 @@ generator:
             credentials:  [show_equivalence]
             condition:     canManageEquivalence
             action: equivalence
-          #activate:
-            #label: Set active
-            #credentials: [edit_student]
-            #action: personActivation
-            #condition: canPersonBeActivated
-          #deactivate:
-            #label: Set inactive
-            #credentials: [edit_student]
-            #action: personDeactivation
-            #condition: canPersonBeDeactivated
           print_report_card:
             label:  print report card
             action: printReportCard

@@ -18,4 +18,4 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php $student_id = is_null($sf_user->getReferenceFor('student')) ? $sf_user->getAttribute('student_id') : $sf_user->getReferenceFor('student');?>
-<h2><?php echo __("Dejar libre a %student%",array("%student%"=> StudentPeer::retrieveByPK($student_id))); ?></h2>
+<h2><?php echo __("Alumno: %student%",array("%student%"=> StudentPeer::retrieveByPK($student_id))); ?></h2>
