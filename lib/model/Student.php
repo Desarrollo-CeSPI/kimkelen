@@ -1371,7 +1371,7 @@ class Student extends BaseStudent
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
     return $this->getStudentCareerSchoolYears($c);
   }
 
