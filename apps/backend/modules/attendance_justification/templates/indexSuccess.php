@@ -68,7 +68,7 @@
 
         <ul class="sf_admin_actions">
           <li>
-            <input type="submit" value="<?php echo __('Multiple Justification', array(),'sf_admin') ?>" />
+            <input type="submit" value="<?php echo __('Justificación multiple', array(),'sf_admin') ?>" />
             <div class="justification_help"><?php echo __('Can do multiple justification, with only a student.')?></div>
           </li>
         </ul>

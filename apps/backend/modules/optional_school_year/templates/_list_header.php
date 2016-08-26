@@ -19,11 +19,12 @@
  */ ?>
 <h3>Carrera: <?php echo $pager->getParameter('career_school_year')?></h3>
 <div>
-    Se pueden editar las opciones de cada materia que fue definida como materia optativa. Siempre y cuando no haya alumnos inscriptos en este año lectivo.
-    <strong>año lectivo</strong>
+  <p>
+  	- Se pueden editar las opciones de cada materia que fue definida como materia optativa. Siempre y cuando no haya alumnos inscriptos en este <strong>año lectivo</strong>.
+  </p>
 </div>
 <ul class="sf_admin_actions">
   <li class="sf_admin_action_go_back">
-    <?php echo link_to(__("Volver al listado de años lectivos"), "@career_school_year") ?>
+    <?php echo link_to(__("Volver al listado"), "@career_school_year") ?>
   </li>
 </ul>

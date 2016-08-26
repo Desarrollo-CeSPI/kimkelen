@@ -14,48 +14,41 @@ generator:
       actions: ~
 
       fields:
-        created_at:         {label:  Fecha de creación}
-        career_name:        {label:  Nombre de la carrera}
-        plan_name:          {label:  Nombre del plan}
-        quantity_years:     {label:  Cantidad de años}
+        created_at:        {label:  Fecha de creación}
+        career_name:       {label:  Nombre de la carrera}
+        plan_name:         {label:  Nombre del plan}
+        quantity_years:    {label:  Cantidad de años}
         orientations:
           label: Orientaciones
 
       list:
-        title:              Listado de planes de estudio
+        title: Listado de planes de estudio
         display:            [=career_name, plan_name, quantity_years, _orientations ]
         sort: career_name
         object_actions:
-
           _edit:
             credentials:    [edit_career]
             condition:      canBeEdited
-
           _delete:
             credentials:    [edit_career]
             condition:      canBeDeleted
-
+            params:         confirm='Are you sure?'
           copy:
             action:         copy
             credentials:    [edit_career]
-            params: confirm='Are you sure?'
-
+            params:         confirm='Are you sure?'
           subjects:
             action:         subjects
             label:          Materias
             credentials:    [edit_career]
-
           career_view:
             action:         careerView
             label:          Plan de estudios
             credentials:    [show_career]
-
           show_inscripted:
             action:         students
             label:          Alumnos inscriptos
             credentials:    [show_career]
-
-
         batch_actions:      {}
         actions:
           _new:
@@ -64,26 +57,22 @@ generator:
 
       filter:
         class:  false
-
       form:                 ~
-
-
       edit:
-        title:              Edición "%%career_name%%"
+        title: Editar plan de estudio
         display:            [career_name, plan_name, quantity_years, file_number_sequence]
         actions:
           _list:
-            label:          Volver al listado de carreras
+            label:          Volver al listado
           _save_and_list:
-            label:          Guardar y volver al listado de carreras
-
+            label:          Guardar plan de estudio
       new:
-        title:              Nuevo plan de estudio
+        title: Nuevo plan de estudio
         display:            [career_name, plan_name, quantity_years, file_number_sequence]
         actions:
           _list:
-            label:          Volver al listado de carreras
+            label:          Volver al listado
           _save_and_list:
-            label:          Guardar y volver al listado de carreras
+            label:          Guardar plan de estudio
           _save_and_add:
-            label:          Guardar y agregar otra carrera
+            label:          Guardar y agregar otro plan de estudio

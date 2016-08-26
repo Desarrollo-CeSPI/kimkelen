@@ -25,7 +25,7 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
   public function configure()
   {
     unset(
-      $this['student_career_subject_allowed_list'], $this["educational_dependency"],  $this["origin_school_id"], $this["global_file_number"], $this["person_id"], $this["occupation_id"], $this["busy_starts_at"], $this["blood_group"], $this["blood_factor"], $this["emergency_information"], $this["health_coverage_id"], $this["student_tag_list"], $this["busy_ends_at"]
+      $this['student_career_subject_allowed_pathway_list'], $this['student_career_subject_allowed_list'], $this["educational_dependency"],  $this["origin_school_id"], $this["global_file_number"], $this["person_id"], $this["occupation_id"], $this["busy_starts_at"], $this["blood_group"], $this["blood_factor"], $this["emergency_information"], $this["health_coverage_id"], $this["student_tag_list"], $this["busy_ends_at"]
     );
 
     $this->configureWidgetSchema();

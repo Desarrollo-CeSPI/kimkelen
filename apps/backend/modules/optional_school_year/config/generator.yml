@@ -32,7 +32,7 @@ generator:
             label:          Editar opciones
             credentials:    [edit_school_year]
             condition: canBeEdited
-            
+
         batch_actions:  []
         actions:        []
       filter: 

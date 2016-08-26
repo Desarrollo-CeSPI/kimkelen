@@ -35,12 +35,14 @@ generator:
       form:    ~
       edit:
         actions:
-          _delete:
-            condition: canEdit
           _list:
+            label: Volver
           _save_and_list:
+            label: Guardar reincorporación
 
       new:
         actions:
           _list:
+            label: Volver
           _save_and_list:
+            label: Guardar reincorporación

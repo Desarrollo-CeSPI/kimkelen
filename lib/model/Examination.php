@@ -74,4 +74,9 @@ class Examination extends BaseExamination
 
 		return $this->countExaminationSubjects($c);
   }
+
+  public function canBeDeleted()
+  {
+    return $this->countExaminationSubjects() == 0;
+  }
 }

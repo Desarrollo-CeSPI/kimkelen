@@ -28,7 +28,7 @@
   </div>
   <ul class="sf_admin_actions">
     <li class="sf_admin_action_list">
-      <?php echo link_to(__('Volver al listado de carreras', array(), 'messages'), '@career' , array()) ?>
+      <?php echo link_to(__('Volver al listado', array(), 'messages'), '@career' , array()) ?>
     </li>
     <li class="sf_admin_action_correlatives">
       <?php echo link_to_function('Ver correlativas', "toggleCorrelatives('.correlative');") ?>
@@ -38,7 +38,7 @@
 
   <ul class="sf_admin_actions">
     <li class="sf_admin_action_list">
-      <?php echo link_to(__('Volver al listado de carreras', array(), 'messages'), "@$module", array()) ?>
+      <?php echo link_to(__('Volver al listado', array(), 'messages'), "@$module", array()) ?>
     </li>
     <li class="sf_admin_action_print">
       <?php //echo link_to(__('Imprimir plan de estudios', array(), 'messages'), '@print_career_view?career_id='.$career->getId() , array()) ?>

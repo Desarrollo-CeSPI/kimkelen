@@ -19,7 +19,6 @@
  */ ?>
 <div class="sf_admin_form_row sf_admin_List sf_admin_form_field_courses">
   <div>
-    <label for="course"> <?php echo __('Courses');?> </label>
     <ul>
       <?php foreach ($division->getCourses() as $course):?>
         <li><?php echo link_to(__('Go to %course%', array('%course%' => $course)),'@shared_course_show?id=' . $course->getId())?></li>

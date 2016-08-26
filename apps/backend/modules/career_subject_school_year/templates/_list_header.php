@@ -19,10 +19,10 @@
  */ ?>
 <h3>Carrera: <?php echo $pager->getParameter('career_school_year')?></h3>
 <div>
-    Cambiando la configuración de una materia se sobreescribe la configuración global del plan de estudios
+    <p>- Cambiando la configuración de una materia se sobreescribe la configuración global del plan de estudios.</p>
 </div>
 <ul class="sf_admin_actions">
   <li class="sf_admin_action_go_back">
-    <?php echo link_to(__("Volver al listado de años lectivos"), "@career_school_year") ?>
+    <?php echo link_to(__("Volver al listado"), "@career_school_year") ?>
   </li>
 </ul>
