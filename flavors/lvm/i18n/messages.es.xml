@@ -1907,11 +1907,6 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 						</trans-unit>
 
 						<trans-unit>
-								<source>New sub orientation</source>
-								<target>Nueva orientación</target>
-						</trans-unit>
-
-						<trans-unit>
 								<source>Sub orientation id</source>
 								<target>Orientación</target>
 						</trans-unit>
@@ -2247,12 +2242,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
 						<trans-unit>
 								<source>With orientation</source>
-								<target>Con orientación</target>
+								<target>Con especialidad</target>
 						</trans-unit>
 
 						<trans-unit>
 								<source>With sub orientation</source>
-								<target>Con sub orientación</target>
+								<target>Con orientación</target>
 						</trans-unit>
 
 						<trans-unit>
@@ -4568,6 +4563,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 								<source>Division title ids</source>
 								<target>Nombre de la división</target>
 						</trans-unit>
+						<trans-unit>
+                <source>New sub orientation</source>
+                <target>Nueva orientación</target>
+            </trans-unit>
           </body>
     </file>
 </xliff>

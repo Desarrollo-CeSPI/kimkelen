@@ -236,17 +236,12 @@
 
             <trans-unit>
                 <source>Back to orientations</source>
-                <target>Volver a orientaciónes/especialidades</target>
-            </trans-unit>
-
-            <trans-unit>
-                <source>New orientation</source>
-                <target>Nueva orientación/especialidad</target>
+                <target>Volver a lenguajes</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Save orientation</source>
-                <target>Guardar orientación/especialidad</target>
+                <target>Guardar lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -1072,7 +1067,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Orientation</source>
-                <target>lenguaje</target>
+                <target>Lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -1913,17 +1908,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Sub orientations</source>
-                <target>orientacion/especialidad</target>
+                <target>Especialidades</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Edit sub orientation</source>
-                <target>Editar orientación/especialidad</target>
+                <target>Editar especialidad</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New sub orientation</source>
-                <target>Nueva orientación/especialidad</target>
+                <target>Nueva especialidad</target>
             </trans-unit>
 
             <trans-unit>
@@ -1968,12 +1963,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Orientations</source>
-                <target>lenguaje</target>
+                <target>Lenguajes</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New orientation</source>
-                <target>Nuevp lenguaje</target>
+                <target>Nuevo lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -2248,7 +2243,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>With sub orientation</source>
-                <target>Con orientación/especialidad</target>
+                <target>Con especialidad</target>
             </trans-unit>
 
             <trans-unit>
@@ -3408,7 +3403,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Sub orientation: %sub_orientation%</source>
-                <target>Sub orientación/Especialidad: %sub_orientation%</target>
+                <target>Especialidad: %sub_orientation%</target>
             </trans-unit>
             <trans-unit>
                 <source>This status is the status of the student in the current school year.</source>
@@ -4670,7 +4665,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             <trans-unit>
                 <source>Division title id</source>
                 <target>Nombre de la división</target>
-            </trans-unit>            
+            </trans-unit>     
         </body>
     </file>
 </xliff>
