@@ -146,15 +146,15 @@ root:
             url: subject/new
             credentials: [edit_subject]
       pathways:
-        title: Trayectorias
+        title: Pathway
         credentials: [show_pathway]
         menu:
           list:
-            title: Listado de trayectorias
+            title: Pathway list
             url: pathway/index
             credentials: [show_pathway]
           new:
-            title: Nueva trayectoria
+            title: New pathway
             url: pathway/new
             credentials: [edit_pathway]
       personal:
@@ -239,7 +239,7 @@ root:
             url: commission/index
             credentials: [show_course]
           student_pathways:
-            title: Listado de comisiones de trayectorias
+            title: Pathway commission list
             credentials: [show_pathway]
             url: pathway_commission/index
 

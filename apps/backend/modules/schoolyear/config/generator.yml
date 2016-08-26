@@ -83,18 +83,18 @@ generator:
         class: false
       form:    ~
       edit:
-        title:             Edición del año lectivo "%%year%%"
+        title: Editar año lectivo
         display:           [year]
         actions:
-          _list:           { label: Volver al listado de años lectivos }
+          _list:
+            label:         Volver al listado
           _save_and_list:
-            label:          Guardar año lectivo
-          _save_and_add:
+            label:         Guardar año lectivo
       new:
-        title:             Crear un año lectivo
+        title: Nuevo año lectivo
         display:           [year]
         actions:
-          _list:           { label: Volver al listado de años lectivos }
+          _list:
+            label:         Volver al listado
           _save_and_list:
-            label:          Guardar año lectivo
-          _save_and_add:
+            label:         Guardar año lectivo

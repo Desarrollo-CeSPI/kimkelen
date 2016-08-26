@@ -14,34 +14,30 @@ generator:
       actions: ~
       fields:  ~
       list:
+        title:            Repproved examination
         batch_actions: []
         layout: stacked
         params: |
           %%_information%%
         display: [examination_repproved]
         object_actions:
-
           _edit:
             credentials:  [edit_examination_repproved]
             condition: canEdit
-
           subjects:
             label: Subjects
             action: examinationRepprovedSubjects
             credentials:  [show_examination_repproved_subjects]
-
           _delete:
             credentials:  [edit_examination_repproved]
             condition: canDelete
-
         actions:
-
           back:
             action: back
-            label:        Volver al listado años lectivos
-
+            label:        Volver al listado
           _new:
-            condition: canCreateExaminationRepproved
+            label:        Nueva mesa de exámen
+            condition:    canCreateExaminationRepproved
             credentials:  [edit_examination_repproved]
 
       filter:
@@ -51,10 +47,15 @@ generator:
         title:  Edit repproved examination
         actions:
           _list:
+            label:        Volver al listado
           _save_and_list:
+            label:        Guardar mesa de exámen
       new:
-        title:  New repproved examination
+        title: New repproved examination
         actions:
           _list:
+            label:        Volver al listado
           _save_and_list:
+            label:        Guardar mesa de exámen
           _save_and_add:
+            label:        Guardar y agregar otro mesa de exámen

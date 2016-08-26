@@ -18,5 +18,9 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <h2>Año lectivo: <?php echo $pager->getParameter('school_year')?></h2>
-<h4>Utilice este tipo de mesas de examen para manejar aquéllas instancias que ocurran durante el año lectivo y no luego del Cierre anual de cursadas.</h4>
-<h5>Por ejemplo, instancias de mesas de Examen Regulares en Agosto/Septiembre.</h5>
+<div>
+	<p>
+	- Utilice este tipo de mesas de examen para manejar aquéllas instancias que ocurran durante el año lectivo y no luego del cierre anual de cursadas.</br>
+	<strong>Por ejemplo</strong>, instancias de mesas de examen regulares en Agosto/Septiembre.
+	</p>
+</div>

@@ -236,22 +236,17 @@
 
             <trans-unit>
                 <source>Back to orientations</source>
-                <target>Volver a orientaciónes/especialidades</target>
-            </trans-unit>
-
-            <trans-unit>
-                <source>New orientation</source>
-                <target>Nueva orientación/especialidad</target>
+                <target>Volver a lenguajes</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Save orientation</source>
-                <target>Guardar orientación/especialidad</target>
+                <target>Guardar lenguaje</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Save and add orientation</source>
-                <target>Guardar y agregar otra especialidad/lengua</target>
+                <target>Guardar y agregar otra lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -572,7 +567,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Register to a new career</source>
-                <target>Inscribir en nueva carrera</target>
+                <target>Inscribir en una nueva carrera</target>
             </trans-unit>
 
             <trans-unit>
@@ -790,17 +785,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Inscription of the students to the %division%</source>
-                <target>Inscripción de alumnos a la %division%</target>
+                <target>Inscripción de alumnos a la división %division%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Preceptors division configuration</source>
-                <target>Configuracón de los preceptores de la división</target>
+                <target>Configuración de los preceptores de la división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Preceptors division configuration of %division%</source>
-                <target>Configuracón de los preceptores de la división %division%</target>
+                <target>Configuración de los preceptores de la división %division%</target>
             </trans-unit>
 
             <trans-unit>
@@ -888,7 +883,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Manage allowed subjects to be coursed for %student%</source>
-                <target>Administrar materias a cursar por %student%</target>
+                <target>Administrar materias a cursar para %student%</target>
             </trans-unit>
 
             <trans-unit>
@@ -933,12 +928,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Add division students</source>
-                <target>Agregar estudiantes de la división</target>
+                <target>Agregar alumnos de la división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Add division students to all courses</source>
-                <target>Agregar estudiantes de la división, a todos las asignaturas posibles.</target>
+                <target>Agregar alumnos de la división, a todos las asignaturas posibles.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1042,7 +1037,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Orientation id</source>
-                <target>especialidad/lengua</target>
+                <target>Lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -1072,7 +1067,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Orientation</source>
-                <target>especialidad/lengua</target>
+                <target>Lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -1258,7 +1253,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Examinations</source>
-                <target>Mesas de examen</target>
+                <target>Mesas de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1277,13 +1272,13 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>New Examination</source>
-                <target>Nueva mesa de examen</target>
+                <source>New examination</source>
+                <target>Nueva mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
-                <source>Edit Examination</source>
-                <target>Editar mesa de examen</target>
+                <source>Edit examination</source>
+                <target>Editar mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1317,7 +1312,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Close subject</source>
-                <target>Cerrar mesa de examen</target>
+                <target>Cerrar mesa de exámen</target>
             </trans-unit>
 
             <trans-unit>
@@ -1326,12 +1321,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Examination subject cant be closed, because some students were not calificated</source>
-                <target>La mesa de examen no puede cerrarse, porque algunos alumnos no fueron calificados</target>
+                <target>La mesa de exámen no puede cerrarse, porque algunos alumnos no fueron calificados</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Edit repproved examination</source>
-                <target>Editar mesa</target>
+                <target>Editar mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
@@ -1341,12 +1336,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>New repproved examination</source>
-                <target>Nueva mesa</target>
+                <target>Nueva mesa de exámen (previos/libres)</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The examination subject can't be closed because it's already closed.</source>
-                <target>La mesa de examen no puede cerrarse porque ya está cerrada.</target>
+                <target>La mesa de exámen no puede cerrarse porque ya está cerrada.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1487,17 +1482,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The subject is not approved yet. The student is not inscripted to any examination.</source>
-                <target>La materia no está aprobada todavía. El alumno no está inscripto a ninguna mesa de examen.</target>
+                <target>La materia no está aprobada todavía. El alumno no está inscripto a ninguna mesa de exámen.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Examination subject is not closed yet.</source>
-                <target>La mesa de examen todavía no cerró.</target>
+                <target>La mesa de exámen todavía no cerró.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Repproved examination subject is not closed yet.</source>
-                <target>La mesa de examen previo todavía no cerró.</target>
+                <target>La mesa de exámen previo todavía no cerró.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1657,7 +1652,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Marks cant be edited because the course dont have students inscripted.</source>
-                <target>No se pueden editar las calificaciones porque la asignatura no tiene estudiantes inscriptos.</target>
+                <target>No se pueden editar las calificaciones porque la asignatura no tiene alumnos inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1682,12 +1677,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Close student</source>
-                <target>Cerrar cursada del estudiante.</target>
+                <target>Cerrar cursada del alumno</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Close course student ?</source>
-                <target>¿ Cerrar cursada del alumno ?</target>
+                <target>¿Cerrar cursada del alumno?</target>
             </trans-unit>
 
             <trans-unit>
@@ -1751,7 +1746,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Calification of the students to the %final_examination_subject%</source>
-                <target>Calificar a los estudiantes de %final_examination_subject%</target>
+                <target>Calificar a los alumnos de %final_examination_subject%</target>
             </trans-unit>
 
             <trans-unit>
@@ -1778,12 +1773,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The final examination cant be closed, because no students are inscripted.</source>
-                <target>La mesa de final no puede ser cerrada, porque no tiene estudiantes inscriptos</target>
+                <target>La mesa de final no puede ser cerrada, porque no tiene alumnos inscriptos</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The final examination cant be closed, because not all the students were calificated.</source>
-                <target>La mesa de final no puede ser cerrada, porque no todos los estudiantes fueron calificados.</target>
+                <target>La mesa de final no puede ser cerrada, porque no todos los alumnos fueron calificados.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1803,17 +1798,17 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The final examination has at least one student inscripted.</source>
-                <target>No se puede editar la mesa porque tiene al menos un estudiante inscripto.</target>
+                <target>No se puede editar la mesa porque tiene al menos un alumno inscripto.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The course hasnt any student inscripted.</source>
-                <target>La asignatura no tiene estudiantes inscriptos.</target>
+                <target>La asignatura no tiene alumnos inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Course student list</source>
-                <target>Listado de estudiantes de la asignatura</target>
+                <target>Listado de alumnos de la asignatura</target>
             </trans-unit>
 
             <trans-unit>
@@ -1828,7 +1823,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The student is not inscripted in at least one career</source>
-                <target>El estudiante tiene que estar inscripto en al menos una carrera.</target>
+                <target>El alumno tiene que estar inscripto en al menos una carrera.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1843,7 +1838,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The equivalence cant be deleted, becouse the student has approved some career_subject that have this for correlative.</source>
-                <target>La equivalencia no puede ser borrada, porque el estudiante tiene alguna materia aprobada que tiene a esta como correlativa.</target>
+                <target>La equivalencia no puede ser borrada, porque el alumno tiene alguna materia aprobada que tiene a esta como correlativa.</target>
             </trans-unit>
 
             <trans-unit>
@@ -1908,27 +1903,27 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The course cant be calificated, because dont have any students inscripted.</source>
-                <target>La asignatura no puede ser calificada, porque no tiene estudiantes inscriptos.</target>
+                <target>La asignatura no puede ser calificada, porque no tiene alumnos inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Sub orientations</source>
-                <target>orientacion/especialidad</target>
+                <target>Especialidades</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Edit sub orientation</source>
-                <target>Editar orientación/especialidad</target>
+                <target>Editar especialidad</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New sub orientation</source>
-                <target>Nueva orientación/especialidad</target>
+                <target>Nueva especialidad</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Sub orientation id</source>
-                <target>orientación/especialidad</target>
+                <target>Especialidad</target>
             </trans-unit>
 
             <trans-unit>
@@ -1968,12 +1963,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Orientations</source>
-                <target>Especialidad/lengua</target>
+                <target>Lenguajes</target>
             </trans-unit>
 
             <trans-unit>
                 <source>New orientation</source>
-                <target>Nueva especialidad/lengua</target>
+                <target>Nuevo lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -2003,12 +1998,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Attendance type</source>
-                <target>Tipo de asistencia</target>
+                <target>Tipo de inasistencia</target>
             </trans-unit>
 
             <trans-unit>
-                <source>Max absence</source>
-                <target>Cantidad de ausencias.</target>
+                <source>Max absences</source>
+                <target>Cantidad de ausencias</target>
             </trans-unit>
 
             <trans-unit>
@@ -2034,7 +2029,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The division dont have students inscripted.</source>
-                <target>La división no puede editar las asistencias, porque no tiene estudiantes inscriptos.</target>
+                <target>La división no puede editar las asistencias, porque no tiene alumnos inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2069,7 +2064,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Manage Students Regularity for %%course_name%%</source>
-                <target>Administrar las regularidades de los estudiantes para la asignatura %%course_name%%</target>
+                <target>Administrar las regularidades de los alumnos para la asignatura %%course_name%%</target>
             </trans-unit>
 
             <trans-unit>
@@ -2233,7 +2228,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>There are students with this health coverage.</source>
-                <target>Hay estudiantes con esta obra social en el sistema.</target>
+                <target>Hay alumnos con esta obra social en el sistema.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2248,12 +2243,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>With sub orientation</source>
-                <target>Con orientación/especialidad</target>
+                <target>Con especialidad</target>
             </trans-unit>
 
             <trans-unit>
                 <source>With orientation</source>
-                <target>Con especialidad/lengua</target>
+                <target>Con lenguaje</target>
             </trans-unit>
 
             <trans-unit>
@@ -2298,7 +2293,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The commission has no students.</source>
-                <target>La comisión no tiene estudiantes.</target>
+                <target>La comisión no tiene alumnos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2379,12 +2374,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Can do multiple justification, with only a student.</source>
-                <target>Solo puede hacerse multiple justificación, con faltas de un mismo estudiante.</target>
+                <target>Solo puede hacerse justificación multiple, con faltas de un mismo alumno.</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Cant do multiple justification with diferent students</source>
-                <target>No puede realizarse multiple justificación con faltas de diferentes estudiantes.</target>
+                <target>No puede realizarse justificación multiple con faltas de diferentes alumnos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2419,7 +2414,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>The student can not be removed because: id enrolled in a course, already has passed a subject, already has passed a course, or has some related data stored.</source>
-                <target>El estudiante no puede ser eliminado debido a que: está inscripto en una materia, ya la tiene aprobada, o posee algún dato relacionado.</target>
+                <target>El alumno no puede ser eliminado debido a que: está inscripto en una materia, ya la tiene aprobada, o posee algún dato relacionado.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2689,7 +2684,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Cant copy from division, because all the students are already inscripted.</source>
-                <target>No se puede copiar los alumnos de la división, porque todos los estudiantes ya están inscriptos.</target>
+                <target>No se puede copiar los alumnos de la división, porque todos los alumnos ya están inscriptos.</target>
             </trans-unit>
 
             <trans-unit>
@@ -2925,7 +2920,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Division student list</source>
-                <target>Listado de estudiantes de la división</target>
+                <target>Listado de alumnos de la división</target>
             </trans-unit>
 
             <trans-unit>
@@ -2945,7 +2940,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Commission student list</source>
-                <target>Listado de estudiantes de la comisión</target>
+                <target>Listado de alumnos de la comisión</target>
             </trans-unit>
 
             <trans-unit>
@@ -2960,7 +2955,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>School year student list</source>
-                <target>Listado de estudiantes del año lectivo</target>
+                <target>Listado de alumnos del año lectivo</target>
             </trans-unit>
 
             <trans-unit>
@@ -3098,22 +3093,22 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Conduct of students to the division</source>
-                <target>Conducta de  estudiantes por división</target>
+                <target>Conducta de alumnos por división</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Conduct of the students to the %division%</source>
-                <target>Conducta de  estudiantes de %division%</target>
+                <target>Conducta de los alumnos de %division%</target>
             </trans-unit>
 
             <trans-unit>
                 <source>Student conduct</source>
-                <target>Conducta de estudiantes</target>
+                <target>Conducta de alumnos</target>
             </trans-unit>
 
             <trans-unit>
                 <source>The student is not inscripted to any bimestral course. </source>
-                <target>El estudiante no esta inscrito en ninguna materia bimestral</target>
+                <target>El alumno no esta inscrito en ninguna materia bimestral</target>
             </trans-unit>
             <trans-unit>
                 <source>Without teachers</source>
@@ -3149,11 +3144,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>New Student free</source>
-                <target>Dejar libre un estudiante</target>
+                <target>Dejar libre un alumno</target>
             </trans-unit>
             <trans-unit>
                 <source>Edit Student free</source>
-                <target>Editar estudiante libre</target>
+                <target>Editar alumno libre</target>
             </trans-unit>
             <trans-unit>
                 <source>Student free</source>
@@ -3221,7 +3216,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Student free List</source>
-                <target>Estudiante libre</target>
+                <target>Alumno libre</target>
             </trans-unit>
 
             <trans-unit>
@@ -3231,7 +3226,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 
             <trans-unit>
                 <source>Course configuration of the %course%</source>
-                <target>Configuracion de la asignatura %course%</target>
+                <target>Configuración de la asignatura %course%</target>
             </trans-unit>
 
             <trans-unit>
@@ -3404,11 +3399,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Orientation: %orientation%</source>
-                <target>Especialidad/Lengua: %orientation%</target>
+                <target>Lenguaje: %orientation%</target>
             </trans-unit>
             <trans-unit>
                 <source>Sub orientation: %sub_orientation%</source>
-                <target>Sub orientación/Especialidad: %sub_orientation%</target>
+                <target>Especialidad: %sub_orientation%</target>
             </trans-unit>
             <trans-unit>
                 <source>This status is the status of the student in the current school year.</source>
@@ -3444,7 +3439,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Show attendance sheet</source>
-                <target>Planilla de asistencias</target>
+                <target>Planilla de inasistencias</target>
             </trans-unit>
             <trans-unit>
                 <source>Please select a date range from below and press the show button.</source>
@@ -3548,7 +3543,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>The examination subject cant be moddify because it's closed.</source>
-                <target>La mesa de examen, no puede ser modificada porque ya esta cerrada.</target>
+                <target>La mesa de exámen, no puede ser modificada porque ya esta cerrada.</target>
             </trans-unit>
             <trans-unit>
                 <source>Disciplinary sanctions</source>
@@ -3629,7 +3624,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Career orientation</source>
-                <target>Especialidad/lengua</target>
+                <target>lenguaje</target>
             </trans-unit>
             <trans-unit>
                 <source>Behaviour</source>
@@ -3781,11 +3776,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Load attendance for %subject%</source>
-                <target>Cargar asistencias para %subject%</target>
+                <target>Cargar inasistencias para %subject%</target>
             </trans-unit>
             <trans-unit>
                 <source>Load attendance day for %division%</source>
-                <target>Cargar asistencias para %division%</target>
+                <target>Cargar inasistencias para %division%</target>
             </trans-unit>
             <trans-unit>
                 <source>Currently inscripted in divisions:</source>
@@ -3833,7 +3828,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Print details of student</source>
-                <target>Imprimir detalles del estudiante</target>
+                <target>Imprimir detalles del alumno</target>
             </trans-unit>
             <trans-unit>
                 <source>Export report cards</source>
@@ -3937,7 +3932,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Edit Examination subject</source>
-                <target>Editar mesa de examen</target>
+                <target>Editar mesa de exámen</target>
             </trans-unit>
             <trans-unit>
                 <source>When disapprove show string</source>
@@ -3953,7 +3948,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Course configuration of the %division%</source>
-              <target>Configuracón de cantidad de asistencias de la division %division%</target>
+              <target>Configuración de cantidad de inasistencias de la division %division%</target>
             </trans-unit>
             <trans-unit>
               <source>Resources str</source>
@@ -3985,7 +3980,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Student reports</source>
-              <target>Reportes de estudiantes</target>
+              <target>Reportes de alumnos</target>
             </trans-unit>
             <trans-unit>
               <source>Choose values for reports</source>
@@ -4001,7 +3996,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>The student has no approved subjects</source>
-              <target>El estudiante no posee materias aprobadas</target>
+              <target>El alumno no posee materias aprobadas</target>
             </trans-unit>
             <trans-unit>
               <source>Add to current career school year</source>
@@ -4121,7 +4116,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Edit previous examination</source>
-              <target>Editar mesa de examen anterior</target>
+              <target>Editar mesa de exámen anterior</target>
             </trans-unit>
             <trans-unit>
               <source>Edit marks</source>
@@ -4155,7 +4150,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Move students from division %division%</source>
-                <target>Mover estudiantes de la división %division%</target>
+                <target>Mover alumnos de la división %division%</target>
             </trans-unit>
             <trans-unit>
               <source>This action allows deletion of students only if them do not have associated information. For those cases, deletion won't be performed to avoid information loss.</source>
@@ -4163,7 +4158,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Move students to other division</source>
-              <target>Mover estudiantes a otra división</target>
+              <target>Mover alumnos a otra división</target>
             </trans-unit>
             <trans-unit>
               <source>Teacher list</source>
@@ -4179,7 +4174,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>Examinations (manual)</source>
-              <target>Mesas de examen (manejo manual)</target>
+              <target>Mesas de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Examination number</source>
@@ -4187,11 +4182,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>New Manual examination subject</source>
-              <target>Nueva mesa de examen (manejo manual)</target>
+              <target>Nueva mesa de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Edit Manual examination subject</source>
-              <target>Editar mesa de examen (manejo manual)</target>
+              <target>Editar mesa de exámen (manejo manual)</target>
             </trans-unit>
             <trans-unit>
               <source>Subjects (manual)</source>
@@ -4215,11 +4210,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
               <source>The student cant be withdrawn because it is still matriculated.</source>
-              <target>El estudiante no puede ser retirado porque aún está matriculado en el año lectivo.</target>
+              <target>El alumno no puede ser retirado porque aún está matriculado en el año lectivo.</target>
             </trans-unit>
             <trans-unit>
               <source>Undo withdraw can be done only if student is withdrawn.</source>
-              <target>El estudiante no está en estado retirado.</target>
+              <target>El alumno no está en estado retirado.</target>
             </trans-unit>
             <trans-unit>
               <source>This field represents the value of the disciplinary sanction</source>
@@ -4279,7 +4274,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Examination %%examination%%</source>
-                <target>Instancia de mesa de examen %%examination%%</target>
+                <target>Instancia de mesa de exámen %%examination%%</target>
             </trans-unit>
             <trans-unit>
                 <source>Mark should de 0 (zero) if you want the student to be free at this period</source>
@@ -4291,11 +4286,11 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Choose student to calificate without numerical mark</source>
-                <target>Elija los estudiantes a eximir de este curso</target>
+                <target>Elija los alumnos a eximir de este curso</target>
             </trans-unit>
             <trans-unit>
                 <source>Choose student to calificate without numerical mark from %course%</source>
-                <target>Elija los estudiantes a eximir del curso %course%</target>
+                <target>Elija los alumnos a eximir del curso %course%</target>
             </trans-unit>
             <trans-unit>
                 <source>Holidays of school year</source>
@@ -4351,7 +4346,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Move students to other course subject</source>
-                <target>Mover estudiantes a otro curso</target>
+                <target>Mover alumnos a otro curso</target>
             </trans-unit>
             <trans-unit>
                 <source>This action allows deletion of students from course only if them do not have associated information for this course. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one course to another.</source>
@@ -4360,7 +4355,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Move students from course %course%</source>
-                <target>Mover estudiantes del curso %course%</target>
+                <target>Mover alumnos del curso %course%</target>
             </trans-unit>
             <trans-unit>
                 <source>The course has not been configured with attendance for subject.</source>
@@ -4368,7 +4363,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>The student is free</source>
-                <target>El estudiante es LIBRE</target>
+                <target>El alumno es LIBRE</target>
             </trans-unit>
             <trans-unit>
                 <source>Origin school</source>
@@ -4380,7 +4375,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Course subjects for commission</source>
-                <target>Materias asociadas a este curso</target>
+                <target>Materias asociadas a esta comisión</target>
             </trans-unit>
             <trans-unit>
                 <source>Create examination subjects for %year%° year</source>
@@ -4409,7 +4404,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Students that will go to pathway plan</source>
-                <target>Alumnos a inscribir en Promoción por excepción</target>
+                <target>Alumnos a incribir en Trayectoria</target>
             </trans-unit>
             <trans-unit>
                 <source>here</source>
@@ -4417,7 +4412,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Create pathway if it does not exist from</source>
-                <target>Crear plan de promoción por excepción desde</target>
+                <target>Crear nueva trayectoria desde</target>
             </trans-unit>
             <trans-unit>
                 <source>School</source>
@@ -4509,7 +4504,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Pathway commission list</source>
-                <target>Listado de comisiones de Promoción por excepción</target>
+                <target>Listado de comisiones de trayectoria</target>
             </trans-unit>
             <trans-unit>
                 <source>confirm</source>
@@ -4529,7 +4524,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Print attendance template</source>
-                <target>Imprimir Hoja de Asistencias</target>
+                <target>Imprimir hoja de inasistencias</target>
             </trans-unit>
             <trans-unit>
                 <source>Previous month</source>
@@ -4549,7 +4544,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Analytical without CBFE</source>
-                <target>Certificado sin CBFE</target>
+                <target>Analitico sin CBFE</target>
             </trans-unit>
             <trans-unit>
                 <source>General Subjects</source>
@@ -4667,6 +4662,34 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
               <source>Dont have any course assigned</source>
               <target>No posee materias asignadas</target>
             </trans-unit>
+            <trans-unit>
+                <source>Pathway list</source>
+                <target>Listado de trayectorias</target>
+            </trans-unit>
+            <trans-unit>
+              <source>New pathway</source>
+              <target>Nueva trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Edit pathway</source>
+              <target>Editar trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Show pathway</source>
+              <target>Detalles de la trayectoria</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Examination %examination%</source>
+              <target>Mesa: %examination%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Repproved examination</source>
+                <target>Mesas de exámen previo y libre</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Division title id</source>
+                <target>Nombre de la división</target>
+            </trans-unit>     
         </body>
     </file>
 </xliff>

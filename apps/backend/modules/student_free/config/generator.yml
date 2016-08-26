@@ -14,15 +14,13 @@ generator:
       actions: ~
       fields:  ~
       list:
+        title: Dejar libre
         display:  [career_school_year ,career_school_year_period, course_subject, is_free]
         object_actions:
-
           _edit:
             credentials:  [set_free]
-
           _delete:
             credentials:  [set_free]
-
         batch_actions:  []
         actions:
           _back:
@@ -36,7 +34,9 @@ generator:
         actions:
           _back:
           _save_and_list:
+            label: save
       new:
         actions:
           _back:
           _save_and_list:
+            label: save

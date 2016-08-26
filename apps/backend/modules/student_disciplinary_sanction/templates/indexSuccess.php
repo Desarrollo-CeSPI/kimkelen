@@ -22,7 +22,7 @@
 
 <div id="sf_admin_container">
 
-  <h1><?php echo __('Listado de sanciones del estudiante %%student%%', array('%%student%%' => $student), 'messages') ?></h1>
+  <h1><?php echo __('Listado de sanciones del alumno %%student%%', array('%%student%%' => $student), 'messages') ?></h1>
 
   <?php include_partial('student_disciplinary_sanction/list_slot_actions', array('helper' => $helper)) ?>
 

@@ -26,12 +26,16 @@
 <div id="sf_admin_container">
   <h1><?php echo __('Configuracion de la carrera  %career_school_year%', array('%career_school_year%' => $career_school_year->__toString())) ?></h1>
 
-  <h3>La configuración del año lectivo se aplicará a todas las materias del plan de estudio. Aquellas materias del plan que difieran podrán redefinir
-  su configuración desde el listado de materias del año lectivo para este plan</h3>
+  <div>
+    <p>
+      <strong>La configuración del año lectivo se aplicará a todas las materias del plan de estudio. Aquellas materias del plan que difieran podrán redefinir
+      su configuración desde el listado de materias del año lectivo para este plan.</strong>
+    </p>
+  </div>
   <div id="sf_admin_content">
     <form action="<?php echo url_for('career_school_year/updateShowConfiguration') ?>" method="post">
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Volver al listado de carreras'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Volver al listado'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Guardar') ?>" /></li>
       </ul>
       <input type="hidden" name="id" value="<?php echo $career_school_year->getId() ?>" />
@@ -45,7 +49,7 @@
       </fieldset>
 
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Volver al listado de carreras'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Volver al listado'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Guardar') ?>" /></li>
       </ul>
     </form>

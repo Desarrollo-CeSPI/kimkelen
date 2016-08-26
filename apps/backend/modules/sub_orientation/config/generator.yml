@@ -27,7 +27,7 @@ generator:
           back:
             action: back
           _new:
-            label:  Nueva orientación
+            label:  Nueva
       filter:
         class: false
       form:    ~
@@ -37,13 +37,11 @@ generator:
           _list:
             label:              Volver al listado
           _save_and_list:
-            label:              Guardar orientación
+            label:              Guardar
       new:
         title: New sub orientation
         actions:
           _list:
             label:              Volver al listado
           _save_and_list:
-            label:              Guardar orientación
-          _save_and_add:
-            label:              Guardar y agregar otra orientación
+            label:              Guardar

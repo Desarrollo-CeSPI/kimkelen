@@ -32,12 +32,11 @@
         <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
       <div>
-        <h3><?php echo __("Important") ?></h3>
-        <p><?php echo __("This action allows deletion of students from division only if them do not have associated information for the courses. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one division to another") ?>
-
-        <?php if ($division->canMoveStudents()): ?>
-        <span class="yellow_link"><a href="<?php echo url_for('move_students') . '?id=' . $division->getId(); ?>"><?php echo __("Move students to other division") ?></a></span>
-        <?php endif; ?>
+        <p>
+          <?php echo __("This action allows deletion of students from division only if them do not have associated information for the courses. For those cases, deletion won't be performed to avoid information loss. Try instead move student from one division to another") ?>
+          <?php if ($division->canMoveStudents()): ?>
+          <span class="yellow_link"><a href="<?php echo url_for('move_students') . '?id=' . $division->getId(); ?>"><?php echo __("Move students to other division") ?></a></span>
+          <?php endif; ?>
         </p>
       </div>
       <fieldset>

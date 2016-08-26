@@ -29,7 +29,7 @@ generator:
             condition:    canBeDeleted
         actions:
           _new:
-            label: New orientation
+            label: Nuevo
             credentials: [edit_orientation]
 
       filter:
@@ -41,13 +41,11 @@ generator:
           _list:
             label:          Volver al listado
           _save_and_list:
-            label:          Save orientation
+            label:          Guardar
       new:
         title: New orientation
         actions:
           _list:
             label:          Volver al listado
           _save_and_list:
-            label:          Save orientation
-          _save_and_add:
-            label:          Save and add orientation
+            label:          Guardar

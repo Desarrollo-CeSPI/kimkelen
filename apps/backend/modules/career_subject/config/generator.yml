@@ -37,7 +37,7 @@ generator:
           label: Opciones
 
       list:
-        title:  Listado de materias
+        title: Listado de materias del plan de estudio
         sort:              [year, asc]
         display:           [year ]
         layout:             stacked
@@ -65,10 +65,10 @@ generator:
 
         actions:
           go_back:
-            label: Volver al listado de carreras
+            label: Volver
             action: back
           _new:
-            label: Nueva materia
+            label: Nueva materia del plan de estudio
             credentials: [edit_career_subject]
         batch_actions:      []
 
@@ -77,23 +77,21 @@ generator:
           has_options:
             help: ""
       form:    ~
-
       edit:
-        title:              Editar materia
+        title: Editar materia del plan de estudio
         display:            [career_id, year, subject_id, has_correlative_previous_year, has_options, is_option, orientation_id, sub_orientation_id]
         actions:
           _list:
-            label:          Volver al listado de materias
+            label:          Volver al listado
           _save_and_list:
-            label:          Guardar y volver al listado de materias
-
+            label:          Guardar materia del plan de estudio
       new:
-        title:              Agregar materia a %%career%%
+        title: Agregar materia del plan de estudio
         display:            [career_id, year, subject_id, has_correlative_previous_year, has_options, is_option, orientation_id, sub_orientation_id]
         actions:
           _list:
-            label:          Volver al listado de materias
+            label:          Volver al listado
           _save_and_list:
-            label:          Guardar y volver al listado de materias
+            label:          Guardar materia del plan de estudio
           _save_and_add:
-            label:          Guardar y agregar otra materia
+            label:          Guardar y agregar otra materia al plan de estudio
