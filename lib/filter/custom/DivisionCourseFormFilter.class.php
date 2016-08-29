@@ -3,7 +3,7 @@ class DivisionCourseFormFilter extends CourseFormFilter
 {
   public function configure() {
     parent::configure();
-    unset($this['starts_at'], $this['quota'], $this['school_year_id'], $this['division_id'], $this['is_closed'], $this['current_period'], $this['related_division_id']);
+    unset($this['starts_at'], $this['quota'], $this['school_year_id'], $this['division_id'], $this['is_closed'], $this['current_period'], $this['related_division_id'], $this['is_pathway']);
 
     $this->getWidget('name')->setOption('with_empty', false);
 
