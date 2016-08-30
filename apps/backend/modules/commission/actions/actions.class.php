@@ -377,5 +377,19 @@ class commissionActions extends autoCommissionActions
       }
      $this->redirect("@commission");
    }
+
+  public function executeChangelogMarks(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+
+    if (null === $this->course)
+    {
+      $this->redirect($this->getModuleName().'/index');
+    }
+
+    $this->getUser()->setAttribute('referer_module', 'commission');
+
+    $this->redirect('course_student_mark/changelogMarks?id='.$this->course->getId());
+  }
    
 }
