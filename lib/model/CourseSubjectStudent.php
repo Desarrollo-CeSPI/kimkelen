@@ -249,7 +249,11 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$this->getMarksAverage());
   		}
   		
-  		return $letter_mark->getLetter();	
+  		if(! is_null($letter_mark))
+  		{
+			return $letter_mark->getLetter();	
+	    }
+  		
   	}
   	else
   	{
@@ -669,9 +673,12 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     if ($config != null && !$config->isNumericalMark())
     {
       $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
-      $letter_mark = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
       
-      return $letter_mark->getLetter();
+      if(! is_null($letter_average)){
+	   $letter_mark = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+       return $letter_mark->getLetter();
+	  }
+     
     }
     else
     {

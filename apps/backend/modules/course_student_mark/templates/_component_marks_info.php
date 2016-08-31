@@ -20,19 +20,19 @@
 <div class="mark-container-info">
   <?php foreach ($marks as $mark) :?>
     <div class="info-mark-container">
-      <?php echo __('Mark %number%: %mark%', array('%number%' => $mark->getMarkNumber(), '%mark%' => $mark->getMark()))?>&nbsp;&nbsp;
+      <?php echo __('Mark %number%: %mark%', array('%number%' => $mark->getMarkNumber(), '%mark%' => $mark->getMarkByConfig($course_subject_student->getConfiguration())))?>&nbsp;&nbsp;
       <?php # echo $mark->renderChangelog(); ?>
     </div>
   <?php endforeach?>
 
   <div class="info-mark-container">
-    <?php echo __('Average: %average%', array('%average%' => $course_subject_student->getMarksAverage())); ?>
+    <?php echo __('Average: %average%', array('%average%' => $course_subject_student->getCourseResult()->getResultStr())) ?>
   </div>
 
   <?php foreach ($course_subject_student_examinations as $course_subject_student_examination):?>
     <div class="info-mark-container">
       <?php echo __('Examination %examination%: %mark%', array('%examination%' => $course_subject_student_examination->getExaminationSubject()->getExamination(),
-          '%mark%'=> $course_subject_student_examination->getIsAbsent()? __('Absent') : $course_subject_student_examination->getMark())); ?>
+          '%mark%'=> $course_subject_student_examination->getIsAbsent()? __('Absent') : $course_subject_student_examination->getMarkStrByConfig())); ?>
       <?php #echo ncChangelogRenderer::render($course_subject_student_examination, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>
   <?php endforeach ?>
