@@ -89,6 +89,11 @@ generator:
             credentials:    [edit_division_course_califications]
             condition:      canEditMarks
 
+          changelog:
+            action:         changelogMarks
+            label:          Auditoria de notas
+            credentials:    [edit_course]
+
           close:
             label:          Close period
             action:         close

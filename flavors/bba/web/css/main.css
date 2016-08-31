@@ -2052,3 +2052,13 @@ div.wc-cal-event{
 #pathway-info-list {
   list-style: disc !important;
 }
+
+.sf_admin_list .sf_admin_action_changelog a
+{
+    background-image: url('../images/disciplinary_sanction.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_division_configure a
+{
+    background-image: url('../images/config.png') !important;
+}

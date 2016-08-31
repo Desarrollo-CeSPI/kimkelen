@@ -200,6 +200,7 @@ class division_courseActions extends autoDivision_courseActions
 
     $this->redirect('course_student_mark/print?id='.$this->course->getId());
   }
+
   public function executeCourseConfiguration(sfWebRequest $request)
   {
     $this->course = $this->getRoute()->getObject();
@@ -237,5 +238,19 @@ class division_courseActions extends autoDivision_courseActions
     $this->course = $this->getRoute()->getObject();
     $this->getUser()->setAttribute("referer_module", "division_course");
     $this->redirect("course_student_mark/calificateNonNumericalMark?id=" . $this->course->getId());
+  }
+
+  public function executeChangelogMarks(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+
+    if (null === $this->course)
+    {
+      $this->redirect($this->getModuleName().'/index');
+    }
+
+    $this->getUser()->setAttribute('referer_module', 'division_course');
+
+    $this->redirect('course_student_mark/changelogMarks?id='.$this->course->getId());
   }
 }

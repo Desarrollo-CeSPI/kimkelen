@@ -44,14 +44,19 @@ generator:
             credentials:    [edit_course]
             condition:  canManageStudents
 
+          teachers:
+            action:       courseTeachers
+            condition:    canTeachers
+            credentials:  [edit_course]
+
           califications:
             action:      califications
             credentials: [edit_division_course_califications]
             condition:    canCalificate
 
-          teachers:
-            action:       courseTeachers
-            condition:    canTeachers
+          changelog:
+            action:       changelogMarks
+            label:        Auditoria de notas
             credentials:  [edit_course]
 
           division_students:
