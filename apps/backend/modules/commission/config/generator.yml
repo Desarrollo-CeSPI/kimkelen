@@ -92,7 +92,6 @@ generator:
           changelog:
             action:         changelogMarks
             label:          Auditoria de notas
-            condition:    
             credentials:    [edit_course]
 
           close:
