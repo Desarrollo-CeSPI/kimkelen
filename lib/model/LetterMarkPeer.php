@@ -24,31 +24,4 @@ class LetterMarkPeer extends BaseLetterMarkPeer
   	return $result;	
   }
   
-  public static function getLetterMarkTextByValue($value)
-  {
-  
-	if((0 < $value)&&($value < 7))
-  	{
-  		$value = 4;
-  	}
-  	
-  	switch($value){		
-		case 4:
-			return "Aplazado"	;  
-		break;		
-		case 7:
-			return "Suficiente";
-			break;
-	    case 8:
-	        return "Bueno";
-	        break;
-	    case 9:
-			return "Distinguido";
-			break;
-	    case 10:
-			return "Excelente";
-			break;
-	}
-  }
-
 }

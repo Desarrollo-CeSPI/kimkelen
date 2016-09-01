@@ -105,7 +105,7 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
 	
 	if(! is_null($config) && !$config->isNumericalMark())
 	{
-		return LetterMarkPeer::getLetterMarkTextByValue($this->getMark());
+		return "-";
 	
 	}
 	else

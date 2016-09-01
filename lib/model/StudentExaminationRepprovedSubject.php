@@ -69,7 +69,7 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
 	
 		if(! is_null($config) && !$config->isNumericalMark())
 		{
-			return LetterMarkPeer::getLetterMarkTextByValue($this->getMark());
+			return "-";
 		
 		}
 		else
