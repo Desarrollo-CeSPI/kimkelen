@@ -21,7 +21,7 @@
   <?php foreach ($marks as $mark) :?>
     <div class="info-mark-container">
       <?php echo __('Mark %number%: %mark%', array('%number%' => $mark->getMarkNumber(), '%mark%' => $mark->getMarkByConfig($course_subject_student->getConfiguration())))?>&nbsp;&nbsp;
-      <?php # echo $mark->renderChangelog(); ?>
+      <?php echo $mark->renderChangelog(); ?>
     </div>
   <?php endforeach?>
 
@@ -32,8 +32,10 @@
   <?php foreach ($course_subject_student_examinations as $course_subject_student_examination):?>
     <div class="info-mark-container">
       <?php echo __('Examination %examination%: %mark%', array('%examination%' => $course_subject_student_examination->getExaminationSubject()->getExamination(),
-          '%mark%'=> $course_subject_student_examination->getIsAbsent()? __('Absent') : $course_subject_student_examination->getMarkStrByConfig())); ?>
-      <?php #echo ncChangelogRenderer::render($course_subject_student_examination, 'tooltip', array('credentials' => 'view_changelog')); ?>
+
+          '%mark%'=> $course_subject_student_examination->getIsAbsent()? __('Absent') : $course_subject_student_examination->getMarkStrByConfig())); ?>      
+			<?php echo ncChangelogRenderer::render($course_subject_student_examination, 'tooltip', array('credentials' => 'view_changelog')); ?>
+
     </div>
   <?php endforeach ?>
 
@@ -44,7 +46,7 @@
       <?php echo __('Repproved examination %repproved_examination%: %mark%', array('%repproved_examination%' => $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved(),
           '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMarkByConfig())); ?>
 
-      <?php #echo ncChangelogRenderer::render($student_examination_repproved_subject, 'tooltip', array('credentials' => 'view_changelog')); ?>
+      <?php echo ncChangelogRenderer::render($student_examination_repproved_subject, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>
   <?php endforeach ?>
 </div>
