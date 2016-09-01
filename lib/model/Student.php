@@ -1157,7 +1157,7 @@ class Student extends BaseStudent
           if(! is_null($letter_mark)){
 			 return $letter_mark->getLetter();
 		  }
-          return $letter_mark->getLetter();   
+          
         }
         else
         {  

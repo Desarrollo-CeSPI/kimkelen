@@ -99,10 +99,21 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
     }
   }
 
-    public function getMarkText()
+  public function getMarkText()
   {
-    $c = new num2text();
-    return $c->num2str($this->getMark());
+	$config = $this->getExaminationSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+	
+	if(! is_null($config) && !$config->isNumericalMark())
+	{
+		return LetterMarkPeer::getLetterMarkTextByValue($this->getMark());
+	
+	}
+	else
+	{
+		$c = new num2text();
+		return $c->num2str($this->getMark());
+    }
+    
   }
 
     public function getFormattedDate()

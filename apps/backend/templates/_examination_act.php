@@ -88,7 +88,7 @@
           <td class="calification number">
             <?php if ($examination_subject->getIsClosed()): ?>
               <?php if (!$ess->getIsAbsent()): ?>
-                <?php echo $ess->getMark() ?>
+                <?php echo $ess->getMarkStrByConfig(); ?>
               <?php endif; ?>
             <?php endif; ?>
           </td>

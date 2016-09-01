@@ -42,7 +42,7 @@
   <?php foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject):?>
     <div class="info-mark-container">
       <?php echo __('Repproved examination %repproved_examination%: %mark%', array('%repproved_examination%' => $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved(),
-          '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMark())); ?>
+          '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMarkByConfig())); ?>
 
       <?php #echo ncChangelogRenderer::render($student_examination_repproved_subject, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>

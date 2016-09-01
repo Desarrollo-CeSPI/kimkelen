@@ -65,8 +65,37 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
 
     public function getMarkText()
     {
-        $c = new num2text();
-        return $c->num2str($this->getMark());
+		$config = $this->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getSubjectConfiguration();
+	
+		if(! is_null($config) && !$config->isNumericalMark())
+		{
+			return LetterMarkPeer::getLetterMarkTextByValue($this->getMark());
+		
+		}
+		else
+		{
+			$c = new num2text();
+			return $c->num2str($this->getMark());
+		}
+       
+    }
+    
+    public function getMarkByConfig($config=null)
+    {
+		if(is_null($config))
+		{
+			$config = $this->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getSubjectConfiguration();
+		}
+		
+		if(! is_null($config) && !$config->isNumericalMark())
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue($this->getMark());
+			return $letter_mark->getLetter(); 	   
+		}else
+		{
+			return $this->getMark();
+		}
+		
     }
 
 
