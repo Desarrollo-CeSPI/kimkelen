@@ -204,6 +204,7 @@ class PersonForm extends BasePersonForm
     $addressForm = new AddressForm($address, array('related_class'=>$related_class));
     $this->embedForm('address', $addressForm);
 
+	$this->validatorSchema->setPostValidator(new sfValidatorCallback(array("callback" => array($this, "validateValueZero"))));
   }
 
   /**
@@ -261,5 +262,27 @@ class PersonForm extends BasePersonForm
       }
     }
     return $this->getObject();
+  }
+  
+  public function validateValueZero($validator, $values)
+  {
+    if ($values["person-birth_department"] == 0)
+    {
+      $values["person-birth_department"] = NULL;
+    } 
+    if ($values["person-birth_city"] == 0)
+    {
+      $values["person-birth_city"] = NULL;
+    }
+    if ($values["person-birth_state"] == 0)
+    {
+      $values["person-birth_state"] = NULL;
+    }
+    if ($values["person-birth_country"] == 0)
+    {
+      $values["person-birth_country"] = NULL;
+    }
+    
+    return $values;
   }
 }
