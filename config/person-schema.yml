@@ -36,13 +36,21 @@ classes:
         type:               date
         required:           false
       birth_country:
-        type:               varchar(255)
+        type:               integer
+        foreignTable:       country
+        foreignReference:   id
       birth_state:
-        type:               varchar(255)
+        type:               integer
+        foreignTable:       state
+        foreignReference:   id
       birth_department:
-        type:               varchar(255)
+        type:               integer
+        foreignTable:       department
+        foreignReference:   id
       birth_city:
-        type:               varchar(255)
+        type:               integer
+        foreignTable:       city
+        foreignReference:   id
       observations:
         type:               longvarchar
       address_id:
