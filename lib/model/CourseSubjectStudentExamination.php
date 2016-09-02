@@ -99,10 +99,21 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
     }
   }
 
-    public function getMarkText()
+  public function getMarkText()
   {
-    $c = new num2text();
-    return $c->num2str($this->getMark());
+	$config = $this->getExaminationSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+	
+	if(! is_null($config) && !$config->isNumericalMark())
+	{
+		return "-";
+	
+	}
+	else
+	{
+		$c = new num2text();
+		return $c->num2str($this->getMark());
+    }
+    
   }
 
     public function getFormattedDate()
@@ -111,6 +122,32 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
     {
       return' (' . $this->getDate('d/m/Y') . ') ';
     }
+  }
+  
+  public function getMarkStrByConfig($config = null)
+  {    
+    if ($this->getIsAbsent()) {
+      return __('A');
+      
+    }else
+    {
+		if(is_null($config))
+			$config = $this->getExaminationSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+		
+		if($this->getMark() != SchoolBehaviourFactory::getEvaluatorInstance()->getMinimumMark())
+		{
+			if(! is_null($config) && !$config->isNumericalMark())
+			{
+				$letter_mark = LetterMarkPeer::getLetterMarkByValue($this->getMark());
+				return $letter_mark->getLetter(); 	   
+			}else
+			{
+				return $this->getMark();
+			}
+		}
+		
+     }
+    
   }
 
 }
