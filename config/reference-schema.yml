@@ -2,6 +2,23 @@ connection: propel
 description: Modelo de datos del Sistema de alumnos
 
 classes:
+
+  Department:
+    tablename: department
+    description:  Representa el partido/departamento de una provincia
+    columns:
+      id:
+      name:
+        type: varchar(255)
+      state_id:
+        type: integer
+        foreignClass: state
+        foreignReference: id
+        required: true
+      _indexes:
+        state: [state_id]
+        name: [name]
+
   City:
     tableName:            city
     description:          Representa una ciudad
@@ -21,6 +38,15 @@ classes:
         department: [department_id]
         name: [name]
 
+  Country:
+    tableName:            country
+    description:          Representa un País
+    columns:
+      id:
+      name:
+        type: varchar(255)
+        required: true
+
   State:
     tableName:            state
     description:          Representa una provincia
@@ -36,15 +62,6 @@ classes:
         required: true
       _indexes:
         country: [country_id]
-
-  Country:
-    tableName:            country
-    description:          Representa un País
-    columns:
-      id:
-      name:
-        type: varchar(255)
-        required: true
 
   Orientation:
     tableName:  orientation
@@ -296,20 +313,4 @@ classes:
         type: integer
         required: true
 
-  Department:
-    tablename: department
-    description:  Representa el partido/departamento de una provincia
-    columns:
-      id:
-      name:
-        type: varchar(255)
-      state_id:
-        type: integer
-        foreignClass: state
-        foreignReference: id
-        required: true
-      condition:
-        type: varchar(1)
-      _indexes:
-        state: [state_id]
-        name: [name]
+
