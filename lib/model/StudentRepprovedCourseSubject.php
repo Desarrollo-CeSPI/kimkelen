@@ -106,6 +106,24 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
     //If has the link to student_approved_career_subject means that the subject has been approved in examination
     return ! is_null($this->getStudentApprovedCareerSubject());
   }
+  
+  public function getMarksShortStrByCurrentSchoolYear()
+  {
+    $result = implode(',',array_map(create_function('$sers', 'return $sers->getShortValueString();'), $this->getStudentExaminationRepprovedSubjectsByCurrentSchoolYear()));
+
+    return $result;
+  }
+  
+  public function getStudentExaminationRepprovedSubjectsByCurrentSchoolYear()
+  {
+	  $c = new Criteria();
+	  $c->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID,ExaminationRepprovedSubjectPeer::ID);
+	  $c->addJoin(ExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_ID, ExaminationRepprovedPeer::ID);
+	  $c->add(ExaminationRepprovedPeer::SCHOOL_YEAR_ID,SchoolYearPeer::retrieveCurrent());
+	  
+	  return $this->getStudentExaminationRepprovedSubjects($c);
+	  
+  }
 }
 
 sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));
