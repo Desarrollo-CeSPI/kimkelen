@@ -29,7 +29,7 @@ class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 			case 'StudentApprovedCourseSubject':
 				return 'Regular';
 			case 'StudentDisapprovedCourseSubject':
-				var_dump($instance);
+				
 				if ($instance->getExaminationNumber() == 1) 
 				{
 					return 'Regular';
