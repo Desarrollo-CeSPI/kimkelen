@@ -2093,3 +2093,7 @@ div.wc-cal-event{
 {
     background-image: url('../images/config.png') !important;
 }
+
+.origin_schools {
+    width: 40em;
+}

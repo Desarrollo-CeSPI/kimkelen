@@ -710,6 +710,12 @@ subject:
     column:               id
     with_wildcard_routes: true
 
+
+search_schools:
+  url: /request/search_schools_ajax
+  param: { module: json, action: searchSchools, sf_format: json }
+
+
 get_careers:
   url:   /carreras-de-año-lectivo
   param:  {module: subject, action: getCareers}

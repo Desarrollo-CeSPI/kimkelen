@@ -10,7 +10,7 @@ Gemfile.lock
 /config/nc_flavor.yml
 /config/school_behaviour
 /cache/backend
-/cache/*cache
+/cache/*
 /data/sql/*sql
 data/sql/sqldb.map
 /data/persons-photos/*
