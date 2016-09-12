@@ -1,0 +1,95 @@
+.metro .select2-container,
+.metro .select2-container * {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -ms-box-sizing: content-box;
+  box-sizing: content-box;
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+.metro .select2-container:not(.select2-dropdown-open) * {
+  border-color: #d8d8d8 !important;
+}
+
+.metro .select2-container .select2-search input {
+  background-position-y: 5px;
+}
+
+.metro .select2-container .select2-focusser {
+  position: absolute !important;
+}
+
+.metro ul.select2-choices li {
+  list-style: none;
+  padding: 3px 19px 3px 6px;
+  margin: 3px 0 3px 5px;
+}
+
+.metro .select2-container .select2-results li {
+  line-height: 1.4;
+}
+
+.metro .select2-container {
+  min-width: 350px;
+  width: 100%;
+}
+
+.metro .select2-container .select2-choice,
+.metro .select2-container.select2-drop-above .select2-choice,
+.metro .select2-container-multi .select2-choices,
+.metro .select2-container-multi.select2-drop-above .select2-choices {
+  background-image: none;
+  background: #fff;
+  height: 36px;
+  line-height: 2.25;
+  border-radius: 4px;
+}
+
+.metro .select2-container.select2-dropdown-open:not(.select2-drop-above) .select2-choice,
+.metro .select2-container.select2-dropdown-open:not(.select2-drop-above) .select2-choices {
+  border-radius: 4px 4px 0 0;
+}
+
+.metro .select2-container.select2-drop-above.select2-dropdown-open .select2-choice,
+.metro .select2-container.select2-drop-above.select2-dropdown-open .select2-choices {
+  border-radius: 0 0 4px 4px;
+}
+
+.metro .select2-container > a > div {
+  background: rgb(242, 242, 242);
+  background-image: none;
+}
+
+.metro .select2-container-active > a > div {
+  background: #fff;
+}
+
+.metro .select2-container .select2-choice .select2-arrow b {
+  background-position-y: 5px !important;
+}
+
+.metro .select2-container-single .select2-search {
+  padding: 3px 4px;
+  margin: 0;
+}
+
+.metro .select2-container-single .select2-search input {
+  margin: 1px 0;
+  padding: 4px 20px 4px 5px;
+  font-size: 1em;
+  line-height: 1.4;
+  height: auto;
+}
+
+.metro .select2-container-multi .select2-search-field input {
+  border: none !important;
+}
+
+.metro .select2-container-multi .select2-choices .select2-search-choice {
+  line-height: 1.4;
+}
+
+.metro .select2-container-multi .select2-search-choice-close {
+  top: 25%;
+}
