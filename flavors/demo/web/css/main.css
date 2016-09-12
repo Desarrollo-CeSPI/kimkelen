@@ -1991,3 +1991,7 @@ div.wc-cal-event{
 #pathway-info-list {
   list-style: disc !important;
 }
+
+.origin_schools {
+    width: 40em;
+}
