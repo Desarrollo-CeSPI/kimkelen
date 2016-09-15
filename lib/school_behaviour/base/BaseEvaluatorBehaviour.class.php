@@ -562,7 +562,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
 
     $c->addAscendingOrderByColumn(CourseSubjectStudentMarkPeer::MARK_NUMBER);
-    $availables = array();
+    $availables = array();z
     $course_subject_student_marks = $course_subject_student->getCourseSubjectStudentMarks($c);
     $availables[1] = array_shift($course_subject_student_marks);
     foreach ($course_subject_student_marks as $cssm)
