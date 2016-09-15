@@ -110,9 +110,9 @@ class attendance_justificationActions extends sfActions
 
     //Filtro solo las que son faltas.
     $criteria->add(StudentAttendancePeer::VALUE, 0, Criteria::GREATER_THAN);
-
     $criteria->addJoin(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
     $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $criteria->addDescendingOrderByColumn(StudentAttendancePeer::DAY);
 
     return $criteria;
   }
