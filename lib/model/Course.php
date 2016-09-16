@@ -314,6 +314,18 @@ class Course extends BaseCourse
 
     if ($this->countStudents() == 0)
       return false;
+      
+      
+     //busco los retirados o con reserva de banco
+    $criteria = new Criteria();
+    $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+    $criterion = $criteria->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
+    $criterion->addOr($criteria->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
+    $criteria->add($criterion);
+	$criteria->clearSelectColumns();
+    $criteria->addSelectColumn(StudentPeer::ID);
+    $stmt = StudentPeer::doSelectStmt($criteria);
+    $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
     $c = new Criteria();
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
@@ -327,7 +339,9 @@ class Course extends BaseCourse
 
     $c->add(CourseSubjectStudentMarkPeer::MARK_NUMBER, $this->getCurrentPeriod());
     $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNULL);
-
+    
+    $c->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+    
     return CourseSubjectStudentMarkPeer::doCount($c) == 0 && $this->isCurrentSchoolYear();
 
   }
