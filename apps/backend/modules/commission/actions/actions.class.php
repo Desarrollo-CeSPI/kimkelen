@@ -350,11 +350,17 @@ class commissionActions extends autoCommissionActions
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
       if ($this->form->isValid())
       {
-        $this->form->save();
-
-        $this->getUser()->setFlash("notice", "New subject added to commission successfully");
-
-        $this->redirect("@commission");
+        try
+        {
+          $this->form->save();
+          $this->getUser()->setFlash("notice", "New subject added to commission successfully");
+          $this->redirect("@commission");
+        }
+        catch (PropelException $e)
+        {
+          $this->getUser()->setFlash('error', 'La materia ya existe en la comisión.');
+        }
+        
       }
     }
     else
@@ -365,7 +371,7 @@ class commissionActions extends autoCommissionActions
     }
   }
 
-   public function executeDeleteSubject(sfWebRequest $request)
+  public function executeDeleteSubject(sfWebRequest $request)
    {
      $cs= CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
 
