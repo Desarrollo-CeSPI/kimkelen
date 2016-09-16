@@ -1594,6 +1594,24 @@ class Student extends BaseStudent
     unset($c);
 
   }
+  
+  public function setCourseSubjectStudentMarksForSchoolYear($school_year,$value=true)
+  {
+	$c = new Criteria();
+    $c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+    $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID,CourseSubjectStudentPeer::ID);
+    
+    $list_cssm = CourseSubjectStudentMarkPeer::doSelect($c);
+    
+    foreach ($list_cssm as $cssm)
+    {
+      $cssm->setIsClosed($value);
+      $cssm->save();
+    }
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
