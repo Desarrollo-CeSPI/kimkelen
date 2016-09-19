@@ -48,29 +48,29 @@
       <fieldset id="califications_fieldset">
         <?php foreach ($forms as $form): ?>
           <div class="sf_admin_form_row">
-            <?php if ($form->hasGlobalErrors()): ?>
-              <?php echo $form->renderGlobalErrors() ?>
-            <?php endif ?>
-            <?php echo $form->renderHiddenFields() ?>
-            <?php echo $form["id"] ?>
-            <?php echo $form["mark"]->renderError() ?>
-            <?php echo $form["mark"]->renderLabel() ?><?php echo $form["mark"] ?>
-            <?php if (isset($form["is_absent"])): ?>
-              <?php echo $form["is_absent"] ?><span style="margin-left: 10px"><?php echo __("Is absent") ?>?</span>
-            <?php endif ?>
-            <div class="help">
-              <?php echo $form["mark"]->renderHelp() ?>
+            <div style="min-height: 75px;"> 
+              <?php if ($form->hasGlobalErrors()): ?>
+                <?php echo $form->renderGlobalErrors() ?>
+              <?php endif ?>
+              <?php echo $form->renderHiddenFields() ?>
+              <?php echo $form["id"] ?>
+              <?php echo $form["mark"]->renderError() ?>
+              <?php echo $form["mark"]->renderLabel() ?>
+              <?php echo 'Nota: ' . $form["mark"] ?>
+              <?php if (isset($form["is_absent"])): ?>
+                <?php echo $form["is_absent"] ?><span style="margin-left: 10px"><?php echo __("Is absent") ?>?</span>
+              <?php endif ?>
+              <div class="help">
+                <?php echo $form["mark"]->renderHelp() ?>
+              </div>
+
+  	          <?php $course_subject_student = $form->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent(); ?>
+  	          <div class="ows">
+  		          <?php echo $course_subject_student->getStudent()->owsCorrelativeFor($examination_repproved_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?>
+  	          </div>
             </div>
-
-	          <?php $course_subject_student = $form->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent(); ?>
-	          <div class="ows">
-		          <?php echo $course_subject_student->getStudent()->owsCorrelativeFor($examination_repproved_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?>
-	          </div>
-
-            <div style="clear: both; margin-top: 1px;"></div>
             <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $course_subject_student)) ?>
           </div>
-
         <?php endforeach ?>
       </fieldset>
 
