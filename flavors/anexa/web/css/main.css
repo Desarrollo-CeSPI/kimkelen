@@ -1688,7 +1688,7 @@ div.no_results_advice {
 
 .info-mark-container
 {
-    margin-left: 10em !important;
+    margin-left: 2em !important;
 }
 .print_student_examination
 {
@@ -2069,4 +2069,9 @@ div.wc-cal-event{
 
 .origin_schools {
     width: 40em;
+}
+
+.mark-container-info
+{
+    margin-top: 5px !important;
 }

@@ -46,19 +46,22 @@
         <?php foreach ($forms as $form): ?>
           <?php echo $form->renderHiddenFields() ?>
           <div class="sf_admin_form_row">
-            <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $form->getObject()->getCourseSubjectStudent())) ?>
-            <?php if ($form->hasGlobalErrors()): ?>
-              <?php echo $form->renderGlobalErrors() ?>
-            <?php endif ?>
-            <?php echo $form["id"] ?>
-            <?php echo $form["mark"]->renderError() ?>
-            <?php echo $form["mark"]->renderLabel() ?><?php echo $form["mark"] ?>
-            <?php if (isset($form["is_absent"])): ?>
-              <?php echo $form["is_absent"] ?><span style="margin-left: 10px"><?php echo __("Is absent") ?>?</span>
-            <?php endif ?>
-            <div class="help">
-              <?php echo $form["mark"]->renderHelp() ?>
+            <div style="min-height: 75px;"> 
+              <?php if ($form->hasGlobalErrors()): ?>
+                <?php echo $form->renderGlobalErrors() ?>
+              <?php endif ?>
+              <?php echo $form["id"] ?>
+              <?php echo $form["mark"]->renderError() ?>
+              <?php echo $form["mark"]->renderLabel() ?>
+              <?php echo 'Nota: ' . $form["mark"] ?>
+              <?php if (isset($form["is_absent"])): ?>
+                <?php echo $form["is_absent"] ?><span style="margin-left: 10px"><?php echo __("Is absent") ?>?</span>
+              <?php endif ?>
+              <div class="help">
+                <?php echo $form["mark"]->renderHelp() ?>
+              </div>
             </div>
+            <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $form->getObject()->getCourseSubjectStudent())) ?>
           </div>
         <?php endforeach ?>
       </fieldset>

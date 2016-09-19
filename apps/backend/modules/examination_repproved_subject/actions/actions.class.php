@@ -237,4 +237,19 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $this->setLayout('cleanLayout');
 
   }
+
+  public function executeChangelogMarks(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = $this->getRoute()->getObject();
+    
+    if (null === $this->examination_repproved_subject)
+    {
+      $this->redirect($this->getModuleName().'/index');
+    }
+    
+    $this->students = $this->examination_repproved_subject->getStudents();
+    $this->previous_url = $this->getUser()->setAttribute('referer_module', 'examination_repproved_subject');
+
+  }
+
 }

@@ -37,6 +37,10 @@ generator:
             condition: canBeClosed
             label: Close examination
             credentials: [edit_examination_repproved_subject]
+          changelog:
+            action:         changelogMarks
+            label:          Auditoria de notas
+            credentials:    [edit_examination_repproved_subject]
           print_students:
             label: Print students
             action: printStudents

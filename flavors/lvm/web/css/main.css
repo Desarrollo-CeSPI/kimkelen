@@ -1070,7 +1070,7 @@ table.list
 
 .info-mark-container
 {
-    margin-left: 10em !important;
+    margin-left: 2em !important;
 }
 
 .tab
@@ -2025,4 +2025,9 @@ div.wc-cal-event{
 
 .origin_schools {
     width: 40em;
+}
+
+.mark-container-info
+{
+    margin-top: 5px !important;
 }

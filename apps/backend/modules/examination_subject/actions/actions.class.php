@@ -198,4 +198,26 @@ class examination_subjectActions extends autoExamination_subjectActions
       $pager->setParameter('examination', $examination);
       return $pager;
   }
+  
+  public function executeChangelogMarks(sfWebRequest $request)
+  {
+    $this->examination_subject = $this->getRoute()->getObject();
+   
+    if (null === $this->examination_subject)
+    {
+      $this->redirect($this->getModuleName().'/index');
+    }
+
+    if (is_null($request->getReferer()))
+    {
+      $this->previous_url = $this->getUser()->setAttribute('referer_module', 'examination_subject');
+    }
+    else
+    {
+      $this->previous_url = $request->getReferer();
+    }
+
+     $this->students = $this->examination_subject->getStudents();
+  }
+
 }
