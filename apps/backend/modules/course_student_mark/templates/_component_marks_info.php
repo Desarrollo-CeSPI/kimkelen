@@ -17,11 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+<?php include_partial('course_student_mark/pathway_info', array('student' => $course_subject_student->getStudent()))?>
+
+<h5>Historial de notas:</h5>
+
 <div class="mark-container-info">
   <?php foreach ($marks as $mark) :?>
     <div class="info-mark-container">
-      <?php echo __('Mark %number%: %mark%', array('%number%' => $mark->getMarkNumber(), '%mark%' => $mark->getMark()))?>&nbsp;&nbsp;
-      <?php echo $mark->renderChangelog(); ?>
+      <?php echo __('Mark %number%: %mark%', array('%number%' => $mark->getMarkNumber(), '%mark%' => $mark->getMark()))?>
     </div>
   <?php endforeach?>
 
@@ -33,18 +36,13 @@
     <div class="info-mark-container">
       <?php echo __('Examination %examination%: %mark%', array('%examination%' => $course_subject_student_examination->getExaminationSubject()->getExamination(),
           '%mark%'=> $course_subject_student_examination->getIsAbsent()? __('Absent') : $course_subject_student_examination->getMark())); ?>
-      <?php echo ncChangelogRenderer::render($course_subject_student_examination, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>
   <?php endforeach ?>
-
-	<?php include_partial('course_student_mark/pathway_info', array('student' => $course_subject_student->getStudent()))?>
 
   <?php foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject):?>
     <div class="info-mark-container">
       <?php echo __('Repproved examination %repproved_examination%: %mark%', array('%repproved_examination%' => $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved(),
           '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMark())); ?>
-
-      <?php echo ncChangelogRenderer::render($student_examination_repproved_subject, 'tooltip', array('credentials' => 'view_changelog')); ?>
     </div>
   <?php endforeach ?>
 </div>
