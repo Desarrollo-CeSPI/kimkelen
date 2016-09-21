@@ -53,11 +53,11 @@
 
 
             <?php if ($config && $config->parentIsFirst()): ?>
-            <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+            <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
             <td>--</td>
           <?php else: ?>
             <td>--</td>
-            <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+            <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
           <?php endif; ?>
 
 
@@ -66,14 +66,14 @@
           <?php $configs = $course_subject_student->getCourseSubject()->getCourseSubjectConfigurations(); ?>
           <?php $config = array_shift($configs); ?>
       <?php if ($config && $config->isForFirstQuaterly()): ?>
-            <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+            <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
             <td>--</td>
           <?php else: ?>
             <td>--</td>
-            <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+            <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
           <?php endif; ?>
         <?php else: ?>
-          <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+          <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
     <?php endif; ?>
     <?php endif; ?>
       <?php endfor; ?>

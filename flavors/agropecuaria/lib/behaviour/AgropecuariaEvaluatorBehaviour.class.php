@@ -131,9 +131,9 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     foreach ($course_subject_students as $course_subject_student)
     {
-      if (!is_null($course_subject_student->getMarkForIsClose($number)))
+      if (!is_null($course_subject_student->getMarkForIsClosed($number)))
       {
-        $partial_avg = bcadd($partial_avg, $course_subject_student->getMarkForIsClose($number)->getMark(), 2);
+        $partial_avg = bcadd($partial_avg, $course_subject_student->getMarkForIsClosed($number)->getMark(), 2);
       }
     }
     return bcdiv($partial_avg, count($course_subject_students), 2);
@@ -145,7 +145,7 @@ class AgropecuariaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     foreach ($course_subject_students as $course_subject_student)
     {
-      $last_mark_is_closed = $course_subject_student->getLastMarkForIsClose();
+      $last_mark_is_closed = $course_subject_student->getLastMarkForIsClosed();
       $partial_avg = bcadd($partial_avg, $last_mark_is_closed->getMark(), 2);
     }
 

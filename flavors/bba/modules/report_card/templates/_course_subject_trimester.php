@@ -23,9 +23,9 @@
   <?php foreach ($course_subject_students as $course_subject_student): ?>
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
-      <td><?php echo $course_subject_student->getMarkForIsClose(1) ?></td>
-      <td><?php echo $course_subject_student->getMarkForIsClose(2) ?></td>
-      <td><?php echo $course_subject_student->getMarkForIsClose(3) ?></td>
+      <td><?php echo $course_subject_student->getMarkForIsClosed(1) ?></td>
+      <td><?php echo $course_subject_student->getMarkForIsClosed(2) ?></td>
+      <td><?php echo $course_subject_student->getMarkForIsClosed(3) ?></td>
       <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
       <td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
       <td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>

@@ -110,7 +110,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
    * @param <type> $mark_number
    * @return  CourseSubjectStudentMark
    */
-  public function getMarkForIsClose($mark_number, PropelPDO $con = null)
+  public function getMarkForIsClosed($mark_number, PropelPDO $con = null)
   {
     $mark = $this->getMarkFor($mark_number);
   
@@ -125,7 +125,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   }
 
-  public function getLastMarkForIsClose(PropelPDO $con = null)
+  public function getLastMarkForIsClosed(PropelPDO $con = null)
   {
     $mark_number = 0;
     /* @var $mark CourseSubjectStudentMark */

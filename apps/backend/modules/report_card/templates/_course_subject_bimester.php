@@ -35,7 +35,7 @@
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
       <?php #Imprimimos las notas del PRIMER bimester?>
       <?php for ($mark_number = 1; $mark_number <= $course_subject_student->getCourseSubject()->countMarks(); $mark_number++): ?>
-        <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+        <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
       <?php endfor; ?>
       <?php #Completo los casilleros extras que  tienen si mi materia tiene menos notas que  el maximo del bimestre?>
       <?php if ($max_marks_first_q > $course_subject_student->getCourseSubject()->countMarks()): ?>
@@ -98,7 +98,7 @@
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
       <?php #Imprimimos las notas del SEGUNDO bimester ?>
       <?php for ($mark_number = 1; $mark_number <= $course_subject_student->getCourseSubject()->countMarks(); $mark_number++): ?>
-        <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+        <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
       <?php endfor; ?>
       <?php #Completo los casilleros extras que  tienen si mi materia tiene menos notas que  el maximo del bimestre?>
       <?php if ($max_marks_second_q > $course_subject_student->getCourseSubject()->countMarks()): ?>
