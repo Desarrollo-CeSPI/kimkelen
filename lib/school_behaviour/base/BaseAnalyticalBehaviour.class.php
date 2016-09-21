@@ -78,7 +78,11 @@ class BaseAnalyticalBehaviour
     
     public function get_year_average($year)
     {
-        return $this->objects[$year]['average'];
+      if(!isset($this->objects[$year]['average'])) {
+        return false;
+      }
+
+      return $this->objects[$year]['average'];
     }
     
     public function get_year_status($year)
