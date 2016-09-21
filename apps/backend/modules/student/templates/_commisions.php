@@ -17,16 +17,29 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+<?php 
+	$commisions = $student->getCommisions();
+  $show_commisions = array_slice($commisions, 0, 3);
+  $hide_commisions = array_slice($commisions, 3);
+?>
 <?php use_helper('I18N')?>
 <?php /* @var $student Student */ ?>
-<?php $commisions = $student->getCommisions()?>
+
 <?php if (count($commisions)): ?>
   <div class="student_year">
   	<?php echo count($commisions) > 1 ?  __('Currently inscripted in commisions:') : __('Currently inscripted in commision:')?>
   </div>
   <div class="student_commisions">
-  	<?php foreach( $commisions as $course):?>
-    	<div style="margin-left:5px"><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
+
+  	<?php foreach( $show_commisions as $course):?>
+    	<div style="margin-left: 5px"><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
     <?php endforeach ?>
+
+    <?php if (count($hide_commisions)): ?>
+    	<?php foreach( $hide_commisions as $course):?>
+      	<div class="hide" style="margin-left: 5px; display: none;"><?php echo link_to($course, 'course/show?id=' . $course->getId())?></div>
+    	<?php endforeach ?>
+    	<a class="toggle-link" href="#" onclick="jQuery(this).closest('.student_commisions').find('.hide').toggle(500);return false">Ver todas</a>
+    <?php endif ?>
   </div>
 <?php endif ?>
