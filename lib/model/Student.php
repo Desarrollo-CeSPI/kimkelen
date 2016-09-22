@@ -1612,6 +1612,17 @@ class Student extends BaseStudent
       $cssm->save();
     }
   }
+
+  public function asArray()
+  {
+    return array(
+      'full_name'  => $this->getPerson()->getFullName(),
+      'full_document' => $this->getPerson()->getFullIdentification(),
+      'is_active' => $this->getPerson()->getIsActive(),
+      'status' => $this->getCurrentOrLastStudentCareerSchoolYear()->getStatusString(),
+      'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear()
+    );
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
