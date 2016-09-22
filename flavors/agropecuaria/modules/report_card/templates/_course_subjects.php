@@ -33,8 +33,8 @@
       <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
       <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
       <?php else: ?>
-      <td><?php echo $course_subject_student->getMarkForIsClose(1) ?></td>
-      <td><?php echo $course_subject_student->getMarkForIsClose(2) ?></td>
+      <td><?php echo $course_subject_student->getMarkForIsClosed(1) ?></td>
+      <td><?php echo $course_subject_student->getMarkForIsClosed(2) ?></td>
       <?php endif; ?>
       <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
       <td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>

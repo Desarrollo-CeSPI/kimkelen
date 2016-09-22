@@ -35,7 +35,7 @@
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 
       <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-        <td><?php echo $course_subject_student->getMarkForIsClose($mark_number) ?></td>
+        <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
       <?php endfor; ?>
       <?php $course_result = $course_subject_student->getCourseResult() ?>
       <?php if (!$course_subject_student->hasSomeMarkFree()): ?>
