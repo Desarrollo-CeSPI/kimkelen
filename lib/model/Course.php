@@ -461,6 +461,7 @@ class Course extends BaseCourse
   {
     $c = new Criteria();
     $c->add(CourseSubjectStudentMarkPeer::IS_CLOSED, true);
+    $c->add(CourseSubjectStudentMarkPeer::MARK, null,Criteria::ISNOTNULL);
     $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
