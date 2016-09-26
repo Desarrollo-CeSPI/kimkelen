@@ -43,7 +43,10 @@
         </div>
         <div class="sf_admin_form_row">
           <?php echo $form['student']->renderRow()?>
-        </div>
+			<div class="help">
+				Filtra por apellido o por número de documento
+		    </div>
+        </div> 
         <?php if ($has_subject_attendance): ?>
             <div class="sf_admin_form_row">
                  <?php echo $form['attendance_subject']->renderRow()?>
