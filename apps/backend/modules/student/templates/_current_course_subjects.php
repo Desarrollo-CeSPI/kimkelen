@@ -76,7 +76,7 @@
 
         <?php foreach ($evaluator_instance->getExaminationNumbers() as $number => $name): ?>
           <td>
-            <?php echo ($course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber($number)) ? $course_subject_student_examination->getMarkStr() : '' ?>
+            <?php echo ($course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber($number)) ? $course_subject_student_examination->getMarkStrByConfig($course_subject_student->getConfiguration()) : '' ?>
             <br/>
             <?php echo is_null($course_subject_student_examination) ? '' : $course_subject_student_examination->getFormattedDate() ?>
           </td>

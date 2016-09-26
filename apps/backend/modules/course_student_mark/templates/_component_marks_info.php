@@ -29,7 +29,7 @@
   <?php endforeach?>
 
   <div class="info-mark-container">
-    <?php echo __('Average: %average%', array('%average%' => $course_subject_student->getMarksAverage())); ?>
+    <?php echo __('Average: %average%', array('%average%' => $course_subject_student->getCourseResult()->getResultStr())) ?>
   </div>
 
   <?php foreach ($course_subject_student_examinations as $course_subject_student_examination):?>

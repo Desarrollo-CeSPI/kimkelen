@@ -41,28 +41,43 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
     
+    $configuration = $this->object->getExaminationSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+    
     if (!$this->getObject()->getExaminationSubject()->canEditCalifications())
     {
       unset($this["is_absent"]);
       
       $this->widgetSchema["mark"] = new mtWidgetFormPlain(array(
-        "empty_value" => "Is absent"
-      ));
+              'object' => $this->getObject(), 'method' => 'getMarkStrByConfig',"empty_value" => "Is absent", 'method_args' => $configuration, 'add_hidden_input' => false),
+               array('class' => 'mark'));
     }
     else
     {
-      $this->widgetSchema->setHelp("mark", "Enter student's mark or mark him as absent.");
+		$this->widgetSchema->setHelp("mark", "Enter student's mark or mark him as absent.");
+      
+		if(! $configuration->isNumericalMark())
+		{
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$this->getObject()->getMark());
+			$this->setWidget('mark',new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true)));
+			
+			if(!is_null($letter_mark)) {
+				$this->setDefault('mark', $letter_mark->getId());
+			 }
+			
+			$this->setValidator('mark',new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false)));
+		}
+		else
+		{
+			$behavior = SchoolBehaviourFactory::getEvaluatorInstance();
+			$this->validatorSchema["mark"]->setOption("min", $behavior->getMinimumMark());
+			$this->validatorSchema["mark"]->setOption("max", $behavior->getMaximumMark());
+			
+			$this->validatorSchema["mark"]->setMessage("min", "Mark should be at least %min%.");
+			$this->validatorSchema["mark"]->setMessage("max", "Mark should be at most %max%.");
+		}
     }
-    
-    $behavior = SchoolBehaviourFactory::getEvaluatorInstance();
-    $this->validatorSchema["mark"]->setOption("min", $behavior->getMinimumMark());
-    $this->validatorSchema["mark"]->setOption("max", $behavior->getMaximumMark());
-    
-    $this->validatorSchema["mark"]->setMessage("min", "Mark should be at least %min%.");
-    $this->validatorSchema["mark"]->setMessage("max", "Mark should be at most %max%.");
-    
-    $this->widgetSchema->setLabel("mark", $this->getObject()->getCourseSubjectStudent()->getStudent());
-    
+     
+    $this->widgetSchema->setLabel("mark", $this->getObject()->getCourseSubjectStudent()->getStudent());   
     $this->validatorSchema->setPostValidator(new sfValidatorCallback(array("callback" => array($this, "validateAbsence"))));
 
     $this->setWidget('date', new csWidgetFormDateInput());
@@ -79,4 +94,5 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
     
     return $values;
   }
+  
 }

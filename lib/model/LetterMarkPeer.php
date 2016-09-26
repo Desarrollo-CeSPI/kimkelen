@@ -23,5 +23,5 @@ class LetterMarkPeer extends BaseLetterMarkPeer
   	$result = LetterMarkPeer::doSelectOne($criteria);
   	return $result;	
   }
-
+  
 }

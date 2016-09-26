@@ -195,7 +195,7 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
     $this->form->setDefault('examination_id', $this->getUser()->getReferenceFor('manual_examination'));
     $this->examination_subject = $this->form->getObject();
   }
-  
+
   public function executeChangelogMarks(sfWebRequest $request)
   {
     $this->examination_subject = $this->getRoute()->getObject();
