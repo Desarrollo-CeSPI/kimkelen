@@ -2075,3 +2075,10 @@ div.wc-cal-event{
 {
     margin-top: 5px !important;
 }
+
+.toggle-link
+{
+    background-color: rgb(238, 238, 238);
+    font-weight: bolder;
+    font-size: 0.9em;
+}
