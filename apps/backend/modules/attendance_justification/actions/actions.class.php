@@ -94,9 +94,19 @@ class attendance_justificationActions extends sfActions
 
     if (isset($params['student']) && trim($params['student']) != '')
     {
-      $criteria->add(PersonPeer::LASTNAME, '%' . $params['student'] . '%', Criteria::LIKE);
-      $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-      $criteria->addJoin(StudentPeer::ID, StudentAttendancePeer::STUDENT_ID);
+		if(is_numeric($params['student'])){
+		//si es un nro chequeo documento
+			$criteria->add(PersonPeer::IDENTIFICATION_NUMBER, (int)$params['student']);	
+			$criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+			$criteria->addJoin(StudentPeer::ID, StudentAttendancePeer::STUDENT_ID);
+				
+		}
+		else{
+			$criteria->add(PersonPeer::LASTNAME, '%' . $params['student'] . '%', Criteria::LIKE);
+			$criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+			$criteria->addJoin(StudentPeer::ID, StudentAttendancePeer::STUDENT_ID);
+		}
+      
     }
 
     if ($this->getUser()->isPreceptor())

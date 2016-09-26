@@ -13,7 +13,7 @@ class AttendanceJustificationFormFilter extends sfForm
       'student' => new sfWidgetFormInput(),
       'attendance_subject'=> new sfWidgetFormInputCheckbox()
     ));
-
+    
     $this->setValidators(array(
       'from_date' => new mtValidatorDateString(array('required' => false)),
       'to_date' => new mtValidatorDateString(array('required' => false)),
