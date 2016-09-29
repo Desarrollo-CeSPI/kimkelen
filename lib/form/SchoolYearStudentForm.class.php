@@ -40,5 +40,7 @@ class SchoolYearStudentForm extends BaseSchoolYearStudentForm
 	  $this->setWidget('health_info',  new sfWidgetFormSelect(array(
 		  'choices'  => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions()
 	  )));
+	$this->setWidget('date_health_info', new csWidgetFormDateInput());
+    $this->setValidator('date_health_info', new mtValidatorDateString(array('required' => true,'date_output'=>'Y-m-d')));
   }
 }
