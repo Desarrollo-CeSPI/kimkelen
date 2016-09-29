@@ -47,8 +47,12 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
         'message_with_no_value' => 'Seleccione un estado y aparecerán los motivos correspondientes',
         'get_observed_value_callback' => array(get_class($this), 'getMotives')
       )));
-    $this->setWidget('start_date_reserve', new sfWidgetFormDate(array('format'=>'%day%/%month%/%year%')));  
-    $this->setWidget('end_date_reserve', new sfWidgetFormDate(array('format'=>'%day%/%month%/%year%')));
+      
+    $this->setWidget('start_date_reserve', new csWidgetFormDateInput());
+    $this->setValidator('start_date_reserve', new mtValidatorDateString(array('date_output'=>'Y-m-d')));
+    
+    $this->setWidget('end_date_reserve', new csWidgetFormDateInput());
+    $this->setValidator('end_date_reserve', new mtValidatorDateString(array('date_output'=>'Y-m-d')));
     
 	//si ya tiene reserva muestro la fecha
 	if($this->getObject()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
@@ -60,8 +64,9 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
 		if(!is_null($reserve))
 		{ 
 			$start_date = new DateTime($reserve->getStartDate());
+			
 			if(!is_null($start_date)){
-				$this->getWidget('start_date_reserve')->setOption('empty_values', array('year' =>  $start_date->format('Y'), 'month' => $start_date->format('m'), 'day' => $start_date->format('d')));
+				$this->getWidget('start_date_reserve')->setOption('default',$start_date->format('d/m/Y') );
 			}	
 		}
 	}
@@ -70,7 +75,7 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
       'student_id'              => new sfValidatorPropelChoice(array('model' => 'Student', 'column' => 'id', 'required' => false)),
       'status'   		        => new sfValidatorChoice(array('choices' => array_keys($status))),
       'change_status_motive_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ChangeStatusMotive','column' => 'id')),
-      'start_date_reserve'		=> new sfValidatorDate(array('required' => false)),
+     
     ));
     
     $this->validatorSchema->setOption("allow_extra_fields", true);
