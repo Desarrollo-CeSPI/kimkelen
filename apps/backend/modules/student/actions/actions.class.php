@@ -831,7 +831,7 @@ class studentActions extends autoStudentActions
 							$career_student->save(Propel::getConnection());
 							
 							//deshabilito la persona
-							//$this->student->getPerson()->setIsActive(false);
+							$this->student->getPerson()->setIsActive(false);
 							$this->student->getPerson()->save();
 							
 							$this->getUser()->setFlash('info','The item was updated successfully.');

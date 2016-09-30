@@ -57,9 +57,7 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
 	//si ya tiene reserva muestro la fecha
 	if($this->getObject()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
 	{
-		$c = new Criteria();
-		$c->add(StudentReserveStatusRecordPeer::STUDENT_ID,$this->getObject()->getStudentId());
-		$reserve= StudentReserveStatusRecordPeer::doSelectOne($c);
+		$reserve= $this->getObject()->getStudent()->hasActiveReserve();
 		
 		if(!is_null($reserve))
 		{ 

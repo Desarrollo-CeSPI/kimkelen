@@ -1493,7 +1493,7 @@ class Student extends BaseStudent
     //tiene reserva de banco activa.
 
     $c = new Criteria();
-    $c->addJoin(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
+    $c->add(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
     $c->add(StudentReserveStatusRecordPeer::END_DATE, null, Criteria::ISNULL);
     return StudentReserveStatusRecordPeer::doSelectOne($c);
   }
