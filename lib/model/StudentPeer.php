@@ -22,6 +22,22 @@
 class StudentPeer extends BaseStudentPeer
 {
 
+  static public function getForDocumentTypeAndNumber($parameters)
+  {
+    $c = new Criteria();
+    $c->addJoin(PersonPeer::ID, self::PERSON_ID, Criteria::INNER_JOIN);
+    $c->add(PersonPeer::IDENTIFICATION_NUMBER, $parameters['document_number']);
+    $c->add(PersonPeer::IDENTIFICATION_TYPE, $parameters['document_type']);
+    $s = self::doSelectOne($c);
+    if (!$s)
+    {
+      throw new sfError404Exception(sprintf('Student with document "%s" "%s" does not exist.',  $parameters['document_type'], $parameters['document_number']));
+    }
+
+    return $s;
+  }
+
+
   static public function search($query_string, $sf_user, $limit = 12)
   {
 
