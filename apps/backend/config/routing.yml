@@ -5,7 +5,12 @@ api_student:
   options: { model: Student, type: object, method: getForDocumentTypeAndNumber }
   requirements:
     sf_format: json
-
+    
+api_student_insert:
+  url: /insertStudent
+  param:   { module: api, action: insertStudent }
+  requirements: { sf_method: post }
+    
 change_status_motive:
   class: sfPropelRouteCollection
   options:
