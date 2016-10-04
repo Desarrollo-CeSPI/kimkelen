@@ -35,7 +35,7 @@
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
       <?php for ($i = 1; $i <= $count_marks; $i++): ?>
-        <td><?php echo $course_subject_student->getMarkFor($i) ?></td>
+        <td><?php echo $course_subject_student->getMarkForIsClosed($i) ?></td>
       <?php endfor; ?>
 
       <?php $course_result = $course_subject_student->getCourseResult() ?>
@@ -98,7 +98,7 @@
       <td class="subject_name"><?php echo $name = $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 
       <?php for ($i = 1; $i <= $count_marks; $i++): ?>
-        <td><?php echo $course_subject_student->getMarkFor($i) ?></td>
+        <td><?php echo $course_subject_student->getMarkForIsClosed($i) ?></td>
       <?php endfor; ?>
 
       <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
