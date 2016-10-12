@@ -6,10 +6,10 @@ api_student:
   requirements:
     sf_format: json
     
-api_student_insert:
-  url: /insertStudent
-  param:   { module: api, action: insertStudent }
-  requirements: { sf_method: post }
+api_confirm_student:
+  url: /api/confirm_student
+  param:   { module: api, action: confirmStudent }
+  requirements: { sf_method: post}
     
 change_status_motive:
   class: sfPropelRouteCollection
