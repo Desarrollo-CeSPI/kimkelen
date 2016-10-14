@@ -46,7 +46,6 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
     if (!$this->getObject()->getExaminationSubject()->canEditCalifications())
     {
       unset($this["is_absent"]);
-      
       $this->widgetSchema["mark"] = new mtWidgetFormPlain(array(
               'object' => $this->getObject(), 'method' => 'getMarkStrByConfig',"empty_value" => "Is absent", 'method_args' => $configuration, 'add_hidden_input' => false),
                array('class' => 'mark'));
