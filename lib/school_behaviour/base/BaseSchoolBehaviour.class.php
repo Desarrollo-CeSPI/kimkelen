@@ -1154,11 +1154,6 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return false;
   }
 
-	public function canShowCBFE() {
-		return false;
-	}
-
-
 	public function getOptionalCourseSubjectStudents($student, $school_year = null)
 	{
 

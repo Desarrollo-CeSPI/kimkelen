@@ -596,36 +596,7 @@ class studentActions extends autoStudentActions
     $this->getUser()->setFlash('info','The item was updated successfully.');
     $this->redirect('@student');
   }
-  
-  public function executeAnalyticalWithoutCBFE(sfWebRequest $request)
-  {	
-	$this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
-	$this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-	$this->analytical->processWithOutCBFE();	
-	$this->analytic = new Analytic();
-  }
-  
-   public function executePrintAnalyticalWithoutCBFE(sfWebRequest $request)
-  {
-    $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
-    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-    $this->analytical->processWithOutCBFE();
-    $this->analytic = new Analytic();
-    $this->analytic->setCareerStudent($this->career_student);
-    $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
-    $this->analytic->save();
 
-    $this->setLayout('cleanLayout');
-  }
-  
-  public function postExecutePrintAnalyticalWithoutCBFE(sfWebRequest $request)
-  {
-      $analytical_document = $this->getResponse()->getContent();
-      $this->analytic->setCertificate($analytical_document);
-      $this->analytic->save();
-  }
-
-  
   public function executeChangeStudentStatus(sfWebRequest $request)
   {
 	$this->student = $this->getRoute()->getObject();

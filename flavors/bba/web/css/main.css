@@ -1970,11 +1970,6 @@ div.wc-cal-event{
     list-style: none !important;
 }
 
-.sf_admin_list .sf_admin_action_analytical_without_cbfe a
-{
-    background-image: url('../images/certificate.png') !important;
-}
-
 .student_current_info .info_div .health
 {
   color: #F86363;

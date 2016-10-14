@@ -147,12 +147,6 @@ class Student extends BaseStudent
 
   }
 
-    public function canShowCBFE()
-    {
-        return SchoolBehaviourFactory::getInstance()->canShowCBFE();
-
-    }
-
   /**
    * Registers the student for the given career.
    *
@@ -160,6 +154,7 @@ class Student extends BaseStudent
    * @param Orientation $orientation
    * @param integer $start_year
    */
+
   public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $con = null)
   {
     if ($con == null)

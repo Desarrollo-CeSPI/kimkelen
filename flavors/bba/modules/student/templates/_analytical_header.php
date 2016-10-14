@@ -25,18 +25,18 @@
         <div class="title" id="header_analytical_data_center">
             <?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true)) ?>
             <?php $school_name = SchoolBehaviourFactory::getInstance()->getSchoolName(); ?>
-	        <h1><?php echo $school_name ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
+            <h1><?php echo $school_name ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
         </div>
 
-	    <?php if ($analytical->showCertificate()): ?>
-        <div id="header_analytical_data_right" class="title">
-            <?php echo __('Certificado N°'); ?>
-            <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
-        </div>
-	    <?php endif; ?>
+        <?php if ($analytical->showCertificate()): ?>
+            <div id="header_analytical_data_right" class="title">
+                <?php echo __('Certificado N°'); ?>
+                <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="header_row">
-        <?php include_partial('analyticalWithoutCBFE_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
+        <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
     </div>
 </div>

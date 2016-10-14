@@ -165,11 +165,6 @@ generator:
             action: analytical
             condition: canBeManagedForCareerSubjectAllowed
 
-          analytical_without_CBFE:
-            credentials:  [show_analytic_without_cbfe]
-            action: analyticalWithoutCBFE
-            condition: canShowCBFE
-
           activate:
             label: Set active
             credentials: [edit_student]
