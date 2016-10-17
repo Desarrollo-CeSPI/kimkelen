@@ -83,7 +83,7 @@ class apiActions extends sfActions
 	 //chequeo campos obligatorios
 	 if(is_null($s_identification_type) || is_null($s_identification_number) || is_null($s_lastname) || trim($s_lastname) == "" || is_null($s_firstname) || trim($s_firstname) =="" || is_null($s_sex)){
 		
-		throw new Exception('Faltan datos del alumno');
+		throw new Exception('Missing data');
 	 }
 	 else
 	 { 
@@ -118,7 +118,7 @@ class apiActions extends sfActions
 				$student->setHealthCoverageId($s_health_coverage_id);  
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "Los datos fueron almacenados correctamente.");
+				$data = array('message' => "The student was updated successfully.");
 			
 			}else{
 				//seteo isActive	
@@ -131,7 +131,7 @@ class apiActions extends sfActions
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "El alumno ya fue confirmado.");
+				$data = array('message' => "The student is confirmed.");
 			}
 			
 			//chequeo domicilio
