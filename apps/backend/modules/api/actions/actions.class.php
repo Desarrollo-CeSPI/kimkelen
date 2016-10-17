@@ -153,9 +153,9 @@ class apiActions extends sfActions
 			if( ! is_null($m_identification_type) && ! is_null($m_identification_number) && ! is_null($m_lastname) &&  trim($m_lastname) != "" && ! is_null($m_firstname) && trim($m_firstname) != "")
 			{
 				//busco si ya existe.
-				$tutor = TutorPeer::findByDocumentTypeAndNumber($m_identification_type,$m_idenfication_number);
+				$m_tutor = TutorPeer::findByDocumentTypeAndNumber($m_identification_type,$m_identification_number);
 				
-				if(is_null($tutor))
+				if(is_null($m_tutor))
 				{
 					//el tutor no existe. Lo creo
 					$m_person = new Person();
@@ -171,26 +171,26 @@ class apiActions extends sfActions
 					$m_person->setBirthCity($m_birth_city);
 					$m_person->save(Propel::getConnection());
 					
-					$tutor = new Tutor();
-					$tutor->setPerson($m_person);
-					$tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
-					$tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
-					$tutor->save(Propel::getConnection());		
+					$m_tutor = new Tutor();
+					$m_tutor->setPerson($m_person);
+					$m_tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
+					$m_tutor->save(Propel::getConnection());		
 					//$tutor->setIsAlive(true);
 						
 				}
 				else
 				{
-					$tutor->getPerson()->setLastname($m_lastname);
-					$tutor->getPerson()->setFirstname($m_firstname);
-					$tutor->getPerson()->setSex($m_sex);
-					$tutor->getPerson()->setPhone($m_phone);
-					$tutor->getPerson()->setBirthdate($m_birthdate);
-					$tutor->getPerson()->setBirthCity($m_birth_city);
-					$tutor->getPerson()->setIsActive(true);
-					$tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
-					$tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
-					$tutor->save(Propel::getConnection());		
+					$m_tutor->getPerson()->setLastname($m_lastname);
+					$m_tutor->getPerson()->setFirstname($m_firstname);
+					$m_tutor->getPerson()->setSex($m_sex);
+					$m_tutor->getPerson()->setPhone($m_phone);
+					$m_tutor->getPerson()->setBirthdate($m_birthdate);
+					$m_tutor->getPerson()->setBirthCity($m_birth_city);
+					$m_tutor->getPerson()->setIsActive(true);
+					$m_tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
+					$m_tutor->save(Propel::getConnection());		
 				
 				}
 				
@@ -203,17 +203,17 @@ class apiActions extends sfActions
 					$a->setFloor($m_floor);
 					$a->setFlat($m_flat);
 					
-					$tutor->getPerson()->setAddress($a);
-					$tutor->getPerson()->save(Propel::getConnection());	
+					$m_tutor->getPerson()->setAddress($a);
+					$m_tutor->getPerson()->save(Propel::getConnection());	
 				}
 				
 				 //datos de tutor(madre) 
 				 $student_tutor = new StudentTutor();
 				 $student_tutor->setStudent($student);
-				 $student_tutor->setTutor($tutor);
+				 $student_tutor->setTutor($m_tutor);
 				 $student_tutor->save(Propel::getConnection()); 
-				 $tutor->addStudentTutor($student_tutor);
-				 $tutor->save(Propel::getConnection());
+				 $m_tutor->addStudentTutor($student_tutor);
+				 $m_tutor->save(Propel::getConnection());
 			 
 			}
 			
@@ -223,7 +223,7 @@ class apiActions extends sfActions
 			if( ! is_null($p_identification_type) && ! is_null($p_identification_number)  && ! is_null($p_lastname) &&  trim($p_lastname) != "" && ! is_null($p_firstname) && trim($p_firstname) != "")
 			{
 				//busco si ya existe.
-				$tutor = TutorPeer::findByDocumentTypeAndNumber($p_identification_type,$p_idenfication_number);
+				$tutor = TutorPeer::findByDocumentTypeAndNumber($p_identification_type,$p_identification_number);
 				
 				if(is_null($tutor))
 				{

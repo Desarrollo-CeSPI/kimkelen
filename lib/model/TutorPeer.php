@@ -24,7 +24,7 @@ class TutorPeer extends BaseTutorPeer
 	static public function findByDocumentTypeAndNumber($document_type,$document_number)
 	{
 		$c = new Criteria();
-		$c->addJoin(PersonPeer::ID, self::PERSON_ID, Criteria::INNER_JOIN);
+		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
 		$c->add(PersonPeer::IDENTIFICATION_NUMBER, $document_number);
 		$c->add(PersonPeer::IDENTIFICATION_TYPE,$document_type );
 		$s = self::doSelectOne($c);
