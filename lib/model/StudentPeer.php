@@ -211,7 +211,7 @@ class StudentPeer extends BaseStudentPeer
     return self::doSelect($c);
   }
   
-  static public function retrieveByDocumentTypeAndNumber($document_type,$document_number)
+  public static function retrieveByDocumentTypeAndNumber($document_type,$document_number)
   {
     $c = new Criteria();
     $c->addJoin(PersonPeer::ID, self::PERSON_ID, Criteria::INNER_JOIN);

@@ -31,7 +31,8 @@ class apiActions extends sfActions
 	 $s_phone =$this->getRequestParameter('telefono_fijo');
 	 $s_birthdate =$this->getRequestParameter('fecha_nacimiento');
 	 $s_birth_city =$this->getRequestParameter('ciudad_nacimiento_id');
-	 $s_health_coverage_id = $this->getRequestParameter('ciudad_nacimiento_id');
+	 $s_health_coverage_id = $this->getRequestParameter('obra_social_id');
+	 $s_origin_school_id = $request->getParameter('escuela_procedencia_numero');
 	 
 	 //domicilio
 	 $s_city = $this->getRequestParameter('domicilio_ciudad_id');
@@ -108,13 +109,20 @@ class apiActions extends sfActions
 				$s_person->setBirthdate($s_birthdate);
 				$s_person->setIsActive(true);
 				$s_person->setBirthCity($s_birth_city);
+				/* Recupero department, state ,country*/
+				
+				if(!is_null($s_birth_city)){
+					$city = CityPeer::retrieveByPk($s_birth_city);
+					$s_person->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
+					$s_person->setBirthState($city->getDepartment()->getState()->getId());
+					$s_person->setBirthDepartment($city->getDepartment()->getId());
+				}
 				$s_person->save(Propel::getConnection());
 				
 				$student= new Student();
 				$student->setPerson($s_person); 
 				$student->setGlobalFileNumber('888888');//Nro de legajo??
-				$student->setHealthCoverageId($request->getParameter('obra_social_id'));
-				$student->setOriginSchoolId($request->getParameter('escuela_procedencia_numero'));
+				$student->setOriginSchoolId($s_origin_school_id);
 				$student->setHealthCoverageId($s_health_coverage_id);  
 				$student->save(Propel::getConnection());
 				
@@ -128,6 +136,14 @@ class apiActions extends sfActions
 				$student->getPerson()->setPhone($s_phone);
 				$student->getPerson()->setBirthdate($s_birthdate);
 				$student->getPerson()->setBirthCity($s_birth_city);
+				
+				if(!is_null($s_birth_city)){
+					$city = CityPeer::retrieveByPk($s_birth_city);
+					$student->getPerson()->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
+					$student->getPerson()->setBirthState($city->getDepartment()->getState()->getId());
+					$student->getPerson()->setBirthDepartment($city->getDepartment()->getId());
+				}
+				
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
@@ -146,8 +162,6 @@ class apiActions extends sfActions
 				$student->getPerson()->setAddress($a);
 				$student->getPerson()->save(Propel::getConnection());	
 			}
-			
-			
 			
 			//chequeo campos obligatorios
 			if( ! is_null($m_identification_type) && ! is_null($m_identification_number) && ! is_null($m_lastname) &&  trim($m_lastname) != "" && ! is_null($m_firstname) && trim($m_firstname) != "")
@@ -207,17 +221,19 @@ class apiActions extends sfActions
 					$m_tutor->getPerson()->save(Propel::getConnection());	
 				}
 				
-				 //datos de tutor(madre) 
-				 $student_tutor = new StudentTutor();
-				 $student_tutor->setStudent($student);
-				 $student_tutor->setTutor($m_tutor);
-				 $student_tutor->save(Propel::getConnection()); 
-				 $m_tutor->addStudentTutor($student_tutor);
-				 $m_tutor->save(Propel::getConnection());
+				$st = StudentTutorPeer::retrieveByStudentAndTutor($student,$m_tutor);
+				if(is_null($st)){
+					 //datos de tutor(madre) 
+					 $student_tutor = new StudentTutor();
+					 $student_tutor->setStudent($student);
+					 $student_tutor->setTutor($m_tutor);
+					 $student_tutor->save(Propel::getConnection()); 
+					 $m_tutor->addStudentTutor($student_tutor);
+					 $m_tutor->save(Propel::getConnection());
+				}
+				
 			 
 			}
-			
-			
 			
 			//chequeo campos obligatorios
 			if( ! is_null($p_identification_type) && ! is_null($p_identification_number)  && ! is_null($p_lastname) &&  trim($p_lastname) != "" && ! is_null($p_firstname) && trim($p_firstname) != "")
@@ -277,13 +293,17 @@ class apiActions extends sfActions
 				}
 					
 				 //datos de tutor(padre) 
-				 $student_tutor = new StudentTutor();
-				 $student_tutor->setStudent($student);
-				 $student_tutor->setTutor($tutor); 
-				 
-				 $student_tutor->save(Propel::getConnection());
-				 $tutor->addStudentTutor($student_tutor);
-				 $tutor->save(Propel::getConnection());
+				$st = StudentTutorPeer::retrieveByStudentAndTutor($student,$tutor);
+				
+				if(is_null($st)){
+					 $student_tutor = new StudentTutor();
+					 $student_tutor->setStudent($student);
+					 $student_tutor->setTutor($tutor); 
+					 
+					 $student_tutor->save(Propel::getConnection());
+					 $tutor->addStudentTutor($student_tutor);
+					 $tutor->save(Propel::getConnection());
+				}
 
 			}
 

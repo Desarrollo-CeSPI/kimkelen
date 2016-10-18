@@ -21,4 +21,13 @@
 
 class StudentTutorPeer extends BaseStudentTutorPeer
 {
+	public static function retrieveByStudentAndTutor($student,$tutor)
+	{
+		$c = new Criteria();
+		$c->add(self::STUDENT_ID, $student->getId());
+		$c->add(self::TUTOR_ID, $tutor->getId());
+		$s = self::doSelectOne($c);
+
+		return $s;
+	 }
 }
