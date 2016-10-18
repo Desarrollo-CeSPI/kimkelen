@@ -1,3 +1,11 @@
+api_student:
+  url:     /api/:document_type/:document_number/is_student.:sf_format
+  class:   sfPropelRoute
+  param:   { module: api, action: isStudent }
+  options: { model: Student, type: object, method: getForDocumentTypeAndNumber }
+  requirements:
+    sf_format: json
+
 change_status_motive:
   class: sfPropelRouteCollection
   options:
