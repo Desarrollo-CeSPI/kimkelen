@@ -22,6 +22,7 @@ class apiActions extends sfActions
 	 //tomo las intancias de las librerias.
 	 $i_identification_type =  BaseCustomOptionsHolder::getInstance('IdentificationType');
 	 $i_sex_type = BaseCustomOptionsHolder::getInstance('SexType');
+	 $i_nationality = BaseCustomOptionsHolder::getInstance('Nationality');
 	 
 	 $s_lastname = $this->getRequestParameter('apellido');// Es obligatorio
 	 $s_firstname = $this->getRequestParameter('nombres');// Es obligatorio
@@ -46,14 +47,23 @@ class apiActions extends sfActions
 	 $m_identification_number = $this->getRequestParameter('madre_nro_documento');
 	 $m_firstname = $this->getRequestParameter('madre_nombres'); 
 	 $m_lastname = $this->getRequestParameter('madre_apellido');
-	 $m_occupation = $this->getRequestParameter('madre_ocupacion_id');
+	 $m_occupation = $this->getRequestParameter('madre_actividad_id');
+	 $m_occupation_category = $this->getRequestParameter('madre_ocupacion_id');
 	 $m_study = $this->getRequestParameter('madre_estudios_id');
-	 //$m_is_alive = $this->getRequestParameter('madre_vive');
 	 $m_email = $this->getRequestParameter('madre_email');
 	 $m_phone = $this->getRequestParameter('madre_telefono_celular');
 	 $m_birthdate =$this->getRequestParameter('madre_fecha_nacimiento');
 	 $m_birth_city =$this->getRequestParameter('madre_ciudad_nacimiento_id');
-	
+	 $m_nationality = $i_nationality->getNationality($this->getRequestParameter('madre_nacionalidad_id'));
+	 $m_is_alive = $this->getRequestParameter('madre_vive');
+	 
+	 //chequeo is_alive
+	 if($m_is_alive == 'S'){
+		$m_is_alive = true;
+	 }elseif($m_is_alive == 'N'){
+		$m_is_alive = false;
+	 }
+	 
 	 //domicilio
 	 $m_city = $this->getRequestParameter('madre_domicilio_ciudad_id');
 	 $m_street =$this->getRequestParameter('madre_domicilio_calle');
@@ -66,14 +76,22 @@ class apiActions extends sfActions
 	 $p_identification_number = $this->getRequestParameter('padre_nro_documento');
 	 $p_firstname = $this->getRequestParameter('padre_nombres'); 
 	 $p_lastname = $this->getRequestParameter('padre_apellido');
-	 $p_occupation =$this->getRequestParameter('padre_ocupacion_id');
+	 $p_occupation = $this->getRequestParameter('padre_actividad_id');
+	 $p_occupation_category = $this->getRequestParameter('padre_ocupacion_id');
 	 $p_study = $this->getRequestParameter('padre_estudios_id');
-	 //$p_is_alive = $this->getRequestParameter('padre_vive');
 	 $p_email = $this->getRequestParameter('padre_email');
 	 $p_phone = $this->getRequestParameter('padre_telefono_celular');
 	 $p_birthdate =$this->getRequestParameter('padre_fecha_nacimiento');
 	 $p_birth_city =$this->getRequestParameter('padre_ciudad_nacimiento_id');
-		
+	 $p_nationality = $i_nationality->getNationality($this->getRequestParameter('padre_nacionalidad_id'));
+	 $p_is_alive = $this->getRequestParameter('padre_vive');
+	 //chequeo is_alive
+	 if($p_is_alive == 'S'){
+		$p_is_alive = true;
+	 }elseif($p_is_alive == 'N'){
+		$p_is_alive = false;
+	 }
+	 	
 	 //domicilio
 	 $p_city = $this->getRequestParameter('padre_domicilio_ciudad_id');
 	 $p_street =$this->getRequestParameter('padre_domicilio_calle');
@@ -102,21 +120,15 @@ class apiActions extends sfActions
 				$s_person = new Person();
 				$s_person->setLastname($s_lastname);
 				$s_person->setFirstname($s_firstname);
+				$s_person->setSex($s_sex);
 				$s_person->setIdentificationType($s_identification_type);
 				$s_person->setIdentificationNumber($s_identification_number);
-				$s_person->setSex($s_sex);
+				
 				$s_person->setPhone($s_phone);
 				$s_person->setBirthdate($s_birthdate);
 				$s_person->setIsActive(true);
 				$s_person->setBirthCity($s_birth_city);
-				/* Recupero department, state ,country*/
 				
-				if(!is_null($s_birth_city)){
-					$city = CityPeer::retrieveByPk($s_birth_city);
-					$s_person->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
-					$s_person->setBirthState($city->getDepartment()->getState()->getId());
-					$s_person->setBirthDepartment($city->getDepartment()->getId());
-				}
 				$s_person->save(Propel::getConnection());
 				
 				$student= new Student();
@@ -136,20 +148,19 @@ class apiActions extends sfActions
 				$student->getPerson()->setPhone($s_phone);
 				$student->getPerson()->setBirthdate($s_birthdate);
 				$student->getPerson()->setBirthCity($s_birth_city);
-				
-				if(!is_null($s_birth_city)){
-					$city = CityPeer::retrieveByPk($s_birth_city);
-					$student->getPerson()->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
-					$student->getPerson()->setBirthState($city->getDepartment()->getState()->getId());
-					$student->getPerson()->setBirthDepartment($city->getDepartment()->getId());
-				}
-				
+
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "The student is confirmed.");
+				$data = array('message' => "The student has been confirmed.");
 			}
-			
+			/* Recupero department, state ,country*/
+			if(!is_null($s_birth_city)){
+				$city = CityPeer::retrieveByPk($s_birth_city);
+				$student->getPerson()->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
+				$student->getPerson()->setBirthState($city->getDepartment()->getState()->getId());
+				$student->getPerson()->setBirthDepartment($city->getDepartment()->getId());
+			}
 			//chequeo domicilio
 			if( ! is_null($s_city) || ! is_null($s_street)  || ! is_null($s_number) || ! is_null($s_floor) || is_null($s_flat)){
 				$a = new Address();
@@ -187,31 +198,43 @@ class apiActions extends sfActions
 					
 					$m_tutor = new Tutor();
 					$m_tutor->setPerson($m_person);
-					$m_tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$m_tutor->setOccupationId($m_occupation);
+					$m_tutor->setOccupationCategoryId($m_occupation_category);
 					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
+					$m_tutor->setNationality($m_nationality);
+					$m_tutor->setIsAlive($m_is_alive);
 					$m_tutor->save(Propel::getConnection());		
-					//$tutor->setIsAlive(true);
+					
 						
 				}
 				else
 				{
 					$m_tutor->getPerson()->setLastname($m_lastname);
 					$m_tutor->getPerson()->setFirstname($m_firstname);
-					$m_tutor->getPerson()->setSex($m_sex);
 					$m_tutor->getPerson()->setPhone($m_phone);
 					$m_tutor->getPerson()->setBirthdate($m_birthdate);
 					$m_tutor->getPerson()->setBirthCity($m_birth_city);
 					$m_tutor->getPerson()->setIsActive(true);
-					$m_tutor->setOccupationId($m_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$m_tutor->setIsAlive($m_is_alive);
+					$m_tutor->setOccupationId($m_occupation); 
+					$m_tutor->setOccupationCategoryId($m_occupation_category);
+					$m_tutor->setNationality($m_nationality);
 					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
 					$m_tutor->save(Propel::getConnection());		
 				
 				}
-				
+				/* Recupero department, state ,country*/				
+				if(!is_null($m_birth_city)){
+					$m_city = CityPeer::retrieveByPk($m_birth_city);
+					$m_tutor->getPerson()->setBirthCountry($m_city->getDepartment()->getState()->getCountry()->getId());
+					$m_tutor->getPerson()->setBirthState($m_city->getDepartment()->getState()->getId());
+					$m_tutor->getPerson()->setBirthDepartment($m_city->getDepartment()->getId());
+				}
+
 				//chequeo domicilio
 				if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
 					$a = new Address();
-					$a->setCityId($m_city);
+					$a->setCityId($m_brith_city);
 					$a->setStreet($m_street);
 					$a->setNumber($m_number);
 					$a->setFloor($m_floor);
@@ -259,8 +282,10 @@ class apiActions extends sfActions
 					
 					$tutor = new Tutor();
 					$tutor->setPerson($p_person);
-					$tutor->setOccupationId($p_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$tutor->setOccupationId($p_occupation);
+					$tutor->setOccupationCategoryId($p_occupation_category);
 					$tutor->setStudyId($p_study);//coincide con la tabla sga_tipos_est_cur
+					$tutor->setNationality($p_nationality);
 					$tutor->save(Propel::getConnection());
 					//$tutor->setIsAlive(true);
 			
@@ -274,15 +299,24 @@ class apiActions extends sfActions
 					$tutor->getPerson()->setBirthdate($p_birthdate);
 					$tutor->getPerson()->setBirthCity($p_birth_city);
 					$tutor->getPerson()->setIsActive(true);
-					$tutor->setOccupationId($p_occupation); //coincide con la tabla sga_act_economica, pero hay otra categ_ocup; ver cual de las dos se usa.
+					$tutor->setOccupationId($p_occupation); 
+					$tutor->setOccupationCategoryId($p_occupation_category);
 					$tutor->setStudyId($p_study);//coincide con la tabla sga_tipos_est_cur
+					$tutor->setNationality($p_nationality);
 					$tutor->save(Propel::getConnection());		
 					
+				}
+				/* Recupero department, state ,country*/				
+				if(!is_null($p_birth_city)){
+					$p_city = CityPeer::retrieveByPk($p_birth_city);
+					$tutor->getPerson()->setBirthCountry($p_city->getDepartment()->getState()->getCountry()->getId());
+					$tutor->getPerson()->setBirthState($p_city->getDepartment()->getState()->getId());
+					$tutor->getPerson()->setBirthDepartment($p_city->getDepartment()->getId());
 				}
 				//chequeo domicilio
 				if( ! is_null($p_city) || ! is_null($p_street)  || ! is_null($p_number) || ! is_null($p_floor) || is_null($p_flat)){
 					$a = new Address();
-					$a->setCityId($p_city);
+					$a->setCityId($p_birth_city);
 					$a->setStreet($p_street);
 					$a->setNumber($p_number);
 					$a->setFloor($p_floor);
