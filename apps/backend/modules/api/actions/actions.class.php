@@ -148,6 +148,7 @@ class apiActions extends sfActions
 				$student->getPerson()->setPhone($s_phone);
 				$student->getPerson()->setBirthdate($s_birthdate);
 				$student->getPerson()->setBirthCity($s_birth_city);
+				$student->setOriginSchoolId($s_origin_school_id);
 
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
