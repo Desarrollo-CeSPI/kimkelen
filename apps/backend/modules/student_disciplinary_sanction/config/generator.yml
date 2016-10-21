@@ -37,7 +37,7 @@ generator:
           label:          Responsable
       list:
         title:            Listado de sanciones
-        display:          [request_date, number , name ,value, disciplinary_sanction_type, sanction_type]
+        display:          [request_date, number , name ,value, sanction_type]
         batch_actions:    []
         actions:
           _back:
@@ -65,7 +65,7 @@ generator:
             label:        Guardar y agregar otra sanción
       show:
         title:            Detalle de la sanción
-        display:          [request_date, number, name, value, disciplinary_sanction_type, sanction_type ,applicant_str, responsible, _document_show, observation]
+        display:          [_student_disciplinary_sanction_show]
         actions:
           _list:
             label:        Volver al listado

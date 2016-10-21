@@ -490,7 +490,7 @@ public function executeExportCalificationTable(sfWebRequest $request)
   {
     $this->division = $this->getRoute()->getObject();
     $this->students = $this->division->getStudents();
-
+	
     $this->setLayout('cleanLayout');
   }
 }
