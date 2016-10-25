@@ -34,7 +34,7 @@
 <div style="clear:both"></div>
 <div class="report-title"><?php echo __('Admonition details'); ?></div>
 <div style="clear:both"></div> 
-<?php $student_disciplinary_sanction_list = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForSchoolYear($student,$division->getSchoolYear());?>
+<?php $student_disciplinary_sanction_list = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForSchoolYear($student);?>
 <div class="admonition_details">
  <?php if($student_disciplinary_sanction_list): ?>
       <table class="gridtable">
@@ -56,7 +56,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="report-total" colspan ="4" class="total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForSchoolYearAndStudent($division->getSchoolYear(),$student) ?></td>
+              <td class="report-total" colspan ="4" class="total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForSchoolYearAndStudent($student) ?></td>
             </tr>
           </tfoot>
         </table>
