@@ -138,7 +138,7 @@ class apiActions extends sfActions
 				$student->setHealthCoverageId($s_health_coverage_id);  
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "The student was updated successfully.");
+				$data = array('message' => "The student has been confirmed.");
 			
 			}else{
 				//seteo isActive	
@@ -153,7 +153,7 @@ class apiActions extends sfActions
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "The student has been confirmed.");
+				$data = array('message' => "The student was updated successfully.");
 			}
 			/* Recupero department, state ,country*/
 			if(!is_null($s_birth_city)){
@@ -235,7 +235,7 @@ class apiActions extends sfActions
 				//chequeo domicilio
 				if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
 					$a = new Address();
-					$a->setCityId($m_brith_city);
+					$a->setCityId($m_birth_city);
 					$a->setStreet($m_street);
 					$a->setNumber($m_number);
 					$a->setFloor($m_floor);
