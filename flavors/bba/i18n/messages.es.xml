@@ -4564,7 +4564,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>%speciality% subjects</source>
-                <target>Asignaturas de %speciality%</target>
+                <target>Asignaturas de la Especialidad: %speciality%</target>
             </trans-unit>
             <trans-unit>
                 <source>No suitable</source>

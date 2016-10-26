@@ -1073,6 +1073,7 @@ class Student extends BaseStudent
   {
     $c = new Criteria();
     $c->add(CareerStudentPeer::STUDENT_ID, $this->getId());
+    $c->addDescendingOrderByColumn(CareerStudentPeer::CREATED_AT);
     #$c->add(CareerStudentPeer::FILE_NUMBER,$this->getGlobalFileNumber());
 
     return CareerStudentPeer::doSelectOne($c);
