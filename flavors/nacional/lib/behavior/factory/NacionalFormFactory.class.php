@@ -23,4 +23,13 @@
  * Copy and rename this class if you want to extend and customize
  */
 class NacionalFormFactory extends BaseFormFactory {
+	
+  public function getStudentDisciplinarySanctionForm()
+  {
+    return 'NacionalStudentDisciplinarySanctionForm';
+  }
+  public function getStudentDisciplinarySanctionFormFilter()
+  {
+    return 'NacionalStudentDisciplinarySanctionFormFilter';
+  }
 }

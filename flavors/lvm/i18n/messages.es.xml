@@ -9004,17 +9004,41 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 				<target>No posee cursos asignados</target>
 			</trans-unit>
 			<trans-unit>
-        <source>New pathway</source>
-        <target>Nueva promoción por excepción</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Edit pathway</source>
-        <target>Editar promoción por excepción</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Show pathway</source>
-        <target>Detalles de la promoción por excepción</target>
-      </trans-unit>
+				<source>New pathway</source>
+				<target>Nueva promoción por excepción</target>
+			</trans-unit>
+			<trans-unit>
+				<source>Edit pathway</source>
+				<target>Editar promoción por excepción</target>
+		        </trans-unit>
+		        <trans-unit>
+				<source>Show pathway</source>
+				<target>Detalles de la promoción por excepción</target>
+	  	        </trans-unit>
+			<trans-unit>
+				<source>Disciplinary sanction type</source>
+				<target>Motivo de sanción disciplinaria</target>
+			</trans-unit>
+	    		<trans-unit>
+                		<source>Sanction type</source>
+               			<target>Tipo de sanción disciplinaria</target>
+            		</trans-unit>
+	    		<trans-unit>
+				<source>Responsible</source>
+				<target>Responsable</target>
+            		</trans-unit>
+	    		<trans-unit>
+                		<source>Value</source>
+                		<target>Valor</target>
+		   	</trans-unit>
+	 	   	<trans-unit>
+		   	       <source>Download document</source>
+		               <target>Descargar documento</target>
+		    	</trans-unit>
+			<trans-unit>
+		   	       <source>Applicant</source>
+		               <target>Solicitante</target>
+		    	</trans-unit>
 		</body>
 	</file>
 </xliff>

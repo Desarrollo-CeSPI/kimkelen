@@ -77,7 +77,7 @@ generator:
 
       list:
         title: Consulta de Sanciones Disciplinarias
-        display: [ student, request_date, school_year, applicant, responsible, sanction_type, disciplinary_sanction_type ]
+        display: [ student, request_date, school_year, applicant, responsible, sanction_type]
         batch_actions: []
         actions:
           _export: ~
@@ -89,7 +89,7 @@ generator:
       new:     ~
       show:
         title: Detalles de Sanción Disciplinaria
-        display: [ number, student, request_date, resolution_date, school_year, applicant, responsible, sanction_type, disciplinary_sanction_type, value, observation, _document_show ]
+        display: [ _show_sanction]
         actions:
           _list:
             label: Volver al Listado

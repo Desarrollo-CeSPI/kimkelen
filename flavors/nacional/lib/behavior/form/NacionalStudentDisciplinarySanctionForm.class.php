@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -20,19 +20,18 @@
 <?php
 
 /**
- * student_disciplinary_sanction module configuration.
+ * StudentDisciplinarySanction form.
  *
  * @package    sistema de alumnos
- * @subpackage student_disciplinary_sanction
+ * @subpackage form
  * @author     Your name here
- * @version    SVN: $Id: configuration.php 12474 2008-10-31 10:41:27Z fabien $
  */
-class student_disciplinary_sanctionGeneratorConfiguration extends BaseStudent_disciplinary_sanctionGeneratorConfiguration
+class NacionalStudentDisciplinarySanctionForm extends StudentDisciplinarySanctionForm
 {
-  public function getForm($object = null)
+   public function configure ()
   {
-    $form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentDisciplinarySanctionForm();
-    return new $form($object);
+    parent::configure();
+    unset($this['disciplinary_sanction_type_id']);
+   
   }
-
 }

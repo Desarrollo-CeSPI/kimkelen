@@ -4473,7 +4473,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Disciplinary sanction type</source>
-                <target>Tipo de sanción</target>
+                <target>Motivo de sanción disciplinaria</target>
             </trans-unit>
             <trans-unit>
                 <source>Division title id</source>
@@ -4490,6 +4490,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 	    <trans-unit>
                 <source>Condition</source>
                 <target>Condición</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Sanction type</source>
+                <target>Tipo de sanción disciplinaria</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Responsible</source>
+                <target>Responsable</target>
+            </trans-unit>
+	   <trans-unit>
+                <source>Student doesn't have any disciplinary sanctions.</source>
+                <target>El alumno no registra sanciones disciplinarias.</target>
             </trans-unit>
         </body>
     </file>

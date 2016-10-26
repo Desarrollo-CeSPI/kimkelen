@@ -617,7 +617,7 @@ classes:
         description:      Motivo de sancion
         foreignTable:     disciplinary_sanction_type
         foreignReference: id
-        required:         true
+        required:         false
         onDelete:         restrict
       sanction_type_id:
         type: integer
