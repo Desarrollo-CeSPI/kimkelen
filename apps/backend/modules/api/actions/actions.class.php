@@ -141,15 +141,7 @@ class apiActions extends sfActions
 				$data = array('message' => "The student has been confirmed.");
 			
 			}else{
-				//seteo isActive	
-				$student->getPerson()->setLastname($s_lastname);
-				$student->getPerson()->setFirstname($s_firstname);
-				$student->getPerson()->setSex($s_sex);
-				$student->getPerson()->setPhone($s_phone);
-				$student->getPerson()->setBirthdate($s_birthdate);
-				$student->getPerson()->setBirthCity($s_birth_city);
-				$student->setOriginSchoolId($s_origin_school_id);
-
+				//seteo isActive
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
@@ -206,45 +198,28 @@ class apiActions extends sfActions
 					$m_tutor->setIsAlive($m_is_alive);
 					$m_tutor->save(Propel::getConnection());		
 					
-						
-				}
-				else
-				{
-					$m_tutor->getPerson()->setLastname($m_lastname);
-					$m_tutor->getPerson()->setFirstname($m_firstname);
-					$m_tutor->getPerson()->setPhone($m_phone);
-					$m_tutor->getPerson()->setBirthdate($m_birthdate);
-					$m_tutor->getPerson()->setBirthCity($m_birth_city);
-					$m_tutor->getPerson()->setIsActive(true);
-					$m_tutor->setIsAlive($m_is_alive);
-					$m_tutor->setOccupationId($m_occupation); 
-					$m_tutor->setOccupationCategoryId($m_occupation_category);
-					$m_tutor->setNationality($m_nationality);
-					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
-					$m_tutor->save(Propel::getConnection());		
-				
-				}
-				/* Recupero department, state ,country*/				
-				if(!is_null($m_birth_city)){
-					$m_city = CityPeer::retrieveByPk($m_birth_city);
-					$m_tutor->getPerson()->setBirthCountry($m_city->getDepartment()->getState()->getCountry()->getId());
-					$m_tutor->getPerson()->setBirthState($m_city->getDepartment()->getState()->getId());
-					$m_tutor->getPerson()->setBirthDepartment($m_city->getDepartment()->getId());
-				}
+					/* Recupero department, state ,country*/				
+					if(!is_null($m_birth_city)){
+						$m_city = CityPeer::retrieveByPk($m_birth_city);
+						$m_tutor->getPerson()->setBirthCountry($m_city->getDepartment()->getState()->getCountry()->getId());
+						$m_tutor->getPerson()->setBirthState($m_city->getDepartment()->getState()->getId());
+						$m_tutor->getPerson()->setBirthDepartment($m_city->getDepartment()->getId());
+					}
 
-				//chequeo domicilio
-				if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
-					$a = new Address();
-					$a->setCityId($m_birth_city);
-					$a->setStreet($m_street);
-					$a->setNumber($m_number);
-					$a->setFloor($m_floor);
-					$a->setFlat($m_flat);
-					
-					$m_tutor->getPerson()->setAddress($a);
-					$m_tutor->getPerson()->save(Propel::getConnection());	
+					//chequeo domicilio
+					if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
+						$a = new Address();
+						$a->setCityId($m_birth_city);
+						$a->setStreet($m_street);
+						$a->setNumber($m_number);
+						$a->setFloor($m_floor);
+						$a->setFlat($m_flat);
+						
+						$m_tutor->getPerson()->setAddress($a);
+						$m_tutor->getPerson()->save(Propel::getConnection());	
+					}	
 				}
-				
+						
 				$st = StudentTutorPeer::retrieveByStudentAndTutor($student,$m_tutor);
 				if(is_null($st)){
 					 //datos de tutor(madre) 
@@ -288,46 +263,29 @@ class apiActions extends sfActions
 					$tutor->setStudyId($p_study);//coincide con la tabla sga_tipos_est_cur
 					$tutor->setNationality($p_nationality);
 					$tutor->save(Propel::getConnection());
-					//$tutor->setIsAlive(true);
-			
-				}
-				else
-				{
-					$tutor->getPerson()->setLastname($p_lastname);
-					$tutor->getPerson()->setFirstname($p_firstname);
-					$tutor->getPerson()->setSex(SexType::MALE);
-					$tutor->getPerson()->setPhone($p_phone);
-					$tutor->getPerson()->setBirthdate($p_birthdate);
-					$tutor->getPerson()->setBirthCity($p_birth_city);
-					$tutor->getPerson()->setIsActive(true);
-					$tutor->setOccupationId($p_occupation); 
-					$tutor->setOccupationCategoryId($p_occupation_category);
-					$tutor->setStudyId($p_study);//coincide con la tabla sga_tipos_est_cur
-					$tutor->setNationality($p_nationality);
-					$tutor->save(Propel::getConnection());		
 					
-				}
-				/* Recupero department, state ,country*/				
-				if(!is_null($p_birth_city)){
-					$p_city = CityPeer::retrieveByPk($p_birth_city);
-					$tutor->getPerson()->setBirthCountry($p_city->getDepartment()->getState()->getCountry()->getId());
-					$tutor->getPerson()->setBirthState($p_city->getDepartment()->getState()->getId());
-					$tutor->getPerson()->setBirthDepartment($p_city->getDepartment()->getId());
-				}
-				//chequeo domicilio
-				if( ! is_null($p_city) || ! is_null($p_street)  || ! is_null($p_number) || ! is_null($p_floor) || is_null($p_flat)){
-					$a = new Address();
-					$a->setCityId($p_birth_city);
-					$a->setStreet($p_street);
-					$a->setNumber($p_number);
-					$a->setFloor($p_floor);
-					$a->setFlat($p_flat);
-					
-					$tutor->getPerson()->setAddress($a);
-					$tutor->getPerson()->save(Propel::getConnection());	
+					/* Recupero department, state ,country*/				
+					if(!is_null($p_birth_city)){
+						$p_city = CityPeer::retrieveByPk($p_birth_city);
+						$tutor->getPerson()->setBirthCountry($p_city->getDepartment()->getState()->getCountry()->getId());
+						$tutor->getPerson()->setBirthState($p_city->getDepartment()->getState()->getId());
+						$tutor->getPerson()->setBirthDepartment($p_city->getDepartment()->getId());
+					}
+					//chequeo domicilio
+					if( ! is_null($p_city) || ! is_null($p_street)  || ! is_null($p_number) || ! is_null($p_floor) || is_null($p_flat)){
+						$a = new Address();
+						$a->setCityId($p_birth_city);
+						$a->setStreet($p_street);
+						$a->setNumber($p_number);
+						$a->setFloor($p_floor);
+						$a->setFlat($p_flat);
+						
+						$tutor->getPerson()->setAddress($a);
+						$tutor->getPerson()->save(Propel::getConnection());	
+					}
 				}
 					
-				 //datos de tutor(padre) 
+				//datos de tutor(padre) 
 				$st = StudentTutorPeer::retrieveByStudentAndTutor($student,$tutor);
 				
 				if(is_null($st)){
