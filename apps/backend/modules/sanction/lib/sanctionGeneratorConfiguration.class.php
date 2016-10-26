@@ -10,4 +10,8 @@
  */
 class sanctionGeneratorConfiguration extends BaseSanctionGeneratorConfiguration
 {
+  public function getFilterFormClass()
+  {
+    return SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentDisciplinarySanctionFormFilter();
+  }
 }

@@ -282,4 +282,10 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
     return 'MultipleStudentAttendanceDayForm';
   }
+  
+  public function getStudentDisciplinarySanctionFormFilter()
+  {
+    return 'StudentDisciplinarySanctionFormFilter';
+  }
+  
 }
