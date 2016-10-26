@@ -39,11 +39,19 @@ generator:
         title:            Listado de sanciones
         display:          [request_date, number , name ,value, disciplinary_sanction_type, sanction_type]
         batch_actions:    []
+        object_actions:
+          _edit:
+            credentials:   [edit_student_disciplinary_sanction]
+          _delete:
+            credentials:   [delete_student_disciplinary_sanction]
+          _show:
+            credentials: [show_student_disciplinary_sanction]
         actions:
           _back:
             label:        Volver
           _new:
             label:        Nueva sanción
+            credentials:    [new_student_disciplinary_sanction]
       filter:
         class:            false
       form:    ~
@@ -56,6 +64,7 @@ generator:
             label:        Guardar sanción
       new:
         title:            Nueva sanción
+        
         actions:
           _list:
             label:        Volver al listado
