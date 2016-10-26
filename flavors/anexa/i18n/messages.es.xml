@@ -4479,6 +4479,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Division title id</source>
                 <target>Nombre de la división</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Admonition details</source>
+                <target>Informe de sanciones</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Global file number</source>
+                <target>Número de legajo</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1154,11 +1154,6 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return false;
   }
 
-	public function canShowCBFE() {
-		return false;
-	}
-
-
 	public function getOptionalCourseSubjectStudents($student, $school_year = null)
 	{
 
@@ -1196,6 +1191,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $c->add(StudentAttendancePeer::STUDENT_ID, $student_id);
     $c->add(StudentAttendancePeer::CAREER_SCHOOL_YEAR_ID, $career_school_year_id);
 	$c->add(StudentAttendancePeer::VALUE, 0, Criteria::NOT_EQUAL);
+	$c->addAscendingOrderByColumn(StudentAttendancePeer::DAY);
 
     return $student_attendances = StudentAttendancePeer::doSelect($c);
 

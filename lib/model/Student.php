@@ -147,12 +147,6 @@ class Student extends BaseStudent
 
   }
 
-    public function canShowCBFE()
-    {
-        return SchoolBehaviourFactory::getInstance()->canShowCBFE();
-
-    }
-
   /**
    * Registers the student for the given career.
    *
@@ -160,6 +154,7 @@ class Student extends BaseStudent
    * @param Orientation $orientation
    * @param integer $start_year
    */
+
   public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $con = null)
   {
     if ($con == null)
@@ -1493,7 +1488,7 @@ class Student extends BaseStudent
     //tiene reserva de banco activa.
 
     $c = new Criteria();
-    $c->addJoin(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
+    $c->add(StudentReserveStatusRecordPeer::STUDENT_ID, $this->getId());
     $c->add(StudentReserveStatusRecordPeer::END_DATE, null, Criteria::ISNULL);
     return StudentReserveStatusRecordPeer::doSelectOne($c);
   }

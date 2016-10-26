@@ -20,7 +20,7 @@
 
 class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
-    public function processWithOutCBFE()
+    public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
 		

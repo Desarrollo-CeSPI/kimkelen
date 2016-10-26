@@ -596,36 +596,7 @@ class studentActions extends autoStudentActions
     $this->getUser()->setFlash('info','The item was updated successfully.');
     $this->redirect('@student');
   }
-  
-  public function executeAnalyticalWithoutCBFE(sfWebRequest $request)
-  {	
-	$this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
-	$this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-	$this->analytical->processWithOutCBFE();	
-	$this->analytic = new Analytic();
-  }
-  
-   public function executePrintAnalyticalWithoutCBFE(sfWebRequest $request)
-  {
-    $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
-    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-    $this->analytical->processWithOutCBFE();
-    $this->analytic = new Analytic();
-    $this->analytic->setCareerStudent($this->career_student);
-    $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
-    $this->analytic->save();
 
-    $this->setLayout('cleanLayout');
-  }
-  
-  public function postExecutePrintAnalyticalWithoutCBFE(sfWebRequest $request)
-  {
-      $analytical_document = $this->getResponse()->getContent();
-      $this->analytic->setCertificate($analytical_document);
-      $this->analytic->save();
-  }
-
-  
   public function executeChangeStudentStatus(sfWebRequest $request)
   {
 	$this->student = $this->getRoute()->getObject();
@@ -678,25 +649,24 @@ class studentActions extends autoStudentActions
 				//Retirado con reserva de banco
 				
 				$this->start_date   = $request->getParameter('student_career_school_year[start_date_reserve]');
+
 				//Si no existe la reserva la creo.
 				$student_reserve = $this->student->hasActiveReserve();
-				
-				$year= $this->start_date['year'];
-				$month=$this->start_date['month'];
-				$day=$this->start_date['day'];
-					
+		
 				if(is_null($student_reserve))
 				{ 
-					if(empty($year) || empty($month) || empty($day))
+					if(is_null($this->start_date) || $this->start_date == '')
 					{
 						$this->getUser()->setFlash('error','El campo Fecha de inicio de la reserva es obligatorio.');	
 					}
 					else
 					{
-						$date = $year.'-'.$month.'-'.$day;
+						$this->start_date = str_replace('/', '-', $this->start_date);
+						$this->start_date = date('Y-m-d', strtotime($this->start_date));
+						
 						$student_reserve = new StudentReserveStatusRecord();
 						$student_reserve->setStudentId($this->student->getId());
-						$student_reserve->setStartDate($date);
+						$student_reserve->setStartDate(new DateTime($this->start_date));
 						StudentReserveStatusRecordPeer::doInsert($student_reserve);
 						
 						//cambio el estado
@@ -719,20 +689,13 @@ class studentActions extends autoStudentActions
 				}
 				else
 				{	//Ya existe la reserva solo modifico la fecha
-					$start_date = new DateTime($student_reserve->getStartDate());
-					
-					$year = empty($this->start_date['year'])? $start_date->format('Y') : $this->start_date['year'];
-					$month = empty($this->start_date['month'])? $start_date->format('m') : $this->start_date['month'];
-					$day = empty($this->start_date['day'])? $start_date->format('d') : $this->start_date['day'];
-					$date = $year.'-'.$month.'-'.$day;
-					
-					$student_reserve->setStartDate($date);
+					$this->start_date = str_replace('/', '-', $this->start_date);
+					$this->start_date = date('Y-m-d', strtotime($this->start_date));	
+					$student_reserve->setStartDate(new DateTime($this->start_date));
 					$student_reserve->save();		
 					$this->getUser()->setFlash('info','The item was updated successfully.' );
 				}
-				
 					
-				
 				break;
 				
 			case StudentCareerSchoolYearStatus::FREE:
@@ -791,20 +754,18 @@ class studentActions extends autoStudentActions
 				{
 					$this->end_date = $request->getParameter('student_career_school_year[end_date_reserve]');
 					
-					$end_year= $this->end_date['year'];
-					$end_month=$this->end_date['month'];
-					$end_day=$this->end_date['day'];
-					
-					if(empty($end_year) || empty($end_month) || empty($end_day))
+					if(is_null($this->end_date) || $this->end_date =='')
 					{
 						$this->getUser()->setFlash('error','El campo Fecha de fin de la reserva es obligatorio.');	
 					}
 					else
 					{
 						//guardo la fecha de fin de la reserva.
+						$this->end_date = str_replace('/', '-', $this->end_date);
+						$this->end_date = date('Y-m-d', strtotime($this->end_date));
+						
 						$student_reserve = $this->student->hasActiveReserve();
-						$date = $end_year.'-'.$end_month.'-'.$end_day;
-						$student_reserve->setEndDate($date);
+						$student_reserve->setEndDate(new DateTime($this->end_date));
 						$student_reserve->save();
 						
 						//cambio el estado
@@ -841,7 +802,7 @@ class studentActions extends autoStudentActions
 							$career_student->save(Propel::getConnection());
 							
 							//deshabilito la persona
-							//$this->student->getPerson()->setIsActive(false);
+							$this->student->getPerson()->setIsActive(false);
 							$this->student->getPerson()->save();
 							
 							$this->getUser()->setFlash('info','The item was updated successfully.');

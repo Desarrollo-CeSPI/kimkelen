@@ -4543,10 +4543,6 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Fecha de Devolución</target>
             </trans-unit>
             <trans-unit>
-                <source>Analytical without CBFE</source>
-                <target>Analitico sin CBFE</target>
-            </trans-unit>
-            <trans-unit>
                 <source>General Subjects</source>
                 <target>Asignaturas Generales</target>
             </trans-unit>

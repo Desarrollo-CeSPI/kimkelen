@@ -28,13 +28,5 @@ class studentComponents extends sfComponents
         $this->student = $this->career_student->getStudent();
         $this->object = AnalyticalBehaviourFactory::getInstance($this->student);
     }
-    
-    public function executeComponent_analytical_table_WithoutCBFE()
-    {
-        //De aca recupero el nombre del establecimiento
-        $this->career_student = $this->getVar('career_student');
-        $this->student = $this->career_student->getStudent();
-        $this->object = AnalyticalBehaviourFactory::getInstance($this->student);
-    }
 
 }

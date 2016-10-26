@@ -237,7 +237,4 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 		else return $css_2_marks;
   }
 
-	public function canShowCBFE() {
-		return true;
-	}
 }
