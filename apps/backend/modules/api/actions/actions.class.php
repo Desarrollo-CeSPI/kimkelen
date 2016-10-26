@@ -114,7 +114,7 @@ class apiActions extends sfActions
 			$student = StudentPeer::retrieveByDocumentTypeAndNumber($s_identification_type,$s_identification_number);
 		    $con->beginTransaction();
 
-			 if(is_null($student))
+			if(is_null($student))
 			{	//el alumno no existe. Creo la persona y el alumno
 				
 				$s_person = new Person();
@@ -138,7 +138,27 @@ class apiActions extends sfActions
 				$student->setHealthCoverageId($s_health_coverage_id);  
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "The student has been confirmed.");
+				/* Recupero department, state ,country*/
+				if(!is_null($s_birth_city)){
+					$city = CityPeer::retrieveByPk($s_birth_city);
+					$student->getPerson()->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
+					$student->getPerson()->setBirthState($city->getDepartment()->getState()->getId());
+					$student->getPerson()->setBirthDepartment($city->getDepartment()->getId());
+				}
+				//chequeo domicilio
+				if( ! is_null($s_city) || ! is_null($s_street)  || ! is_null($s_number) || ! is_null($s_floor) || is_null($s_flat)){
+					$a = new Address();
+					$a->setCityId($s_city);
+					$a->setStreet($s_street);
+					$a->setNumber($s_number);
+					$a->setFloor($s_floor);
+					$a->setFlat($s_flat);
+					
+					$student->getPerson()->setAddress($a);
+					$student->getPerson()->save(Propel::getConnection());	
+					$data = array('message' => "The student has been confirmed.");
+				
+				}
 			
 			}else{
 				//seteo isActive
@@ -146,25 +166,6 @@ class apiActions extends sfActions
 				$student->save(Propel::getConnection());
 				
 				$data = array('message' => "The student was updated successfully.");
-			}
-			/* Recupero department, state ,country*/
-			if(!is_null($s_birth_city)){
-				$city = CityPeer::retrieveByPk($s_birth_city);
-				$student->getPerson()->setBirthCountry($city->getDepartment()->getState()->getCountry()->getId());
-				$student->getPerson()->setBirthState($city->getDepartment()->getState()->getId());
-				$student->getPerson()->setBirthDepartment($city->getDepartment()->getId());
-			}
-			//chequeo domicilio
-			if( ! is_null($s_city) || ! is_null($s_street)  || ! is_null($s_number) || ! is_null($s_floor) || is_null($s_flat)){
-				$a = new Address();
-				$a->setCityId($s_city);
-				$a->setStreet($s_street);
-				$a->setNumber($s_number);
-				$a->setFloor($s_floor);
-				$a->setFlat($s_flat);
-				
-				$student->getPerson()->setAddress($a);
-				$student->getPerson()->save(Propel::getConnection());	
 			}
 			
 			//chequeo campos obligatorios
