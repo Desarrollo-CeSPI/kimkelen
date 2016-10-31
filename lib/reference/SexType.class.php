@@ -35,4 +35,21 @@ class SexType extends BaseCustomOptionsHolder
         self::MALE      => 'Masculino',
         self::FEMALE    => 'Femenino'
       );
+  
+  public function getSexType($sex_type)
+  {
+	switch($sex_type){
+			
+		case "M":
+			return self::MALE;
+		break;
+			
+		case "F":
+			return self::FEMALE;
+		break;
+		default:
+			return null;
+		break;
+	} 
+  }
 }

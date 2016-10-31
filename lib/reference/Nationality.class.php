@@ -37,4 +37,26 @@ class Nationality extends BaseCustomOptionsHolder
         self::N_NATURALIZED    => 'Naturalizado',
         self::N_FOREIGN  => 'Extranjero'
       );
+      
+  public function getNationality($nationality)
+  {
+	switch($nationality){
+			
+		case 1:
+			return self::N_NATIVE;
+		break;
+			
+		case 2:
+			return self::N_FOREIGN;
+		break;
+		
+		case 3:
+			return self::N_NATURALIZED;
+		break;
+		
+		default:
+			return null;
+		break;
+	} 
+  }
 }

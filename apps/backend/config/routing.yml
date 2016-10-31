@@ -5,7 +5,12 @@ api_student:
   options: { model: Student, type: object, method: getForDocumentTypeAndNumber }
   requirements:
     sf_format: json
-
+    
+api_confirm_student:
+  url: /api/confirm_student.:sf_format
+  param:   { module: api, action: confirmStudent }
+  requirements: { sf_method: post , sf_format: json}
+    
 change_status_motive:
   class: sfPropelRouteCollection
   options:

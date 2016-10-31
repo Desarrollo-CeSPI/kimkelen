@@ -47,4 +47,39 @@ class IdentificationType extends BaseCustomOptionsHolder
         self::CUIT      => 'CUIT',
         self::OTRO      => 'OTRO'
       );
+      
+  public function getIdentificationType($identification_type)
+  {
+		switch($identification_type){
+			
+			case 0:
+				return self::DNI;
+			break;
+				
+			case 1: // no hay dni temporario en kimkelen
+				return self::OTRO;
+			break;
+			
+			case 2:
+				return self::CI;
+			break;
+			
+			case 18:
+				return self::LE;
+			break;
+			
+			case 19:
+				return self::LC;
+			break;
+			
+			case 90:
+				return self::PASSPORT;
+			break;
+			
+			default:
+				return null;
+			break;
+		}
+   
+  }
 }
