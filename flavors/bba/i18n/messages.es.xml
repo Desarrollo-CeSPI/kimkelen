@@ -4698,6 +4698,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Value</source>
                 <target>Valor</target>
             </trans-unit>
+	    <trans-unit>
+                <source>The examination subject has been successfully closed.</source>
+                <target>La materia ha sido cerrada satisfactoriamente.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
