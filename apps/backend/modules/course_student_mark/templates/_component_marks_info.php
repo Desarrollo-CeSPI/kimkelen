@@ -42,7 +42,7 @@
   <?php foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject):?>
     <div class="info-mark-container">
       <?php echo __('Repproved examination %repproved_examination%: %mark%', array('%repproved_examination%' => $student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved(),
-          '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMarkByConfig())); ?>
+          '%mark%'=> $student_examination_repproved_subject->getIsAbsent()? __('Absent'): $student_examination_repproved_subject->getMarkStrByConfig())); ?>
     </div>
   <?php endforeach ?>
 </div>
