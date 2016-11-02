@@ -378,8 +378,11 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         $result->setMark($average);
       }
 
-      ##se agrega en la tupla student_disapproved_course_subject el link a al resultado final
-      $course_subject_student->getCourseResult()->setStudentApprovedCareerSubject($result)->save($con);
+      ##se agrega en la tupla student_disapproved_course_subject el link a al resultado final y el tipo de mesa en el que aprobo
+      $sdcs = $course_subject_student->getCourseResult();
+      $sdcs->setStudentApprovedCareerSubject($result);
+      $sdcs->setExaminationNumber($course_subject_student_examination->getExaminationNumber());
+      $sdcs->save($con);
 
       $result->save($con);
 
