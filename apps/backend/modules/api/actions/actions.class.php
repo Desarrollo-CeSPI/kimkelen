@@ -98,7 +98,7 @@ class apiActions extends sfActions
 	 $p_number =$this->getRequestParameter('padre_domicilio_numero');
 	 $p_floor = $this->getRequestParameter('padre_domicilio_piso');
 	 $p_flat =$this->getRequestParameter('padre_domicilio_departamento');
-	
+	 $data=array();
 	 //chequeo campos obligatorios
 	 if(is_null($s_identification_type) || is_null($s_identification_number) || is_null($s_lastname) || trim($s_lastname) == "" || is_null($s_firstname) || trim($s_firstname) =="" || is_null($s_sex)){
 		
@@ -156,7 +156,7 @@ class apiActions extends sfActions
 					
 					$student->getPerson()->setAddress($a);
 					$student->getPerson()->save(Propel::getConnection());	
-					$data = array('message' => "The student has been confirmed.");
+					$data['message'] = "El alumno ha sido confirmado.";
 				
 				}
 			
@@ -165,7 +165,7 @@ class apiActions extends sfActions
 				$student->getPerson()->setIsActive(true);
 				$student->save(Propel::getConnection());
 				
-				$data = array('message' => "The student was updated successfully.");
+				$data['message'] = "El alumno fue actualizado correctamente.";
 			}
 			
 			//chequeo campos obligatorios
@@ -219,6 +219,9 @@ class apiActions extends sfActions
 						$m_tutor->getPerson()->setAddress($a);
 						$m_tutor->getPerson()->save(Propel::getConnection());	
 					}	
+				}else{
+				
+					$data['info']= "El tutor con ".$i_identification_type->getStringFor($m_identification_type) . " " . $m_identification_number ;
 				}
 						
 				$st = StudentTutorPeer::retrieveByStudentAndTutor($student,$m_tutor);
@@ -234,6 +237,7 @@ class apiActions extends sfActions
 				
 			 
 			}
+			
 			
 			//chequeo campos obligatorios
 			if( ! is_null($p_identification_type) && ! is_null($p_identification_number)  && ! is_null($p_lastname) &&  trim($p_lastname) != "" && ! is_null($p_firstname) && trim($p_firstname) != "")
@@ -284,6 +288,18 @@ class apiActions extends sfActions
 						$tutor->getPerson()->setAddress($a);
 						$tutor->getPerson()->save(Propel::getConnection());	
 					}
+					if(! is_null($data['info'])){
+						$data['info']= $data['info']." ya existe en el sistema. Por favor actualice los datos.";
+					
+					}
+				}else
+				{	
+					if(! is_null($data['info'])){
+						$data['info']= "Los tutores con ". $i_identification_type->getStringFor($m_identification_type) . " " . $m_identification_number  ." y ".$i_identification_type->getStringFor($p_identification_type) . " " . $p_identification_number ." ya existen en el sistema. Por favor actualice los datos.";
+					}else{
+						$data['info']= "El tutor con ".$i_identification_type->getStringFor($p_identification_type) . " " . $p_identification_number ." ya existe en el sistema. Por favor actualice los datos.";	
+					}
+					
 				}
 					
 				//datos de tutor(padre) 
