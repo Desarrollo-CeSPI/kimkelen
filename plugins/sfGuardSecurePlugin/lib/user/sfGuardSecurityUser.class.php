@@ -162,13 +162,7 @@ class sfGuardSecurityUser extends sfBasicSecurityUser
 
   public function getUsername()
   {
-	  if(is_null($this->getGuardUser())){
-		  return "SIPECU";
-	  }
-	  else{
-		  return $this->getGuardUser()->getUsername();
-	  }
-    
+	  return $this->getGuardUser() ? $this->getGuardUser()->getUsername() : "SIPECU";
   }
 
   public function getEmail()
