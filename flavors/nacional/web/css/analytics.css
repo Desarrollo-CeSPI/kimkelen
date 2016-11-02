@@ -54,6 +54,7 @@
 }
 #analytical_footer
 {
+    font-size: 12px;
     clear: both;
     float: left;
     margin-top: 1em !important;
@@ -102,4 +103,9 @@
 
 .analytical_body_table {
     font-size: 13px;
+}
+
+.header-text
+{
+    font-size: 12px;
 }
