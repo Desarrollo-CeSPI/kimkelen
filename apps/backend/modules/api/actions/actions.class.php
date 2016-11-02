@@ -8,8 +8,21 @@
  * @author     Corrons M. Emilia
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
+class FakeUser
+{
+	public function getUsername() {
+		return "SIPECU";
+	}
+	
+	public function shutdown()
+	{
+		//stub method
+	}
+}
+
 class apiActions extends sfActions
 {
+  
 
   public function executeIsStudent(sfWebRequest $request)
   {
@@ -19,6 +32,8 @@ class apiActions extends sfActions
   
   public function executeConfirmStudent(sfWebRequest $request)
   { 
+	 sfContext::getInstance()->set("user", new FakeUser());
+	 
 	 //tomo las intancias de las librerias.
 	 $i_identification_type =  BaseCustomOptionsHolder::getInstance('IdentificationType');
 	 $i_sex_type = BaseCustomOptionsHolder::getInstance('SexType');
