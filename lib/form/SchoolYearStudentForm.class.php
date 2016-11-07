@@ -37,10 +37,11 @@ class SchoolYearStudentForm extends BaseSchoolYearStudentForm
     unset($this['created_at'], $this['school_year_id'], $this['student_id']);
     $this->getWidget('shift_id')->setOption('add_empty',false);
 
-	  $this->setWidget('health_info',  new sfWidgetFormSelect(array(
+	$this->setWidget('health_info',  new sfWidgetFormSelect(array(
 		  'choices'  => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions()
 	  )));
+	  
 	$this->setWidget('date_health_info', new csWidgetFormDateInput());
-    $this->setValidator('date_health_info', new mtValidatorDateString(array('required' => true,'date_output'=>'Y-m-d')));
+    $this->setValidator('date_health_info', new mtValidatorDateString(array('required'=> false,'date_output'=>'Y-m-d')));
   }
 }
