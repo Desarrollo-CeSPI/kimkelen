@@ -1087,21 +1087,22 @@ class Course extends BaseCourse
 	
 	public function canRevertCalificate(PropelPDO $con = null)
     {
-		if ($this->getIsClosed())
+		if (! $this->getIsClosed())
 		{
-			 return false;
-		}
-		else{
-		
 			$course_subject= CourseSubjectPeer::retrieveByCourseId($this->getId());
-			$c = new Criteria();
+			if(!is_null($course_subject)){
+				$c = new Criteria();
+				
+				$c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $course_subject->getId());
+				$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
+				
+				return (CourseSubjectStudentPeer::doCount($c) > 0);
+			}
 			
-			$c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $course_subject->getId());
-			$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
-			
-			return (CourseSubjectStudentPeer::doCount($c) > 0);
-		
+			return false;
 		}
+			
+		return false;				
     }
 }
 sfPropelBehavior::add('Course', array('changelog'));
