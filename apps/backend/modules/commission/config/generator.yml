@@ -122,6 +122,12 @@ generator:
             action:         attendanceSheetByCourseSubject
             credentials:    [show_course]
             condition:      canSeeAttendanceSheet
+          
+          revertCalificateNonNumericalMark:
+            label:          Revert calificate non numerical mark
+            action:         revertCalificateNonNumericalMark
+            credentials:    [edit_division_course_califications]
+            condition:      canRevertCalificate
 
           _delete:
             condition:      canBeDeleted
