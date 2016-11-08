@@ -106,6 +106,12 @@ generator:
             action: calificateNonNumericalMark
             credentials: [edit_division_course_califications]
             condition:    canCalificate
+          
+          revertCalificateNonNumericalMark:
+            label: Revert calificate non numerical mark
+            action: revertCalificateNonNumericalMark
+            credentials: [edit_division_course_califications]
+            condition:    canRevertCalificate
 
           _delete:
             condition:      canBeDeleted

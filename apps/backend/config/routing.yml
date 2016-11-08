@@ -98,6 +98,10 @@ save_calificate_non_numerical_mark:
   url:  course_student_mark/saveCalificateNonNumericalMark
   param:  { module: course_student_mark, action: saveCalificateNonNumericalMark }
 
+save_revert_calificate_non_numerical_mark:
+  url:  course_student_mark/saveRevertCalificateNonNumericalMark
+  param:  { module: course_student_mark, action: saveRevertCalificateNonNumericalMark }
+
 save_resolve_problematic_students:
   url:  tentative_repproved_student/save
   param:  { module: tentative_repproved_student, action: save }

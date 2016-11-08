@@ -4702,6 +4702,14 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>The examination subject has been successfully closed.</source>
                 <target>La materia ha sido cerrada satisfactoriamente.</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Choose student to revert calificate without numerical mark from %course%</source>
+                <target>Elija los alumnos a deseximir del curso %course%</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Revert calificate non numerical mark</source>
+                <target>Deseximir alumnos de este curso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
