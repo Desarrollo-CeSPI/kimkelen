@@ -380,15 +380,6 @@ save_student_attendance_show_day:
   url: /student_attendance/SaveStudentAttendanceShowDay
   param: { module: student_attendance, action: SaveStudentAttendanceShowDay }
 
-tag:
-  class: sfPropelRouteCollection
-  options:
-    model:                Tag
-    module:               tag
-    prefix_path:          tag
-    column:               id
-    with_wildcard_routes: true
-
 sub_orientation:
   class: sfPropelRouteCollection
   options:

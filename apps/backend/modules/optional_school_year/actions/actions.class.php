@@ -115,42 +115,4 @@ class optional_school_yearActions extends autoOptional_school_yearActions
     }
   }
   
-  /** tags! **/
-  
-  public function executeTags(sfWebRequest $request)
-  {
-    $this->career_subject_school_year = $this->getRoute()->getObject();
-
-    $this->form = new CareerSubjectSchoolYearTaggableForm($this->career_subject_school_year);
-  }
-  
-  public function executeUpdateTags(sfWebRequest $request)
-  {
-    $this->career_subject_school_year = CareerSubjectSchoolYearPeer::retrieveByPK($request->getParameter('id'));
-
-    if (null === $this->career_school_year)
-    {
-      $this->getUser()->setFlash('error', 'Debe seleccionar una carrera para editar sus etiquetas');
-
-      $this->redirect('@career_school_year');
-    }
-
-    $this->form = new CareerSubjectSchoolYearTaggableForm($this->career_subject_school_year);
-
-    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-    if ($this->form->isValid())
-    {
-      $notice = $this->getProcessFormNotice($this->form->getObject()->isNew());
-
-      $subject_configuration = $this->form->save();
-
-      $this->getUser()->setFlash('notice', $notice);
-    }
-    else
-    {
-      $this->setProcessFormErrorFlash();
-    }
-    
-    $this->setTemplate('tags');
-  }
 }

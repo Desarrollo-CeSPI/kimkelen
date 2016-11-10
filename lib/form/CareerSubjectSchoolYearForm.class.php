@@ -30,6 +30,6 @@ class CareerSubjectSchoolYearForm extends BaseCareerSubjectSchoolYearForm
 {
   public function configure()
   {
-    unset($this['career_school_year_id'], $this['career_subject_id'], $this['subject_configuration_id'], $this['career_subject_school_year_tag_list']);
+    unset($this['career_school_year_id'], $this['career_subject_id'], $this['subject_configuration_id']);
   }
 }

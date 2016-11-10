@@ -20,12 +20,7 @@ generator:
         params:             |
           %%_career_subject_info%%
 
-        object_actions:
-          tags:
-            action: tags
-            label: Tags
-            credentials: [edit_school_year]
-            condition: canBeEdited  
+        object_actions: 
 
           optionals:
             action:         optional

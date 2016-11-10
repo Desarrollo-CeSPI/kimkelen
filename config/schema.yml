@@ -440,26 +440,6 @@ classes:
       _uniques:
         career_subject_school_year: [career_subject_id, career_school_year_id]
 
-  CareerSubjectSchoolYearTag:
-    tableName: career_subject_school_year_tag
-    columns:
-      career_subject_school_year_id:
-        type: integer
-        foreignTable: career_subject_school_year
-        foreignReference: id
-        required: true
-        onDelete: cascade
-        onUpdate: cascade
-        primaryKey: true
-      tag_id:
-        type: integer
-        foreignTable: tag
-        foreignReference: id
-        required: true
-        onDelete: restrict
-        onUpdate: cascade
-        primaryKey: true
-
   SchoolYearStudent:
     tableName:          school_year_student
     description:        Matrícula por año lectivo: inscripción de un alumno a un año lectivo.

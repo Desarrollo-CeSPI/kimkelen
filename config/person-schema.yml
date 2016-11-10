@@ -202,24 +202,6 @@ classes:
         type:             varchar(255)
         required:         true
 
-  StudentTag:
-    tableName: student_tag
-    columns:
-      student_id:
-        type: integer
-        foreignTable: student
-        foreignReference: id
-        onUpdate: cascade
-        onDelete: cascade
-        primaryKey: true
-      tag_id:
-        type: integer
-        foreignTable: tag
-        foreignReference: id
-        onUpdate: restrict
-        onDelete: cascade
-        primaryKey: true
-
   Teacher:
     tableName:            teacher
     description:           representa a un docente

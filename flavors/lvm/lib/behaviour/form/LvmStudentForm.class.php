@@ -49,7 +49,6 @@ class LvmStudentForm extends StudentForm
           'Contact data'    =>  array('person-email', 'person-phone', 'person-address'),
           'Health data'   =>  array('blood_group', 'blood_factor', 'health_coverage_id', 'emergency_information'),
           //'System access'   =>  array('person-username', 'person-password', 'person-password_again' ),
-          'Tags' => array('student_tag_list'),
 //          'Work data'       =>  array('occupation_id', 'busy_starts_at', 'busy_ends_at'),
     );
   }

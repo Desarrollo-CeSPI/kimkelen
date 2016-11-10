@@ -25,7 +25,6 @@ class CareerSubjectSchoolYearFormFilter extends BaseCareerSubjectSchoolYearFormF
 
     $this->getWidget('index_sort')->setOption('with_empty', false);
 
-    $this->getWidgetSchema()->moveField("year", "before", "career_subject_school_year_tag_list");
   }
 
   public function getFields()
