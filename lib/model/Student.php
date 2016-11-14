@@ -1418,12 +1418,17 @@ class Student extends BaseStudent
      */
     public function getBelongsToPathway()
     {
+      if (SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent())){
         $c = new Criteria();
         $c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
         $c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
         $c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent())->getId());
 
-        return $this->countPathwayStudents($c) > 0;
+        $flag = $this->countPathwayStudents($c) > 0;
+      } else {
+        $flag = false;
+     }
+      return $flag;
     }
 
     public function owsCorrelativeFor($career_subject) 
