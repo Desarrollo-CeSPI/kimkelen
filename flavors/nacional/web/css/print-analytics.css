@@ -12,27 +12,27 @@
 
 .table {
     margin-bottom: 1em;
-/*    page-break-inside: avoid; */
+    page-break-inside: avoid;
 }
 .table tr
 {
-        page-break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .table thead th{
-    font-size: 10px;
+    font-size: 14px;
     padding-top: 1px !important;
     padding-bottom: 0 !important;
 }
 
 .table td {
-    font-size: 8px;
+    font-size: 14px;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
 .table tbody th {
-    font-size: 10px;
+    font-size: 14px;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }

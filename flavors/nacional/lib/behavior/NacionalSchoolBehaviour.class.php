@@ -38,4 +38,15 @@ class NacionalSchoolBehaviour extends BaseSchoolBehaviour
       '_delete' => array('credentials' => array( 0 => 'edit_school_year',),'condition' => 'canBeDeleted',),
     );
   }
+
+  public function getFileNumberIsGlobal()
+  {
+    return true;
+  }
+
+  protected function getClassSubjectStudentAnalytic()
+  {
+    return 'NacionalSubjectStudentAnalytic';
+  }
+
 }

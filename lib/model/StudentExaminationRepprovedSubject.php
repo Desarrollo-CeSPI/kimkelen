@@ -80,7 +80,7 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
        
     }
     
-    public function getMarkByConfig($config=null)
+    public function getMarkStrByConfig($config=null)
     {
 		if(is_null($config))
 		{

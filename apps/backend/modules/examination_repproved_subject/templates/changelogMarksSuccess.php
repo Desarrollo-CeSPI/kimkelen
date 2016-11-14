@@ -43,7 +43,7 @@
         <td>   
           <?php $ers = $examination_repproved_subject->getExaminationNoteForStudent($student) ?>
           <span>
-            <?php echo __('Nota: %mark%', array('%mark%' => !$ess->getMark()? ($ess->getIsAbsent()? __('Absent') : '-') : $ess->getMark()));?>
+            <?php echo __('Nota: %mark%', array('%mark%' => !$ers->getMark()? ($ers->getIsAbsent()? __('Absent') : '-') : $ers->getMark()));?>
             <?php echo ncChangelogRenderer::render($ers, 'tooltip', array('credentials' => 'view_changelog')); ?>
           </span>
           </br>

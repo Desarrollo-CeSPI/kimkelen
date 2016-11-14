@@ -157,6 +157,8 @@ class studentActions extends autoStudentActions
   public function executeUpdateRegistrationForCurrentSchoolYear(sfWebRequest $request)
   {
     $this->student = StudentPeer::retrieveByPK($request->getParameter('student_id'));
+    $health_info = $request->getParameter('school_year_student[health_info]');
+    $date_health_info = $request->getParameter('school_year_student[date_health_info]');
 
     if (null === $this->student)
     {
@@ -165,27 +167,37 @@ class studentActions extends autoStudentActions
       $this->redirect('@student');
     }
     $school_year_student = $this->student->getSchoolYearStudentForSchoolYear();
+	
+	if (is_null ($school_year_student))
+	{
+	  $school_year_student = new SchoolYearStudent();
+	  $school_year_student->setStudent($this->student);
+	  $school_year_student->setSchoolYear(SchoolYearPeer::retrieveCurrent());
+	}
+			
+	$this->form = new SchoolYearStudentForm($school_year_student);	
+	$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
 
-    if (is_null ($school_year_student))
-    {
-      $school_year_student = new SchoolYearStudent();
-      $school_year_student->setStudent($this->student);
-      $school_year_student->setSchoolYear(SchoolYearPeer::retrieveCurrent());
-    }
-    $this->form = new SchoolYearStudentForm($school_year_student);
-
-    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-    if ($this->form->isValid())
-    {
-      $career_student = $this->form->save();
-      $this->getUser()->setFlash('info','The item was updated successfully.');
-      $this->redirect('@student');
-    }
-    else
-    {
-      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
-      $this->setTemplate('registerForCurrentSchoolYear');
-    }
+	if(!is_null($health_info) && $health_info != HealthInfoStatus::HEALTH_INFO_NO_COMMITED && (is_null($date_health_info) || $date_health_info == '')){
+		
+		$this->getUser()->setFlash('error', 'El campo fecha de devolución es obligatorio.', false);
+		$this->setTemplate('registerForCurrentSchoolYear');
+		
+	}else{
+		if ($this->form->isValid())
+		{
+			$career_student = $this->form->save(Propel::getConnection());
+			$this->getUser()->setFlash('info','The item was updated successfully.');
+			$this->redirect('@student');
+		}
+		else
+		{
+		  $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+		  $this->setTemplate('registerForCurrentSchoolYear');
+		}
+	}
+		
+		
   }
   /**
    * This action deletes a created SchoolYear registration for selected student

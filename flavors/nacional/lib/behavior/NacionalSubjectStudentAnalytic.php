@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -16,9 +15,39 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */
+ */ ?>
+<?php
 
-class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
+class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 {
-	
+
+	public function getCondition()
+	{
+		$instance = $this->approvationInstance();
+		switch (get_class($instance))
+		{
+			case 'StudentApprovedCourseSubject':
+				return 'Regular';
+			case 'StudentDisapprovedCourseSubject':
+				if ($instance->getExaminationNumber() == 1) 
+				{
+					return 'Regular';
+				}
+				else
+				{
+					return 'R. Comp.';
+				}
+			case 'StudentRepprovedCourseSubject':
+				if ($instance->getentExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1)
+				{
+					return 'R. Prev.';
+				}
+				else
+				{
+					return 'Libre';
+				}
+		}
+		return;
+	}
+
 }
