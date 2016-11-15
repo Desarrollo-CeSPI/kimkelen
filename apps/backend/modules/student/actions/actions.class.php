@@ -858,5 +858,12 @@ class studentActions extends autoStudentActions
 	$this->redirect('student/changeStudentStatus?id='.$this->student->getId());   
       
   }
+  
+  public function executeShowAssistanceSheet($request)
+  {
+    $this->student = $this->getRoute()->getObject();
+    $this->student_career_school_years = $this->student->getCurrentStudentCareerSchoolYears();
+
+  }
 
 }

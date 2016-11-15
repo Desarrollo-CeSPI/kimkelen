@@ -33,6 +33,6 @@
     <?php endif?>
   <?php endif?>
   <li>
-	  <?php echo link_to("Ver reporte de inasistencias", 'student/showAssistanceAndSanctionReport?id='. $student->getId());?>
+	  <?php echo link_to("Ver planilla de inasistencias", 'student/showAssistanceSheet?id='. $student->getId());?>
   </li>
 </ul>
