@@ -215,6 +215,14 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
         $criteria->add(StudentExaminationRepprovedSubjectPeer::IS_ABSENT,true);
         return  StudentExaminationRepprovedSubjectPeer::doCount($criteria) ;
     }
+
+	  public function getYear() {
+		  return $this->getCareerSubject()->getYear();
+	  }
+
+		public function getSchoolYear() {
+			return $this->getExaminationRepproved()->getSchoolYear();
+		}
 }
 
 sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));

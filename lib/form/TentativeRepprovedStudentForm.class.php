@@ -9,13 +9,12 @@
  */
 class TentativeRepprovedStudentForm extends sfForm
 {
-
 	public function configure()
 	{
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('I18N', 'Url'));
 
-		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'peer_method' => 'getStudents',     'multiple'  => true,
-			"renderer_class"  => "csWidgetFormSelectDoubleList"
+		$this->setWidget('students', new sfWidgetFormPropelChoice(array('model' => 'TentativeRepprovedStudent', 'expanded' => true, 'peer_method' => 'getStudents', 'multiple'  => true
+,  'renderer_options' =>array('class' => 'checkbox')
 		)));
 
 		$this->validatorSchema['students'] = new sfValidatorPass();
@@ -48,14 +47,15 @@ class TentativeRepprovedStudentForm extends sfForm
 				foreach ($values as $value)
 				{
 					$c = new Criteria();
+
 					$c->addJoin(TentativeRepprovedStudentPeer::STUDENT_CAREER_SCHOOL_YEAR_ID, StudentCareerSchoolYearPeer::ID);
 					$c->add(TentativeRepprovedStudentPeer::IS_DELETED, false);
 					$c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $value);
 
-					$trs = TentativeRepprovedStudentPeer::doSelectOne($c);
+					$trs = TentativeRepprovedStudentPeer::retrieveByPK($value);
 
 					$pathway_student = new PathwayStudent();
-					$pathway_student->setStudentId($value);
+					$pathway_student->setStudentId($trs->getStudentCareerSchoolYear()->getStudentId());
 					$pathway_student->setPathway(PathwayPeer::retrieveCurrent());
 					$pathway_student->setYear($trs->getStudentCareerSchoolYear()->getYear());
 					$pathway_student->save($con);
@@ -66,8 +66,6 @@ class TentativeRepprovedStudentForm extends sfForm
 					$trs->getStudentCareerSchoolYear()->setStatus(StudentCareerSchoolYearStatus::APPROVED);
 					$trs->getStudentCareerSchoolYear()->save($con);
 				}
-
-
 
 			}
 			$con->commit();

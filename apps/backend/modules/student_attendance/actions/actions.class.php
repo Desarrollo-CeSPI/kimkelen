@@ -30,6 +30,54 @@
 class student_attendanceActions extends sfActions
 {
 
+  private function getDaysOfMonth($month)
+  {
+    $days = array();
+    $limit = cal_days_in_month(CAL_GREGORIAN, $month, date('Y'));
+    $start_date = strtotime("1-". $month ."-". date('Y') ."");
+
+    for ($i = 0; $i < $limit; $i++)
+    {
+      $day = strtotime("+$i day", $start_date);
+      if (date('N', $day) < 6)
+      {
+        $days[] = $day;
+      }
+    }
+
+    return $days;
+
+  }
+
+  public function executePrintAttendanceTemplate(sfWebRequest $request)
+  {
+    $this->month = $request->getParameter('month');
+    $this->url = $request->getParameter('url');
+    $this->id = $request->getParameter('id');
+    $this->nextMonth = ($this->month < 12) ? $this->month + 1 : 1;
+    $this->prevMonth = ($this->month > 1) ? $this->month - 1 : 12;
+    $this->monthName = date("F", mktime(0, 0, 0, $this->month, 1, 2015));
+
+    if ( $this->url == "division")
+    {
+      $this->division_id = $request->getParameter('division_id');
+      $this->division = DivisionPeer::retrieveByPK($this->id);
+      $this->students = $this->division->getStudents();
+      $this->days = $this->getDaysOfMonth($this->month);
+      $this->course_subject = null;
+
+    }
+    elseif ($this->url == "commission")
+    {
+      $this->course_subject = CourseSubjectPeer::retrieveByPK($this->id);
+      $this->students = $this->course_subject->getStudents();
+      $this->days = $this->getDaysOfMonth($this->month);
+
+    }
+
+    $this->setLayout('cleanLayout');
+  }
+
   public function executeSelectValuesForAttendanceDay(sfWebRequest $request)
   {
     $this->getUser()->clearAttribute('back_url');
@@ -157,6 +205,19 @@ class student_attendanceActions extends sfActions
     elseif ($request->hasParameter("next_division"))
     {
       $this->redirect("student_attendance/StudentAttendance?url=division&year=". $multiple_student_attendance['year'] . "&division_id=" . $this->form->getNextDivision()->getId() . "&career_school_year_id=" . $multiple_student_attendance['career_school_year_id'] . "&day=" .$multiple_student_attendance['day'] . "&course_subject_id=");
+    }
+    elseif ($request->hasParameter("print_attendance_template"))
+    {
+      $this->month = date('m');
+
+      if (!$this->form->isAttendanceBySubject())
+      {  
+        $this->redirect("student_attendance/printAttendanceTemplate?url=division&id=" . $multiple_student_attendance['division_id']. " &month=". $this->month ."");
+      }
+      else 
+      {
+        $this->redirect("student_attendance/printAttendanceTemplate?url=commission&id=" . $multiple_student_attendance['course_subject_id']. " &month=". $this->month ."");
+      }    
     }
 
     $this->setTemplate('StudentAttendance');

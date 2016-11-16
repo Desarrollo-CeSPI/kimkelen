@@ -32,8 +32,9 @@
 
         <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
+        <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Print attendance template') ?>" name="print_attendance_template" ></li>
       </ul>
-
+      
       <div class="week_move">
         <?php echo image_tag('../sfPropelPlugin/images/previous.png') ?>
         <?php echo link_to(__('previous week'), 'student_attendance/StudentAttendance', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . date('Y-m-d', strtotime($form->day . '- 1 week')))); ?>

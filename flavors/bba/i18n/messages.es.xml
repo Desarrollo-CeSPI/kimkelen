@@ -3042,7 +3042,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
             <trans-unit>
                 <source>Course minimun mark</source>
-                <target>Nota minima para aprobar</target>
+                <target>Nota mínima para aprobar</target>
             </trans-unit>
             <trans-unit>
                 <source>Attendance for subject</source>
@@ -4419,12 +4419,138 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Create pathway if it does not exist from</source>
                 <target>Crear plan de promoción por excepción desde</target>
             </trans-unit>
-
+            <trans-unit>
+                <source>School</source>
+                <target>Escuela</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Curso C</source>
+                <target>Curso completo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Curso I</source>
+                <target>Curso incompleto</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_ciudad</source>
+                <target>La Plata</target>
+            </trans-unit>
+            <trans-unit>
+                <source>nombre_ultimo_anio_primario</source>
+                <target>6º año de la EPB</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_1</source>
+                <target>Vicedirector/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_2</source>
+                <target>Director/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_3</source>
+                <target>Jefe/a del Dpto. de Alumnos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>analytic_signature_4</source>
+                <target>Secretario/a</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_nombre</source>
+                <target>Bachillerato de Bellas Artes</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
+            </trans-unit>
+            <trans-unit>
+                <source>escuela_nombre</source>
+                <target>Colegio Nacional Rafael Hernández</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Condition</source>
+                <target>Condición</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 1</source>
+                <target>Primer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 2</source>
+                <target>Segundo año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 3</source>
+                <target>Tercer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 4</source>
+                <target>Cuarto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 5</source>
+                <target>Quinto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 6</source>
+                <target>Sexto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 7</source>
+                <target>Séptimo año</target>
+            </trans-unit>
             <trans-unit>
                 <source>Student approved career subject</source>
                 <target>Materia aprobada</target>
             </trans-unit>
-
+            <trans-unit>
+                <source>Ows correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Pathway commission list</source>
+                <target>Listado de comisiones de Promoción por excepción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>confirm</source>
+                <target>Confirmar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Choose values for repproved track</source>
+                <target>Elección de parámetros para el seguimiento de previas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate track</source>
+                <target>Generar seguimiento</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print attendance template</source>
+                <target>Imprimir Hoja de Asistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Previous month</source>
+                <target>Mes anterior</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Next month</source>
+                <target>Mes siguiente</target>
+            </trans-unit>
+	        <trans-unit>
+                <source>Health info</source>
+                <target>Estado de la Ficha de Salud</target>
+            </trans-unit>
+	        <trans-unit>
+                <source>Date health info</source>
+                <target>Fecha de Devolución</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Edit last repproved examination</source>
+                <target>Editar ultima mesa de previa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

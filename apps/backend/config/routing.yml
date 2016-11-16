@@ -1,3 +1,8 @@
+
+printAttendanceTemplate:
+  url: /student_attendance/PrintAttendanceTemplate
+  param: { module: student_attendance, action: printAttendanceTemplate}
+
 pathway_commission:
   class: sfPropelRouteCollection
   options:
@@ -55,6 +60,9 @@ sanction:
     prefix_path:          sanction
     column:               id
     with_wildcard_routes: true
+student_print_analytical:
+  url:  /student/:id/printAnalytical
+  param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
 
 move_students:
   url:  move_students
@@ -123,6 +131,10 @@ print_table:
   url:   /printTable
   param: { module: course_student_mark, action: printTable }
 
+print_pathway_marks:
+  url:   /printPathwayMarks
+  param: { module: pathway_commission, action: printPathwayMarks }
+
 division_show_courses:
   url:  /showCourses
   param:  {module: division, action: showCourses}
@@ -155,7 +167,7 @@ report_card:
 
 social_card:
   url: /student/:id/printSocialCard
-  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait  }
+  param: { module: student, action: printSocialCard, sf_format: pdf, orientation:portrait, page-size:Legal}
 
 export_not_totally_approved_report_cards:
   url: /report_card/Boletines_adeudan_materias.pdf
@@ -590,11 +602,6 @@ create_course_division:
   requirements:
     career_subject_id: \d+
 
-generate_backup:
-  url:  /generar-backup-del-sistema
-  params:
-    module: mainBackend
-    action: generateBackup
 
 personal:
   class: sfPropelRouteCollection
@@ -737,6 +744,10 @@ manual_administracion:
 homepage:
   url:   /
   param: { module: mainBackend, action: index }
+
+changelog_helper:
+  url: /changelog_helper
+  param: { module: changelog_helper, action: index }
 
 default_index:
   url:   /:module

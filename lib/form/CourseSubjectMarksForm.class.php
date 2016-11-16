@@ -40,10 +40,12 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
     $messages = array(
       'min'     => 'La calificación debe ser al menos %min%.',
       'max'     => 'La calificación debe ser a lo sumo %max%.',
-      'invalid' => 'El valor ingresado es inválido.'
+      'invalid' => 'El valor ingresado es inválido, solo se aceptan numeros enteros.'
     );
+
     $this->disableCSRFProtection();
     $tmp_sum = 0;
+    $configuration = $this->object->getCareerSubjectSchoolYear()->getConfiguration();
     foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
     {
       foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks() as $course_subject_student_mark)
@@ -52,13 +54,27 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
         if ($course_subject_student_mark->getIsClosed())
         {
           $widgets[$widget_name] = new mtWidgetFormPlain(array(
-              'object' => $course_subject_student_mark, 'method' => 'getMark', 'add_hidden_input' => false), array('class' => 'mark'));
+              'object' => $course_subject_student_mark, 'method' => 'getMarkByConfig', 'method_args' => $configuration, 'add_hidden_input' => false), array('class' => 'mark'));
           $widgets[$widget_name]->setAttribute('class', 'mark_note');
+
         }
         else
         {
-          $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student_mark->getMark()), array('class' => 'mark'));
-
+          if($configuration->isNumericalMark())
+          {
+            $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student_mark->getMark()), array('class' => 'mark'));
+            $validators[$widget_name] = new sfValidatorInteger($options, $messages);
+          }
+          else
+          {
+            $letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$course_subject_student_mark->getMark());
+            
+            if(!is_null($letter_mark)) {
+              $this->setDefault($widget_name, $letter_mark->getId());
+            }
+            $widgets[$widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true));
+            $validators[$widget_name] = new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false));
+          }
           //IS FREE
           $free_widget_name = $course_subject_student->getId().'_free_'.$course_subject_student_mark->getMarkNumber();
           $name = 'course_student_mark_'. $this->getObject()->getId() . '_' . $widget_name;
@@ -73,7 +89,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $validators[$free_widget_name] = new sfValidatorBoolean();
         }
         $tmp_sum = $this->evaluationFinalProm($course_subject_student, $course_subject_student_mark, $tmp_sum);
-        $validators[$widget_name] = new sfValidatorNumber($options, $messages);
+        
 
       }
       $tmp_sum = 0;
@@ -116,11 +132,22 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       {
         $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
         $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
+        
         if ((!is_null($is_free)))
         {
           if ($is_free)
           {
             $value = 0;
+          }
+          else
+          {
+            if($value != null)
+            {
+              if (!$course_subject_student->getConfiguration()->isNumericalMark())
+              {
+                $value = LetterMarkPeer::retrieveByPk($value)->getValue();
+              }
+            }
           }
 
           $course_subject_student_mark->setMark($value);

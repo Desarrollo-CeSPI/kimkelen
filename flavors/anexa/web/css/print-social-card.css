@@ -1,0 +1,151 @@
+
+body {
+  font-size: 12px;
+}
+
+img {
+  margin-top: 40px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+h2 {
+  font-weight: bold; 
+  font-size: 20px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+header #nota {
+  margin-top: 40px;
+  margin-left: 75px;
+  margin-right: 75px;
+  text-align: left;
+}
+
+header #nota #firma {
+  text-align: right;
+  font-style: italic;
+}
+
+#datos-personales {
+  margin-top: 50px;
+  margin-left: 75px;
+  margin-right: 75px;
+  text-align: left;
+}
+
+#datos-personales #fecha {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+#datos-familiares {
+  text-align: left;
+  margin-left: 75px;
+  margin-right: 75px;
+  margin-top: 50px;
+}
+
+#datos-familiares .form-info {
+  padding-top: 100px;
+}
+
+#datos-familiares div {
+  margin-top: 20px;
+}
+
+#datos-familiares section {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.seleccion-3columnas ul {
+  width: 700px;
+}
+
+.seleccion-3columnas ul li {
+  display: inline-block;
+  width: 200px;
+}
+
+.seleccion-2columnas ul {
+  width: 700px;
+}
+
+.seleccion-2columnas ul li {
+  display: inline-block;
+  width: 300px;
+}
+
+.tabla  {
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.tabla td {
+  font-family:Arial, sans-serif;
+  font-size: 12px;
+  padding: 15px 5px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
+  word-break: normal;
+}
+.tabla th {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 15px 5px;
+  border-style: solid;
+  border-width: 1px;
+  overflow: hidden;
+  word-break: normal;
+}
+
+#datos-salud {
+  text-align: left;
+  margin-right: 75px;
+  margin-left: 75px;
+  margin-top: 50px;
+  padding-top: 40px;
+}
+#datos-salud h2 {
+  margin-bottom:  50px;
+}
+
+#datos-salud div {
+  margin-bottom: 20px
+}
+
+#datos-salud section {
+  margin-bottom: 5px;
+}
+
+#datos-salud p {
+  font-size: 11px;
+}
+
+#aclaracion {
+  font-size: 10px;
+  font-style: italic;
+  margin: 0px;
+}
+
+#observacion {
+  text-align: left;
+  margin-right: 75px;
+  margin-left: 75px;
+}

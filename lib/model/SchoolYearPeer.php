@@ -26,6 +26,7 @@ class SchoolYearPeer extends BaseSchoolYearPeer
    *
    * @return SchoolYear
    */
+
   public static function retrieveCurrent(){
     $c = new Criteria();
     $c->add(SchoolYearPeer::IS_ACTIVE, true, Criteria::EQUAL);
@@ -48,7 +49,7 @@ class SchoolYearPeer extends BaseSchoolYearPeer
    *
    * @return integer
    */
-  public static function sugestYear()
+  public static function suggestYear()
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(self::YEAR);

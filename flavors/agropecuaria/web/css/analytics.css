@@ -1,0 +1,63 @@
+/* 
+    Created on : 18-ago-2015, 11:53:20
+    Author     : lucianoc
+*/
+
+#header_analytical_data_left
+{
+    width: 20%;
+}
+#header_analytical_data_right
+{
+    width: 20%;
+    float: right
+}
+#header_analytical_data_center
+{
+    width: 55%;
+    text-align: center;
+}
+#header_analytical_data_center h1
+{
+    display: inline;
+}
+.title dd.detail{
+    font-weight: normal;
+    padding-left: 1em;
+}
+#header_analytical_data_center h1 small
+{
+    display: block;
+    font-weight: normal;
+}
+.analytical hr
+{
+    margin: 0;
+    border-color: black;
+    border-style: solid;
+}
+
+.report-content {
+    float: left;
+    margin-top: 1em;
+    width: 100%;
+}
+
+.school_logo
+{
+    float: left;
+}
+
+@media print
+{
+    .sf_admin_actions {
+        display: none;
+    }
+    .table {
+        margin-bottom: 1em;
+    }
+}
+
+.analytical_body_table {
+    font-size: 14px;
+}

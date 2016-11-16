@@ -53,7 +53,7 @@ class ncChangelogRenderer
 
         if (is_callable($callable))
         {
-          return call_user_func_array($callable, array($object, $options));
+          return call_user_func_array($callable, array($object));
         }
       }
     }
@@ -75,23 +75,27 @@ class ncChangelogRenderer
    */
   static protected function renderAsTooltip($object)
   {
+    sfContext::getInstance()->getResponse()->addJavascript('changelog');
     self::loadHelpers('Asset');
 
+    $klass = get_class($object);
+    $id = $object->getId();
+    $html_id = "changelog_for_${klass}_${id}";
     $html = <<<HTML
-<a href="#" style="display: inline-block; margin: 1px;" onclick="jQuery('.nc_changelog_tooltip').fadeOut(500); jQuery('#changelog_for_mark_%id%:hidden').fadeIn(500); return false;">
+<a href="#" style="display: inline-block; margin: 1px;" onclick="changelog_render_tooltip('%url%','%klass%','%id%','#%html_id%'); return false;">
   <img style="vertical-align: middle;" src="%img_src%" alt="%img_alt%" title="%img_title%" />
 </a>
-<div id="changelog_for_mark_%id%" class="nc_changelog_tooltip" style="display: none;">
-  %changelog%
-</div>
+<div id="%html_id%" class="nc_changelog_tooltip" style="display: none;"></div>
 HTML;
 
     return strtr($html, array(
-      '%id%'        => $object->getId(),
+      '%klass%'     => $klass,
+      '%url%'       => url_for('@changelog_helper'),
+      '%id%'        => $id,
+      '%html_id%'   => $html_id,
       '%img_src%'   => image_path('clock.png'),
       '%img_alt%'   => __('Change log', array(), 'nc_change_log_behavior'),
-      '%img_title%' => __('See change log', array(), 'nc_change_log_behavior'),
-      '%changelog%' => self::renderAsList($object)
+      '%img_title%' => __('See change log', array(), 'nc_change_log_behavior')
     ));
   }
 
@@ -114,6 +118,7 @@ HTML;
 
     return content_tag($list_type, $changelog);
   }
+
 
   /**
    * Load the helpers passed as arguments of this function.

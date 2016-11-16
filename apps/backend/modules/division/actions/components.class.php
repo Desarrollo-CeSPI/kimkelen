@@ -28,6 +28,7 @@ class divisionComponents extends sfComponents
 {
   public function executeStudent_marks()
   {
+  	$this->configuration = $this->getVar('course_subject')->getCareerSubjectSchoolYear()->getConfiguration();
     $this->marks = $this->getVar('student')->getMarksForCourse($this->getVar('course_subject'));
     $this->marksNumber = $this->getVar('course_subject')->countMarks();
   }

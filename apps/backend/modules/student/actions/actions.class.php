@@ -143,6 +143,7 @@ class studentActions extends autoStudentActions
       $school_year_student = new SchoolYearStudent();
       $school_year_student->setStudent($this->student);
       $school_year_student->setSchoolYear($csy);
+      
     }
     $this->form = new SchoolYearStudentForm($school_year_student);
   }
@@ -164,6 +165,7 @@ class studentActions extends autoStudentActions
       $this->redirect('@student');
     }
     $school_year_student = $this->student->getSchoolYearStudentForSchoolYear();
+
     if (is_null ($school_year_student))
     {
       $school_year_student = new SchoolYearStudent();
@@ -371,13 +373,29 @@ class studentActions extends autoStudentActions
   public function executeAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
+    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
+    $this->analytic = new Analytic();
   }
+  
   public function executePrintAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
+    $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
+    $this->analytic = new Analytic();
+    $this->analytic->setCareerStudent($this->career_student);
+    $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
+    $this->analytic->save();
+
     $this->setLayout('cleanLayout');
   }
-
+  
+  public function postExecutePrintAnalytical(sfWebRequest $request)
+  {
+      $analytical_document = $this->getResponse()->getContent();
+      $this->analytic->setCertificate($analytical_document);
+      $this->analytic->save();
+  }
+  
   public function executeStudentCoursesRegularity(sfWebRequest $request)
   {
     $this->student = StudentPeer::retrieveByPK($request->getParameter('id'));
@@ -539,7 +557,9 @@ class studentActions extends autoStudentActions
   {
      $this->setLayout('cleanLayout');
      $this->student = StudentPeer::retrieveByPK($request->getParameter('id'));
-
+     $this->options_nationality = BaseCustomOptionsHolder::getInstance('Nationality')->getOptions();
+	 $this->options_occupation = OccupationCategoryPeer::getOccupationCategories();
+	 $this->options_study = StudyPeer::getStudies();
   }
 
   public function executeShowAssistanceAndSanctionReport($request)

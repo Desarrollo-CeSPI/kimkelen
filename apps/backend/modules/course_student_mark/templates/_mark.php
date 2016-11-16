@@ -29,7 +29,7 @@
     <?php if ($field->hasError()): ?>
       <?php echo $field->renderError(); ?>
     <?php endif; ?>
-    <?php if (!$mark->getIsClosed()): ?>
+    <?php if ((!$mark->getIsClosed()) && ($configuration->isNumericalMark())): ?>
       <?php echo __($mark->getFreeLabel()) ?>
       <?php echo $form[$course_subject_student->getId() . '_free_' . $mark->getMarkNumber()]->render() ?>
     <?php endif ?>

@@ -45,21 +45,21 @@ class CareerStudentForm extends BaseCareerStudentForm
     $this->setWidget("start_year", new dcWidgetAjaxDependence(array(
       "dependant_widget"            => $w,
       "observe_widget_id"           => "career_student_career_id",
-      "message_with_no_value"       => "Seleccione una carrera y apareceran los años que correspondan",
+      "message_with_no_value"       => "Seleccione una carrera y aparecerán los años que correspondan",
       "get_observed_value_callback" => array(get_class($this), "getYears")
     )));
 
     $this->setWidget("orientation_id", new dcWidgetAjaxDependence(array(
       "dependant_widget"            => $w,
       "observe_widget_id"           => "career_student_career_id",
-      "message_with_no_value"       => "Seleccione una carrera y apareceran las orientaciones correspondientes",
+      "message_with_no_value"       => "Seleccione una carrera y aparecerán las orientaciones correspondientes",
       "get_observed_value_callback" => array(get_class($this), "getOrientations")
     )));
 
     $this->setWidget("sub_orientation_id", new dcWidgetAjaxDependence(array(
       "dependant_widget"            => $w,
       "observe_widget_id"           => "career_student_orientation_id",
-      "message_with_no_value"       => "Seleccione una orientación y apareceran las sub orientaciones correspondientes",
+      "message_with_no_value"       => "Seleccione una orientación y aparecerán las sub orientaciones correspondientes",
       "get_observed_value_callback" => array(get_class($this), "getSubOrientations")
     )));
 

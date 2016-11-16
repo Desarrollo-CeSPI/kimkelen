@@ -61,9 +61,13 @@
         <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
         <th rowspan="2"><?php echo __('Division'); ?></th>
+        <th colspan="2"><?php echo __('Evaluation type'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
+        <th rowspan="2"><?php echo __('Observations'); ?></th>
       </tr>
       <tr>
+        <th><?php echo __('Escrito'); ?></th>
+        <th><?php echo __('Oral'); ?></th>
         <th><?php echo __('Números'); ?></th>
         <th><?php echo __('Letras'); ?></th>
       </tr>
@@ -74,8 +78,10 @@
       <?php foreach ($students as $student): ?>
         <tr>
           <td class="orden"><?php echo $i ?> </td>
-          <td class="student"><?php echo $student ?> </td>
+          <td class="student" style="text-align: left"><?php echo $student ?> </td>
           <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
+          <td class="evaluation-type"></td>
+          <td class="evaluation-type"></td>
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">
             <?php if ($examination_subject->getIsClosed()): ?>
@@ -93,6 +99,7 @@
               <?php endif; ?>
             <?php endif; ?>
           </td>
+          <td class"observations"></td>
 
         </tr>
         <?php $i++; ?>

@@ -36,6 +36,7 @@ class SubjectPeer extends BaseSubjectPeer
     $criteria->setDistinct();
     $criteria->addAscendingOrderByColumn(self::NAME);
     return self::doSelect($criteria);
+    
   }
 
   /**

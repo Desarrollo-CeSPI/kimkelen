@@ -57,6 +57,10 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setWidget('disciplinary_sanction_count', new sfWidgetFormInput());
     $this->setValidator('disciplinary_sanction_count', new sfValidatorNumber(array('required' => false)));
     $this->widgetSchema->setHelp('disciplinary_sanction_count', 'Students that have more or equal to disciplinary sanctions in current school year.');
+    
+    $this->setWidget('health_info', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions(true))));
+    $this->setValidator('health_info', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getKeys(),'required' => false)));
+    
   }
 
   public function unsetFields()
@@ -76,7 +80,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $this['health_coverage_id'],
       $this['order_of_merit'],
       $this['folio_number'],
-      $this['origin_school'],
+      $this['origin_school_id'],
       $this['educational_dependency'],
       $this['student_tag_list']
     );
@@ -169,7 +173,8 @@ class StudentFormFilter extends BaseStudentFormFilter
         'is_free_in_some_period' => 'Boolean',
         'is_graduated' => 'Boolean',
         'disciplinary_sanction_count' => 'Number',
-        'status' => 'Number'));
+        'status' => 'Number',
+        'health_info' => 'Text'));
   }
 
   public function addIsGraduatedColumnCriteria(Criteria $criteria, $field, $values)
@@ -238,5 +243,15 @@ class StudentFormFilter extends BaseStudentFormFilter
       $criteria->add(DivisionStudentPeer::DIVISION_ID, $values);
       $criteria->addJoin(DivisionStudentPeer::STUDENT_ID, StudentPeer::ID);
     }
+  }
+  
+  public function addHealthInfoColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if($values)
+    {
+		$criteria->addJoin(StudentPeer::ID,SchoolYearStudentPeer::STUDENT_ID);
+		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
+				
+	}
   }
 }

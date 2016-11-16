@@ -1179,12 +1179,12 @@ table.dc_horizontal_table tr.dc_horizontal_row td.dc_horizontal_column
 
 .free
 {
-    background-color: yellow !important;
+    background-color: #F29A79 !important;
 }
 
 .almost_free
 {
-    background-color: greenyellow !important;
+    background-color: #FF0 !important;
 }
 
 .box
@@ -1928,6 +1928,16 @@ div.wc-cal-event{
   background-image: url('../images/create-division.png') !important;
 }
 
+.sf_admin_action_create_last_year_divisions a
+{
+    background-image: url('../images/create-division.png') !important;
+}
+
+.sf_admin_action_print_califications a
+{
+    background-image: url('../images/calification_sheet.png') !important;
+}
+
 .sf_admin_action_add_subject a
 {
   background-image: url('../images/admin-subjects.png') !important;
@@ -1977,4 +1987,8 @@ div.wc-cal-event{
     text-align: center;
     margin-bottom: 10px;
     text-decoration: none !important;
+}
+
+#sf_admin_container ul li {
+    list-style: none !important;
 }

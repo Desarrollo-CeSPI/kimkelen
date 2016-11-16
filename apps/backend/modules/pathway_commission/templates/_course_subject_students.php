@@ -58,15 +58,18 @@
       </thead>
       <tbody>
         <?php foreach ($course_subject->getCourseSubjectStudentPathways() as $course_subject_student): ?>
-          <?php $course_result = $course_subject_student->getMark() >= $evaluator_instance::PATHWAY_PROMOTION_NOTE ? __('Approved') : __('Dissaproved'); ?>
+	        <?php $course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($course_subject_student->getRelatedCourseSubjectStudent()); ?>
+          <?php if ($course_subject_student->getMark() >= $evaluator_instance::PATHWAY_PROMOTION_NOTE): ?>
+		        <?php $course_result = __('Approved'); ?>
+		        <?php $final_mark = bcdiv($course_subject_student->getMark() + $course_marks_avg, 2, 2); ?>
+	        <?php else: ?>
+	          <?php $course_result = __('Dissaproved'); ?>
+		        <?php $final_mark = $course_subject_student->getMark() == '0.00' ? 'L' : $course_subject_student->getMark(); ?>
+	        <?php endif; ?>
           <tr>
             <td><?php echo $course_subject_student->getStudent()->getFileNumber($career) ?></td>
             <td><?php echo $course_subject_student->getStudent() ?></td>
-            <td><?php echo $course_subject_student->getMark(); ?></td>
-
-	          <?php $course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($course_subject_student->getRelatedCourseSubjectStudent()); ?>
-	          <?php $final_mark = bcdiv($course_subject_student->getMark() + $course_marks_avg, 2, 2); ?>
-
+            <td><?php echo $course_subject_student->getMark() == '0.00' ? 'L' : $course_subject_student->getMark(); ?></td>
             <td><?php echo $final_mark ?></td>
             <td><?php echo $course_result ?></td>
           </tr>

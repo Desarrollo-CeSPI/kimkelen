@@ -43,7 +43,7 @@
   <div class="gray-background">
     <span><strong><?php echo 'Exámenes de Alumnos'; ?></strong>:
       <strong>
-        <?php echo $examination_subject->getExamination()->getExaminationTypeStr();?>
+        <?php echo $examination_subject->getExamination(); ?>
       </strong>
     </span>
 
@@ -51,16 +51,22 @@
   <br>
   <div class="gray-background">
     <span><strong><?php echo __('Subject'); ?></strong>:
-      <strong><?php echo $examination_subject->getSubject() ?></strong>
+      <strong><?php echo $examination_subject->getSubject() . ' - ' . $examination_subject->getYear() . ' año'  ?></strong>
       <span class="right"><strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?></span>
   </div>
-  <br>
+
+	<div class="gray-background">
+    <span><strong><?php echo __('Course minimun mark'); ?></strong>:
+      <span><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote(); ?></span>
+	</div>
+	<br>
+
   <table class="gridtable_bordered">
     <thead>
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('N° de Orden'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
-        <th rowspan="2"><?php echo __('Division'); ?></th>
+        <th rowspan="2"><?php echo __('División'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
       </tr>
       <tr>
@@ -74,8 +80,10 @@
       <?php foreach ($students as $student): ?>
         <tr>
           <td class="orden"><?php echo $i ?> </td>
-          <td class="student"><?php echo $student ?> </td>
-          <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
+
+          <td class="student" style="text-align: left"><?php echo $student ?><?php echo $student->owsCorrelativeFor($examination_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?></td>
+          <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getSchoolYear(), $student)); ?> </td>
+
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">
             <?php if ($examination_subject->getIsClosed()): ?>

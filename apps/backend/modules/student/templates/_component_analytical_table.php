@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -19,43 +18,65 @@
  */ ?>
 <?php use_helper('Date') ?>
 
-<div id='content' style='font-size: 12px;'>
-  <div id='sf_admin_container'>
-    <?php if(0 == count($objects)):?>
-      <div class="notice" style="padding: 20px; background-image: none; margin-bottom: 15px;">
-        <?php echo __('The student has no approved subjects')?>
-      </div>
-    <?php else: ?>
-      <?php foreach ($objects as $key => $subjects): ?>
+<?php if ($object->is_empty()): ?>
 
-        <table class="analytical">
-          <thead>
-            <tr>
-              <th colspan="6" ><?php echo __('Año: '.$key) ?></th>
-            </tr>
-            <tr>
-              <th><?php echo __("Subject") ?></th>
-              <th><?php echo __("Year") ?></th>
-              <th><?php echo __("Month") ?></th>
-              <th><?php echo __("Result") ?></th>
-              <th><?php echo __("Mark") ?></th>
-              <th><?php echo __("Approved method") ?></th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php foreach ($subjects as $subject): ?>
-            <tr>
-              <td><?php echo $subject->getCareerSubject()->getSubject() ?></td>
-              <td><?php echo $subject->getSchoolYear() ?></td>
-              <td><?php  // echo format_date($subject->getApprovationDate(), "MMMM") ?></td>
-              <td><?php echo $subject->getResult(false) ?></td>
-              <td><?php echo $subject->getMark() ?></td>
-              <td><?php echo $subject->getMethod() ?></td>
-            </tr>
-          <?php endforeach ?>
-          </tbody>
+    <div class="notice" style="padding: 20px; background-image: none; margin-bottom: 15px;">
+        <?php echo __('The student has no approved subjects') ?>
+    </div>
+
+<?php else:?>
+
+    <?php foreach ($object->get_years_in_career() as $year): ?>
+
+        <table class="table gridtable_bordered">
+            <thead>
+                <tr>
+                    <th colspan="7"><?php echo __('Year ' . $year) ?></th>
+                </tr>
+                <tr>
+                    <th rowspan="2"><?php echo __("Condition") ?></th>
+                    <th rowspan="2"><?php echo __("Mes") ?></th>
+                    <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
+                    <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
+                    <th colspan="2"><?php echo __("Calification") ?></th>
+
+                </tr>
+                <tr>
+                    <th>Nro.</th>
+                    <th>Letras</th>
+                </tr>
+            </thead>
+
+            <tbody class="analytical_body_table">
+                <?php foreach ($object->get_subjects_in_year($year) as $css):?>
+                    <tr>
+
+                        <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
+
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
+
+                        <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
+
+                        <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
+
+                        <td class="text-center"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+
+                        <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+
+
+                    </tr>
+                <?php endforeach ?>
+
+                <tr>
+                    <th colspan="5" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
+                    <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
+                </tr>
+
+            </tbody>
         </table>
-      <?php endforeach ?>
-    <?php endif; ?>
-  </div>
-</div>
+    <?php endforeach ?>
+<?php if ($object->has_completed_career()): ?>
+  <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
+<?php endif; ?>
+<?php endif; ?>
+

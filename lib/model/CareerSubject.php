@@ -274,6 +274,17 @@ class CareerSubject extends BaseCareerSubject
       
     }    
   }
+
+	public function getCorrelativeCareerSubject() {
+
+		$correlatives = $this->getCorrelativeCareerSubjects();
+
+		foreach ($correlatives as $c) {
+			if ($c->getSubject() == $this->getSubject()) {
+				return $c;
+			}
+		}
+	}
   
 }
 

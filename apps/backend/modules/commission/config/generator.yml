@@ -74,7 +74,7 @@ generator:
           printCalification:
             label:   Print califications
             action:  printCalification
-            credentials:    [edit_division_course_califications]
+            credentials:    [show_division_course_califications]
 
           seeAttendanceSheet:
             label:   Show attendance sheet

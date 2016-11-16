@@ -108,6 +108,32 @@ class StudentApprovedCareerSubject extends BaseStudentApprovedCareerSubject
     return count(StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this))> 0 ;
   }
 
+  public function getApprovationInstance()
+  {
+    // Caso Regular: aprueba en primer instancia
+    $instance = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
+    if(!is_null($instance))
+    {
+        return $instance;
+    }
+
+    // Caso Mesa de Diciembre, Marzo
+    $instance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
+
+    if(!is_null($instance))
+    {
+      return $instance;
+    }
+
+    // Caso de previa
+    $instance = StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
+    if(!is_null($instance))
+    {
+      return $instance;
+    }
+
+    return null;
+  }
 
 }
 

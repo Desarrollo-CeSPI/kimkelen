@@ -90,6 +90,22 @@ class Student extends BaseStudent
   }
 
   /**
+   * Returns the initial SchoolYear (the year when the student was first registered at school)
+   *
+   * @return SchoolYear
+   */
+  public function getInitialSchoolYear()
+  {
+    $criteria = new Criteria();
+    $criteria->addAscendingOrderByColumn(SchoolYearPeer::YEAR);
+    $criteria->setLimit(1);
+    $array = $this->getSchoolYearStudentsJoinSchoolYear($criteria);
+    return ($array?$array[0]->getSchoolYear():null);
+
+  }
+
+  
+  /**
    * Opposite of getIsRegistered.
    *
    * @see getIsRegistered
@@ -1258,6 +1274,20 @@ class Student extends BaseStudent
   {
     return ($this->getIsRegistered())? 'Sí': 'No';
   }
+  
+  public function getHealthInfoString()
+  {
+	
+	$school_year = SchoolYearPeer::retrieveCurrent();
+	$c = new Criteria();
+	$c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+	$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+	$school_year_student = SchoolYearStudentPeer::doSelectOne($c);
+	SchoolYearStudentPeer::clearInstancePool();
+
+	return is_null($school_year_student) ? ' ' : $school_year_student->getHealthInfo();
+		
+  }
 
   /**
    * This method returns the current or last StudentCareerSchoolYear.
@@ -1329,6 +1359,21 @@ class Student extends BaseStudent
 		//$c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
 
 		return $this->countPathwayStudents($c) > 0;
+	}
+
+	public function owsCorrelativeFor($career_subject) {
+    //obtengo las correlativas de la materia recibida por parámetro
+    $correlative = $career_subject->getCorrelativeCareerSubject();
+
+		if (!is_null($correlative)){
+		foreach ($this->getStudentRepprovedCourseSubjectForRepordCards(SchoolYearPeer::retrieveCurrent()) as $repproved) {
+
+			if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+			  return true;
+			}
+		}
+	}
+		return false;
 	}
 
 }

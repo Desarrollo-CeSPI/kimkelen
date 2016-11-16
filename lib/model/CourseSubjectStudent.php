@@ -75,6 +75,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     try
     {
       $con->beginTransaction();
+      
       if ($this->countCourseSubjectStudentMarks() == 0)
       {
         for ($i = 1; $i <= $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks(); $i++)
@@ -82,6 +83,13 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
           $course_subject_student_mark = new CourseSubjectStudentMark();
           $course_subject_student_mark->setCourseSubjectStudent($this);
           $course_subject_student_mark->setMarkNumber($i);
+          
+          $last_period_close = $this->getCourseSubject()->getCourse()->getCurrentPeriod()-1;
+          if ($i <= $last_period_close)
+          {
+            $course_subject_student_mark->setIsClosed(true); // se pone la nota como cerrada
+          }
+          
           $course_subject_student_mark->save($con);
         }
       }
@@ -105,9 +113,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function getMarkForIsClose($mark_number, PropelPDO $con = null)
   {
     $mark = $this->getMarkFor($mark_number);
+  
     if ($mark)
     {
-      return ($mark->getIsClosed()) ? $mark : null;
+      return ($mark->getIsClosed()) ? $mark->getMarkByConfig($this->getConfiguration()) : null;
     }
     else
     {
@@ -169,6 +178,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   public function getCourseResult(PropelPDO $con = null)
   {
+
     /* Si tengo alguna materia sin cerrar devuelvo null */
     if (!$this->areAllMarksClosed())
     {
@@ -176,8 +186,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
 
     /* Si tiene aprobada la cursada, entonces retornamos la cursada aprobada */
-
-    if ($this->getStudentApprovedCourseSubject($con))
+   
+    if (!is_null($this->getStudentApprovedCourseSubject($con)))
     {
       return $this->getStudentApprovedCourseSubject($con);
     }
@@ -189,7 +199,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       $c->add(StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
       $c->add(StudentApprovedCourseSubjectPeer::SCHOOL_YEAR_ID, $this->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
 
-      if ($result = StudentApprovedCourseSubjectPeer::doSelectOne($c))
+      if (!is_null($result = StudentApprovedCourseSubjectPeer::doSelectOne($c)))
       {
         //aca encontramos la cursada aprobada y se la asociamos al course_subject_student
         $this->setStudentApprovedCourseSubject($result);
@@ -197,6 +207,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
         return $result;
       }
     }
+
     /* Si desaprobò la cursada entonces retornamos la cursada desaprobada */
     if ($this->countStudentDisapprovedCourseSubjects(null, false, $con))
     {
@@ -204,11 +215,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       return array_shift($disapproveds);
     }
-
+    
     /* Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
      * Eso lo sabe el behavior
      */
-
     return SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this, $con);
 
   }
@@ -501,25 +511,46 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 	        $srcs->setStudentApprovedCareerSubject(null);
 	        $srcs->save($con);
 	      }
-        $student_approved_career_subject->delete($con);
-      }
 
-      //IF exists course_subject_student_examination
-      if ($this->countCourseSubjectStudentExaminations())
+        $student_approved_career_subject->delete($con);
+
+      }
+      
+      $student_repproved_course_subject = $this->getStudentRepprovedCourseSubject();
+
+      // si es previa
+      if (!is_null($student_repproved_course_subject))
       {
-        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();
-        $course_subject_student_examination->delete($con);
+        $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
+        //si no existe una mesa de previa
+        if (is_null($student_examination_repproved_subject))
+        {
+          $student_repproved_course_subject->delete($con);
+        }
       }
       else
       {
-        //IF Exist course result
-        $course_result = $this->getCourseResult();
-
-        if (!is_null($course_result))
+        //si es examination
+        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();   
+        //si existe alguna mesa de examination
+        if (!is_null($course_subject_student_examination))
         {
-          $course_result->delete($con);
+
+          $course_subject_student_examination->delete($con);
+        }
+        else
+        {
+          // habilita la edicion para notas del año!
+          $course_result = $this->getCourseResult();
+
+          if (!is_null($course_result))
+          {
+            $course_result->delete($con);
+          }
+          
         }
       }
+
       $con->commit();
     }
     catch (PropelException $e)
@@ -635,6 +666,26 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $course_result = $this->getCourseResult();
 
     return is_null($course_result) ? '' : $course_result->getColor();
+  }
+
+  public function getAverageByConfig($config = null)
+  {
+    if (!$this->areAllMarksClosed())
+    {
+      return '';
+    }
+    
+    if ($config != null && !$config->isNumericalMark())
+    {
+      $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
+      $letter_mark = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+      
+      return $letter_mark->getLetter();
+    }
+    else
+    {
+      return $this->getMarksAverage();
+    }
   }
 
 }

@@ -34,15 +34,29 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
    */
   public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
   {
+
+  	if (CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()
+		  && $course_subject_student->getCourseSubject()->getYear() > 4
+		  && ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption())) 
+    {
+    	  $last_mark_value = self::BIMESTER_POSTPONED_NOTE;
+    }
+  	else 
+    {
+			$last_mark_value = self::POSTPONED_NOTE;
+    }
 	  $correct_last_note = true;
   	if (!(CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()))
   	{
 		  $correct_last_note = $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= self::POSTPONED_NOTE;
+
   	}
+
+  	$correct_last_note = $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= $last_mark_value;
 
   	$minimum_mark = $course_subject_student->getCourseSubject($con)->getCareerSubjectSchoolYear($con)->getConfiguration($con)->getCourseMinimunMark();
 
-    return ($average >=  $minimum_mark)  && $correct_last_note;
+    return ($average >= $minimum_mark) && $correct_last_note;
   }
 
   /**
