@@ -39,8 +39,8 @@ class StudentExaminationRepprovedSubjectForm extends BaseStudentExaminationReppr
       $this["examination_repproved_subject_id"]
     );
     
-    $configuration = $this->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getSubjectConfiguration();
-    
+    $configuration = $this->getObject()->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+
     if (!$this->getObject()->getExaminationRepprovedSubject()->canEditCalifications())
     {
       unset($this["is_absent"]);
@@ -55,7 +55,7 @@ class StudentExaminationRepprovedSubjectForm extends BaseStudentExaminationReppr
     {
       $this->widgetSchema->setHelp("mark", "Enter student's mark or mark him as absent.");
       
-      if(! $configuration->isNumericalMark())
+      if(!$configuration->isNumericalMark())
 		{
 			$letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$this->getObject()->getMark());
 			$this->setWidget('mark',new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true)));
