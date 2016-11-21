@@ -18,6 +18,11 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setValidator('student', new sfValidatorPass(array('required' => false)));
     $this->getWidgetSchema()->setHelp('student', 'Filtra por apellido o por número de documento');
 
+	$sy_criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+	$sy_criteria->addAscendingOrderByColumn(SchoolYearPeer::YEAR);
+	$this->setWidget('school_year', new sfWidgetFormPropelChoice(array('model' => 'SchoolYear', 'criteria' => $sy_criteria, 'add_empty' => true)));
+    $this->setValidator('school_year', new sfValidatorPropelChoice(array('model' => 'SchoolYear', 'criteria' => new Criteria(SchoolYearPeer::DATABASE_NAME), 'required' => false)));
+	
     $max = CareerPeer::getMaxYear();
     $years = array('' => '');
     for ($i = 1; $i <= $max; $i++)
@@ -26,11 +31,12 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setWidget('year', new sfWidgetFormChoice(array('choices' => $years)));
     $this->setValidator('year' , new sfValidatorChoice(array('choices' => array_keys($years), 'required' => false)));
 
-    $this->getWidgetSchema()->setHelp('year', 'El año filtra, de acuerdo al año que se encuentra cursando en el ciclo lectivo actual.');
+    $this->getWidgetSchema()->setHelp('year', 'El año filtra de acuerdo al año lectivo elegido.');
 
     $user_criteria = $this->getDivisionCriteriaForUser(sfContext::getInstance()->getUser());
     $this->setWidget('division', new sfWidgetFormPropelChoice(array('model' => 'Division', 'criteria' => $user_criteria, 'add_empty' => true)));
     $this->setValidator('division', new sfValidatorPropelChoice(array('model' => 'Division', 'criteria' => $user_criteria, 'required' => false)));
+    $this->widgetSchema->setHelp('division', 'Filtra por la división actual del alumno.');
 
     $this->setWidget('is_matriculated', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
     $this->setValidator('is_matriculated', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
@@ -52,7 +58,7 @@ class StudentFormFilter extends BaseStudentFormFilter
 
     $this->setWidget('is_graduated', new sfWidgetFormInputCheckbox());
     $this->setValidator('is_graduated', new sfValidatorBoolean());
-    $this->widgetSchema->setHelp('is_graduated', 'If is checked, then will show only students graduated in some career.');
+    $this->widgetSchema->setHelp('is_graduated', 'If is checked, then will show only students graduated in some career in selected school year.');
 
     $this->setWidget('disciplinary_sanction_count', new sfWidgetFormInput());
     $this->setValidator('disciplinary_sanction_count', new sfValidatorNumber(array('required' => false)));
@@ -170,6 +176,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     return array_merge(parent::getFields(),
       array(
         'student' => 'Text',
+        'school_year'=> 'Number',
         'year' => 'Number',
         'division' => 'Number',
         'is_matriculated' => 'Boolean',
@@ -187,6 +194,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     {
       $criteria->addJoin(CareerStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
       $criteria->add(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE);
+      $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
     }
   }
 
@@ -252,7 +260,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
       $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
       $criteria->addJoin(CareerSchoolYearPeer::CAREER_ID, CareerPeer::ID);
-      $criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+     // $criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
     }
   }
 
@@ -273,5 +281,14 @@ class StudentFormFilter extends BaseStudentFormFilter
 		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
 				
 	}
+  }
+  
+  public function addSchoolYearColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if ($values)
+    {
+      $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+      $criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $values);
+    }
   }
 }
