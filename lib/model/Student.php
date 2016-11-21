@@ -1631,6 +1631,24 @@ class Student extends BaseStudent
       'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear()
     );
   }
+  
+  public function getGraduationSchoolYear()
+  {
+	$c = new Criteria();
+    $c->addJoin(StudentPeer::ID, CareerStudentPeer::STUDENT_ID);
+    $c->add(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE);
+    $c->add(CareerStudentPeer::STUDENT_ID,$this->getId());
+    $c->addDescendingOrderByColumn(CareerStudentPeer::ID);
+    
+    $cs = CareerStudentPeer::doSelectOne($c);
+    
+    if(!is_null($cs)){
+	 $sy = SchoolYearPeer::retrieveByPk($cs->getGraduationSchoolYearId());
+	}
+   
+    return ($sy) ? $sy->getYear() :'-';
+
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
