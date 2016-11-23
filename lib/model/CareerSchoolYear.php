@@ -469,14 +469,14 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   * This method check:
   * * If exists more than one school year
   * * The school year is active
-  * * There are not divisions in the school year
+  * * Note: It used to check if there are not divisions in the school year. Since we allow to pre-charge several school year at the same time
+   * we quit this check.
   */
   public function canCreateLastYearDivisions()
   {
     $has_students = $this->getSchoolYear()->countSchoolYearStudents() > 0;
 
-    $has_divisions = $this->countDivisions() > 0;
-    return $this->getSchoolYear()->getIsActive() && SchoolYearPeer::doCount(new Criteria()) > 1 && !$has_divisions && $has_students;
+    return $this->getSchoolYear()->getIsActive() && SchoolYearPeer::doCount(new Criteria()) > 1 && $has_students;
   }
 
   /**
