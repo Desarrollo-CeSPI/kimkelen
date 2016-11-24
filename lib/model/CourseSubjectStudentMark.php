@@ -86,7 +86,7 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
 	  {
 		  return "Libre";
 	  } else {
-		  return '';
+		  return $this->getMark();
 	  }
   }
 
