@@ -1418,12 +1418,17 @@ class Student extends BaseStudent
      */
     public function getBelongsToPathway()
     {
+      if (SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent())){
         $c = new Criteria();
         $c->add(PathwayStudentPeer::STUDENT_ID, $this->getId());
         $c->addJoin(PathwayPeer::ID, PathwayStudentPeer::PATHWAY_ID, Criteria::INNER_JOIN);
         $c->add(PathwayPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent())->getId());
 
-        return $this->countPathwayStudents($c) > 0;
+        $flag = $this->countPathwayStudents($c) > 0;
+      } else {
+        $flag = false;
+     }
+      return $flag;
     }
 
     public function owsCorrelativeFor($career_subject) 
@@ -1625,6 +1630,24 @@ class Student extends BaseStudent
       'status' => $this->getCurrentOrLastStudentCareerSchoolYear()->getStatusString(),
       'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear()
     );
+  }
+  
+  public function getGraduationSchoolYear()
+  {
+	$c = new Criteria();
+    $c->addJoin(StudentPeer::ID, CareerStudentPeer::STUDENT_ID);
+    $c->add(CareerStudentPeer::STATUS, CareerStudentStatus::GRADUATE);
+    $c->add(CareerStudentPeer::STUDENT_ID,$this->getId());
+    $c->addDescendingOrderByColumn(CareerStudentPeer::ID);
+    
+    $cs = CareerStudentPeer::doSelectOne($c);
+    
+    if(!is_null($cs)){
+	 $sy = SchoolYearPeer::retrieveByPk($cs->getGraduationSchoolYearId());
+	}
+   
+    return ($sy) ? $sy->getYear() :'-';
+
   }
 }
 

@@ -93,6 +93,10 @@ generator:
             label: Health info
             method: getHealthInfoString
             decorator: text
+          graduation_school_year_id:
+            label: Año de egreso
+            method: getGraduationSchoolYear
+          
       fields:
         person:
         person_lastname:  { label: Lastname, column_name: PersonPeer::LASTNAME }

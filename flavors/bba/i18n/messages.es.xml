@@ -3414,12 +3414,12 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <target>Estado</target>
             </trans-unit>
             <trans-unit>
-                <source>If is checked, then will show only students graduated in some career.</source>
-                <target>Si esta chequeado, solo se mostraran alumnos egresados en alguna carrera</target>
+                <source>If is checked, then will show only students graduated in some career in selected school year.</source>
+                <target>Si esta chequeado, solo se mostraran alumnos egresados en alguna carrera en el año lectivo seleccionado.</target>
             </trans-unit>
             <trans-unit>
                 <source>Is graduated</source>
-                <target>¿ Graduado ?</target>
+                <target>¿Egresado?</target>
             </trans-unit>
             <trans-unit>
                 <source>Related to a division</source>
