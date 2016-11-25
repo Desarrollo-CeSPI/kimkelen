@@ -863,6 +863,7 @@ class studentActions extends autoStudentActions
   {
     $this->student = $this->getRoute()->getObject();
     $this->student_career_school_years = $this->student->getCurrentStudentCareerSchoolYears();
+    $this->back_url= $this->getUser()->getAttribute('back_url');
 
   }
 

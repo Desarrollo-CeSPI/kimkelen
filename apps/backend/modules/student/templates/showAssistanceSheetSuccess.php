@@ -25,7 +25,7 @@
     <?php echo __("Assistance sheet for %student%", array("%student%" => $student)) ?>
 	</h1>
 	<ul class="sf_admin_actions">
-        <?php echo $helper->linkToList(array('label' => __('Go back'), 'params' => array(''), 'class_suffix' => 'list',)) ?>      
+        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>    
 	</ul>
 	<div id="sf_admin_content">
 	<?php foreach ($student_career_school_years as $student_career_school_year): ?>
@@ -46,7 +46,7 @@
             </thead>
             <tbody>
               <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence):?>
-                <tr class="student_attendance">
+                <tr class="student_attendance<?php if($absence->hasJustification()) echo '_justificated'?>" >
                   <td><?php echo $absence->getFormattedDay();?></td>
                   <td><?php echo $absence->getValueString();?> </td>
                   <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? 'Sí' : 'No' ?></td>
