@@ -214,6 +214,5 @@ class course_student_markActions extends sfActions
     $this->previous_url = $request->getReferer();
     $this->course = CoursePeer::retrieveByPK($this->getRequest()->getParameter("id"));
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-
   }  
 }

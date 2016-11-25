@@ -51,7 +51,7 @@ class StudentAttendanceJustificationForm extends BaseStudentAttendanceJustificat
                                                         'max_size' => '2097152',                                                        
                                                         'required' => false)));
     
-    $this->getWidgetSchema()->setHelp('document', 'The file must be of the following types: jpeg, jpg, gif, png.');
+    $this->getWidgetSchema()->setHelp('document', 'The file must be of the following types: jpeg, jpg, gif, png, pdf.');
   }
 
   public function setStudentAttendances($student_attendance_ids)

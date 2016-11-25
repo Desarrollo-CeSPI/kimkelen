@@ -163,13 +163,21 @@ class student_attendanceActions extends sfActions
 
     if (!isset($params['back_url']))
     {
-      $this->back_url = ($request->getParameter('back_url'))? $request->getParameter('back_url'): $this->getUser()->getAttribute('back_url'); ;
+      $this->back_url = ($request->getParameter('back_url'))? $request->getParameter('back_url'): $this->getUser()->getAttribute('back_url');
     }
     else
     {
       $this->back_url = $params['back_url'];
     }
-
+    if($params['division_id'] == '')
+    {
+		$this->getUser()->setAttribute('back_url', 'student_attendance/StudentAttendance?url=division&year='.$params['year'].'&course_subject_id='.$params['course_subject_id'].'&career_school_year_id='.$params['career_school_year_id'].'&division_id=');
+	}
+	else
+	{
+		$this->getUser()->setAttribute('back_url', 'student_attendance/StudentAttendance?url=division&year='.$params['year'].'&division_id='.$params['division_id'].'&career_school_year_id='.$params['career_school_year_id'].'&course_subject_id='); 
+	}
+	 
     $this->title = $this->form->isAttendanceBySubject() ? 'Load attendance for %subject%' : 'Load attendance day for %division%';
 
   }

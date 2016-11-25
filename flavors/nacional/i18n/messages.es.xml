@@ -2145,8 +2145,8 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
             </trans-unit>
 
             <trans-unit>
-                <source>The file must be of the following types: jpeg, jpg, gif, png.</source>
-                <target>El archivo debe ser de los siguientes tipos: jpeg, jpg, gif, png.</target>
+                <source>The file must be of the following types: jpeg, jpg, gif, png, pdf.</source>
+                <target>El archivo debe ser de los siguientes tipos: jpeg, jpg, gif, png, pdf.</target>
             </trans-unit>
 
             <trans-unit>
@@ -4571,6 +4571,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 	    <trans-unit>
                 <source>The examination subject has been successfully closed.</source>
                 <target>La materia ha sido cerrada satisfactoriamente.</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Assistance sheet for %student%</source>
+                <target>Planilla de asistencia de %student%</target>
             </trans-unit>
         </body>
     </file>
