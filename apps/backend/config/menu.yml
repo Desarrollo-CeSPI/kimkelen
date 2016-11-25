@@ -8,7 +8,7 @@ root:
 
   administration:
     title: Administración
-    credentials: [[show_occupation, show_absence_reason, show_justification_type, show_division_title, show_user, show_group, edit_modules, backup, show_orientation, show_classroom, show_tag]]
+    credentials: [[show_occupation, show_absence_reason, show_justification_type, show_division_title, show_user, show_group, edit_modules, backup, show_orientation, show_classroom]]
     menu:
       reference_data:
         title: Datos de referencia
@@ -45,10 +45,6 @@ root:
             title:       Aulas
             url:         @classroom
             credentials: [show_classroom]
-          tags:
-            title: Etiquetas
-            url: @tag
-            credentials: [show_tag]
           justification:
             title:  Justification type
             url:  @justification_type

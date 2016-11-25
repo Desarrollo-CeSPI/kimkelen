@@ -184,16 +184,6 @@ classes:
         primaryKey: true,
         onDelete: cascade
 
-
-
-  Tag:
-    columns:
-      id:
-      name:
-        type: varchar(255)
-        required: true
-        index: unique
-
   sfGuardUserProfile:
     tablename:      sf_guard_user_profile
     description:    Representa el perfil de un usuario

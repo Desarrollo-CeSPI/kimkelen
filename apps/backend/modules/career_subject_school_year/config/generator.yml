@@ -47,12 +47,6 @@ generator:
             credentials: [edit_school_year]
             condition: canBeEdited
 
-          tags:
-            action: tags
-            label: Tags
-            credentials: [edit_school_year]
-            condition: canBeEdited
-
           configuration:
             action:         configuration
             label:          Configuración

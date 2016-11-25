@@ -88,8 +88,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $this['order_of_merit'],
       $this['folio_number'],
       $this['origin_school_id'],
-      $this['educational_dependency'],
-      $this['student_tag_list']
+      $this['educational_dependency']
     );
   }
 

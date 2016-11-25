@@ -44,9 +44,6 @@ class StudentForm extends BaseStudentForm
 
 	  $this->getWidgetSchema()->setLabel('occupation_id', 'Occupation');
 
-	  $this->getWidget('student_tag_list')->setOption('expanded', true);
-	  $this->getWidget('student_tag_list')->setOption('multiple', true);
-
 	  $this->getWidgetSchema()->setHelp('folio_number', __('Format must be XX-XXXX'));
 	  $this->getWidgetSchema()->setHelp('order_of_merit', __('Format must be XX-XXXX'));
 
@@ -79,7 +76,6 @@ class StudentForm extends BaseStudentForm
           'Personal data'   =>  $personal_data_fields,
           'Contact data'    =>  array('person-email', 'person-phone', 'person-address'),
           'Health data'   =>  array('blood_group', 'blood_factor', 'health_coverage_id', 'emergency_information'),
-          'Tags' => array('student_tag_list'),
     );
   }
 
