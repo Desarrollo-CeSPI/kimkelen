@@ -46,8 +46,7 @@ class LvmStudentFormFilter extends StudentFormFilter
       $this['blood_group'],
       $this['blood_factor'],
       $this['emergency_information'],
-      $this['health_coverage_id'],
-      $this['student_tag_list']
+      $this['health_coverage_id']
     );
   }
   public function getFields()
