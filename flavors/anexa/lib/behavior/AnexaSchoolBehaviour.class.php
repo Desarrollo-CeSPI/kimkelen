@@ -38,4 +38,34 @@ class AnexaSchoolBehaviour extends BaseSchoolBehaviour
       '_delete' => array('credentials' => array( 0 => 'edit_school_year',),'condition' => 'canBeDeleted',),
     );
   }
+
+	public function getOptionalCourseSubjectStudents($student, $school_year = null)
+	{
+
+		if (is_null($school_year))
+		{
+			$school_year = SchoolYearPeer::retrieveCurrent();
+		}
+
+		$c = new Criteria();
+		$c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+		$c->addJoin(CareerSubjectPeer::ID, CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID);
+		$c->add(CareerSubjectPeer::IS_OPTION, true);
+		CareerSubjectSchoolYearPeer::sorted($c);
+
+		$course_subject_students = $student->getCourseSubjectStudents($c);
+
+
+		$results = array();
+		foreach ($course_subject_students as $css)
+		{
+			$results[] = $css;
+		}
+
+		return $results;
+
+	}
 }

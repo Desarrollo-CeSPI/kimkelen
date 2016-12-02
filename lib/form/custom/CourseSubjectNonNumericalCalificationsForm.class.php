@@ -48,6 +48,7 @@ class CourseSubjectNonNumericalCalificationsForm extends sfFormPropel
   {
     $values = $this->getValues();
     $course_subject = CourseSubjectPeer::retrieveByPk($values['course_subject_id']);
+    $course = $course_subject->getCourse();
 
     $con = (is_null($con)) ? $this->getConnection() : $con;
 
@@ -85,6 +86,13 @@ class CourseSubjectNonNumericalCalificationsForm extends sfFormPropel
         $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
         $course_subject_student->save($con);
       }
+
+      // Si se exime al curso completo significa que es una materia sin calificaciones y se debe cerrar el curso
+      if (count($values['student_list']) ==  $course->countStudents()){
+        $course->setIsClosed(true);
+        $course->save($con);
+    }
+
       $con->commit();
     }
     catch (Exception $e)
