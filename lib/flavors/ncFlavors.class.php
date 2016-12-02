@@ -53,7 +53,9 @@ class ncFlavorFlavors
    */
   static public function checkConfig()
   {
-    include(sfContext::getInstance()->getConfigCache()->checkConfig(sfConfig::get('sf_config_dir').'/nc_flavor.yml'));
+	if (sfContext::hasInstance()){
+	    include(sfContext::getInstance()->getConfigCache()->checkConfig(sfConfig::get('sf_config_dir').'/nc_flavor.yml'));
+	}
   }
   
   /**
