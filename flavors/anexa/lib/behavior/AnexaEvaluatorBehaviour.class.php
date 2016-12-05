@@ -79,4 +79,30 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return $class;
   }
 
+
+  /**
+   * This method returns the marks average of a student in a course_subject_student given.
+   *
+   * @param CourseSubjectStudent $course_subject_student
+   * @return <type>
+   */
+  public function getMarksAverage($course_subject_student, PropelPDO $con = null)
+  {
+
+      if (!is_null($course_subject_student->getStudentApprovedCourseSubject())) {
+        $average = $course_subject_student->getStudentApprovedCourseSubject()->getMark();
+
+      } else {
+        $sum = 0;
+        foreach ($course_subject_student->getCourseSubjectStudentMarks() as $cssm) {
+          $sum += $cssm->getMark();
+        }
+
+        $average = (string) ($sum / $course_subject_student->countCourseSubjectStudentMarks(null, false, $con));
+      }
+
+    $average = sprintf('%.4s', $average);
+    return $average;
+  }
+
 }

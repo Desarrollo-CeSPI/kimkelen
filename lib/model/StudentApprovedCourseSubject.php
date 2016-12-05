@@ -47,7 +47,7 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
     $c = new Criteria();
     $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $this->getStudentId());
-    return CourseSUbjectStudentPeer::doSelectOne($c);
+    return CourseSubjectStudentPeer::doSelectOne($c);
 
   }
 
