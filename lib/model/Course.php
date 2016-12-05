@@ -1084,5 +1084,15 @@ class Course extends BaseCourse
 		}
 
 	}
+	
+	public function getIsNotAverageableCourseSubjectStudent(){
+		
+		$c = new Criteria();
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, $this->getId());
+		$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
+
+		return CourseSubjectStudentPeer::doSelect($c);
+	}
 }
 sfPropelBehavior::add('Course', array('changelog'));

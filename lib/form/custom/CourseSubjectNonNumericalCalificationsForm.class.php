@@ -46,6 +46,7 @@ class CourseSubjectNonNumericalCalificationsForm extends sfFormPropel
 
   protected function doSave($con = null)
   {
+	//chequeo si la cantidad de alumnos eximidos es la cantidad de alumnos inscriptos en el curso.
     $values = $this->getValues();
     $course_subject = CourseSubjectPeer::retrieveByPk($values['course_subject_id']);
 
@@ -85,6 +86,13 @@ class CourseSubjectNonNumericalCalificationsForm extends sfFormPropel
         $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
         $course_subject_student->save($con);
       }
+      
+      $course = $course_subject->getCourse();
+      if(count($course->getIsNotAverageableCourseSubjectStudent()) == $course->countStudents()){
+		  //cierro el curso.
+		  $course->setIsClosed(true);
+		  $course->save($con);
+	  }
       $con->commit();
     }
     catch (Exception $e)
