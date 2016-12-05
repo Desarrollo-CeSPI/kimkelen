@@ -4511,6 +4511,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                 <source>Assistance sheet for %student%</source>
                 <target>Planilla de asistencia de %student%</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Set all course subject non numerical califications</source>
+                <target>Eximir a todos los alumnos del curso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
