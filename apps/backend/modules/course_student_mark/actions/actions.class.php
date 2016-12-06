@@ -214,5 +214,42 @@ class course_student_markActions extends sfActions
     $this->previous_url = $request->getReferer();
     $this->course = CoursePeer::retrieveByPK($this->getRequest()->getParameter("id"));
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-  }  
+  }
+  
+  public function executeRevertCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getCourse();
+    $this->course_subject = $this->course->getCourseSubject();
+    $this->form = new RevertCourseSubjectNonNumericalCalificationsForm($this->course_subject);
+    $this->back_url = $this->getUser()->getAttribute('referer_module');
+
+  }
+ 
+  public function executeSaveRevertCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    if ($request->isMethod('POST'))
+    {
+      $params = $request->getParameter('revert_course_subject_non_numerical_califications');
+      $this->course_subject = CourseSubjectPeer::retrieveByPk($params['course_subject_id']);
+      $this->form = new RevertCourseSubjectNonNumericalCalificationsForm($this->course_subject);
+
+      $this->form->bind($request->getParameter($this->form->getName()));
+
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash('notice', 'Se han deseximido a los alumnos seleccionados satisfactoriamente.');
+        return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron errores al intentar deseximir a los alumnos. Por favor, intente nuevamente la operación.');
+        $this->course = $this->course_subject->getCourse();
+        $this->back_url = $this->getUser()->getAttribute('referer_module');
+      }
+      $this->setTemplate('revertCalificateNonNumericalMark');
+    }
+  }
+    
 }

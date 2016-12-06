@@ -1104,5 +1104,25 @@ class Course extends BaseCourse
 
 		return CourseSubjectStudentPeer::doSelect($c);
 	}
+	
+	public function canRevertCalificate(PropelPDO $con = null)
+    {
+		if (! $this->getIsClosed())
+		{
+			$course_subject= CourseSubjectPeer::retrieveByCourseId($this->getId());
+			if(!is_null($course_subject)){
+				$c = new Criteria();
+				
+				$c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $course_subject->getId());
+				$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
+				
+				return (CourseSubjectStudentPeer::doCount($c) > 0);
+			}
+			
+			return false;
+		}
+			
+		return false;				
+    }
 }
 sfPropelBehavior::add('Course', array('changelog'));

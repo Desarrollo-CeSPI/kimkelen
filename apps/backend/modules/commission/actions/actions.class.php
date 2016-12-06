@@ -397,5 +397,12 @@ class commissionActions extends autoCommissionActions
 
     $this->redirect('course_student_mark/changelogMarks?id='.$this->course->getId());
   }
+  
+  public function executeRevertCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "commission");
+    $this->redirect("course_student_mark/revertCalificateNonNumericalMark?id=" . $this->course->getId());
+  }
    
 }
