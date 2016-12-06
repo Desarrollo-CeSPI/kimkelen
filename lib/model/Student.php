@@ -1126,18 +1126,18 @@ class Student extends BaseStudent
     }
     
     $config = $course_result->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
-    
+
     if ($course_result instanceOf StudentApprovedCourseSubject)
-    { 
+    {
       if ($course_result->getCareerSchoolYear()->getSubjectConfiguration()->getNecessaryStudentApprovedCareerSubjectToShowPromDef())
       {
         if($config != null && !$config->isNumericalMark())
         {
-          $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
+          $mark = ($course_result->getStudentApprovedCareerSubject()) ? $course_result->getStudentApprovedCareerSubject()->getMark() : $course_result->getMark();
+          $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$mark);
           if(! is_null($letter_mark)){
 			 return $letter_mark->getLetter();
 		  }
-           
         }
         else
         {
