@@ -68,7 +68,7 @@
 
 
 			<?php if (!is_null($average = $student_career_school_year->getAnualAverage())): ?>
-				<?php include_partial('average', array('average' => $average)); ?>
+				<?php include_partial('average', array('average' => ($average != '0.00') ? $average : '' )); ?>
 			<?php endif; ?>
 
 			<?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
