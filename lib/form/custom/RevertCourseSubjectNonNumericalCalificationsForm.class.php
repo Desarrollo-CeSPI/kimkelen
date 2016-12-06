@@ -108,6 +108,14 @@ class RevertCourseSubjectNonNumericalCalificationsForm extends sfFormPropel
         $course_subject_student->setIsNotAverageable(false);
         $course_subject_student->save($con);
       }
+      
+       //chequeo si la cantidad de alumnos deseximidos es mayor a cero.
+      if(count($course->getIsAverageableCourseSubjectStudent()) == 0)
+      {
+		  //abro el curso.
+		  $course->setIsClosed(false);
+		  $course->save($con);
+	  }
       $con->commit();
     }
     catch (Exception $e)
