@@ -651,7 +651,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
   public function getAnualAverageForStudentCareerSchoolYear($student_career_school_year)
   {
-
     if ($this->hasApprovedAllCourseSubjects($student_career_school_year))
     {
       $sum = 0;
@@ -688,14 +687,18 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     /* @var $course_subject_student CourseSubjectStudent */
     foreach ($course_subject_students as $course_subject_student)
     {
-      $course_result = $course_subject_student->getCourseResult();
-      if (is_null($course_result))
+      if(!$course_subject_student->getIsNotAverageable())
       {
-        return false;
+        $course_result = $course_subject_student->getCourseResult();
+        if (is_null($course_result))
+        {
+          return false;
+        }
+
+        if (!$course_result->isApproved())
+          return false;
       }
 
-      if (!$course_result->isApproved())
-        return false;
     }
 
     return true;
