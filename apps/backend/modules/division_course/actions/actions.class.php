@@ -253,4 +253,11 @@ class division_courseActions extends autoDivision_courseActions
 
     $this->redirect('course_student_mark/changelogMarks?id='.$this->course->getId());
   }
+  
+  public function executeRevertCalificateNonNumericalMark(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->getUser()->setAttribute("referer_module", "division_course");
+    $this->redirect("course_student_mark/revertCalificateNonNumericalMark?id=" . $this->course->getId());
+  }
 }

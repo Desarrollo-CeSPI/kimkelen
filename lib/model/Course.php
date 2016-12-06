@@ -1084,5 +1084,39 @@ class Course extends BaseCourse
 		}
 
 	}
+	
+	public function getIsNotAverageableCourseSubjectStudent(){
+		
+		$c = new Criteria();
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, $this->getId());
+		$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
+
+		return CourseSubjectStudentPeer::doSelect($c);
+	}
+	
+	public function getIsAverageableCourseSubjectStudent(){
+		
+		$c = new Criteria();
+		$c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+		$c->addJoin(CourseSubjectPeer::COURSE_ID, $this->getId());
+		$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+
+		return CourseSubjectStudentPeer::doSelect($c);
+	}
+	
+	public function canRevertCalificate(PropelPDO $con = null)
+    {
+		$course_subject= CourseSubjectPeer::retrieveByCourseId($this->getId());
+		if(!is_null($course_subject)){
+			$c = new Criteria();
+		
+			$c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $course_subject->getId());
+			$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
+			
+			return (CourseSubjectStudentPeer::doCount($c) > 0);
+		}		
+		return true;				
+    }
 }
 sfPropelBehavior::add('Course', array('changelog'));
