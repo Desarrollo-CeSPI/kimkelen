@@ -129,8 +129,8 @@ class CourseSubjectNonNumericalCalificationsForm extends sfFormPropel
 		  }
 	  }
 
-	  //chequeo si la cantidad de alumnos eximidos es igual a la cantidad de alumnos inscriptos en el curso.
-      if(count($course->getIsNotAverageableCourseSubjectStudent()) == $course->countStudents())
+	  //chequeo si la cantidad de alumnos eximidos es igual a la cantidad de alumnos inscriptos en el curso y el curso esta abierto .
+      if(count($course->getIsNotAverageableCourseSubjectStudent()) == $course->countStudents() && ! $course->getIsClosed())
       {
 		  //cierro el curso.
 		  $course->setIsClosed(true);

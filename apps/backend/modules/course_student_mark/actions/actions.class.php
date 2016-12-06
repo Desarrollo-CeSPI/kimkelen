@@ -46,7 +46,6 @@ class course_student_markActions extends sfActions
   public function getCourse()
   {
     $course = CoursePeer::retrieveByPK($this->getRequest()->getParameter("id"));
-
     if (null === $course)
     {
       $this->getUser()->setFlash('error', 'Debe seleccionar un curso para editar sus calificaciones.');
@@ -218,7 +217,7 @@ class course_student_markActions extends sfActions
   
   public function executeRevertCalificateNonNumericalMark(sfWebRequest $request)
   {
-    $this->course = $this->getCourse();
+    $this->course = CoursePeer::retrieveByPK($this->getRequest()->getParameter("id"));
     $this->course_subject = $this->course->getCourseSubject();
     $this->form = new RevertCourseSubjectNonNumericalCalificationsForm($this->course_subject);
     $this->back_url = $this->getUser()->getAttribute('referer_module');

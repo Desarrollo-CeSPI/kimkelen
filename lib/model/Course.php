@@ -1107,7 +1107,7 @@ class Course extends BaseCourse
 	
 	public function canRevertCalificate(PropelPDO $con = null)
     {
-		/*$course_subject= CourseSubjectPeer::retrieveByCourseId($this->getId());
+		$course_subject= CourseSubjectPeer::retrieveByCourseId($this->getId());
 		if(!is_null($course_subject)){
 			$c = new Criteria();
 		
@@ -1115,7 +1115,7 @@ class Course extends BaseCourse
 			$c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, true);
 			
 			return (CourseSubjectStudentPeer::doCount($c) > 0);
-		}*/		
+		}		
 		return true;				
     }
 }

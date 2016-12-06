@@ -2074,7 +2074,7 @@ div.wc-cal-event{
     font-size: 0.9em;
 }
 
-sf_admin_list .sf_admin_action_revert_calificate_non_numerical_mark a
+.sf_admin_list .sf_admin_action_revert_calificate_non_numerical_mark a
 {
     background-image: url('../images/revert.png') !important;
 }

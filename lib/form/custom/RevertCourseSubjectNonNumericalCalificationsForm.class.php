@@ -109,8 +109,8 @@ class RevertCourseSubjectNonNumericalCalificationsForm extends sfFormPropel
         $course_subject_student->save($con);
       }
       
-       //chequeo si la cantidad de alumnos deseximidos es mayor a cero.
-      if(count($course->getIsAverageableCourseSubjectStudent()) == 0)
+       //chequeo si la cantidad de alumnos deseximidos es mayor a cero y le curso esta cerrado.
+      if(count($course->getIsAverageableCourseSubjectStudent()) > 0 && $course->getIsClosed())
       {
 		  //abro el curso.
 		  $course->setIsClosed(false);
