@@ -78,7 +78,6 @@ class RevertCourseSubjectNonNumericalCalificationsForm extends sfFormPropel
       foreach ($values['student_list'] as $student_id)
       {
         $course_subject_student = CourseSubjectStudentPeer::retrievebyCourseSubjectAndStudent($course_subject->getid(), $student_id);
-        $course_subject_student->setIsNotAverageable(true);
         $course_subject_student_marks = CourseSubjectStudentMarkPeer::retrieveByCourseSubjectStudent($course_subject_student->getId());
 
         foreach ($course_subject_student_marks as $mark)
