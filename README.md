@@ -33,7 +33,7 @@ cp config/databases.yml-default config/databases.yml
 cp config/propel.ini-default config/propel.ini
 ```
 
-Edite estos archivos según la configuración de su entorno. Debe espesificar el dsn (nombre de la base de datos, host, usuario de la BBDD y contraseña de la BBDD)
+Edite estos archivos según la configuración de su entorno. Debe especificar el dsn (nombre de la base de datos, host, usuario de la BBDD y contraseña de la BBDD)
 
 ## Ejemplo de `databases.yml`
 
