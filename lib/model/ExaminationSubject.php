@@ -82,6 +82,18 @@ class ExaminationSubject extends BaseExaminationSubject
         $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
         $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID, Criteria::INNER_JOIN);
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        
+        //quito los retirados
+        $withdrawn_criteria = new Criteria();
+		$withdrawn_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+		$withdrawn_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN);
+		$withdrawn_criteria->clearSelectColumns();
+		$withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+		$stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
+		$not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
+		
+		
+		$criteria->add(StudentPeer::ID, $not_in_w, Criteria::NOT_IN);
         return $criteria;
     }
 
