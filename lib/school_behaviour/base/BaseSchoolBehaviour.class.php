@@ -932,9 +932,18 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $approved_criteria->addSelectColumn(StudentApprovedCareerSubjectPeer::STUDENT_ID);
     $stmt = StudentApprovedCareerSubjectPeer::doSelectStmt($approved_criteria);
     $not_in = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    //quito los retirados.
+    $withdrawn_criteria = new Criteria();
+    $withdrawn_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+    $withdrawn_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN);
+    $withdrawn_criteria->clearSelectColumns();
+    $withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+    $stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
+    $not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
 
     $c->add(StudentPeer::ID, $not_in, Criteria::NOT_IN);
-
+    $c->addAnd(StudentPeer::ID, $not_in_w, Criteria::NOT_IN);
     return StudentPeer::doSelect($c);
 
   }
