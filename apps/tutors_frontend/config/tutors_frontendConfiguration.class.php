@@ -6,7 +6,6 @@ class tutors_frontendConfiguration extends sfApplicationConfiguration
   {
   }
 
-
   public function initialize()
   {
     parent::initialize();

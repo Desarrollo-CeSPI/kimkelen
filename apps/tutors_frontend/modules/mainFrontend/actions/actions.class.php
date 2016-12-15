@@ -5,7 +5,7 @@
  *
  * @package    symfony
  * @subpackage mainFrontend
- * @author     Your name here
+ * @author     ecorrons
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
 class mainFrontendActions extends sfActions

@@ -20,6 +20,18 @@ test:
     etag:                   off
 
 all:
+
+  .actions:
+    error_404_module:       default   # To be called when a 404 error is raised
+    error_404_action:       error404  # Or when the requested URL doesn't match any route
+
+#
+    login_module:           sfGuardAuth   # To be called when a non-authenticated user
+    login_action:           signin    # Tries to access a secure page
+#
+    secure_module:          sfGuardAuth   # To be called when a user doesn't have
+    secure_action:          secure    # The credentials required for an action
+
   .settings:
     # Form security secret (CSRF protection)
     csrf_secret:       kImkElEn_tUtorS     # Unique secret to enable CSRF protection or false to disable
