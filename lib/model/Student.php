@@ -1165,8 +1165,11 @@ class Student extends BaseStudent
     { 
       if($config != null && !$config->isNumericalMark())
       {
-        $letter_mark = LetterMarkPeer::getLetterMarkByValue((int)$course_result->getStudentApprovedCareerSubject()->getMark());
-        return $letter_mark->getLetter();   
+        $sacs = $course_result->getStudentApprovedCareerSubject();
+		if(!is_null($sacs)){
+			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int) $sacs->getMark());
+			return $letter_mark->getLetter(); 
+		}   
       }
       else
       {
