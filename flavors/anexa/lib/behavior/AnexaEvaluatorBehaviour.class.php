@@ -53,13 +53,6 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   }
 
-  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
-  {
-    // en graduada solo existe una mesa y se utiliza la de febrero.
-    return self::FEBRUARY;
-
-  }
-
   public function getColorForCourseSubjectStudentMark(CourseSubjectStudentMark $course_subject_student_mark)
   {
     if (! $course_subject_student_mark->getIsClosed() || is_null($course_subject_student_mark->getMark()))
