@@ -165,7 +165,7 @@ class StudentEditHistoryForm extends sfFormPropel
 
       if ($i < $last_examination_number ||  !$this->canEditExaminationSubject())
       {
-        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getValueString', 'add_hidden_input' => true)));
+        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getMarkStrByConfig', 'add_hidden_input' => true)));
         $this->setValidator($name, new sfValidatorPass());
       }
       else

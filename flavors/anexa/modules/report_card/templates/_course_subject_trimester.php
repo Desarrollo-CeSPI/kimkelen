@@ -38,6 +38,7 @@
 			<?php endfor; ?>
 			<th><?php echo __('Prom.') ?></th>
 			<th><?php echo __('Ex.R.') ?></th>
+			<th><?php echo __('Ex.C.') ?></th>
 			<th><?php echo __('Prom.Def.') ?></th>
 	</tr>
 	<?php foreach ($course_subject_students as $course_subject_student): ?>
@@ -55,8 +56,8 @@
 				<?php else: ?>
 					<td></td>
 				<?php endif; ?>
-				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
-
+				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
+				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
 			  <td> <?php echo $student->getPromDef($course_result) ?></td>
 			<?php endif; ?>
 
