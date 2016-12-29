@@ -37,8 +37,8 @@
 				<th><?php echo __($mark_number . '°T') ?></th>
 			<?php endfor; ?>
 			<th><?php echo __('Prom.') ?></th>
-			<th><?php echo __('Ex.R.') ?></th>
-			<th><?php echo __('Ex.C.') ?></th>
+			<th><?php echo __('PEEE dic.') ?></th>
+			<th><?php echo __('PEEE feb.') ?></th>
 			<th><?php echo __('Prom.Def.') ?></th>
 	</tr>
 	<?php foreach ($course_subject_students as $course_subject_student): ?>
