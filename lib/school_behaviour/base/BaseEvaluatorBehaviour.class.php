@@ -296,6 +296,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
     else
     {
+		
       $c = new Criteria();
       $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $result->getExaminationNumber());
       $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
@@ -313,7 +314,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 //El if creo que no deberia existir para mantener la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
 //    if (!is_null($course_subject_student->getCourseResult()))
 //    {
-    $examination_number = $course_subject_student->getCourseResult()->getExaminationNumber();
+	$course_result = $this->getCourseSubjectStudentResult($course_subject_student, $con);
+    $examination_number = $course_result->getExaminationNumber();
     $course_subject_student_examination->setExaminationNumber($examination_number);
 //    }
 
