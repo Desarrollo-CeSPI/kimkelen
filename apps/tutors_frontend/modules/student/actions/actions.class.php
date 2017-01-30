@@ -17,7 +17,8 @@ class studentActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    die("Acá habría que buscar en StudentTutorPeer solo a los id de student de aquellos que coincidan con el tutor_id del usuario y mostrar la info de ese/esos estudiantes con sus respectivas opciones");
-    $this->forward('default', 'module');
+  	//falta chequear que sea solo los alumnos que tiene a cargo
+  	$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+  	
   }
 }

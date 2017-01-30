@@ -17,17 +17,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
- <div class="row"> 
- 	<div class="col-md-1"></div>
- 	<div class="col-md-10">
- 		
- 		<?php include_partial('tutor_box', array('tutor'=>$tutor)); ?>
- 		<?php include_partial('students_box', array('students'=>$students)); ?>
 
- 	</div>
- 	<div class="col-md-2"></div>
- </div>
+	<div class="col-md-12 container-students">
+		<div class="student-box-info">
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+			<span class="text-student"> <?php echo __("Students in charge");?> </span>
+		</div>
 
+		<?php foreach ($students as $s): ?>
+			
+			<div class="button-student">
+				<?php echo link_to(__($s->getPerson()->getFullName()),'student/index?student_id=' . $s->getId()) ?>
+			</div>
+		<?php endforeach;?>
+
+	</div>
 
 
