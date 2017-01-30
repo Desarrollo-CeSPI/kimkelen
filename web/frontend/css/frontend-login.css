@@ -15,6 +15,9 @@
 
 body{
 	background-color: #009874 !important;
+	text-align: left !important;
+	font-family: helvetica !important;
+	font-size: 12px !important;
 }
 
 .green{
