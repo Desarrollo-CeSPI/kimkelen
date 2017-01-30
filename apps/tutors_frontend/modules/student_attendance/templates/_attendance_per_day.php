@@ -18,7 +18,9 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php use_stylesheet('/frontend/css/main.css', 'first') ?>
-	
+	<?php if(is_null($division)):?>
+		<div class="info-attendance">El alumno no registra inasistencias en el año lectivo vigente</div>
+	<?php else: ?>
 	<?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
  			<div class="col-md-1"></div>
  			<div class="col-md-10">
@@ -43,3 +45,4 @@
 				</div>
 			</div>
 			<div class="col-md-1"></div>
+			<?php endif ?>

@@ -26,7 +26,7 @@
       	</div>
 
       	<?php if (count($absences) == 0): ?>
-      		<span class=""><?php echo __('No se registraron inasistencias para este alumno.'); ?></span>
+      		<span class="info-attendance-report"><?php echo __('No se registraron inasistencias para este alumno.'); ?></span>
 		<?php else: ?>
 			<div class="table-responsive">
 		        <table class="table table-condensed">

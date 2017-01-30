@@ -15,7 +15,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   </head>
   <body>
-    <header class="green">
+    <header class="green-header">
 		<div class="header-image">
 			<?php echo image_tag("/frontend/images/logo-kimkelen-blanco.png", array('alt' => __('Kimkelen'))); ?>
 		</div>

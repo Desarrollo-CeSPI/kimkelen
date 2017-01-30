@@ -19,7 +19,10 @@ class student_attendanceActions extends sfActions
   	{
     	$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
     	$this->student_career_school_year = $this->student->getCurrentStudentCareerSchoolYear();
-    	$this->division = DivisionPeer::retrieveByStudentCareerSchoolYear($this->student->getCurrentStudentCareerSchoolYear());
+    	
+    	if(!is_null($this->student->getCurrentStudentCareerSchoolYear())){
+			$this->division = DivisionPeer::retrieveByStudentCareerSchoolYear();
+		}
   		$this->school_year = SchoolYearPeer::retrieveCurrent();
   		$this->link = 'student/index?student_id='.$this->student->getId();
 		

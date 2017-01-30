@@ -2,11 +2,11 @@ header{
 	height: 110px;
 	padding-left: 3%;
 	padding-top: 1%;
+	background-color: #009874 !important;
 }
 
-.green{
-	background-color: #009874 !important;
-	color: #23a223;
+.green-header{
+	color: #23a223 !important;
 }
 .lightgreen{
 	color: #219637 !important;
@@ -20,6 +20,9 @@ html
 body
 {
     margin: 0 0 65px;
+    text-align:left !important;
+    font-family: helvetica !important;
+    font-size: 13px !important;
 }
 footer
 {
@@ -212,14 +215,14 @@ padding-left: 16px;
 }
 
 .button{
-	text-align: center;
-	margin-bottom: 2px;
-	padding-top: 6%;
-	padding-bottom: 6%;
-	border-radius: 3px;
+	text-align: center !important;
+	margin-bottom: 2px !important;
+	padding-top: 6% !important;
+	padding-bottom: 6% !important;
+	border-radius: 3px !important;
 }
 .button a{
-	color: #fff;
+	color: #fff !important;
 }
 .button a:hover, .button a:focus {
     color: #fff !important;
@@ -231,7 +234,8 @@ padding-left: 16px;
 }
 
 .go-back{
-	background-color: #006898;
+	background: #006898 !important;
+	
 }
 
 .report{
@@ -417,4 +421,13 @@ background-color: #ddd;
 
 .title-califications{
 	margin-left: 5%;
+}
+
+.info-attendance{
+	margin-left: 8%;
+	font-size: 14px !important;
+}
+
+.info-attendance-report{
+	margin-left:2%;
 }
