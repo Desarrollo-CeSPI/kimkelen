@@ -86,4 +86,16 @@ class Tutor extends BaseTutor
 
     return implode(',  ', $students);
   }
+  
+  public function getStudentsArray()
+  {
+	$students = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $students[] = $student_tutor->getStudent();
+    }
+
+    return $students;
+	  
+  }
 }

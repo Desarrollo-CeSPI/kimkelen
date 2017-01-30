@@ -17,6 +17,8 @@ class mainFrontendActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    die("Acá iría la información necesaria para dibujar el dashboard");
+    //tomo la info del tutor
+	$this->tutor = TutorPeer::retrieveByUsername($this->getUser()->getUsername());
+	$this->students = $this->tutor->getStudentsArray();
   }
 }
