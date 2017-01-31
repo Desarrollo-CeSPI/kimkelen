@@ -148,8 +148,15 @@ class apiActions extends sfActions
 				
 				$student= new Student();
 				$student->setPerson($s_person); 
-				$student->setGlobalFileNumber('888888');//Nro de legajo??
-				$student->setOriginSchoolId($s_origin_school_id);
+				$student->setGlobalFileNumber('888888');
+				
+				//chequeo que la escuela este en la BBDD
+				$school = OriginSchoolPeer::retrieveByPk($s_origin_school_id);
+				
+				if(! is_null($school)){
+					$student->setOriginSchoolId($s_origin_school_id);
+				}
+				
 				$student->setHealthCoverageId($s_health_coverage_id);  
 				$student->save(Propel::getConnection());
 				
