@@ -21,7 +21,7 @@ class student_attendanceActions extends sfActions
     	$this->student_career_school_year = $this->student->getCurrentStudentCareerSchoolYear();
     	
     	if(!is_null($this->student->getCurrentStudentCareerSchoolYear())){
-			$this->division = DivisionPeer::retrieveByStudentCareerSchoolYear();
+			$this->division = DivisionPeer::retrieveByStudentCareerSchoolYear($this->student_career_school_year);
 		}
   		$this->school_year = SchoolYearPeer::retrieveCurrent();
   		$this->link = 'student/index?student_id='.$this->student->getId();

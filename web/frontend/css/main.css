@@ -29,7 +29,7 @@ footer
     width: 100%;
     bottom: 0;
     /* position: absolute; */
-    height: 65px;
+    height: 85px;
     background-color: #009874;
     color: #fff;
     text-align: center;
@@ -43,7 +43,6 @@ footer
 }
 
 .container-sombra{
-	margin-top: 3%;
 	box-shadow: inset 0 0 15px 0 #aaa;
 	padding: 7%;
 }
@@ -62,16 +61,13 @@ footer
 }
 
 .button-student{
-	background-color: #513fce;
-	width: 30%;
-	height: 127px;
-	border-radius: 2px !important;
-	margin-top: 3%;
-	text-align: center;
-	cursor: pointer;
-	padding-top: 6%;
-	display: inline-block;
-	margin-right: 2%;
+	background-color: #513FCE;
+	width: 245px;
+	padding-top: 45px;
+	padding-bottom: 45px;
+	color: rgb(255, 255, 255);
+	margin-top: 4%;
+	height: 130px;
 }
 
 
@@ -83,8 +79,10 @@ footer
 }
 
 .tutor-identification{
-	font-size: 40px;
-	text-align: center;
+	font-size: 32px !important;
+	text-align: center !important;
+	padding-right: 2% !important;
+	margin-top: 10% !important;
 }
 
 .tutor-documentation{

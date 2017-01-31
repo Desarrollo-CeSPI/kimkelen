@@ -156,6 +156,18 @@
                 <source>Califications report</source>
                 <target>Reporte de calificaciones</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Required.</source>
+                <target>Este campo es requerido</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>The username and/or password is invalid.</source>
+                <target>Usuario y/o contraseña incorrecta</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Enter the digits here:</source>
+                <target>Ingrese los dígitos del recuadro aquí</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

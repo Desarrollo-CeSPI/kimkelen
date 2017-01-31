@@ -35,7 +35,7 @@
 	    			</ul>
 				</li>
 				<?php if ($sf_user->isAuthenticated()): ?>
-				<li class="user"><?php echo $sf_user->getUsername()?> <span class="glyphicon glyphicon-triangle-bottom min" aria-hidden="true"></span>
+				<li class="user"><?php echo $sf_user->getUsername()?> <span class="glyphicon glyphicon-triangle-bottom min" aria-hidden="true"></span> <?php echo image_tag("/frontend/images/user.png", array('alt' => __('User'))); ?>
 					<ul class="list">
 		        		<li><?php echo link_to(__('Salir'), '@sf_guard_signout')?></li>
 		        

@@ -33,9 +33,13 @@
 	      	</div>
 
 		 	<ul class="nav nav-tabs" role="tablist">
+				
+				<?php $last_year= $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear();?>
 		 		<?php foreach ($student->getStudentCareerSchoolYears() as $student_career_school_year): ?>
-			  		<?php $year= $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(); ?>
-			  		<?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive())?'active' : ''; ?>
+			  		<?php $year= $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(); ?>	
+			  		<?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive() || ($year == $last_year))?'active' : ''; ?>
+			  		
+			  		
 			  		<li role="presentation"class="<?php echo $class?>" ><a href="<?php echo '#' . $year ?>" aria-controls="home" role="tab" data-toggle="tab"><?php echo $year ?></a></li>
 			 	<?php endforeach ?>                                                
             </ul>
@@ -43,7 +47,7 @@
                 <div class="tab-content">
                 	<?php foreach ($student->getStudentCareerSchoolYears() as $student_career_school_year): ?>
 				    	<?php $year= $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(); ?>
-			  			<?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive())?'tab-pane active' : 'tab-pane'; ?>
+			  			<?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive() || ($year == $last_year))?'tab-pane active' : 'tab-pane'; ?>
 			  	
                             <div role="tabpanel" class="<?php echo $class ?>" id="<?php echo $year ?>"> 
 
