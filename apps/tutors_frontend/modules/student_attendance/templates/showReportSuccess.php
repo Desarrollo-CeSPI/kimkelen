@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
+<?php use_stylesheet('/bootstrap/css/bootstrap.css', 'last') ?>
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10 container-sombra-exterior container-report-sanctions">
@@ -26,7 +26,7 @@
       	</div>
 
       	<?php if (count($absences) == 0): ?>
-      		<span class="info-attendance-report"><?php echo __('No se registraron inasistencias para este alumno.'); ?></span>
+      		<div class="alert alert-success info-report"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
 		<?php else: ?>
 			<div class="table-responsive">
 		        <table class="table table-condensed">

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
+
  <div class="row"> 
  	<div class="col-md-1"></div>
  	<div class="col-md-10 container-sombra-exterior container-attendance">
@@ -27,7 +27,7 @@
 			<span class="title-sanctions"><?php echo __('Attendance'); ?> |</span>
 			<span class=""><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear()?></span>
 		</div>
- 		<?php if($student->hasAttendancesPerDay()): ?>
+ 		<?php if(! $student->hasAttendancesPerSubject()): ?>
 
  			<?php include_partial('attendance_per_day', array('division'=>$division,'student'=>$student)); ?>
  			
@@ -40,19 +40,7 @@
  	</div>
  	<div class="col-md-1"></div>
  	<div class="col-md-12 container-buttons">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-6">
-				<div class="button button_1 go-back">
-					<?php echo link_to(__('Go back'), $link);?>
-				</div>	
-			</div>
-			<div class="col-md-6">
-				<div class="button button_2 report">
-					<?php echo link_to(__('Attendance report'), 'student_attendance/showReport?student_id=' . $student->getId());?>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-1"></div>	
-	</div>
+		<?php echo link_to(__('Go back'), $link, array("class"=> "button_1"));?>
+		<?php echo link_to(__('Show report'), 'student_attendance/showReport?student_id=' . $student->getId(), array("class"=> "button_2"));?>		
+	</div>	
  </div>

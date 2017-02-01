@@ -34,15 +34,15 @@
 		<div class="tutor-box">
 			<div class="tutor-box-info">
 				<span class="glyphicon glyphicon glyphicon-phone lightgreen" aria-hidden="true"></span>
-				<span class="text"> <b> <?php echo __("Phone") .': ' ?> </b>  <?php echo $tutor->getPerson()->getPhone(); ?> </span>
+				<span class="text"> <b> <?php echo __("Phone") .': ' ?> </b>  <?php echo ($tutor->getPerson()->getPhone()) ? $tutor->getPerson()->getPhone():'-'; ?> </span>
 			</div>
 			<div class="tutor-box-info">
 				<span class="glyphicon glyphicon glyphicon-envelope lightgreen" aria-hidden="true"></span>
-				<span class="text"> <b> <?php echo __("Email") .': ' ?> </b>  <?php echo $tutor->getPerson()->getEmail(); ?> </span>
+				<span class="text"> <b> <?php echo __("Email") .': ' ?> </b>  <?php echo ($tutor->getPerson()->getEmail()) ? $tutor->getPerson()->getEmail() : '-'; ?> </span>
 			</div>
 			<div class="tutor-box-info">
 				<span class="glyphicon glyphicon glyphicon-map-marker lightgreen" aria-hidden="true"></span> 
-				<span class="text"> <b> <?php echo __("Address") .': ' ?> </b>  <?php echo $tutor->getPerson()->getAddress()->getFullAddress(); ?> </span>
+				<span class="text"> <b> <?php echo __("Address") .': ' ?> </b>  <?php echo ($tutor->getPerson()->getAddress()) ? $tutor->getPerson()->getAddress()->getFullAddress() : '-'; ?> </span>
 			</div>		
 		</div>
 	</div>	

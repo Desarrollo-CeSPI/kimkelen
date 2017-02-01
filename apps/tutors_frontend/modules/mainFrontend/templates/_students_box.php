@@ -25,11 +25,6 @@
 		</div>
 		<div class="container-button-students">
 		<?php foreach ($students as $s): ?>
-			
-			<!--<div class="button-student">
-				<?php/* echo link_to(__($s->getPerson()->getFullName()),'student/index?student_id=' . $s->getId()) */?>
-				
-			</div> !-->
 			<button class="button-student" onclick='location.href="<?php echo 'student/index?student_id=' . $s->getId()?>"'><?php echo $s->getPerson()->getFullName()?></button>
 		<?php endforeach;?>
 		</div>

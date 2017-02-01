@@ -17,9 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/bootstrap/css/bootstrap.css') ?>	
-<?php use_stylesheet('/frontend/css/main.css') ?>
-<?php use_javascript('/frontend/js/scripts.js','last') ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <div class="row">
@@ -53,7 +50,7 @@
 
                             	<?php $divisions = $student->getCurrentDivisions($student_career_school_year->getCareerSchoolYearId())?>
 
-							    <div class="col-md-12 pull-right">
+							    <div class="status">
 							      <b><?php echo __('Year %%year%%',array('%%year%' => $student_career_school_year->getYear()))?></b>
 							      <b><?php echo __("Status") .': '?></b> <?php echo $student_career_school_year->getStatusString() ?>
 							    </div>

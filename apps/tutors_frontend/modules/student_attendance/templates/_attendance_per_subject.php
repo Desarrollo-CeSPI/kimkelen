@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
 
 	<?php $course_subjects_student = CourseSubjectStudentPeer:: retrieveByCareerSchoolYearAndStudent($student_career_school_year->getCareerSchoolYear(),$student); ?>
  			<div class="col-md-1"></div>

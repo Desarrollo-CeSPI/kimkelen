@@ -17,10 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
 
 <div class="col-md-12">
-
 	<?php include_partial('student_info', array('student'=> $student)) ?>
 	<?php include_partial('student_actions', array('student'=> $student)) ?>
 </div>

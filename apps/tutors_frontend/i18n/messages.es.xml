@@ -168,6 +168,10 @@
                 <source>Enter the digits here:</source>
                 <target>Ingrese los dígitos del recuadro aquí</target>
             </trans-unit>
+	    <trans-unit>
+                <source>Show report</source>
+                <target>Ver reporte</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

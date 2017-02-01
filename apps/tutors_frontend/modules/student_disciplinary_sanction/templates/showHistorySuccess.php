@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-md-1"></div>
@@ -27,36 +26,46 @@
 				<span class="title-sanctions"><?php echo __('Disciplinary sanctions'); ?> |</span>
 				<span class=""><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear()?></span>
 			</div>
+			<div class="col-md-1"></div>
+ 			<div class="col-md-10">
 			<?php $total= 0 ;?>
-			<?php foreach ($sanctions_type as $st): ?>
-				<div class="container-sombra-exterior student-info">
-					<span> <b> <?php echo $st->getName() .': '?> </b></span> <span class="pull-right"><?php echo $info[$st->getName()] ;?></span>
+				<div class="table-responsive"> 
+					 <table class="table">
+						 <thead>
+						  <tr class="success">
+							 <th><?php echo __('Sanction type') ?></th>
+							 <th><?php echo __('Total') ?></th>
+						  </tr>
+						 </thead>
+						 <tbody>
+							<?php foreach ($sanctions_type as $st): ?>
+							<tr>
+							
+							  <td><?php echo $st->getName() ?></td>
+					          <td><?php echo $info[$st->getName()] ?></td>
+					          <?php $total += $info[$st->getName()]; ?>
+							</tr>
+						  <?php endforeach; ?>
+						 </tbody>
+						 <tfoot>
+						  <tr>
+							 <td><b>Total</b></td>
+							 <td><b><?php echo $total ?></b></td>
+						  </tr>
+						 </tfoot>
+					</table> 
 				</div>
-				<?php $total+= $info[$st->getName()] ; ?>
-			<?php endforeach ?>
-			<div class="container-sombra-exterior student-info">
-				<span> <b> Total: </b></span> <span class="pull-right"><?php echo $total ;?></span>
 			</div>
-
+			<div class="col-md-1"></div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
 
 	<div class="col-md-12 container-buttons">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-6">
-				<div class="button button_1 go-back">
-					<?php echo link_to(__('Go back'), $link);?>
-				</div>	
-			</div>
-			<div class="col-md-6">
-				<div class="button button_2 report">
-					<?php echo link_to(__('Disciplinary sanctions report'), 'student_disciplinary_sanction/showReport?student_id=' . $student->getId());?>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-1"></div>	
+		
+		<?php echo link_to(__('Go back'), $link, array("class"=> "button_1"));?>
+		<?php echo link_to(__('Show report'), 'student_disciplinary_sanction/showReport?student_id=' . $student->getId(), array("class"=> "button_2"));?>
+		
 	</div>
 
 </div>

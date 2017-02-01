@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/frontend/css/main.css', 'first') ?>
+<?php use_stylesheet('/bootstrap/css/bootstrap.css', 'last') ?>
 <div class="row">
   <div class="col-md-12">
     <div class="col-md-1"></div>
@@ -26,32 +26,33 @@
           <span class="title-sanctions"><?php echo __('Admonition details') . ' |'; ?></span> 
           <span><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear() ?></span>
       </div>
-      <div class="table-responsive">
+      
         <?php if(count($student_disciplinary_sanctions) > 0) :?>
-        <table class="table table-hover">
-          <tbody>
-
-                  <tr class="success">
-                    <th><?php echo __('Date') ?></th>
-                    <th><?php echo __('Reason') ?></th>
-                    <th><?php echo __('Sanction type') ?></th>
-                    <th><?php echo __('Total') ?></th>
-                  </tr>
-                  
-                  <?php foreach ($student_disciplinary_sanctions as $student_disciplinary_sanction): ?>
-                    <tr>
-                      <td><?php echo $student_disciplinary_sanction->getFormattedRequestDate(); ?></td>
-                      <td><?php echo $student_disciplinary_sanction->getDisciplinarySanctionType(); ?></td>
-                      <td><?php echo $student_disciplinary_sanction->getSanctionType(); ?></td>
-                      <td><?php echo $student_disciplinary_sanction->getValue(); ?></td>
-                    </tr>
-                  <?php endforeach; ?>
-          </tbody>          
-        </table>
+        <div class="table-responsive">
+			<table class="table table-hover">
+			  <tbody>
+					  <tr class="success">
+						<th><?php echo __('Date') ?></th>
+						<th><?php echo __('Reason') ?></th>
+						<th><?php echo __('Sanction type') ?></th>
+						<th><?php echo __('Total') ?></th>
+					  </tr>
+					  
+					  <?php foreach ($student_disciplinary_sanctions as $student_disciplinary_sanction): ?>
+						<tr>
+						  <td><?php echo $student_disciplinary_sanction->getFormattedRequestDate(); ?></td>
+						  <td><?php echo $student_disciplinary_sanction->getDisciplinarySanctionType(); ?></td>
+						  <td><?php echo $student_disciplinary_sanction->getSanctionType(); ?></td>
+						  <td><?php echo $student_disciplinary_sanction->getValue(); ?></td>
+						</tr>
+					  <?php endforeach; ?>
+			  </tbody>          
+			</table>
+		</div>
       <?php else: ?>
-        <?php echo __("Student doesn't have any disciplinary sanctions.") ?>
+      <div class="alert alert-success info-report" role="alert"><?php echo __("Student doesn't have any disciplinary sanctions.") ?></div>
       <?php endif;?>
-      </div>
+      
     </div>
     <div class="col-md-1"></div>
   </div>
