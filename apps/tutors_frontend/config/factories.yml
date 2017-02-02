@@ -30,6 +30,10 @@ all:
     param:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
+storage:
+    class: sfSessionStorage
+    param:
+      session_name: "kimkelen-<?php echo sfConfig::get('nc_flavor_flavors_current') ?>"
 
 #all:
 #  controller:
