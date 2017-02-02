@@ -43,7 +43,7 @@
         
         $tutor=TutorPeer::retrieveByUsername($values['user']);
         
-        if(!is_null($tutor))
+        if(!is_null($tutor) && $tutor->getPerson()->getIsActive())
         {
 			if ($this->form->isValid())
 			{  
