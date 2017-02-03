@@ -196,10 +196,11 @@ padding-left: 16px;
 }
 
 .container-sanctions{
-	padding-bottom: 6%;
+	padding-bottom: 3%;
 	padding-top: 4%;
 	margin-left: 2%;
 	margin-right: 2%;
+	margin-bottom: 3%;
 }
 .title-box{
 	color: #fff;
@@ -233,7 +234,7 @@ width: 450px;
 .container-buttons{
 	margin-bottom: 6%;
 	text-align: center;
-	margin-top: 6%;
+	margin-top: 50px;
 }
 
 .go-back{
@@ -268,6 +269,7 @@ width: 450px;
 	
 	margin-left: 2%;
 	margin-right: 2%;
+	margin-bottom:3%;
 }
 
 .margin{
@@ -402,7 +404,10 @@ display:block;
 #menu ul {
   position: relative;
 }
-	
+
+.box-title{
+margin-left:5% !important;
+}
 #menu ul li {
 	border:none;
 	width: 100%;
@@ -447,6 +452,7 @@ a.button_1{
 .info-attendance{
 	margin-left: 8%;
 	font-size: 14px !important;
+	margin-bottom: 2%;
 }
 
 .info-report{
@@ -467,8 +473,8 @@ a.button_1{
 	text-decoration: none !important;
 	padding-top: 4%;
 	padding-bottom: 4%;
-	padding-left: 15%;
-	padding-right: 15%;
+	padding-left: 17%;
+	padding-right: 17%;
 	margin-right: 2%;
 }
 
@@ -480,9 +486,9 @@ a.button_1{
 margin-left:3%;
 }
 a.button_1{
-	padding-right: 16%;
-	margin-left: 6%;
-	padding-left: 16%;
+	
+	margin-left: 5%;
+
 }
 a.button_1:focus, a.button_1:hover{
 	background-color: #3360DE;
@@ -490,3 +496,9 @@ a.button_1:focus, a.button_1:hover{
 a.button_2:focus, a.button_2:hover{
 	background-color: #82B7C8;
 }
+
+.box-title{
+	margin-left: 11%;
+	margin-bottom: 4%;
+}
+

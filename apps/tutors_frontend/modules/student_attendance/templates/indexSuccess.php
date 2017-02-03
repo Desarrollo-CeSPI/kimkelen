@@ -21,9 +21,7 @@
  <div class="row"> 
  	<div class="col-md-1"></div>
  	<div class="col-md-10 container-sombra-exterior container-attendance">
-
- 		<div class="student-info title-box box-attendance">	
-			<span class="glyphicon glyphicon-file icon-title large violet" aria-hidden="true"></span>
+ 		<div class="box-title">		
 			<span class="title-sanctions"><?php echo __('Attendance'); ?> |</span>
 			<span class=""><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear()?></span>
 		</div>
@@ -36,11 +34,10 @@
  			<?php include_partial('attendance_per_subject', array('student_career_school_year'=>$student_career_school_year,'student' => $student)); ?>
 
 	 	<?php endif; ?>
-
- 	</div>
- 	<div class="col-md-1"></div>
- 	<div class="col-md-12 container-buttons">
+	<div class="col-md-12 container-buttons">
 		<?php echo link_to(__('Go back'), $link, array("class"=> "button_1"));?>
 		<?php echo link_to(__('Show report'), 'student_attendance/showReport?student_id=' . $student->getId(), array("class"=> "button_2"));?>		
-	</div>	
+	</div>
+ 	</div>
+ 	<div class="col-md-1"></div>
  </div>

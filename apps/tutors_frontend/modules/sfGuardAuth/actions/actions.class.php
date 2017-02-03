@@ -56,6 +56,6 @@
 		}
         
       }
-
+		$this->setTemplate('signinFrontend');
     }
   }

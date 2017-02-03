@@ -21,8 +21,7 @@
 	<div class="col-md-12">
 		<div class="col-md-1"></div>
 		<div class="col-md-10 container-sombra-exterior container-sanctions">
-			<div class="student-info title-box sanction">	
-				<span class="glyphicon glyphicon-exclamation-sign icon-title large red" aria-hidden="true"></span>
+			<div class="box-title">	
 				<span class="title-sanctions"><?php echo __('Disciplinary sanctions'); ?> |</span>
 				<span class=""><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear()?></span>
 			</div>
@@ -57,15 +56,13 @@
 				</div>
 			</div>
 			<div class="col-md-1"></div>
+			<div class="col-md-12 container-buttons">
+		
+				<?php echo link_to(__('Go back'), $link, array("class"=> "button_1"));?>
+				<?php echo link_to(__('Show report'), 'student_disciplinary_sanction/showReport?student_id=' . $student->getId(), array("class"=> "button_2"));?>
+				
+			</div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-
-	<div class="col-md-12 container-buttons">
-		
-		<?php echo link_to(__('Go back'), $link, array("class"=> "button_1"));?>
-		<?php echo link_to(__('Show report'), 'student_disciplinary_sanction/showReport?student_id=' . $student->getId(), array("class"=> "button_2"));?>
-		
-	</div>
-
 </div>
