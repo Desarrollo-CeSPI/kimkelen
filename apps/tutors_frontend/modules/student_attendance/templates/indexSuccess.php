@@ -27,7 +27,7 @@
 		</div>
  		<?php if(! $student->hasAttendancesPerSubject()): ?>
 
- 			<?php include_partial('attendance_per_day', array('division'=>$division,'student'=>$student)); ?>
+ 			<?php include_partial('attendance_per_day', array('student_career_school_year'=>$student_career_school_year,'division'=>$division,'student'=>$student)); ?>
  			
  		<?php else: ?>
 

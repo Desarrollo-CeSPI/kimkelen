@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+ <?php use_stylesheet('/bootstrap/css/bootstrap.css', 'last') ?>
 	<?php if(is_null($division)):?>
 		<div class="info-attendance"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
 	<?php else: ?>
@@ -34,7 +35,7 @@
 						 <tbody>
 							<?php foreach ($periods as $period): ?>
 							<tr>
-							<?php $absences = count(StudentAttendancePeer::retrieveByStudentAndPeriod($student,$period)); ?>
+							<?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, true) ; ?>
 							  <td><?php echo $period->getName();?></td>
 					          <td><?php echo round($absences, 2) ?></td>
 					          <?php $total += $absences ?>

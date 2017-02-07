@@ -114,27 +114,5 @@ class StudentAttendancePeer extends BaseStudentAttendancePeer
     }
     return $total;
   }
-  static function retrieveByStudentAndSchoolYear($student,$school_year)
-  {
-      $c = new Criteria();
-      $c->add(self::STUDENT_ID, $student->getId());
-      $c->add(self::VALUE, 0, Criteria::NOT_EQUAL);
-      $c->addJoin(self::CAREER_SCHOOL_YEAR_ID,CareerSchoolYearPeer::ID);
-      $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
-      
-      return self::doSelect($c);
-  }
-
-  static function retrieveByStudentAndPeriod($student,$period){
-
-      $c = new Criteria();
-      $c->add(self::STUDENT_ID, $student->getId());
-      $c->add(self::VALUE, 0, Criteria::NOT_EQUAL);
-      $criterion = $c->getNewCriterion(StudentAttendancePeer::DAY, $period->getStartAt(), Criteria::GREATER_EQUAL);
-      $criterion->addAnd($c->getNewCriterion(StudentAttendancePeer::DAY, $period->getEndAt(), Criteria::LESS_EQUAL));
-      $c->add($criterion);
-
-      return self::doSelect($c);
-  }
 
 }

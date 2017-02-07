@@ -31,8 +31,8 @@ class student_attendanceActions extends sfActions
 	public function executeShowReport(sfWebRequest $request)
 	{
 		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+		$this->student_career_school_years = $this->student->getCurrentStudentCareerSchoolYears();
 		$this->school_year = SchoolYearPeer::retrieveCurrent();
-		$this->absences = StudentAttendancePeer::retrieveByStudentAndSchoolYear($this->student,$this->school_year);
 		$this->link = 'student_attendance/index?student_id='.$this->student->getId();
 
 	}		

@@ -421,9 +421,7 @@ margin-left:5% !important;
 .container.absolute {
     margin-top: 50px;
 }
-a.button_1{
-	margin-left: 0% !important;
-}
+
 }
 @media screen and (min-width: 580px) {
 	#oculto {
@@ -485,11 +483,7 @@ a.button_1{
 .status{
 margin-left:3%;
 }
-a.button_1{
-	
-	margin-left: 5%;
 
-}
 a.button_1:focus, a.button_1:hover{
 	background-color: #3360DE;
 }
@@ -498,7 +492,14 @@ a.button_2:focus, a.button_2:hover{
 }
 
 .box-title{
-	margin-left: 11%;
+	margin-left: 8%;
 	margin-bottom: 4%;
+	margin-top: 1%;
+}
+
+.text-report{
+	text-transform: none !important;
+margin-left: 8%;
+margin-right: 10%;
 }
 

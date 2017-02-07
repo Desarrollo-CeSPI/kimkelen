@@ -17,8 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+ <?php use_stylesheet('/bootstrap/css/bootstrap.css', 'last') ?>
 	<?php if(is_null($student_career_school_year)):?>
-		<div class="info-attendance"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
+		<div class="alert alert-success text-report"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
 	<?php else: ?>
 		<?php $course_subjects_student = CourseSubjectStudentPeer:: retrieveByCareerSchoolYearAndStudent($student_career_school_year->getCareerSchoolYear(),$student); ?>
  		<div class="col-md-1"></div>
@@ -42,8 +43,10 @@
 			                  foreach ($course_subject_configurations as $c) {
 				                  	$total += $c->getMaxAbsence();
 			                  }
-			                  $value = StudentAttendancePeer::doCountAbsenceByCourseSubjectAndStudent($css->getCourseSubject(), $student);
-			                  $global += $value ;
+			                  
+			                  $value=$student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, $css->getCourseSubject()->getId(), false);
+
+			               
 			                  echo $value .'/' . $total . 'hs.'; 
 	 
 			                ?>
@@ -54,7 +57,7 @@
 			        </table>
 				</div>
 				<div class="pull-right">
-			       	<b>Total: </b> <?php echo $global .'hs.'?>
+			       	<b>Total: </b> <?php echo $student->getTotalAbsencesReport($student_career_school_year->getCareerSchoolYear()->getId(), null, null, false) .'hs.'?>
 			    </div>
  			</div>
  			<div class="col-md-1"></div>

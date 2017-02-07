@@ -25,7 +25,7 @@
           	<span><?php echo $student . ' - ' . __('school year') . ' '. $school_year->getYear() ?></span>
       	</div>
 
-      	<?php if (count($absences) == 0): ?>
+      	<?php if (is_null($student->getCurrentStudentCareerSchoolYear()) || count($student->getTotalAbsences($student->getCurrentStudentCareerSchoolYear()->getCareerSchoolYear()->getId(),null, null, false)) == 0): ?>
       		<div class="alert alert-success info-report"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
 		<?php else: ?>
 			<div class="table-responsive">
@@ -43,11 +43,12 @@
 		            	</tr>
 		          	</thead>
 		          	<tbody>
-		          	<?php $justified = 0;?>
-		          	<?php $unjustified = 0;?>
-		            <?php foreach ($absences as $absence): ?>
+						
+					<?php foreach ($student_career_school_years as $student_career_school_year): ?>
+					  
+					  <?php foreach ($student_career_school_year->getDivisions() as $division): ?>
+		            <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
 		              	<tr>
-		              		<?php if ($absence->getStudentAttendanceJustification()) $justified++; else $unjustified++; ?>
 		                	<td><?php echo $absence->getFormattedDay(); ?></td>
 		                	<td><?php echo $absence->getValueString() ?></td>
 		                	<?php if ($student->hasAttendancesPerSubject()): ?>
@@ -57,6 +58,8 @@
 		                	<td><?php echo ($type = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getJustificationType() : '-' ?></td>
 		                	<td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getObservation() : '-' ?></td>
 		              	</tr>
+		            <?php endforeach; ?>
+		            <?php endforeach; ?>
 		            <?php endforeach; ?>
 		          	</tbody>
 		          	<tfoot>
@@ -68,7 +71,7 @@
 		                	<?php endif; ?>
 		                	<td></td>
 		                	<td></td>
-		          			<td><span class="pull-right"><b><?php echo __('Total') .': '?> </b> <?php echo $justified + $unjustified; ?></span></td>
+		          			<td><span class="pull-right"><b><?php echo __('Total') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId(), false), 2) ?></span></td>
 		          		</tr>
 		          		<tr>
 		          			<td></td>
@@ -78,7 +81,7 @@
 		                	<?php endif; ?>
 		                	<td></td>
 		                	<td></td>
-		                	<td><span class="pull-right"><b><?php echo __('Unjustified').': '?></b><?php echo $unjustified;?></span></td>
+		                	<td><span class="pull-right"><b><?php echo __('Unjustified') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId()), 2) ?></span></td>
 		          		</tr>
 		          		<tr>
 		          			<td></td>
@@ -88,7 +91,7 @@
 		                	<?php endif; ?>
 		                	<td></td>
 		                	<td></td>
-		                	<td><span class="pull-right"><b><?php echo __('Justified'). ': '?></b> <?php echo $justified; ?></span></td>
+		                	<td><span class="pull-right"><b><?php echo __('Justified') . ': ' . round($student->getTotalJustificatedAbsencesReport($division->getCareerSchoolYearId()), 2) ?></span></td>
 		          		</tr>
 		          	</tfoot>
 		        </table>
@@ -100,4 +103,3 @@
     	<?php echo button_to(__('Go back'), $link, array('class'=>'btn btn-default')) ?>
   	</div>
 </div>
-    
