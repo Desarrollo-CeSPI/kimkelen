@@ -15,10 +15,18 @@ class studentActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
+  protected function checkIsStudent($student)
+  {
+    $tutor = TutorPeer::retrieveByUsername($this->getUser()->getUsername());
+  	if(is_null($student ) || !$student->getIsTutor($tutor))
+  	{
+		throw new sfError404Exception();
+	}
+  }
   public function executeIndex(sfWebRequest $request)
   {
-  	//falta chequear que sea solo los alumnos que tiene a cargo
   	$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+  	$this->checkIsStudent($this->student);
   	
   }
 }

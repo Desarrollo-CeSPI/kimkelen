@@ -1649,6 +1649,18 @@ class Student extends BaseStudent
     return ($sy) ? $sy->getYear() :'-';
 
   }
+  
+  public function getIsTutor($tutor){
+	  
+	  $c = new Criteria();
+	  $c->add(StudentTutorPeer::STUDENT_ID, $this->getId());
+	  $c->add(StudentTutorPeer::TUTOR_ID, $tutor->getId());
+	  
+	  $st = StudentTutorPeer::doSelectOne($c);
+	  
+	  return (!is_null($st));
+	  
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

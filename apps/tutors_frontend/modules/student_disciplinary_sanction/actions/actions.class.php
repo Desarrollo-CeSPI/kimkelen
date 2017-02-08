@@ -15,14 +15,20 @@ class student_disciplinary_sanctionActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
-
-  public function executeShowHistory(sfWebRequest $request)
-  {
+	protected function checkIsStudent($student)
+	{
+		$tutor = TutorPeer::retrieveByUsername($this->getUser()->getUsername());
+		if(is_null($student ) || !$student->getIsTutor($tutor))
+		{
+			throw new sfError404Exception();
+		}
+	}
+  
+	public function executeShowHistory(sfWebRequest $request)
+	{
   		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+		$this->checkIsStudent($this->student);
+		
   		$this->school_year = SchoolYearPeer::retrieveCurrent();
   		//tomo los tipos de sanciones-
   		$this->sanctions_type = SanctionTypePeer::doSelect(new Criteria());
@@ -35,14 +41,15 @@ class student_disciplinary_sanctionActions extends sfActions
   		}
 
   		$this->link = 'student/index?student_id='.$this->student->getId();
-  }
+	}
 
-  public function executeShowReport(sfWebRequest $request){
+	public function executeShowReport(sfWebRequest $request)
+	{
+		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+		$this->checkIsStudent($this->student);
+		$this->student_disciplinary_sanctions = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForSchoolYear($this->student);
+		$this->school_year = SchoolYearPeer::retrieveCurrent();
+		$this->link = 'student_disciplinary_sanction/showHistory?student_id='.$this->student->getId();
 
-  	$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
-  	$this->student_disciplinary_sanctions = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForSchoolYear($this->student);
-    $this->school_year = SchoolYearPeer::retrieveCurrent();
-    $this->link = 'student_disciplinary_sanction/showHistory?student_id='.$this->student->getId();
-
-  }
+	}
 }

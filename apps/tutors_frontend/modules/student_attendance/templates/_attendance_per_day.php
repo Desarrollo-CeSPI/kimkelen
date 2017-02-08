@@ -38,14 +38,14 @@
 							<?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, true) ; ?>
 							  <td><?php echo $period->getName();?></td>
 					          <td><?php echo round($absences, 2) ?></td>
-					          <?php $total += $absences ?>
+					          
 							</tr>
 						  <?php endforeach; ?>
 						 </tbody>
 						 <tfoot>
 						  <tr>
 							 <td><b>Total</b></td>
-							 <td><b><?php echo $total ?></b></td>
+							 <td><b><?php echo $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, null, true)  ?></b></td>
 						  </tr>
 						 </tfoot>
 					</table> 

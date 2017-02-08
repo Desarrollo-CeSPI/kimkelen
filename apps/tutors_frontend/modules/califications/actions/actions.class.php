@@ -15,9 +15,20 @@ class calificationsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeShowHistory(sfWebRequest $request)
-  {
-    $this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
-    $this->link = 'student/index?student_id=' . $this->student->getId();
-  }
+  
+	protected function checkIsStudent($student)
+	{
+		$tutor = TutorPeer::retrieveByUsername($this->getUser()->getUsername());
+		if(is_null($student ) || ! $student->getIsTutor($tutor))
+		{
+			throw new sfError404Exception();
+		}
+	}
+	
+	public function executeShowHistory(sfWebRequest $request)
+	{
+		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
+		$this->checkIsStudent($this->student);
+		$this->link = 'student/index?student_id=' . $this->student->getId();
+	}
 }
