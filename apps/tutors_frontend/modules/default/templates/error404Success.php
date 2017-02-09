@@ -17,29 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
-
-class TutorPeer extends BaseTutorPeer
-{
-	static public function findByDocumentTypeAndNumber($document_type,$document_number)
-	{
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->add(PersonPeer::IDENTIFICATION_NUMBER, $document_number);
-		$c->add(PersonPeer::IDENTIFICATION_TYPE,$document_type );
-		$s = self::doSelectOne($c);
-
-		return $s;
-	 }
-	 
-	 public static function retrieveByUsername($username)
-	 {
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->addJoin(PersonPeer::USER_ID, sfGuardUserPeer::ID);
-		$c->add(sfGuardUserPeer::USERNAME,$username );
-		$t = self::doSelectOne($c);
-
-		return $t;
-	 }
-}
+  <div>
+    <h4>Error</h4>
+    <span>La página que estás buscando no existe.</span>
+  </div>

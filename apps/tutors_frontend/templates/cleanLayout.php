@@ -17,29 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <?php include_http_metas() ?>
+  <?php include_metas() ?>
+  <?php include_title() ?>
+  <link rel="shortcut icon" href="/favicon.ico" />
+</head>
 
-class TutorPeer extends BaseTutorPeer
-{
-	static public function findByDocumentTypeAndNumber($document_type,$document_number)
-	{
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->add(PersonPeer::IDENTIFICATION_NUMBER, $document_number);
-		$c->add(PersonPeer::IDENTIFICATION_TYPE,$document_type );
-		$s = self::doSelectOne($c);
-
-		return $s;
-	 }
-	 
-	 public static function retrieveByUsername($username)
-	 {
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->addJoin(PersonPeer::USER_ID, sfGuardUserPeer::ID);
-		$c->add(sfGuardUserPeer::USERNAME,$username );
-		$t = self::doSelectOne($c);
-
-		return $t;
-	 }
-}
+<body>
+  <?php echo $sf_content ?>
+</body>
+</html>

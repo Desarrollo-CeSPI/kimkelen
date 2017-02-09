@@ -17,29 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
 
-class TutorPeer extends BaseTutorPeer
-{
-	static public function findByDocumentTypeAndNumber($document_type,$document_number)
-	{
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->add(PersonPeer::IDENTIFICATION_NUMBER, $document_number);
-		$c->add(PersonPeer::IDENTIFICATION_TYPE,$document_type );
-		$s = self::doSelectOne($c);
+	<div class="col-md-12 container-students">
+		<div class="student-box-info">
+			<?php echo image_tag("/frontend/images/student-hat.png", array('alt' => __('Student'))); ?></span>
+			<span class="text-student"> <?php echo __("Students in charge");?> </span>
+		</div>
+		<div class="container-button-students">
+		<?php foreach ($students as $s): ?>
+			<button class="button-student" onclick='location.href="<?php echo 'student/index?student_id=' . $s->getId()?>"'><?php echo $s->getPerson()->getFullName()?></button>
+		<?php endforeach;?>
+		</div>
+	</div>
 
-		return $s;
-	 }
-	 
-	 public static function retrieveByUsername($username)
-	 {
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->addJoin(PersonPeer::USER_ID, sfGuardUserPeer::ID);
-		$c->add(sfGuardUserPeer::USERNAME,$username );
-		$t = self::doSelectOne($c);
 
-		return $t;
-	 }
-}

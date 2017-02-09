@@ -17,29 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
+ <div class="row"> 
+ 	<div class="col-md-1"></div>
+ 	<div class="col-md-10">
+ 		
+ 		<?php include_partial('tutor_box', array('tutor'=>$tutor)); ?>
+ 		<?php include_partial('students_box', array('students'=>$students)); ?>
 
-class TutorPeer extends BaseTutorPeer
-{
-	static public function findByDocumentTypeAndNumber($document_type,$document_number)
-	{
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->add(PersonPeer::IDENTIFICATION_NUMBER, $document_number);
-		$c->add(PersonPeer::IDENTIFICATION_TYPE,$document_type );
-		$s = self::doSelectOne($c);
+ 	</div>
+ 	<div class="col-md-2"></div>
+ </div>
 
-		return $s;
-	 }
-	 
-	 public static function retrieveByUsername($username)
-	 {
-		$c = new Criteria();
-		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
-		$c->addJoin(PersonPeer::USER_ID, sfGuardUserPeer::ID);
-		$c->add(sfGuardUserPeer::USERNAME,$username );
-		$t = self::doSelectOne($c);
 
-		return $t;
-	 }
-}
+

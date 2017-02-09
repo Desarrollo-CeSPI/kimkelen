@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+    <file original="global" source-language="en" datatype="plaintext" date="2009-04-30T12:40:33Z">
+        <header/>
+        <body>     
+	       <trans-unit>
+                <source>Attendance</source>
+                <target>Inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Califications</source>
+                <target>Calificaciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanctions</source>
+                <target>Sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Phone</source>
+                <target>Teléfono</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Email</source>
+                <target>Correo eletrónico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Address</source>
+                <target>Dirección</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Students in charge</source>
+                <target>Estudiantes a cargo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Go back</source>
+                <target>Volver</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password</source>
+                <target>Contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Sign in</source>
+                <target>Ingresar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>school year</source>
+                <target>año lectivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanctions report</source>
+                <target>Reporte de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Date</source>
+                <target>Fecha</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reason</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Sanction type</source>
+                <target>Tipo de sanción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Admonition details</source>
+                <target>Detalle de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course</source>
+                <target>Materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Total allowed</source>
+                <target>Total permitido</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student doesn't have any disciplinary sanctions.</source>
+                <target>No se registraron sanciones disciplinarias para este alumno</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Attendance report</source>
+                <target>Reporte de inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Day</source>
+                <target>Fecha</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Absence</source>
+                <target>Ausencia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Is justified</source>
+                <target>Justificada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Justification type</source>
+                <target>Tipo de justificacion</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Subject</source>
+                <target>Materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Description</source>
+                <target>Descripción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Unjustified</source>
+                <target>Sin justificar </target>
+            </trans-unit>
+            <trans-unit>
+                <source>Justified</source>
+                <target>Justificadas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Mark %number%</source>
+                <target>Nota %number%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course Average</source>
+                <target>Promedio Cursada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course Status</source>
+                <target>Resultado Cursada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Repproved examinations</source>
+                <target>Previas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Final Average</source>
+                <target>Promedio Def.</target>
+            </trans-unit>
+             <trans-unit>
+                <source>Anual average</source>
+                <target>Promedio anual</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Status</source>
+                <target>Estado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year %%year%%</source>
+                <target>%%year%° año</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Califications report</source>
+                <target>Reporte de calificaciones</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Required.</source>
+                <target>Este campo es requerido</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>The username and/or password is invalid.</source>
+                <target>Usuario y/o contraseña incorrecta</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Enter the digits here:</source>
+                <target>Ingrese los dígitos del recuadro aquí</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Show report</source>
+                <target>Ver reporte</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
