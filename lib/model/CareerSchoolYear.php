@@ -258,7 +258,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 			$student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $this);
             //si el alumno tiene reserva de banco no deberia hacer nada.
             
-            if($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+            if($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE && $student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN)
             {
 				$student->closeCareerSchoolYear($this, $con);
             
