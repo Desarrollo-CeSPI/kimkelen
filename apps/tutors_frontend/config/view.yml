@@ -11,7 +11,8 @@ default:
 
   stylesheets:    []
 
-  javascripts:    [jquery-ui-1.7.2.custom.min.js, jquery.cookie.js, no-conflict.js, /sfProtoculousPlugin/js/prototype.js, main.js, i18n/jquery-ui-i18n.js]
+  javascripts:    []
+    #jquery-ui-1.7.2.custom.min.js, jquery.cookie.js, no-conflict.js, /sfProtoculousPlugin/js/prototype.js, main.js, i18n/jquery-ui-i18n.js]
 
   has_layout:     on
   layout:         layout
