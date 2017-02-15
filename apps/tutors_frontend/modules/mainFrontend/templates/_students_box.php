@@ -18,16 +18,21 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-	<div class="col-md-12 container-students">
-		<div class="student-box-info">
-			<?php echo image_tag("/frontend/images/student-hat.png", array('alt' => __('Student'))); ?></span>
-			<span class="text-student"> <?php echo __("Students in charge");?> </span>
-		</div>
-		<div class="container-button-students">
-		<?php foreach ($students as $s): ?>
-			<button class="button-student" onclick='location.href="<?php echo 'student/index?student_id=' . $s->getId()?>"'><?php echo $s->getPerson()->getFullName()?></button>
-		<?php endforeach;?>
-		</div>
+	<div class="col-md-8">
+		<div class="row title-box">
+            <div class="col-md-12 title-icon">
+                <?php echo image_tag("/frontend/images/student-hat.svg", array('alt' => __('ícono'))); ?>
+			    <span class="title-text"> <?php echo __("Students in charge");?> </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php foreach ($students as $s): ?>
+                    <div class="col-md-4 container-student">
+                        <?php include_partial('student/student_info', array('student' => $s)) ?>
+                        <?php include_partial('student/student_actions', array('student' => $s)) ?>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        </div>
 	</div>
-
-
