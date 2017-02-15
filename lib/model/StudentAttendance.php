@@ -58,4 +58,5 @@ class StudentAttendance extends BaseStudentAttendance
   }
 }
 
-sfPropelBehavior::add('StudentAttendance', array('changelog'));
+
+try { sfPropelBehavior::add('StudentAttendance', array('changelog')); } catch(sfConfigurationException $e) {}

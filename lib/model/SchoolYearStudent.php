@@ -69,4 +69,4 @@ class SchoolYearStudent extends BaseSchoolYearStudent
   }
 }
 
-sfPropelBehavior::add('SchoolYearStudent', array('studentCareerSchoolYear'));
+try { sfPropelBehavior::add('SchoolYearStudent', array('studentCareerSchoolYear')); } catch(sfConfigurationException $e) {}

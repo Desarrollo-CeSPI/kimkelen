@@ -33,4 +33,5 @@ class StudentCareerSchoolYearConduct extends BaseStudentCareerSchoolYearConduct
 
 }
 
-sfPropelBehavior::add('StudentCareerSchoolYearConduct', array('changelog'));
+
+try { sfPropelBehavior::add('StudentCareerSchoolYearConduct', array('changelog')); } catch(sfConfigurationException $e) {}

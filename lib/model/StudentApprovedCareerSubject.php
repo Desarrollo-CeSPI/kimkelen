@@ -150,4 +150,5 @@ class StudentApprovedCareerSubject extends BaseStudentApprovedCareerSubject
 
 }
 
-sfPropelBehavior::add('StudentApprovedCareerSubject', array('student_approved_career_subject'));
+
+try { sfPropelBehavior::add('StudentApprovedCareerSubject', array('student_approved_career_subject')); } catch(sfConfigurationException $e) {}

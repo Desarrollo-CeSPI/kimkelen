@@ -1119,4 +1119,5 @@ class Course extends BaseCourse
 		return true;				
     }
 }
-sfPropelBehavior::add('Course', array('changelog'));
+
+try { sfPropelBehavior::add('Course', array('changelog')); }catch(sfConfigurationException $e) {}

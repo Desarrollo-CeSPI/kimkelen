@@ -152,4 +152,5 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
 
 }
 
-sfPropelBehavior::add('CourseSubjectStudentExamination', array('changelog'));
+try { sfPropelBehavior::add('CourseSubjectStudentExamination', array('changelog')); }catch(sfConfigurationException $e) {}
+

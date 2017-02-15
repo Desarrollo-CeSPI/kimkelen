@@ -447,4 +447,5 @@ class SchoolYear extends BaseSchoolYear
 	}
 }
 
-sfPropelBehavior::add('SchoolYear', array('changelog'));
+try { sfPropelBehavior::add('SchoolYear', array('changelog')); } catch(sfConfigurationException $e) {}
+
