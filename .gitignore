@@ -44,6 +44,7 @@ plugins/.registry
 /web/dcFormExtraPlugin
 /web/sfTCPDFPlugin
 /web/css
+/web/js/frontend
 /web/images
 /web/uploads/disciplinary-sanction-documents/*
 /nbproject/
