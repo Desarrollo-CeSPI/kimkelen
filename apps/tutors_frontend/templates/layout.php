@@ -27,7 +27,7 @@
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                              <?php echo image_tag("/frontend/images/user.svg", array('alt' => __('User'))); ?>
+                              <?php echo image_tag("frontend/user.svg", array('alt' => __('User'))); ?>
                               <?php echo $sf_user->getUsername()?> <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu">

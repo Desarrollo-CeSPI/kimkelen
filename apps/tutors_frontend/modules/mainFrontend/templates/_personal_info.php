@@ -20,7 +20,7 @@
 <div class="col-md-4 container-sombra">
     <div class="row">
         <div class="col-md-12 personal-photo">
-            <?php echo image_tag("/frontend/images/user.svg", array('alt' => __('Foto'))); ?>
+            <?php echo image_tag("frontend/user.svg", array('alt' => __('Foto'))); ?>
             <h1 class="person-name"><?php echo $person->getPerson()->getFullName(); ?></h1>
             <span class="person-document-type">DNI:</span>
             <span class="person-document-number"><?php echo $person->getPerson()->getIdentificationNumber(); ?></span>

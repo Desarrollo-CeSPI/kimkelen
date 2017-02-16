@@ -9,7 +9,7 @@ default:
     language:      es_AR
     #robots:       index, follow
 
-  stylesheets:    [ frontend/main.css, frontend/bootstrap.min.css ]
+  stylesheets:    [ frontend/main.css, ../bootstrap/css/bootstrap.min.css ]
 
   javascripts:    [ frontend/jquery-3.1.1.js, frontend/scripts.js]
 

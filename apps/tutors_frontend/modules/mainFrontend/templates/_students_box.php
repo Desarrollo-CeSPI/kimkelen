@@ -21,7 +21,7 @@
 	<div class="col-md-8">
 		<div class="row title-box">
             <div class="col-md-12 title-icon">
-                <?php echo image_tag("/frontend/images/student-hat.svg", array('alt' => __('ícono'))); ?>
+                <?php echo image_tag("frontend/student-hat.svg", array('alt' => __('ícono'))); ?>
 			    <span class="title-text"> <?php echo __("Students in charge");?> </span>
             </div>
         </div>

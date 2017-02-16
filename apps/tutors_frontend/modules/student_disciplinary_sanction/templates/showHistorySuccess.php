@@ -26,7 +26,7 @@
         <div class="col-md-8">
             <div class="row title-box">
                 <div class="col-md-12 title-icon">
-                    <?php echo image_tag("/frontend/images/book.svg", array('alt' => __('Disciplinary sanctions'))); ?>
+                    <?php echo image_tag("frontend/book.svg", array('alt' => __('Disciplinary sanctions'))); ?>
                     <span class="title-text"> <?php echo __("Disciplinary sanctions");?> </span>
                 </div>
             </div>

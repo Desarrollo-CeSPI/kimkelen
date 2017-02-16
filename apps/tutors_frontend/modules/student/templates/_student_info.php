@@ -20,7 +20,7 @@
 
 <div class="row">
     <div class="col-md-12 student-photo">
-        <?php echo image_tag("/frontend/images/user.svg", array('alt' => __('Student'))); ?>
+        <?php echo image_tag("frontend/user.svg", array('alt' => __('Student'))); ?>
         <h1 class="student-name"><?php echo $student->getPerson()->getFullName(); ?></h1>
         <span class="student-document-type">DNI:</span>
         <span class="student-document-number"><?php echo $student->getPerson()->getIdentificationNumber(); ?></span>

@@ -17,8 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <div class="row">
 	<div class="col-md-12">
@@ -28,7 +26,7 @@
         <div class="col-md-8">
             <div class="row title-box">
                 <div class="col-md-12 title-icon">
-                    <?php echo image_tag("/frontend/images/notepad.svg", array('alt' => __('Califications'))); ?>
+                    <?php echo image_tag("frontend/notepad.svg", array('alt' => __('Califications'))); ?>
                     <span class="title-text"> <?php echo __("Califications report");?> </span>
                 </div>
             </div>

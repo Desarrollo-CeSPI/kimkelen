@@ -17,10 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php use_stylesheet('/bootstrap/css/bootstrap.min.css', 'first') ?>
-<?php use_stylesheet('/frontend/css/frontend-login.css', 'first') ?>
-
-
 
 <header>
     <?php echo image_tag("kimkelen_logo.png", array('alt' => __('Kimkelen'))); ?>
