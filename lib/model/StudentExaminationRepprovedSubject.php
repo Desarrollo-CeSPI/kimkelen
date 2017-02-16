@@ -102,4 +102,4 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
 
 }
 
-sfPropelBehavior::add('StudentExaminationRepprovedSubject', array('changelog'));
+try { sfPropelBehavior::add('StudentExaminationRepprovedSubject', array('changelog')); } catch(sfConfigurationException $e) {}

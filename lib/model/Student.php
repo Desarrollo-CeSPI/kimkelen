@@ -1666,4 +1666,4 @@ class Student extends BaseStudent
   }
 }
 
-sfPropelBehavior::add('Student', array('person_delete'));
+try { sfPropelBehavior::add('Student', array('person_delete')); } catch(sfConfigurationException $e ) {}

@@ -4,15 +4,9 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
+
     <link rel="shortcut icon" href="/favicon.ico" />
-    
-    <?php use_stylesheet('/frontend/css/main.css', 'first') ?>
-   	<?php use_stylesheet('/bootstrap/css/bootstrap.min.css', 'first') ?>
-	<?php use_javascript('/frontend/js/scripts.js', 'last') ?>
-	<?php use_javascript('/frontend/js/jquery-3.1.1.js') ?>
-	<?php use_javascript('/frontend/js/scripts.js','last') ?>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i,800i" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
   </head>
   <body>
       <nav class="navbar navbar-default navbar-fixed-top">

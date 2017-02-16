@@ -838,4 +838,6 @@ class Division extends BaseDivision
   }
 
 }
-sfPropelBehavior::add('Division', array('changelog'));
+
+try { sfPropelBehavior::add('Division', array('changelog')); }catch(sfConfigurationException $e) {}
+

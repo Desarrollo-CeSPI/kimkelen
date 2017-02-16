@@ -33,7 +33,7 @@ all:
 storage:
     class: sfSessionStorage
     param:
-      session_name: "kimkelen-<?php echo sfConfig::get('nc_flavor_flavors_current') ?>"
+      session_name: "kimkelen-frontend-<?php echo sfConfig::get('nc_flavor_flavors_current') ?>"
 
 #all:
 #  controller:
