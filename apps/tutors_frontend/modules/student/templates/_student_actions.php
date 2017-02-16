@@ -18,44 +18,35 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-	<div class="col-md-5">
-		<div class="col-md-12 box-action box-califications">
-			<div class="icon-action lightblue">
-				<span class="glyphicon glyphicon-star large" aria-hidden="true"></span>
-			</div>
-			<div class="title">
-				<div class="title-action">
-					<b><?php echo link_to(__('Califications'), 'califications/showHistory?student_id=' . $student->getId());?> </b>
-				</div>
-				<div class="info-action">
-					<i><?php echo "Consulte el historial académico de calificaciones"; ?> </i>
-				</div>
-			</div>			
-		</div>
-		<div class="col-md-12 box-action box-attendance">
-			<div class="icon-action violet">
-				<span class="glyphicon glyphicon-file large" aria-hidden="true"></span>
-			</div>
-			<div class="title">
-				<div class="title-action">
-					<b><?php echo link_to(__('Attendance'), 'student_attendance/index?student_id=' . $student->getId());?></b>
-				</div>
-				<div class="info-action">
-					<i><?php echo "Verfique el registro de inasistencias a clases"; ?></i>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12 box-action sanction">
-			<div class="icon-action red">
-				<span class="glyphicon glyphicon-exclamation-sign large" aria-hidden="true"></span> 
-			</div>
-			<div class="title">
-				<div class="title-action">
-					<b><?php echo link_to(__('Disciplinary sanctions'), 'student_disciplinary_sanction/showHistory?student_id=' . $student->getId()); ?></b>
-				</div>
-				<div class="info-action">
-					<i> <?php echo "Chequee las sanciones disciplinarias imputadas"; ?> </i>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="row">
+    <div class="col-md-12 student-actions text-right">
+
+        <?php echo link_to('<span class="glyphicon glyphicon-star large" aria-hidden="true"></span>',
+                           'califications/showHistory?student_id=' . $student->getId() . '',
+                           array('class' => 'btn btn btn-info',
+                                 'data-toggle' => 'tooltip',
+                                 'data-placement' => 'bottom',
+                                 'title' => __('Califications')
+                           ))
+        ?>
+
+        <?php echo link_to('<span class="glyphicon glyphicon-file large" aria-hidden="true"></span>',
+                           'student_attendance/index?student_id=' . $student->getId() . '',
+                           array('class' => 'btn btn btn-warning',
+                                 'data-toggle' => 'tooltip',
+                                 'data-placement' => 'bottom',
+                                 'title' => __('Attendance')
+                           ))
+        ?>
+
+        <?php echo link_to('<span class="glyphicon glyphicon-exclamation-sign large" aria-hidden="true"></span>',
+                           'student_disciplinary_sanction/showHistory?student_id=' . $student->getId() . '',
+                           array('class' => 'btn btn btn-danger',
+                                 'data-toggle' => 'tooltip',
+                                 'data-placement' => 'bottom',
+                                 'title' => __('Disciplinary sanctions')
+                           ))
+        ?>
+
+    </div>
+</div>

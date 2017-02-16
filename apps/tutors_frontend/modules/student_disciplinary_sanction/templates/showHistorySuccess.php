@@ -17,9 +17,71 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+
 <div class="row">
 	<div class="col-md-12">
-		<div class="col-md-1"></div>
+
+        <?php include_partial('mainFrontend/personal_info', array('person' => $student)) ?>
+
+        <div class="col-md-8">
+            <div class="row title-box">
+                <div class="col-md-12 title-icon">
+                    <?php echo image_tag("frontend/book.svg", array('alt' => __('Disciplinary sanctions'))); ?>
+                    <span class="title-text"> <?php echo __("Disciplinary sanctions");?> </span>
+                </div>
+            </div>
+
+            <div class="row action-box">
+                <div class="col-md-12 text-right">
+                    <?php echo link_to('<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>' . __('Go back') .'',
+                        '@homepage', array('class' => 'btn btn btn-primary'))
+                    ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="data-box">
+                        <?php $total= 0 ;?>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><?php echo __('Sanction type') ?></th>
+                                    <th><?php echo __('Total') ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($sanctions_type as $st): ?>
+                                <tr>
+                                    <td><?php echo $st->getName() ?></td>
+                                    <td><?php echo $info[$st->getName()] ?></td>
+                                </tr>
+                                <?php $total += $info[$st->getName()]; ?>
+                            <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td><b><?php echo $total ?></b></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <div class="text-center">
+                            <?php echo link_to('<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> ' . __('Show report') . '',
+                                               'student_disciplinary_sanction/showReport?student_id=' . $student->getId(),
+                                               array('class' => 'btn btn-success'))
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
 		<div class="col-md-10 container-sombra-exterior container-sanctions">
 			<div class="box-title">	
 				<span class="title-sanctions"><?php echo __('Disciplinary sanctions'); ?> |</span>
@@ -66,3 +128,4 @@
 		<div class="col-md-1"></div>
 	</div>
 </div>
+-->

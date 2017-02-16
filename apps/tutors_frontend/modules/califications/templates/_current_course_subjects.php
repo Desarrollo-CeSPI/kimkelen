@@ -21,8 +21,7 @@
 <?php unset($course_subject_students['marks']); ?>
 <?php unset($course_subject_students['periods']); ?>
 
-<?php $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance() ?>
-
+<?php $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance(); ?>
 
 <?php $columns = 6 + $marks + count($evaluator_instance->getExaminationNumbers()) ?>
 

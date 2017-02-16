@@ -48,3 +48,4 @@ plugins/.registry
 /web/images
 /web/uploads/disciplinary-sanction-documents/*
 /nbproject/
+.idea/

@@ -29,6 +29,6 @@ class calificationsActions extends sfActions
 	{
 		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
 		$this->checkIsStudent($this->student);
-		$this->link = 'student/index?student_id=' . $this->student->getId();
+		$this->link = '@homepage';
 	}
 }

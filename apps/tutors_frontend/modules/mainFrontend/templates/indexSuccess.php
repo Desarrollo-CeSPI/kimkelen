@@ -17,16 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
- <div class="row"> 
- 	<div class="col-md-1"></div>
- 	<div class="col-md-10">
- 		
- 		<?php include_partial('tutor_box', array('tutor'=>$tutor)); ?>
- 		<?php include_partial('students_box', array('students'=>$students)); ?>
-
- 	</div>
- 	<div class="col-md-2"></div>
- </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php include_partial('personal_info', array('person'=>$tutor)); ?>
+            <?php include_partial('students_box', array('students'=>$students)); ?>
+        </div>
+    </div>
 
 
 
