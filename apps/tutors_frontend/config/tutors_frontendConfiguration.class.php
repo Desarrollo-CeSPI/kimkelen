@@ -8,4 +8,10 @@ class tutors_frontendConfiguration extends sfApplicationConfiguration
     $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin', 'pmJSCookMenuPlugin'));
   }
 
+  public function initialize()
+  {
+    parent::initialize();
+    spl_autoload_register(array('ncFlavorAutoload', 'initialize'));
+  }
+
 }
