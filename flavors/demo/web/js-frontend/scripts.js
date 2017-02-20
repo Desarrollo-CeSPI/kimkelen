@@ -32,5 +32,7 @@ $('#nav_mobile').click(function(){
 });
 
 
-
+$(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+});
 

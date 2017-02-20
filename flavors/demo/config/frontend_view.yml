@@ -9,9 +9,9 @@ default:
     language:      es_AR
     #robots:       index, follow
 
-  stylesheets:    [ frontend/main.css, ../bootstrap/css/bootstrap.min.css ]
+  stylesheets:    [ frontend/main.css, ../bootstrap/css/bootstrap.min.css, frontend/frontend-login.css ]
 
-  javascripts:    [ frontend/jquery-3.1.1.js, frontend/scripts.js]
+  javascripts:    [ frontend/jquery-3.1.1.js, frontend/scripts.js, ../bootstrap/js/bootstrap.js ]
 
   has_layout:     on
   layout:         layout
