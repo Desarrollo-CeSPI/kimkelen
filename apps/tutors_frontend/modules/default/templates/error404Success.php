@@ -17,7 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-  <div>
-    <h4>Error</h4>
-    <span>La página que estás buscando no existe.</span>
-  </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="data-box">
+            <div class="alert alert-danger" role="alert">
+                <p>
+                    <strong>¡ERROR!</strong>
+                    La página a la que intenta acceder no existe. Por favor rediríjase al <?php echo link_to( 'Inicio', '@homepage', array('title' => __('Inicio'))) ?>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
