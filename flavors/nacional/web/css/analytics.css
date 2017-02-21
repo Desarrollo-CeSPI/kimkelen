@@ -18,12 +18,14 @@
 #header_analytical_data_right
 {
     width: 20%;
-    float: right
+    float: right;
+    margin-top: -3% !important;
 }
 #header_analytical_data_center
 {
     width: 55%;
     text-align: center;
+    margin-left:20% !important;
 }
 #header_analytical_data_center h1
 {
@@ -37,9 +39,8 @@
     
 }
 
-.title dd.detail{
+.title span.detail{
     font-weight: normal;
-    padding-left: 1em;
 }
 #header_analytical_data_center h1 small
 {
