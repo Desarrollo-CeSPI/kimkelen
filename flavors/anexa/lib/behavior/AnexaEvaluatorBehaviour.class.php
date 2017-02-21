@@ -97,5 +97,21 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     $average = sprintf('%.4s', $average);
     return $average;
   }
+  /*
+   * This method returns the marks average of a student between a course_subject_student and course_subject_student_examination
+   * 
+   * */
+  public function getAverage($course_subject_student, $course_subject_student_examination)
+  {
+	  $config = $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
+	  if(! is_null($config) && !$config->isNumericalMark())
+	  {
+		  return $course_subject_student_examination->getMark();
+	  }
+	  else
+	  {
+		  return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
+	  }  
+  }
 
 }
