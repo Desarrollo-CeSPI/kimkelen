@@ -21,7 +21,7 @@
 <div class="row">
     <div class="col-md-12 student-actions text-right">
 
-        <?php echo link_to('<span class="glyphicon glyphicon-star large" aria-hidden="true"></span>',
+        <?php echo link_to('<span class="glyphicon glyphicon-star" aria-hidden="true"></span>',
                            'califications/showHistory?student_id=' . $student->getId() . '',
                            array('class' => 'btn btn btn-info',
                                  'data-toggle' => 'tooltip',
@@ -30,7 +30,7 @@
                            ))
         ?>
 
-        <?php echo link_to('<span class="glyphicon glyphicon-file large" aria-hidden="true"></span>',
+        <?php echo link_to('<span class="glyphicon glyphicon-file" aria-hidden="true"></span>',
                            'student_attendance/index?student_id=' . $student->getId() . '',
                            array('class' => 'btn btn btn-warning',
                                  'data-toggle' => 'tooltip',
@@ -39,7 +39,7 @@
                            ))
         ?>
 
-        <?php echo link_to('<span class="glyphicon glyphicon-exclamation-sign large" aria-hidden="true"></span>',
+        <?php echo link_to('<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>',
                            'student_disciplinary_sanction/showHistory?student_id=' . $student->getId() . '',
                            array('class' => 'btn btn btn-danger',
                                  'data-toggle' => 'tooltip',

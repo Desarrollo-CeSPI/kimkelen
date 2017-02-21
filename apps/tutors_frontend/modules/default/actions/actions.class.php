@@ -10,11 +10,13 @@
  */
 class defaultActions extends sfActions
 {
+
  /**
   * Executes index action
   *
   * @param sfRequest $request A request object
   */
+
   public function executeError404(sfWebRequest $request)
   {
   }

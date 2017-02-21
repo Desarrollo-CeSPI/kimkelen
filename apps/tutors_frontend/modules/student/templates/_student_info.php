@@ -16,35 +16,37 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
+ */
+?>
 
 <div class="row">
-    <div class="col-md-12 student-photo">
-        <?php echo image_tag("frontend/user.svg", array('alt' => __('Student'))); ?>
-        <h1 class="student-name"><?php echo $student->getPerson()->getFullName(); ?></h1>
-        <span class="student-document-type">DNI:</span>
-        <span class="student-document-number"><?php echo $student->getPerson()->getIdentificationNumber(); ?></span>
-    </div>
+  <div class="col-md-12 student-photo">
+    <?php echo image_tag("frontend/user.svg", array('alt' => __('Student'))); ?>
+    <h1 class="student-name"><?php echo $student->getPerson()->getFullName(); ?></h1>
+    <span class="student-document-type">DNI:</span>
+    <span class="student-document-number"><?php echo $student->getPerson()->getIdentificationNumber(); ?></span>
+  </div>
 </div>
+
 <div class="row">
-    <div class="col-md-12 personal-data">
-        <div class="detail">
-            <b> <?php echo __("Phone")?> </b>
-            <span class="glyphicon glyphicon glyphicon-phone icon" aria-hidden="true"></span>
-        </div>
-        <p class="text"><?php echo ($student->getPerson()->getPhone()) ? $student->getPerson()->getPhone(): 'No posee'; ?> </p>
-
-        <div class="detail">
-            <b> <?php echo __("Email") ?> </b>
-            <span class="glyphicon glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
-        </div>
-        <p class="text"><?php echo ($student->getPerson()->getEmail()) ? $student->getPerson()->getEmail() : 'No posee'; ?></p>
-
-        <div class="detail">
-            <b> <?php echo __("Address")?> </b>
-            <span class="glyphicon glyphicon glyphicon-map-marker icon" aria-hidden="true"></span>
-        </div>
-        <p class="text"><?php echo ($student->getPerson()->getAddress()) ? $student->getPerson()->getAddress()->getFullAddress() : 'No posee'; ?></p>
+  <div class="col-md-12 personal-data">
+    <div class="detail">
+      <b> <?php echo __("Phone")?> </b>
+      <span class="glyphicon glyphicon glyphicon-phone icon" aria-hidden="true"></span>
     </div>
+    <p class="text"><?php echo ($student->getPerson()->getPhone()) ? $student->getPerson()->getPhone(): 'No posee'; ?> </p>
+
+    <div class="detail">
+      <b> <?php echo __("Email") ?> </b>
+      <span class="glyphicon glyphicon glyphicon-envelope icon" aria-hidden="true"></span>
+    </div>
+    <p class="text"><?php echo ($student->getPerson()->getEmail()) ? $student->getPerson()->getEmail() : 'No posee'; ?></p>
+
+    <div class="detail">
+      <b> <?php echo __("Address")?> </b>
+      <span class="glyphicon glyphicon glyphicon-map-marker icon" aria-hidden="true"></span>
+    </div>
+    <p class="text"><?php echo ($student->getPerson()->getAddress()) ? $student->getPerson()->getAddress()->getFullAddress() : 'No posee'; ?></p>
+  </div>
 </div>
 
