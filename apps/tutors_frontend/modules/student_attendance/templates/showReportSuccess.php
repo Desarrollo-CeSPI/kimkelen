@@ -25,7 +25,7 @@
       <div class="row title-box">
         <div class="col-md-12 title-icon">
           <?php echo image_tag('frontend/attendance.svg', array('alt' => __('Attendance details'))); ?>
-          <span class="title-text"> <?php echo __('Attendance details');?> - <?php echo $school_year->getYear()?> </span>
+          <span class="title-text"> <?php echo __("Attendance");?> - <?php echo $school_year->getYear()?> </span>
         </div>
       </div>
 

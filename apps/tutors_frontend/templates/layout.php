@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
         </button>
       -->
-        <?php echo link_to(image_tag("kimkelen_logo.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Inicio'))) ?>
+        <?php echo link_to(image_tag("frontend/kimkelen_logo.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Inicio'))) ?>
       </div>
       <div class="collapse navbar-collapse user-data" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
