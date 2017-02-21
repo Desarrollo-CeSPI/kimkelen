@@ -4,7 +4,7 @@ body {
  color:#000;
  margin:0;
  padding:0;
- background-color: #172983;
+ background-color: #2e366b;
 }
 
 #login {
@@ -12,20 +12,20 @@ body {
  width: auto; /* ancho de la capa a centrar */
  height: auto; /* alto de la capa a centrar */
  top: 25%;
- left: 52%;
- margin-left: -200px; /* mitad del ancho de la capa a centrar */
+ left: 51%;
+ margin-left: -210px; /* mitad del ancho de la capa a centrar */
  margin-top: -100px; /* mitad del alto de la capa a centrar */
 }
 
 #login .left {
  padding:0px;
- width: 310px;
+ width: auto;
  padding:5px 5px;
 }
 
 #login .right {
- width: 310px;
- height:220px;
+ width: 400px;
+ height:250px;
  padding:2px 0 0 0px;
 background-color: white;
  text-align:left;
@@ -35,10 +35,10 @@ background-color: white;
  font-family:arial,sans-serif;
  font-size:14.5px;
  color:#fff;
- width: 320px;
+ width: 370px;
  height:100px;
- margin:0px 0px 0px 0px;
- background-image:url(../images/CNLP.png);
+ margin:0px 0px 0px 7px;
+ background-image:url(../images/nacional_login.png);
  background-repeat:no-repeat;
 }
 
@@ -56,12 +56,12 @@ background-color: white;
  font-weight:bold;
  color:#000;
  padding-bottom:10px;
- margin:23px 25px 10px 25px;
+ margin:35px 58px 10px 58px;
  text-align:left;
 }
 
 #login .form_row {
- margin:5px 25px 5px 25px;
+ margin:10px 60px 10px 60px;
  border:0px solid red;
 }
 
@@ -90,7 +90,7 @@ background-color: white;
  margin:0px;
  padding:2px;
  height:25px;
- width:250px;
+ width:270px;
  font-size:11px;
  text-align:left;
 }
@@ -113,13 +113,13 @@ background-color: white;
  outline:none;
  background:none;
  padding:5px 10px;
- background:#172983;
+ background:#2e366b;
  float:right;
  -moz-border-radius: 5px 5px 5px 5px;
 }
 
 #login .form_footer {
- margin:5px 0px 5px 0px;
+ margin:5px 40px 5px 40px;
  text-align:center;
  color:white;
  clear:both;
