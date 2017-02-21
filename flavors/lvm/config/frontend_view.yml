@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:         Kimkëlen - Tutores
+    description:   Sistema de acceso a tutores del sistema de alumnos - CeSPI - UNLP
+    keywords:      Kimkelen, Cespi, unlp, alumnos
+    language:      es_AR
+    #robots:       index, follow
+
+  stylesheets:    [ frontend/main.css, ../bootstrap/css/bootstrap.min.css, frontend/frontend-login.css ]
+
+  javascripts:    [ frontend/jquery-3.1.1.js, frontend/scripts.js, ../bootstrap/js/bootstrap.js ]
+
+  has_layout:     on
+  layout:         layout
