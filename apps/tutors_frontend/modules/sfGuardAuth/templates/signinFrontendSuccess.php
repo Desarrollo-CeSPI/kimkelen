@@ -19,7 +19,7 @@
  */ ?>
 
 <header class="header-login text-center">
-    <?php echo image_tag("kimkelen_logo.png", array('alt' => __('Kimkelen'))); ?>
+    <?php echo image_tag("frontend/kimkelen_logo.png", array('alt' => __('Kimkelen'))); ?>
 </header>
 
 <div class="container">

@@ -1,6 +1,15 @@
 .navbar {
 	padding: 1em;
 	font-size: 1.5em;
+    background-color: #F37321 !important;
+}
+
+.user-data li {
+    background-color: white;
+}
+
+.user-data li a {
+    color: black !important;
 }
 
 body {
@@ -15,7 +24,7 @@ footer
     width: 100%;
     bottom: 0;
     height: 85px;
-    color: gray;
+    color: black;
     text-align: center;
     font-size: 12px;
 	padding-top: 2%
