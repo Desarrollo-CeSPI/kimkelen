@@ -28,7 +28,11 @@
 					<span class="detail"> <?php echo $career_student->getStudent()->getInitialSchoolYear()->getYear(); ?></span>
                 </div>
                 <div><?php echo __("Fecha de egreso:") ?> 
-					<span class="detail"><?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "d");?></span>
+					<?php if ($analytical->has_completed_career()): ?>
+						<span class="detail"><?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "d");?></span>
+					<?php else: ?>
+						<span class="detail"> - </span>
+					<?php endif ?>
                 </div>
                 <div><?php echo __("RMN Nº 1079/13") ?> </div>
             </div>
