@@ -1,5 +1,8 @@
 $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    $(".tab-pane").css("display", "none");
+    $(".tab-pane.active").css("display", "inline");
+
 });
 
 $(document).ready(function() {
