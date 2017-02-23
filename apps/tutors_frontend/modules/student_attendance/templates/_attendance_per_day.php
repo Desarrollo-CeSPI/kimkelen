@@ -29,7 +29,7 @@
   </thead>
   <tbody>
   <?php foreach ($periods as $period): ?>
-    <?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, true) ; ?>
+    <?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, false) ; ?>
     <tr>
       <td><?php echo $period->getName();?></td>
       <td><?php echo round($absences, 2) ?></td>
@@ -39,7 +39,7 @@
   <tfoot>
     <tr>
       <td> <strong>Total</strong> </td>
-      <td> <strong><?php echo $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, null, true)  ?></strong> </td>
+      <td> <strong><?php echo $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, null, false)  ?></strong> </td>
     </tr>
   </tfoot>
 </table>
