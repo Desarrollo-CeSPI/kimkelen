@@ -187,7 +187,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
     /* Si tiene aprobada la cursada, entonces retornamos la cursada aprobada */
    
-    if (!is_null($this->getStudentApprovedCourseSubject($con)))
+    if ($this->getStudentApprovedCourseSubject($con))
     {
       return $this->getStudentApprovedCourseSubject($con);
     }
@@ -199,7 +199,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       $c->add(StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $this->getCourseSubjectId());
       $c->add(StudentApprovedCourseSubjectPeer::SCHOOL_YEAR_ID, $this->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
 
-      if (!is_null($result = StudentApprovedCourseSubjectPeer::doSelectOne($c)))
+      if ($result = StudentApprovedCourseSubjectPeer::doSelectOne($c))
       {
         //aca encontramos la cursada aprobada y se la asociamos al course_subject_student
         $this->setStudentApprovedCourseSubject($result);
