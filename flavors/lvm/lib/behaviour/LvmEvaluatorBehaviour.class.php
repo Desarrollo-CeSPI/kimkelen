@@ -400,17 +400,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
       {
-        $sers = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
-          //$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
-
-          if ($sers > 1) 
-          {
-            foreach ($sers as $student_examination_repproved_subject) 
-            {
-              $student_examination_repproved_subject->delete($con);
-            }
-          }
-          $student_repproved_course_subject->delete($con);
+        $student_repproved_course_subject->delete($con);
       }
     }
     else
