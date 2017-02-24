@@ -156,9 +156,6 @@ class StudentEditHistoryForm extends sfFormPropel
     $fieldset = array();
     $last_examination_number = $this->getObject()->countCourseSubjectStudentExaminations();
 
-    $criteria = new Criteria(CourseSubjectStudentPeer::DATABASE_NAME);
-    $criteria->addAscendingOrderByColumn('examination_number');
-
     foreach ($this->getObject()->getCourseSubjectStudentExaminations($criteria) as $course_subject_student_examination)
     {
       $fields = array();
