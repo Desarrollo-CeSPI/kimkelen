@@ -68,4 +68,31 @@ class AnexaSchoolBehaviour extends BaseSchoolBehaviour
 		return $results;
 
 	}
+	
+	  public function getTotalAbsences($career_school_year_id, $period, $course_subject_id = null, $exclude_justificated = true, $student_id)
+	  {
+		$absences = $this->getAbsences($career_school_year_id, $student_id, $period, $course_subject_id);
+		$rounder  = new StudentAttendanceRounder();
+		$total    = 0;
+
+		foreach ($absences as $absence)
+		{
+		  // sacamos las justificadas, es decir se quiere el total SIN las justificadas (Saco solo las que son por Paro o Enfermedad.)
+		  if ($exclude_justificated && $absence->hasJustification())
+		  { 
+			$justification = $absence->getStudentAttendanceJustification();
+			if($justification->getJustificationType()->getName() == 'Paro' || $justification->getJustificationType()->getName() == 'Enfermedad')
+			{
+				continue;
+			}
+		  }
+
+		  $total += $absence->getValue();
+		  $rounder->process($absence);
+		}
+
+		$diff = $rounder->calculateDiff();
+
+		return $total + $diff;
+	  }
 }
