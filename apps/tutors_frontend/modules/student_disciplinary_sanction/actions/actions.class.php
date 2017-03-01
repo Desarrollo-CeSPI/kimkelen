@@ -28,27 +28,24 @@ class student_disciplinary_sanctionActions extends sfActions
   
 	public function executeShowHistory(sfWebRequest $request)
 	{
-    $this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
-    $this->checkIsStudent($this->student);
-    $this->school_year = SchoolYearPeer::retrieveCurrent();
-
-    //tomo los tipos de sanciones-
-    $this->sanctions_type = SanctionTypePeer::doSelect(new Criteria());
-
-    //por cada tipo de sancion chequeo la cantidad de tiene el alumno en el año lectivo vigente.
-    $this->info = array();
-    foreach ($this->sanctions_type as $st)
-    {
-      $this->info[$st->getName()] = StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForStudentAndSanctionType($this->student, $st);
-    }
-	}
-
-	public function executeShowReport(sfWebRequest $request)
-	{
 		$this->student = StudentPeer::retrieveByPk($request->getParameter('student_id'));
 		$this->checkIsStudent($this->student);
-		$this->student_disciplinary_sanctions = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForSchoolYear($this->student);
 		$this->school_year = SchoolYearPeer::retrieveCurrent();
-		$this->go_back = 'student_disciplinary_sanction/showHistory?student_id='.$this->student->getId();
+
+		//tomo los tipos de sanciones-
+		$this->sanctions_type = SanctionTypePeer::doSelect(new Criteria());
+
+		//por cada tipo de sancion chequeo la cantidad de tiene el alumno en el año lectivo vigente.
+		$this->info = array();
+		$student_career_school_years = $this->student->getStudentCareerSchoolYears();
+		foreach ($student_career_school_years as $scsy)
+		{
+		  foreach ($this->sanctions_type as $st)
+		  {	
+			 $sy=$scsy->getCareerSchoolYear()->getSchoolYear()->getYear();
+			 $this->info[$sy][$st->getName()] = StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForStudentAndSanctionTypeAndSchoolYear($this->student, $st, $sy);
+		   }
+		}
+		
 	}
 }
