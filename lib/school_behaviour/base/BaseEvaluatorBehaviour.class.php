@@ -302,20 +302,23 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
       if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
       {
-        $this->createCourseSubjectStudentExamination($result, $con);
+        $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
       }
     }
   }
 
-  public function createCourseSubjectStudentExamination(StudentDisapprovedCourseSubject $student_disapproved_course_subject, $con)
+  public function createCourseSubjectStudentExamination(CourseSubjectStudent $course_subject_student, $con)
   {
-    
     $course_subject_student_examination = new CourseSubjectStudentExamination();
-    $course_subject_student_examination->setCourseSubjectStudent($student_disapproved_course_subject->getCourseSubjectStudent());
-    $examination_number = $student_disapproved_course_subject->getExaminationNumber();
+    $course_subject_student_examination->setCourseSubjectStudent($course_subject_student);
+//El if creo que no deberia existir para mantener la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
+//    if (!is_null($course_subject_student->getCourseResult()))
+//    {
+    $course_result = $this->getCourseSubjectStudentResult($course_subject_student, $con);
+    $examination_number = $course_result->getExaminationNumber();
     $course_subject_student_examination->setExaminationNumber($examination_number);
+//    }
     $course_subject_student_examination->save($con);
-
     //Libero memoria
     $course_subject_student_examination->clearAllReferences(true);
     unset($course_subject_student_examination);
@@ -723,7 +726,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $new_course_subject_student_examination->setMark(null);
     $new_course_subject_student_examination->setExaminationSubjectId(null);
     $new_course_subject_student_examination->setIsAbsent(false);
-    $new_course_subject_student_examination->setFolioNumber(null);
     $new_course_subject_student_examination->save($con);
 
   }
