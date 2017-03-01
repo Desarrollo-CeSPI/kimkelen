@@ -134,9 +134,15 @@ class ExaminationSubjectStudentForm extends sfFormPropel
         {
           $values = array();
         }
+        //si no esta en la lista 
         if(!in_array($csse->getStudent()->getId(), $values))
         {
-          $csse->delete($con);
+			//y debe la correlativa creo la instancia siguiente.
+			if($csse->getStudent()->owsCorrelativeFor($this->getObject()->getCareerSubject()))
+			{
+				$csse->close($con);	
+			}	
+			$csse->delete($con);
         }
         else
         {
