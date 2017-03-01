@@ -103,15 +103,8 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
    * */
   public function getAverage($course_subject_student, $course_subject_student_examination)
   {
-	  $config = $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
-	  if(! is_null($config) && !$config->isNumericalMark())
-	  {
-		  return $course_subject_student_examination->getMark();
-	  }
-	  else
-	  {
-		  return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
-	  }  
+	  return $course_subject_student_examination->getMark();
+ 
   }
 
 }
