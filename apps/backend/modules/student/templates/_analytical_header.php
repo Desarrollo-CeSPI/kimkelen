@@ -20,8 +20,22 @@
     <div class="header_row">
         <div class="title" id="header_analytical_data_right">
             <div class="dl-horizontal">
-                <div><?php echo __("Legajo N°") ?>:</div>
-                <div class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></div>
+                <div><?php echo __("Legajo N°") ?>:
+					<span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+                </div>
+                <div><?php echo __("Año de ingreso:") ?> 
+					<span class="detail"> <?php echo $career_student->getStudent()->getInitialSchoolYear()->getYear(); ?></span>
+                </div>
+                <div><?php echo __("Fecha de egreso:") ?> 
+					<?php if ($analytical->has_completed_career()): ?>
+						<span class="detail"><?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "d");?></span>
+					<?php else: ?>
+						<span class="detail"> - </span>
+					<?php endif ?>
+                </div>
+                <div><?php echo __("RMN Nº") ?> 
+					<span class="detail"><?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?></span>					
+                </div>
             </div>
         </div>
         <div class="title" id="header_analytical_data_center">
