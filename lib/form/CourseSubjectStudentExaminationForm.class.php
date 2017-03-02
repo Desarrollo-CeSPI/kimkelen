@@ -57,13 +57,18 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
 		if(! $configuration->isNumericalMark())
 		{
 			$letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$this->getObject()->getMark());
-			$this->setWidget('mark',new sfWidgetFormPropelChoice(array('model'=> 'LetterMark', 'add_empty' => true)));
+			$letter_list = LetterMarkPeer::doSelect(new Criteria());
+			$choices = array();
+			foreach( $letter_list as $l ){
+				$choices[$l->getValue()] = $l->getLetter();
+			}
+			$this->setWidget('mark',  new sfWidgetFormSelect(array('choices'  => $choices)));
 			
 			if(!is_null($letter_mark)) {
-				$this->setDefault('mark', $letter_mark->getId());
+				$this->setDefault('mark', $letter_mark->getValue());
 			 }
 			
-			$this->setValidator('mark',new sfValidatorPropelChoice(array('model' => 'LetterMark', 'required' => false)));
+			$this->setValidator('mark', new sfValidatorChoice(array('choices' => array_keys($choices))));
 		}
 		else
 		{

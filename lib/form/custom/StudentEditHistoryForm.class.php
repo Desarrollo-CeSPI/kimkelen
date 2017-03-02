@@ -90,7 +90,7 @@ class StudentEditHistoryForm extends sfFormPropel
       else
       {
         $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $cssm, 'method' => 'getMarkByConfig', 'method_args' => $configuration, 'add_hidden_input' => true)));
-        $this->setValidator($name, new sfValidatorInteger(array('required' => false)));
+        $this->setValidator($name, new sfValidatorString(array('required' => false)));
         $this->setDefault($name, $cssm->getMark());
       }
 
@@ -164,7 +164,7 @@ class StudentEditHistoryForm extends sfFormPropel
       
       if ($i < $last_examination_number || !$this->canEditExaminationSubject())
       {
-        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getValueString', 'add_hidden_input' => true)));
+        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getMarkStrByConfig', 'add_hidden_input' => true)));
         $this->setValidator($name, new sfValidatorPass());
       }
       else
