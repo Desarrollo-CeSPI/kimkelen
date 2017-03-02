@@ -4519,6 +4519,10 @@
         <source>Edit last repproved examination</source>
         <target>Editar ultima mesa de previa</target>
     </trans-unit>
+    <trans-unit>
+        <source>Resolution number</source>
+        <target>Número de resolución</target>
+    </trans-unit>
     </body>
 </file>
 </xliff>

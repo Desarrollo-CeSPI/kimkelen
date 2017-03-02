@@ -18,11 +18,11 @@
  */ ?>
 <div class="report-header">
     <div class="header_row">
-        <div class="title" id="header_analytical_data_left">
-            <dl class="dl-horizontal">
-                <dt><?php echo __("Legajo N°") ?>:</dt>
-                <dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
-            </dl>
+        <div class="title" id="header_analytical_data_right">
+            <div class="dl-horizontal">
+                <div><?php echo __("Legajo N°") ?>:</div>
+                <div class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></div>
+            </div>
         </div>
         <div class="title" id="header_analytical_data_center">
             <?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true)) ?>

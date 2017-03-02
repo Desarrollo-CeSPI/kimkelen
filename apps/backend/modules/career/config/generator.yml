@@ -60,7 +60,7 @@ generator:
       form:                 ~
       edit:
         title: Editar plan de estudio
-        display:            [career_name, plan_name, quantity_years, file_number_sequence]
+        display:            [career_name, plan_name, quantity_years, file_number_sequence, resolution_number]
         actions:
           _list:
             label:          Volver al listado
@@ -68,7 +68,7 @@ generator:
             label:          Guardar plan de estudio
       new:
         title: Nuevo plan de estudio
-        display:            [career_name, plan_name, quantity_years, file_number_sequence]
+        display:            [career_name, plan_name, quantity_years, file_number_sequence, resolution_number]
         actions:
           _list:
             label:          Volver al listado
