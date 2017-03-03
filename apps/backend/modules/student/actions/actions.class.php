@@ -866,5 +866,12 @@ class studentActions extends autoStudentActions
     $this->back_url= $this->getUser()->getAttribute('back_url');
 
   }
+  
+  public function executeShowGraduatedCertificate($request)
+  {
+	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+	  $this->setLayout('cleanLayout');
+
+  }
 
 }

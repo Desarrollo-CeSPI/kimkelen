@@ -1652,6 +1652,11 @@ class Student extends BaseStudent
     return ($sy) ? $sy->getYear() :'-';
 
   }
+  
+  public function canShowGraduatedCertificate()
+  {
+	  return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE;
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

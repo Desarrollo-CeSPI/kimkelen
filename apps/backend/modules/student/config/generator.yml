@@ -213,6 +213,11 @@ generator:
             credentials: [edit_student]
             action: changeStudentStatus
             condition: canChangeStudentStatus
+          
+          graduated_certificate:
+            label: Graduated certificate
+            action: showGraduatedCertificate
+            condition: canShowGraduatedCertificate
 
       filter:
       form:    ~
