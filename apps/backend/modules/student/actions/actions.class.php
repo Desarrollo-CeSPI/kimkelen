@@ -867,11 +867,16 @@ class studentActions extends autoStudentActions
 
   }
   
-  public function executeShowGraduatedCertificate($request)
+  public function executePrintGraduatedCertificate($request)
   {
 	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
 	  $this->setLayout('cleanLayout');
-
+  }
+  
+  public function executePrintRegularCertificate($request)
+  {
+	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+	  $this->setLayout('cleanLayout');
   }
 
 }

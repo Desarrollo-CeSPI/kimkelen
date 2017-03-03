@@ -1653,9 +1653,14 @@ class Student extends BaseStudent
 
   }
   
-  public function canShowGraduatedCertificate()
+  public function canPrintGraduatedCertificate()
   {
 	  return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE;
+  }
+  
+  public function canPrintRegularCertificate()
+  {
+	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
   }
 }
 

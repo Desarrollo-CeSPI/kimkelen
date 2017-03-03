@@ -216,8 +216,13 @@ generator:
           
           graduated_certificate:
             label: Graduated certificate
-            action: showGraduatedCertificate
-            condition: canShowGraduatedCertificate
+            action: printGraduatedCertificate
+            condition: canPrintGraduatedCertificate
+         
+          regular_certificate:
+            label: Regular certificate
+            action: printRegularCertificate
+            condition: canPrintRegularCertificate
 
       filter:
       form:    ~
