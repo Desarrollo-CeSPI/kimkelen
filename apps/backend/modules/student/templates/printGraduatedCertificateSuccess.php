@@ -25,7 +25,7 @@
 		<div class="report-text">
 			<p>
 				El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
-			    <b><?php echo $student .', '. $student->getPerson()->getFullIdentification() ?> </b>
+			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
 				completó sus estudios secundarios. <?php echo $student->getCareerStudent()->getCareer()->getCareerName()?>. Certificado analítico en trámite.
 			</p>
 			<?php include_partial('certificate_footer_text');?>

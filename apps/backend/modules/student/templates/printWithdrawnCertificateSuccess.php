@@ -25,7 +25,7 @@
 		<div class="report-text">
 			<p>
 				El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
-			    <b><?php echo $student .', '. $student->getPerson()->getFullIdentification() ?> </b>
+			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
 			    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
 			    <b> <?php echo $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
 			    <?php $p = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($student, $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());?>
@@ -35,16 +35,14 @@
 				<?php else:?>
 				
 					<?php echo 'adeudando ' ?>
-					<b>
-						<?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' ?>
- 
-					</b>
+					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' ?></b>
 					
 					<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
-						<b><?php echo ($i == (count($p) -1)) ? 'y' : ','?>
-							<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año'  ?>
-							
-						</b>
+					<b>
+						<?php echo ($i == (count($p) -1)) ? 'y' : ',' ;?>
+						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() ;?> 
+						<?php echo ($p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()) ? ' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' : ''; ?>							
+					</b>
 					<?php endfor?>
 				<?php endif?>
 				<?php echo '.'?>
