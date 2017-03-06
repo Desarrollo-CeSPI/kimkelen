@@ -878,5 +878,11 @@ class studentActions extends autoStudentActions
 	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
 	  $this->setLayout('cleanLayout');
   }
+  
+  public function executePrintWithdrawnCertificate($request)
+  {
+	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+	  $this->setLayout('cleanLayout');
+  }
 
 }

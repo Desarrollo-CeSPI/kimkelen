@@ -94,6 +94,10 @@ print_regular_certificate:
   url:  /student/:id/printRegularCertificate
   param:  {module: student, action: printRegularCertificate, sf_format: pdf }
 
+print_withdrawn_certificate:
+  url:  /student/:id/printWithdrawnCertificate
+  param:  {module: student, action: printWithdrawnCertificate, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }

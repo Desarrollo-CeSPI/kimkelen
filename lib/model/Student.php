@@ -1662,6 +1662,11 @@ class Student extends BaseStudent
   {
 	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
   }
+  
+  public function canPrintWithdrawnCertificate()
+  {
+	return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

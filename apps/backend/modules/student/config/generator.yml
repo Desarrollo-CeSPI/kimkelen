@@ -223,6 +223,12 @@ generator:
             label: Regular certificate
             action: printRegularCertificate
             condition: canPrintRegularCertificate
+            
+          withdrawn_certificate:
+            label: Withdrawn certificate
+            action: printWithdrawnCertificate
+            condition: canPrintWithdrawnCertificate
+          
 
       filter:
       form:    ~
