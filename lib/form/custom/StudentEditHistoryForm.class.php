@@ -42,7 +42,7 @@ class StudentEditHistoryForm extends sfFormPropel
     $this->examination_fields = $this->configureExaminationSubjects();
     $this->student_approved_career_subject = $this->configureStudentApprovedCareerSubject();
 
-    //$this->repproved_course_subjects = $this->configureRepprovedCourseSubjects();
+    $this->repproved_course_subjects = $this->configureRepprovedCourseSubjects();
 
     $this->getWidgetSchema()->setNameFormat('course_subject_student[%s]');
 
@@ -90,7 +90,7 @@ class StudentEditHistoryForm extends sfFormPropel
       else
       {
         $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $cssm, 'method' => 'getMarkByConfig', 'method_args' => $configuration, 'add_hidden_input' => true)));
-        $this->setValidator($name, new sfValidatorInteger(array('required' => false)));
+        $this->setValidator($name, new sfValidatorString(array('required' => false)));
         $this->setDefault($name, $cssm->getMark());
       }
 
@@ -140,15 +140,14 @@ class StudentEditHistoryForm extends sfFormPropel
   public function canEditExaminationSubject()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
-
+    
     if (!is_null($student_approved_career_subject))
     {
-
       return false;
     }
-
-    return $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
+   
     //return $this->getObject()->countStudentRepprovedCourseSubjects() == 0 && $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
+    return $this->getObject()->countCourseSubjectStudentExaminations() > 0 ;
   }
 
   public function configureExaminationSubjects()
@@ -157,15 +156,15 @@ class StudentEditHistoryForm extends sfFormPropel
     $fieldset = array();
     $last_examination_number = $this->getObject()->countCourseSubjectStudentExaminations();
 
-    foreach ($this->getObject()->getCourseSubjectStudentExaminations() as $course_subject_student_examination)
+    foreach ($this->getObject()->getCourseSubjectStudentExaminations($criteria) as $course_subject_student_examination)
     {
       $fields = array();
       $name = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_mark';
       $fields[] = $name;
-
-      if ($i < $last_examination_number ||  !$this->canEditExaminationSubject())
+      
+      if ($i < $last_examination_number || !$this->canEditExaminationSubject())
       {
-        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getValueString', 'add_hidden_input' => true)));
+        $this->setWidget($name,  new mtWidgetFormPlain(array('object' => $course_subject_student_examination, 'method' => 'getMarkStrByConfig', 'add_hidden_input' => true)));
         $this->setValidator($name, new sfValidatorPass());
       }
       else
@@ -210,13 +209,13 @@ class StudentEditHistoryForm extends sfFormPropel
     return $fieldset;
   }
 
-  /* Esto se hizo para las previas, pero me parece que no tiene sentido poder editarlas
+
   public function canEditStudentRepprovedCourseSubjects()
   {
     $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
-
+    
     $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
-
+    
     if (is_null($student_repproved_course_subject))
     {
       return false;
@@ -234,11 +233,10 @@ class StudentEditHistoryForm extends sfFormPropel
 
     if (!is_null($student_repproved_course_subject))
     {
+      
       $i = 1;
       $last_student_examination_repproved_subjects = $student_repproved_course_subject->countStudentExaminationRepprovedSubjects();
-
       $student_examination_repproved_subjects = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
-
 
       foreach ($student_examination_repproved_subjects as $student_examination_repproved_subject)
       {
@@ -263,19 +261,29 @@ class StudentEditHistoryForm extends sfFormPropel
           $this->setWidget($name_absence, new sfWidgetFormInputCheckbox());
           $this->setValidator($name_absence, new sfValidatorBoolean(array('required' => false)));
           $this->setDefault($name_absence, $student_examination_repproved_subject->getIsAbsent());
-          $this->getWidget($name_absence)->setLabel(__('Is absence', array('%number%' => $i)));
+
+	        $this->getWidget($name_absence)->setLabel(__('Is absent'));
+
+	        $name_date = 'student_examination_repproved_subject_id_' . $student_examination_repproved_subject->getId() .'_date';
+	        $fields[] = $name_date;
+
+	        $this->setWidget($name_date, new csWidgetFormDateInput());
+	        $this->setValidator($name_date, new mtValidatorDateString(array('required' => false)));
+	        $this->setDefault($name_date, $student_examination_repproved_subject->getDate());
+	        $this->getWidget($name_date)->setLabel(__('Day'));
+
         }
 
         $this->getWidget($name)->setLabel(__('Mark', array('%number%' => $i)));
 
-        $fieldset[] = array('Examination repproved ' . $i => $fields);
+        $fieldset[] = array('Mesa de Previa/Libre ' . $i => $fields);
         $i++;
       }
     }
 
     return $fieldset;
   }
-  */
+
 
   public function getFormFieldsDisplay()
   {
@@ -289,6 +297,12 @@ class StudentEditHistoryForm extends sfFormPropel
       $fields = array_merge($fields, $examination_field);
     }
 
+
+	  foreach ($this->repproved_course_subjects as $rcs_field)
+	  {
+		  $fields = array_merge($fields, $rcs_field);
+	  }
+
     $fields = array_merge($fields, array('Materia aprobada' => $this->student_approved_career_subject));
 
     return $fields;
@@ -296,7 +310,13 @@ class StudentEditHistoryForm extends sfFormPropel
 
   public function getBackTo()
   {
-    if ( $this->getObject()->countCourseSubjectStudentExaminations() )
+    $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
+    
+    if ( !is_null($student_repproved_course_subject) && $student_repproved_course_subject->countStudentExaminationRepprovedSubjects() )
+    { 
+      return __('Edit last repproved examination');
+    }
+    elseif ( $this->getObject()->countCourseSubjectStudentExaminations() )
     {
       return __('Edit previous examination');
     }
@@ -317,7 +337,7 @@ class StudentEditHistoryForm extends sfFormPropel
 
   public function canEdit()
   {
-    return $this->canEditMarks() || $this->canEditExaminationSubject();
+    return $this->canEditMarks() || $this->canEditExaminationSubject() || $this->canEditStudentRepprovedCourseSubjects();
   }
 
   public function save($con = null)
@@ -339,7 +359,6 @@ class StudentEditHistoryForm extends sfFormPropel
         foreach ($this->getObject()->getSortedCourseSubjectStudentMarks() as $cssm)
         {
           $mark = $values['mark_' . $cssm->getId()];
-
           $configuration = $this->getObject()->getConfiguration();
           if(!$configuration->isNumericalMark())
           {
@@ -352,11 +371,11 @@ class StudentEditHistoryForm extends sfFormPropel
 				$mark = $letter_mark->getValue();
 			}
           }
-         
+
           if ($cssm->getMark() !== $mark)
           {
             $cssm->setMark($mark);
-
+           
             if ($mark == 0){
               $cssm->setIsFree(true);
             }
@@ -368,10 +387,10 @@ class StudentEditHistoryForm extends sfFormPropel
           }
         }
 
-
         if ($any_change && $this->getObject()->areAllMarksClosed())
         {
           //Creo de nuevo el result porque cambiaron las notas
+
           $course_result = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this->getObject(), $con);
           $course_result->save($con);
 
@@ -419,25 +438,33 @@ class StudentEditHistoryForm extends sfFormPropel
         }
       }
 
-      /* Esto se habia creado para las previas, pero no tiene sentido editarlas. Lo dejo comentado por si sirve para mas adelante.
+      //if para la edicion de notas en mesas de previa
       if ($this->canEditStudentRepprovedCourseSubjects())
       {
 
         $student_repproved_course_subject = $this->getObject()->getStudentRepprovedCourseSubject();
-
+        
         $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
-
+        
         $mark = $values['student_examination_repproved_subject_' . $student_examination_repproved_subject->getId() .'_mark'];
         $is_absence_name = 'student_examination_repproved_subject_' . $student_examination_repproved_subject->getId() .'_is_absent';
         $is_absence = isset($values[$is_absence_name]) ? $values[$is_absence_name] : null;
 
+	      $date = $values['student_examination_repproved_subject_id_' . $student_examination_repproved_subject->getId() . '_date'];
+
         if ($mark !== $student_examination_repproved_subject->getMark() || $is_absence !== $student_examination_repproved_subject->getIsAbsent())
         {
           $student_examination_repproved_subject->setMark($mark);
-          $student_examination_repproved_subject->setIsAbsence($is_absence);
+          $student_examination_repproved_subject->setIsAbsent($is_absence);
+
+	        $student_examination_repproved_subject->setDate($date);
+	        $student_examination_repproved_subject->save($con);
+
+          SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubject($student_examination_repproved_subject, $con);
+          
         }
       }
-      */
+
 
       $con->commit();
     }

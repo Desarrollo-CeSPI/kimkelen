@@ -1168,7 +1168,7 @@ class Student extends BaseStudent
         $sacs = $course_result->getStudentApprovedCareerSubject();
 		if(!is_null($sacs)){
 			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int) $sacs->getMark());
-			return $letter_mark->getLetter(); 
+				return  $letter_mark->getLetter(); 
 		}   
       }
       else

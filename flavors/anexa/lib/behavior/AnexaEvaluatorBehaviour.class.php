@@ -53,13 +53,6 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   }
 
-  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
-  {
-    // en graduada solo existe una mesa y se utiliza la de febrero.
-    return self::FEBRUARY;
-
-  }
-
   public function getColorForCourseSubjectStudentMark(CourseSubjectStudentMark $course_subject_student_mark)
   {
     if (! $course_subject_student_mark->getIsClosed() || is_null($course_subject_student_mark->getMark()))
@@ -103,6 +96,15 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     $average = sprintf('%.4s', $average);
     return $average;
+  }
+  /*
+   * This method returns the marks average of a student between a course_subject_student and course_subject_student_examination
+   * 
+   * */
+  public function getAverage($course_subject_student, $course_subject_student_examination)
+  {
+	  return $course_subject_student_examination->getMark();
+ 
   }
 
 }

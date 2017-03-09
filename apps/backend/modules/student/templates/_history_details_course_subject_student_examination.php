@@ -27,7 +27,7 @@
     </div>
     <?php if (!$course_subject_student_examination->getIsAbsent()): ?>
       <div class="info_div">
-        <strong><?php echo __("Mark") ?></strong> <em><?php echo ($mark = $course_subject_student_examination->getMark()) ? $mark : "-" ?></em>
+        <strong><?php echo __("Mark") ?></strong> <em><?php echo ($mark = $course_subject_student_examination->getMark()) ? $course_subject_student_examination->getMarkStrByConfig() : "-" ?></em>
       </div>
     <?php else: ?>
       <div class="info_div">

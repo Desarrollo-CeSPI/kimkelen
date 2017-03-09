@@ -178,6 +178,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   public function getCourseResult(PropelPDO $con = null)
   {
+
     /* Si tengo alguna materia sin cerrar devuelvo null */
     if (!$this->areAllMarksClosed())
     {
@@ -185,7 +186,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
 
     /* Si tiene aprobada la cursada, entonces retornamos la cursada aprobada */
-
+   
     if ($this->getStudentApprovedCourseSubject($con))
     {
       return $this->getStudentApprovedCourseSubject($con);
@@ -206,6 +207,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
         return $result;
       }
     }
+
     /* Si desaprobò la cursada entonces retornamos la cursada desaprobada */
     if ($this->countStudentDisapprovedCourseSubjects(null, false, $con))
     {
@@ -213,11 +215,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       return array_shift($disapproveds);
     }
-
+    
     /* Si no aprobo o desaprobò, es porque tenemos que calcular què pasò y crear el resultado: aprobado o desaprobado..
      * Eso lo sabe el behavior
      */
-    
     return SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentResult($this, $con);
 
   }
@@ -527,25 +528,52 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
       if (!is_null($student_approved_career_subject))
       {
-        $student_approved_career_subject->delete($con);
-      }
+	      $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($this);
 
-      //IF exists course_subject_student_examination
-      if ($this->countCourseSubjectStudentExaminations())
+	      if (!is_null($srcs)) {
+	        $srcs->setStudentApprovedCareerSubject(null);
+	        $srcs->save($con);
+	      }
+
+        $student_approved_career_subject->delete($con);
+
+      }
+      
+      $student_repproved_course_subject = $this->getStudentRepprovedCourseSubject();
+
+      // si es previa
+      if (!is_null($student_repproved_course_subject))
       {
-        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();
-        $course_subject_student_examination->delete($con);
+        $student_examination_repproved_subject = $student_repproved_course_subject->getLastStudentExaminationRepprovedSubject();
+        //si no existe una mesa de previa
+        if (is_null($student_examination_repproved_subject))
+        {
+          $student_repproved_course_subject->delete($con);
+        }
       }
       else
       {
-        //IF Exist course result
-        $course_result = $this->getCourseResult();
-
-        if (!is_null($course_result))
+        //si es examination
+        $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();   
+        //si existe alguna mesa de examination
+        if (!is_null($course_subject_student_examination))
         {
-          $course_result->delete($con);
+
+          $course_subject_student_examination->delete($con);
+        }
+        else
+        {
+          // habilita la edicion para notas del año!
+          $course_result = $this->getCourseResult();
+
+          if (!is_null($course_result))
+          {
+            $course_result->delete($con);
+          }
+          
         }
       }
+
       $con->commit();
     }
     catch (PropelException $e)
