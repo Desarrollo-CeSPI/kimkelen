@@ -17,5 +17,5 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <div class="report-header">
-	<div class="logo_certificate"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+	<div class="logo_certificate"><?php echo image_tag("logo-kimkelen-negro.png", array('absolute' => true)) ?></div>
 </div>
