@@ -24,6 +24,11 @@
  */
 class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
+  protected
+  $_examination_number_short = array(
+    self::DECEMBER => 'PEEE-dic',
+    self::FEBRUARY => 'PEEE-feb',
+  );
 
   public function getCourseSubjectStudentResult(CourseSubjectStudent $course_subject_student, PropelPDO $con = null)
   {
