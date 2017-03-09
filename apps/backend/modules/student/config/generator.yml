@@ -214,10 +214,10 @@ generator:
             action: changeStudentStatus
             condition: canChangeStudentStatus
           
-          graduated_certificate:
-            label: Graduated certificate
-            action: printGraduatedCertificate
-            condition: canPrintGraduatedCertificate
+          graduate_certificate:
+            label: Graduate certificate
+            action: printGraduateCertificate
+            condition: canPrintGraduateCertificate
          
           regular_certificate:
             label: Regular certificate
