@@ -1665,7 +1665,11 @@ class Student extends BaseStudent
   
   public function canPrintWithdrawnCertificate()
   {
-	return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+	if(!is_null($this->getLastStudentCareerSchoolYear()))
+	{
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+	}
+	return false;
   }
 }
 
