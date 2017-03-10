@@ -338,3 +338,35 @@ table.gridtable_bordered tr {
     background:#f2f2f2;
     border-bottom:1px solid #ccc;
 }
+
+.report-text{	
+	font-size: 14px;
+	text-align: justify;
+	margin-top: 100px;
+	line-height: 130%;
+}
+
+div.report-text p {	
+	text-indent:3em;
+}
+
+.certificate-wrapper{
+  text-align:left;
+  width:600px;
+  margin-left:40px;
+  margin-right:40px;
+  margin-top:30px;
+}
+
+#signature{
+	margin-top:15%;
+	float: right;
+	width: 250px;
+	border-top: 1px solid;
+	text-align:center;
+}
+
+.logo_certificate img{
+	width: 210px;
+	height: 60px;
+}

@@ -1652,6 +1652,25 @@ class Student extends BaseStudent
     return ($sy) ? $sy->getYear() :'-';
 
   }
+  
+  public function canPrintGraduateCertificate()
+  {
+	  return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE;
+  }
+  
+  public function canPrintRegularCertificate()
+  {
+	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
+  }
+  
+  public function canPrintWithdrawnCertificate()
+  {
+	if(!is_null($this->getLastStudentCareerSchoolYear()))
+	{
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+	}
+	return false;
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

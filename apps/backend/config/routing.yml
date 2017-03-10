@@ -86,6 +86,18 @@ student_print_analytical:
   url:  /student/:id/printAnalytical
   param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
 
+print_graduate_certificate:
+  url:  /student/:id/printGraduateCertificate
+  param:  {module: student, action: printGraduateCertificate, sf_format: pdf }
+  
+print_regular_certificate:
+  url:  /student/:id/printRegularCertificate
+  param:  {module: student, action: printRegularCertificate, sf_format: pdf }
+
+print_withdrawn_certificate:
+  url:  /student/:id/printWithdrawnCertificate
+  param:  {module: student, action: printWithdrawnCertificate, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }

@@ -213,6 +213,22 @@ generator:
             credentials: [edit_student]
             action: changeStudentStatus
             condition: canChangeStudentStatus
+          
+          graduate_certificate:
+            label: Graduate certificate
+            action: printGraduateCertificate
+            condition: canPrintGraduateCertificate
+         
+          regular_certificate:
+            label: Regular certificate
+            action: printRegularCertificate
+            condition: canPrintRegularCertificate
+            
+          withdrawn_certificate:
+            label: Withdrawn certificate
+            action: printWithdrawnCertificate
+            condition: canPrintWithdrawnCertificate
+          
 
       filter:
       form:    ~
