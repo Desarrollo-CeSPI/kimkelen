@@ -31,7 +31,7 @@ class NacionalStudentDisciplinarySanctionForm extends StudentDisciplinarySanctio
    public function configure ()
   {
     parent::configure();
-    unset($this['disciplinary_sanction_type_id']);
-   
+    $this->getWidgetSchema()->moveField('disciplinary_sanction_type_id', sfWidgetFormSchema::AFTER, 'sanction_type_id');
+    $this->getWidgetSchema()->setLabel('disciplinary_sanction_type_id', 'Gravedad');
   }
 }

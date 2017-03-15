@@ -4386,6 +4386,14 @@
                 <source>Withdrawn certificate</source>
                 <target>Constancia de adeudar materias</target>
             </trans-unit>
+            <trans-unit>
+		<source>Disciplinary sanction types</source>
+		<target>Motivos de sanciones</target>
+	    </trans-unit>
+	    <trans-unit>
+		<source>Disciplinary sanction type id</source>
+		<target>Motivo de sanción disciplinaria</target>
+	    </trans-unit>
         </body>
     </file>
 </xliff>

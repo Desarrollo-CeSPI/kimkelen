@@ -72,8 +72,6 @@ generator:
           label: Solicitante
         value:
           label: Valor
-        disciplinary_sanction_type_id:
-          label: Tipo de Sanción Disciplinaria
 
       list:
         title: Consulta de Sanciones Disciplinarias

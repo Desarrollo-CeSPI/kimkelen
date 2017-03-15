@@ -62,7 +62,7 @@ root:
             url:  @absence_type
             credentials:  [[new_absence_type, edit_absence_type]]
           disciplinary_sanction_types:
-            title:  Motivos de sanciones
+            title:  Disciplinary sanction types
             url:  @disciplinary_sanction_type
             credentials:  [[new_disciplinary_sanction_type, edit_disciplinary_sanction_type]]
           sanction_types:

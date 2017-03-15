@@ -75,6 +75,13 @@
 </div>
 <div class="sf_admin_form_row sf_admin_Text">
   <div>
+    <label for="disciplinary_sanction_type"> <?php echo __('Disciplinary sanction type');?> </label>
+    <?php echo $student_disciplinary_sanction->getDisciplinarySanctionType();?>
+  </div>
+  <div style="margin-top: 1px; clear: both;"></div>
+</div>
+<div class="sf_admin_form_row sf_admin_Text">
+  <div>
     <label for="value"> <?php echo __('Value');?> </label>
     <?php echo $student_disciplinary_sanction->getValue();?>
   </div>
