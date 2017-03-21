@@ -22,10 +22,56 @@
 
   class sfGuardAuthActions extends BasesfGuardAuthActions
   {
+
+	  public function executeFacebookLogin(sfWebRequest $request) {
+		  $this->redirectIf($this->getUser()->isAuthenticated(), "@homepage");
+
+		  if ($request->isMethod('post')) {
+			  $this->form = new sfGuardUserEmailForm();
+			  $this->form->bind($request->getParameter($this->form->getName()));
+			  if ($this->form->isValid()) {
+				  $this->facebookLogin($request, $this->form->getValue('email_address'));
+			  }
+		  } else {
+			  $this->facebookLogin($request);
+		  }
+	  }
+
+	  private function facebookLogin($request, $email = null) {
+		  include(sfConfig::get('sf_root_dir') . '/lib/custom/facebook.php');
+
+		  $facebook = new Facebook(array(
+			  'appId' => sfConfig::get('app_facebook_api_id'),
+			  'secret' => sfConfig::get('app_facebook_api_secret'),
+		  ));
+
+		  $fb_user = $facebook->getUser();
+
+		  if ($fb_user) {
+			  try {
+				  $fb_profile = $facebook->api('/me'); // Devuelve el Profile de facebook.
+
+				  if ($email) {// Si existe $email quiere decir que el usuario ingreso un mail diferente al que posee en facebook.
+					  $fb_profile['email'] = $email;
+				  }
+				  $guard_user = GuardUserSocialTable::getOrCreateGuardUserBySocialData($fb_profile);
+				  if (!$guard_user) {
+					  $this->form = new sfGuardUserEmailForm();
+				  }
+			  } catch (FacebookApiException $e) {
+				  $guard_user = null;
+			  }
+		  }
+
+		  if ((isset($guard_user)) && (!is_null($guard_user))) {
+			  $this->getUser()->signin($guard_user, false);
+			  $this->getUser()->setAttribute("id", $guard_user->getProfile()->getId());
+			  $this->redirect('@homepage');
+		  }
+	  }
+
     public function executeSignin($request)
     {
-      // Acá habría que chequear que si no es un tutor, no se pueda loguear.
-
       $this->setLayout('cleanLayout');
       $user = $this->getUser();
       if ($user->isAuthenticated())
@@ -40,11 +86,7 @@
       {
         $this->form->bind($request->getParameter('signin'));
         $values = $this->form->getValues();
-        
-        $tutor=TutorPeer::retrieveByUsername($values['user']);
-        
-        if(!is_null($tutor) && $tutor->getPerson()->getIsActive())
-        {
+
 			if ($this->form->isValid())
 			{  
 			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
@@ -53,7 +95,7 @@
 
 			  return $this->redirect($signinUrl);
 			}
-		}
+
         
       }
 		$this->setTemplate('signinFrontend');

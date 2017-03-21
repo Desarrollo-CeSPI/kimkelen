@@ -213,6 +213,20 @@ classes:
         type: longvarchar
         required:     false
 
+  GuardUserSocial:
+    tableName: guard_user_social
+    columns:
+      id:
+      social_id:
+        type: varchar(255)
+        required: true
+      user_id:
+        type: integer
+        foreignTable: sf_guard_user
+        foreignReference: id
+        onDelete: cascade
+
+
   Conduct:
     tablename:      conduct
     description:    Representa la conducta (muy buena, buena, regular, mala)

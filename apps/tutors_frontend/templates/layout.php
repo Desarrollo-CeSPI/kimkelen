@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<?php include_partial('global/header'); ?>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">

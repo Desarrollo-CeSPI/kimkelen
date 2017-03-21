@@ -1,6 +1,9 @@
 rendering: ~
 security:  ~
 
+login_frontend_filter:
+  class: frontendLoginFilter
+
 # insert your own filters here
 
 cache:     ~

@@ -11,6 +11,10 @@ homepage:
   url:   /
   param: { module: mainFrontend, action: index }
 
+facebook_login:
+  url: /sfGuardAuth/facebookLogin
+  param:   { module: sf_guard_auth, action: facebookLogin}
+
 # default rules
 sf_guard_secure:
   url:   /acceso-denegado

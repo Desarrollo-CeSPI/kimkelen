@@ -24,10 +24,9 @@
 
 <div class="container">
   <div class="form-login">
-    <form class="" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
-      <?php echo $form ?>
-      <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
-    </form>
+    
+      <?php include_component('sfGuardAuth', 'doLogin'); ?>
+
   </div>
 </div>
 

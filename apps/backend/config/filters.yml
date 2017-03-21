@@ -1,9 +1,10 @@
 rendering: ~
-security:  ~
+security: ~
 change_password:
   class: sfGuardChangePasswordFilter
 # insert your own filters here
-
+login_filter:
+  class: loginFilter
 state:
   class:  dcStatefulSecurityFilter
   param:
