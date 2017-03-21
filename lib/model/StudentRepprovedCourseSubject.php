@@ -126,4 +126,4 @@ class StudentRepprovedCourseSubject extends BaseStudentRepprovedCourseSubject
   }
 }
 
-sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject'));
+try { sfPropelBehavior::add('StudentRepprovedCourseSubject', array('student_approved_course_subject')); } catch(sfConfigurationException $e) {}

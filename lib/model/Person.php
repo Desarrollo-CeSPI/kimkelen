@@ -227,4 +227,4 @@ class Person extends BasePerson
   }
 }
 
-sfPropelBehavior::add('Person', array('changelog'));
+try { sfPropelBehavior::add('Person', array('changelog')); } catch(sfConfigurationException $e) {}

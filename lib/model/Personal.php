@@ -176,4 +176,5 @@ class Personal extends BasePersonal
 
 }
 
-sfPropelBehavior::add('Personal', array('person_delete'));
+try { sfPropelBehavior::add('Personal', array('person_delete')); }catch(sfConfigurationException $e) {}
+

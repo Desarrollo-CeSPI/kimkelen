@@ -39,4 +39,4 @@ class StudentFree extends BaseStudentFree
 
 }
 
-sfPropelBehavior::add('StudentFree', array('changelog'));
+try { sfPropelBehavior::add('StudentFree', array('changelog')); } catch(sfConfigurationException $e) {}

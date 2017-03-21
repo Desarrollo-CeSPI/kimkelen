@@ -251,4 +251,4 @@ class ExaminationSubject extends BaseExaminationSubject
 	  }
 }
 
-sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));
+try { sfPropelBehavior::add('ExaminationSubject', array('examination_subject')); }catch(sfConfigurationException $e) {}
