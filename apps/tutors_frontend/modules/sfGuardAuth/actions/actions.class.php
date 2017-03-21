@@ -59,13 +59,14 @@
 		$this->setTemplate('signinFrontend');
     }
     
-    public function executeFacebookLogin()
+    public function executeFacebookLogin($request)
     {
-		$my_url = url_for('@facebook', true);
+		sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
+		$my_url = url_for('@facebook_login', true);
 		$code = $request->getParameter('code');
 		
-		$app_id = ;
-		$app_secret = ;
+		$app_id = '';
+		$app_secret = '';
         
         
         if(!empty ($code))
@@ -75,6 +76,16 @@
                     . "&client_secret=" . $app_secret . "&code=" . $code;
 
             $response = file_get_contents($token_url);
+            
+            $params = null;
+            parse_str($response, $params);
+
+            $graph_url = "https://graph.facebook.com/me?access_token="
+                    . $params['access_token'];
+
+            $user = json_decode(file_get_contents($graph_url));
+            var_dump($user);
+                        die();
 		}
 	
 	}

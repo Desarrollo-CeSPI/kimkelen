@@ -28,7 +28,11 @@ sf_guard_signout:
 sf_guard_password:
   url:   /request_password
   param: { module: sfGuardAuth, action: password }
-
+  
+facebook_login:
+  url: /facebookLogin
+  param : { module: sfGuardAuth, action: facebookLogin }
+  
 default_index:
   url:   /:module
   param: { action: index }
@@ -36,6 +40,4 @@ default_index:
 default:
   url:   /:module/:action/*
   
-facebook_login:
-  url: /facebookLogin
-  param : { module: sfGuardAuth, action: facebookLogin }
+
