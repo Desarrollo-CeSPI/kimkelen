@@ -35,3 +35,7 @@ default_index:
 
 default:
   url:   /:module/:action/*
+  
+facebook_login:
+  url: /facebookLogin
+  param : { module: sfGuardAuth, action: facebookLogin }

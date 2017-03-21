@@ -29,6 +29,7 @@
       <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
     </form>
   </div>
+  <li><a class="" href="https://www.facebook.com/dialog/oauth?client_id=<?php //echo sfConfig::get('facebook_api_id') ?>&redirect_uri=<?php echo url_for('@facebook_login',true) ?>"> Facebook login </a>  </li>
 </div>
 
 <footer>
