@@ -23,11 +23,13 @@
   class sfGuardAuthActions extends BasesfGuardAuthActions
   {
 
-	  public function executeFacebookLogin(sfWebRequest $request) {
+	  public function executeLogin(sfWebRequest $request) {
+
 		  $this->redirectIf($this->getUser()->isAuthenticated(), "@homepage");
 
 		  if ($request->isMethod('post')) {
 			  $this->form = new sfGuardUserEmailForm();
+			  die('lala');
 			  $this->form->bind($request->getParameter($this->form->getName()));
 			  if ($this->form->isValid()) {
 				  $this->facebookLogin($request, $this->form->getValue('email_address'));
@@ -46,7 +48,7 @@
 		  ));
 
 		  $fb_user = $facebook->getUser();
-
+die(var_dump($fb_user));
 		  if ($fb_user) {
 			  try {
 				  $fb_profile = $facebook->api('/me'); // Devuelve el Profile de facebook.

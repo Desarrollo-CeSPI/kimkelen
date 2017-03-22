@@ -13,7 +13,7 @@ homepage:
 
 facebook_login:
   url: /sfGuardAuth/facebookLogin
-  param:   { module: sf_guard_auth, action: facebookLogin}
+  param:   { module: sfGuardAuth, action: login}
 
 # default rules
 sf_guard_secure:

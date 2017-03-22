@@ -2,6 +2,49 @@ $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });
 
+
+
+
+jQuery(document).ready(function () {
+    window.fbAsyncInit = function () {
+        FB.init({appId: 1817942881803388, status: false, cookie: true, xfbml: true});
+        FB.Event.subscribe('auth.login', function (response) {
+            window.location = "<?php echo url_for('default', array('module' => 'sfGuardAuth', 'action' => 'facebookLogin')) ?>";
+        });
+        FB.Event.subscribe('auth.logout', function (response) {
+            window.location = "<?php echo url_for('@homepage') ?>";
+        });
+    };
+    //(function () {
+    //var e = document.createElement('script');
+    //e.type = 'text/javascript';
+    //e.src = 'http://connect.facebook.net/es_LA/all.js';
+    //e.async = true;
+    //document.getElementById('fb-root').appendChild(e);
+    //}());
+
+
+
+    // JS SDK - this will be loaded asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_LA/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+
+});
+
+
+
+
+
+
+
+
 $(document).ready(function() {
     $('.navbar a.dropdown-toggle').on('click', function(e) {
         var $el = $(this);
@@ -34,3 +77,6 @@ $(document).ready(function() {
         $('#oculto').slideToggle('slow');
     });
 });
+
+
+
