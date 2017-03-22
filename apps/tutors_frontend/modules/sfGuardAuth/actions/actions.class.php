@@ -66,8 +66,8 @@
 		$my_url = url_for('@facebook_login', true);
 		$code = $request->getParameter('code');
 		
-		$app_id = '1818352448429098';
-		$app_secret = '3258fdd25cf296669172496525c1d3af';
+		$app_id = '';
+		$app_secret = '';
         
         
         if(!empty ($code))
