@@ -28,7 +28,7 @@
 
       $this->setLayout('cleanLayout');
       $user = $this->getUser();
-      $this->form_facebook = new RegisterFacebookForm();
+      
       if ($user->isAuthenticated())
       {
         return $this->redirect('@homepage');
@@ -48,8 +48,17 @@
         {
 			if ($this->form->isValid())
 			{  
+				
 			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
 
+				//tiene facebookID lo asocio al usuario.
+				 if(!is_null($user->getFacebookId()))
+				 {
+					 $social_user = new GuardUserSocial();
+					 $social_user->setSocialId($user->getFacebookId());
+					 $social_user->setUserId($tutor->getPerson()->getUserId());
+					 $social_user->save();
+				 }
 				$signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer('@homepage'));
 
 			  return $this->redirect($signinUrl);
@@ -102,8 +111,10 @@
 
                 if (!is_null($user))
                 {
-                    // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimekelen
-                    //$this->facebookSignin($user);
+                    // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimkelen
+                    $user_app = sfGuardUserPeer::retrieveByPk($user->getUserId());
+                    $this->getUser()->signin($user_app, false);
+                    $this->redirect('@homepage');
                 }
                 else
                 {
@@ -117,6 +128,19 @@
                 }
             }
 		}
+		
+		$this->redirect('@sf_guard_signin');
+		
+	}
+	
+	public function executeSignout($request)
+	{
+		$this->getUser()->resetFacebookAttributes();
+		$this->getUser()->signOut();
+
+		$signoutUrl = sfConfig::get('app_sf_guard_plugin_success_signout_url', $request->getReferer());
+
+		$this->redirect('' != $signoutUrl ? $signoutUrl : '@homepage');
 	}
 	
   }

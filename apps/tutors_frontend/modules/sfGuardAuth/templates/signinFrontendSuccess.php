@@ -23,13 +23,18 @@
 </header>
 
 <div class="container">
+	 <?php if ($sf_user->hasFlash('notice')): ?>
+    <div class="alert alert-success">
+        <?php echo __($sf_user->getFlash('notice'), array(), 'sf_admin') ?>
+    </div>
+	<?php endif; ?>
   <div class="form-login">
     <form class="" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
       <?php echo $form ?>
       <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
     </form>
   </div>
-  <li><a class="" href="https://www.facebook.com/dialog/oauth?client_id=<?php //echo sfConfig::get('facebook_api_id') ?>&redirect_uri=<?php echo url_for('@facebook_login',true) ?>"> Facebook login </a>  </li>
+	<li><a class="" href="https://www.facebook.com/dialog/oauth?client_id=<?php //echo sfConfig::get('facebook_api_id') ?>&redirect_uri=<?php echo url_for('@facebook_login',true) ?>"> Facebook login </a>  </li>
 </div>
 
 <footer>

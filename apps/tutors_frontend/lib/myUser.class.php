@@ -76,5 +76,11 @@ class myUser extends sfGuardSecurityUser
 	public function setFacebookName($fb_name) {
 		$this->setAttribute('facebook_name', $fb_name);
     }
+    
+    public function resetFacebookAttributes()
+    {
+		$this->getAttributeHolder()->remove('facebook_id');
+		$this->getAttributeHolder()->remove('facebook_name');
+    }
 
 }
