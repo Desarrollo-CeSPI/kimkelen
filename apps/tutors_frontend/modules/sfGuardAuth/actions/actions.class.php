@@ -28,6 +28,7 @@
 
       $this->setLayout('cleanLayout');
       $user = $this->getUser();
+      $this->form_facebook = new RegisterFacebookForm();
       if ($user->isAuthenticated())
       {
         return $this->redirect('@homepage');
@@ -65,8 +66,8 @@
 		$my_url = url_for('@facebook_login', true);
 		$code = $request->getParameter('code');
 		
-		$app_id = '';
-		$app_secret = '';
+		$app_id = '1818352448429098';
+		$app_secret = '3258fdd25cf296669172496525c1d3af';
         
         
         if(!empty ($code))
@@ -83,10 +84,39 @@
             $graph_url = "https://graph.facebook.com/me?access_token="
                     . $params['access_token'];
 
-            $user = json_decode(file_get_contents($graph_url));
-            var_dump($user);
-                        die();
+            $facebook_user = json_decode(file_get_contents($graph_url));
+            /*
+             * {  
+             * 	  ["name"]=> string(13) "Nombre" 
+             *    ["id"]=> string(16) "xxxxxxxxx" 
+             * 
+             * } 
+             * */
+
+            if ($facebook_user->id)
+            {
+                $user = GuardUserSocialPeer::retrieveBySocialId($facebook_user->id);
+                
+                $this->getUser()->setFacebookId($facebook_user->id);
+                $this->getUser()->setFacebookName($facebook_user->name);
+
+                if (!is_null($user))
+                {
+                    // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimekelen
+                    //$this->facebookSignin($user);
+                }
+                else
+                {
+                    // usuario nuevo
+                    if (!$this->getUser()->isAuthenticated())
+                    {
+                        $this->getUser()->setFlash('notice', "Tu cuenta de Facebook todavía no está asociada a Kimkelen, ingresá con tu usuario y clave y luego podrás asociar tu cuenta de Facebook.");
+                        $this->redirect('@sf_guard_signin');
+                        
+                    }
+                }
+            }
 		}
-	
 	}
+	
   }
