@@ -44,6 +44,10 @@ classes:
         description:      Nombre de la carrera
         type:             varchar(255)
         required:         true
+      resolution_number:
+        description:      Numero de la resolucion ministerial
+        type:             varchar(255)
+        required:         false
 
   SubjectConfiguration:
     tableName:            subject_configuration
