@@ -4531,6 +4531,10 @@
         <source>Withdrawn certificate</source>
         <target>Constancia de adeudar materias</target>
     </trans-unit>
+    <trans-unit>
+        <source>Resolution number</source>
+        <target>Número de resolución</target>
+    </trans-unit>
     </body>
 </file>
 </xliff>
