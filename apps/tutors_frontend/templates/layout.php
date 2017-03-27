@@ -5,7 +5,6 @@
   <?php include_http_metas() ?>
   <?php include_metas() ?>
   <?php include_title() ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
