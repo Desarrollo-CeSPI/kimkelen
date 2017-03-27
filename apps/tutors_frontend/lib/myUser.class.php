@@ -66,7 +66,7 @@ class myUser extends sfGuardSecurityUser
     }
     
     public function getFacebookId() {
-        return $this->getAttribute('facebook_id', 'No');
+        return $this->getAttribute('facebook_id');
     }
     
     public function getFacebookName() {

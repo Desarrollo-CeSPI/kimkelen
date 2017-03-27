@@ -83,3 +83,12 @@
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     margin-right: 2%;
 }
+
+a.facebook{
+	text-decoration: none;
+}
+
+li.list_facebook{
+	margin-top: 10px !important;
+	list-style: none;
+}

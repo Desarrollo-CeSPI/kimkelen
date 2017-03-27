@@ -58,29 +58,31 @@
             <?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive() || ($year == $last_year))?'tab-pane active' : 'tab-pane'; ?>
             <div role="tabpanel" class="<?php echo $class ?>" id="<?php echo $year ?>">
 				<?php $total= 0 ;?>
-				<table class="table table-striped table-bordered">
-				  <thead>
-					<tr>
-					  <th><?php echo __('Sanction type') ?></th>
-					  <th><?php echo __('Total') ?></th>
-					</tr>
-				  </thead>
-				  <tbody>
-				  <?php foreach ($sanctions_type as $st): ?>
-					<tr>
-					  <td><?php echo $st->getName() ?></td>
-					  <td><?php echo $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()] ?></td>
-					</tr>
-					<?php $total += $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()]; ?>
-				  <?php endforeach; ?>
-				  </tbody>
-				  <tfoot>
-					<tr>
-					  <td> <strong>Total</strong> </td>
-					  <td> <strong><?php echo $total ?></strong> </td>
-					</tr>
-				  </tfoot>
-				</table>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+					  <thead>
+						<tr>
+						  <th><?php echo __('Sanction type') ?></th>
+						  <th><?php echo __('Total') ?></th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  <?php foreach ($sanctions_type as $st): ?>
+						<tr>
+						  <td><?php echo $st->getName() ?></td>
+						  <td><?php echo $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()] ?></td>
+						</tr>
+						<?php $total += $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()]; ?>
+					  <?php endforeach; ?>
+					  </tbody>
+					  <tfoot>
+						<tr>
+						  <td> <strong>Total</strong> </td>
+						  <td> <strong><?php echo $total ?></strong> </td>
+						</tr>
+					  </tfoot>
+					</table>
+				</div>
             </div>
           <?php $global += $total; ?>
           <?php endforeach ?>

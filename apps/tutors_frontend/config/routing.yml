@@ -32,6 +32,10 @@ sf_guard_password:
 facebook_login:
   url: /facebookLogin
   param : { module: sfGuardAuth, action: facebookLogin }
+
+change_password:
+  url:    /cambiar-password
+  param:  { module: sfGuardChangePassword, action: index}
   
 default_index:
   url:   /:module

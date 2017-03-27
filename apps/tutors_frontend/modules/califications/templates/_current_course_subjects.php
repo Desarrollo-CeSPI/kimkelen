@@ -25,6 +25,7 @@
 <?php $columns = 6 + $marks + count($evaluator_instance->getExaminationNumbers()) ?>
 
 <?php if(count($course_subject_students)): ?>
+<div class="table-responsive">
   <table class="table table-striped table-bordered table-condensed">
     <thead>
       <tr>
@@ -55,7 +56,7 @@
           <?php if ($course_subject_student->getIsNotAverageable()): ?>
             <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
           <?php else: ?>
-            <td><?php echo ($mark = $course_subject_student->getMarkFor($i)) ? $mark->getMarkByConfig($course_subject_student->getConfiguration()) : "-" ?></td>
+            <td><?php echo $course_subject_student->getMarkForIsClosed($i) //($mark = $course_subject_student->getMarkFor($i)) ? $mark->getMarkByConfig($course_subject_student->getConfiguration()) : "-" ?></td>
           <?php endif; ?>
         <?php endfor ?>
         <?php if ($course_subject_student->getIsNotAverageable()): ?>
@@ -77,4 +78,5 @@
       </tr>
     <?php endforeach ?>
   </table>
+</div>
 <?php endif ?>

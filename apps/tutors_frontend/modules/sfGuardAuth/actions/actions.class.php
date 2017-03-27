@@ -50,7 +50,6 @@
 			{  
 				
 			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
-
 				//tiene facebookID lo asocio al usuario.
 				 if(!is_null($user->getFacebookId()))
 				 {
@@ -75,8 +74,8 @@
 		$my_url = url_for('@facebook_login', true);
 		$code = $request->getParameter('code');
 		
-		$app_id = '';
-		$app_secret = '';
+		$app_id = ;
+		$app_secret = ;
         
         
         if(!empty ($code))
@@ -121,7 +120,7 @@
                     // usuario nuevo
                     if (!$this->getUser()->isAuthenticated())
                     {
-                        $this->getUser()->setFlash('notice', "Tu cuenta de Facebook todavía no está asociada a Kimkelen, ingresá con tu usuario y clave y luego podrás asociar tu cuenta de Facebook.");
+                        $this->getUser()->setFlash('notice', "Tu cuenta de Facebook no está asociada a Kimkëlen, ingresá con tu usuario y contraseña y luego podrás ingresar con Facebook.");
                         $this->redirect('@sf_guard_signin');
                         
                     }
