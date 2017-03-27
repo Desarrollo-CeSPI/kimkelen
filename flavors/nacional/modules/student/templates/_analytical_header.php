@@ -38,7 +38,7 @@
                 </div>
                 <div><?php echo __("Fecha de egreso:") ?> 
 					<?php if ($analytical->has_completed_career()): ?>
-						<span class="detail"><?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "d");?></span>
+						<span class="detail"><?php echo $career_student->getGraduationSchoolYear()->getYear();?></span>
 					<?php else: ?>
 						<span class="detail"> - </span>
 					<?php endif ?>

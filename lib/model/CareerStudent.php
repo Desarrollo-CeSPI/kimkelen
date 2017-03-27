@@ -412,5 +412,10 @@ class CareerStudent extends BaseCareerStudent
     return (StudentApprovedCareerSubjectPeer::doSelectOne($c)) ? true : false;
   }
 
+  public function getGraduationSchoolYear()
+  {
+    return SchoolYear::retrieveByPk($this->getGraduationSchoolYearId());
+  }
+
 }
 sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));
