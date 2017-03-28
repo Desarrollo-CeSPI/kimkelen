@@ -70,79 +70,71 @@
     
     public function executeFacebookLogin($request)
     {
-        sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
-	$my_url = url_for('@facebook_login', true);
-	$code = $request->getParameter('code');
+	    sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
+	    $my_url = url_for('@facebook_login', true);
+	    $code = $request->getParameter('code');
 	
-	$app_id = '';
-	$app_secret = '';
+	    $app_id = sfConfig::get("app_facebook_app_id");
+	    $app_secret = sfConfig::get("app_facebook_app_secret");
        
-        if (empty($code))
-        {
-            //no viene el codigo como parametro. Creo un codigo state
-            $state = md5(uniqid(rand(), TRUE)); //CSRF protection
-            $this->getUser()->setFacebookState($state);
+      if (empty($code))
+      {
+          //no viene el codigo como parametro. Creo un codigo state
+          $state = md5(uniqid(rand(), TRUE)); //CSRF protection
+          $this->getUser()->setFacebookState($state);
 
-            $dialog_url = "https://www.facebook.com/dialog/oauth?client_id="
-                    . $app_id . "&redirect_uri=" . $my_url . "&state=" . $state;
+          $dialog_url = "https://www.facebook.com/dialog/oauth?client_id="
+                  . $app_id . "&redirect_uri=" . $my_url . "&state=" . $state;
 
-            $this->redirect($dialog_url);
-        }
+          $this->redirect($dialog_url);
+      }
         
-       if (!empty($code) && $this->getUser()->getFacebookState() === $request->getParameter('state'))
+      if (!empty($code) && $this->getUser()->getFacebookState() === $request->getParameter('state'))
+      {
+        $token_url = "https://graph.facebook.com/v2.8/oauth/access_token?"
+                . "client_id=" . $app_id . "&redirect_uri=" . $my_url
+                . "&client_secret=" . $app_secret . "&code=" . $code;
+
+        $response = file_get_contents($token_url);
+
+        $params = null;
+        parse_str($response, $params);
+
+        $response = json_decode($response);
+
+        $graph_url = "https://graph.facebook.com/me?access_token="
+                . $response->access_token;
+
+        $facebook_user = json_decode(file_get_contents($graph_url));
+
+        if ($facebook_user->id)
         {
-           
-            $token_url = "https://graph.facebook.com/v2.8/oauth/access_token?"
-                    . "client_id=" . $app_id . "&redirect_uri=" . $my_url
-                    . "&client_secret=" . $app_secret . "&code=" . $code;
+          $user = GuardUserSocialPeer::retrieveBySocialId($facebook_user->id);
 
-            $response = file_get_contents($token_url);
-          
-            $params = null;
-            parse_str($response, $params);
-            
-            $response = json_decode($response);
-            
-            $graph_url = "https://graph.facebook.com/me?access_token="
-                    . $response->access_token;
+          $this->getUser()->setFacebookId($facebook_user->id);
+          $this->getUser()->setFacebookName($facebook_user->name);
 
-            $facebook_user = json_decode(file_get_contents($graph_url));
-           
-            /*
-             * {  
-             * 	  ["name"]=> string(13) "Nombre" 
-             *    ["id"]=> string(16) "xxxxxxxxx" 
-             * 
-             * } 
-             * */
-            if ($facebook_user->id)
+          if (!is_null($user))
+          {
+              // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimkelen
+              $user_app = sfGuardUserPeer::retrieveByPk($user->getUserId());
+              $this->getUser()->signin($user_app, false);
+              $this->redirect('@homepage');
+          }
+          else
+          {
+            // usuario nuevo
+            if (!$this->getUser()->isAuthenticated())
             {
-                $user = GuardUserSocialPeer::retrieveBySocialId($facebook_user->id);
-                
-                $this->getUser()->setFacebookId($facebook_user->id);
-                $this->getUser()->setFacebookName($facebook_user->name);
+                $this->getUser()->setFlash('notice', "Tu cuenta de Facebook no está asociada a Kimkëlen, ingresá con tu usuario y contraseña y luego podrás ingresar con Facebook.");
+                $this->redirect('@sf_guard_signin');
 
-                if (!is_null($user))
-                {
-                    // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimkelen
-                    $user_app = sfGuardUserPeer::retrieveByPk($user->getUserId());
-                    $this->getUser()->signin($user_app, false);
-                    $this->redirect('@homepage');
-                }
-                else
-                {
-                    // usuario nuevo
-                    if (!$this->getUser()->isAuthenticated())
-                    {
-                        $this->getUser()->setFlash('notice', "Tu cuenta de Facebook no está asociada a Kimkëlen, ingresá con tu usuario y contraseña y luego podrás ingresar con Facebook.");
-                        $this->redirect('@sf_guard_signin');
-                        
-                    }
-                }
             }
-	}
+          }
+        }
+      }
 		
-	 $this->redirect('@sf_guard_signin');
+	  $this->redirect('@sf_guard_signin');
 		
 	}
 	

@@ -1,6 +1,6 @@
 dev:
   facebook:
-    api_id: #YOUR_FACEBOOK_API_ID#
+    app_id: #YOUR_FACEBOOK_API_ID#
     app_secret: #YOUR_FACEBOOK_API_KEY#
 
 prod:
