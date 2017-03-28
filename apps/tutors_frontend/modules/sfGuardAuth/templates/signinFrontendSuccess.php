@@ -33,7 +33,8 @@
       <?php echo $form ?>
       <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
     </form>
-    <li class="list_facebook"> <a class="facebook" href="https://www.facebook.com/dialog/oauth?client_id=<?php //echo sfConfig::get('facebook_api_id') ?>&redirect_uri=<?php echo url_for('@facebook_login',true) ?>"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?>Ingresá con Facebook </a>
+    <li class="list_facebook"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?> <?php echo link_to('Ingresa con Facebook', '@facebook_login',array('class'=> 'facebook')) ?></a>
+    
     </li>
   </div>
 </div>

@@ -70,29 +70,44 @@
     
     public function executeFacebookLogin($request)
     {
-		sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
-		$my_url = url_for('@facebook_login', true);
-		$code = $request->getParameter('code');
-		
-		$app_id = ;
-		$app_secret = ;
-        
-        
-        if(!empty ($code))
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Url');
+	$my_url = url_for('@facebook_login', true);
+	$code = $request->getParameter('code');
+	
+	$app_id = '';
+	$app_secret = '';
+       
+        if (empty($code))
         {
-			$token_url = "https://graph.facebook.com/oauth/access_token?"
-                    . "client_id=" . $app_id . "&redirect_uri=" . urlencode($my_url)
+            //no viene el codigo como parametro. Creo un codigo state
+            $state = md5(uniqid(rand(), TRUE)); //CSRF protection
+            $this->getUser()->setFacebookState($state);
+
+            $dialog_url = "https://www.facebook.com/dialog/oauth?client_id="
+                    . $app_id . "&redirect_uri=" . $my_url . "&state=" . $state;
+
+            $this->redirect($dialog_url);
+        }
+        
+       if (!empty($code) && $this->getUser()->getFacebookState() === $request->getParameter('state'))
+        {
+           
+            $token_url = "https://graph.facebook.com/v2.8/oauth/access_token?"
+                    . "client_id=" . $app_id . "&redirect_uri=" . $my_url
                     . "&client_secret=" . $app_secret . "&code=" . $code;
 
             $response = file_get_contents($token_url);
-            
+          
             $params = null;
             parse_str($response, $params);
-
+            
+            $response = json_decode($response);
+            
             $graph_url = "https://graph.facebook.com/me?access_token="
-                    . $params['access_token'];
+                    . $response->access_token;
 
             $facebook_user = json_decode(file_get_contents($graph_url));
+           
             /*
              * {  
              * 	  ["name"]=> string(13) "Nombre" 
@@ -100,7 +115,6 @@
              * 
              * } 
              * */
-
             if ($facebook_user->id)
             {
                 $user = GuardUserSocialPeer::retrieveBySocialId($facebook_user->id);
@@ -126,9 +140,9 @@
                     }
                 }
             }
-		}
+	}
 		
-		$this->redirect('@sf_guard_signin');
+	 $this->redirect('@sf_guard_signin');
 		
 	}
 	
