@@ -72,6 +72,7 @@ class TutorForm extends BaseTutorForm
   {
     parent::doSave($con);
     $this->saveStudentList($con);
+    $this->saveChangePassword($con);
   }
 
   public function saveStudentList($con = null)
@@ -114,6 +115,27 @@ class TutorForm extends BaseTutorForm
       $con->rollBack();
     }
 
+  }
+  
+  public function saveChangePassword($con = null)
+  {
+	if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+    
+    $tutor = TutorPeer::retrieveByUsername($this->getValue('person-username'));
+    //si tiene usuario
+    if(! is_null($tutor))
+    {
+		$user = sfGuardUserPeer::retrieveByPk($tutor->getPerson()->getUserId(),Propel::getConnection());
+		//no se logueo nunca
+		if(is_null($user->getLastLogin()))
+		{
+			$user->setMustChangePassword(true);
+			$user->save(Propel::getConnection());
+		}
+	}
   }
 
 

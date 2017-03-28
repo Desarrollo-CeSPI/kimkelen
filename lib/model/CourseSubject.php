@@ -717,7 +717,7 @@ class CourseSubject extends BaseCourseSubject
   }
 
   /*
-   * Retrieves number of examinations for examination instance (December, Februray) given as parameter.
+   * Retrieves number of examinations for examination instance (December, February) given as parameter.
    */
    public function countExaminationsForExaminationNumber($examination_number)
   {
@@ -792,8 +792,6 @@ class CourseSubject extends BaseCourseSubject
 
 					$original_course_subject_student = $course_subject_student_pathway->getRelatedCourseSubjectStudent();
 
-					//$final_mark = $course_subject_student_pathway->getMark();
-
 					$course_marks_avg =  SchoolBehaviourFactory::getEvaluatorInstance()->getMarksAverage($original_course_subject_student, $con);
 					$final_mark = bcdiv($course_subject_student_pathway->getMark() + $course_marks_avg, 2, 2);
 
@@ -814,6 +812,7 @@ class CourseSubject extends BaseCourseSubject
 					$srcs->save($con);
 					$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($srcs);
 					// TODO: pongo en blanco la referencia a una mesa de previa??
+
 					if (is_null($sers)) {
 						$sers = new StudentExaminationRepprovedSubject();
 						$sers->setStudentRepprovedCourseSubject($srcs);

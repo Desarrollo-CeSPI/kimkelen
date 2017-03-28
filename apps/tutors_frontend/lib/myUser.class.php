@@ -60,5 +60,35 @@ class myUser extends sfGuardSecurityUser
 	{
 		$this->getAttributeHolder()->remove(sprintf(self::$reference_key,$module_name));
 	}
+	
+	public function setFacebookId($fb_id) {
+		$this->setAttribute('facebook_id', $fb_id);
+        }
+
+        public function getFacebookId() {
+            return $this->getAttribute('facebook_id');
+        }
+
+        public function getFacebookName() {
+            return $this->getAttribute('facebook_name', '');
+        }
+
+        public function setFacebookName($fb_name) {
+            $this->setAttribute('facebook_name', $fb_name);
+        }
+
+        public function resetFacebookAttributes()
+        {
+            $this->getAttributeHolder()->remove('facebook_id');
+            $this->getAttributeHolder()->remove('facebook_name');
+        }
+
+        public function getFacebookState() {
+            return $this->getAttribute('facebook_state');
+        }
+
+        public function setFacebookState($fb_state) {
+            $this->setAttribute('facebook_state', $fb_state);
+        }
 
 }

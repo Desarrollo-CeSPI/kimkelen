@@ -24,10 +24,18 @@
 
 <div class="container">
   <div class="form-login">
+	<?php if ($sf_user->hasFlash('notice')): ?>
+    <div class="alert alert-info">
+        <?php echo __($sf_user->getFlash('notice'), array(), 'sf_admin') ?>
+    </div>
+	<?php endif; ?>
     <form class="" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
       <?php echo $form ?>
       <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
     </form>
+    <li class="list_facebook"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?> <?php echo link_to('Ingresa con Facebook', '@facebook_login',array('class'=> 'facebook')) ?></a>
+    
+    </li>
   </div>
 </div>
 

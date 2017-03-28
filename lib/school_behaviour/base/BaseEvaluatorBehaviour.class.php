@@ -79,6 +79,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   public function getCourseSubjectStudentResult(CourseSubjectStudent $course_subject_student, PropelPDO $con = null)
   {
     $average = $course_subject_student->getMarksAverage($con);
+    
     if ($this->isApproved($course_subject_student, $average, $con))
     {
       return $this->createStudentApprovedCourseSubject($course_subject_student, $average, $con);
@@ -314,13 +315,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 //El if creo que no deberia existir para mantener la integridad de los datos. no deberia  existir course_subject_student_examination sin un examinationNumbre
 //    if (!is_null($course_subject_student->getCourseResult()))
 //    {
-	$course_result = $this->getCourseSubjectStudentResult($course_subject_student, $con);
+
+    $course_result = $this->getCourseSubjectStudentResult($course_subject_student, $con);
+
     $examination_number = $course_result->getExaminationNumber();
     $course_subject_student_examination->setExaminationNumber($examination_number);
 //    }
-
     $course_subject_student_examination->save($con);
-
     //Libero memoria
     $course_subject_student_examination->clearAllReferences(true);
     unset($course_subject_student_examination);
@@ -332,14 +333,14 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $con = is_null($con) ? Propel::getConnection() : $con;
 
     $course_subject_student = $course_subject_student_examination->getCourseSubjectStudent();
-
+    
     // si aprueba la mesa de examen
-
     if ($course_subject_student_examination->getMark() >= $this->getExaminationNote())
     {
       $result = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
 
-      if (is_null($result)){
+      if (is_null($result))
+      {
         $result = new StudentApprovedCareerSubject();
         $result->setCareerSubject($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
         $result->setStudent($course_subject_student->getStudent());
@@ -348,12 +349,22 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
         if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
         {
+          $sers = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
+	        //$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
+
+	        if ($sers >= 1) 
+          {
+	          foreach ($sers as $student_examination_repproved_subject) 
+            {
+              $student_examination_repproved_subject->delete($con);
+            }
+          }
           $student_repproved_course_subject->delete($con);
+          
         }
       }
 
       $examination_subject = $course_subject_student_examination->getExaminationSubject();
-
 
       // IF is null, is because the course_subject_student_examination has been created editing student history
       $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();
@@ -372,7 +383,6 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       // se guarda la NOTA FINAL de la materia
       if ($course_subject_student_examination->getExaminationNumber() == self::FEBRUARY)
       {
-
         $this->setFebruaryApprovedResult($result, $average, $course_subject_student_examination->getMark());
       }
       else
@@ -401,10 +411,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
       {
         // se crea una previa
         $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+
         if (is_null($srcs)) {
            $student_repproved_course_subject = new StudentRepprovedCourseSubject();
            $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
            $student_repproved_course_subject->save($con);
+
         }
       }
     }
@@ -499,6 +511,10 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 		}
 
 	}
+
+
+
+
 
 
 	/**

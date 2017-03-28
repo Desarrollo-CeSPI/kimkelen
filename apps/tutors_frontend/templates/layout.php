@@ -5,7 +5,6 @@
   <?php include_http_metas() ?>
   <?php include_metas() ?>
   <?php include_title() ?>
-
   <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 
@@ -32,7 +31,7 @@
               <?php echo $sf_user->getUsername()?> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="disabled"><a href="#">Cambiar contraseña</a></li>
+              <li><?php echo link_to(__('Change password'), '@change_password')?></li>
               <li role="separator" class="divider"></li>
               <li><?php echo link_to(__('Logout'), '@sf_guard_signout')?></li>
             </ul>
@@ -54,5 +53,4 @@
   </footer>
 
 </body>
-
 </html>

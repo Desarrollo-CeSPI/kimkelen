@@ -29,6 +29,19 @@ class ExaminationSubject extends BaseExaminationSubject
         $c->add(CourseSubjectStudentExaminationPeer::MARK, null, Criteria::ISNULL);
         $c->add(CourseSubjectStudentExaminationPeer::IS_ABSENT, false);
         $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
+        $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID , CourseSubjectStudentPeer::ID);
+          
+        //quito los retirados
+        $withdrawn_criteria = new Criteria();
+		$withdrawn_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+		$withdrawn_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN);
+		$withdrawn_criteria->clearSelectColumns();
+		$withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+		$stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
+		$not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
+		
+		
+		$c->add(CourseSubjectStudentPeer::STUDENT_ID, $not_in_w, Criteria::NOT_IN);
 
         return $this->countCourseSubjectStudentExaminations($c) == 0 && !$this->getIsClosed();
 
@@ -58,7 +71,7 @@ class ExaminationSubject extends BaseExaminationSubject
             $c = new Criteria();
             $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
 
-            foreach ($this->getCourseSubjectStudentExaminations($c) as $course_subject_student_examination)
+            foreach ($this->getSortedCourseSubjectStudentExaminations($c) as $course_subject_student_examination)
             {
                 $course_subject_student_examination->close($con);
             }
@@ -131,11 +144,21 @@ class ExaminationSubject extends BaseExaminationSubject
             $c = new Criteria();
         }
 
-
         $c->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
         $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
         $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
         $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        
+        //quito los retirados
+        $withdrawn_criteria = new Criteria();
+        $withdrawn_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN);
+		$withdrawn_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+		$withdrawn_criteria->clearSelectColumns();
+		$withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+		$stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
+		$not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
+		
+		$c->add(StudentPeer::ID, $not_in_w, Criteria::NOT_IN);
 
         return $this->getCourseSubjectStudentExaminations($c);
 

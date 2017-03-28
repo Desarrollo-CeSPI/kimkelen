@@ -21,6 +21,12 @@
 
 <div class="row">
   <div class="col-md-12">
+	<?php if ($sf_user->hasFlash('notice')): ?>
+		<div class="alert alert-info alert-dismissable">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+			<?php echo __($sf_user->getFlash('notice'), array(), 'sf_admin') ?>
+		</div>
+	<?php endif; ?>
     <?php include_partial('personal_info', array('person'=>$tutor)); ?>
     <?php include_partial('students_box', array('students'=>$students)); ?>
   </div>

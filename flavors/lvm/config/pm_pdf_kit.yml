@@ -1,4 +1,4 @@
-all:
+report_card:
   options:
     orientation: Landscape
     page-size: A4

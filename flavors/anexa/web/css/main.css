@@ -2087,3 +2087,18 @@ div.wc-cal-event{
 {
     background-image: url('../images/revert.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_graduate_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_regular_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_withdrawn_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}

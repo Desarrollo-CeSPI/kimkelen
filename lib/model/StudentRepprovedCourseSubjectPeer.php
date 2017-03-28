@@ -162,5 +162,11 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
 
     return self::doSelectOne($criteria);
   }
+  
+  public static function retrieveByStudentAndCareer(Student $student, Career $career, PropelPDO $con = null)
+  {
+    $criteria = self::retrieveCriteriaRepprovedForStudentAndCareer($student, $career, $con);
+    return self::doSelect($criteria);
+  }
 
 }

@@ -1168,7 +1168,7 @@ class Student extends BaseStudent
         $sacs = $course_result->getStudentApprovedCareerSubject();
 		if(!is_null($sacs)){
 			$letter_mark = LetterMarkPeer::getLetterMarkByValue((int) $sacs->getMark());
-			return $letter_mark->getLetter(); 
+				return  $letter_mark->getLetter(); 
 		}   
       }
       else
@@ -1653,6 +1653,27 @@ class Student extends BaseStudent
 
   }
   
+  public function canPrintGraduateCertificate()
+  {
+	  if(!is_null($this->getCareerStudent())){
+		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+	  }
+	  return false;
+  }
+  
+  public function canPrintRegularCertificate()
+  {
+	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
+  }
+  
+  public function canPrintWithdrawnCertificate()
+  {
+	if(!is_null($this->getLastStudentCareerSchoolYear()))
+	{
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+	}
+	return false;
+  }
   public function getIsTutor($tutor){
 	  
 	  $c = new Criteria();
@@ -1662,7 +1683,6 @@ class Student extends BaseStudent
 	  $st = StudentTutorPeer::doSelectOne($c);
 	  
 	  return (!is_null($st));
-	  
   }
 }
 

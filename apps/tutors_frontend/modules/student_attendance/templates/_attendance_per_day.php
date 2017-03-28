@@ -20,26 +20,28 @@
 ?>
 
 <?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th><?php echo __('Periodo') ?></th>
-      <th><?php echo __('Total') ?></th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php foreach ($periods as $period): ?>
-    <?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, false) ; ?>
-    <tr>
-      <td><?php echo $period->getName();?></td>
-      <td><?php echo round($absences, 2) ?></td>
-    </tr>
-  <?php endforeach; ?>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td> <strong>Total</strong> </td>
-      <td> <strong><?php echo $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, null, false)  ?></strong> </td>
-    </tr>
-  </tfoot>
-</table>
+  <div class="table-responsive">
+	<table class="table table-striped table-bordered">
+	  <thead>
+		<tr>
+		  <th><?php echo __('Periodo') ?></th>
+		  <th><?php echo __('Total') ?></th>
+		</tr>
+	  </thead>
+	  <tbody>
+	  <?php foreach ($periods as $period): ?>
+		<?php $absences= $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), $period, null, false) ; ?>
+		<tr>
+		  <td><?php echo $period->getName();?></td>
+		  <td><?php echo round($absences, 2) ?></td>
+		</tr>
+	  <?php endforeach; ?>
+	  </tbody>
+	  <tfoot>
+		<tr>
+		  <td> <strong>Total</strong> </td>
+		  <td> <strong><?php echo $student->getTotalAbsences($student_career_school_year->getCareerSchoolYear()->getId(), null, null, false)  ?></strong> </td>
+		</tr>
+	  </tfoot>
+	</table>
+  </div>
