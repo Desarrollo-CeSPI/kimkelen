@@ -34,13 +34,12 @@
 				<?php else:?>
 				
 					<?php echo 'adeudando ' ?>
-					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' ?></b>
+					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año' ?></b>
 					
 					<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
 					<b>
 						<?php echo ($i == (count($p) -1)) ? 'y' : ',' ;?>
-						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() ;?> 
-						<?php echo ($p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()) ? ' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' : ''; ?>							
+						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año';?> 
 					</b>
 					<?php endfor?>
 				<?php endif?>
