@@ -45,4 +45,25 @@ class StudentDisapprovedCourseSubjectPeer extends BaseStudentDisapprovedCourseSu
 
     return self::doSelectOne($criteria);
   }
+  
+  public static function retrieveByStudentAndCareerSchoolYear($student, $career_school_year)
+  {
+    $c = new Criteria();
+    $c->add(self::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+
+    $c->addJoin(self::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $c->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
+    
+    return self::doSelect($c);
+    
+    
+    //tomo todas las materias desaprobadas. menos las del año en que repitio
+    
+    
+      
+  }
 }
