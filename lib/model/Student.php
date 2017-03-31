@@ -1100,8 +1100,8 @@ class Student extends BaseStudent
   public function getLastStudentCareerSchoolYear($career_school_year = null)
   {
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
     if(! is_null($career_school_year))
     {
