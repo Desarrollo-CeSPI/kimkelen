@@ -4590,7 +4590,7 @@
             </trans-unit>
             <trans-unit>
                 <source>Edit last repproved examination</source>
-                <target>Editar ultima mesa de previa</target>
+                <target>Editar última mesa de previa</target>
             </trans-unit>
 	    <trans-unit>
                 <source>Regular certificate</source>
@@ -4611,6 +4611,10 @@
 	    <trans-unit>
                 <source>Disciplinary sanction types</source>
                 <target>Gravedad de sanciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Resolution number</source>
+                <target>Número de resolución</target>
             </trans-unit>
         </body>
     </file>

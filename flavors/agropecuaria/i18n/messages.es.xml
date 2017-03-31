@@ -4539,6 +4539,10 @@
 	<source>Disciplinary sanction type id</source>
 	<target>Motivo de sanción disciplinaria</target>
     </trans-unit>
+    <trans-unit>   
+        <source>Resolution number</source>
+        <target>Número de resolución</target>
+    </trans-unit>
     </body>
 </file>
 </xliff>

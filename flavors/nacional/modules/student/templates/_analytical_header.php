@@ -18,10 +18,8 @@
  */ ?>
 <div class="report-header">
     <div class="header_row">
-        <div class="title" id="header_analytical_data_left">
+		<div class="title" id="header_analytical_data_left">
             <dl class="dl-horizontal">
-                <dt><?php echo __("Legajo N°") ?>:</dt>
-                <dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
             </dl>
         </div>
         <div class="title" id="header_analytical_data_center">
@@ -30,23 +28,33 @@
 	        <h1><?php echo $school_name ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
         </div>
 
-	  
-        <div id="header_analytical_data_right" class="title">
-		<div>
-			<?php echo __("RMN Nº") ?> 
-			<?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
-		</div>
-		<?php if ($analytical->showCertificate()): ?>
+		<div class="title" id="header_analytical_data_right">
+            <div class="dl-horizontal">
+                <div><?php echo __("Legajo N°") ?>:
+					<span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+                </div>
+                <div><?php echo __("Año de ingreso:") ?> 
+					<span class="detail"> <?php echo $career_student->getStudent()->getInitialSchoolYear()->getYear(); ?></span>
+                </div>
+                <div><?php echo __("Fecha de egreso:") ?> 
+					<?php if ($analytical->has_completed_career()): ?>
+						<span class="detail"><?php echo $career_student->getGraduationSchoolYear()->getYear();?></span>
+					<?php else: ?>
+						<span class="detail"> - </span>
+					<?php endif ?>
+                </div>
+                <div><?php echo __("RMN Nº") ?> 
+					<span class="detail"><?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?></span>					
+                </div>
+            </div>
+            <?php if ($analytical->showCertificate()): ?>
             <?php echo __('Certificado N°'); ?>
             <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
-        <?php endif; ?>				
+            <?php endif; ?>
         </div>
-	    
-
     </div>
 
     <div class="header_row">
         <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
     </div>
 </div>
-
