@@ -24,7 +24,6 @@ generator:
         batch_actions:     []
         actions:
           _new:
-            label: Nuevo motivo de sanción
             credentials:   [new_disciplinary_sanction_type]
       filter:
         class: false

@@ -15,16 +15,12 @@ generator:
       fields:
         value:
           label:          Valor
-        disciplinary_sanction_type_id:
-          label:          Motivo de sanción disciplinaria
         sanction_type_id:
           label:          Tipo de sanción disciplinaria
         applicant_id:
           label:          Solicitante
         responsible_id:
           label:          Responsable
-        disciplinary_sanction_type:
-          label:          Motivo de sanción disciplinaria
         sanction_type:
           label:          Tipo de sanción disciplinaria
         applicant:
@@ -37,7 +33,7 @@ generator:
           label:          Responsable
       list:
         title:            Listado de sanciones
-        display:          [request_date, number , name ,value, sanction_type]
+        display:          [request_date, number , name ,value, sanction_type, disciplinary_sanction_type]
         batch_actions:    []
         object_actions:
           _edit:
