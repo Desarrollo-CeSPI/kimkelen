@@ -277,6 +277,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     if($values)
     {
 		$criteria->addJoin(StudentPeer::ID,SchoolYearStudentPeer::STUDENT_ID);
+                $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID,SchoolYearPeer::retrieveCurrent()->getId());
 		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
 				
 	}
@@ -287,7 +288,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     if ($values)
     {
       $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-      $criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $values);
+      $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $values);
     }
   }
 }
