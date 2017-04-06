@@ -108,16 +108,20 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
 
     if ($allowed)
     {
-      // Se consulta si el alumno esta en trayectorias antes de eliminarlo 
-      $student_id = $this->object->getPrimaryKey();
-      $criteria = new Criteria();
-      $criteria->add(PathwayStudentPeer::STUDENT_ID, $student_id);
-      $pathway = PathwayStudentPeer::doSelectOne($criteria, $con);
+        // Se consulta si el alumno esta en trayectorias antes de eliminarlo (Trayectoria actual)
+        $sy = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+        
+        $student_id = $this->object->getPrimaryKey();
+        $criteria = new Criteria();
+        $criteria->add(PathwayStudentPeer::STUDENT_ID, $student_id);
+        $criteria->addJoin(PathwayStudentPeer::PATHWAY_ID,PathwayPeer::ID);
+        $criteria->add(PathwayPeer::SCHOOL_YEAR_ID,$sy->getId());
+        $pathway = PathwayStudentPeer::doSelectOne($criteria, $con);
 
-      if (!$pathway)
-      {
-        StudentCareerSubjectAllowedPeer::doDelete($c, $con);
-      }
+        if (!$pathway)
+        {
+          StudentCareerSubjectAllowedPeer::doDelete($c, $con);
+        }   
     }
 
     $year = $this->getValue('year');
@@ -134,6 +138,7 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
 //      $student_career_school_year->save();
 //    }
     $career_student = CareerStudentPeer::retrieveByCareerAndStudent($this->getValue('career_id'), $this->getObject()->getId());
+   
     try
     {
       $con->beginTransaction();
