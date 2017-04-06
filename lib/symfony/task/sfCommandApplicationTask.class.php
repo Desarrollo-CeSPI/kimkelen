@@ -52,4 +52,36 @@ abstract class sfCommandApplicationTask extends sfTask
       parent::logSection($section, $message, $size, $style);
     }
   }
+
+
+  /**
+   * Returns a mailer instance.
+   *
+   * Notice that your task should accept an application option.
+   * The mailer configuration is read from the current configuration
+   * instance, which is automatically created according to the current
+   * --application option.
+   *
+   * @return sfMailer A sfMailer instance
+   */
+  protected function getMailer()
+  {
+    if (!$this->mailer)
+    {
+      $this->mailer = $this->initializeMailer();
+    }
+
+    return $this->mailer;
+  }
+
+  protected function initializeMailer()
+  {
+    require_once sfConfig::get('sf_symfony_lib_dir').'/vendor/swiftmailer/classes/Swift.php';
+    Swift::registerAutoload();
+    sfMailer::initialize();
+
+    $config = sfFactoryConfigHandler::getConfiguration($this->configuration->getConfigPaths('config/factories.yml'));
+
+    return new $config['mailer']['class']($this->dispatcher, $config['mailer']['param']);
+  }
 }

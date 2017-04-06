@@ -78,7 +78,7 @@ all:
     standard_helpers:       [Partial, Cache, Form, I18N]
 #
 #    # Activated modules from plugins or from the symfony core
-    enabled_modules:        [default, sfGuardGroup, sfGuardUser, sfGuardAuth, sfCaptchaGD, sfGuardChangePassword]
+    enabled_modules:        [default, sfGuardGroup, sfGuardUser, sfGuardAuth, sfCaptchaGD, sfGuardChangePassword, sfGuardForgotPassword]
 #
 #    # Charset used for the response
 #    charset:                utf-8

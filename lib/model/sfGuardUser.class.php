@@ -60,4 +60,7 @@ class sfGuardUser extends PluginsfGuardUser
     return 'El usuario pertenece a los grupos Profesor o Preceptor, debe editarlos desde sus respectivos listados';
   }
 
+  public function getEmail() {
+    return $this->getProfile()->getEmail();
+  }
 }

@@ -9,3 +9,10 @@ all:
     show_disabled_actions: true
 
   close_course_subject_schol_year_max_error: 50
+
+  sf_guard_extra_plugin:
+    mail_from: "no-responder@kimkelen.com"
+    name_from:        Kimkëlen - Sistema de alumnos
+    subject_request:  Pedido de reseteo de contraseña
+    subject_success:  Nueva contraseña
+    reset_type:       set # set to `ask` for asking (see above)

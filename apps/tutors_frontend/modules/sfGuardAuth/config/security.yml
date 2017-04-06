@@ -3,3 +3,7 @@ default:
 
 facebookLogin:
   is_secure: false
+
+password:
+  is_secure: false
+
