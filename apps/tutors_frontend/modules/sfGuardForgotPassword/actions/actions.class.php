@@ -40,24 +40,25 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 				$values = $this->form->getValues();
 
 				$sf_guard_user = sfGuardUserPeer::retrieveByUsernameOrEmail($values['username_or_email'], true);
-				$this->forward404Unless($sf_guard_user, 'user not found');
+				$tutor = TutorPeer::retrieveByUsername($sf_guard_user->getUsername());
+				$this->forward404Unless($tutor, 'user tutor not found');
 
-				$to_name = $sf_guard_user->getUsername();
-				$body = 'Hola,';//. $to_name . ". Si usted solicitó resetear su contraseña, haga click en el siguiente link. Si no ha sido usted, desestime este correo.";
-				$from = 'no-responder@kimkelen.com';
-				$from_name = sfConfig::get('app_sf_guard_extra_plugin_name_from');
+				$to_name = $tutor->getPerson()->getFirstname();
+				$body = 'Hola, '. $to_name .". Si usted solicitó resetear su contraseña, haga click en el siguiente link.\nSi usted no ha solicitado el cambio, por favor desestime este correo.";
+				$from = sfConfig::get('app_sf_guard_extra_plugin_mail_from');
+				$from_name = sfConfig::get('app_sf_guard_extra_plugin_name_from') . " | " . SchoolBehaviourFactory::getInstance()->getSchoolName();
 				$to = $sf_guard_user->getEmail();
-				$subject = "Reseteo";//sfConfig::get('app_sf_guard_extra_plugin_subject_request');
-
+				$subject = sfConfig::get('app_sf_guard_extra_plugin_subject_request');
 
 				$mailer = sfContext::getInstance()->getMailer();
 				$message = Swift_Message::newInstance()
-					->setFrom($from)
-					->setBcc($to)
+					->setFrom('no-responder@kimkelen.com', $from_name)
+					->setTo($to, $to_name)
 					->setSubject($subject)
 					->setBody($body);
 
 				$message->setContentType("text/html");
+
 				$mailer->send($message);
 			}
 

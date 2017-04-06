@@ -61,6 +61,6 @@ class sfGuardUser extends PluginsfGuardUser
   }
 
   public function getEmail() {
-    return $this->getProfile()->getEmail();
+    return PersonPeer::retrieveBySfGuardUser($this)->getEmail();
   }
 }
