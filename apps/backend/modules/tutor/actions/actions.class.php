@@ -61,5 +61,90 @@ class tutorActions extends autoTutorActions
     }
 
   }
+ 
+  public function executeGenerateUser($request)
+  {
+    $this->form = new GenerateUserForm();
+    
+    if ($request->isMethod('POST'))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()));
+      $this->tutor = TutorPeer::retrieveByPK($request->getParameter('tutor_id'));
+      $username = $request->getParameter('generate_user[username]');
+      if ($this->form->isValid())
+      {
+           try
+            {
+              //Chequeo que no exista un usuario con ese nombre
+              $user = sfGuardUserPeer::retrieveByUsername($username);
+
+              if(is_null($user))
+              {
+                  //si el tutor tiene email registrado en el sistema.
+                  
+                  if(is_null($this->tutor->getPerson()->getEmail()) || trim($this->tutor->getPerson()->getEmail() === ''))
+                  {
+                      $this->getUser()->setFlash('error', 'El tutor no tiene cuenta de email registrada.');
+                  }
+                  else {
+                      //creo el usuario y envio el email.
+                      $user = new sfGuardUser();
+                      $user->setUsername($username);
+                      
+                      /*Generar password aleatoria*/
+                      $password = '';
+                      $user->setPassword($password);
+                  
+                      $user->setIsActive(true);
+                      $user->save(Propel::getConnection());
+                      
+                      //le seteo el usuario al tutor
+                      
+                      $this->tutor->getPerson()->setUserId($user->getId());
+                      $this->tutor->save(Propel::getConnection());
+                      
+                      /*
+                      $to_name = $this->tutor->getPerson()->getFullName();
+		      $body = 'Hola,';//. $to_name . ". Su nombre de usuario es $username y su clave: .";
+				$from = 'no-responder@kimkelen.com';
+				$from_name = sfConfig::get('app_sf_guard_extra_plugin_name_from');
+				$to = $this->tutor->getPerson()->getEmail();
+				$subject = "Generación de usuario";//sfConfig::get('app_sf_guard_extra_plugin_subject_request');
+
+
+				$mailer = sfContext::getInstance()->getMailer();
+				$message = Swift_Message::newInstance()
+					->setFrom($from)
+					->setBcc($to)
+					->setSubject($subject)
+					->setBody($body);
+
+				$message->setContentType("text/html");
+				$mailer->send($message);
+                       * 
+                       */
+                      $this->getUser()->setFlash("notice", "The item was updated successfully.");
+                  }
+              }
+              else
+              {
+                   $this->getUser()->setFlash('error', 'Ya existe un usuario con ese nombre.');
+
+              }
+            }
+            catch (Exception $e)
+            {
+              $this->getUser()->setFlash('error', 'Ocurrio un error durante la generación de usuario.');
+            }     
+        
+      }
+    }
+    else{
+        
+        $this->tutor = $this->getRoute()->getObject();
+    }
+       
+  }
+  
 
 }

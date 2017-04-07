@@ -4367,6 +4367,14 @@
                 <source>Resolution number</source>
                 <target>Número de resolución</target>
             </trans-unit>
+            <trans-unit>
+                <source>Generate user</source>
+                <target>Generar usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate user for tutor %tutor%</source>
+                <target>Generar usuario para el tutor %tutor%</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

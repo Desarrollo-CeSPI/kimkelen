@@ -1,0 +1,10 @@
+rendering: ~
+security:  ~
+change_password:
+  class: sfGuardChangePasswordFilter
+
+# insert your own filters here
+
+cache:     ~
+common:    ~
+execution: ~

@@ -1,0 +1,5 @@
+config/nc_flavor.yml:
+  class: ncFlavorConfigHandler
+
+modules/*/config/view.yml:
+  class: ncFlavorFrontendViewConfigHandler

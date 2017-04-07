@@ -99,5 +99,20 @@ class StudentAttendancePeer extends BaseStudentAttendancePeer
     return self::doCount($c);
 
   }
+  static public function doCountAbsenceByCourseSubjectAndStudent ($course_subject,$student)
+  {
+
+    $c = new Criteria();
+    $c->add(self::COURSE_SUBJECT_ID, $course_subject->getId());
+    $c->add(self::STUDENT_ID, $student->getId());
+    $c->add(self::VALUE, 0, Criteria::NOT_EQUAL);
+    
+    $absences = self::doSelect($c);
+    $total = 0;
+    foreach ($absences as $a) {
+      $total += $a->getValue();
+    }
+    return $total;
+  }
 
 }

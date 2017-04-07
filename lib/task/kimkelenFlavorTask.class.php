@@ -57,10 +57,11 @@ EOF;
     $web = sfConfig::get('sf_web_dir');
     $web_css = $web . '/css';
     $web_img = $web . '/images';
+    $web_js_frontend = $web . '/js/frontend';
     $pm_pdf_kit_cfg = sfConfig::get('sf_apps_dir') . '/backend/config/pm_pdf_kit.yml';
 
     $files = array();
-    foreach (array($web_css, $web_img, $pm_pdf_kit_cfg) as $file)
+    foreach (array($web_css, $web_img, $pm_pdf_kit_cfg, $web_js_frontend) as $file)
     {
       if (file_exists($file))
       {
@@ -82,10 +83,12 @@ EOF;
 
     $flavor_css = $flavor . '/web/css';
     $flavor_img = $flavor . '/web/images';
+    $flavor_js_frontend = $flavor . '/web/js-frontend';
     $pm_pdf_kit = $flavor . '/config/pm_pdf_kit.yml';
 
     $this->getFilesystem()->symlink($flavor_css, $web_css, true);
     $this->getFilesystem()->symlink($flavor_img, $web_img, true);
+    $this->getFilesystem()->symlink($flavor_js_frontend, $web_js_frontend, true);
     $this->getFilesystem()->symlink($pm_pdf_kit, $pm_pdf_kit_cfg, true);
 
 

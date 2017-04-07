@@ -92,4 +92,4 @@ class CourseSubjectStudentMark extends BaseCourseSubjectStudentMark
 
 }
 
-sfPropelBehavior::add('CourseSubjectStudentMark', array('changelog'));
+try { sfPropelBehavior::add('CourseSubjectStudentMark', array('changelog')); }catch(sfConfigurationException $e) {}

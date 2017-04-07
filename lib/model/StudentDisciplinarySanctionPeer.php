@@ -154,4 +154,13 @@ class StudentDisciplinarySanctionPeer extends BaseStudentDisciplinarySanctionPee
 
     return self::doCount($criteria);
   }
+  public static function countStudentDisciplinarySanctionsForStudentAndSanctionTypeAndSchoolYear($student, $st,$sy)
+  {
+    $criteria = new Criteria();
+    $criteria->add(self::STUDENT_ID, $student->getId());
+    $criteria->add(self::SANCTION_TYPE_ID, $st->getId());
+    $criteria->add(self::REQUEST_DATE, 'YEAR('.self::REQUEST_DATE.')='. $sy, Criteria::CUSTOM);
+
+    return self::doCount($criteria);
+  }
 }
