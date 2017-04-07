@@ -27,7 +27,7 @@ sf_guard_signout:
 
 sf_guard_password:
   url:   /request_password
-  param: { module: sfGuardAuth, action: password }
+  param: { module: sfGuardForgotPassword, action: password }
   
 facebook_login:
   url: /facebookLogin
