@@ -41,18 +41,15 @@
       {
         $this->form->bind($request->getParameter('signin'));
         $values = $this->form->getValues();
-        
-        $tutor=TutorPeer::retrieveByUsername($values['user']);
-        
-        if(!is_null($tutor) && $tutor->getPerson()->getIsActive())
-        {
-			if ($this->form->isValid())
-			{  
-				
+
+	      if ($this->form->isValid())
+			{
 			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
 				//tiene facebookID lo asocio al usuario.
 				 if(!is_null($user->getFacebookId()))
 				 {
+					 $tutor = TutorPeer::retrieveByUsername($values['user']);
+
 					 $social_user = new GuardUserSocial();
 					 $social_user->setSocialId($user->getFacebookId());
 					 $social_user->setUserId($tutor->getPerson()->getUserId());
@@ -62,7 +59,7 @@
 
 			  return $this->redirect($signinUrl);
 			}
-		}
+
         
       }
 		$this->setTemplate('signinFrontend');

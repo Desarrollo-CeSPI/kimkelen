@@ -39,19 +39,16 @@
       {
         $this->form->bind($request->getParameter('signin'));
         $values = $this->form->getValues();
-        
-        $tutor = TutorPeer::retrieveByUsername($values['user']);
-        if(is_null($tutor)){
 			
-			if ($this->form->isValid())
-			{
-			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
+        if ($this->form->isValid())
+        {
+          $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
 
-				$signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer('@homepage'));
+          $signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer('@homepage'));
 
-			  return $this->redirect($signinUrl);
-			}
-		}
+          return $this->redirect($signinUrl);
+        }
+
       }
       else
       {

@@ -2,9 +2,8 @@ rendering: ~
 security:  ~
 change_password:
   class: sfGuardChangePasswordFilter
-
-# insert your own filters here
-
+login_frontend_filter:
+  class: frontendLoginFilter
 cache:     ~
 common:    ~
 execution: ~
