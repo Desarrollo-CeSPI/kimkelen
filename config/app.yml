@@ -9,3 +9,8 @@ all:
     show_disabled_actions: true
 
   close_course_subject_schol_year_max_error: 50
+
+  mailer:
+    from: no-responder@desarrollo.unlp.edu.ar
+    name_from: Kimkëlen
+    new_user_subject: Nuevo usuario de Kimkëlen

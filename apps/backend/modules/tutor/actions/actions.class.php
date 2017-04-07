@@ -92,10 +92,13 @@ class tutorActions extends autoTutorActions
                       $user->setUsername($username);
                       
                       /*Generar password aleatoria*/
-                      $password = '';
+                      $password = randomPassword::generate();
+
+
                       $user->setPassword($password);
                   
                       $user->setIsActive(true);
+                      $user->setMustChangePassword(true);
                       $user->save(Propel::getConnection());
                       
                       //le seteo el usuario al tutor
@@ -103,26 +106,25 @@ class tutorActions extends autoTutorActions
                       $this->tutor->getPerson()->setUserId($user->getId());
                       $this->tutor->save(Propel::getConnection());
                       
-                      /*
-                      $to_name = $this->tutor->getPerson()->getFullName();
-		      $body = 'Hola,';//. $to_name . ". Su nombre de usuario es $username y su clave: .";
-				$from = 'no-responder@kimkelen.com';
-				$from_name = sfConfig::get('app_sf_guard_extra_plugin_name_from');
-				$to = $this->tutor->getPerson()->getEmail();
-				$subject = "Generación de usuario";//sfConfig::get('app_sf_guard_extra_plugin_subject_request');
+
+                      $to_name = $this->tutor->getPerson()->getFirstname();
+                      $body = "Hola,". $to_name. ".\n Se ha generado una nuevo usuario para el sistema de alumnos Kimkelen.\nUsuario: " .$username . "\nContraseña:" . $password ;
+                      $from = sfConfig::get('app_mailer_from');
+                      $from_name = sfConfig::get('app_mailer_name_from');
+                      $to = $this->tutor->getPerson()->getEmail();
+                      $subject = sfConfig::get('app_mailer_new_user_subject');
 
 
-				$mailer = sfContext::getInstance()->getMailer();
-				$message = Swift_Message::newInstance()
-					->setFrom($from)
-					->setBcc($to)
-					->setSubject($subject)
-					->setBody($body);
+                      $mailer = sfContext::getInstance()->getMailer();
+                      $message = Swift_Message::newInstance()
+                        ->setFrom($from, $from_name)
+                        ->setTo($to, $to_name)
+                        ->setSubject($subject)
+                        ->setBody($body);
 
-				$message->setContentType("text/html");
-				$mailer->send($message);
-                       * 
-                       */
+                      $message->setContentType("text/html");
+                      $mailer->send($message);
+
                       $this->getUser()->setFlash("notice", "The item was updated successfully.");
                   }
               }
@@ -145,6 +147,4 @@ class tutorActions extends autoTutorActions
     }
        
   }
-  
-
 }
