@@ -39,7 +39,7 @@
 					<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
 					<b>
 						<?php echo ($i == (count($p) -1)) ? 'y' : ',' ;?>
-						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año';?> 
+						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año';?> 
 					</b>
 					<?php endfor?>
 				<?php endif?>
