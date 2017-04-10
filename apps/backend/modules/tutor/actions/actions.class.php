@@ -76,9 +76,9 @@ class tutorActions extends autoTutorActions
            try
             {
               //Chequeo que no exista un usuario con ese nombre
-              $user = sfGuardUserPeer::retrieveByUsername($username);
+              $this->user = sfGuardUserPeer::retrieveByUsername($username);
 
-              if(is_null($user))
+              if(is_null($this->user))
               {
                   //si el tutor tiene email registrado en el sistema.
                   
@@ -88,44 +88,27 @@ class tutorActions extends autoTutorActions
                   }
                   else {
                       //creo el usuario y envio el email.
-                      $user = new sfGuardUser();
-                      $user->setUsername($username);
+                      $this->user = new sfGuardUser();
+                      $this->user->setUsername($username);
                       
                       /*Generar password aleatoria*/
-                      $password = randomPassword::generate();
+                      $this->password = randomPassword::generate();
 
+                      $this->user->setPassword($this->password);
 
-                      $user->setPassword($password);
-                  
-                      $user->setIsActive(true);
-                      $user->setMustChangePassword(true);
-                      $user->save(Propel::getConnection());
+                      $this->user->setIsActive(true);
+                      $this->user->setMustChangePassword(true);
+                      $this->user->save(Propel::getConnection());
                       
                       //le seteo el usuario al tutor
                       
-                      $this->tutor->getPerson()->setUserId($user->getId());
+                      $this->tutor->getPerson()->setUserId($this->user->getId());
                       $this->tutor->save(Propel::getConnection());
-                      
 
-                      $to_name = $this->tutor->getPerson()->getFirstname();
-                      $body = "Hola,". $to_name. ".\n Se ha generado una nuevo usuario para el sistema de alumnos Kimkelen.\nUsuario: " .$username . "\nContraseña:" . $password ;
-                      $from = sfConfig::get('app_mailer_from');
-                      $from_name = sfConfig::get('app_mailer_name_from');
-                      $to = $this->tutor->getPerson()->getEmail();
-                      $subject = sfConfig::get('app_mailer_new_user_subject');
+                      $this->link = sfContext::getInstance()->getRequest()->getHost() . '/tutors_frontend.php';
 
+                      $this->setTemplate('printUser');
 
-                      $mailer = sfContext::getInstance()->getMailer();
-                      $message = Swift_Message::newInstance()
-                        ->setFrom($from, $from_name)
-                        ->setTo($to, $to_name)
-                        ->setSubject($subject)
-                        ->setBody($body);
-
-                      $message->setContentType("text/html");
-                      $mailer->send($message);
-
-                      $this->getUser()->setFlash("notice", "The item was updated successfully.");
                   }
               }
               else

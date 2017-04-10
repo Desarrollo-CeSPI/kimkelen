@@ -23,11 +23,6 @@
 <?php include_javascripts_for_form($form) ?>
 <div id="sf_admin_container">
   <h1><?php echo __('Generate user for tutor %tutor%', array("%tutor%" => $tutor->getPerson()->getFullName())) ?></h1>
-  <div>
-	<div class="warning change_status">
-	    <?php echo __('Se generará una contraseña automática y será enviada a la cuenta de email registrada en el sistema.') ?>
-	</div>
-  </div>
 	
   <div id="sf_admin_content">
     <form action="<?php echo url_for('tutor/generateUser') ?>" method="post">
