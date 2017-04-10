@@ -120,8 +120,7 @@ class tutorActions extends autoTutorActions
             catch (Exception $e)
             {
               $this->getUser()->setFlash('error', 'Ocurrio un error durante la generación de usuario.');
-            }     
-        
+            }
       }
     }
     else{
@@ -129,5 +128,23 @@ class tutorActions extends autoTutorActions
         $this->tutor = $this->getRoute()->getObject();
     }
        
+  }
+
+  public function executeDeactivate(sfWebRequest $request)
+  {
+    $this->tutor = $this->getRoute()->getObject();
+    $this->tutor->getPerson()->setIsActive(false);
+    $this->tutor->save();
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@tutor');
+  }
+
+  public function executeActivate(sfWebRequest $request)
+  {
+    $this->tutor = $this->getRoute()->getObject();
+    $this->tutor->getPerson()->setIsActive(true);
+    $this->tutor->save();
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@tutor');
   }
 }

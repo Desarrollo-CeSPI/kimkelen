@@ -1702,9 +1702,11 @@ class Student extends BaseStudent
     $c->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
     
     return StudentCareerSchoolYearPeer::doSelectOne($c);
+
     }
 
-  public function getIsTutor($tutor){
+  public function getIsTutor($tutor)
+  {
 	  
 	  $c = new Criteria();
 	  $c->add(StudentTutorPeer::STUDENT_ID, $this->getId());
