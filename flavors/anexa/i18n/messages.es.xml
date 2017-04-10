@@ -4563,6 +4563,18 @@
                 <source>Generate user for tutor %tutor%</source>
                 <target>Generar usuario para el tutor %tutor%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Enter system following this link</source>
+                <target>Ingrese al sistema desde el siguiente enlace</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username and password will allow you to log in the system.</source>
+                <target>A través del siguiente nombre de usuario y contraseña podrá ingresar al sistema.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>You will be asked to change your password when you login for the first time.</source>
+                <target>Se le solicitará un cambio de contraseña obligatorio al ingresar por primera vez.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

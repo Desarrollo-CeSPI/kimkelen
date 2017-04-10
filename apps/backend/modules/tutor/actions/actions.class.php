@@ -101,12 +101,12 @@ class tutorActions extends autoTutorActions
                       $this->user->save(Propel::getConnection());
                       
                       //le seteo el usuario al tutor
-                      
                       $this->tutor->getPerson()->setUserId($this->user->getId());
                       $this->tutor->save(Propel::getConnection());
 
                       $this->link = sfContext::getInstance()->getRequest()->getHost() . '/tutors_frontend.php';
 
+                    $this->setLayout('cleanLayout');
                       $this->setTemplate('printUser');
 
                   }
