@@ -4555,6 +4555,10 @@
         <source>You will be asked to change your password when you login for the first time.</source>
         <target>Se le solicitará un cambio de contraseña obligatorio al ingresar por primera vez.</target>
     </trans-unit>
+    <trans-unit>
+        <source>You have successfully requested information on how to reset your password. Please check your e-mail to reset your password.</source>
+        <target>Se le ha enviado un correo electrónico a su casilla de correo. En el mismo encontrará la información con los pasos a seguir para regenerar su contraseña. Por favor, chequee su casilla de correo para encontrar este mensaje y continuar con el proceso.</target>
+    </trans-unit>
   </body>
 </file>
 </xliff>

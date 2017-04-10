@@ -44,8 +44,14 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 
 				$this->forward404Unless($tutor, 'user tutor not found');
 
-				$link = $this->generateUrl('reset_password', array(), true);
-				dcMailer::sendResetPasswordEmail($tutor->getPerson(), $sf_guard_user);
+
+				$token_user = new TokenUser();
+				$token_user->setsfGuardUser($sf_guard_user);
+				$token_user->setToken(md5(uniqid(rand(), true)));
+				$token_user->save();
+				$link = $this->generateUrl('reset_password', array(), true) . "/" . $token_user->getToken();
+				dcMailer::sendResetPasswordEmail($tutor->getPerson(), $token_user->getsfGuardUser(), $link);
+
 				$this->setTemplate('request_reset_password');
 			}
 		}

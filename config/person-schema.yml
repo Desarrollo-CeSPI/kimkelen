@@ -360,3 +360,19 @@ classes:
         required: true
       _uniques:
         license_type:  [name]
+
+  TokenUser:
+    tableName: token_user
+    description: Tokens válidos para reseteo de contraseña
+    columns:
+      id:
+      sf_guard_user_id:
+        type:             integer
+        foreignTable:     sf_guard_user
+        required: true
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         restrict
+      token:
+        type: varchar(50)
+        unique: true
