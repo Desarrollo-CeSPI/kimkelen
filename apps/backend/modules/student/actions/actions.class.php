@@ -882,7 +882,35 @@ class studentActions extends autoStudentActions
   public function executePrintWithdrawnCertificate($request)
   {
 	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
-	  $this->setLayout('cleanLayout');
+          /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
+           *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
+          
+          $school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+          
+          $scsy = $this->student->isRepprovedInSchoolYear($school_year);
+          $css = $this->student->getCourseSubjectStudentsForSchoolYear(SchoolYearPeer::retrieveCurrent());
+        
+          $dis_cs = array();
+          if(!is_null($scsy) && count($css) == 0 )
+          {
+             $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($this->student,$scsy->getCareerSchoolYear());
+            
+             if(is_null($dis_cs))
+             {
+                $dis_cs = array();
+             }
+          }
+          
+        $previous = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($this->student, $this->student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());
+	
+        if(is_null($previous))
+        {
+           $previous = array();
+        }
+        
+        $this->p = array_merge($previous,$dis_cs);
+      
+        $this->setLayout('cleanLayout');
   }
 
 }

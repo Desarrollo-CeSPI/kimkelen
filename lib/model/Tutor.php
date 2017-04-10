@@ -98,4 +98,9 @@ class Tutor extends BaseTutor
     return $students;
 	  
   }
+  
+  public function canGenerateUser()
+  {
+      return is_null($this->getPerson()->getUserId()); 
+  }
 }

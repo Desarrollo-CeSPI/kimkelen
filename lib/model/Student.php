@@ -1100,8 +1100,8 @@ class Student extends BaseStudent
   public function getLastStudentCareerSchoolYear($career_school_year = null)
   {
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID, $this->getId());
     if(! is_null($career_school_year))
     {
@@ -1674,6 +1674,36 @@ class Student extends BaseStudent
 	}
 	return false;
   }
+
+  
+  public function getLastStudentCareerSchoolYearCursed()
+  {
+    $c = new Criteria();
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
+    
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+ 
+    
+    return StudentCareerSchoolYearPeer::doSelectOne($c);
+  }
+  
+  public function isRepprovedInSchoolYear($school_year)
+  {
+    $c = new Criteria();
+    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getId());
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,CareerSchoolYearPeer::ID);
+    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
+    
+    return StudentCareerSchoolYearPeer::doSelectOne($c);
+    }
+
   public function getIsTutor($tutor){
 	  
 	  $c = new Criteria();
@@ -1684,6 +1714,7 @@ class Student extends BaseStudent
 	  
 	  return (!is_null($st));
   }
+
 }
 
 try { sfPropelBehavior::add('Student', array('person_delete')); } catch(sfConfigurationException $e ) {}

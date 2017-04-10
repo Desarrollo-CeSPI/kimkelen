@@ -3348,15 +3348,15 @@
             </trans-unit>
             <trans-unit>
                 <source>Disciplinary sanction type List</source>
-                <target>Motivos de sanciones</target>
+                <target>Gravedad de sanciones</target>
             </trans-unit>
             <trans-unit>
                 <source>New Disciplinary sanction type</source>
-                <target>Nuevo motivo de sanción</target>
+                <target>Nueva gravedad de sanción</target>
             </trans-unit>
             <trans-unit>
                 <source>Edit Disciplinary sanction type</source>
-                <target>Editar motivo de sanción</target>
+                <target>Editar gravedad de sanción</target>
             </trans-unit>
             <trans-unit>
                 <source>Sanction type List</source>
@@ -4542,7 +4542,7 @@
             </trans-unit>
             <trans-unit>
                 <source>Disciplinary sanction type</source>
-                <target>Motivo de sanción disciplinaria</target>
+                <target>Gravedad</target>
             </trans-unit>
             <trans-unit>
                 <source>Division title id</source>
@@ -4590,7 +4590,7 @@
             </trans-unit>
             <trans-unit>
                 <source>Edit last repproved examination</source>
-                <target>Editar ultima mesa de previa</target>
+                <target>Editar última mesa de previa</target>
             </trans-unit>
 	    <trans-unit>
                 <source>Regular certificate</source>
@@ -4603,6 +4603,26 @@
 	    <trans-unit>
                 <source>Withdrawn certificate</source>
                 <target>Constancia de adeudar materias</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Disciplinary sanction type id</source>
+                <target>Gravedad</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Disciplinary sanction types</source>
+                <target>Gravedad de sanciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Resolution number</source>
+                <target>Número de resolución</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate user</source>
+                <target>Generar usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate user for tutor %tutor%</source>
+                <target>Generar usuario para el tutor %tutor%</target>
             </trans-unit>
         </body>
     </file>

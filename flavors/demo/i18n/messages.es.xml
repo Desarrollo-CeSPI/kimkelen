@@ -4347,13 +4347,33 @@
                 <source>Regular certificate</source>
                 <target>Constancia de alumno regular</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>Graduate certificate</source>
                 <target>Constancia de egresado</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>Withdrawn certificate</source>
                 <target>Constancia de adeudar materias</target>
+            </trans-unit>
+            <trans-unit>
+		<source>Disciplinary sanction types</source>
+		<target>Motivos de sanciones</target>
+	    </trans-unit>
+	    <trans-unit>
+		<source>Disciplinary sanction type id</source>
+		<target>Motivo de sanción disciplinaria</target>
+	    </trans-unit>
+            <trans-unit>
+                <source>Resolution number</source>
+                <target>Número de resolución</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate user</source>
+                <target>Generar usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate user for tutor %tutor%</source>
+                <target>Generar usuario para el tutor %tutor%</target>
             </trans-unit>
         </body>
     </file>

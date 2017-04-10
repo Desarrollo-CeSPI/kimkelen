@@ -27,21 +27,19 @@
 				El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
 			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
 			    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
-			    <b> <?php echo $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
-			    <?php $p = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($student, $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());?>
+                            <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
 			    
-			    <?php if(count ($p) == 0): ?>
-					<?php echo "sin adeudar materias."?>
+                                <?php if(count ($p) == 0): ?>
+					<?php echo "sin adeudar materias"?>
 				<?php else:?>
 				
 					<?php echo 'adeudando ' ?>
-					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' ?></b>
+					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año' ?></b>
 					
 					<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
 					<b>
 						<?php echo ($i == (count($p) -1)) ? 'y' : ',' ;?>
-						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() ;?> 
-						<?php echo ($p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()) ? ' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getDivision()->getYear() .'° año' : ''; ?>							
+						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año';?> 
 					</b>
 					<?php endfor?>
 				<?php endif?>

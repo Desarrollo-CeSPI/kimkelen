@@ -594,29 +594,37 @@ class Division extends BaseDivision
 
   public function createCopyForSchoolYear(PropelPDO $con = null, $career_school_year)
   {
-    $copy_division = new Division();
-    $copy_division->setDivisionTitle($this->getDivisionTitle());
-    $copy_division->setCareerSchoolYear($career_school_year);
-    $copy_division->setShift($this->getShift());
-    $copy_division->setYear($this->getYear());
-    $copy_division->save($con);
-
-    $this->copyPreceptorsToDivision($con, $copy_division);
-    $this->copyCoursesToDivision($con, $copy_division, $career_school_year);
-
-
-    if ($this->getYear() <= $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
+    try
     {
-      $copy_division->createStudentsForNextYear($con, $this->getCareerSchoolYear());
+      $con->beginTransaction();
+
+      $copy_division = new Division();
+      $copy_division->setDivisionTitle($this->getDivisionTitle());
+      $copy_division->setCareerSchoolYear($career_school_year);
+      $copy_division->setShift($this->getShift());
+      $copy_division->setYear($this->getYear());
+      $copy_division->save($con);
+
+      $this->copyPreceptorsToDivision($con, $copy_division);
+      $this->copyCoursesToDivision($con, $copy_division, $career_school_year);
+
+      if ($this->getYear() <= $career_school_year->getCareer()->getQuantityYears() && $this->getYear() > 1)
+      {
+        $copy_division->createStudentsForNextYear($con, $this->getCareerSchoolYear());
+      }
+
+      $copy_division->clearAllReferences(true);
+      unset($copy_division);
+      $career_school_year->clearAllReferences(true);
+      unset($career_school_year);
+      $this->clearAllReferences(true);
+
+      $con->commit();
     }
-
-
-    $copy_division->clearAllReferences(true);
-    unset($copy_division);
-    $career_school_year->clearAllReferences(true);
-    unset($career_school_year);
-    $this->clearAllReferences(true);
-
+    catch (Exception $e)
+    {
+      $con->rollBack();
+    }
   }
 
   public function createStudentsForNextYear(PropelPDO $con = null, CareerSchoolYear $last_career_school_year)
