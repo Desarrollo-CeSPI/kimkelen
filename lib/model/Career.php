@@ -274,4 +274,5 @@ class Career extends BaseCareer
   }
 
 }
-sfPropelBehavior::add('Career', array('changelog'));
+
+try { sfPropelBehavior::add('Career', array('changelog')); } catch(sfConfigurationException $e){}

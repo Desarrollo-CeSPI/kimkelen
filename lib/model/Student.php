@@ -1674,6 +1674,7 @@ class Student extends BaseStudent
 	}
 	return false;
   }
+
   
   public function getLastStudentCareerSchoolYearCursed()
   {
@@ -1701,7 +1702,20 @@ class Student extends BaseStudent
     $c->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
     
     return StudentCareerSchoolYearPeer::doSelectOne($c);
-    }
+  }
+
+  public function getIsTutor($tutor)
+  {
+	  
+	  $c = new Criteria();
+	  $c->add(StudentTutorPeer::STUDENT_ID, $this->getId());
+	  $c->add(StudentTutorPeer::TUTOR_ID, $tutor->getId());
+	  
+	  $st = StudentTutorPeer::doSelectOne($c);
+	  
+	  return (!is_null($st));
+  }
+
 }
 
-sfPropelBehavior::add('Student', array('person_delete'));
+try { sfPropelBehavior::add('Student', array('person_delete')); } catch(sfConfigurationException $e ) {}

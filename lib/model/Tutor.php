@@ -87,6 +87,7 @@ class Tutor extends BaseTutor
     return implode(',  ', $students);
   }
   
+
   public function canBeDeactivated()
   {
       return $this->getPerson()->getIsActive();
@@ -96,4 +97,18 @@ class Tutor extends BaseTutor
   {
       return !$this->getPerson()->getIsActive();
   }
+
+
+  public function getStudentsArray()
+  {
+	$students = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $students[] = $student_tutor->getStudent();
+    }
+
+    return $students;
+	  
+  }
 }
+

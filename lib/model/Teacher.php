@@ -200,4 +200,4 @@ class Teacher extends BaseTeacher
 
 }
 
-sfPropelBehavior::add('Teacher', array('person_delete'));
+try { sfPropelBehavior::add('Teacher', array('person_delete')); } catch(sfConfigurationException $e) {}

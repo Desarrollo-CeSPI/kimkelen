@@ -135,6 +135,16 @@ abstract class sfComponent
   }
 
   /**
+   * Gets the current mailer instance.
+   *
+   * @return sfMailer A sfMailer instance
+   */
+  public function getMailer()
+  {
+    return $this->getContext()->getMailer();
+  }
+
+  /**
    * Displays a message as a short message in the sfWebDebug toolbar.
    *
    * @param string $message The message text

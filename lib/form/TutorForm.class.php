@@ -63,7 +63,7 @@ class TutorForm extends BaseTutorForm
           'Personal data'   =>  array( 'person-lastname', 'person-firstname', 'person-identification_type', 'is_alive', 'person-identification_number', 'person-sex', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department' ,'person-birth_city', 'tutor_type_id', 'person-observations' ),
           'Statistics'      => array('nationality' ,'occupation_id', 'occupation_category_id', 'study_id'),
           'Contact data'   => array('person-email', 'person-phone', 'person-address'),
-   //       'System access'  => array('person-username', 'person-password', 'person-password_again'),
+		  'System access'  => array('person-username', 'person-password', 'person-password_again'),
           'In charge of'  => array('student_list')
     );
   }
@@ -72,6 +72,7 @@ class TutorForm extends BaseTutorForm
   {
     parent::doSave($con);
     $this->saveStudentList($con);
+    $this->saveChangePassword($con);
   }
 
   public function saveStudentList($con = null)
@@ -114,6 +115,27 @@ class TutorForm extends BaseTutorForm
       $con->rollBack();
     }
 
+  }
+  
+  public function saveChangePassword($con = null)
+  {
+	if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+    
+    $tutor = TutorPeer::retrieveByUsername($this->getValue('person-username'));
+    //si tiene usuario
+    if(! is_null($tutor))
+    {
+		$user = sfGuardUserPeer::retrieveByPk($tutor->getPerson()->getUserId(),Propel::getConnection());
+		//no se logueo nunca
+		if(is_null($user->getLastLogin()))
+		{
+			$user->setMustChangePassword(true);
+			$user->save(Propel::getConnection());
+		}
+	}
   }
 
 

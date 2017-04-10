@@ -1,0 +1,51 @@
+student:
+  class: sfPropelRouteCollection
+  options:
+    model:                Student
+    module:               student
+    prefix_path:          student
+    column:               id
+    with_wildcard_routes: true
+
+homepage:
+  url:   /
+  param: { module: mainFrontend, action: index }
+
+# default rules
+sf_guard_secure:
+  url:   /acceso-denegado
+  param: { module: sfGuardAuth, action: secure }
+
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardForgotPassword, action: password }
+
+reset_password:
+  url:   /reset_password
+  param: { module: sfGuardForgotPassword, action: setPassword }
+  
+facebook_login:
+  url: /facebookLogin
+  param : { module: sfGuardAuth, action: facebookLogin }
+
+change_password:
+  url:    /cambiar-password
+  param:  { module: sfGuardChangePassword, action: index}
+  
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+  
+
