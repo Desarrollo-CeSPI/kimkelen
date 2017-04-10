@@ -61,5 +61,23 @@ class tutorActions extends autoTutorActions
     }
 
   }
+  
+  public function executeDeactivate(sfWebRequest $request)
+  {
+     $this->tutor = $this->getRoute()->getObject();
+     $this->tutor->getPerson()->setIsActive(false);
+     $this->tutor->save();
+     $this->getUser()->setFlash('info','The item was updated successfully.');
+     $this->redirect('@tutor');
+  }
+  
+  public function executeActivate(sfWebRequest $request)
+  {
+     $this->tutor = $this->getRoute()->getObject();
+     $this->tutor->getPerson()->setIsActive(true);
+     $this->tutor->save();
+     $this->getUser()->setFlash('info','The item was updated successfully.');
+     $this->redirect('@tutor');
+  }
 
 }

@@ -76,6 +76,16 @@ generator:
             credentials:   [edit_tutor]
           _delete:
             credentials:   [edit_tutor]
+          deactivate:
+            label: Set inactive
+            credentials: [edit_tutor]
+            action: deactivate
+            condition: canBeDeactivated
+          activate:
+            label: Set active
+            credentials: [edit_tutor]
+            action: activate
+            condition: canBeActivated
       filter:
       form:
       edit:

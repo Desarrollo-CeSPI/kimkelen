@@ -86,4 +86,14 @@ class Tutor extends BaseTutor
 
     return implode(',  ', $students);
   }
+  
+  public function canBeDeactivated()
+  {
+      return $this->getPerson()->getIsActive();
+  }
+  
+  public function canBeActivated()
+  {
+      return !$this->getPerson()->getIsActive();
+  }
 }
