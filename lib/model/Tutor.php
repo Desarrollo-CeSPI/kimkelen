@@ -113,7 +113,7 @@ class Tutor extends BaseTutor
   
   public function canGenerateUser()
   {
-      return is_null($this->getPerson()->getUserId()); 
+      return is_null($this->getPerson()->getUserId()) && $this->getPerson()->getIsActive();
   }
 }
 

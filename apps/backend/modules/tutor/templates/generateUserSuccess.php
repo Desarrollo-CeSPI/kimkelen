@@ -23,7 +23,10 @@
 <?php include_javascripts_for_form($form) ?>
 <div id="sf_admin_container">
   <h1><?php echo __('Generate user for tutor %tutor%', array("%tutor%" => $tutor->getPerson()->getFullName())) ?></h1>
-	
+
+  <div class="warning change_status">
+    <?php echo __('Recuerde verificar los datos del tutor, especialmente el e-mail registrado en el sistema. Valide también si el mismo está autorizado a acceder a los datos de/del el/los estudiante/s.') ?>
+  </div>
   <div id="sf_admin_content">
     <form action="<?php echo url_for('tutor/generateUser') ?>" method="post">
 

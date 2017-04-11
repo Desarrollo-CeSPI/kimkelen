@@ -87,7 +87,7 @@ class tutorActions extends autoTutorActions
                       $this->getUser()->setFlash('error', 'El tutor no tiene cuenta de email registrada.');
                   }
                   else {
-                      //creo el usuario y envio el email.
+                      //creo el usuario
                       $this->user = new sfGuardUser();
                       $this->user->setUsername($username);
                       
@@ -106,7 +106,7 @@ class tutorActions extends autoTutorActions
 
                       $this->link = sfContext::getInstance()->getRequest()->getHost() . '/tutors_frontend.php';
 
-                    $this->setLayout('cleanLayout');
+                      $this->setLayout('cleanLayout');
                       $this->setTemplate('printUser');
 
                   }

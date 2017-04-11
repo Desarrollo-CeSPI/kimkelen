@@ -38,6 +38,7 @@
 	<div class="colsbottom">
 			<p><?php echo __('Username') ?>: <strong><?php echo $user->getUsername(); ?></strong></p>
 			<p><?php echo __('Password') ?>: <strong><?php echo $password; ?></strong></p>
+		  <p><?php echo __('Email') ?>: <strong><?php echo $tutor->getPerson()->getEmail(); ?></strong></p>
 			<p><?php echo __("Enter system following this link"); ?> <strong>: <?php echo $link ?></strong></p>
 	</div>
 </div>

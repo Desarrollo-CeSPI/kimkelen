@@ -212,6 +212,10 @@
                 <source>The password is too weak. It must be at least 8 characters long AND contain at least 2 alphabetical characters AND 2 digital characters AND one symbol among !@#$%^&amp;*-.</source>
                 <target>La contraseña ingresada es demasiado débil. Debe tener al menos 8 caracteres de longitud y contener: al menos dos (2) caracteres alfabéticos, al menos dos (2) caracteres numéricos y al menos un (1) caracter especial de los siguientes: !@#$%^&amp;*-</target>
             </trans-unit>
+        <trans-unit>
+            <source>Password changed successfuly</source>
+            <target>La contraseña fue restablecida satisfactoriamente.</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
