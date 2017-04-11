@@ -235,8 +235,9 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     if (!$this->areAllMarksClosed() || $this->getIsNotAverageable())
       return '';
 
-    $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
-    
+    $student_approved_course_subject = $this->getStudentApprovedCourseSubject();
+    $student_approved_career_subject = ($student_approved_course_subject) ?$student_approved_course_subject->getStudentApprovedCareerSubject() : null;
+
     $config = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
   	
   	if($config != null && !$config->isNumericalMark())
@@ -270,7 +271,6 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
     $course_subject_student_examination = $this->getLastCourseSubjectStudentExamination();
     $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();
-
     if (is_null($course_subject_student_examination))
     {
       return $this->getFinalMark();

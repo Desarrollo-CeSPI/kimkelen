@@ -4730,7 +4730,7 @@
                 <source>Graduate certificate</source>
                 <target>Constancia de egresado</target>
             </trans-unit>
-	    <trans-unit>
+	        <trans-unit>
                 <source>Withdrawn certificate</source>
                 <target>Constancia de adeudar materias</target>
             </trans-unit>
@@ -4738,14 +4738,6 @@
                 <source>Resolution number</source>
                 <target>Número de resolución</target>
             </trans-unit>
-	    <trans-unit>
-		  <source>Disciplinary sanction types</source>
-		  <target>Motivos de sanciones</target>
-	    </trans-unit>
-	    <trans-unit>
-		<source>Disciplinary sanction type id</source>
-		  <target>Motivo de sanción disciplinaria</target>
-	    </trans-unit>
         <trans-unit>
           <source>Generate user</source>
           <target>Generar usuario</target>
@@ -4769,6 +4761,14 @@
         <trans-unit>
             <source>You have successfully requested information on how to reset your password. Please check your e-mail to reset your password.</source>
             <target>Se le ha enviado un correo electrónico a su casilla de correo. En el mismo encontrará la información con los pasos a seguir para regenerar su contraseña. Por favor, chequee su casilla de correo para encontrar este mensaje y continuar con el proceso.</target>
+        </trans-unit>
+        <trans-unit>
+          <source>Disciplinary sanction types</source>
+          <target>Motivos de sanciones</target>
+        </trans-unit>
+        <trans-unit>
+          <source>Disciplinary sanction type id</source>
+          <target>Motivo de sanción disciplinaria</target>
         </trans-unit>
         </body>
     </file>
