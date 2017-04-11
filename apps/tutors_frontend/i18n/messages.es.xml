@@ -216,6 +216,10 @@
             <source>Password changed successfuly</source>
             <target>La contraseña fue restablecida satisfactoriamente.</target>
         </trans-unit>
+        <trans-unit>
+            <source>Logout</source>
+            <target>Cerrar sesión</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
