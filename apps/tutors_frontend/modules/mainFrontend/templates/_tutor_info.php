@@ -46,7 +46,7 @@
       
       <div class="tutor-contact-info">
           <p class="">
-              <?php echo __("En caso de modificar algún dato, por favor comuníquese con el colegio."); ?>
+              <?php echo __("En caso de que cambie algún dato, por favor informarlo en el colegio."); ?>
           </p>
       </div>
       

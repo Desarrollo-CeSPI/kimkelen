@@ -115,5 +115,18 @@ class Tutor extends BaseTutor
   {
       return is_null($this->getPerson()->getUserId()) && $this->getPerson()->getIsActive();
   }
+
+  public function getMessageCantGenerateUser()
+  {
+    $has_id = $this->getPerson()->getUserId();
+
+    if ($has_id)
+    {
+      return 'User already created';
+    }
+    elseif (!$this->getPerson()->getIsActive()){
+      return 'Person must be active';
+    }
+  }
 }
 

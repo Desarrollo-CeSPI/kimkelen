@@ -4391,6 +4391,14 @@
             <source>You have successfully requested information on how to reset your password. Please check your e-mail to reset your password.</source>
             <target>Se le ha enviado un correo electrónico a su casilla de correo. En el mismo encontrará la información con los pasos a seguir para regenerar su contraseña. Por favor, chequee su casilla de correo para encontrar este mensaje y continuar con el proceso.</target>
         </trans-unit>
+        <trans-unit>
+            <source>Person must be active</source>
+            <target>La persona debe estar activa</target>
+        </trans-unit>
+        <trans-unit>
+            <source>User already created</source>
+            <target>El usuario ya fue generado</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>

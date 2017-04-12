@@ -4770,6 +4770,14 @@
           <source>Disciplinary sanction type id</source>
           <target>Motivo de sanción disciplinaria</target>
         </trans-unit>
+        <trans-unit>
+            <source>Person must be active</source>
+            <target>La persona debe estar activa</target>
+        </trans-unit>
+        <trans-unit>
+            <source>User already created</source>
+            <target>El usuario ya fue generado</target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
