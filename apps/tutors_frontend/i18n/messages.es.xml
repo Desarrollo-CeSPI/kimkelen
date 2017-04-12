@@ -4,7 +4,7 @@
     <file original="global" source-language="en" datatype="plaintext" date="2009-04-30T12:40:33Z">
         <header/>
         <body>     
-	       <trans-unit>
+	    <trans-unit>
                 <source>Attendance</source>
                 <target>Inasistencias</target>
             </trans-unit>
@@ -212,14 +212,22 @@
                 <source>The password is too weak. It must be at least 8 characters long AND contain at least 2 alphabetical characters AND 2 digital characters AND one symbol among !@#$%^&amp;*-.</source>
                 <target>La contraseña ingresada es demasiado débil. Debe tener al menos 8 caracteres de longitud y contener: al menos dos (2) caracteres alfabéticos, al menos dos (2) caracteres numéricos y al menos un (1) caracter especial de los siguientes: !@#$%^&amp;*-</target>
             </trans-unit>
-        <trans-unit>
-            <source>Password changed successfuly</source>
-            <target>La contraseña fue restablecida satisfactoriamente.</target>
-        </trans-unit>
-        <trans-unit>
-            <source>Logout</source>
-            <target>Cerrar sesión</target>
-        </trans-unit>
+            <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Logout</source>
+                <target>Cerrar sesión</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Facebook account</source>
+                <target>Cuenta de Facebook</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Unlink</source>
+                <target>Desvincular</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

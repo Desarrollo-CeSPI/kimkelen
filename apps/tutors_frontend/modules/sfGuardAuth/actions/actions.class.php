@@ -46,26 +46,32 @@
         
         if(!is_null($tutor) && $tutor->getPerson()->getIsActive())
         {
-			if ($this->form->isValid())
-			{  
+            if ($this->form->isValid())
+            {  
 				
-			  $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
-				//tiene facebookID lo asocio al usuario.
-				 if(!is_null($user->getFacebookId()))
-				 {
-					 $social_user = new GuardUserSocial();
-					 $social_user->setSocialId($user->getFacebookId());
-					 $social_user->setUserId($tutor->getPerson()->getUserId());
-					 $social_user->save();
-				 }
-				$signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer('@homepage'));
-
-			  return $this->redirect($signinUrl);
-			}
+		$this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
+		//tiene facebookID lo asocio al usuario.
+		if(!is_null($user->getFacebookId()))
+		{
+                    $social_user = new GuardUserSocial();
+                    $social_user->setSocialId($user->getFacebookId());
+                    $social_user->setUserId($tutor->getPerson()->getUserId());
+                    $social_user->save();
 		}
+		$signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer('@homepage'));
+
+		 return $this->redirect($signinUrl);
+            }
+	}
+        else{
+            $this->getUser()->resetFacebookAttributes();
+            $this->getUser()->setFlash('notice', "La cuenta de usuario se encuentra deshabilitada.");
+            $this->redirect('@sf_guard_signin');
+            
+        }
         
       }
-		$this->setTemplate('signinFrontend');
+        $this->setTemplate('signinFrontend');
     }
     
     public function executeFacebookLogin($request)
@@ -116,14 +122,24 @@
 
           if (!is_null($user))
           {
-              // si ya estaba asociado a un usuario lo ingreso a la cuenta de kimkelen
+              // si ya estaba asociado a un usuario y HABILITADO  lo ingreso a la cuenta de kimkelen
               $user_app = sfGuardUserPeer::retrieveByPk($user->getUserId());
-              $this->getUser()->signin($user_app, false);
-              $this->redirect('@homepage');
+              $tutor= TutorPeer::retrieveByUsername($user_app->getUsername());
+              if($tutor->getPerson()->getIsActive())
+              {
+                $this->getUser()->signin($user_app, false);
+                $this->redirect('@homepage');   
+              }
+              else
+              {
+                  $this->getUser()->resetFacebookAttributes();
+                  $this->getUser()->setFlash('notice', "La cuenta de usuario se encuentra deshabilitada.");
+                  $this->redirect('@sf_guard_signin');
+              }
           }
           else
           {
-            // usuario nuevo
+            // new user
             if (!$this->getUser()->isAuthenticated())
             {
                 $this->getUser()->setFlash('notice', "Tu cuenta de Facebook no está asociada a Kimkëlen, ingresá con tu usuario y contraseña y luego podrás ingresar con Facebook.");
@@ -134,18 +150,27 @@
         }
       }
 		
-	  $this->redirect('@sf_guard_signin');
+        $this->redirect('@sf_guard_signin');
 		
-	}
+    }
 	
-	public function executeSignout($request)
-	{
-		$this->getUser()->resetFacebookAttributes();
-		$this->getUser()->signOut();
+    public function executeSignout($request)
+    {
+	$this->getUser()->resetFacebookAttributes();
+	$this->getUser()->signOut();
 
-		$signoutUrl = sfConfig::get('app_sf_guard_plugin_success_signout_url', $request->getReferer());
+	$signoutUrl = sfConfig::get('app_sf_guard_plugin_success_signout_url', $request->getReferer());
 
-		$this->redirect('' != $signoutUrl ? $signoutUrl : '@homepage');
-	}
+	$this->redirect('' != $signoutUrl ? $signoutUrl : '@homepage');
+    }
+    
+    public function executeFacebookUnlink($request)
+    {
+        //delete
+        GuardUserSocialPeer::deleteBySocialId($this->getUser()->getFacebookId());
+        $this->getUser()->resetFacebookAttributes();
+        $this->redirect('@homepage');
+        
+    }
 	
   }

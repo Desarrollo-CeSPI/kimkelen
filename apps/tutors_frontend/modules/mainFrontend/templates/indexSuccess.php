@@ -27,7 +27,7 @@
 			<?php echo __($sf_user->getFlash('notice'), array(), 'sf_admin') ?>
 		</div>
 	<?php endif; ?>
-    <?php include_partial('personal_info', array('person'=>$tutor)); ?>
+    <?php include_partial('tutor_info', array('person'=>$tutor)); ?>
     <?php include_partial('students_box', array('students'=>$students)); ?>
   </div>
 </div>

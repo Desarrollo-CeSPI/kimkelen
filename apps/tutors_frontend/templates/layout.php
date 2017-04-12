@@ -49,6 +49,9 @@
     <div class="logo_footer">
       <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Inicio'))) ?>
     </div>
+    <div class="contact-info">
+      <?php $school_behaviour = SchoolBehaviourFactory::getInstance(); echo $school_behaviour->getSchoolName() .' - '.$school_behaviour->getPhone(); ?>
+    </div>
     © <?php echo date('Y') ?>| CeSPI - UNLP | <?php echo __('v%%number%%', array('%%number%%' => sfConfig::get('app_version_number', 1))) ?>
   </footer>
 

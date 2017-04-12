@@ -81,6 +81,7 @@ class myUser extends sfGuardSecurityUser
         {
             $this->getAttributeHolder()->remove('facebook_id');
             $this->getAttributeHolder()->remove('facebook_name');
+            $this->getAttributeHolder()->remove('facebook_state');
         }
 
         public function getFacebookState() {

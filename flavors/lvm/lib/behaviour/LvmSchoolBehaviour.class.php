@@ -24,7 +24,8 @@
  */
 class LvmSchoolBehaviour extends BaseSchoolBehaviour
 {
-	protected $school_name = "Liceo Víctor Mercante";
+    protected $school_name = "Liceo Víctor Mercante";
+    protected $phone = "0221-423-6707 / 08";
 
   public function getListObjectActionsForSchoolYear()
   {

@@ -9,4 +9,13 @@ class GuardUserSocialPeer extends BaseGuardUserSocialPeer
 		
 		return GuardUserSocialPeer::doSelectOne($c);
 	}
+        
+        public static function deleteBySocialId($social_id)
+        {
+            $c = new Criteria();
+	    $c->add(GuardUserSocialPeer::SOCIAL_ID,$social_id);
+		
+	    return GuardUserSocialPeer::doDelete($c);
+            
+        }
 }
