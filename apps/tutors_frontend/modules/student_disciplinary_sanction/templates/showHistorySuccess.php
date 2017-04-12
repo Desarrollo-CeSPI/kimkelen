@@ -51,45 +51,48 @@
           <?php endforeach ?>
           </ul>
 
-          <div class="data-box">
-		  <?php $global = 0; ?>
-          <?php foreach ($student->getStudentCareerSchoolYears() as $student_career_school_year): ?>
-            <?php $year= $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(); ?>
-            <?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive() || ($year == $last_year))?'tab-pane active' : 'tab-pane'; ?>
-            <div role="tabpanel" class="<?php echo $class ?>" id="<?php echo $year ?>">
-				<?php $total= 0 ;?>
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
-					  <thead>
-						<tr>
-						  <th><?php echo __('Sanction type') ?></th>
-						  <th><?php echo __('Total') ?></th>
-						</tr>
-					  </thead>
-					  <tbody>
-					  <?php foreach ($sanctions_type as $st): ?>
-						<tr>
-						  <td><?php echo $st->getName() ?></td>
-						  <td><?php echo $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()] ?></td>
-						</tr>
-						<?php $total += $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()]; ?>
-					  <?php endforeach; ?>
-					  </tbody>
-					  <tfoot>
-						<tr>
-						  <td> <strong>Total</strong> </td>
-						  <td> <strong><?php echo $total ?></strong> </td>
-						</tr>
-					  </tfoot>
-					</table>
-				</div>
-            </div>
-          <?php $global += $total; ?>
-          <?php endforeach ?>
-			 <div class="pull-right">
-				<b>Total: </b> <?php echo $global ?>
-			 </div>
-		  </div>
+            <div class="data-box">
+                <div class="alert alert-info">
+                    <?php echo __("Cualquier duda o inquietud comuníquese con el preceptor.") ?>
+                </div>
+		<?php $global = 0; ?>
+                <?php foreach ($student->getStudentCareerSchoolYears() as $student_career_school_year): ?>
+                <?php $year= $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(); ?>
+                <?php $class= ($student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getIsActive() || ($year == $last_year))?'tab-pane active' : 'tab-pane'; ?>
+                <div role="tabpanel" class="<?php echo $class ?>" id="<?php echo $year ?>">
+                    <?php $total= 0 ;?>
+                    <div class="table-responsive">
+			<table class="table table-striped table-bordered">
+                            <thead>
+				<tr>
+                                    <th><?php echo __('Sanction type') ?></th>
+                                    <th><?php echo __('Total') ?></th>
+				</tr>
+                            </thead>
+                            <tbody>
+				<?php foreach ($sanctions_type as $st): ?>
+				<tr>
+				    <td><?php echo $st->getName() ?></td>
+				    <td><?php echo $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()] ?></td>
+				</tr>
+				<?php $total += $info[$student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear()][$st->getName()]; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+				<tr>
+				    <td> <strong>Total</strong> </td>
+				    <td> <strong><?php echo $total ?></strong> </td>
+				</tr>
+                            </tfoot>
+			</table>
+                    </div>
+                </div>
+                <?php $global += $total; ?>
+                <?php endforeach ?>
+                <div class="pull-right">
+                    <b>Total: </b> <?php echo $global ?>
+                </div>
+            </div>      
         </div>
       </div>
     </div>

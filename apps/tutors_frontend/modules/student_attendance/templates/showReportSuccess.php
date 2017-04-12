@@ -38,55 +38,62 @@
           )?>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-12">
           <div class="data-box">
-			<div class="table-responsive">
-			  <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th><?php echo __('Day') ?></th>
-                    <th><?php echo __('Absence') ?></th>
-                    <?php if ($student->hasAttendancesPerSubject()): ?>
-                    <th><?php echo __('Subject') ?></th>
-                    <?php endif; ?>
-                    <th><?php echo __('Is justified') ?></th>
-                    <th><?php echo __('Justification type') ?></th>
-                    <th><?php echo __('Description') ?></th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($student_career_school_years as $student_career_school_year): ?>
-                  <?php foreach ($student_career_school_year->getDivisions() as $division): ?>
-                    <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
+            <?php foreach ($student_career_school_years as $student_career_school_year): ?>
+               <?php foreach ($student_career_school_year->getDivisions() as $division): ?>
+              
+              <?php if (count($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId())) == 0): ?>
+               
+                <div class="alert alert-success"><?php echo __('No se registraron inasistencias para este alumno.'); ?></div>
+              <?php else: ?>
+              
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered">
+                    <thead>
                       <tr>
-                        <td><?php echo $absence->getFormattedDay(); ?></td>
-                        <td><?php echo $absence->getValueString() ?></td>
+                        <th><?php echo __('Day') ?></th>
+                        <th><?php echo __('Absence') ?></th>
                         <?php if ($student->hasAttendancesPerSubject()): ?>
-                        <td><?php echo ($course_subject = $absence->getCourseSubject()) ? $absence->getCourseSubject() : '-' ?></td>
+                        <th><?php echo __('Subject') ?></th>
                         <?php endif; ?>
-                        <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? 'Sí' : 'No' ?></td>
-                        <td><?php echo ($type = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getJustificationType() : '-' ?></td>
-                        <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getObservation() : '-' ?></td>
+                        <th><?php echo __('Is justified') ?></th>
+                        <th><?php echo __('Justification type') ?></th>
+                        <th><?php echo __('Description') ?></th>
                       </tr>
-                    <?php endforeach; ?>
-                  <?php endforeach; ?>
-                <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="5" class="text-right"><?php echo __('Total') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId(), false), 2) ?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" class="text-right"><?php echo __('Unjustified') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId()), 2) ?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5" class="text-right"><?php echo __('Justified') . ': ' . round($student->getTotalJustificatedAbsencesReport($division->getCareerSchoolYearId()), 2) ?></td>
-                  </tr>
-                </tfoot>
-              </table>
-             </div>
+                    </thead>
+                    <tbody>
+
+                        <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
+                          <tr>
+                            <td><?php echo $absence->getFormattedDay(); ?></td>
+                            <td><?php echo $absence->getValueString() ?></td>
+                            <?php if ($student->hasAttendancesPerSubject()): ?>
+                            <td><?php echo ($course_subject = $absence->getCourseSubject()) ? $absence->getCourseSubject() : '-' ?></td>
+                            <?php endif; ?>
+                            <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? 'Sí' : 'No' ?></td>
+                            <td><?php echo ($type = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getJustificationType() : '-' ?></td>
+                            <td><?php echo ($justification = $absence->getStudentAttendanceJustification()) ? $absence->getStudentAttendanceJustification()->getObservation() : '-' ?></td>
+                          </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="5" class="text-right"><?php echo __('Total') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId(), false), 2) ?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" class="text-right"><?php echo __('Unjustified') . ': ' . round($student->getTotalAbsencesReport($division->getCareerSchoolYearId()), 2) ?></td>
+                      </tr>
+                      <tr>
+                        <td colspan="5" class="text-right"><?php echo __('Justified') . ': ' . round($student->getTotalJustificatedAbsencesReport($division->getCareerSchoolYearId()), 2) ?></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                 </div>
+                <?php endif ?>
+            <?php endforeach; ?>
+           <?php endforeach; ?>
           </div>
         </div>
       </div>

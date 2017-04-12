@@ -41,6 +41,10 @@ change_password:
   url:    /cambiar-password
   param:  { module: sfGuardChangePassword, action: index}
   
+facebook_unlink:
+  url: /facebookUnlink
+  param : { module: sfGuardAuth, action: facebookUnlink }
+  
 default_index:
   url:   /:module
   param: { action: index }

@@ -30,13 +30,29 @@
   </div>
 
   <div class="row">
-    <div class=" col-md-12 personal-data">  
-      <?php include_partial('mainFrontend/detail_info',array('person' => $person))?>
-    </div>
+    <div class=" col-md-12 personal-data">   
+      <?php include_partial('detail_info',array('person' => $person))?>
+      <div class="detail">
+        <b> <?php echo __("Facebook account")?> </b>
+        <span class="glyphicon glyphicon glyphicon glyphicon-user icon" aria-hidden="true"></span>
+      </div>
+      <p class="text">
+        <?php echo ($sf_user->getAttribute('facebook_name')) ? $sf_user->getAttribute('facebook_name') . link_to(
+            '' . __('Unlink') .'',
+            '@facebook_unlink',
+            array('class' => 'btn btn-xs btn-primary pull-right')
+          ): 'No posee'; ?>
+      </p>
       
+      <div class="tutor-contact-info">
+          <p class="">
+              <?php echo __("En caso de modificar algún dato, por favor comuníquese con el colegio."); ?>
+          </p>
+      </div>
+      
+    </div>
   </div>
 </div>
-
 
 
 
