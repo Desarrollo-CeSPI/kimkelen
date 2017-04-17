@@ -32,62 +32,60 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 	{
 		$this->form = new sfGuardFormForgotPassword();
 
-		if ($request->isMethod(sfRequest::POST))
-		{
+		if ($request->isMethod(sfRequest::POST)) {
 			$this->form->bind($request->getParameter($this->form->getName()));
-			if ($this->form->isValid())
-			{
+			if ($this->form->isValid()) {
 				$values = $this->form->getValues();
 
 				$sf_guard_user = sfGuardUserPeer::retrieveByUsernameOrEmail($values['username_or_email'], true);
 				$tutor = TutorPeer::retrieveByUsername($sf_guard_user->getUsername());
 
-				$this->forward404Unless($tutor, 'user tutor not found');
+				if (!is_null($tutor)) {
+
+					$token_user = new TokenUser();
+					$token_user->setsfGuardUser($sf_guard_user);
+					$token_user->setToken(md5(uniqid(rand(), true)));
+					$token_user->save();
 
 
-				$token_user = new TokenUser();
-				$token_user->setsfGuardUser($sf_guard_user);
-				$token_user->setToken(md5(uniqid(rand(), true)));
-				$token_user->save();
-				$link = $this->generateUrl('reset_password', array(), true) . "/" . $token_user->getToken();
-				dcMailer::sendResetPasswordEmail($tutor->getPerson(), $token_user->getsfGuardUser(), $link);
+					$result = dcMailer::sendResetPasswordEmail($tutor->getPerson(), $token_user);
 
-				$this->setTemplate('request_reset_password');
+					if ($result) {
+						$this->redirect('@request_reset_password');
+					}
+				}
 			}
 		}
+			$this->setLayout('cleanLayout');
 
-		$this->setLayout('cleanLayout');
 	}
 
+	public function executeRequestResetPassword(){
+		$this->setLayout('cleanLayout');
+  }
 
 	/**
-	 * Reset the users password and e-mail it
+	 * Redirects the user to change password form only if token is valid.
 	 * @param sfRequest $request
 	 */
-	protected function setPassword(sfWebRequest $request)
+	public function executeResetPassword($request)
 	{
+		$token = $request->getParameter('token');
 		$c = new Criteria();
-		$c->add(sfGuardUserPeer::PASSWORD, $request->getParameter('key'));
-		$c->add(sfGuardUserPeer::ID, $request->getParameter('id'));
-		$sfGuardUser = sfGuardUserPeer::doSelectOne($c);
-		$this->forwardUnless($sfGuardUser, 'sfGuardForgotPassword', 'invalid_key');
+		$c->add(TokenUserPeer::TOKEN, $token);
+    $token_user = TokenUserPeer::doSelectOne($c);
 
-		$newPassword = time();
-		$sfGuardUser->setPassword($newPassword);
-		$sfGuardUser->save();
+		if (!is_null($token_user)) {
+      $user = sfGuardUserPeer::retrieveByPK($token_user->getsfGuardUserId());
+			// acá tendría que loguear al usuario
+			$user->setMustChangePassword(true);
+			$user->save();
+			$this->redirect('@change_password');
 
-		$messageParams = array(
-			'sfGuardUser' => $sfGuardUser,
-			'password'    => $newPassword,
-		);
-		$body = $this->getComponent($this->getModuleName(), 'send_reset_password', $messageParams);
-		$from = sfConfig::get('app_sf_guard_extra_plugin_mail_from', 'noreply@example.org');
-		$fromName = sfConfig::get('app_sf_guard_extra_plugin_name_from', 'noreply');
-		$to = $sfGuardUser->getEmail();
-		$toName = $sfGuardUser->getUsername();
-		$subject = sfConfig::get('app_sf_guard_extra_plugin_subject_success', 'Password reset successfully');
-		$mailer = $this->getMailer();
-		$message = $mailer->compose(array($from => $fromName), array($to => $toName), $subject, $body);
-		$mailer->send($message);
+		}else {
+			$this->setLayout('cleanLayout');
+      $this->setTemplate('invalidKey');
+		}
+
 	}
 }

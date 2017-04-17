@@ -7,6 +7,15 @@ student:
     column:               id
     with_wildcard_routes: true
 
+reset_password:
+  url: /reset_password/:token
+  param: { module: sfGuardForgotPassword, action: resetPassword }
+
+
+request_reset_password:
+  url: /reseteo-contrasenia
+  param: { module: sfGuardForgotPassword, action: requestResetPassword }
+
 homepage:
   url:   /
   param: { module: mainFrontend, action: index }
@@ -28,10 +37,6 @@ sf_guard_signout:
 sf_guard_password:
   url:   /request_password
   param: { module: sfGuardForgotPassword, action: password }
-
-reset_password:
-  url:   /reset_password
-  param: { module: sfGuardForgotPassword, action: setPassword }
   
 facebook_login:
   url: /facebookLogin
@@ -44,12 +49,10 @@ change_password:
 facebook_unlink:
   url: /facebookUnlink
   param : { module: sfGuardAuth, action: facebookUnlink }
-  
+
 default_index:
   url:   /:module
   param: { action: index }
 
 default:
   url:   /:module/:action/*
-  
-

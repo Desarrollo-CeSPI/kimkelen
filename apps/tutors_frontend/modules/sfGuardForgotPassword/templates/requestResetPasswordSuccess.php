@@ -25,7 +25,8 @@
 
 <div class="container">
 	<div class="form-login">
-		<span><?php echo __('You have successfully requested information on how to reset your password. Please check your e-mail to reset your password.') ?></span>
+		<p><?php echo __('You have successfully requested information on how to reset your password.'); ?></p>
+		<p><?php echo __('Please check your e-mail to reset your password.') ?></p>
 	</div>
 </div>
 <footer>

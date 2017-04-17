@@ -62,7 +62,7 @@
 
 		 return $this->redirect($signinUrl);
             }
-	}
+	   }
         else{
             if(!is_null($tutor) && !$tutor->getPerson()->getIsActive()){
                 $this->getUser()->resetFacebookAttributes();
