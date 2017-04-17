@@ -64,10 +64,11 @@
             }
 	}
         else{
-            $this->getUser()->resetFacebookAttributes();
-            $this->getUser()->setFlash('notice', "La cuenta de usuario se encuentra deshabilitada.");
-            $this->redirect('@sf_guard_signin');
-            
+            if(!is_null($tutor) && !$tutor->getPerson()->getIsActive()){
+                $this->getUser()->resetFacebookAttributes();
+                $this->getUser()->setFlash('notice', "La cuenta de usuario se encuentra deshabilitada.");
+                $this->redirect('@sf_guard_signin');
+            }        
         }
         
       }

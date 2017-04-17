@@ -19,7 +19,7 @@
  */
 ?>
 
-<?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
+<?php ($division) ? $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()) : $periods= array(); ?>
   <div class="table-responsive">
 	<table class="table table-striped table-bordered">
 	  <thead>
