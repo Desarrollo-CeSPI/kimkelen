@@ -23,4 +23,9 @@
  * Copy and rename this class if you want to extend and customize
  */
 class AnexaFormFactory extends BaseFormFactory {
+    
+  public function getTutorFormFilter()
+  {
+    return 'AnexaTutorFormFilter';
+  }
 }

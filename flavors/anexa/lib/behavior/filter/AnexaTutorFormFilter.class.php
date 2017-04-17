@@ -8,11 +8,11 @@
  * @author     Desarrollo CeSPI
  * @version    SVN: $Id: sfPropelFormFilterTemplate.php 11675 2008-09-19 15:21:38Z fabien $
  */
-class BbaTutorFormFilter extends TutorFormFilter
+class AnexaTutorFormFilter extends TutorFormFilter
 {
 
   public function configure()
-  {   
+  {
     parent::configure();
     
     $c_criteria = new Criteria(CareerPeer::DATABASE_NAME);
@@ -31,6 +31,7 @@ class BbaTutorFormFilter extends TutorFormFilter
       
     $this->getWidgetSchema()->setHelp('year', 'El año filtra de acuerdo al año en el que se encuentra cursando el alumno.');
     $this->getWidgetSchema()->moveField('career', sfWidgetFormSchema::BEFORE, 'year');
+    
   }
 
   public function getFields()
@@ -46,7 +47,7 @@ class BbaTutorFormFilter extends TutorFormFilter
 
 	$years = array('' => '');
         for ($i = 1; $i <= $max; $i++)
-            $years[$i] = $i;
+          $years[$i] = $i;
         $widget->setOption('choices', $years);
   }
   
@@ -54,12 +55,14 @@ class BbaTutorFormFilter extends TutorFormFilter
   {
     if ($values)
     {
-        $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-        $criteria->add(CareerSchoolYearPeer::CAREER_ID, $values);
-        $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-        $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+	$criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+	$criteria->add(CareerSchoolYearPeer::CAREER_ID, $values);
+	$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+	$criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
         $criteria->addJoin(StudentPeer::ID, StudentTutorPeer::STUDENT_ID);
         $criteria->addJoin(StudentTutorPeer::TUTOR_ID, TutorPeer::ID);
+	  
     }
   }
+
 }
