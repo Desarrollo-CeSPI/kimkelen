@@ -80,4 +80,9 @@ class BbaFormFactory extends BaseFormFactory
   {
     return 'BbaStudentFormFilter';
   }
+  
+  public function getTutorFormFilter()
+  {
+    return 'BbaTutorFormFilter';
+  }
 }

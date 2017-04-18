@@ -288,4 +288,9 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
     return 'StudentDisciplinarySanctionFormFilter';
   }
   
+  public function getTutorFormFilter()
+  {
+    return 'TutorFormFilter';
+  }
+  
 }

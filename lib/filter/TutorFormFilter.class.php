@@ -27,6 +27,15 @@ class TutorFormFilter extends BaseTutorFormFilter
     $this->setWidget('student', new dcWidgetFormPropelJQuerySearch(array('model' => 'Person', 'column' => array('lastname', 'firstname'), 'peer_method' => 'doSelectStudent')));
     $this->setValidator('student', new sfValidatorPropelChoice(array('required' => false, 'model' => 'Person', 'column' => 'id')));  
 
+    $max = CareerPeer::getMaxYear();
+    $years = array('' => '');
+    for ($i = 1; $i <= $max; $i++)
+      $years[$i] = $i;
+
+    $this->setWidget('year', new sfWidgetFormChoice(array('choices' => $years)));
+    $this->setValidator('year' , new sfValidatorChoice(array('choices' => array_keys($years), 'required' => false)));
+
+    
     $this->setWidget('division_id', new sfWidgetFormPropelChoice(array('model' => 'Division', 'peer_method' => 'retrieveSchoolYearDivisions', 'add_empty' => true)));
     $this->setValidator('division_id', new sfValidatorPropelChoice(array('model' => 'Division', 'required' => false)));
     
@@ -40,7 +49,7 @@ class TutorFormFilter extends BaseTutorFormFilter
 
   public function getFields()
   {
-    return array_merge(parent::getFields(), array('lastname' => 'text', 'firstname' => 'text', 'is_alive' => 'Boolean', 'student' => 'ForeignKey', 'division_id' => 'Number'));
+    return array_merge(parent::getFields(), array('lastname' => 'text', 'firstname' => 'text', 'is_alive' => 'Boolean', 'student' => 'ForeignKey', 'division_id' => 'Number','year'=>'Number'));
 
   }
 
@@ -86,6 +95,20 @@ class TutorFormFilter extends BaseTutorFormFilter
       $criteria->addJoin(StudentTutorPeer::TUTOR_ID, TutorPeer::ID);
     }
 
+  }
+  
+  public function addYearColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if ($values)
+    {
+      $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+      $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+      $criteria->add(StudentCareerSchoolYearPeer::YEAR, $values);
+      $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+      $criteria->addJoin(StudentPeer::ID, StudentTutorPeer::STUDENT_ID);
+      $criteria->addJoin(StudentTutorPeer::TUTOR_ID, TutorPeer::ID);
+      
+    }
   }
 
 }

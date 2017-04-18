@@ -34,4 +34,9 @@ class tutorGeneratorConfiguration extends BaseTutorGeneratorConfiguration
     $form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getTutorForm();
     return new $form($object);
   }
+  
+  public function getFilterFormClass()
+  {
+    return SchoolBehaviourFactory::getInstance()->getFormFactory()->getTutorFormFilter();
+  }
 }
