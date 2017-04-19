@@ -4402,6 +4402,10 @@
 		<source>Disciplinary sanction type id</source>
 		<target>Motivo de sanción disciplinaria</target>
 	    </trans-unit>
+            <trans-unit>
+                <source>Is computable</source>
+                <target>Es computable</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -30,5 +30,7 @@ class JustificationTypeForm extends BaseJustificationTypeForm
 {
   public function configure()
   {
+      parent::configure();
+      $this->getWidgetSchema()->setHelp('is_computable', "Si está tildado las ausencias justificadas de este tipo serán visibles en el boletín");
   }
 }
