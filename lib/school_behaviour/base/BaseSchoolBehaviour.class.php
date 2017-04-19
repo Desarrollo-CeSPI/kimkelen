@@ -1116,7 +1116,12 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
       // sacamos las justificadas, es decir se quiere el total SIN las justificadas
       if ($exclude_justificated && $absence->hasJustification())
       {
-        continue;
+        $justification = $absence->getStudentAttendanceJustification();
+	if(!$justification->getJustificationType()->getIsComputable())
+	{
+            continue;
+        }
+        
       }
 
       $total += $absence->getValue();
