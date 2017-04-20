@@ -34,5 +34,14 @@ class sfGuardUserGroupPeer extends BasesfGuardUserGroupPeer
 
     return sfGuardGroupPeer::doSelect($c);
   }
+  
+  static public function deleteByUserAndGroup($user , $group)
+  {
+    $c = new Criteria();
+    $c->add(self::USER_ID, $user->getId());
+    $c->add(self::GROUP_ID, $group->getId());
+    
+    self::doDelete($c);
+  }
 
 }

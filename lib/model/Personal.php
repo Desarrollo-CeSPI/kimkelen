@@ -110,15 +110,7 @@ class Personal extends BasePersonal
 
   public function canBeDeleted()
   {
-    if ($this->isPreceptor())
-    {
-      return ((0 == $this->countDivisionPreceptors()) && (0 == $this->countCoursePreceptors()) );
-    }
-    else
-    { //mejorar con todos los casos
-      return true;
-    }
-
+    return ($this->isPreceptor());
   }
 
   /**

@@ -60,4 +60,28 @@ class personalActions extends autoPersonalActions
     $this->getUser()->setFlash('info','The teacher has been created succesfuly.');
     $this->redirect('@personal');
   }
+  
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->personal = $this->getRoute()->getObject();
+    
+    $guard_user = $this->personal->getPerson()->getSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $personal_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::PERSONAL);
+       
+      $group = sfGuardGroupPeer::retrieveByName($personal_group); 
+
+      sfGuardUserGroupPeer::deleteByUserAndGroup($guard_user, $group);
+        
+    }
+    //delete all courses.
+    foreach ($this->personal->getDivisionPreceptors() as $division_preceptor) {
+        $division_preceptor->delete();
+    }
+    foreach ($this->personal->getCoursePreceptors() as $course_preceptor) {
+        $course_preceptor->delete();
+    }
+    parent::executeDelete($request);
+  }
 }
