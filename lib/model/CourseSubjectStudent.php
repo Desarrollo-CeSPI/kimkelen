@@ -236,7 +236,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       return '';
 
     $student_approved_course_subject = $this->getStudentApprovedCourseSubject();
-    $student_approved_career_subject = ($student_approved_course_subject) ?$student_approved_course_subject->getStudentApprovedCareerSubject() : null;
+
+    $student_approved_career_subject = ($student_approved_course_subject) ? $student_approved_course_subject->getStudentApprovedCareerSubject() : StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
 
     $config = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
   	
