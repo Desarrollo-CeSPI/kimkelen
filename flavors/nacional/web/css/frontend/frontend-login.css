@@ -92,3 +92,13 @@ li.list_facebook{
 	margin-top: 10px !important;
 	list-style: none;
 }
+
+li.forgot_password{
+    margin-top: 10px !important;
+    list-style: none;
+}
+
+.actions li {
+   float: left;
+   padding-right: 13px;
+}

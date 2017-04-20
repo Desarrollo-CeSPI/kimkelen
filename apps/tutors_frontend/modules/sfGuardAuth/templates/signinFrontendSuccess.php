@@ -33,11 +33,10 @@
       <?php echo $form ?>
       <button class="btn btn-block" type="submit"> <?php echo __('Sign in') ?></button>
     </form>
-    <li class="list_facebook"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?> <?php echo link_to('Ingresa con Facebook', '@facebook_login',array('class'=> 'facebook')) ?></a>
-
-      <?php echo link_to('¿Olvidó su contraseña?', '@sf_guard_password') ?>
-
-    </li>
+    <div class="actions">
+      <li class="list_facebook"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?> <?php echo link_to('Ingresa con Facebook', '@facebook_login',array('class'=> 'facebook')) ?></a></li>
+      <li class="forgot_password"><?php echo link_to('¿Olvidó su contraseña?', '@sf_guard_password', array('class'=> 'facebook')) ?></a></li>
+    </div>
   </div>
 </div>
 

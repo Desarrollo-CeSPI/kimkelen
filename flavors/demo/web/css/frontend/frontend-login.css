@@ -83,3 +83,13 @@
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     margin-right: 2%;
 }
+
+li.forgot_password{
+    margin-top: 10px !important;
+    list-style: none;
+}
+
+.actions li {
+    float: left;
+    padding-right: 13px;
+}
