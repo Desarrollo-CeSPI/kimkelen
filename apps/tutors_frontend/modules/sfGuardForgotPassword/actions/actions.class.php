@@ -70,22 +70,26 @@ class sfGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 	 */
 	public function executeResetPassword($request)
 	{
-		$token = $request->getParameter('token');
-		$c = new Criteria();
-		$c->add(TokenUserPeer::TOKEN, $token);
-    $token_user = TokenUserPeer::doSelectOne($c);
+		$this->token = $request->getParameter('token');
+		$token_user = TokenUserPeer::retrieveByToken($this->token);
 
 		if (!is_null($token_user)) {
-      $user = sfGuardUserPeer::retrieveByPK($token_user->getsfGuardUserId());
-			// acá tendría que loguear al usuario
-			$user->setMustChangePassword(true);
-			$user->save();
-			$this->redirect('@change_password');
+			$sf_guard_user = sfGuardUserPeer::retrieveByPK($token_user->getsfGuardUserId());
+			$this->form = new sfGuardFormResetPassword(null, array('userid' => $sf_guard_user->getId()));
 
-		}else {
+			if ($request->isMethod(sfRequest::POST) && $this->form->bindAndSave($request->getParameter($this->form->getName()))) {
+				$this->getUser()->setFlash('notice', "La contraseña fue restablecida satisfactoriamente.");
+				$this->redirect('@sf_guard_signin');
+			}
+
 			$this->setLayout('cleanLayout');
-      $this->setTemplate('invalidKey');
+			$this->setTemplate('askPassword');
+
+		} else {
+			$this->setLayout('cleanLayout');
+			$this->setTemplate('invalidKey');
 		}
 
 	}
+
 }

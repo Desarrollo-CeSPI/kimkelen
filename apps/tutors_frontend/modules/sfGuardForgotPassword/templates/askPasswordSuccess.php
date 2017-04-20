@@ -24,19 +24,15 @@
 
 <div class="container">
   <div class="form-login">
-    <p><?php echo __("Se le solicitará su dirección de correo electrónico registrada o su nombre de usuario para poder enviarle un e-mail con instrucciones para crear una nueva contraseña.") ?></p>
-  <form action="<?php echo url_for('@sf_guard_password') ?>" method="post">
-    <table>
-      <?php echo $form ?>
-    </table>
-    <p><?php echo __("Si aún no cuenta con un usuario registrado en el sistema, deberá solicitar su creación en la oficina de Alumnos del colegio."); ?></p>
-
-    <button class="btn btn-block" type="submit"> <?php echo __('Change password') ?></button>
-  </form>
-    <br><?php echo link_to(__('Go back'), '@homepage'); ?>
+<form action="<?php echo url_for('@reset_password?token='.$token) ?>" method="post">
+  <table>
+    <p><?php echo __('Please enter a new password and confirm it. You will be redirected to login page afterwards.') ?></p>
+    <?php echo $form ?>
+  </table>
+  <button class="btn btn-block" type="submit"> <?php echo __('Reset password') ?></button>
+</form>
   </div>
 </div>
-
 <footer>
   <div class="logo_footer">
     <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Inicio'))) ?>

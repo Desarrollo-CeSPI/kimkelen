@@ -11,6 +11,9 @@ reset_password:
   url: /reset_password/:token
   param: { module: sfGuardForgotPassword, action: resetPassword }
 
+save_reset_password:
+  url: /save_reset_password
+  param:  { module: sfGuardForgotPassword, action: saveResetPassword }
 
 request_reset_password:
   url: /reseteo-contrasenia

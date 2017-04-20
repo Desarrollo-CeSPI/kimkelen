@@ -5,7 +5,7 @@
  * @package    symfony
  * @subpackage form
  */
-class PluginsfGuardFormResetPassword extends BaseForm
+class PluginsfGuardFormResetPassword extends sfForm
 {
   public function configure()
   {
@@ -14,9 +14,11 @@ class PluginsfGuardFormResetPassword extends BaseForm
       'password_confirm' => new sfWidgetFormInputPassword(),
     ));
 
+    $password_policy_validator_class = sfConfig::get('app_sf_guard_secure_password_validator', 'sfGuardSecurePasswordValidator');
+
     $this->setValidators(array(
-      'password'         => new sfValidatorString(array('min_length' => 8), array('min_length' => 'Password is too short (%min_length% characters min).', 'required' => 'Your password is required.')),
-      'password_confirm' => new sfValidatorString(array(), array('required' => 'Your password confirmation is required.')),
+      'password'         => new sfValidatorAnd(array(new sfValidatorString(array('max_length' => 128)), new $password_policy_validator_class())),
+      'password_confirm' => new sfValidatorString(array('max_length' => 128)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -38,8 +40,9 @@ class PluginsfGuardFormResetPassword extends BaseForm
     {
       $user = sfGuardUserPeer::retrieveByPK($this->getOption('userid'));
       $user->setPassword($values['password']);
+      $user->getMustChangePassword(false);
       $user->save();
-
+      TokenUserPeer::deleteUsedTokenFor($user);
       return true;
     }
     else

@@ -35,7 +35,7 @@
     </form>
     <li class="list_facebook"> <?php echo image_tag("frontend/facebook_icon.gif", array('alt' => __('Kimkelen'))); ?> <?php echo link_to('Ingresa con Facebook', '@facebook_login',array('class'=> 'facebook')) ?></a>
 
-      <?php // echo link_to('¿Olvidó su contraseña?', '@sf_guard_password') ?>
+      <?php echo link_to('¿Olvidó su contraseña?', '@sf_guard_password') ?>
 
     </li>
   </div>

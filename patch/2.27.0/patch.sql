@@ -5,6 +5,7 @@ CREATE TABLE `token_user`
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`sf_guard_user_id` INTEGER  NOT NULL,
 	`token` VARCHAR(50),
+	`created_at` DATETIME,
 	PRIMARY KEY (`id`),
 	INDEX `token_user_FI_1` (`sf_guard_user_id`),
 	CONSTRAINT `token_user_FK_1`

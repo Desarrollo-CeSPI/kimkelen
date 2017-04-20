@@ -256,6 +256,26 @@
                 <source>Username or e-mail address not found please try again.</source>
                 <target>Usuario o e-mail inválidos. Por favor intente nuevamente.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Please enter a new password and confirm it. You will be redirected to login page afterwards.</source>
+                <target>Ingrese una nueva contraseña y confírmela. Será redireccionado luego a la pantalla de inicio de sesión.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password confirm</source>
+                <target>Repetir contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reset password</source>
+                <target>Cambiar mi contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The link you followed is not valid. If you wish to have your password reset please %link% and fill out the form and a link to reset your password will be provided.</source>
+                <target>El enlace ya no es válido. Si desea cambiar su contraseña por favor vaya %link% y siga las instrucciones.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>here</source>
+                <target>aquí</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
