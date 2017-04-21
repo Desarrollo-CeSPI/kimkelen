@@ -40,7 +40,8 @@ class PluginsfGuardFormResetPassword extends sfForm
     {
       $user = sfGuardUserPeer::retrieveByPK($this->getOption('userid'));
       $user->setPassword($values['password']);
-      $user->getMustChangePassword(false);
+      $user->setMustChangePassword(false);
+      $user->setChangePasswordAt(date('Y-m-d H:i:s', strtotime("+90 day")));
       $user->save();
       TokenUserPeer::deleteUsedTokenFor($user);
       return true;
