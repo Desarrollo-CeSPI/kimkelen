@@ -1,6 +1,6 @@
 <?php
 
-class clearTokenUserTableTask extends sfBaseTask
+class clearTokenUserTask extends sfBaseTask
 {
 	protected function configure()
 	{
@@ -12,13 +12,13 @@ class clearTokenUserTableTask extends sfBaseTask
 		));
 
 		$this->namespace = 'clear';
-		$this->name = 'tokenUserTable';
+		$this->name = 'tokenUser';
 		$this->briefDescription = '';
 		$this->detailedDescription = <<<EOF
     The [clearTokenUserTableTask] deletes all token older than 1 day.
     Call it with:
 
-    [php symfony clear:tokenUserTable|INFO]
+    [php symfony clear:tokenUser|INFO]
 EOF;
 	}
 
@@ -40,12 +40,11 @@ EOF;
 		$this->createContextInstance('backend');
 
 		$criteria = new Criteria();
-		$criteria->add(TokenUserPeer::CREATED_AT, false);
-		$criteria->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID, Criteria::INNER_JOIN);
-		$criteria->addJoin(CourseSubjectPeer::ID, CourseSubjectStudentPeer::COURSE_SUBJECT_ID, Criteria::INNER_JOIN);
+		$criteria->add(TokenUserPeer::CREATED_AT, date('Y-m-d H:i:s', strtotime("-2 hours")), Criteria::LESS_EQUAL);
 
-		$course_subject_students = CourseSubjectStudentPeer::doSelect($criteria);
+		$token_users = TokenUserPeer::doSelect($criteria);
 
-
+		$this->logSection('Token users', count($token_users) . ' tokens will be deleted because they have expired');
+    TokenUserPeer::doDelete($token_users);
 	}
 }

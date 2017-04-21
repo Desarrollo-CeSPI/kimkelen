@@ -276,6 +276,16 @@
                 <source>here</source>
                 <target>aquí</target>
             </trans-unit>
+            <trans-unit>
+                <source>If you still do not have a registered user, you should ask for it at school.</source>
+                <target>Si aún no cuenta con un usuario registrado en el sistema, deberá solicitar su creación en la oficina de Alumnos del colegio.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Your e-mail address will be asked in order to send you further instructions about how to reset your password.</source>
+                <target>Se le solicitará su dirección de correo electrónico registrada o su nombre de usuario para poder enviarle un e-mail con instrucciones para crear una nueva contraseña.</target>
+            </trans-unit>
+
+
         </body>
     </file>
 </xliff>

@@ -24,12 +24,13 @@
 
 <div class="container">
   <div class="form-login">
-    <p><?php echo __("Se le solicitará su dirección de correo electrónico registrada o su nombre de usuario para poder enviarle un e-mail con instrucciones para crear una nueva contraseña.") ?></p>
+    <p><?php echo __("Your e-mail address will be asked in order to send you further instructions about how to reset your password.") ?></p>
   <form action="<?php echo url_for('@sf_guard_password') ?>" method="post">
     <table>
       <?php echo $form ?>
     </table>
-    <p><?php echo __("Si aún no cuenta con un usuario registrado en el sistema, deberá solicitar su creación en la oficina de Alumnos del colegio."); ?></p>
+    <br>
+    <p><?php echo __("If you still do not have a registered user, you should ask for it at school."); ?></p>
 
     <button class="btn btn-block" type="submit"> <?php echo __('Change password') ?></button>
   </form>
