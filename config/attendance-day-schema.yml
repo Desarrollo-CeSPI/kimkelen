@@ -129,6 +129,9 @@ classes:
       name:
         type:             varchar(255)
         required:         true
+      is_computable:
+        type:             boolean
+        default:          false
       _uniques:
         justification_name:  [name]
       _indexes:

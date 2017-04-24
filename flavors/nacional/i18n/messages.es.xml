@@ -4632,6 +4632,10 @@
                 <source>Are you sure? If you inactive it, the user can not to be to access the system.</source>
                 <target>¿Está seguro? Si lo deshabilita, el usuario no podrá acceder al sistema.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Is computable</source>
+                <target>Es computable</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

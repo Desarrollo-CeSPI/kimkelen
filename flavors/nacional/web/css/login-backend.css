@@ -4,7 +4,7 @@ body {
  color:#000;
  margin:0;
  padding:0;
- background-color: #3A256C;
+ background-color: #2e366b;
 }
 
 #login {
@@ -113,7 +113,7 @@ background-color: white;
  outline:none;
  background:none;
  padding:5px 10px;
- background:#3A256C;
+ background:#2e366b;
  float:right;
  -moz-border-radius: 5px 5px 5px 5px;
 }
