@@ -33,6 +33,7 @@ generator:
             credentials: [edit_user]
             action: activation
             condition: canInactive
+            params: confirm='Are you sure? If you inactive it, the user can not to be to access the system.'
 
           _show:
             credentials: [admin]
