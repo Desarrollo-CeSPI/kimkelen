@@ -1670,7 +1670,8 @@ class Student extends BaseStudent
   {
 	if(!is_null($this->getLastStudentCareerSchoolYear()))
 	{
-		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN 
+                        || $this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE);
 	}
 	return false;
   }

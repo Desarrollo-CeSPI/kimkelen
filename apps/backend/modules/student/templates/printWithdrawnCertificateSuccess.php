@@ -24,7 +24,7 @@
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
 			<p>
-				El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
+                            <?php include_partial('certificate_header_text');?>	, hace constar que
 			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
 			    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
                             <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
