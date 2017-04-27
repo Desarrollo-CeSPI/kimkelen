@@ -87,4 +87,39 @@ class StudentDisapprovedCourseSubject extends BaseStudentDisapprovedCourseSubjec
 
     return $this->getStudentApprovedCareerSubject()->getMark();
   }
+  
+  public function getAvgColorDisapprovedReport()
+  {
+    if ($this->getExaminationNumber() == 1 )
+    {
+      return 'mark_yellow';
+    }
+
+    return 'mark_yellow_red';
+  }
+  public function getColorDisapprovedReport($examination_number)
+  {
+      $course_subject_student_examination = $this->getCourseSubjectStudent()->getCourseSubjectStudentExaminationsForExaminationNumber($examination_number);
+      if(is_null($course_subject_student_examination))
+      {
+          return '';
+      }
+      else
+      {
+          if($course_subject_student_examination->getIsAbsent())
+          {
+              return 'absent';
+          }
+          else
+          {
+              if($examination_number == 1 && $course_subject_student_examination->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+              {
+                  return 'mark_red';
+              }
+              elseif ($examination_number == 2 && $course_subject_student_examination->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote()) {
+                  return 'febrero';
+              }
+          }
+      }
+  }
 }

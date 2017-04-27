@@ -493,4 +493,39 @@ public function executeExportCalificationTable(sfWebRequest $request)
 	
     $this->setLayout('cleanLayout');
   }
+  
+  public function executeShowDisapprovedReport(sfWebRequest $request)
+  {
+    $this->setLayout('cleanLayout');
+
+    $this->division = DivisionPeer::retrieveByPk($request->getParameter('id'));
+
+    if (null === $this->division)
+    {
+      $this->getUser()->setFlash('error', 'No se ha indicado ninguna división');
+      $this->redirect('@division');
+    }
+
+    $this->buildDisapprovedReport();
+      
+      
+  }
+  
+  public function buildDisapprovedReport()
+  {
+    $this->students = $this->division->getStudents();
+    $this->career_subjects = $this->division->getCareerSubjects();
+
+    $this->career_subject_school_years = array();
+    $this->course_subjects = array();
+ 
+
+    foreach ($this->division->getCourseSubjects() as $i => $course_subject)
+    {
+      /*revisar esto porque no es necesario*/$this->career_subject_school_years[$i] = $cssy = $course_subject->getCareerSubjectSchoolYear();
+
+      $this->course_subjects[$i] = $course_subject;
+
+    }
+  }
 }
