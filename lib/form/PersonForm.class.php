@@ -255,7 +255,7 @@ class PersonForm extends BasePersonForm
         $this->getObject()->setSfGuardUser($guard_user);
       }
 
-      if (isset($values['delete_photo']))
+      if (isset($values['delete_photo']) && $values['delete_photo'] )
       {
         $this->getObject()->deleteImage();
       }
