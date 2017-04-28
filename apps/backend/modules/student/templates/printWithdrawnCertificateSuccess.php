@@ -23,28 +23,7 @@
 	<div class="report-content">
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
-			<p>
-                            <?php include_partial('certificate_header_text');?>	, hace constar que
-			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-			    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
-                            <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
-			    
-                                <?php if(count ($p) == 0): ?>
-					<?php echo "sin adeudar materias"?>
-				<?php else:?>
-				
-					<?php echo 'adeudando ' ?>
-					<b><?php echo $p[0]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[0]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año' ?></b>
-					
-					<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
-					<b>
-						<?php echo ($i == (count($p) -1)) ? 'y' : ',' ;?>
-						<?php echo $p[$i]->getCourseSubjectStudent()->getCourseSubject() .' de '.  $p[$i]->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año';?> 
-					</b>
-					<?php endfor?>
-				<?php endif?>
-				<?php echo '.'?>
-			</p>
+                        <?php include_partial('certificate_withdrawn_text',array('student'=>$student));?>
 			<?php include_partial('certificate_footer_text');?>
 		</div>
 		<div id="signature"><?php echo __('Firma de la autoridad')?></div>
