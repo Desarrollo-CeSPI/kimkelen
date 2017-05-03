@@ -73,5 +73,22 @@ class teacherActions extends autoTeacherActions
     $this->getUser()->setFlash('info','The preceptor has been created succesfuly.');
     $this->redirect('@teacher');
   }
+  
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->teacher = $this->getRoute()->getObject();
+    
+    $guard_user = $this->teacher->getPerson()->getSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $teacher_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::TEACHER);
+       
+      $group = sfGuardGroupPeer::retrieveByName($teacher_group); 
+
+      sfGuardUserGroupPeer::deleteByUserAndGroup($guard_user, $group);
+        
+    }
+    parent::executeDelete($request);
+  }
 
 }

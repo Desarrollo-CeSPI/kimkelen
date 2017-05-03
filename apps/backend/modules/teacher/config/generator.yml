@@ -96,19 +96,20 @@ generator:
             label: Courses
             action: courses
             condition: canShowCourses
-
+          
           activate:
-            label: Set active
+            label: Set active in courses
             credentials: [edit_teacher]
             action: personActivation
             condition: canPersonBeActivated
 
           deactivate:
-            label: Set inactive
+            label: Set inactive in courses
             credentials: [edit_teacher]
             action: personActivation
             condition: canPersonBeDeactivated
-            params: confirm='Are you sure?'
+            params: confirm='Are you sure? If you inactive it can not to be managed from courses.'
+            
       filter:
       form:
       edit:

@@ -85,16 +85,17 @@ generator:
             credentials:  [edit_personal]
 
           activate:
-            label: Set active
+            label: Set active in courses
             credentials: [edit_personal]
             action: personActivation
             condition: canPersonBeActivated
 
           deactivate:
-            label: Set inactive
+            label: Set inactive in courses
             credentials: [edit_personal]
             action: personActivation
             condition: canPersonBeDeactivated
+            params: confirm='Are you sure? If you inactive it can not to be managed from courses.'
 
         actions:
           _new:

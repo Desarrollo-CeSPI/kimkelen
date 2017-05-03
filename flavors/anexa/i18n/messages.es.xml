@@ -4555,6 +4555,22 @@
                 <source>Resolution number</source>
                 <target>Número de resolución</target>
             </trans-unit>
+            <trans-unit>   
+                <source>Set inactive in courses</source>
+                <target>Deshabilitar de los cursos</target>
+            </trans-unit>
+            <trans-unit>   
+                <source>Are you sure? If you inactive it can not to be managed from courses.</source>
+                <target>¿Está seguro? Si lo deshabilita no podrá ser administrado desde los cursos.</target>
+            </trans-unit>
+            <trans-unit>   
+                <source>Set active in courses</source>
+                <target>Habilitar en los cursos</target>
+            </trans-unit>
+            <trans-unit>   
+                <source>Are you sure? If you inactive it, the user can not to be to access the system.</source>
+                <target>¿Está seguro? Si lo deshabilita, el usuario no podrá acceder al sistema.</target>
+            </trans-unit>
             <trans-unit>
                 <source>Is computable</source>
                 <target>Es computable</target>
