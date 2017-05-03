@@ -19,11 +19,8 @@
  */ ?>
 <?php use_stylesheet('print.css', 'last', array('media' => 'print')) ?>
 
-<?php include_partial('division/calification_table', array(
-      'career_subjects' => $career_subjects,
-      'configurations'  => $configurations,
+<?php include_partial('division/course_result_table', array(
       'students'        => $students,
-      'courses'         => $courses,
-      'course_subjects' => $course_subjects,
-      'career_subject_school_years' => $career_subject_school_years,
+      'division'        => $division,
+      'course_subjects' => $division->getCourseSubjects(),
   ));?>

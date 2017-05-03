@@ -494,7 +494,7 @@ public function executeExportCalificationTable(sfWebRequest $request)
     $this->setLayout('cleanLayout');
   }
   
-  public function executeShowDisapprovedReport(sfWebRequest $request)
+  public function executeShowCourseResultReport(sfWebRequest $request)
   {
     $this->setLayout('cleanLayout');
 
@@ -505,27 +505,20 @@ public function executeExportCalificationTable(sfWebRequest $request)
       $this->getUser()->setFlash('error', 'No se ha indicado ninguna división');
       $this->redirect('@division');
     }
-
-    $this->buildDisapprovedReport();
-      
-      
+  
+    $this->students = $this->division->getStudents();  
   }
   
-  public function buildDisapprovedReport()
+  public function executeExportCourseResultTable(sfWebRequest $request)
   {
-    $this->students = $this->division->getStudents();
-    $this->career_subjects = $this->division->getCareerSubjects();
+	$this->executeShowCourseResultReport($request);
 
-    $this->career_subject_school_years = array();
-    $this->course_subjects = array();
- 
+	$response = $this->getResponse();
 
-    foreach ($this->division->getCourseSubjects() as $i => $course_subject)
-    {
-      /*revisar esto porque no es necesario*/$this->career_subject_school_years[$i] = $cssy = $course_subject->getCareerSubjectSchoolYear();
-
-      $this->course_subjects[$i] = $course_subject;
-
-    }
+	$response->setHttpHeader("Content-type","application/vnd.ms-excel; name='excel'; charset='utf-8'");
+	$response->setHttpHeader('Content-Disposition', 'attachment; filename="resultado_cursadas.xls"');
+	$response->setHttpHeader("Pragma","no-cache");
+	$response->setHttpHeader("Expires","0");
   }
+  
 }

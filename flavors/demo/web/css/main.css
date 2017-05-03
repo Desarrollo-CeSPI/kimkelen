@@ -1995,3 +1995,9 @@ div.wc-cal-event{
 .origin_schools {
     width: 40em;
 }
+
+.mark_yellow_red
+{
+   background-color: #FF0;
+   color:red;
+}

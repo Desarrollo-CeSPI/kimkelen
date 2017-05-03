@@ -2058,3 +2058,9 @@ div.wc-cal-event{
 {
     background-image: url('../images/certificate.png') !important;
 }
+
+.mark_yellow_red
+{
+   background-color: #FF0;
+   color:red;
+}

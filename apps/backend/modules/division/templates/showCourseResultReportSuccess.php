@@ -23,7 +23,7 @@
 
 <ul style="list-style: none">
   <li> 
-    <a href="<?php echo url_for('division/exportCalificationTable') . '?id='.$division->getId();?>" class="excel_button"><?php echo __('Export to excel') ?>
+    <a href="<?php echo url_for('division/exportCourseResultTable') . '?id='.$division->getId();?>" class="excel_button"><?php echo __('Export to excel') ?>
       <?php echo image_tag('export_to_excel.gif', array('class' => 'excel_button')) ?>
     </a>
   </li>
@@ -34,16 +34,14 @@
 
 <h1 class="print_title"><?php echo $division; ?></h1>          
 <div id="mi_tabla_wrapper">
-  <?php include_partial('division/disapproved_table', array(
-      'career_subjects' => $career_subjects,
+  <?php include_partial('division/course_result_table', array(
       'students'        => $students,
       'division'        => $division,
-      'course_subjects' => $course_subjects,
-      'career_subject_school_years' => $career_subject_school_years,
+      'course_subjects' => $division->getCourseSubjects(),
   ));?>
 </div>
 
-<?php if (count($career_subjects) > 8): ?>
+<?php if (count($division->getCourseSubjects()) > 7): ?>
   <script type="text/javascript">
     jQuery(document).ready(function()
     {

@@ -110,11 +110,11 @@ generator:
             credentials: [delete_division]
             condition: canBeDeleted
             
-          show_disapproved_report:
-            label:   Show disapproved report
-            action:  showDisapprovedReport
+          show_course_result_report:
+            label:   Course result report
+            action:  showCourseResultReport
             credentials:    [show_division_course_califications]
-            
+            condition: canShowCourseResultReport
 
       filter:
         class:  ~

@@ -21,13 +21,14 @@
     <thead>
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('Students'); ?></th>
-        <?php foreach ($career_subjects as $i => $career_subject) : ?>
-          <th colspan="<?php echo count(SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNumbers()) + 1 ?>"><?php echo $career_subject->getSubject()->getFantasyName(); ?></th>
+        <?php foreach ($course_subjects as $i => $course) : ?>
+          <th colspan="<?php echo count(SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNumbers()) + 1 ?>">
+              <?php echo $course->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject()->getFantasyName(); ?></th>
         <?php endforeach; ?>
           <th>Previas</th>
       </tr>
       <tr>
-        <?php foreach ($career_subjects as $i => $career_subject) : ?>
+        <?php foreach ($course_subjects as $i => $course) : ?>
           <th class="mark">Prom</th>
             <?php  $examinations = SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNumbers()?>
           <?php foreach ($examinations as $e): ?>
@@ -42,9 +43,8 @@
         <tr>
           <th><?php echo $student ?></th>
           <?php foreach ($course_subjects as $i => $course): ?>
-            <?php include_partial('student_disapproved_marks', array(
-              'student' => $student, 
-              'career_subject_school_year' => $career_subject_school_years[$i], 
+            <?php include_partial('student_course_result_marks', array(
+              'student' => $student,  
               'course_subject' => $course_subjects[$i])) ?>
           <?php endforeach; ?>
           <td><?php echo  count(StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($student, $division->getCareerSchoolYear()->getCareer()))?></td>

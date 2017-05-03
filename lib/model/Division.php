@@ -844,6 +844,17 @@ class Division extends BaseDivision
     }
     return $students;
   }
+  
+  public function canShowCourseResultReport()
+  {
+    foreach ($this->getCourses() as $course)
+    {
+      if (! $course->getIsClosed())
+        return false;
+    }
+    
+    return $this->hasStudents();
+  }
 
 }
 sfPropelBehavior::add('Division', array('changelog'));

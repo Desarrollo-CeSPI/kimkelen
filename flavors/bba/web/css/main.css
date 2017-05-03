@@ -495,7 +495,7 @@ body {
 .sf_admin_list .sf_admin_action_boletines a,
 .sf_admin_list .sf_admin_action_print_report_card a,
 .sf_admin_list .print_certificate a,
-.sf_admin_actions .print_certificate a,
+.sf_admin_actions .print_certificate a
 {
     background-image: url('../images/printer.png') !important;
 }
@@ -2092,4 +2092,10 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_withdrawn_certificate a
 {
     background-image: url('../images/certificate.png') !important;
+}
+
+.mark_yellow_red
+{
+   background-color: #FF0;
+   color:red;
 }
