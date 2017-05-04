@@ -2099,3 +2099,8 @@ div.wc-cal-event{
    background-color: #FF0;
    color:red;
 }
+
+.sf_admin_list .sf_admin_action_show_course_result_report a
+{
+    background-image: url('../images/report_course.png') !important;
+}
