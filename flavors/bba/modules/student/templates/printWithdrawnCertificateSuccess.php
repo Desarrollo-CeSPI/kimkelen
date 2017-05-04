@@ -23,7 +23,10 @@
 	<div class="report-content">
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
-                        <?php include_partial('certificate_withdrawn_text',array('student'=>$student,'p' => $p));?>
+                        <?php include_partial('certificate_withdrawn_text',array('student'=> $student, 'p' => $p));?>
+                        <p>
+                            Certificado de Estudios Incompletos en trámite SI / NO
+                        </p>
 			<?php include_partial('certificate_footer_text');?>
 		</div>
 		<div id="signature"><?php echo __('Firma de la autoridad')?></div>
