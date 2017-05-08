@@ -16,18 +16,4 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-
-<?php use_stylesheet('/css/report-card.css') ?>
-<?php use_helper('Date') ?>
-<div class="certificate-wrapper">
-	<div class="report-content">
-		<?php include_partial('certificate_header');?>
-		<div class="report-text">
-			<?php include_partial('certificate_regular_text',array('student'=> $student));?>
-			<?php include_partial('certificate_footer_text');?>
-		</div>
-		<div id="signature"><?php echo __('Firma de la autoridad')?></div>
-	</div>
-</div>
-
-
+<?php include_partial('certificate_graduate_text', array('student'=> $student, 'p'=> $p)); ?>

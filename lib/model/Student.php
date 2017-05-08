@@ -1670,8 +1670,7 @@ class Student extends BaseStudent
   {
 	if(!is_null($this->getLastStudentCareerSchoolYear()))
 	{
-		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN 
-                        || $this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE);
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
 	}
 	return false;
   }
@@ -1703,6 +1702,15 @@ class Student extends BaseStudent
     
     return StudentCareerSchoolYearPeer::doSelectOne($c);
     }
+    
+  public function canPrintFreeCertificate()
+  {
+	if(!is_null($this->getLastStudentCareerSchoolYear()))
+	{
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE);
+	}
+	return false;
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

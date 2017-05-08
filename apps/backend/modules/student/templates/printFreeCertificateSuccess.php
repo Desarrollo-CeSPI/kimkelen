@@ -23,7 +23,7 @@
 	<div class="report-content">
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
-			<?php include_partial('certificate_regular_text',array('student'=> $student));?>
+			<?php include_partial('certificate_free_text',array('student'=> $student,'p' => $p));?>
 			<?php include_partial('certificate_footer_text');?>
 		</div>
 		<div id="signature"><?php echo __('Firma de la autoridad')?></div>

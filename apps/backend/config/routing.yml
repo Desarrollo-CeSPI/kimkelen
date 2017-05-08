@@ -98,6 +98,10 @@ print_withdrawn_certificate:
   url:  /student/:id/printWithdrawnCertificate
   param:  {module: student, action: printWithdrawnCertificate, sf_format: pdf }
 
+print_free_certificate:
+  url:  /student/:id/printFreeCertificate
+  param:  {module: student, action: printFreeCertificate, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }

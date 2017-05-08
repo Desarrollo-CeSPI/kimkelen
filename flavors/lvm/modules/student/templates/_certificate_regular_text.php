@@ -16,5 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-
- El Jefe de la Oficina de alumnos del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata
+<?php $division = DivisionPeer::retrieveByStudentCareerSchoolYear($student->getCurrentStudentCareerSchoolYear());?>
+<p>
+    Las autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata,
+    certifican que <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
+    es alumno/a regular de <?php echo $division->getYear() . '° ' . $division->getDivisionTitle()->getName() ?> en el presente ciclo lectivo. 
+</p>

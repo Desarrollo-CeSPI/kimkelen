@@ -16,17 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+<h4> Constancia de certificado de <b>estudio en trámite</b></h4>
 <p>
-    El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
-    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
-    <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
-			    
+    Se deja constancia que el alumno/a <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>,
+    tiene en trámite su certificado de  estudio <b>Completo</b> hasta 6°año del ciclo Bachiller (Res. Min. 1497/14),
+    
     <?php if(count ($p) == 0): ?>
 	<?php echo "sin adeudar materias"?>
     <?php else:?>
 		
-	<?php echo 'adeudando ' ?>
+	<?php echo 'adeudando las siguiente asignaturas: ' ?>
 	<b><?php echo $p[0]->getCourseSubject() .' de '.  $p[0]->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getYear() .'° año' ?></b>
 			
 	<?php for($i= 1 ; $i < count($p)  ; $i++): ?>
@@ -36,5 +35,9 @@
 	</b>
 	<?php endfor?>
     <?php endif?>
-    <?php echo '.'?>
+    <?php echo '.'?> 
+    
+</p>
+<p>
+    Idiomas que acredita: Inglés y Francés.
 </p>

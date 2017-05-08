@@ -17,17 +17,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-<?php use_stylesheet('/css/report-card.css') ?>
-<?php use_helper('Date') ?>
-<div class="certificate-wrapper">
-	<div class="report-content">
-		<?php include_partial('certificate_header');?>
-		<div class="report-text">
-			<?php include_partial('certificate_regular_text',array('student'=> $student));?>
-			<?php include_partial('certificate_footer_text');?>
-		</div>
-		<div id="signature"><?php echo __('Firma de la autoridad')?></div>
-	</div>
-</div>
-
-
+	<p>
+		A pedido del interesado/a y al sólo efecto de ser presentado a las autoridades que estime corresponder, 
+                se extiende el presente, en la ciudad de <?php echo __('escuela_ciudad'); ?>  a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.
+	</p>
