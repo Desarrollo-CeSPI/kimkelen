@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+export TIMEZONE=${TIMEZONE:-'America/Argentina/Buenos_Aires'}
+export MEMCACHE_HOST=${MEMCACHE_HOST:-'memcache'}
+export MEMCACHE_PORT=${MEMCACHE_PORT:-'11211'}
+export APACHE_RUN_USER=${APACHE_RUN_USER:-apache}
+export APACHE_RUN_GROUP=${APACHE_RUN_GROUP:-apache}
+
+export SESSION_SAVE_HANDLER=${SESSION_SAVE_HANDLER:-'memcached'}
+export SESSION_SAVE_PATH=${SESSION_SAVE_PATH:-"$MEMCACHE_HOST:$MEMCACHE_PORT"}
+
+export MEMORY_LIMIT=${MEMORY_LIMIT:-'512M'}
+export TESTING=${TESTING:-'true'}
+export MAIL_PORT={MAIL_PORT:-25}
+export BACKEND_SESSION_NAME=unlp_k1mk3l3n_back
+export FRONTEND_SESSION_NAME=unlp_k1mk3l3n_front
+export MAIL_FROM=${MAIL_FROM:-'kimkelen@example.com'}
+export FLAVOR=${FLAVOR:-demo}
+
+echo -e "date.timezone = $TIMEZONE\nmemory_limit = $MEMORY_LIMIT\n" > /usr/local/etc/php/conf.d/php.ini
+
+for dir in  disciplinary-sanction-documents justification-documents persons-photos; do
+  [ -d /uploads/$dir ] || ( mkdir -p /uploads/$dir && chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /uploads/$dir )
+  ln -s /uploads/$dir /app/data/$dir
+done
+
+
+envsubst '${DB_NAME} ${DB_HOST} ${DB_USERNAME} ${DB_PASSWORD}' < /app/config/databases.yml.docker > /app/config/databases.yml
+envsubst '${DB_NAME} ${DB_HOST} ${DB_USERNAME} ${DB_PASSWORD}' < /app/config/propel.ini.docker > /app/config/propel.ini
+
+envsubst '${TESTING} ${FACEBOOK_ID} ${FACEBOOK_SECRET}' < /app/config/app.yml.docker > /app/config/app.yml
+envsubst '${MAIL_PORT} ${MAIL_HOST} ${MEMCACHE_HOST} ${MEMCACHE_PORT} ${SESSION_NAME}' < /app/apps/backend/config/factories.yml.docker > /app/apps/backend/config/factories.yml
+
+cd /app && \
+  rm -fr cache/* && \
+  php -d memory_limit=512M symfony kimkelen:flavor $FLAVOR 
+
+/usr/local/bin/apache2-foreground "$@"
