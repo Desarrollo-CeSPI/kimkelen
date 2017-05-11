@@ -2093,3 +2093,8 @@ div.wc-cal-event{
 {
     background-image: url('../images/certificate.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_free_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}

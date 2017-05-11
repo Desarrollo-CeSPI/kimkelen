@@ -228,6 +228,11 @@ generator:
             label: Withdrawn certificate
             action: printWithdrawnCertificate
             condition: canPrintWithdrawnCertificate
+            
+          free_certificate:
+            label: Withdrawn certificate
+            action: printFreeCertificate
+            condition: canPrintFreeCertificate
           
 
       filter:

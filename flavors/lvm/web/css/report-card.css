@@ -385,3 +385,8 @@ div.report-text p {
 	border-top: 1px solid;
 	text-align:center;
 }
+
+.logo_certificate img{
+	width: 300px;
+	height: 70px;
+}

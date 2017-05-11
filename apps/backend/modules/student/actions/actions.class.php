@@ -870,6 +870,7 @@ class studentActions extends autoStudentActions
   public function executePrintGraduateCertificate($request)
   {
 	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+          $this->buildCertificate($this->student);
 	  $this->setLayout('cleanLayout');
   }
   
@@ -881,36 +882,53 @@ class studentActions extends autoStudentActions
   
   public function executePrintWithdrawnCertificate($request)
   {
-	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
-          /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
-           *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
-          
-          $school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
-          
-          $scsy = $this->student->isRepprovedInSchoolYear($school_year);
-          $css = $this->student->getCourseSubjectStudentsForSchoolYear(SchoolYearPeer::retrieveCurrent());
-        
-          $dis_cs = array();
-          if(!is_null($scsy) && count($css) == 0 )
-          {
-             $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($this->student,$scsy->getCareerSchoolYear());
-            
-             if(is_null($dis_cs))
-             {
-                $dis_cs = array();
-             }
-          }
-          
-        $previous = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($this->student, $this->student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());
-	
-        if(is_null($previous))
-        {
-           $previous = array();
-        }
-        
-        $this->p = array_merge($previous,$dis_cs);
-      
+	$this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+        $this->buildCertificate($this->student);
         $this->setLayout('cleanLayout');
+  }
+  
+  public function executePrintFreeCertificate($request)
+  {
+	$this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+        $this->buildCertificate($this->student);
+        $this->setLayout('cleanLayout');
+        //$this->setTemplate('printGraduateCertificate');
+  }
+  
+  public function buildCertificate($student)
+  {
+      /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
+        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
+          
+        $school_year = SchoolYearPeer::retrieveLastYearSchoolYear($student->getLastStudentCareerSchoolYearCursed());
+          
+        $scsy = $student->isRepprovedInSchoolYear($school_year);
+        $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear());
+        
+        if(!is_null($scsy) && count($css) == 0 )
+        {
+            $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
+        }
+        $previous = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($student, $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());
+	
+        $this->p = array();
+        foreach($previous as $p)
+        {
+           $this->p[count($this->p)] = $p->getCourseSubjectStudent();
+        }
+        foreach($dis_cs as $c)
+        {
+           $this->p[count($this->p)] = $c->getCourseSubjectStudent();
+        }
+
+        foreach ($css as $c)
+        {
+            $sacs = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($c);
+            $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($c);
+            if(is_null($sacs) && is_null($srcs))
+                $this->p[count($this->p)] = $c;
+        }
+      
   }
 
 }

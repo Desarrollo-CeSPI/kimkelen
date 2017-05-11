@@ -23,11 +23,7 @@
 	<div class="report-content">
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
-			<p>
-			    <?php include_partial('certificate_header_text');?>, hace constar que
-			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-				completó sus estudios secundarios. <?php echo $student->getCareerStudent()->getCareer()->getCareerName()?>. Certificado analítico en trámite.
-			</p>
+                        <?php include_partial('certificate_graduate_text',array('student'=> $student, 'p' => $p));?>
 			<?php include_partial('certificate_footer_text');?>
 		</div>
 		<div id="signature"><?php echo __('Firma de la autoridad')?></div>
