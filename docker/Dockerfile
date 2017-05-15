@@ -1,17 +1,25 @@
 FROM cespi/php-5.3:modules-apache-latest
 
-ENV APACHE_RUN_USER apache
-ENV APACHE_RUN_GROUP apache
-
 ENV APACHE_DOCUMENT_ROOT /app/web
 
 WORKDIR /app
-ADD docker/kimkelen-entrypoint /usr/local/bin/kimkelen-entrypoint
 ADD . ./
+ADD docker/kimkelen-entrypoint /usr/local/bin/kimkelen-entrypoint
 VOLUME [ "/uploads" ]
 
-RUN apk add -U --no-cache wkhtmltopdf gettext \
-    --repository http://dl-3.alpinelinux.org/alpine/edge/testing/  && \
+RUN apk add -U --no-cache \
+        gettext \
+        xvfb \
+        ttf-freefont \
+        fontconfig \
+        dbus \
+    && apk add qt5-qtbase \
+        wkhtmltopdf \
+        --no-cache \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+        --allow-untrusted \
+    # Wrapper for xvfb
+    && mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin && \
     rm -fr /app/cache && mkdir /app/cache && \
     rm -fr /app/log && mkdir /app/log && \
     cp config/propel.ini.docker config/propel.ini && \
@@ -20,5 +28,7 @@ RUN apk add -U --no-cache wkhtmltopdf gettext \
     php -d memory_limit=512M symfony project:permissions && \
     php symfony cc && \
     echo $REVISION > VERSION
+
+ADD docker/wkhtmltopdf /usr/bin/wkhtmltopdf
 
 CMD ["kimkelen-entrypoint"]

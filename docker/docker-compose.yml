@@ -4,9 +4,10 @@ volumes:
   kimkelen-db:
 services:
   app: 
-    image: cespi/kimkelen
+    image: cespi/kimkelen:latest
     ports:
-      - "8080:80"
+      # El puerto interno necesita ser igual al externo para que funcione wkhtmltopdf
+      - "8080:8080"
     environment:
       MEMCACHE_HOST: memcache
       MEMCACHE_PORT: 11211
@@ -14,6 +15,8 @@ services:
       DB_HOST: db
       DB_USERNAME: root
       DB_PASSWORD: root_pass
+      FLAVOR: anexa
+      PORT: 8080
     volumes:
       - kimkelen-uploads:/uploads
   memcache:

@@ -23,7 +23,7 @@ echo -e "date.timezone = $TIMEZONE\nmemory_limit = $MEMORY_LIMIT\n" > /usr/local
 
 for dir in  disciplinary-sanction-documents justification-documents persons-photos; do
   [ -d /uploads/$dir ] || ( mkdir -p /uploads/$dir && chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /uploads/$dir )
-  ln -s /uploads/$dir /app/data/$dir
+  rm -fr /app/data/$dir && ln -s /uploads/$dir /app/data/$dir
 done
 
 
@@ -36,5 +36,7 @@ envsubst '${MAIL_PORT} ${MAIL_HOST} ${MEMCACHE_HOST} ${MEMCACHE_PORT} ${SESSION_
 cd /app && \
   rm -fr cache/* && \
   php -d memory_limit=512M symfony kimkelen:flavor $FLAVOR 
+
+sed -i 's/^Listen 80/Listen 0.0.0.0:8080/' /usr/local/etc/httpd.conf.tpl
 
 /usr/local/bin/apache2-foreground "$@"

@@ -13,3 +13,5 @@ all:
   facebook:
     app_id: $FACEBOOK_ID
     app_secret: $FACEBOOK_SECRET
+
+  pm_pdf_kit_executable: /usr/bin/wkhtmltopdf
