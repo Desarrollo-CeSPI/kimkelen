@@ -40,6 +40,11 @@ generator:
             action:         courseSubjectStudent
             credentials:    [edit_course]
             condition:      canManagePathwayCourseStudents
+            
+          preceptors:
+            action:         preceptors
+            condition:      canPathwayPreceptors
+            credentials:    [edit_course_preceptors]
 
           califications:
             action:         califications
@@ -48,6 +53,10 @@ generator:
 
           print_califications:
             action:         printCalifications
+          
+          attendanceSubject:
+            label:          Load Attendances
+            action:         attendanceSubject
 
           close:
             label:          Close

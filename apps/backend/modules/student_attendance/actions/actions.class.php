@@ -179,7 +179,13 @@ class student_attendanceActions extends sfActions
 	}
 	 
     $this->title = $this->form->isAttendanceBySubject() ? 'Load attendance for %subject%' : 'Load attendance day for %division%';
-
+    
+    $course_subject = CourseSubjectPeer::retrieveByPK($params['course_subject_id']);
+    
+    if($course_subject->getCourse()->getIsPathway()){
+        $this->setTemplate('studentAttendancePathway');
+    }
+    /*Tengo que crear el template*/
   }
 
   public function executeSaveStudentAttendance(sfWebRequest $request)

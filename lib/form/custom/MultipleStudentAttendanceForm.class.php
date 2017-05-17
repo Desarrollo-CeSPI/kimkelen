@@ -84,7 +84,12 @@ class MultipleStudentAttendanceForm extends sfForm
   {
     if ($this->isAttendanceBySubject())
     {
-      return $this->getCourseSubject()->getStudents();
+      if($this->getCourseSubject()->getCourse()->getIsPathway())
+      {
+          return CourseSubjectStudentPathwayPeer::retrieveStudentsByCourseSubject($this->getCourseSubject());
+      }
+      else
+        return $this->getCourseSubject()->getStudents();
     }
     else
     {

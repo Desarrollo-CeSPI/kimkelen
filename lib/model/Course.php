@@ -1118,5 +1118,11 @@ class Course extends BaseCourse
 		}		
 		return true;				
     }
+    
+  public function canPathwayPreceptors()
+  {
+    return SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent()) == $this->getSchoolYear();
+
+  }
 }
 sfPropelBehavior::add('Course', array('changelog'));
