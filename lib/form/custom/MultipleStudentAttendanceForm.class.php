@@ -82,21 +82,15 @@ class MultipleStudentAttendanceForm extends sfForm
 
   protected function getStudents()
   {
-    if($this->getCourseSubject()->getCourse()->getIsPathway())
+    if ($this->isAttendanceBySubject())
     {
-        return CourseSubjectStudentPathwayPeer::retrieveStudentsByCourseSubject($this->getCourseSubject());
+        return $this->getCourseSubject()->getStudents();
     }
     else
     {
-        if ($this->isAttendanceBySubject())
-        {
-          return $this->getCourseSubject()->getStudents();
-        }
-        else
-        {
-          return $this->getDivision()->getStudents();
-        }
+        return $this->getDivision()->getStudents();
     }
+    
   }
 
   public function configureStudents()
@@ -308,21 +302,14 @@ class MultipleStudentAttendanceForm extends sfForm
 
   public function getCareerSchoolYearPeriods()
   {
-    if($this->getCourseSubject()->getCourse()->getIsPathway())
+    
+    if ($this->isAttendanceBySubject())
     {
-        return array(CareerSchoolYearPeriodPeer::retrieveCurrentFirstQuaterly());
+        return $this->getCourseSubject()->getCareerSchoolYearPeriods();
     }
-    else{
-        
-        if ($this->isAttendanceBySubject())
-        {
-          return $this->getCourseSubject()->getCareerSchoolYearPeriods();
-        }
-        else
-        {
-          return $this->getDivision()->getCareerSchoolYearPeriods();
-        }
-        
+    else
+    {
+        return $this->getDivision()->getCareerSchoolYearPeriods();
     }
   }
 
