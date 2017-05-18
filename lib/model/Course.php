@@ -1121,8 +1121,24 @@ class Course extends BaseCourse
     
   public function canPathwayPreceptors()
   {
-    return SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent()) == $this->getSchoolYear();
-
+    //pregunto si la correlativa tiene falta por materia   
+    $correlatives = $this->getCourseSubject()->getCareerSubject()->getCareerSubjectsCorrelatives();
+    $sy= SchoolYearPeer::retrieveCurrent();
+    foreach($correlatives as $c)
+    {
+        $cssy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($c, $sy);
+        if($cssy->isAttendanceForDay())
+        {
+            return false;
+        }
+    }
+    
+    return !$this->getIsClosed() ;
+  }
+  
+  public function canPathwayAttendanceSubject()
+  {
+     return $this->canPathwayPreceptors();
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));

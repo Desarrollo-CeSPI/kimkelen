@@ -57,6 +57,7 @@ generator:
           attendanceSubject:
             label:          Load Attendances
             action:         attendanceSubject
+            condition:      canPathwayAttendanceSubject
 
           close:
             label:          Close

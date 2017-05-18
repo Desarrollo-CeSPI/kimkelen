@@ -249,7 +249,7 @@ class pathway_commissionActions extends autoPathway_commissionActions
       $career_school_year_id = $course->getCareerSchoolYear()->getId();
       $course_subject_id = array_shift($course->getCourseSubjectIds());
       $year = $course->getYear();
-      $this->redirect("student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+      $this->redirect("student_attendance/StudentAttendance?url=pathway_commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
     }
   }
 

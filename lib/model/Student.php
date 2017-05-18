@@ -511,7 +511,8 @@ class Student extends BaseStudent
     }
     else
     {
-      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $division))
+        // && el curso no es de trayectoria
+      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $division) && !$course_subject->getCourse()->getIsPathway())
       {
         return 'almost_free';
       }

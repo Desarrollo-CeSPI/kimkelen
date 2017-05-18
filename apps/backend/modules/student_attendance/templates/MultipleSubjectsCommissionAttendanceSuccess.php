@@ -31,7 +31,11 @@
       <?php $career_school_year_id = $cs->getCareerSchoolYear()->getId(); ?>
       <?php $year = $cs->getYear(); ?>
       <?php $course_subject_id = $cs->getId(); ?>
-      <td><?php echo link_to(__('Load Attendances'), "student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id="); ?></td>
+      <?php if($cs->getCourse()->isPathway()):?>
+              <td><?php echo link_to(__('Load Attendances'), "student_attendance/StudentAttendance?url=pathway_commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id="); ?></td>
+      <?php else: ?>
+              <td><?php echo link_to(__('Load Attendances'), "student_attendance/StudentAttendance?url=commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id="); ?></td>
+      <?php endif ?>
     </tr>
   <?php endforeach ?>
 </table>

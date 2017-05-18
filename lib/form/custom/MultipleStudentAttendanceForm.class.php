@@ -82,18 +82,20 @@ class MultipleStudentAttendanceForm extends sfForm
 
   protected function getStudents()
   {
-    if ($this->isAttendanceBySubject())
+    if($this->getCourseSubject()->getCourse()->getIsPathway())
     {
-      if($this->getCourseSubject()->getCourse()->getIsPathway())
-      {
-          return CourseSubjectStudentPathwayPeer::retrieveStudentsByCourseSubject($this->getCourseSubject());
-      }
-      else
-        return $this->getCourseSubject()->getStudents();
+        return CourseSubjectStudentPathwayPeer::retrieveStudentsByCourseSubject($this->getCourseSubject());
     }
     else
     {
-      return $this->getDivision()->getStudents();
+        if ($this->isAttendanceBySubject())
+        {
+          return $this->getCourseSubject()->getStudents();
+        }
+        else
+        {
+          return $this->getDivision()->getStudents();
+        }
     }
   }
 
@@ -306,13 +308,21 @@ class MultipleStudentAttendanceForm extends sfForm
 
   public function getCareerSchoolYearPeriods()
   {
-    if ($this->isAttendanceBySubject())
+    if($this->getCourseSubject()->getCourse()->getIsPathway())
     {
-      return $this->getCourseSubject()->getCareerSchoolYearPeriods();
+        return array(CareerSchoolYearPeriodPeer::retrieveCurrentFirstQuaterly());
     }
-    else
-    {
-      return $this->getDivision()->getCareerSchoolYearPeriods();
+    else{
+        
+        if ($this->isAttendanceBySubject())
+        {
+          return $this->getCourseSubject()->getCareerSchoolYearPeriods();
+        }
+        else
+        {
+          return $this->getDivision()->getCareerSchoolYearPeriods();
+        }
+        
     }
   }
 
