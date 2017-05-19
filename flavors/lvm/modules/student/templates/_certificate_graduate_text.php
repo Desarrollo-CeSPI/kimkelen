@@ -19,7 +19,13 @@
 <h4> Constancia de certificado de <b>estudio en trámite</b></h4>
 <p>
     Se deja constancia que el alumno/a <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>,
-    tiene en trámite su certificado de  estudio <b>Completo</b> hasta 6°año del ciclo Bachiller (Res. Min. 1497/14),
+    tiene en trámite su certificado de  estudio <b>Completo</b> hasta 6°año del ciclo Bachiller 
+    
+    <?php if(!is_null($student->getLastCareerStudent()->getOrientation())): ?>
+    Orientado en <b><?php echo $student->getLastCareerStudent()->getOrientation() ?> </b> 
+    <?php endif ?>
+    
+    (Res. Min. 1497/14),
     
     <?php if(count ($p) == 0): ?>
 	<?php echo "sin adeudar materias"?>
