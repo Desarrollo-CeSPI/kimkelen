@@ -30,11 +30,11 @@
 
     <h2><?php echo __("Preceptors of commission %course%", array("%course%" => $course)) ?></h2>
 
-    <form action="<?php echo url_for('commission/updatePreceptors') ?>" method="post">
+    <form action="<?php echo url_for('pathway_commission/updatePreceptors') ?>" method="post">
       <input type="hidden" name="id" id="id" value="<?php echo $course->getId()?>">
 
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Back'), $back_url, array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Back'), '@pathway_commission', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
 
@@ -45,7 +45,7 @@
       </fieldset>
 
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Back'), $back_url, array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Back'), '@pathway_commission', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
     </form>

@@ -100,6 +100,7 @@ class commissionActions extends autoCommissionActions
   {
     $this->course = $this->getRoute()->getObject();
     $this->form = new CoursePreceptorsForm($this->course);
+    $this->back_url= '@commission';
 
   }
 
@@ -122,6 +123,7 @@ class commissionActions extends autoCommissionActions
       $this->form->save();
 
       $this->getUser()->setFlash('notice', 'Los preceptores seleccionados han sido correctamente asignados a la comisión.');
+      $this->back_url = '@commission';
     }
     else
     {

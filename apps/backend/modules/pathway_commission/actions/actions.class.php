@@ -204,8 +204,6 @@ class pathway_commissionActions extends autoPathway_commissionActions
   {
     $this->course = $this->getRoute()->getObject();
     $this->form = new CoursePreceptorsForm($this->course);
-
-    $this->setTemplate('preceptors','commission');
   }
   
   public function executeUpdatePreceptors(sfWebRequest $request)
