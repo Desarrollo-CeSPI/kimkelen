@@ -36,7 +36,7 @@
         <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
         
-        <?php if(!$course_subject->getCourse()->isPathway()): ?>
+        <?php if(!is_null($course_subject) && !$course_subject->getCourse()->isPathway()): ?>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Print attendance template') ?>" name="print_attendance_template" ></li>
         <?php endif ?>
       </ul>

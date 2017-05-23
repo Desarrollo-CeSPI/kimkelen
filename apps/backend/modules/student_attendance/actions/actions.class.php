@@ -156,7 +156,7 @@ class student_attendanceActions extends sfActions
       $params['career_school_year_id'] = $request->getParameter('career_school_year_id');
     }
     
-    $multiple_student_attendance_form = ($course_subject->getCourse()->getIsPathway()) ? SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendancePathwayForm(): SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceForm();
+    $multiple_student_attendance_form = (!is_null($course_subject) && $course_subject->getCourse()->getIsPathway()) ? SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendancePathwayForm(): SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceForm();
     
     $this->form = new $multiple_student_attendance_form;
     $this->form->setDefaults($params);
