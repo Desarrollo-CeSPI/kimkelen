@@ -1135,7 +1135,8 @@ class Course extends BaseCourse
             }
         }
     
-        return !$this->getIsClosed() ;     
+        $sy=SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+        return (!$this->getIsClosed()  && $this->getSchoolYear()->getYear() == $sy->getYear());     
     }
     
     return false;

@@ -188,7 +188,7 @@ class student_attendanceActions extends sfActions
       
     $multiple_student_attendance = $request->getParameter('multiple_student_attendance');
     $course_subject = CourseSubjectPeer::retrieveByPK($multiple_student_attendance['course_subject_id']);
-    $multiple_student_attendance_form = ($course_subject->getCourse()->getIsPathway()) ? SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendancePathwayForm(): SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceForm();
+    $multiple_student_attendance_form = (!is_null($course_subject) && $course_subject->getCourse()->getIsPathway()) ? SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendancePathwayForm(): SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleStudentAttendanceForm();
 
     $this->form = new $multiple_student_attendance_form;
     
@@ -201,7 +201,7 @@ class student_attendanceActions extends sfActions
     $this->form->configureStudents();
     $this->title = $this->form->isAttendanceBySubject() ? 'Load attendance for %subject%' : 'Load attendance day for %division%';
     
-    $this->back_url = ($course_subject->getCourse()->isPathway())?'pathway_commission': $request->getParameter('back_url');
+    $this->back_url = (!is_null($course_subject) && $course_subject->getCourse()->getIsPathway())?'pathway_commission': $request->getParameter('back_url');
    
 
     $this->form->bind($request->getParameter($this->form->getName()));
