@@ -117,7 +117,6 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
         $criteria->addJoin(PathwayStudentPeer::PATHWAY_ID,PathwayPeer::ID);
         $criteria->add(PathwayPeer::SCHOOL_YEAR_ID,$sy->getId());
         $pathway = PathwayStudentPeer::doSelectOne($criteria, $con);
-
         if (!$pathway)
         {
           StudentCareerSubjectAllowedPeer::doDelete($c, $con);
@@ -151,10 +150,15 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
 
       foreach (CareerSubjectPeer::doSelect($c) as $career_subject)
       {
-        $obj = new StudentCareerSubjectAllowed();
-        $obj->setStudentId($this->object->getPrimaryKey());
-        $obj->setCareerSubject($career_subject);
-        $obj->save($con);
+        /* check if not exist */
+        $scsa= StudentCareerSubjectAllowedPeer::retrieveByStudentAndCareerSubject($this->object, $career_subject);
+        if(is_null($scsa))
+        {
+            $obj = new StudentCareerSubjectAllowed();
+            $obj->setStudentId($this->object->getPrimaryKey());
+            $obj->setCareerSubject($career_subject);
+            $obj->save($con);
+        }
       }
 
       $prev_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($career_school_year->getSchoolYear());
