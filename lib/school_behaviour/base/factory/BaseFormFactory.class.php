@@ -297,5 +297,10 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
       return 'MultipleStudentAttendancePathwayForm';
   }
+
+  public function getStudentsCareerSchoolYearConductForm()
+  {
+      return 'StudentsCareerSchoolYearConductForm';
+  }
   
 }

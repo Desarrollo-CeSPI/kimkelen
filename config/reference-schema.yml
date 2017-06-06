@@ -224,6 +224,14 @@ classes:
       short_name:
         type: varchar(255)
         required: true
+      shift_id:
+        description:      Especifica el turno del usuario en un año lectivo
+        type:             integer
+        foreignTable:     shift
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         restrict
+        required:         false 
 
   Holiday:
     tableName: holiday
