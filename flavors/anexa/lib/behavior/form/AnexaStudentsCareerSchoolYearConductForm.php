@@ -26,35 +26,10 @@
  * @subpackage form
  * @author     Ivan
  */
-class StudentsCareerSchoolYearConductForm extends sfForm
-{
-  public function configure()
+class AnexaStudentsCareerSchoolYearConductForm extends StudentsCareerSchoolYearConductForm
+{ 
+  public function setStudents($students, $career_school_year)
   {
-    $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
-    $this->getWidgetSchema()->addFormFormatter("Revisited", $sf_formatter_revisited);
-    $this->getWidgetSchema()->setFormFormatterName("Revisited");
-
-    $this->widgetSchema->setNameFormat('student_school_year_conduct[%s]');
-
-    $this->validatorSchema->setOption("allow_extra_fields", true);
-  }
-
-public function getStudents()
-{
-  return $this->students;
-}
-
-public function getPeriods()
-{
-  return $this->periods;
-}
-public function getCareerSchoolYear()
-{
-  return $this->career_school_year;
-}
-
-public function setStudents($students, $career_school_year)
-{
    $this->students = $students;
    $this->career_school_year =$career_school_year;
    $csp = CareerSchoolYearPeriodPeer:: getPeriodsSchoolYear($career_school_year->getId());
@@ -88,73 +63,18 @@ public function setStudents($students, $career_school_year)
                }
               else
               {
-                 $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'Conduct', 'add_empty' => true)));
-                 $this->setValidator($name, new sfValidatorPropelChoice(array('model' => 'Conduct', 'required' => false)));
-                 if($student_conduct)
-                 {
+                $c = new Criteria();
+                $c->add(ConductPeer::SHIFT_ID, $this->getDivision()->getShift()->getId());
+                  
+                $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'Conduct', 'add_empty' => true,'criteria' => $c)));
+                $this->setValidator($name, new sfValidatorPropelChoice(array('model' => 'Conduct', 'required' => false)));
+                if($student_conduct)
+                {
                     $this->setDefault($name, $student_conduct->getConductId());
-                 }
+                }
               }
             # $this->widgetSchema->setLabel("conduct_$student_id", "Conducta");
           }
       }
-  }
-
-   public function save($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (is_null($con))
-    {
-      $con = Propel::getConnection();
-    }
-    try
-    {
-      $con->beginTransaction();
-      $values = $this->getValues();
-      $students=$this->getStudents();
-      $periods=$this->getPeriods();
-      $career_school_year = $this->getCareerSchoolYear();
-      foreach ($students as $student)
-      {
-        $student_career_school_year =  StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $career_school_year);
-        foreach ($periods as $period)
-        {
-          if (!$period->getIsClosed())
-           {
-              $conduct_id = $values['conduct_'. $student->getId() . '_' . $period->getId()];
-              $scsyc = StudentCareerSchoolYearConductPeer::retrieveOrCreate($student_career_school_year, $period);
-              if(!is_null($conduct_id))
-              {
-                $scsyc->setConductId($conduct_id);
-                $scsyc->save();
-              }
-              elseif (!is_null($scsyc->getConduct())) {
-                  $scsyc->delete();
-              }
-            }
-        }
-      }
-      $con->commit();
-    }
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      throw $e;
-    }
-  }
-  
-  
-  public function setDivision($division)
-  {
-      $this->division= $division ;
-  }
-  
-  public function getDivision()
-  {
-      return $this->division ;
   }
 }
