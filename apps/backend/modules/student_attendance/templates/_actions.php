@@ -18,7 +18,8 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <ul class="sf_admin_td_actions">
-  <?php if ($sf_user->hasCredential('set_free')):?>
+  <?php $is_pathway = (! is_null($course_subject) && $course_subject->getCourse()->isPathway() ) ? true: false;  ?>
+  <?php if ($sf_user->hasCredential('set_free') && ! $is_pathway):?>
     <li>
       <?php echo link_to("Dejar libre", "student_attendance/free?student_id=" . $student->getId());?>
     </li>

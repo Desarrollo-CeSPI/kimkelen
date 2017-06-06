@@ -199,5 +199,56 @@ class pathway_commissionActions extends autoPathway_commissionActions
     $this->getUser()->setFlash('notice', __('The course has been closed successfuly'));
     $this->setTemplate('close');
   }
+  
+   public function executePreceptors(sfWebRequest $request)
+  {
+    $this->course = $this->getRoute()->getObject();
+    $this->form = new CoursePreceptorsForm($this->course);
+  }
+  
+  public function executeUpdatePreceptors(sfWebRequest $request)
+  {
+    $this->course = CoursePeer::retrieveByPk($request->getParameter('id'));
+
+    if (null === $this->course)
+    {
+      $this->getUser()->setFlash('error', 'Debe seleccionar una comisión para configurar sus preceptores');
+
+      $this->redirect('@commission');
+    }
+
+    $this->form = new CoursePreceptorsForm($this->course);
+
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid())
+    {
+      $this->form->save();
+
+      $this->getUser()->setFlash('notice', 'Los preceptores seleccionados han sido correctamente asignados a la comisión.');
+    }
+    else
+    {
+      $this->setProcessFormErrorFlash();
+    }
+
+    $this->setTemplate('preceptors');
+
+  }
+  
+  public function executeAttendanceSubject(sfWebRequest $request)
+  {
+    $this->redirectIf($this->getUser()->isTeacher());
+    $course = $this->getRoute()->getObject();
+    if (count($course->getCourseSubjects()) > 1){
+      $course_id = $course->getId();
+      $this->redirect("student_attendance/MultipleSubjectsCommissionAttendance?course=$course_id&division_id=");
+    }
+    else {
+      $career_school_year_id = $course->getCareerSchoolYear()->getId();
+      $course_subject_id = array_shift($course->getCourseSubjectIds());
+      $year = $course->getYear();
+      $this->redirect("student_attendance/StudentAttendance?url=pathway_commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
+    }
+  }
 
 }

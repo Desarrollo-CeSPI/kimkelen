@@ -28,11 +28,17 @@
   <div id="sf_admin_content">
     <?php include_partial('division/information_box') ?>
     <form action="<?php echo url_for('@save_student_attendance?back_url=' . $back_url) ?>" method="post" >
+        
+      <?php $course_subject_id = isset($form->course_subject_id) ? $form->course_subject_id : null ?>
+      <?php $course_subject = CourseSubjectPeer::retrieveByPK($course_subject_id); ?>  
       <ul class="sf_admin_actions">
 
         <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
+        
+        <?php if(!is_null($course_subject) && !$course_subject->getCourse()->isPathway()): ?>
         <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Print attendance template') ?>" name="print_attendance_template" ></li>
+        <?php endif ?>
       </ul>
       
       <div class="week_move">
@@ -54,8 +60,6 @@
 
       <?php echo $form->renderHiddenFields() ?>
       <?php echo $form->renderGlobalErrors() ?>
-      <?php $course_subject_id = isset($form->course_subject_id) ? $form->course_subject_id : null ?>
-      <?php $course_subject = CourseSubjectPeer::retrieveByPK($course_subject_id); ?>
       <?php $career_school_year = $form->getCareerSchoolYear() ?>
 
       <?php $absence_for_period = $form->isAbsenceForPeriod(); ?>

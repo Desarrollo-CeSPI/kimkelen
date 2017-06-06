@@ -84,12 +84,13 @@ class MultipleStudentAttendanceForm extends sfForm
   {
     if ($this->isAttendanceBySubject())
     {
-      return $this->getCourseSubject()->getStudents();
+        return $this->getCourseSubject()->getStudents();
     }
     else
     {
-      return $this->getDivision()->getStudents();
+        return $this->getDivision()->getStudents();
     }
+    
   }
 
   public function configureStudents()
@@ -301,13 +302,14 @@ class MultipleStudentAttendanceForm extends sfForm
 
   public function getCareerSchoolYearPeriods()
   {
+    
     if ($this->isAttendanceBySubject())
     {
-      return $this->getCourseSubject()->getCareerSchoolYearPeriods();
+        return $this->getCourseSubject()->getCareerSchoolYearPeriods();
     }
     else
     {
-      return $this->getDivision()->getCareerSchoolYearPeriods();
+        return $this->getDivision()->getCareerSchoolYearPeriods();
     }
   }
 

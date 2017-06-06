@@ -1118,5 +1118,34 @@ class Course extends BaseCourse
 		}		
 		return true;				
     }
+    
+  public function canPathwayPreceptors()
+  {
+    //pregunto si la correlativa tiene falta por materia  
+    if(! is_null($this->getCourseSubject()))
+    {
+        $correlatives = $this->getCourseSubject()->getCareerSubject()->getCareerSubjectsCorrelatives();
+        $sy= SchoolYearPeer::retrieveCurrent();
+        foreach($correlatives as $c)
+        {
+            $cssy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($c, $sy);
+            if($cssy->isAttendanceForDay())
+            {
+                return false;
+            }
+        }
+    
+        $sy=SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
+        return (!$this->getIsClosed()  && $this->getSchoolYear()->getYear() == $sy->getYear());     
+    }
+    
+    return false;
+    
+  }
+  
+  public function canPathwayAttendanceSubject()
+  {
+     return $this->canPathwayPreceptors();
+  }
 }
 sfPropelBehavior::add('Course', array('changelog'));

@@ -86,7 +86,7 @@
 			</tfoot>
 		</table>
 		<ul class="sf_admin_actions">
-        <?php echo $helper->linkToList(array('label' => __('Go back'), 'params' => array(''), 'class_suffix' => 'list',)) ?>      
+                    <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
 		</ul>
 	</div>
  </div>	

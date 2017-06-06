@@ -406,6 +406,21 @@ class AdminGeneratorFiltersClass
     else if ($event->getSubject() instanceOf pathway_commissionActions)
     {
       $criteria->add(CoursePeer::IS_PATHWAY, true);
+      
+      CoursePeer::sorted($criteria);
+
+      if ($user->isPreceptor())
+      {
+        PersonalPeer::joinWithCourse($criteria, $user->getGuardUser()->getId());
+      }
+      elseif ($user->isTeacher())
+      {
+        TeacherPeer::joinWithCourses($criteria, $user->getGuardUser()->getId(), true);
+      }
+      if ($user->isHeadPreceptor())
+      {
+        self::addCommissionHeadPreceptorCriteria($criteria, $user);
+      }
     }
 
     return $criteria;
