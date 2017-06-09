@@ -149,10 +149,9 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
       $c->add(CareerSubjectPeer::YEAR, $year);
 
       foreach (CareerSubjectPeer::doSelect($c) as $career_subject)
-      {
-        /* check if not exist */
-        $scsa= StudentCareerSubjectAllowedPeer::retrieveByStudentAndCareerSubject($this->object, $career_subject);
-        if(is_null($scsa))
+      { /* check if not exist */
+        $scsa= StudentCareerSubjectAllowedPeer::doCountStudentAndCareerSubject($this->object, $career_subject);
+        if($scsa == 0)
         {
             $obj = new StudentCareerSubjectAllowed();
             $obj->setStudentId($this->object->getPrimaryKey());
