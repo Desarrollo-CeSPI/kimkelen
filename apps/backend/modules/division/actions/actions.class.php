@@ -234,7 +234,6 @@ class divisionActions extends autoDivisionActions
     $this->periods = $this->division->getCareerSchoolYearPeriods();
     $class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentsCareerSchoolYearConductForm();
     $form = new $class();
-    $form->setDivision($this->division);
     $form->setStudents($this->students, $career_school_year);
     $this->form = $form;
 
@@ -249,7 +248,6 @@ class divisionActions extends autoDivisionActions
     $career_school_year = $this->division->getCareerSchoolYear();
     $class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentsCareerSchoolYearConductForm();
     $this->form = new $class();
-    $this->form->setDivision($this->division);
     $this->form->setStudents($this->students, $career_school_year);
 
     $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));

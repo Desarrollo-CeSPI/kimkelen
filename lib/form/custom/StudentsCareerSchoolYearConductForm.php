@@ -146,15 +146,4 @@ public function setStudents($students, $career_school_year)
       throw $e;
     }
   }
-  
-  
-  public function setDivision($division)
-  {
-      $this->division= $division ;
-  }
-  
-  public function getDivision()
-  {
-      return $this->division ;
-  }
 }
