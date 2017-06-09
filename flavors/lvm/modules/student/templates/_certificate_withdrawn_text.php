@@ -37,7 +37,7 @@
     <?php endif; ?>
     <?php if($scsy->getYear() < $scsy->getCareerSchoolYear()->getCareer()->getMaxYear() ):?>
         <?php $year =  $scsy->getYear() + 1; ?>
-        <b><?php echo " y todo ". $year ."°"; ?></b>
+        <b><?php echo " y la totalidad de ". $year ."°"; ?></b>
         <?php for($i = $year +1; $i <= $scsy->getCareerSchoolYear()->getCareer()->getMaxYear() ; $i++): ?>
         
             <b><?php echo ($i == ($scsy->getCareerSchoolYear()->getCareer()->getMaxYear())) ? 'y' : ',' ;?>
