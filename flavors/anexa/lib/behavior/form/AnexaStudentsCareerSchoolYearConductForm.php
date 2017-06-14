@@ -64,7 +64,7 @@ class AnexaStudentsCareerSchoolYearConductForm extends StudentsCareerSchoolYearC
               else
               {
                 $c = new Criteria();
-                $c->add(ConductPeer::SHIFT_ID, $this->getDivision()->getShift()->getId());
+                $c->add(ConductPeer::SHIFT_ID, ShiftType::SHIFT_MORNING );
                   
                 $this->setWidget($name, new sfWidgetFormPropelChoice(array('model'=> 'Conduct', 'add_empty' => true,'criteria' => $c)));
                 $this->setValidator($name, new sfValidatorPropelChoice(array('model' => 'Conduct', 'required' => false)));
