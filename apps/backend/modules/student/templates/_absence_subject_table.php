@@ -44,9 +44,9 @@
                           <th>Periodo</th>
                         <?php endif?>
 
-                        <th>Fecha</th>
-                        <th>Cantidad</th>
-                        <th>Justificacion</th>
+                        <th><?php echo __('Day') ?></th>
+                        <th><?php echo __('Absence') ?></th>
+                        <th><?php echo __('Justification') ?></th>
                     </tr>
                 </thead>
 
@@ -82,7 +82,7 @@
                                         <?php echo $absence->getValue() ?>
                                     </td>
                                     <td class="<?php !is_null($absence->getStudentAttendanceJustificationId()) and print "box_justificated_studet_show" ?>">
-                                        <?php echo is_null($absence->getStudentAttendanceJustificationId()) ? '-' : $absence->getStudentAttendanceJustification() ?>
+                                        <?php echo is_null($absence->getStudentAttendanceJustificationId()) ? '-' : $absence->getStudentAttendanceJustification()->getJustificationType() ?>
                                     </td>
                                 </tr>
                                 <tr class ="<?php $is_free and print "box_free" ?> <?php $is_almost_free and print "box_almost_free" ?>">
