@@ -494,4 +494,32 @@ public function executeExportCalificationTable(sfWebRequest $request)
 	
     $this->setLayout('cleanLayout');
   }
+  
+  public function executeShowCourseResultReport(sfWebRequest $request)
+  {
+    $this->setLayout('cleanLayout');
+
+    $this->division = DivisionPeer::retrieveByPk($request->getParameter('id'));
+
+    if (null === $this->division)
+    {
+      $this->getUser()->setFlash('error', 'No se ha indicado ninguna división');
+      $this->redirect('@division');
+    }
+  
+    $this->students = $this->division->getStudents();  
+  }
+  
+  public function executeExportCourseResultTable(sfWebRequest $request)
+  {
+	$this->executeShowCourseResultReport($request);
+
+	$response = $this->getResponse();
+
+	$response->setHttpHeader("Content-type","application/vnd.ms-excel; name='excel'; charset='utf-8'");
+	$response->setHttpHeader('Content-Disposition', 'attachment; filename="resultado_cursadas.xls"');
+	$response->setHttpHeader("Pragma","no-cache");
+	$response->setHttpHeader("Expires","0");
+  }
+  
 }
