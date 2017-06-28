@@ -209,5 +209,15 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
 
     return $periods_array;
   }
+  
+  static function retrieveByCourseTypeAndCareerSchoolYear($course_type,$career_school_year)
+  {
+      $c=new Criteria();
+      $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year->getId());
+      $c->add(self::COURSE_TYPE, $course_type);
+      
+      return self::doSelect($c);
+      
+  }
 
 }

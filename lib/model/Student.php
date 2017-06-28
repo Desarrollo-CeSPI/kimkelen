@@ -1378,6 +1378,9 @@ class Student extends BaseStudent
  public function getStudentCareerSchoolYearsAscending()
   {
     $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->addDescendingOrderByColumn(SchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
     return $this->getStudentCareerSchoolYears($c);
