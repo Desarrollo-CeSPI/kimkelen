@@ -4418,6 +4418,10 @@
                 <source>Is computable</source>
                 <target>Es computable</target>
             </trans-unit>
+            <trans-unit>
+                <source>Course result report</source>
+                <target>Reporte de resultado de cursadas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

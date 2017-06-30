@@ -17,20 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
+<?php use_stylesheet('print.css', 'last', array('media' => 'print')) ?>
 
-/**
- * components
- *
- * @author José Nahuel Cuesta Luengo <ncuesta@cespi.unlp.edu.ar>
- */
-class divisionComponents extends sfComponents
-{
-  public function executeStudent_marks()
-  {
-    $this->configuration = $this->getVar('course_subject')->getCareerSubjectSchoolYear()->getConfiguration();
-    $this->marks = $this->getVar('student')->getMarksForCourse($this->getVar('course_subject'));
-    $this->marksNumber = $this->getVar('course_subject')->countMarks();
-  }
-
-}
+<?php include_partial('division/course_result_table', array(
+      'students'        => $students,
+      'division'        => $division,
+      'course_subjects' => $division->getCourseSubjects(),
+  ));?>

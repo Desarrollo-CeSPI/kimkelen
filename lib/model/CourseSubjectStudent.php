@@ -714,5 +714,17 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       return $this->getMarksAverage();
     }
   }
+  
+  public function getAvgColorDisapprovedReport()
+  {
+    $course_result = $this->getCourseResult();
+    return ($course_result instanceOf StudentDisapprovedCourseSubject) ? $course_result->getAvgColorDisapprovedReport() : '' ;
+  }
+  
+  public function getColorDisapprovedReport($number)
+  {
+    $course_result = $this->getCourseResult();
+    return ($course_result instanceOf StudentDisapprovedCourseSubject) ? $course_result->getColorDisapprovedReport($number) : '' ;
+  }
 
 }
