@@ -369,4 +369,35 @@ class BaseAnalyticalBehaviour
 	public function showCertificate() {
 		return false;
 	}
+        
+    public function getApprovationDateBySubject(StudentApprovedCareerSubject $studentApprovedCareerSubject)
+    {
+        $approvationInstance = $studentApprovedCareerSubject->getApprovationInstance();
+
+        switch(get_class($approvationInstance)) {
+          case 'StudentApprovedCourseSubject':
+
+            $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+            if(!is_null($period))
+            {
+              return $period->getEndAt();
+            }
+            break;
+          case 'StudentDisapprovedCourseSubject': 
+            $cssid = $approvationInstance->getCourseSubjectStudentId();
+            $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
+            $exam = $csse->getExaminationSubject()->getExamination();
+
+            return $exam->getDateFrom();
+          case 'StudentRepprovedCourseSubject':
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);
+            $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
+
+            return $exam->getDateFrom();
+        }
+
+        //couldn't find when was approved. return null ¿error?
+        return;
+        
+    }
 }

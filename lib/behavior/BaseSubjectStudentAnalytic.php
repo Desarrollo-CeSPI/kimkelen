@@ -122,11 +122,11 @@ class BaseSubjectStudentAnalytic
         }
         if ($this->approved)
         {	
-            $approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
-			
+            //$approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
+            $approvation_date = SchoolAnalyticalFactory::getInstance()->getApprovationDateBySubject($this->approved);
             if ($approvation_date)
             {	
-                return $this->approved ? $this->approved_date = new DateTime(StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved)) : ($as_label ? $this->getNullLabel() : null);
+                return $this->approved ? $this->approved_date = new DateTime(SchoolAnalyticalFactory::getInstance()->getApprovationDateBySubject($this->approved)) : ($as_label ? $this->getNullLabel() : null);
             }
         }
         return ($as_label ? $this->getNullLabel() : null);
