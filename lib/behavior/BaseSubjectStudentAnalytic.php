@@ -123,10 +123,10 @@ class BaseSubjectStudentAnalytic
         if ($this->approved)
         {	
             //$approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
-            $approvation_date = SchoolAnalyticalFactory::getInstance()->getApprovationDateBySubject($this->approved);
+            $approvation_date = AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->approved);
             if ($approvation_date)
             {	
-                return $this->approved ? $this->approved_date = new DateTime(SchoolAnalyticalFactory::getInstance()->getApprovationDateBySubject($this->approved)) : ($as_label ? $this->getNullLabel() : null);
+                return $this->approved ? $this->approved_date = new DateTime(AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->approved)) : ($as_label ? $this->getNullLabel() : null);
             }
         }
         return ($as_label ? $this->getNullLabel() : null);

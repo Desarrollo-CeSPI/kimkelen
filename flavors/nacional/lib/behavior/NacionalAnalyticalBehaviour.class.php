@@ -28,8 +28,7 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
           case 'StudentApprovedCourseSubject':
 
             //return November
-              $year = date('Y');
-            return $year."-11-01";
+            return $approvationInstance->getSchoolYear()->getYear()."-11-30";
             
             break;
           case 'StudentDisapprovedCourseSubject': 
