@@ -303,4 +303,9 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
       return 'StudentsCareerSchoolYearConductForm';
   }
   
+  public function getMultipleManageAllowedSubjectForm()
+  {
+      return 'MultipleManageAllowedSubjectForm';
+  }
+  
 }

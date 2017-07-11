@@ -125,6 +125,9 @@ generator:
             credentials: [edit_student]
           _delete:
             credentials: [edit_student]
+          manageAllowedSubject:
+            label: Materias a cursar
+            credentials: [edit_student]
         display: [person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, _is_registered, _careers]
         layout: stacked
         params: |
