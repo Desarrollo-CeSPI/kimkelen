@@ -34,6 +34,10 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                 $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
                 if(!is_null($period))
                 {
+                    $month = date('m', strtotime($period->getEndAt()));
+                    if($month > 11 ){
+                        return $approvationInstance->getSchoolYear()->getYear()."-11-30";
+                    }
                   return $period->getEndAt();
                 }
                 break;
