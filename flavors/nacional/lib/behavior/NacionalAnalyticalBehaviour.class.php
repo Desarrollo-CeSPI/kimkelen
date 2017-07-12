@@ -27,9 +27,21 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         switch(get_class($approvationInstance)) {
           case 'StudentApprovedCourseSubject':
 
+              var_dump($approvationInstance->getCourseSubject()->getCourseType());
             //return November
-            return $approvationInstance->getSchoolYear()->getYear()."-11-30";
-            
+            if($approvationInstance->getCourseSubject()->getCourseType() != CourseType::TRIMESTER)
+            {
+                $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+                if(!is_null($period))
+                {
+                  return $period->getEndAt();
+                }
+                break;
+            }
+            else{
+                return $approvationInstance->getSchoolYear()->getYear()."-11-30";
+            }
+           
             break;
           case 'StudentDisapprovedCourseSubject': 
             $cssid = $approvationInstance->getCourseSubjectStudentId();
