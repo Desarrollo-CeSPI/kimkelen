@@ -79,6 +79,13 @@
                 <?php endif ?>
                 <?php if (HolidayPeer::isHoliday($form->day)): ?>
                   <script>disableDayUneditable(1)</script>
+                <?php endif; ?>
+                <?php 
+                  $month = date('m', strtotime($form->day));
+                  $now = date('m');
+                  
+                  if (!$sf_user->hasGroup(UserProfile::getStateString(UserProfile::ADMIN)) && ($month < $now)):?>
+                  <script>disableDayUneditable(1)</script>
                 <?php endif; ?>      
                 
             </td>

@@ -27,19 +27,24 @@
   </h1>
   <div id="sf_admin_content">
     <?php include_partial('division/information_box') ?>
-    <form action="<?php echo url_for('@save_student_attendance_show_day') ?>" method="post" >
+    <form action="<?php echo url_for('@save_student_attendance?back_url=' . $back_url) ?>" method="post" >
+        
+      <?php $course_subject_id = isset($form->course_subject_id) ? $form->course_subject_id : null ?>
+      <?php $course_subject = CourseSubjectPeer::retrieveByPK($course_subject_id); ?>  
       <ul class="sf_admin_actions">
-        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), '@student_attendance_day_show_day'); ?></li>
-        <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li> 
+
+        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
+        <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
+        
+        <?php if(!is_null($course_subject) && !$course_subject->getCourse()->isPathway()): ?>
+        <li class ="sf_admin_action_list"><input type="submit" value="<?php echo __('Print attendance template') ?>" name="print_attendance_template" ></li>
+        <?php endif ?>
       </ul>
       
       <div class="week_move">
-		<?php (date('l', strtotime($form->day)) == 'Friday') ? $next_day = date('Y-m-d', strtotime($form->day . '+ 3 day')) : $next_day = date('Y-m-d', strtotime($form->day . '+ 1 day')) ?>
-        <?php (date('l', strtotime($form->day)) == 'Monday') ? $previous_day = date('Y-m-d', strtotime($form->day . '- 3 day')) : $previous_day = date('Y-m-d', strtotime($form->day . '- 1 day')) ?>
-
         <?php echo image_tag('../sfPropelPlugin/images/previous.png') ?>
-        <?php echo link_to(__('previous day'), 'student_attendance/StudentAttendanceShowDay', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . $previous_day)); ?>
-        <?php echo link_to(__('next day'), 'student_attendance/StudentAttendanceShowDay', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . $next_day )); ?>
+        <?php echo link_to(__('previous week'), 'student_attendance/StudentAttendance', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . date('Y-m-d', strtotime($form->day . '- 1 week')))); ?>
+        <?php echo link_to(__('next week'), 'student_attendance/StudentAttendance', array('query_string' => "year=$form->year&career_school_year_id=$form->career_school_year_id&division_id=$form->division_id&course_subject_id=$form->course_subject_id&day=" . date('Y-m-d', strtotime($form->day . '+ 1 week')))); ?>
         <?php echo image_tag('../sfPropelPlugin/images/next.png') ?>
       </div>
 
@@ -55,8 +60,6 @@
 
       <?php echo $form->renderHiddenFields() ?>
       <?php echo $form->renderGlobalErrors() ?>
-      <?php $course_subject_id = isset($form->course_subject_id) ? $form->course_subject_id : null ?>
-      <?php $course_subject = CourseSubjectPeer::retrieveByPK($course_subject_id); ?>
       <?php $career_school_year = $form->getCareerSchoolYear() ?>
 
       <?php $absence_for_period = $form->isAbsenceForPeriod(); ?>
@@ -70,18 +73,28 @@
         <thead>
           <tr>
             <td></td>
-            <td>
-                <?php $name = 'day_disabled_1'  ?>
+            <?php foreach ($form->days as $day => $day_i): ?>
+              <td>
+                <?php $name = 'day_disabled_' . $day ?>
                 <?php echo $form[$name]; ?>
                 <?php echo __("Disabled"); ?>
                 <?php if ($form->getDefault($name)): ?>
-                  <script>disableDay(1)</script>
+                  <script>disableDay(<?php echo $day ?>)</script>
                 <?php endif ?>
-                <?php if (HolidayPeer::isHoliday($form->day)): ?>
-                  <script>disableDayUneditable(1)</script>
-                <?php endif; ?>      
-                
-            </td>
+                <?php if (HolidayPeer::isHoliday($day_i)): ?>
+                  <script>disableDayUneditable(<?php echo $day ?>)</script>
+                <?php endif; ?>
+                <?php 
+                  $month = date('m', strtotime($day_i));
+                  $now = date('m');
+                  
+                  if (!$sf_user->hasGroup(UserProfile::getStateString(UserProfile::ADMIN)) && ($month < $now)): ?>
+                  <script>disableDayUneditable(<?php echo $day ?>)</script>
+                <?php endif; ?>
+
+              </td>
+            <?php endforeach ?>
+
             <?php if ($absence_for_period): ?>
               <td colspan="<?php echo $count_career_school_year_period ?>"></td>
               <td colspan="<?php echo $count_career_school_year_period ?>"></td>
@@ -95,12 +108,12 @@
           </tr>
           <tr>
             <td><?php echo __('Student'); ?></td>
-            
+            <?php foreach ($form->days as $day => $day_i): ?>
               <td>
-                <?php echo __(date('l', strtotime($form->day))); ?>
-                <?php echo date('d/m', strtotime($form->day)); ?>
+                <?php echo __(date('l', strtotime($day_i))); ?>
+                <?php echo date('d/m', strtotime($day_i)); ?>
               </td>
-           
+            <?php endforeach ?>
 
             <?php if ($absence_for_period): ?>
               <?php foreach ($career_school_year_periods as $career_school_year_period): ?>
@@ -114,7 +127,9 @@
           </tr>
           <tr>
             <td></td>
-            <td></td>
+            <?php foreach ($form->days as $day => $day_i): ?>
+              <td></td>
+            <?php endforeach ?>
 
             <?php if ($absence_for_period): ?>
               <?php if ($count_career_school_year_period): ?>
@@ -143,16 +158,16 @@
           <?php foreach ($form->students as $student): ?>
             <tr>
               <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student ?></td>
-              
-                <td class="day_1 <?php echo $student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$form->day,$course_subject_id)?>">
-                  <?php $name = 'student_attendance_' . $student->getId() . '_' . 1 ?>
+              <?php foreach ($form->days as $day => $day_i): ?>
+                <td class="day_<?php echo $day .' ' .$student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$day_i,$course_subject_id)?>">
+                  <?php $name = 'student_attendance_' . $student->getId() . '_' . $day ?>
 
                   <?php echo $form[$name] ?>
                   <?php if ($form[$name]->hasError()): ?>
                     <?php echo $form[$name]->renderError() ?>
                   <?php endif ?>
                 </td>
-             
+              <?php endforeach ?>
               <?php if ($absence_for_period): ?>
                 <?php foreach ($career_school_year_periods as $career_school_year_period): ?>
                   <?php $free_class = $student->getFreeClass($career_school_year_period, $course_subject, $career_school_year, $form->getDivision()) ?>
@@ -174,12 +189,15 @@
         </tbody>
       </table>
       <ul class="sf_admin_actions">
-        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), '@student_attendance_day_show_day'); ?></li>
+        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $back_url); ?></li>
         <li ><input type="submit" value="<?php echo __('Save', array(), 'sf_admin') ?>" /></li>
       </ul>
     </form>
   </div>
 </div>
+
 <script>
-    disableColumn(1);
+<?php foreach ($form->days as $day => $day_i): ?>
+    disableColumn(<?php echo $day ?>);
+<?php endforeach ?>
 </script>
