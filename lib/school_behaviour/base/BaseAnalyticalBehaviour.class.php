@@ -345,21 +345,34 @@ class BaseAnalyticalBehaviour
                 $this->process_total_average($avg_mark_for_year);
             }else{
 				if($scsy->getStatus() == 0 ){
-					
-					//recupero en año en curso
+					//recupero el año en curso
 					$year_in_career = $scsy->getYear();
 					$this->add_year_in_career($year_in_career);
 					$career_school_year = $scsy->getCareerSchoolYear();
 					$school_year = $career_school_year->getSchoolYear();
 					
 					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
-
 					foreach ($csss as $css)
 					{
-						// No tiene nota -> el curso está incompleto
+						/*// No tiene nota -> el curso está incompleto
 						$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
 						$this->add_subject_to_year($year_in_career, $css);
-						
+						*/
+                                            
+                                             if ($this->subject_is_averageable($css))
+                                            {
+                                                $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
+                                                $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
+                                                if (!$css->getMark(false))
+                                                {
+                                                    // No tiene nota -> el curso está incompleto
+                                                    $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+                                                    $this->add_missing_subject($css);
+                                                }
+                                            }
+
+                                            $this->add_subject_to_year($year_in_career, $css);
+                                            $this->check_last_exam_date($css->getApprovedDate(false));
 					}
 				}
 			}
@@ -370,10 +383,8 @@ class BaseAnalyticalBehaviour
 		return false;
 	}
         
-    public function getApprovationDateBySubject(StudentApprovedCareerSubject $studentApprovedCareerSubject)
+    public function getApprovationDateBySubject($approvationInstance)
     {
-        $approvationInstance = $studentApprovedCareerSubject->getApprovationInstance();
-
         switch(get_class($approvationInstance)) {
           case 'StudentApprovedCourseSubject':
 

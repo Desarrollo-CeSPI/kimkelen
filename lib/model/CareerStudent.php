@@ -414,7 +414,7 @@ class CareerStudent extends BaseCareerStudent
 
   public function getGraduationSchoolYear()
   {
-    return SchoolYear::retrieveByPk($this->getGraduationSchoolYearId());
+    return SchoolYearPeer::retrieveByPk($this->getGraduationSchoolYearId());
   }
 
 }

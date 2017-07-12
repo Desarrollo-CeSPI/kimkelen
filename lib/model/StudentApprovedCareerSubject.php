@@ -132,7 +132,6 @@ class StudentApprovedCareerSubject extends BaseStudentApprovedCareerSubject
 	
     // Caso Mesa de Diciembre, Marzo
     $instance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
-
     if(!is_null($instance))
     {
       return $instance;

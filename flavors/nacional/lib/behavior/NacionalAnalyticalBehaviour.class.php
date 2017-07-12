@@ -20,15 +20,11 @@
 
 class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
-    public function getApprovationDateBySubject(StudentApprovedCareerSubject $studentApprovedCareerSubject)
+    public function getApprovationDateBySubject($approvationInstance)
     {
-        $approvationInstance = $studentApprovedCareerSubject->getApprovationInstance();
-
         switch(get_class($approvationInstance)) {
           case 'StudentApprovedCourseSubject':
-
-              var_dump($approvationInstance->getCourseSubject()->getCourseType());
-            //return November
+            //return November/July
             if($approvationInstance->getCourseSubject()->getCourseType() != CourseType::TRIMESTER)
             {
                 $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();

@@ -45,7 +45,12 @@ class BaseSubjectStudentAnalytic
         if ($this->approved && !$this->approvationInstance)
         {
             $this->approvationInstance = $this->approved->getApprovationInstance();
+        }// es para mostrar las materias aprobadas del año en curso
+        elseif (! $this->approved && !is_null($this->css->getStudentApprovedCourseSubject()) ) 
+        {
+            $this->approvationInstance = $this->css->getStudentApprovedCourseSubject();
         }
+       
         return $this->approvationInstance;
     }
 
@@ -93,7 +98,6 @@ class BaseSubjectStudentAnalytic
     
     public function getCondition()
     {
-        $instance = $this->approvationInstance();
         switch (get_class($instance))
         {
             case 'StudentApprovedCourseSubject':
@@ -122,11 +126,19 @@ class BaseSubjectStudentAnalytic
         }
         if ($this->approved)
         {	
-            //$approvation_date = StudentApprovedCareerSubjectPeer::retrieveApprovationDate($this->approved);
-            $approvation_date = AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->approved);
+            $approvationInstance = $this->approved->getApprovationInstance();
+            $approvation_date = AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($approvationInstance);
             if ($approvation_date)
             {	
-                return $this->approved ? $this->approved_date = new DateTime(AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->approved)) : ($as_label ? $this->getNullLabel() : null);
+                return $this->approved ? $this->approved_date = new DateTime(AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($approvationInstance)) : ($as_label ? $this->getNullLabel() : null);
+            }
+        } 
+        elseif (!is_null($this->css->getStudentApprovedCourseSubject())) 
+        { 
+            $approvation_date = AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->css->getStudentApprovedCourseSubject());
+            if ($approvation_date)
+            {	
+                return $this->approved_date = new DateTime(AnalyticalBehaviourFactory::getInstance($this->css->getStudent())->getApprovationDateBySubject($this->css->getStudentApprovedCourseSubject()));
             }
         }
         return ($as_label ? $this->getNullLabel() : null);
@@ -144,12 +156,21 @@ class BaseSubjectStudentAnalytic
 
     public function getMark($as_label = true)
     {
-        return ( $this->approved ? $this->approved->getMark() : ($as_label ? $this->getNullLabel() : null) );
+        if($this->approved)
+        {
+            return $this->approved->getMark();
+        }
+        else
+        {
+            $sacs = $this->css->getStudentApprovedCourseSubject();          
+            return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
+        }
+ 
     }
 
     public function getMarkAsSymbol()
     {
-        if (!$this->approved)
+        if (!$this->approved && is_null($this->css->getStudentApprovedCourseSubject()))
             return $this->getNullLabel();
         $c = new num2text();
         $mark = $this->getMark();
