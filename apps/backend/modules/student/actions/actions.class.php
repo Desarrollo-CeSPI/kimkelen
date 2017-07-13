@@ -930,5 +930,42 @@ class studentActions extends autoStudentActions
         }
       
   }
+  
+  public function executeBatchManageAllowedSubject(sfWebRequest $request, $objects)
+  {
+    $ids = array_map(create_function("\$o", "return \$o->getId();"), $objects);
+    $this->getUser()->setAttribute("multiple_register_students_ids", implode(",", $ids));
+
+    $this->redirect("student/multipleManageAllowedSubject");
+  }
+  
+  public function executeMultipleManageAllowedSubject(sfWebRequest $request)
+  {
+    $this->title = "Subjects to be coursed";
+    $this->help = "Sólo se administrarán las materias para aquellos alumnos que se encuentren matriculados.";
+    $this->url = 'student/multipleManageAllowedSubject';
+
+    $this->setTemplate("commonBatch");
+
+    $ids = $this->getUser()->getAttribute("multiple_register_students_ids");
+    $ids = explode(",", $ids);
+    $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleManageAllowedSubjectForm();
+    $this->form = new $form_name;
+    $this->form->setStudentsIds($ids);
+
+    if ($request->isMethod("post"))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "Los ítems fueron actualizados correctamente.");
+        $this->getUser()->getAttributeHolder()->remove("multiple_register_students_ids");
+
+        $this->redirect("@student");
+      }
+    }
+  }
 
 }
