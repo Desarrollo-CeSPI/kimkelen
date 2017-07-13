@@ -47,13 +47,13 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             $cssid = $approvationInstance->getCourseSubjectStudentId();
             $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
             $exam = $csse->getExaminationSubject()->getExamination();
-
-            return $exam->getDateFrom();
+            return $exam->getDateTo();
           case 'StudentRepprovedCourseSubject':
-            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);
+               
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);  
             $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
-
-            return $exam->getDateFrom();
+            return $exam->getDateFrom();  
+            
         }
 
         //couldn't find when was approved. return null ¿error?

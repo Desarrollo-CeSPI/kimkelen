@@ -129,16 +129,16 @@ class StudentApprovedCareerSubject extends BaseStudentApprovedCareerSubject
     {
         return $instance;
     }
-	
-    // Caso Mesa de Diciembre, Marzo
-    $instance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
+    
+    // Caso de previa
+    $instance = StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
     if(!is_null($instance))
     {
       return $instance;
     }
-
-    // Caso de previa
-    $instance = StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
+    
+    // Caso Mesa de Diciembre, Marzo
+    $instance = StudentDisapprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($this);
     if(!is_null($instance))
     {
       return $instance;

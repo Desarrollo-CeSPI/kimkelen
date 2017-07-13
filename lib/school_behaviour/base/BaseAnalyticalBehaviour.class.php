@@ -299,7 +299,7 @@ class BaseAnalyticalBehaviour
             //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
             //Siempre tomo el año "Aprobado" y "Cursando"
             
-            if ($scsy->getStatus() == 1)
+            if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED)
             {
 
                 $year_in_career = $scsy->getYear();
@@ -344,7 +344,7 @@ class BaseAnalyticalBehaviour
                 }
                 $this->process_total_average($avg_mark_for_year);
             }else{
-				if($scsy->getStatus() == 0 ){
+				if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED){
 					//recupero el año en curso
 					$year_in_career = $scsy->getYear();
 					$this->add_year_in_career($year_in_career);

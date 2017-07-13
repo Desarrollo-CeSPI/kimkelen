@@ -109,7 +109,7 @@ class BaseSubjectStudentAnalytic
 								  return 'R. Comp.';
 							  }
             case 'StudentRepprovedCourseSubject':
-	            if ($instance->getentExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1) {
+	            if ($instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1) {
 		            return 'R. Prev.';
 	            } else {
 		            return 'Libre';
