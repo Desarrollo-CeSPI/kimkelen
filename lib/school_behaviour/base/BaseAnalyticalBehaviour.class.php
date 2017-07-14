@@ -111,6 +111,11 @@ class BaseAnalyticalBehaviour
         return $this->get_career_student()->getCareer()->getPlanName();
     }
 
+    public function get_resolution_number()
+    {
+       return $this->get_career_student()->getCareer()->getResolutionNumber();
+    }
+
     public function get_orientation()
     {
         return $this->get_career_student()->getOrientation();
