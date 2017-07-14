@@ -620,7 +620,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
    * @param ExaminationRepprovedSubject $examination_repproved_subject
    * @return array
    */
-  public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
+  public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject, $is_new=null)
   {
     $c = new Criteria();
     $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
