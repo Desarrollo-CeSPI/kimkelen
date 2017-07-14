@@ -234,7 +234,7 @@ abstract class InterfaceSchoolBehaviour
    * @param ExaminationRepprovedSubject $examination_repproved_subject
    * @return array
    */
-  public abstract function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject);
+  public abstract function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject , $is_new=null);
 
   /**
    * This method returns a dir for a yml file that draws the menu.

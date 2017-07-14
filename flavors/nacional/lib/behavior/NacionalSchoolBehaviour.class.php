@@ -48,5 +48,38 @@ class NacionalSchoolBehaviour extends BaseSchoolBehaviour
   {
     return 'NacionalSubjectStudentAnalytic';
   }
+  
+  public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject, $is_new=null)
+  {
+      if(!is_null($is_new) && !$is_new)
+      {
+        $c = new Criteria();
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
+
+        if($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::FREE_GRADUATED)
+        {    
+            $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
+            $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::FREE);           
+        }
+        else
+        {
+            $free_criteria = new Criteria();
+            $free_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+            $free_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::FREE);
+            $free_criteria->clearSelectColumns();
+            $free_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+            $stmt_f = StudentCareerSchoolYearPeer::doSelectStmt($free_criteria);
+            $not_in_free = $stmt_f->fetchAll(PDO::FETCH_COLUMN);
+
+            $c->add(CourseSubjectStudentPeer::STUDENT_ID, $not_in_free, Criteria::NOT_IN);
+
+        }
+        return StudentRepprovedCourseSubjectPeer::doSelect($c);
+      }
+    }
 
 }
