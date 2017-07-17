@@ -75,11 +75,13 @@ EOF;
 		$c->add(CourseSubjectStudentPeer::CREATED_AT, strtotime('-5 years ago'), Criteria::LESS_THAN);
 		$c->add(CourseSubjectStudentPeer::STUDENT_APPROVED_COURSE_SUBJECT_ID, $ids, Criteria::NOT_IN);
 		$course_subject_students = CourseSubjectStudentPeer::doSelect($c);
-		$this->logSection('sdfds', count($course_subject_students));
+		$this->logSection('cant course_subject_students', count($course_subject_students));
+		$cantidad = 0;
 		foreach ($course_subject_students as $css) {
 			$student_approved_course_subject = StudentApprovedCourseSubjectPeer::retrieveForCourseSujectStudentAndSchoolYearId($css, $css->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear()->getId());
 
 			if (is_null($student_approved_course_subject)) {
+				$cantidad = $cantidad +1;
 				$student_approved_course_subject = new StudentApprovedCourseSubject();
 				$student_approved_course_subject->setCourseSubject($css->getCourseSubject());
 				$student_approved_course_subject->setStudent($css->getStudent());
@@ -92,5 +94,6 @@ EOF;
 				$css->save($connection);
 			}
 		}
+		$this->logSection('cant sacs', $cantidad);
 	}
 }
