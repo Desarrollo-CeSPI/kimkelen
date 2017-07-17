@@ -1716,6 +1716,17 @@ class Student extends BaseStudent
 	}
 	return false;
   }
+
+  public function getStudentTutorsString()
+  {
+    $tutors = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $tutors[] = $student_tutor->getTutor() . " (" . $student_tutor->getTutor()->getPerson()->getFullIdentification() . ")";
+    }
+
+    return implode(',  ', $tutors);
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
