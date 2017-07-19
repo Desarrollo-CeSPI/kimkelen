@@ -22,7 +22,7 @@
 
 <div class="header-text">
 	<?php if ($analytical->has_completed_career()): ?>
-		<p>Habiendo terminado sus estudios secundarios el día <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>, se le extiende el certificado de <strong>Bachiller</strong> (<?php echo $analytical->get_resolution_number() ?>) orientado en <strong><?php echo $analytical->get_orientation(); ?></strong>.</p>
+		<p>Habiendo terminado sus estudios secundarios el día <?php echo format_datetime($analytical->get_graduated_date()->format('U'), "D"); ?>, se le extiende el certificado de <strong>Bachiller</strong> (<?php echo $analytical->get_resolution_number() ?>) orientado en <strong><?php echo $analytical->get_orientation(); ?></strong>.</p>
 	<?php else: ?>
 		<p>Para terminar sus estudios secundarios deberá aprobar:
 			<?php if ($analytical->has_missing_subjects() ): ?>

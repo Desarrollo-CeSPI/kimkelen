@@ -30,79 +30,78 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 
         foreach ($this->student_career_school_years as $scsy)
         {
-            //chequeo que la carrera no sea el ciclo basico.
-            $career_school_year = $scsy->getCareerSchoolYear();
-			$career = $career_school_year->getCareer();
-			$school_year = $career_school_year->getSchoolYear();
+	        //chequeo que la carrera no sea el ciclo basico.
+	        $career_school_year = $scsy->getCareerSchoolYear();
+			    $career = $career_school_year->getCareer();
+			    $school_year = $career_school_year->getSchoolYear();
 
-            if($career->getCareerName() != 'Ciclo Básico de Formación Estética')
-            {
-				if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED )
-				{
-					//tomo el año
-					$year_in_career = $scsy->getYear();
-					$this->add_year_in_career($year_in_career);
-					
-					$approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
-					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
-					
-					foreach ($csss as $css) // $css CareerSubjectStudent
-					{	
-						if (!isset($this->objects[$year_in_career]))
+	        if($career->getCareerName() != 'Ciclo Básico de Formación Estética') {
+						if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED )
 						{
-							// Inicialización por año
-							$this->set_year_status($year_in_career, self::YEAR_COMPLETE);
-							$avg_mark_for_year[$year_in_career]['sum'] = 0;
-							$avg_mark_for_year[$year_in_career]['count'] = 0;
-						}
-						
-						if ($this->subject_is_averageable($css))
-						{
-							$avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
-							$avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
-							if (!$css->getMark(false))
+							//tomo el año
+							$year_in_career = $scsy->getYear();
+							$this->add_year_in_career($year_in_career);
+
+							$approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
+							$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+
+							foreach ($csss as $css) // $css CareerSubjectStudent
 							{
-								// No tiene nota -> el curso está incompleto
-								$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
-								$this->add_missing_subject($css);
-							}
-						}
-						
-						//si la materia no tiene orientacion ni optativas es general.
-						if(is_null($css->getOrientation()) && !$css->getOption())
-						{ 
-							$this->add_general_subject_to_year($year_in_career, $css);
-						}
-						else
-                        {
-							//chequeo si es una asignatura optativa
-							if($css->getOption())
-							{	
-								$this->add_optional_subject_to_year($year_in_career, $css);
-							}
-							else
-                            {
-								//chequeo si es propia de la especialidad / suborientacion
-								if(is_null($css->getSubOrientation()))
+								if (!isset($this->objects[$year_in_career]))
 								{
-									$this->add_specific_subject_to_year($year_in_career, $css);
-								}else{
-									$this->add_suborientation_subject_to_year($year_in_career, $css);
+									// Inicialización por año
+									$this->set_year_status($year_in_career, self::YEAR_COMPLETE);
+									$avg_mark_for_year[$year_in_career]['sum'] = 0;
+									$avg_mark_for_year[$year_in_career]['count'] = 0;
 								}
+
+								if ($this->subject_is_averageable($css))
+								{
+									$avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
+									$avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
+									if (!$css->getMark(false))
+									{
+										// No tiene nota -> el curso está incompleto
+										$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+										$this->add_missing_subject($css);
+									}
+								}
+
+								//si la materia no tiene orientacion ni optativas es general.
+								if(is_null($css->getOrientation()) && !$css->getOption())
+								{
+									$this->add_general_subject_to_year($year_in_career, $css);
+								}
+								else
+		                        {
+									//chequeo si es una asignatura optativa
+									if($css->getOption())
+									{
+										$this->add_optional_subject_to_year($year_in_career, $css);
+									}
+									else
+		                            {
+										//chequeo si es propia de la especialidad / suborientacion
+										if(is_null($css->getSubOrientation()))
+										{
+											$this->add_specific_subject_to_year($year_in_career, $css);
+										}else{
+											$this->add_suborientation_subject_to_year($year_in_career, $css);
+										}
+									}
+								}
+
+								$this->check_last_exam_date($css->getApprovedDate(false));
 							}
+
+							// Cálculo del promedio por año
+							foreach ($this->objects as $year => $data)
+							{
+								$this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
+							}
+
+							$this->process_total_average($avg_mark_for_year);
 						}
-						
-						$this->check_last_exam_date($css->getApprovedDate(false));
-					}
-
-					// Cálculo del promedio por año
-					foreach ($this->objects as $year => $data)
-					{
-						$this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
-					}
-
-					$this->process_total_average($avg_mark_for_year);
-				}
 				else
                 {
 					if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE ){
@@ -242,9 +241,9 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     {
 		if($year > 3)
 		{
-			return "Educacion Secundaria Superior";
+			return "Educación Secundaria Superior";
 		}else{
-			return "Educacion Secundaria Básica";
+			return "Educación Secundaria Básica";
 		}
 		
 	}
