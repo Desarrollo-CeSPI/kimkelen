@@ -301,7 +301,6 @@ class BaseAnalyticalBehaviour
             
             if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED)
             {
-
                 $year_in_career = $scsy->getYear();
                  
                 $this->add_year_in_career($year_in_career);

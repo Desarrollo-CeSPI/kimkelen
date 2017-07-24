@@ -23,11 +23,11 @@ class BaseSubjectStudentAnalytic
 
     protected $approved_date = null;
 
-    public function __construct($css)
+    public function __construct($css,$school_year)
     {
         $this->css = $css;
 
-        $this->approved = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->css);
+        $this->approved = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->css,$school_year);
 
         $this->school_year = $this->css->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear();
 
