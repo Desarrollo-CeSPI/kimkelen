@@ -50,9 +50,21 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             return $exam->getDateTo();
           case 'StudentRepprovedCourseSubject':
                
-            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);  
-            $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
-            return $exam->getDateFrom();  
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
+            if(is_null($sers->getExaminationRepprovedSubject()))
+            {
+                //Estuvo en trayectorias. Es el año de la trayectoria + 1
+                $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
+                $year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
+                $year += 1;
+                return $year .'-07-01';
+            }
+            else
+            {
+                $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
+                return $exam->getDateFrom(); 
+            }
+             
             
         }
 

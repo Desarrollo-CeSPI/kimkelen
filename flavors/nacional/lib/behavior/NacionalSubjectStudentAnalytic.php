@@ -38,7 +38,7 @@ class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 					return 'R. Comp.';
 				}
 			case 'StudentRepprovedCourseSubject':
-				if ($instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1)
+				if (is_null($instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()) || $instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1)
 				{
 					return 'R. Prev.';
 				}

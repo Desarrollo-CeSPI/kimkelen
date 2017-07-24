@@ -344,7 +344,8 @@ class BaseAnalyticalBehaviour
                 }
                 $this->process_total_average($avg_mark_for_year);
             }else{
-				if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED){
+				if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
+                                        || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE ){
 					//recupero el año en curso
 					$year_in_career = $scsy->getYear();
 					$this->add_year_in_career($year_in_career);
@@ -401,10 +402,22 @@ class BaseAnalyticalBehaviour
 
             return $exam->getDateFrom();
           case 'StudentRepprovedCourseSubject':
-            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance);
-            $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
-
-            return $exam->getDateFrom();
+              
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
+            if(is_null($sers->getExaminationRepprovedSubject()))
+            {
+                //Estuvo en trayectorias. Es el año de la trayectoria + 1
+                $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
+                $year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
+                $year += 1;
+                return $year .'-07-01';
+            }
+            else
+            {
+                $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
+                return $exam->getDateFrom(); 
+            }
+           
         }
 
         //couldn't find when was approved. return null ¿error?
