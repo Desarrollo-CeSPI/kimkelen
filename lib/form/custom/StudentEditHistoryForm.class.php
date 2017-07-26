@@ -156,7 +156,7 @@ class StudentEditHistoryForm extends sfFormPropel
     $fieldset = array();
     $last_examination_number = $this->getObject()->countCourseSubjectStudentExaminations();
 
-    foreach ($this->getObject()->getCourseSubjectStudentExaminations($criteria) as $course_subject_student_examination)
+    foreach ($this->getObject()->getCourseSubjectStudentExaminations() as $course_subject_student_examination)
     {
       $fields = array();
       $name = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_mark';
