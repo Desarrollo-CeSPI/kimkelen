@@ -26,16 +26,16 @@ class CourseSubjectPeer extends BaseCourseSubjectPeer {
     $criteria->add(self::SUBJECT_ID, $subject_id, Criteria::EQUAL);
     $criteria->add(self::COURSE_ID, $course_id, Criteria::NOT_EQUAL);
 
-    $same_stundent_ids = array();
+    $same_student_ids = array();
     foreach (self::doSelect($criteria) as $course_subject) {
       $students = CourseStudentPeer::getStudentForCourse($course_subject->getCourseId());
       foreach ($students as $student) {
         if (in_array($student->getId(), $potential_student_ids)) {
-          $same_stundent_ids[] = $student->getId();
+          $same_student_ids[] = $student->getId();
         }
       }
     }
-    $student_ids = array_diff($potential_student_ids, $same_stundent_ids);
+    $student_ids = array_diff($potential_student_ids, $same_student_ids);
 
     return $student_ids;
   }

@@ -96,6 +96,9 @@ generator:
           graduation_school_year_id:
             label: Año de egreso
             method: getGraduationSchoolYear
+          tutors:
+            label: Tutores
+            method: getStudentTutorsString
           
       fields:
         person:
