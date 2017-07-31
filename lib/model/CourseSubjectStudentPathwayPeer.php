@@ -22,4 +22,15 @@ class CourseSubjectStudentPathwayPeer extends BaseCourseSubjectStudentPathwayPee
       
       return StudentPeer::doSelect($c);
   }
+  
+  public function retrieveByCourseSubjectStudent($course_subject_student)
+  { 
+      
+      $c = new Criteria();
+      $c->addJoin(CourseSubjectStudentPathwayPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+      $c->add(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYearId());
+      $c->add(self::STUDENT_ID,$course_subject_student->getStudent()->getId());
+      return CourseSubjectStudentPathwayPeer::doSelectOne($c);
+      
+  }
 }

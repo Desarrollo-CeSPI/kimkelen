@@ -1092,16 +1092,16 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     $ret = array();
 
     foreach ($this->getCourseSubjectStudentsForCourseTypeArray($student, null,$school_year) as $css){
-      $ret[] = $this->getInstanceSubjectStudentAnalytic($css);
+      $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
     }
     return $ret;
   }
 
-  protected function getInstanceSubjectStudentAnalytic($course_subject_student){
+  protected function getInstanceSubjectStudentAnalytic($course_subject_student,$school_year){
 
     $klass = $this->getClassSubjectStudentAnalytic();
 
-    return new $klass($course_subject_student);
+    return new $klass($course_subject_student,$school_year);
 
   }
 

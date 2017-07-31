@@ -19,14 +19,23 @@
  */ ?>
 <?php
 
-class StudentExaminationRepprovedSubjectPeer extends BaseStudentExaminationRepprovedSubjectPeer
+class SectorOriginSchoolType extends BaseCustomOptionsHolder
 {
-  public static function retrieveByStudentRepprovedCourseSubject($srcs)
-  {
-    $criteria = new Criteria();
-    $criteria->add(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, $srcs->getId());
-    $criteria->addDescendingOrderByColumn(self::ID);
-	
-    return self::doSelectOne($criteria);
-  }
+
+  const
+    SECTOR_PUBLIC    = 0,
+    SECTOR_PRIVATE   = 1,
+    SECTOR_ACTIVE    = 2,
+    SECTOR_SOCIAL    = 3,
+    SECTOR_UNLP      = 4;
+  protected
+    $_options = array(
+        self::SECTOR_PUBLIC   => 'Dirección General de Cultura y Educación',
+        self::SECTOR_PRIVATE  => 'Dirección Provincial de Educación de Gestión Privada',
+        self::SECTOR_ACTIVE   => '-',
+        self::SECTOR_SOCIAL   => '-',
+        self::SECTOR_UNLP     => 'Universidad Nacional de La Plata',
+      );
+
 }
+
