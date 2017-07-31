@@ -98,6 +98,7 @@ class BaseSubjectStudentAnalytic
     
     public function getCondition()
     {
+        $instance = $this->approvationInstance();
         switch (get_class($instance))
         {
             case 'StudentApprovedCourseSubject':
