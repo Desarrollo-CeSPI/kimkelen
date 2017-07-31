@@ -27,7 +27,7 @@
 			</dl>
 		</div>
 		<div class="title" id="header_analytical_data_center">
-			<?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 550, 'height' => 120)) ?>
+			<?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 390, 'height' => 70)) ?>
 
 		</div>
 
