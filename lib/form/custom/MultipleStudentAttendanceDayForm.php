@@ -46,15 +46,20 @@ class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
 
     $sf_user = sfContext::getInstance()->getUser();
     $this->students = $this->getStudents();
+    $days_disabled = array();
     
     foreach ($this->students as $student)
     {
+      if (!isset($days_disabled[$day]))
+      {
+         $days_disabled[$day] = true;
+      }
       $name = 'student_name_' . $student->getId();
       $this->setWidget($name, new mtWidgetFormPlain(array('object' => $student)));
       $this->setValidator($name, new sfValidatorPass());
 
       
-      $name = 'student_attendance_' . $student->getId() . '_' . $this->day;
+      $name = 'student_attendance_' . $student->getId() . '_' . 1;
       $this->setAbsenceWidget($name);
       $student_attendance = StudentAttendancePeer::retrieveByDateAndStudent($this->day, $student, $this->course_subject_id, $this->career_school_year_id);
 
@@ -64,6 +69,9 @@ class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
       }
       
     }
+    
+    $this->configureDaysWidget($days_disabled);
+    return $days_disabled;
   }
   public function configureDays()
   {
@@ -73,6 +81,22 @@ class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
 
   }
 
+  public function configureDaysWidget($days_disabled = null)
+  {
+    $today = strtotime(date('Y-m-d'));
+
+    $name = 'day_disabled_1';
+    $this->setWidget($name, new sfWidgetFormInputCheckbox());
+    $this->setValidator($name, new sfValidatorBoolean(array('required' => false)));
+
+    $this->getWidget($name)->setAttribute('onClick', "disableColumn(1)");
+      //$this->setDefault($name, $days_disabled[$day]);
+    if ($this->isAttendanceBySubject())
+    {
+       $this->setDefault($name, !$this->getCourseSubject()->isConfiguredToCourse(1) && !$this->getCourseSubject()->hasAttendanceForDate($this->day));
+    }
+    
+  }
   public function save()
   {
     $con = Propel::getConnection();
@@ -85,9 +109,17 @@ class MultipleStudentAttendanceDayForm extends MultipleStudentAttendanceForm
       {
           $student_attendance = StudentAttendancePeer::retrieveOrCreate($student, $this->course_subject_id,  $this->day, $this->career_school_year_id);
 
-          $name = 'student_attendance_' . $student->getId() . '_' . $this->day;
-          $this->setStudentAttendanceValue($name, $student_attendance);
-          $student_attendance->save($con);
+          if (!$this->getValue('day_disabled_1'))
+          {
+            $name = 'student_attendance_' . $student->getId() . '_1';
+
+            $this->setStudentAttendanceValue($name, $student_attendance);
+            $student_attendance->save($con);
+          }
+          elseif (!$student_attendance->isNew())
+          {
+            $student_attendance->delete($con);
+          }
       }
 
       $con->commit();

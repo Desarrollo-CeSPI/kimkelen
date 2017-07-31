@@ -280,6 +280,15 @@ class student_attendanceActions extends sfActions
 	$this->form = new $multiple_student_attendance_day_form;
 	$this->form->setDefaults($params);
 	$this->form->configureStudents();
+        
+        if ($this->form->isAttendanceBySubject())
+        {  
+            $this->getUser()->setAttribute('back_url','student_attendance/StudentAttendanceShowDay?url=division&year='.$params['year'].'&course_subject_id='.$params['course_subject_id'].'&career_school_year_id='.$params['career_school_year_id'].'&day='.$params['day'].'&division_id=' );
+        }
+        else 
+        {
+            $this->getUser()->setAttribute('back_url', 'student_attendance/StudentAttendanceShowDay?url=division&year='.$params['year'].'&division_id='.$params['division_id'].'&career_school_year_id='.$params['career_school_year_id'].'&day='.$params['day'].'&course_subject_id=');
+        }  
 
 	$this->title = $this->form->isAttendanceBySubject() ? 'Load attendance for %subject%' : 'Load attendance day for %division%';
   }
