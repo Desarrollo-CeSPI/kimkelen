@@ -1120,6 +1120,11 @@ class Course extends BaseCourse
     }
     
   public function canPathwayPreceptors()
+  {    
+    return TRUE; 
+  }
+  
+  public function canPathwayAttendanceSubject()
   {
     //pregunto si la correlativa tiene falta por materia  
     if(! is_null($this->getCourseSubject()))
@@ -1140,12 +1145,6 @@ class Course extends BaseCourse
     }
     
     return false;
-    
-  }
-  
-  public function canPathwayAttendanceSubject()
-  {
-     return $this->canPathwayPreceptors();
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));
