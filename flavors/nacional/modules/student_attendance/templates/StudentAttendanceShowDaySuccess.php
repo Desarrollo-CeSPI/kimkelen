@@ -82,11 +82,13 @@
                 <?php endif; ?>
                 <?php 
                   $month = date('m', strtotime($form->day));
-                  $now = date('m');
-                  
-                  if (!$sf_user->hasGroup(UserProfile::getStateString(UserProfile::ADMIN)) && ($month < $now)):?>
-                  <script>disableDayUneditable(1)</script>
-                <?php endif; ?>      
+                  $month_today = date('m');
+                  $day_today = date('d');
+                  //Chequea si (el mes es el inmediato anterior y el dia es mayor 3 ) o el mes es menor al anterior 
+                  if (!$sf_user->hasGroup(UserProfile::getStateString(UserProfile::ADMIN)) &&
+                      ((($month == $month_today -1 ) && ($day_today > 3)) || ($month < $month_today - 1 ))):?>
+                        <script>disableDayUneditable(1)</script>
+                <?php endif;?>      
                 
             </td>
             <?php if ($absence_for_period): ?>
