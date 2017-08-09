@@ -358,7 +358,8 @@ class CourseSubject extends BaseCourseSubject
      $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
      $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
      $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentCareerSchoolYearPeer::STUDENT_ID);
-	 $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+     $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+     $criteria->add(PersonPeer::IS_ACTIVE,TRUE);
      $criteria->setDistinct();    
      $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
