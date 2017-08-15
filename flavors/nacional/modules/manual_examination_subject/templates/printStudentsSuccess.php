@@ -74,7 +74,7 @@
       <?php foreach ($students as $student): ?>
         <tr>
           <td class="orden"><?php echo $i ?> </td>
-          <td class="student" style="text-align: left"><?php echo $student ?> </td>
+          <td class="student" style="text-align: left"><?php echo $student ?><?php echo $student->owsCorrelativeFor($examination_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?> </td>
           <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">

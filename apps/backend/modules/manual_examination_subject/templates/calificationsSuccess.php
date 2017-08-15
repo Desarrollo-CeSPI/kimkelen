@@ -60,6 +60,10 @@
               <div class="help">
                 <?php echo $form["mark"]->renderHelp() ?>
               </div>
+              <?php $course_subject_student = $form->getObject()->getCourseSubjectStudent(); ?>
+  	          <div class="ows">
+  		          <?php echo $course_subject_student->getStudent()->owsCorrelativeFor($examination_subject->getCareerSubjectSchoolYear()->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?>
+  	          </div>
             </div>
             <?php include_component('course_student_mark', 'component_marks_info', array('course_subject_student' => $form->getObject()->getCourseSubjectStudent())) ?>
           </div>
