@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
+<?php use_helper('Date') ?>
 <div class="report-header">
     <div class="header_row">
 		<div class="title" id="header_analytical_data_left">
@@ -38,7 +39,7 @@
                 </div>
                 <div><?php echo __("Fecha de egreso:") ?> 
 					<?php if ($analytical->has_completed_career()): ?>
-						<span class="detail"><?php echo $career_student->getGraduationSchoolYear()->getYear();?></span>
+						<span class="detail"><?php echo $analytical->get_last_exam_date()->format('d/m/Y'); ?></span>
 					<?php else: ?>
 						<span class="detail"> - </span>
 					<?php endif ?>

@@ -173,7 +173,7 @@ class BaseAnalyticalBehaviour
             {
 				foreach ($years as $year)
 				{
-					if ($current_year->getYear() <= $year)
+					if ($current_year->getYear() < $year)
 					{
 						$this->remaining_years[] = $year;
 					}
@@ -330,7 +330,7 @@ class BaseAnalyticalBehaviour
                 $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
 				
                 foreach ($csss as $css)
-				{	
+                {	
                     if (!isset($this->objects[$year_in_career]))
                     {
                         // Inicialización por año
