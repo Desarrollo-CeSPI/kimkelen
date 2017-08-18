@@ -44,10 +44,12 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
            
             break;
           case 'StudentDisapprovedCourseSubject': 
+              //return December/February
             $cssid = $approvationInstance->getCourseSubjectStudentId();
             $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
             $exam = $csse->getExaminationSubject()->getExamination();
-            return $exam->getDateTo();
+                        
+            return $exam->getDateFrom();
           case 'StudentRepprovedCourseSubject':
                
             $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 

@@ -28,11 +28,12 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
     $c->add(self::CAREER_SUBJECT_ID, $course_subject_student->getCourseSubject()->getCareerSubject()->getId());
     $c->add(self::STUDENT_ID, $course_subject_student->getStudentId());
 
+    /*Puede haber aprobado en ese año o en otro siguiente*/
     if ($school_year)
     {
-      $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
+      $c->addJoin(self::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+      $c->add(SchoolYearPeer::YEAR,$school_year->getYear(), Criteria::GREATER_EQUAL);
     }
-
     return self::doSelectOne($c);
 
   }
