@@ -131,7 +131,7 @@ class CourseSubjectStudentExamination extends BaseCourseSubjectStudentExaminatio
       
     }else
     {
-		if(is_null($config))
+		if(is_null($config) && !is_null($this->getExaminationSubject()))
 			$config = $this->getExaminationSubject()->getCareerSubjectSchoolYear()->getConfiguration();
 		
 		if($this->getMark() != SchoolBehaviourFactory::getEvaluatorInstance()->getMinimumMark())
