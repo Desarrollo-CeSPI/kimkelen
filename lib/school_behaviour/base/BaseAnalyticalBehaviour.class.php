@@ -288,13 +288,13 @@ class BaseAnalyticalBehaviour
     protected function process_total_average($avg_mark_for_year)
     {
         $sum = 0;
-        $count = 0;
+        $prom_anual = 0;
         foreach ($avg_mark_for_year as $year => $data)
         {
             if (self::YEAR_COMPLETE === $this->get_year_status($year))
             {
-                $sum += $data['sum'];
-                $count += $data['count'];
+                $prom_anual = $data['sum'] / $data['count'];
+                $sum += $prom_anual;
             }
             else
             {
@@ -302,7 +302,7 @@ class BaseAnalyticalBehaviour
                 return;
             }
         }
-        $this->total_average = ($sum/$count);
+        $this->total_average = ($sum/count($avg_mark_for_year));
     }
     
     public function process()
