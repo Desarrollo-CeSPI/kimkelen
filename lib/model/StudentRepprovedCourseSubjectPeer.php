@@ -78,6 +78,7 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
     $c->add(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $career_subject_id);
+    $c->addDescendingOrderByColumn(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID);
 
     return self::doSelectOne($c);
   }
