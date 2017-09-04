@@ -88,9 +88,9 @@
                   $month = date('m', strtotime($day_i));
                   $month_today = date('m');
                   $day_today = date('d');         
-                  //Chequea si (el mes es el inmediato anterior y el dia es mayor 3 ) o el mes es menor al anterior 
+                  //Chequea si (el mes es el inmediato anterior y el dia es mayor 9 ) o el mes es menor al anterior 
                   if (!$sf_user->hasGroup(UserProfile::getStateString(UserProfile::ADMIN)) &&
-                      ((($month == $month_today -1 ) && ($day_today > 3)) || ($month < $month_today - 1 ))):?>
+                      ((($month == $month_today -1 ) && ($day_today > 9)) || ($month < $month_today - 1 ))):?>
                         <script>disableDayUneditable(<?php echo $day ?>)</script>
                 <?php endif;?>
 
