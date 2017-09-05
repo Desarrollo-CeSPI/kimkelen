@@ -684,7 +684,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       if (count($course_subject_students))
       {
-        return bcdiv($sum, count($course_subject_students), 2);
+        return round(($sum / count($course_subject_students)), 2);
       }
     }
     return null;
