@@ -1636,7 +1636,8 @@ class Student extends BaseStudent
       'full_document' => $this->getPerson()->getFullIdentification(),
       'is_active' => $this->getPerson()->getIsActive(),
       'status' => $this->getCurrentOrLastStudentCareerSchoolYear()->getStatusString(),
-      'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear()
+      'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear(),
+      'school_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()
     );
   }
   
