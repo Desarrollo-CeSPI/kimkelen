@@ -19,7 +19,7 @@
  */ ?>
 <?php $is_block = $course->getYear() == 1 || $course->getYear() == 2?>
 <?php $i = 0;?>
-<?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
+<?php foreach ($course_subject->getCourseSubjectStudentsForPrintCalifications() as $course_subject_student): ?>
   <?php $i++?>
   <?php $course_result = $course_subject_student->getCourseResult(); ?>
   <tr>

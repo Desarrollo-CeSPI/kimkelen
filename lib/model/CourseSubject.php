@@ -349,7 +349,7 @@ class CourseSubject extends BaseCourseSubject
      $criterion = $c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
      $criterion->addOr($c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
      $c->add($criterion);
-	 $c->clearSelectColumns();
+     $c->clearSelectColumns();
      $c->addSelectColumn(StudentPeer::ID);
      $stmt = StudentPeer::doSelectStmt($c);
      $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -824,4 +824,23 @@ class CourseSubject extends BaseCourseSubject
 				}
 		}
 	}
+        
+    public function getCourseSubjectStudentsForPrintCalifications($criteria = null, PropelPDO $con = null)
+    {
+        if ($criteria === null)
+        {
+          $criteria = new Criteria();
+        }
+
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+        $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentCareerSchoolYearPeer::STUDENT_ID);
+        $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+        $criteria->add(PersonPeer::IS_ACTIVE,TRUE);
+        $criteria->setDistinct();    
+        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+
+        return parent::getCourseSubjectStudents($criteria);
+    }
 }
