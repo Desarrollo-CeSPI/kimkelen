@@ -647,10 +647,6 @@ class studentActions extends autoStudentActions
 					$s->delete();
 				}
 				
-				//deshabilito la persona
-				$this->student->getPerson()->setIsActive(false);
-				$this->student->getPerson()->save();
-				
 				//seteo en sus course_subject_student_mark is_closed en TRUE;
 				$this->student->setCourseSubjectStudentMarksForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear(),true);
 				$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
@@ -813,9 +809,6 @@ class studentActions extends autoStudentActions
 							$career_student->setGraduationSchoolYearId($current_school_year->getId());
 							$career_student->save(Propel::getConnection());
 							
-							//deshabilito la persona
-							$this->student->getPerson()->setIsActive(false);
-							$this->student->getPerson()->save();
 							
 							$this->getUser()->setFlash('info','The item was updated successfully.');
 						}	
