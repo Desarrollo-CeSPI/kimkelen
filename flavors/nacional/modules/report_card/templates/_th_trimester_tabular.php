@@ -26,7 +26,12 @@
 
 
   <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-    <th><?php echo __($mark_number . '°T') ?></th>
+      <?php if($mark_number > BaseCustomOptionsHolder::getInstance('CourseType')->getMarksFor(CourseType::TRIMESTER)):?>
+      <th><?php echo __('PF') ?></th>
+      <?php else:?>
+      <th><?php echo __($mark_number . '°T') ?></th>
+      <?php endif;?>
+  
   <?php endfor; ?>
   <th><?php echo __('Prom.') ?></th>
   <th><?php echo __('Ex.Reg.') ?></th>

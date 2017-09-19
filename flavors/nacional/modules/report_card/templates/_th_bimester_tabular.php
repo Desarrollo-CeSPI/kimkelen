@@ -25,7 +25,11 @@
     <?php $max_marks = ($course_subject_student->getCourseSubject()->countMarks() > $max_marks) ? $course_subject_student->getCourseSubject()->countMarks() : $max_marks ?>
   <?php endforeach; ?>
   <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-    <th><?php echo __($mark_number . '°B') ?></th>
+    <?php if($mark_number > BaseCustomOptionsHolder::getInstance('CourseType')->getMarksFor(CourseType::BIMESTER)):?>
+      <th><?php echo __('PF') ?></th>
+      <?php else:?>
+      <th><?php echo __($mark_number . '°B') ?></th>
+      <?php endif;?>
   <?php endfor; ?>
 
   <th><?php echo __('Prom.') ?></th>
