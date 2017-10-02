@@ -147,5 +147,25 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
 
     return self::doSelectOne($c);
   }
+  
+  public static function getStudentsForAcademicYear($parameters)
+  {
+        $sy = SchoolYearPeer::retrieveCurrent();
+
+        $c = new Criteria();
+        $c->addJoin(self::ID, StudentPeer::ID);
+        $c->addJoin(self::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->add(self::YEAR,6);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,11);
+
+        $students =  StudentPeer::doSelect($c);
+print_r($students);die();
+        if (!$students)
+        {
+          throw new sfError404Exception(sprintf('jhfjsdfhksdj'));
+        }
+
+        return $students;
+  }
 
 }

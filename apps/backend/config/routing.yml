@@ -10,6 +10,14 @@ api_confirm_student:
   url: /api/confirm_student.:sf_format
   param:   { module: api, action: confirmStudent }
   requirements: { sf_method: post , sf_format: json}
+
+api_get_students:
+    url: /api/:academic_year/get_students.:sf_format
+    class:   sfPropelRoute
+    param:   { module: api, action: getStudents }
+    options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForAcademicYear }
+    requirements:
+      sf_format: json
     
 change_status_motive:
   class: sfPropelRouteCollection

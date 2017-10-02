@@ -355,5 +355,10 @@ class apiActions extends sfActions
       $this->setLayout(false);
   
 	}
+        
+        public function executeGetStudents(sfWebRequest $request)
+        {
+            $scsy = $this->getRoute()->getObject();
+        }
  
 }
