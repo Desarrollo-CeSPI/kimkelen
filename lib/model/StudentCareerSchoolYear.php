@@ -257,4 +257,17 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
   {
     return $this->getStatus() == StudentCareerSchoolYearStatus::FREE;
   }
+  
+  public function asArray()
+  {
+    return array(
+      'full_name'  => $this->getStudent()->getPerson()->getFullName(),
+      'document_type' => BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($this->getStudent()->getPerson()->getIdentificationType()),
+      'document_number' => $this->getStudent()->getPerson()->getIdentificationNumber(),
+      'career' => $this->getCareerSchoolYear()->getCareer()->getCareerName(),
+      'status' => $this->getStatusString(),
+      'academic_year' => $this->getyear(),
+      'school_year' => $this->getCareerSchoolYear()->getSchoolYear()->getYear()
+    );
+  }
 }

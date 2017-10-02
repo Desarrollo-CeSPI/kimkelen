@@ -15,7 +15,7 @@ api_get_students:
     url: /api/:academic_year/get_students.:sf_format
     class:   sfPropelRoute
     param:   { module: api, action: getStudents }
-    options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForAcademicYear }
+    options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForYear }
     requirements:
       sf_format: json
     

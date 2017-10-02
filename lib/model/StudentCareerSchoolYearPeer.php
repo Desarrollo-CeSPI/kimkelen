@@ -148,24 +148,25 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
     return self::doSelectOne($c);
   }
   
-  public static function getStudentsForAcademicYear($parameters)
+  public static function getStudentsForYear($parameters)
   {
         $sy = SchoolYearPeer::retrieveCurrent();
 
         $c = new Criteria();
-        $c->addJoin(self::ID, StudentPeer::ID);
+        $c->addJoin(self::STUDENT_ID, StudentPeer::ID);
         $c->addJoin(self::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-        $c->add(self::YEAR,6);
-        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,11);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$sy->getId());
+        $c->add(self::YEAR,$parameters['academic_year']);
+        
 
-        $students =  StudentPeer::doSelect($c);
-print_r($students);die();
-        if (!$students)
+        $scsys = self::doSelect($c);
+
+        if (!$scsys)
         {
           throw new sfError404Exception(sprintf('jhfjsdfhksdj'));
         }
 
-        return $students;
+        return $scsys;
   }
 
 }

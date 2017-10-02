@@ -358,7 +358,7 @@ class apiActions extends sfActions
         
         public function executeGetStudents(sfWebRequest $request)
         {
-            $scsy = $this->getRoute()->getObject();
+            $this->scsys = $this->getRoute()->getObject();
         }
  
 }
