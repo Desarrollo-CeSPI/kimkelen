@@ -147,7 +147,7 @@ class BaseAnalyticalBehaviour
     
     public function get_current_school_year()
     {
-        return $this->get_student()->getCurrentStudentCareerSchoolYear();
+        return $this->get_student()->getCurrentOrLastStudentCareerSchoolYear();
     }
     
     public function get_remaining_years_string()
@@ -168,12 +168,12 @@ class BaseAnalyticalBehaviour
             $this->remaining_years = array();
             $years = $this->get_career_student()->getCareer()->getYearsRange();
             $current_year = $this->get_current_school_year();
-            
+            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();
             if(!is_null($current_year))
             {
 				foreach ($years as $year)
 				{
-					if ($current_year->getYear() < $year)
+					if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() ))
 					{
 						$this->remaining_years[] = $year;
 					}
@@ -308,7 +308,8 @@ class BaseAnalyticalBehaviour
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
-		
+	$scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();	
+
         //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
         $this->init();
         $avg_mark_for_year = array();
@@ -363,8 +364,10 @@ class BaseAnalyticalBehaviour
                 $this->process_total_average($avg_mark_for_year);
             }else{
 				if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
-                                        || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE ){
+                                        || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                                         $scsy->getId() == $scsy_cursed->getId())){
 					//recupero el año en curso
+                                        
 					$year_in_career = $scsy->getYear();
 					$this->add_year_in_career($year_in_career);
 					$career_school_year = $scsy->getCareerSchoolYear();
