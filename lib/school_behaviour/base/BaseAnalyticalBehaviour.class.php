@@ -328,7 +328,7 @@ class BaseAnalyticalBehaviour
                 $school_year = $career_school_year->getSchoolYear();
 
                 $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
-                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year,$scsy);
 				
                 foreach ($csss as $css)
                 {	
@@ -373,7 +373,7 @@ class BaseAnalyticalBehaviour
 					$career_school_year = $scsy->getCareerSchoolYear();
 					$school_year = $career_school_year->getSchoolYear();
 					
-					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year,$scsy);
 					foreach ($csss as $css)
 					{
 						/*// No tiene nota -> el curso está incompleto

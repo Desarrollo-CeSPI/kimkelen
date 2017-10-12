@@ -19,28 +19,26 @@
 <div class="report-header">
 	<div class="header_row">
 		<div class="title" id="header_analytical_data_left">
-			<dl class="dl-horizontal">
-				<dt><?php echo __("Legajo N°") ?>: </dt>
-				<dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
-				<dt><?php echo __("División") ?>: </dt>
-				<dd class="detail"><?php echo implode(", ", $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions()); ?></dd>
-			</dl>
 		</div>
-		<div class="title" id="header_analytical_data_center">
-			<?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 390, 'height' => 70)) ?>
-
-		</div>
-
-
-		<div id="header_analytical_data_right" class="title">
-			<div>
-				<?php echo __("RMN Nº") ?>
-				<?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
-			</div>
-			<?php if ($analytical->showCertificate()): ?>
+                <div class="title" id="header_analytical_data_center">
+                    <div class="analytical_info">
+                       <?php if ($analytical->showCertificate()): ?>
 				<?php echo __('Certificado N°'); ?>
-				<?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
+                    <span class="detail"><?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?></span>
 			<?php endif; ?>
+                        <div>
+				<?php echo __("Legajo N°") ?>: 
+				<span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+			</div>
+                        <div>
+				<?php echo __("Curso") ?>: 
+				<span class="detail"><?php echo implode(", ", $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions()); ?></span>
+			</div>
+                    </div>
+                    
+                     <?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 390, 'height' => 70)) ?>
+		</div>
+		<div id="header_analytical_data_right">	    
 		</div>
 
 

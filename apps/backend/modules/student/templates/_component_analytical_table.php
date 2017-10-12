@@ -31,7 +31,7 @@
     <table class="table gridtable_bordered">
       <thead>
         <tr>
-          <th colspan="7"><?php echo __('Year ' . $year) ?></th>
+          <th colspan="7" class="analytical_year"><?php echo __('Year ' . $year) ?></th>
         </tr>
         <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
@@ -58,7 +58,7 @@
       <?php endforeach ?>
         <tr>
           <th colspan="5" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
-          <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
+          <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? number_format(round($object->get_year_average($year), 2), 2, '.', '') : '-') ;?>    </th>
         </tr>
       </tbody>
     </table>
