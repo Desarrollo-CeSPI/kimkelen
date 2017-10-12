@@ -23,7 +23,7 @@
     <div class="header-text">
         <p>
         <?php if($student->getOriginSchool()):?>
-          Expedido por: <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?>  
+          Certificado de Educación Primaria expedido por: <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?>  
           <?php echo ($student->getOriginSchool()->getSector() != SectorOriginSchoolType::SECTOR_UNLP)? ' - Provincia de ' .  $student->getOriginSchool()->getCity()->getDepartment()->getState() : ''?>
         <?php endif ?> 
         </p>
