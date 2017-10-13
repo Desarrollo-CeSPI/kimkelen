@@ -187,7 +187,12 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
      {
         $introduccion = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentsForIntroduccion($student, $student_career_school_year->getCareerSchoolYear());
         $ret[] = $this->getInstanceSubjectStudentAnalytic($introduccion[0],$school_year);
-     }
+     }else{
+         $course_subject_student_attendance_subject = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForSubject(CourseType::TRIMESTER,$student_career_school_year);
+        foreach ($course_subject_student_attendance_subject as $css){
+            $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
+        }
+    }
      
     /*Quaterly*/
     
@@ -210,11 +215,15 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
     }
     
     $course_subject_student_attendance_subject = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForSubject(CourseType::TRIMESTER,$student_career_school_year);
-    $course_subject_student_attendance_subject = array_udiff($course_subject_student_attendance_subject, $introduccion, array('CourseSubjectStudent', 'compare'));
+    if(!is_null($introduccion))
+        $course_subject_student_attendance_subject = array_udiff($course_subject_student_attendance_subject, $introduccion, array('CourseSubjectStudent', 'compare'));
     
+    if ($student_career_school_year->getYear() == 4)
+    {
     foreach ($course_subject_student_attendance_subject as $css){
       $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
     }
+  }
     
     return $ret;
   }
