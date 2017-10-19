@@ -176,7 +176,7 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
   
   public function getCourseSubjectStudentsForAnalytics($student, $school_year, $student_career_school_year)
   {
-    
+    $introduccion=null;
     $ret = array();
     /*Trimester*/
     foreach ($student->getCourseSubjectStudentsForCourseTypeAndAttendanceForDay(CourseType::TRIMESTER,$student_career_school_year) as $css){
@@ -186,14 +186,17 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
      if ($student_career_school_year->getYear() == 4)
      {
         $introduccion = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentsForIntroduccion($student, $student_career_school_year->getCareerSchoolYear());
-        $ret[] = $this->getInstanceSubjectStudentAnalytic($introduccion[0],$school_year);
+        if(count($introduccion) > 0)
+        {
+            $ret[] = $this->getInstanceSubjectStudentAnalytic($introduccion[0],$school_year);
+        }
+        
      }else{
          $course_subject_student_attendance_subject = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForSubject(CourseType::TRIMESTER,$student_career_school_year);
         foreach ($course_subject_student_attendance_subject as $css){
             $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
         }
     }
-     
     /*Quaterly*/
     
     foreach ($this->getCourseSubjectStudentsForCourseType($student, CourseType::QUATERLY,$school_year) as $css){

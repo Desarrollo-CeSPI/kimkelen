@@ -1086,7 +1086,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 
   }
 
-  public function getCourseSubjectStudentsForAnalytics($student, $school_year, $student_career_school_year=null)
+  public function getCourseSubjectStudentsForAnalytics($student, $school_year, $student_career_school_year)
   {
     
     $ret = array();
