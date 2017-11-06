@@ -32,7 +32,7 @@
 			</div>
                         <div>
 				<?php echo __("Curso") ?>: 
-				<span class="detail"><?php echo implode(", ", $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions()); ?></span>
+				<span class="detail"><?php $d = $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
 			</div>
                     </div>
                     

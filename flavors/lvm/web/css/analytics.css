@@ -97,11 +97,11 @@
     width: 39%;
     height: 1.5em;
     text-align: center;
-    padding-top: 5em;
-    border: 1px solid;
+    border-top: 1px solid;
     margin-right: 5%;
     margin-left: 5%;
-    margin-top: 2em;
+    margin-top: 10em;
+    padding-top: 1em;
 }
 
 .detail
