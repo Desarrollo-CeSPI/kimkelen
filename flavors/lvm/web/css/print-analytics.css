@@ -7,16 +7,16 @@
 }
 
 .misma_pagina {
-    page-break-inside: avoid;
+   /* page-break-inside: avoid;*/
 }
 
 .table {
     margin-bottom: 1em;
-/*    page-break-inside: avoid; */
+    page-break-inside: avoid; 
 }
 .table tr
 {
-        page-break-inside: avoid;
+        /*page-break-inside: avoid;*/
 }
 
 .table thead th{
@@ -68,4 +68,16 @@
     text-align:left;
     padding-bottom: 1px !important;
     font-size:11px;
+}
+
+.analytical_form{
+    display: none;
+}
+
+.analytical_form_info{
+    display: block;
+}
+
+.analytic_info{
+    display: block;
 }

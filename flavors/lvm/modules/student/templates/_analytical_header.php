@@ -22,17 +22,20 @@
 		</div>
                 <div class="title" id="header_analytical_data_center">
                     <div class="analytical_info">
-                       <?php if ($analytical->showCertificate()): ?>
-				<?php echo __('Certificado N°'); ?>
-                    <span class="detail"><?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?></span>
-			<?php endif; ?>
-                        <div>
-				<?php echo __("Legajo N°") ?>: 
-				<span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+                      	<div class="analytical_form">
+                            <?php echo $form; ?>
+                        </div>
+                        <div class="analytical_form_info">   
+                            <?php echo __('Certificado N°'); ?>
+                            <span class="detail"><?php echo (isset($analytic) && $analytic->getCertificateNumber()?$analytic->getCertificateNumber():__('S/N')); ?></span> 	
 			</div>
-                        <div>
-				<?php echo __("Curso") ?>: 
-				<span class="detail"><?php $d = $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
+                        <div class="analytic_info">
+                            <label><?php echo __("Legajo N°") ?>: </label>
+                            <span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+			</div>
+                        <div class="analytic_info">
+                            <label><?php echo __("Curso") ?>: </label>
+                            <span class="detail"><?php $d = $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
 			</div>
                     </div>
                     

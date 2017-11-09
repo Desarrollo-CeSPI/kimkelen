@@ -121,3 +121,11 @@
     text-align: justify;
     line-height: 1.4;
 }
+
+.analytical_form_info{
+    display:none;
+}
+
+.analytic_info{
+    display: inherit;
+}

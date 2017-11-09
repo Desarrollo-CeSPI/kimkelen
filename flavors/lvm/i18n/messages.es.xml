@@ -9111,6 +9111,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                                 <source>Course result report</source>
                                 <target>Reporte de resultado de cursadas</target>
                     </trans-unit>
+                    <trans-unit>
+                                <source>Certificate number</source>
+                                <target>Certificado N°</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>
