@@ -2,7 +2,7 @@ update occupation set name = 'Salud' where id = 18;
 insert into occupation(name) values('Profesional independiente');
 insert into occupation(name) values('Servicios públicos');
 insert into occupation(name) values('Servicios domiciliarios');
-insert into occupation(name) values('Construccion');
+insert into occupation(name) values('Construcción');
 insert into occupation(name) values('Industria');
 update occupation set name = 'Producción primaria (agrícola-ganadera/fruti-hortícola)' where id = 1;
 insert into occupation (name) values('Otros');
