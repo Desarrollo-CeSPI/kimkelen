@@ -491,7 +491,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       if ($sum > 0 && $count > 0)
       {
-        return round($sum/$count, 2);
+        return bcdiv($sum, $count, 2);
       }
     }
     return null;

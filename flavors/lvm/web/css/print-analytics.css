@@ -23,49 +23,20 @@
     font-size: 10px;
     padding-top: 1px !important;
     padding-bottom: 0 !important;
-    min-width: 50px;
 }
 
 .table td {
-    font-size: 11px;
-    padding-top: 1px !important;
-    padding-bottom: 1px !important;
+    font-size: 8px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .table tbody th {
-    font-size: 11px;
-    padding-top: 1px !important;
-    padding-bottom: 1px !important;
+    font-size: 10px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .analytical_body_table {
     font-size: 14px !important;
-}
-
-#header_analytical_data_left
-{
-    width: 0;
-}
-#header_analytical_data_right
-{
-    width: 0;
-}
-#header_analytical_data_center
-{
-    width: 100%;
-}
-.analytical_info{
-    width: 30%;
-    display: inline-block;
-    padding: 25px !important;
-    font-size:12px;
-}
-.report-header{
-    margin-top: -10% !important;
-}
-
-.analytical_year{
-    text-align:left;
-    padding-bottom: 1px !important;
-    font-size:11px;
 }

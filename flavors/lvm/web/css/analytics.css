@@ -19,15 +19,16 @@
 #header_analytical_data_left
 {
     width: 20%;
-    height: 1px;
 }
 #header_analytical_data_right
 {
-    width: 0;
+    width: 20%;
+    float: right
 }
 #header_analytical_data_center
 {
-    width: 60%;
+    width: 55%;
+    text-align: center;
 }
 #header_analytical_data_center h1
 {
@@ -72,8 +73,7 @@
 
 .school_logo
 {
-    float: right;
-    height: 92px;
+    float: left;
 }
 
 #promedio_gral
@@ -102,22 +102,4 @@
     margin-right: 5%;
     margin-left: 5%;
     margin-top: 2em;
-}
-
-.detail
-{
-    font-weight: normal;
-}
-
-.analytical_info
-{
-    width: 25%;
-    display: inline-block;
-    padding: 20px !important;
-}
-
-.header-text
-{
-    text-align: justify;
-    line-height: 1.4;
 }
