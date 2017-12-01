@@ -57,7 +57,7 @@
             <tr>
               <td><?php echo $i ?></td>
               <td style="text-align: left"><?php echo $student ?></td>
-              <td align="center"><?php echo ($student_career_school_year->getAnualAverage())? $student_career_school_year->getAnualAverage() : '-'; ?></td>
+              <td align="center"><?php echo ($student_career_school_year->getAnualAverage())? $student_career_school_year->getAnualAverage() : ''; ?></td>
               <?php $c = new num2text(); ?>
 	      <td><?php echo ($student_career_school_year->getAnualAverage() )? $c->num2str($student_career_school_year->getAnualAverage()) : '' ?></td>
             </tr>
