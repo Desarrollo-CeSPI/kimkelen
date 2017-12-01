@@ -115,7 +115,13 @@ generator:
             action:  showCourseResultReport
             credentials:    [show_division_course_califications]
             condition: canShowCourseResultReport
-
+            
+          print_average:
+            label: Print averages
+            action: printAverages
+            credentials:    [show_division_course_califications]
+            condition: canShowCourseResultReport
+            
       filter:
         class:  ~
       form:

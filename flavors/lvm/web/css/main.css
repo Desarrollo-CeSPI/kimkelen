@@ -2074,3 +2074,13 @@ div.wc-cal-event{
 {
     background-image: url('../images/report_course.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_print_average a
+{
+    background-image: url('../images/report--pencil.png') !important;
+}
+
+.report-average
+{
+    width: 900px;
+}

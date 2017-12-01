@@ -4640,6 +4640,10 @@
                 <source>Course result report</source>
                 <target>Reporte de resultado de cursadas</target>
             </trans-unit>
+            <trans-unit>
+                <source>Print averages</source>
+                <target>Planilla de promedios</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
