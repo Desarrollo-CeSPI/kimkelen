@@ -38,32 +38,44 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     return $c;
   }
 
-	static public function getFreeGraduatedStudentsCriteria(ExaminationRepprovedSubject $examination_repproved_subject)
-	{
-    $c = new Criteria();
-    $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
-    $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-    $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
-    $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::FREE, Criteria::EQUAL, Criteria::INNER_JOIN);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
+    static public function getFreeGraduatedStudentsCriteria(ExaminationRepprovedSubject $examination_repproved_subject)
+    {
+        $c = new Criteria();
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+        $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, CourseSubjectStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
+        $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::FREE, Criteria::EQUAL, Criteria::INNER_JOIN);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
 
-
-
-		return $c;
-	}
+        return $c;
+    }
 
   static public function getAvailableStudentsForExaminationRepprovedSubject(ExaminationRepprovedSubject $examination_repproved_subject)
   {
-	  if($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::FREE_GRADUATED) {
+    if($examination_repproved_subject->getExaminationRepproved()->getExaminationType() == ExaminationRepprovedType::FREE_GRADUATED) {
 
-		  $c = self::getFreeGraduatedStudentsCriteria($examination_repproved_subject);
+        $c = self::getFreeGraduatedStudentsCriteria($examination_repproved_subject);
 
-	  }else{
-      $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
-	  }
+    }else{
+        $c = self::getAvailableForExaminationRepprovedSubjectCriteria($examination_repproved_subject);
+    }
     $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+    
+     /*Saco retirados*/
+    $criteria = new Criteria();
+    $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+    $criterion = $criteria->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
+    $criterion->addOr($criteria->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
+    $criteria->add($criterion);
+    $criteria->clearSelectColumns();
+    $criteria->addSelectColumn(StudentPeer::ID);
+    $stmt = StudentPeer::doSelectStmt($c);
+    $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    
+    $c->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
     
     return StudentPeer::doSelect($c);
   }
