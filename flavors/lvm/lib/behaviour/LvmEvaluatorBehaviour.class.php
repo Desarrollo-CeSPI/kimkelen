@@ -57,9 +57,17 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $sum_marks += $cssm->getMark();
     }
 
+    if(($year == 5 || $year == 6) && CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType())
+    {
+        $min_note = self::EXAMINATION_NOTE;
+    }else
+    {
+        self::POSTPONED_NOTE;
+    }
+    
     if (
       ($average >= $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMinimunMark()
-      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() >= self::POSTPONED_NOTE)
+      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() >= $min_note)
       || (
       $year > 1
       && $year < 5
