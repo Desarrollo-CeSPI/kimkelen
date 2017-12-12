@@ -90,7 +90,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       $school_year = $course_subject_student->getCourseSubject()->getCourse()->getSchoolYear();
       $career_school_year = CareerSchoolYearPeer::retrieveBySchoolYear(null, $school_year);
-
+      
 	    if ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption() && $year == 6) {
 
 	    $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
@@ -104,17 +104,17 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 	    return $student_disapproved_course_subject;
 
 
-    }
+        }
 
 
-      /*elseif ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
-        if (is_null($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))){
+      elseif ($course_subject_student->getStudent()->isFree(null, null, $career_school_year[0])) {
+        if (is_null($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))){ 
           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
           $student_repproved_course_subject->setCourseSubjectStudent($course_subject_student);
         }
 
         return $student_repproved_course_subject;
-      }*/
+      }
       else {
         $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
         $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
@@ -612,5 +612,45 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       $student_approved_career_subject->save($con);
     }
+  }
+  
+  public function closeCourseSubjectStudent($result, PropelPDO $con = null)
+  {
+    if ($result instanceof StudentApprovedCourseSubject)
+    {
+      if (is_null($student_approved_career_subject = $result->getStudentApprovedCareerSubject($con)))
+      {
+        $student_approved_career_subject = new StudentApprovedCareerSubject();
+        $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
+        $student_approved_career_subject->setStudent($result->getStudent($con));
+        $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
+        $student_approved_career_subject->setMark($result->getMark());
+
+        $result->setStudentApprovedCareerSubject($student_approved_career_subject);
+
+        $student_approved_career_subject->save($con);
+        $result->save($con);
+
+        $student_approved_career_subject->clearAllReferences(true);
+
+        $result->clearAllReferences(true);
+      }
+
+      unset($result);
+      unset($student_approved_career_subject);
+    }
+    elseif($result instanceof StudentDisapprovedCourseSubject)
+    {	
+      $c = new Criteria();
+      $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $result->getExaminationNumber());
+      $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
+      if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
+      {
+        $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
+      }
+    }  
+    /*instance of StudentRepprovedCourseSubject*/
+    /*No se crea nada ya que se debe inscribir en la mesa.*/
+    
   }
 }

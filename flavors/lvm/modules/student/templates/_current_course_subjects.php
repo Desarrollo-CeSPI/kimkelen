@@ -72,7 +72,16 @@
         <?php endif; ?>
 
         <?php if ($course_subject_student->getConfiguration()->isNumericalMark()): ?>
-          <td><?php echo ($course_result = $course_subject_student->getCourseResult()) ? $course_result->getResultStr() : '' ?></td>
+          <td>
+          <?php $course_result = $course_subject_student->getCourseResult() ?>
+          <?php if($course_result instanceof StudentRepprovedCourseSubject): 
+              echo sprintf("%01.2f", $course_subject_student->getMarksAverage()); 
+          else: 
+              echo ($course_result) ? $course_result->getResultStr() : '';
+          endif; 
+              ?>
+          </td>
+       
         <?php else: ?>
           <td></td>
         <?php endif; ?>

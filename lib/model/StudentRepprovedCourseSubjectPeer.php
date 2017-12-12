@@ -71,12 +71,11 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     $criteria->add($criterion);
     $criteria->clearSelectColumns();
     $criteria->addSelectColumn(StudentPeer::ID);
-    $stmt = StudentPeer::doSelectStmt($c);
+    $stmt = StudentPeer::doSelectStmt($criteria);
     $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
     
-    
     $c->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
-    
+
     return StudentPeer::doSelect($c);
   }
 
