@@ -278,11 +278,17 @@ class CareerSubject extends BaseCareerSubject
 	public function getCorrelativeCareerSubject() {
 
 		$correlatives = $this->getCorrelativeCareerSubjects();
-
-		foreach ($correlatives as $c) {
-			if ($c->getSubject() == $this->getSubject()) {
-				return $c;
-			}
+		
+                if(count($correlatives) == 1)
+                {
+                    return $correlatives[0];
+                }
+                foreach ($correlatives as $c) {
+                    /*if == name or is into correlative table*/
+                    if ($c->getSubject() == $this->getSubject() ) {
+                            return $c;
+                    }
+                        
 		}
 	}
   
