@@ -172,7 +172,7 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
   public static function retrieveByStudentAndYear($student,$year)
   {
       $c= new Criteria();
-      $c->add(self::STUDENT_ID,$sutdent->getId());
+      $c->add(self::STUDENT_ID,$student->getId());
       $c->add(self::YEAR,$year);
       $c->add(self::STATUS, StudentCareerSchoolYearStatus::REPPROVED, Criteria::NOT_EQUAL);
       

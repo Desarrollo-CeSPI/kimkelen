@@ -20,7 +20,7 @@
 <?php use_stylesheet('print-report-card.css', 'last', array('media' => 'print')) ?>
 <?php use_stylesheet('main.css', '', array('media' => 'all')) ?>
 
-<!--<div class="non-printable">
+<div class="non-printable">
   <span><a href="<?php echo url_for('division') ?>"><?php echo __('Go back') ?></a></span>
   <span><a href="#" onclick="window.print(); return false;"><?php echo __('Print') ?></a></span>
   <form action="<?php echo url_for('@print_table') ?>" method="post" target="_blank" id="exportation_form">
@@ -28,10 +28,17 @@
   </form>
   <span><a href="#" onclick="javascript:exportToExcel()"><?php echo __('Export to excel') ?></a></span>
 </div>
-!-->
+
 
 <div class="report-wrapper report-average"  id="export_to_excel">
-   <?php // include_partial('header',array('division' => $division));?>
+<div class="report-header">
+    <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+    <div class="header_row">
+      <h2><?php echo __('Print averages'); ?></h2>
+      <div class="title2"><?php echo __('Year '. $year) .' ' .$school_year  ?>  </div>
+      <div class="row-content"></div>
+    </div>
+</div>
 
     <div style="clear:both"></div>
     <table width="100%" class="gridtable_bordered">
@@ -45,28 +52,51 @@
       </tr>
       <tr class="head" valign="bottom">
           <td align="center"  height="22" colspan="1"></td>
-          <td align="center"  height="22" colspan="1"><?php echo __('Nombre y Apellido'); ?></td>
+          <td align="center"  height="22" colspan="1"><strong><?php echo __('Nombre y Apellido'); ?></strong></td>
         <?php for($i= 1;$i <= $year; $i ++): ?>
-            <td align="center" height="22" ><?php echo __('Year ' . $i); ?></td>
+          <td align="center" height="22" ><strong><?php echo __('Year ' . $i); ?></strong></td>
         <?php endfor;?>
-        <td align="center" height="22"><?php echo __('Average'); ?></td>
+          <td align="center" height="22"><strong><?php echo __('Average'); ?></strong></td>
       </tr>
       <tbody class="print_body">
             <?php $j = 0; ?>
-            <?php foreach ($students as $student): ?>
-            <?php //$student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear());?>
-            <?php $j++ ?>
-            
+            <?php foreach ($students as $student):?>
+            <?php $j++; ?>
             <tr>
                 <td><?php echo $j; ?></td>
                 <td style="text-align: left"><?php echo $student ?></td>
+                <?php $sum = 0; $count = 0;?>
                 <?php for($i= 1;$i <= $year; $i ++): ?>
-                    <td></td>
+                <td>
+                    <?php $scsy = StudentCareerSchoolYearPeer::retrieveByStudentAndYear($student, $i); 
+                    if(!is_null($scsy))
+                    {
+                        $prom = $scsy->getAnualAverageWithDisapprovedSubjects();
+                        $sum += $prom;
+                        $count ++;
+                        echo $prom;
+                    }
+                    else
+                    {
+                      echo '-';   
+                    }
+                    ?>
+                    
+                    <?php unset($prom);?>
+                    <?php unset($scsy);?>
+                </td>
                 <?php endfor;?>
-                <td></td>
+                <td>
+                    <strong><?php echo ($sum != 0 && $count != 0)? number_format(round($sum / $count, 3), 3, ',', '') : '';?>  </strong> 
+                </td>
             </tr>
-          
-            <?php endforeach ?>
+            <?php           
+             $student->clearAllReferences(true); 
+             unset($student);
+            ?>
+            
+            <?php endforeach?>
+            <?php unset($students);?>
       </tbody>    
     </table>
 
