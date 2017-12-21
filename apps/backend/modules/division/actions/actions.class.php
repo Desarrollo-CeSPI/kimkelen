@@ -521,15 +521,5 @@ public function executeExportCalificationTable(sfWebRequest $request)
 	$response->setHttpHeader("Pragma","no-cache");
 	$response->setHttpHeader("Expires","0");
   }
-  
-  public function executePrintAverages(sfWebRequest $request)
-  {
-    $this->division = DivisionPeer::retrieveByPK($request->getParameter('id'));
-    $this->career_id = $this->division->getCareer()->getId();
-    $this->students = $this->division->getStudents();
-    
-    $this->back_url= '@division';
-    $this->setLayout('cleanLayout');
-  }
  
 }
