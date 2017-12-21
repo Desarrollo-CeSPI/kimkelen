@@ -82,11 +82,11 @@ class rating_reportActions extends sfActions
           $this->form->bind($request->getParameter($this->form->getName()));
           if ($this->form->isValid())
           {
-             $career = CareerPeer::retrieveByPK($request->getParameter('average_report[career_id]'));
-             $this->school_year = SchoolYearPeer::retrieveCurrent();
+             $career_school_year = CareerSchoolYearPeer::retrieveByPK($request->getParameter('average_report[career_school_year_id]'));
+             $this->school_year = $career_school_year->getSchoolYear();
              $this->year = $request->getParameter('average_report[year]');
              
-             $this->career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($career, $this->school_year);
+             $this->career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($career_school_year->getCareer(), $this->school_year);
              
              $c = new Criteria();
              $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$this->career_school_year->getId());

@@ -45,7 +45,7 @@
       <tr class="head" valign="bottom">
           <td align="center"  height="22" colspan="1"></td>
           <td align="center"  height="22" colspan="1"><strong><?php echo __('Nombre y Apellido'); ?></strong></td>
-        <?php for($i= 1;$i <= $year; $i ++): ?>
+        <?php for($i= 4;$i <= $year; $i ++): ?>
           <td align="center" height="22" ><strong><?php echo __('Year ' . $i); ?></strong></td>
         <?php endfor;?>
           <td align="center" height="22"><strong><?php echo __('Average'); ?></strong></td>
@@ -58,7 +58,7 @@
                 <td><?php echo $j; ?></td>
                 <td style="text-align: left"><?php echo $student ?></td>
                 <?php $sum = 0; $count = 0;?>
-                <?php for($i= 1;$i <= $year; $i ++): ?>
+                <?php for($i= 4;$i <= $year; $i ++): ?>
                 <td>
                     <?php $scsy = StudentCareerSchoolYearPeer::retrieveByStudentAndYear($student, $i); 
                     if(!is_null($scsy))

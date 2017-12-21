@@ -499,7 +499,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
       if ($sum > 0 && $count > 0)
       {
-        return bcdiv($sum, $count, 2);
+        return round($sum/$count, 2);
       }
     }
     return null;
@@ -661,4 +661,76 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     /*No se crea nada ya que se debe inscribir en la mesa.*/
     
   }
+  
+    public function getAnualAverageWithDisapprovedSubjects($student_career_school_year)
+    {
+       
+        $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
+                  $student_career_school_year->getCareerSchoolYear(),$student_career_school_year->getStudent());
+
+        /* $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
+          $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);*/
+
+        if ($student_career_school_year->getYear() == 4)
+        {
+            $sum = 0;
+            $sum_introduccion = 0;
+            foreach ($course_subject_students as $course_subject_student)
+            {
+              if (in_array($course_subject_student->getCourseSubject()->getSubject()->getId(), $this->_introduccion))
+              {
+                $sum_introduccion += $course_subject_student->getFinalMark();
+              }
+              else
+              {
+                $sum += $course_subject_student->getFinalMark();
+              }
+            }
+            $sum += $sum_introduccion / 3;
+            $count = count($course_subject_students) - 2;
+        }
+        elseif ($student_career_school_year->getYear() == 6)
+        {
+          $sum = 0;
+          foreach ($course_subject_students as $course_subject_student)
+          {
+            $is_historia = self::HISTORIA_DEL_ARTE == $course_subject_student->getCourseSubject()->getSubject()->getId()
+            || in_array($course_subject_student->getCourseSubject()->getCareerSubject()->getId(), array(261,262));
+
+            if ($is_historia)
+            {
+              $historia_mark = $this->getHistoriaDelArteMark($course_subject_student->getStudent(), $course_subject_student->getCourseSubject()->getCareerSubject()->getCareerSchoolYear()->getSchoolYear());
+            }
+            else
+            {
+              $sum += $course_subject_student->getFinalMark();
+            }
+          }
+
+          if (isset($historia_mark)){
+            $sum += $historia_mark;
+            $count = count($course_subject_students) - 1;
+          }
+          else {
+            $count = count($course_subject_students);
+          }
+        }
+        else
+        {
+            $sum=0;
+          foreach ($course_subject_students as $course_subject_student)
+          {
+            $sum += $course_subject_student->getFinalMark();
+          }
+          $count = count($course_subject_students);              
+        }
+
+        if ($sum > 0 && $count > 0)
+        {
+          return round($sum/$count, 2);
+        }
+          
+        unset ($course_subject_students);
+
+    }
 }
