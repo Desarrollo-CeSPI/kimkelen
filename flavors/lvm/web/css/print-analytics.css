@@ -7,16 +7,16 @@
 }
 
 .misma_pagina {
-    page-break-inside: avoid;
+   /* page-break-inside: avoid;*/
 }
 
 .table {
     margin-bottom: 1em;
-/*    page-break-inside: avoid; */
+    page-break-inside: avoid; 
 }
 .table tr
 {
-        page-break-inside: avoid;
+        /*page-break-inside: avoid;*/
 }
 
 .table thead th{
@@ -39,4 +39,44 @@
 
 .analytical_body_table {
     font-size: 14px !important;
+}
+
+#header_analytical_data_left
+{
+    width: 0;
+}
+#header_analytical_data_right
+{
+    width: 0;
+}
+#header_analytical_data_center
+{
+    width: 100%;
+}
+.analytical_info{
+    width: 30%;
+    display: inline-block;
+    padding: 25px !important;
+    font-size:12px;
+}
+.report-header{
+    margin-top: -10% !important;
+}
+
+.analytical_year{
+    text-align:center;
+    padding-bottom: 1px !important;
+    font-size:11px;
+}
+
+.analytical_form{
+    display: none;
+}
+
+.analytical_form_info{
+    display: block;
+}
+
+.analytic_info{
+    display: block;
 }

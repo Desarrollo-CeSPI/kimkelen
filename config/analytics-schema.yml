@@ -20,3 +20,6 @@ classes:
         description:      Archivo del certificado
         type:             blob
       created_at:
+      certificate_number:
+        description:      numero de certificado
+        type: varchar(20)
