@@ -66,7 +66,7 @@
   <?php endforeach ?>
 
   <?php if ($object->has_completed_career()): ?>
-    <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()?round($object->get_total_average(),2):'-'); ?></span></div>
+    <div id="promedio_gral"><?php echo __('Promedio general'); ?>: <span id="promedio_gral_valor"><?php echo ($object->get_total_average()? number_format(round($object->get_total_average(), 2), 2, '.', '') :'-'); ?></span></div>
   <?php endif; ?>
 <?php endif; ?>
 
