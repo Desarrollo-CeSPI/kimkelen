@@ -114,5 +114,15 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
 		}
 
 	}
+        
+        public function canPrintWithdrawnCertificate($student)
+        {
+            if(!is_null($student->getCareerStudent())){
+		 
+                return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+            }
+            
+            return true;
+        }
 
 }
