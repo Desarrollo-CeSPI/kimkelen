@@ -1674,11 +1674,7 @@ class Student extends BaseStudent
   
   public function canPrintWithdrawnCertificate()
   {
-	if(!is_null($this->getLastStudentCareerSchoolYear()))
-	{
-		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
-	}
-	return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
   
   public function getLastStudentCareerSchoolYearCursed()
