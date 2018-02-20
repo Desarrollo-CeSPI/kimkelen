@@ -847,5 +847,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     }
     return false;
   }
+  
+  public function cantPrintGraduateCertificate($student)
+  {
+      if(!is_null($this->getCareerStudent())){
+		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+	  }
+	  return false;
+  }
 
 }
