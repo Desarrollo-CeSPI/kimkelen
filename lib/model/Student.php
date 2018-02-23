@@ -1661,10 +1661,8 @@ class Student extends BaseStudent
   
   public function canPrintGraduateCertificate()
   {
-	  if(!is_null($this->getCareerStudent())){
-		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
-	  }
-	  return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintGraduateCertificate($this);
+
   }
   
   public function canPrintRegularCertificate()
