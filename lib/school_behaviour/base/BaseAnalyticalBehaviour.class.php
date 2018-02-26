@@ -34,6 +34,13 @@ class BaseAnalyticalBehaviour
         self::YEAR_INCOMPLETE => 'Curso I',
     );
     
+    protected $valid_status = array(
+        StudentCareerSchoolYearStatus::APPROVED,
+        StudentCareerSchoolYearStatus::IN_COURSE,
+        StudentCareerSchoolYearStatus::FREE,
+        StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED  
+    );
+    
     /* @var $student Student */
     protected $student = null;
     protected $objects = array();
@@ -316,18 +323,15 @@ class BaseAnalyticalBehaviour
 
         foreach ($this->student_career_school_years as $scsy)
         {
-            //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
-            //Siempre tomo el año "Aprobado" y "Cursando"
-            
-            if ($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED)
+            //Si está en el arreglo de estados válidos o está retirado y cursó materias en ese año.
+            if (in_array($scsy->getStatus(), $this->valid_status) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                         $scsy->getId() == $scsy_cursed->getId()) )
             {
-                $year_in_career = $scsy->getYear();
-                 
+                $year_in_career = $scsy->getYear(); 
                 $this->add_year_in_career($year_in_career);
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
 
-                $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
                 $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
 				
                 foreach ($csss as $css)
@@ -362,42 +366,9 @@ class BaseAnalyticalBehaviour
                     $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
                 }
                 $this->process_total_average($avg_mark_for_year);
-            }else{
-				if($scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
-                                        || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
-                                         $scsy->getId() == $scsy_cursed->getId())){
-					//recupero el año en curso
-                                        
-					$year_in_career = $scsy->getYear();
-					$this->add_year_in_career($year_in_career);
-					$career_school_year = $scsy->getCareerSchoolYear();
-					$school_year = $career_school_year->getSchoolYear();
-					
-					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
-					foreach ($csss as $css)
-					{
-						/*// No tiene nota -> el curso está incompleto
-						$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
-						$this->add_subject_to_year($year_in_career, $css);
-						*/
-                                            
-                                             if ($this->subject_is_averageable($css))
-                                            {
-                                                $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
-                                                $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
-                                                if (!$css->getMark(false))
-                                                {
-                                                    // No tiene nota -> el curso está incompleto
-                                                    $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
-                                                    $this->add_missing_subject($css);
-                                                }
-                                            }
-
-                                            $this->add_subject_to_year($year_in_career, $css);
-                                            $this->check_last_exam_date($css->getApprovedDate(false));
-					}
-				}
-			}
+                
+            }
+            
         }
     }
 
