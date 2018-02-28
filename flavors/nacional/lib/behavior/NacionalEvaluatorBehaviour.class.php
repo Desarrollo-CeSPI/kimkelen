@@ -116,13 +116,24 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
 
     public function canPrintWithdrawnCertificate($student)
-    {
-        if(!is_null($student->getCareerStudent())){
+    {     
+        $scsy = $student->getLastStudentCareerSchoolYear();
+        
+        if(!is_null($scsy))
+        {
+           if($scsy->getStatus() == StudentCareerSchoolYearStatus::FREE)
+           {
+               return false;
+           }
+           else
+           {
+               if(!is_null($student->getCareerStudent())){
 
-            return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
-        }
-
-        return true;
+                    return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+                }
+           }
+           return false; 
+        }   
     }
 
     public function canPrintGraduateCertificate($student)
@@ -138,6 +149,11 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
                //chequeo que esté en 6to y tenga todas las materias aprobadas.
                 $this->student_career_school_years = $student->getStudentCareerSchoolYears();
                 $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
+                
+                if(is_null($scsy_cursed))
+                {
+                    return false;
+                }
 
                 $max_year = $scsy_cursed->getCareerSchoolYear()->getCareer()->getMaxYear();
 
