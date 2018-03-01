@@ -1653,10 +1653,9 @@ class Student extends BaseStudent
     
     if(!is_null($cs)){
 	 $sy = SchoolYearPeer::retrieveByPk($cs->getGraduationSchoolYearId());
-	}
-   
-    return ($sy) ? $sy->getYear() :'-';
-
+         return ($sy) ? $sy->getYear() :'-';     
+    }
+    return '';
   }
   
   public function canPrintGraduateCertificate()
@@ -1721,6 +1720,18 @@ class Student extends BaseStudent
     }
 
     return implode(',  ', $tutors);
+  }
+  
+  public function getStudentTutorsEmailString()
+  {
+    $tutors = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $email = ($student_tutor->getTutor()->getPerson()->getEmail())  ? $student_tutor->getTutor()->getPerson()->getEmail(): '-';
+      $tutors[] = $student_tutor->getTutor() . " (" . $email . ")";
+    }
+
+    return implode(';  ', $tutors);
   }
 }
 
