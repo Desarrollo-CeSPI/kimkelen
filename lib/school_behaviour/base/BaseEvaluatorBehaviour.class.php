@@ -848,10 +848,10 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return false;
   }
   
-  public function cantPrintGraduateCertificate($student)
+  public function canPrintGraduateCertificate($student)
   {
-      if(!is_null($this->getCareerStudent())){
-		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+      if(!is_null($student->getCareerStudent())){
+		 return $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
 	  }
 	  return false;
   }
