@@ -96,6 +96,7 @@ class ExaminationSubject extends BaseExaminationSubject
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
         $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
         $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
         
         //quito los retirados
         $withdrawn_criteria = new Criteria();
