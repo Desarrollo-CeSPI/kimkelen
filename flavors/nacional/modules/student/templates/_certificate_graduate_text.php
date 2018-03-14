@@ -17,7 +17,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <p>
-    Las autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
+    Las Autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
     <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
     completó sus estudios secundarios. <?php echo $student->getCareerStudent()->getCareer()->getCareerName()?>. Certificado analítico en trámite.
 </p>
