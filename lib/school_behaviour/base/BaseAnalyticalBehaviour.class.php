@@ -323,8 +323,9 @@ class BaseAnalyticalBehaviour
 
         foreach ($this->student_career_school_years as $scsy)
         {
-            //Si está en el arreglo de estados válidos o está retirado y cursó materias en ese año.
+            //Si está en el arreglo de estados válidos o está retirado y cursó materias en ese año o si repitio ero fue el ultimo año que cursó
             if (in_array($scsy->getStatus(), $this->valid_status) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                         $scsy->getId() == $scsy_cursed->getId()) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED && 
                          $scsy->getId() == $scsy_cursed->getId()) )
             {
                 $year_in_career = $scsy->getYear(); 
