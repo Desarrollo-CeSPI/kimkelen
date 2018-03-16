@@ -99,17 +99,17 @@ class BaseAnalyticalBehaviour
     
     public function get_year_average($year)
     {
-      return $this->objects[$year]['average'];
+      return ($this->objects[$year]) ? $this->objects[$year]['average'] : NULL;
     }
     
     public function get_year_status($year)
-    {
-        return $this->objects[$year]['status'];
+    { 
+        return (!is_null($this->objects[$year])) ? $this->objects[$year]['status'] : NULL;
     }
 
     public function get_str_year_status($year)
     {
-        return $this->_str_year_statuses[$this->get_year_status($year)]; 
+        return (!is_null($this->get_year_status($year)))? $this->_str_year_statuses[$this->get_year_status($year)] : ""; 
     }
     
     public function get_total_average()

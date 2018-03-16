@@ -20,24 +20,38 @@
 }
 
 .table thead th{
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 1px !important;
     padding-bottom: 0 !important;
     min-width: 80px;
 }
 
 .table td {
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 1px !important;
     padding-bottom: 1px !important;
 }
 
 .table tbody th {
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
 .analytical_body_table {
-    font-size: 16px !important;
+    font-size: 14px !important;
+}
+
+.header-text{
+    font-size: 14px;
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
+#analytical_footer {
+    margin-top: 0.5em !important;
+}
+
+#analytic_signatures .signature {
+    margin-top: 6.5em;
 }
