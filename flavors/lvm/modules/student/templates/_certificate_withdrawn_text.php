@@ -21,7 +21,7 @@
 <h4> Constancia de certificado de <b>estudio en trámite</b></h4>
 
 <p>
-   <?php $scsy = $student->getLastStudentCareerSchoolYear();?>
+   <?php $scsy = $student->getLastStudentCareerSchoolYearCursed();?>
    Se deja constancia que el alumno/a <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>,
    tiene en trámite su certificado de estudio <b>Incompleto</b> hasta <b><?php echo $scsy->getYear() .'° año'?> </b>.
    Para terminar sus estudios secundarios deberá aprobar:

@@ -19,8 +19,8 @@
 <p>
     Las Autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
     <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
-    <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
+    cursó <b><?php echo $student->getLastStudentCareerSchoolYearCursed()->getYear() .'° año'?> </b> en el ciclo lectivo 
+    <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
 			    
     <?php if(count ($p) == 0): ?>
 	<?php echo "sin adeudar materias"?>
