@@ -27,7 +27,7 @@
 }
 
 .table td {
-    font-size: 14px;
+    font-size: 13px;
     padding-top: 1px !important;
     padding-bottom: 1px !important;
 }
@@ -54,4 +54,10 @@
 
 #analytic_signatures .signature {
     margin-top: 6.5em;
+    padding-top: 5px;
+}
+
+.header_row .title {
+    font-weight: bold;
+    font-size: 12px;
 }
