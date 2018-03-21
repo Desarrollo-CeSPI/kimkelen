@@ -44,16 +44,16 @@
 
 .header-text{
     font-size: 14px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
 
 #analytical_footer {
-    margin-top: 0.5em !important;
+    margin-top: 3.5em !important;
 }
 
 #analytic_signatures .signature {
-    margin-top: 5em;
+    margin-top: 12em;
     padding-top: 3px;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .report-wrapper {
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 .footer-text{
@@ -72,5 +72,9 @@
 }
 
 #analytical_footer {
-    font-size: 12px;
+    font-size: 13px;
+}
+
+#header_analytical_data_center h1 {
+    font-size: 20px;
 }
