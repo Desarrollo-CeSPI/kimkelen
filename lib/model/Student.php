@@ -1684,10 +1684,9 @@ class Student extends BaseStudent
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getId());
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
- 
-    
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+       
     return StudentCareerSchoolYearPeer::doSelectOne($c);
   }
   

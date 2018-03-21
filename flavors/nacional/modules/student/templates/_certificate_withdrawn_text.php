@@ -19,7 +19,7 @@
 <p>
     Las Autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
     <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-    cursó <b><?php echo $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
+    cursó <b><?php echo ($student->getLastStudentCareerSchoolYearCursed())? $student->getLastStudentCareerSchoolYearCursed()->getYear() .'° año': $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
     <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
 			    
     <?php if(count ($p) == 0): ?>
