@@ -4330,11 +4330,11 @@
             </trans-unit>
             <trans-unit>
                 <source>analytic_signature_3</source>
-                <target>Jefe/a del Dpto. de Alumnos</target>
+                <target>Director/a del Depto. de Alumnos</target>
             </trans-unit>
             <trans-unit>
                 <source>analytic_signature_4</source>
-                <target>Secretario/a</target>
+                <target>Secretario/a Administrativo/a</target>
             </trans-unit>
             <trans-unit>
                 <source>escuela_nombre</source>
