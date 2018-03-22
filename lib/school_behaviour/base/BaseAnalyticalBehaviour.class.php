@@ -180,7 +180,8 @@ class BaseAnalyticalBehaviour
             {
 				foreach ($years as $year)
 				{
-					if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() ))
+					if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() 
+                                                && $scsy_cursed->getStatus() != StudentCareerSchoolYearStatus::REPPROVED ))
 					{
 						$this->remaining_years[] = $year;
 					}
