@@ -19,31 +19,30 @@
 <div class="report-header">
 	<div class="header_row">
 		<div class="title" id="header_analytical_data_left">
-			<dl class="dl-horizontal">
-				<dt><?php echo __("Legajo N°") ?>: </dt>
-				<dd class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></dd>
-				<dt><?php echo __("División") ?>: </dt>
-				<dd class="detail"><?php echo implode(", ", $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions()); ?></dd>
-			</dl>
 		</div>
-		<div class="title" id="header_analytical_data_center">
-			<?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 390, 'height' => 70)) ?>
-
-		</div>
-
-
-		<div id="header_analytical_data_right" class="title">
-			<div>
-				<?php echo __("RMN Nº") ?>
-				<?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
+                <div class="title" id="header_analytical_data_center">
+                    <div class="analytical_info">
+                      	<div class="analytical_form">
+                            <?php echo $form; ?>
+                        </div>
+                        <div class="analytical_form_info">   
+                            <?php echo __('Certificado N°'); ?>
+                            <span class="detail"><?php echo (isset($analytic) && $analytic->getCertificateNumber()?$analytic->getCertificateNumber():__('S/N')); ?></span> 	
 			</div>
-			<?php if ($analytical->showCertificate()): ?>
-				<?php echo __('Certificado N°'); ?>
-				<?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
-			<?php endif; ?>
+                        <div class="analytic_info">
+                            <label><?php echo __("Legajo N°") ?>: </label>
+                            <span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+			</div>
+                        <div class="analytic_info">
+                            <label><?php echo __("Curso") ?>: </label>
+                            <span class="detail"><?php $d = $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
+			</div>
+                    </div>
+                    
+                     <?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true, 'width' => 390, 'height' => 70)) ?>
 		</div>
-
-
+		<div id="header_analytical_data_right">	    
+		</div>
 	</div>
 
 	<div class="header_row">

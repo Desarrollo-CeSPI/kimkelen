@@ -393,16 +393,19 @@ class studentActions extends autoStudentActions
     $this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
     $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
     $this->analytical->process();
-    $this->analytic = new Analytic();
+    $form_class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getAnalyticForm();
+    $this->form  = new $form_class( new Analytic());
+    
   }
   
   public function executePrintAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
     $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-    $this->analytical->process(); //falta el imprimir el analitico sin CBFE
+    $this->analytical->process(); 
     $this->analytic = new Analytic();
     $this->analytic->setCareerStudent($this->career_student);
+    $this->analytic->setCertificateNumber($request->getParameter('certificate'));
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
     $this->analytic->save();
 

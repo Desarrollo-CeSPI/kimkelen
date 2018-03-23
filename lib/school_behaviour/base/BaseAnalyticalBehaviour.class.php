@@ -334,7 +334,8 @@ class BaseAnalyticalBehaviour
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
 
-                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+                $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
+                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year, $scsy);
 				
                 foreach ($csss as $css)
                 {	
@@ -369,8 +370,7 @@ class BaseAnalyticalBehaviour
                 }
                 $this->process_total_average($avg_mark_for_year);
                 
-            }
-            
+            }            
         }
     }
 

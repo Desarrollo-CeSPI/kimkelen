@@ -308,4 +308,9 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
       return 'MultipleManageAllowedSubjectForm';
   }
   
+  public function getAnalyticForm()
+  {
+      return 'AnalyticForm';    
+  }
+  
 }

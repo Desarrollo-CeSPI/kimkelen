@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -16,35 +16,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php
-
-/**
- * Copy and rename this class if you want to extend and customize
- */
-class LvmFormFactory extends BaseFormFactory
-{
-  /**
-   * Returns form used by student new|edit action
-   *
-   * @return string represents a Form PHPClass
-   */
-  public function getStudentForm()
-  {
-    return 'LvmStudentForm';
-  }
-
-  /**
-   * Returns form used to filter students in list action
-   *
-   * @return string represents a Form PHPClass
-   */
-  public function getStudentFormFilter()
-  {
-    return 'LvmStudentFormFilter';
-  }
-  
-  public function getAnalyticForm() {
-      return 'LvmAnalyticForm';
-  }
-}
+ *
+ */ 
+?>
+<div id="analytic_signatures">
+    <div id="signature_1" class="signature">
+        <div>Prof. Lucas Demarco</div>
+        <?php echo __('analytic_signature_1'); ?>
+    </div>
+    <div id="signature_2" class="signature">
+        <div>Prof. María Constanza Erbetta</div>
+        <?php echo __('analytic_signature_2'); ?>
+    </div>
+    <div id="signature_3" class="signature">
+        <?php echo __('analytic_signature_3'); ?>
+    </div>
+    <div id="signature_4" class="signature">
+        <div>Prof. María Fernanda Bustos</div>
+        <?php echo __('analytic_signature_4'); ?>
+    </div>
+</div>
