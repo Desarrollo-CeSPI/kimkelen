@@ -46,6 +46,7 @@
         </tr>
       </thead>
       <tbody class="analytical_body_table">
+      <?php if(! is_null($object->get_subjects_in_year($year))): ?>
       <?php foreach ($object->get_subjects_in_year($year) as $css):?>
         <tr>
           <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
@@ -56,6 +57,7 @@
           <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
         </tr>
       <?php endforeach ?>
+      <?php endif; ?>
         <tr>
           <th colspan="5" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
           <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
