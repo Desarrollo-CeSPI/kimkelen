@@ -293,16 +293,14 @@ class Course extends BaseCourse
   {
     $c = is_null($c) ? new Criteria() : $c;
 
-    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-    $c->addJoin(CareerSchoolYearPeer::CAREER_ID, CareerPeer::ID);
+    $c->add(CoursePeer::ID,$this->getId());
+    $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID,CareerSubjectSchoolYearPeer::ID);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID,CareerSubjectPeer::ID);
+    $c->addJoin(CareerSubjectPeer::CAREER_ID,CareerPeer::ID);
     $c->addAscendingOrderByColumn(CareerPeer::CAREER_NAME);
-    $c->addJoin(CareerPeer::ID, CareerSubjectPeer::CAREER_ID);
     $c->addAscendingOrderByColumn(CareerSubjectPeer::YEAR);
-    $c->addJoin(CareerSubjectPeer::ID, CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::ID, CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID);
-    $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
-    $c->add(CoursePeer::ID, $this->getId());
-
+    
     return $this->getCourseSubjects($c);
 
   }

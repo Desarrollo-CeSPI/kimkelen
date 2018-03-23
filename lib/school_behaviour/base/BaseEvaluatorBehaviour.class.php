@@ -834,9 +834,26 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return self::FEBRUARY;
   }
 
-	public function getPathwayPromotionNote()
-	{
-		return self::PATHWAY_PROMOTION_NOTE;
-	}
+  public function getPathwayPromotionNote()
+  {
+       return self::PATHWAY_PROMOTION_NOTE;
+  }
+    
+  public function canPrintWithdrawnCertificate($student)
+  {
+    if(!is_null($student->getLastStudentCareerSchoolYear()))
+    {
+            return ($student->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
+    }
+    return false;
+  }
+  
+  public function canPrintGraduateCertificate($student)
+  {
+      if(!is_null($student->getCareerStudent())){
+		 return $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+	  }
+	  return false;
+  }
 
 }

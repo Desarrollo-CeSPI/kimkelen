@@ -893,38 +893,56 @@ class studentActions extends autoStudentActions
   
   public function buildCertificate($student)
   {
-      /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
-        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
-          
-        $school_year = SchoolYearPeer::retrieveLastYearSchoolYear($student->getLastStudentCareerSchoolYearCursed());
-          
-        $scsy = $student->isRepprovedInSchoolYear($school_year);
-        $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear());
-        
-        if(!is_null($scsy) && count($css) == 0 )
-        {
-            $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
-        }
-        $previous = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($student, $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());
-	
-        $this->p = array();
-        foreach($previous as $p)
-        {
-           $this->p[count($this->p)] = $p->getCourseSubjectStudent();
-        }
-        foreach($dis_cs as $c)
-        {
-           $this->p[count($this->p)] = $c->getCourseSubjectStudent();
-        }
+      $this->p = array();
+      $this->student_career_school_years = $student->getStudentCareerSchoolYears();
+      $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
+      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED,StudentCareerSchoolYearStatus::FREE);
 
-        foreach ($css as $c)
+        foreach ($this->student_career_school_years as $scsy)
         {
-            $sacs = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($c);
-            $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($c);
-            if(is_null($sacs) && is_null($srcs))
-                $this->p[count($this->p)] = $c;
+            if (in_array($scsy->getStatus(), $status) || 
+               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_cursed->getId()))
+            {
+                $career_school_year = $scsy->getCareerSchoolYear();
+                $school_year = $career_school_year->getSchoolYear();
+
+                $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
+                foreach ($csss as $css)
+                {	    
+                    if ( ! $css->getIsNotAverageable())
+                    {
+                        $sacs = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($css, $school_year);
+                        
+                        if(is_null($sacs) && is_null($css->getStudentApprovedCourseSubject())) 
+                        {
+                                // No tiene nota -> el curso está incompleto
+                                $this->p[]=$css;
+                               
+                        }
+                    }
+                }
+            }
         }
       
+       /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
+        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/   
+        if(!is_null($student->getLastStudentCareerSchoolYearCursed()))
+        {
+            $school_year = $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear();
+            $scsy = $student->isRepprovedInSchoolYear($school_year); 
+            $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear());
+
+            if(!is_null($scsy) && count($css) == 0 )
+            {
+                $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
+            }
+
+            foreach($dis_cs as $c)
+            {
+               $this->p[] = $c->getCourseSubjectStudent();
+            } 
+        }
+  
   }
   
   public function executeBatchManageAllowedSubject(sfWebRequest $request, $objects)

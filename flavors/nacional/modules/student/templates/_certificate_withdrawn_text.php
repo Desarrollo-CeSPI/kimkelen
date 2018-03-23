@@ -17,9 +17,9 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <p>
-    El Jefe de la Oficina de alumnos del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
+    Las Autoridades del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
     <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-    cursó <b><?php echo $student->getLastStudentCareerSchoolYearCursed()->getYear() .'° año'?> </b> en el ciclo lectivo 
+    cursó <b><?php echo ($student->getLastStudentCareerSchoolYearCursed())? $student->getLastStudentCareerSchoolYearCursed()->getYear() .'° año': $student->getLastStudentCareerSchoolYear()->getYear() .'° año'?> </b> en el ciclo lectivo 
     <b> <?php echo ($student->getLastStudentCareerSchoolYearCursed()) ? $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear()->getYear() : $student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()?></b> 
 			    
     <?php if(count ($p) == 0): ?>
@@ -37,7 +37,4 @@
 	<?php endfor?>
     <?php endif?>
     <?php echo '.'?>
-</p>
-<p>
-   Certificado de Estudios Incompletos en trámite SI / NO
 </p>

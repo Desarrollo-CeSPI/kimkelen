@@ -1653,18 +1653,15 @@ class Student extends BaseStudent
     
     if(!is_null($cs)){
 	 $sy = SchoolYearPeer::retrieveByPk($cs->getGraduationSchoolYearId());
-	}
-   
-    return ($sy) ? $sy->getYear() :'-';
-
+         return ($sy) ? $sy->getYear() :'-';     
+    }
+    return '';
   }
   
   public function canPrintGraduateCertificate()
   {
-	  if(!is_null($this->getCareerStudent())){
-		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
-	  }
-	  return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintGraduateCertificate($this);
+
   }
   
   public function canPrintRegularCertificate()
@@ -1674,11 +1671,7 @@ class Student extends BaseStudent
   
   public function canPrintWithdrawnCertificate()
   {
-	if(!is_null($this->getLastStudentCareerSchoolYear()))
-	{
-		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN);
-	}
-	return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
   
   public function getLastStudentCareerSchoolYearCursed()
@@ -1691,10 +1684,9 @@ class Student extends BaseStudent
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getId());
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
- 
-    
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+       
     return StudentCareerSchoolYearPeer::doSelectOne($c);
   }
   
@@ -1727,6 +1719,18 @@ class Student extends BaseStudent
     }
 
     return implode(',  ', $tutors);
+  }
+  
+  public function getStudentTutorsEmailString()
+  {
+    $tutors = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $email = ($student_tutor->getTutor()->getPerson()->getEmail())  ? $student_tutor->getTutor()->getPerson()->getEmail(): '-';
+      $tutors[] = $student_tutor->getTutor() . " (" . $email . ")";
+    }
+
+    return implode(';  ', $tutors);
   }
 }
 

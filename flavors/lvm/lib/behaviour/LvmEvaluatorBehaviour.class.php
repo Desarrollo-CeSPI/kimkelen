@@ -62,9 +62,8 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         $min_note = self::EXAMINATION_NOTE;
     }else
     {
-        self::POSTPONED_NOTE;
+        $min_note = self::POSTPONED_NOTE;
     }
-    
     if (
       ($average >= $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMinimunMark()
       && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks())->getMark() >= $min_note)
@@ -100,9 +99,9 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $career_school_year = CareerSchoolYearPeer::retrieveBySchoolYear(null, $school_year);
       
 	    if ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption() && $year == 6) {
-
+               
 	    $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
-		  $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
+		  $student_disapproved_course_subject->setExaminationNumber($this->getExaminationNumberFor($average));
 	    $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
 
 
