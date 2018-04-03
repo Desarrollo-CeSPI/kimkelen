@@ -1132,7 +1132,8 @@ class Course extends BaseCourse
         foreach($correlatives as $c)
         {
             $cssy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($c, $sy);
-            if($cssy->isAttendanceForDay())
+            
+            if(!is_null($cssy) && $cssy->isAttendanceForDay())
             {
                 return false;
             }
