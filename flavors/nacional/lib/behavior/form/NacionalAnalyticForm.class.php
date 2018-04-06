@@ -7,12 +7,13 @@
  * @subpackage form
  * @author     Your name here
  */
-class LvmAnalyticForm extends AnalyticForm
+class NacionalAnalyticForm extends AnalyticForm
 {
   public function configure()
   {
       parent::configure();
       $this->unsetFields();
+      $this->setWidget('observations', new sfWidgetFormInput());
   }
   
   public function unsetFields()
@@ -23,7 +24,7 @@ class LvmAnalyticForm extends AnalyticForm
       $this['career_student_id'],
       $this['certificate'],
       $this['created_at'],
-      $this['observations']   
+      $this['certificate_number']
          
     );
   }
