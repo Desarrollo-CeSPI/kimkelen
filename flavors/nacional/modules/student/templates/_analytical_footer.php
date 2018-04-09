@@ -20,6 +20,14 @@
 
 
 <div id="analytical_footer" class="misma_pagina">
-    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical,'form'=> $form)) ?>
-    <?php include_partial('analytical_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
+    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
+    <div class="analytical-form">
+           <?php echo $form ?>
+    </div>       
+    <div class="analytical-observations">
+        <?php if(isset($analytic) && $analytic->getObservations()): ?>
+        <div class="footer-text">Observaciones: <?php echo$analytic->getObservations() ?> </div>
+        <?php endif;?>
+    </div>   
+    <?php include_partial('analytical_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?> 
 </div>

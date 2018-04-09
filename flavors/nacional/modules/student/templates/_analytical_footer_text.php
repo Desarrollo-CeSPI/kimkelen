@@ -44,5 +44,4 @@
             <div class="footer-text">Certificado de Estudios Incompleto.</div>
         <?php endif; ?>
             <div class="footer-text">Para que conste y a pedido del interesado, se expide el presente certificado confrontado con los registros y actas originales por el <?php echo __('Departamento de alumnos'); ?>, en la ciudad de <?php echo __('escuela_ciudad'); ?>, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</div>
-        <?php echo $form; ?>
     </div>

@@ -55,7 +55,6 @@
             url = document.getElementById('link_print').href;
             if(observations.trim() != ''){
                  document.getElementById('link_print').href= url + '&observations=' + observations;
-alert();
             }      
         });
       })
