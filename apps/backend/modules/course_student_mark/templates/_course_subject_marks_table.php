@@ -37,7 +37,7 @@
     <?php $final_period = $course_subject->isFinalPeriod(); ?>
     <?php $configuration = $course_subject->getCareerSubjectSchoolYear()->getConfiguration() ?>
 
-    <?php include_partial('information_header', array('course'=> $course)); ?>
+    <?php include_partial('course_student_mark/information_header', array('course'=> $course)); ?>
 
     <div style="clear:both"></div>
     <table width="100%" class="gridtable_bordered">
@@ -48,13 +48,13 @@
 
   <div class="report-wrapper">
     <?php if ($configuration->getCourseType() == CourseType::TRIMESTER): ?>
-      <?php include_partial('trimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+      <?php include_partial('course_student_mark/trimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
     <?php elseif ($configuration->getCourseType() == CourseType::QUATERLY): ?>
-      <?php include_partial('quaterly_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+      <?php include_partial('course_student_mark/quaterly_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
     <?php elseif ($configuration->getCourseType() == CourseType::BIMESTER): ?>
-      <?php include_partial('bimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
+      <?php include_partial('course_student_mark/bimester_boxes', array('marks_count' => $configuration->getCourseMarks())); ?>
     <?php elseif ($configuration->getCourseType() == CourseType::QUATERLY_OF_A_TERM): ?>
-      <?php include_partial('quaterly_of_a_term_boxes'); ?>
+      <?php include_partial('course_student_mark/quaterly_of_a_term_boxes'); ?>
     <?php endif; ?>
   </div>
   <br><div style="clear:both"></div><br>
