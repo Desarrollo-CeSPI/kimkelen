@@ -31,7 +31,7 @@
 			</div>
                         <div class="analytic_info">
                             <label><?php echo __("Legajo N°") ?>: </label>
-                            <span class="detail"><?php echo $career_student->getStudent()->getFileNumber($career_student->getCareer()); ?></span>
+                            <span class="detail"><?php echo $career_student->getStudent()->getGlobalFileNumber(); ?></span>
 			</div>
                         <div class="analytic_info">
                             <label><?php echo __("Curso") ?>: </label>
