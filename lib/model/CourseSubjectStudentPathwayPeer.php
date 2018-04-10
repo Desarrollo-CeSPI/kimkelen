@@ -23,7 +23,7 @@ class CourseSubjectStudentPathwayPeer extends BaseCourseSubjectStudentPathwayPee
       return StudentPeer::doSelect($c);
   }
   
-  public function retrieveByCourseSubjectStudent($course_subject_student)
+  public static function retrieveByCourseSubjectStudent($course_subject_student)
   { 
       
       $c = new Criteria();
