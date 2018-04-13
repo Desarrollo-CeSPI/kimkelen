@@ -250,5 +250,13 @@ class course_student_markActions extends sfActions
       $this->setTemplate('revertCalificateNonNumericalMark');
     }
   }
+  
+  public function executePrintSubjectCalification(sfWebRequest $request)
+  {
+    $this->setLayout('cleanLayout');
+    $this->course_subjects = array( CourseSubjectPeer::retrieveByPK($this->getRequest()->getParameter("id")));
+    $this->setTemplate('print');
+ 
+  }
     
 }

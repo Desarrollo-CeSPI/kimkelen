@@ -51,7 +51,7 @@
           <?php endforeach; ?>
           <?php $student_career_school_year = StudentCareerSchoolYearPeer::retrieveByStudentAndCareerSchoolYear($student, $csy);?>
           
-          <td><?php echo $student_career_school_year->getAnualAverage();?></td>
+          <td><?php echo ($student_career_school_year->getAnualAverage()) ? $student_career_school_year->getAnualAverage() : '-';?></td>
         <?php endforeach; ?>
           
       </tr>

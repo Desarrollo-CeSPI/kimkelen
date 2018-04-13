@@ -49,10 +49,8 @@ class rating_reportActions extends sfActions
   public function executeSubject(sfWebRequest $request)
   {
   	$params = $request->getParameter('subject_rating_report');
-  	$this->course_subject = CourseSubjectPeer::retrieveByPk($params['course_subject_id']);
-
         $this->getUser()->setReferenceFor($this, 'rating_report');
-        $this->setLayout('cleanLayout');
+        $this->redirect('course_student_mark/printSubjectCalification?id=' . $params['course_subject_id'] );
   }
 
   public function executeFilterForDivision(sfWebRequest $request)
