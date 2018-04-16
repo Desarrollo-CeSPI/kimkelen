@@ -407,6 +407,7 @@ class studentActions extends autoStudentActions
     $this->analytic->setCareerStudent($this->career_student);
     $this->analytic->setCertificateNumber($request->getParameter('certificate'));
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
+    $this->analytic->setObservations($request->getParameter('observations'));
     $this->analytic->save();
 
     $this->setLayout('cleanLayout');

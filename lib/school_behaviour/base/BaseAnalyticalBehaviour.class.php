@@ -178,16 +178,28 @@ class BaseAnalyticalBehaviour
             $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();
             if(!is_null($current_year))
             {
-				foreach ($years as $year)
-				{
-					if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() 
-                                                && $scsy_cursed->getStatus() != StudentCareerSchoolYearStatus::REPPROVED ))
-					{
-						$this->remaining_years[] = $year;
-					}
-				}	
-			}
-            
+                if($scsy_cursed)
+                {
+                    foreach ($years as $year)
+                    {
+                        if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() 
+                                    && $scsy_cursed->getStatus() != StudentCareerSchoolYearStatus::REPPROVED ))
+                            {
+                                    $this->remaining_years[] = $year;
+                            }   	
+                    }
+                }
+                else
+                {
+                    foreach ($years as $year)
+                    {
+                        if ($current_year->getYear() < $year)
+                        {
+                            $this->remaining_years[] = $year;
+                        }
+                    }
+                }			
+            }   
         }
         return $this->remaining_years;
     }

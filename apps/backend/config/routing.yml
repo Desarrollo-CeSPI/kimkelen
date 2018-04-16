@@ -92,7 +92,7 @@ sanction:
     with_wildcard_routes: true
 student_print_analytical:
   url:  /student/:id/printAnalytical
-  param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
+  param:  {module: student, action: printAnalytical } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
 
 print_graduate_certificate:
   url:  /student/:id/printGraduateCertificate
