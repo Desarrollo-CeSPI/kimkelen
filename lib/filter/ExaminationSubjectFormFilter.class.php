@@ -11,11 +11,11 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
 {
   public function configure()
   {
-    unset($this['examination_id'], $this['career_subject_school_year_id'],  $this['examination_subject_teacher_list']);
+  unset($this['examination_id'], $this['career_subject_school_year_id'],  $this['examination_subject_teacher_list'], $this['date']);
 
     $this->setWidget('is_closed', new sfWidgetFormChoice(array('choices' => array('' => '', 1 => 'Sí', 0 => 'No'))));
     $this->setValidator('is_closed', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
-
+    
     $this->setWidget('subject', new sfWidgetFormFilterInput(array('with_empty' => false)));
     $this->setValidator('subject', new sfValidatorPass(array('required' => false)));
 

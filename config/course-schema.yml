@@ -473,6 +473,10 @@ classes:
       is_closed:
         type: boolean
         default: false
+      date:
+        description:  Fecha de la mesa de examen
+        type: date
+        required: false
       _indexes:
         examination_career_subject_school_year: [career_subject_school_year_id, examination_id]
       _uniques:
