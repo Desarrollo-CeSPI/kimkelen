@@ -638,6 +638,10 @@ classes:
       is_closed:
         type: boolean
         default: false
+      date:
+        description:  Fecha de la mesa de examen
+        type: date
+        required: false
 
   ExaminationRepprovedSubjectTeacher:
     tablename: examination_repproved_subject_teacher

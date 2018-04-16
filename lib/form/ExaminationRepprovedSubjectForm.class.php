@@ -48,9 +48,12 @@ class ExaminationRepprovedSubjectForm extends BaseExaminationRepprovedSubjectFor
       unset($this['career_subject_id']);
       $this->setWidget('career_subject_wrapper', new mtWidgetFormWrapper(array('content' => $this->getObject()->getCareerSubject())));
       $this->setValidator('career_subject_wrapper', new sfValidatorPass());
-      $this->getWidgetSchema()->moveField('career_subject_wrapper', 'before','examination_repproved_subject_teacher_list');
+      $this->getWidgetSchema()->moveField('career_subject_wrapper', 'before','date');
       $this->getWidget('career_subject_wrapper')->setLabel('Subject');
     }
+    
+    $this->setWidget('date', new csWidgetFormDateInput());
+    $this->setValidator('date', new mtValidatorDateString(array('required' => false)));
     
     $this->getWidget("examination_repproved_subject_teacher_list")->setOption("multiple", true);
     $this->getWidget("examination_repproved_subject_teacher_list")->setOption("peer_method", 'doSelectActive');
