@@ -120,7 +120,44 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
         if (!$pathway)
         {
           StudentCareerSubjectAllowedPeer::doDelete($c, $con);
-        }   
+        }
+        else
+        {   //Calculo las materias que rinde en trayectorias.  
+            try
+            {
+                $con->beginTransaction();
+                
+                $cri = new Criteria();
+                $cri->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+                $cri->add(CourseSubjectStudentPeer::STUDENT_ID,$student_id);
+                $cri->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+                $cri->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID,CareerSubjectSchoolYearPeer::ID);
+                $cri->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID,CareerSubjectPeer::ID);
+                $cri->add(CareerSubjectPeer::CAREER_ID,$this->getValue("career_id"));
+                $cri->add(CareerSubjectPeer::YEAR,$pathway->getYear());
+                $cri->add(StudentDisapprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID,NULL);
+                $career_subjects = CareerSubjectPeer::doSelect($cri);
+                
+                foreach ($career_subjects as $career_subject)
+                { /* check if not exist */
+                  $scsap= StudentCareerSubjectAllowedPathwayPeer::doCountStudentAndCareerSubject($this->object, $career_subject);
+                  if($scsap == 0)
+                  {
+                      $obj = new StudentCareerSubjectAllowedPathway();
+                      $obj->setStudentId($this->object->getPrimaryKey());
+                      $obj->setCareerSubject($career_subject);
+                      $obj->save($con);
+                  }
+                }
+                
+                $con->commit();
+            }
+            catch (PropelException $e)
+            {
+              $con->rollBack();
+              throw $e;
+            }
+        }
     }
 
     $year = $this->getValue('year');
