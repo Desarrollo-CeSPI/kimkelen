@@ -111,5 +111,32 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 	  return $course_subject_student_examination->getMark();
  
   }
+  
+  public function getAnualAverageForStudentCareerSchoolYear($student_career_school_year)
+  {
+    if ($this->hasApprovedAllCourseSubjects($student_career_school_year))
+    {
+      $sum = 0;
+
+      $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
+        $student_career_school_year->getCareerSchoolYear(),
+        $student_career_school_year->getStudent());
+
+      foreach ($course_subject_students as $course_subject_student)
+      {
+          if($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->isNumericalMark())
+              $sum += $course_subject_student->getFinalMark();
+          else  
+              return NULL;
+      }
+
+      if (count($course_subject_students))
+      {
+        return round(($sum / count($course_subject_students)), 2);
+      }
+    }
+    return null;
+
+  }
 
 }

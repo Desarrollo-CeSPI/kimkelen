@@ -26,4 +26,5 @@
       'courses'         => $courses,
       'course_subjects' => $course_subjects,
       'career_subject_school_years' => $career_subject_school_years,
+      'division'        => $division
   ));?>

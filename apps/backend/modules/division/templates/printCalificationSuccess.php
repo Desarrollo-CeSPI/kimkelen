@@ -31,7 +31,6 @@
     <a href="<?php echo url_for('division/index') ?>"><?php echo __('Go back') ?></a>
   </li>
 </ul>
-
 <h1 class="print_title"><?php echo $division; ?></h1>          
 <div id="mi_tabla_wrapper">
   <?php include_partial('division/calification_table', array(
@@ -41,6 +40,7 @@
       'courses'         => $courses,
       'course_subjects' => $course_subjects,
       'career_subject_school_years' => $career_subject_school_years,
+      'division'        => $division
   ));?>
 </div>
 
