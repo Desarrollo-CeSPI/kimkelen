@@ -27,6 +27,25 @@ class FhaycsalberdiEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
   const POSTPONED_NOTE_FHAYCS = 5; //nota del 3er trimestre no puede ser menor de 6
 
+  const DECEMBER = 1;
+  const FEBRUARY = 2;
+  const MARCH    = 3;
+
+  protected
+  $_examination_number = array(
+    self::DECEMBER => 'Diciembre',
+    self::FEBRUARY => 'Febrero',
+    self::MARCH => 'Marzo',
+  );
+
+  protected
+  $_examination_number_short = array(
+    self::DECEMBER => 'Diciembre',
+    self::FEBRUARY => 'Febrero',
+    self::MARCH => 'Marzo',
+  );
+
+
   public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
   {
     return self::DECEMBER; //Todos los alumnos se van a diciembre
@@ -50,13 +69,15 @@ class FhaycsalberdiEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       return $course_subject_student_examination->getMark();
     }
+    elseif ($examination->getExaminationNumber() == self::MARCH)
+    {
+      return $course_subject_student_examination->getMark();
+    }
     else
     {
       return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
     }
-
   }
-
 
   public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
   { // el nombre del método esta mal escrito
