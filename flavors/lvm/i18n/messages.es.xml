@@ -9119,6 +9119,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                                 <source>Certificate number</source>
                                 <target>Certificado N°</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Date</source>
+                        <target>Fecha</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>
