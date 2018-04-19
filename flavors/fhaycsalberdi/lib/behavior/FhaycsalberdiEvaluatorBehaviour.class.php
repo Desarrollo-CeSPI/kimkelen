@@ -25,13 +25,13 @@
 class FhaycsalberdiEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
 
+  const POSTPONED_NOTE_FHAYCS = 5; //nota del 3er trimestre no puede ser menor de 6
+
   public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
   {
     return self::DECEMBER; //Todos los alumnos se van a diciembre
 
   }
-
-  const POSTPONED_NOTE_FHAYCS = 5; //nota del 3er trimestre no puede ser menor de 6
 
   public function getPosponedNote()
   {
@@ -55,6 +55,31 @@ class FhaycsalberdiEvaluatorBehaviour extends BaseEvaluatorBehaviour
       return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
     }
 
+  }
+
+
+  public function checkRepeationCondition(Student $student, StudentCareerSchoolYear $student_career_school_year)
+  { // el nombre del método esta mal escrito
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    if ($student_career_school_year->isLastYear())
+    {
+      return false;
+    }
+
+    
+    // Se quita por que no aplica nuestro establecimiento
+    // $last_year_previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareerAndYear($student, $career_school_year->getCareer(), $student_career_school_year->getYear() - 1);
+    // if ($last_year_previous > 0)
+    // {
+    //   return true;
+    // }
+
+    //If Previous count > max count of repproved subject allowed, then the student will repeat or go to pathways programs
+    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student, $student_career_school_year->getCareerSchoolYear()->getCareer());
+
+    return ($previous > $career_school_year->getSubjectConfiguration()->getMaxPrevious());
   }
 
 }
