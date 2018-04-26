@@ -24,6 +24,9 @@ class ManualExaminationSubjectForm extends BaseExaminationSubjectForm
       'add_empty' => false,
       'criteria' => $c
     )));
+    
+    $this->setWidget('date', new csWidgetFormDateInput());
+    $this->setValidator('date', new mtValidatorDateString(array('required' => false)));
 
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("multiple", true);
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("peer_method", 'doSelectActive');

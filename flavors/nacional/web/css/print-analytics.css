@@ -85,3 +85,12 @@
 .analytical {
     padding: 1em 2em;
 }
+
+.analytical-observations{
+    display: inline-block;  
+    font-size: 14px;
+}
+
+.analytical-form{
+    display: none;
+}

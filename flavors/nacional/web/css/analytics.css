@@ -100,11 +100,29 @@
     padding-top: 1em;
 }
 
-.analytical_body_table {
+.analytical_body_table 
+{
     font-size: 13px;
 }
 
 .header-text
 {
     font-size: 16px;
+}
+
+.analytical-observations
+{
+    display: none;    
+}
+
+.analytical-form
+{
+    display: inline-block;
+    font-size: 16px;    
+}
+
+#analytic_observations
+{
+    font-size: 14px !important;
+    width: 50em !important;
 }
