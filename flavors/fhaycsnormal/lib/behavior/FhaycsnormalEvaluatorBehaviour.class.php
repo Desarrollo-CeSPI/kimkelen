@@ -123,7 +123,8 @@ class FhaycsnormalEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
-    if ($student_career_school_year->isLastYear())
+    //Si el estudiante está en el último año de la carrera y no es nivel primario escuela normal (id 3), retorna falso (no puede repetir)
+    if ($student_career_school_year->isLastYear() && ($career_school_year->getCareerId() != 3))
     {
       return false;
     }
