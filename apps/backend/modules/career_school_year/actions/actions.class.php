@@ -208,25 +208,54 @@ class career_school_yearActions extends autoCareer_school_yearActions
     $this->module = $this->getModuleName();
 
   }
-
-  public function executeClose(sfWebRequest $reuqest)
+  
+  public function executeClose(sfWebRequest $request)
   {
-    ini_set('max_execution_time', 0);
     $this->career_school_year = $this->getRoute()->getObject();
-    $this->result = array();
-    $this->result = $this->career_school_year->close();
-    //Si hay errores muestro los errores
-    if (is_array($this->result))
+    $this->form = new CloseCareerSchoolYearForm();
+  }
+  
+  public function executeSaveClose(sfWebRequest $request)
+  { $year = $request->getPostParameter('close_career_school_year[year]');
+    ini_set('max_execution_time', 0);
+    if ($request->isMethod('POST'))
     {
-      $this->getUser()->setFlash('error', "Hay errores en algunos alumnos.");
-      $this->setTemplate('studentWithErrors');
+      $year = $request->getPostParameter('close_career_school_year[year]');
+      $career_school_year_id = $request->getParameter('id');
+      if (is_null($career_school_year_id) || is_null($year))
+      {
+        $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+        $this->redirect('@career_school_year');
+      }
+
+      $this->form = new CloseCareerSchoolYearForm();
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      $this->career_school_year = CareerSchoolYearPeer::retrieveByPK($career_school_year_id);
+      if ($this->form->isValid())
+      {
+        $this->result = array();
+        $this->result = $this->career_school_year->close($year);
+        //Si hay errores muestro los errores
+        if (is_array($this->result))
+        {
+          $this->getUser()->setFlash('error', "Hay errores en algunos alumnos.");
+          $this->setTemplate('studentWithErrors');
+        }
+        //si no  hay errores  la carrera fue cerrada con exito
+        else
+        {
+          $this->getUser()->setFlash('notice', "El año de la carrera fue cerrada con exito.");
+          $this->redirect('@career_school_year');
+        }
+     
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+      }
     }
-    //si no  hay errores  la carrera fue cerrada con exito
-    else
-    {
-      $this->getUser()->setFlash('notice', "La carrera fue cerrada con exito.");
-      $this->redirect('@career_school_year');
-    }
+    
+    $this->redirect('@career_school_year');
 
   }
 

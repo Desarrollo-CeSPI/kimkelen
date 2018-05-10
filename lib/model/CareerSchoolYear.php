@@ -206,7 +206,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
    * @param PropelPDO $con
    */
 
-  public function close(array $errors = Array(), PropelPDO $con = null)
+  public function close($year, array $errors = Array(), PropelPDO $con = null)
   {
     $con = (is_null($con)) ? Propel::getConnection() : $con;
 
@@ -215,6 +215,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
     $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
     $c->addJoin(StudentPeer::ID, StudentCareerSchoolYearPeer::STUDENT_ID);
     //$c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::IN_COURSE);
+    $c->add(StudentCareerSchoolYearPeer::YEAR,$year);
     $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
     $c->setDistinct(StudentPeer::ID);
 
@@ -290,7 +291,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
         throw new Exception('Hay errores no se puede cerrar el año!');
       }
       //Se setea a la carrera como procesada.
-      $this->setIsProcessed(true);
+      //$this->setIsProcessed(true);
       $this->save($con);
       Propel::enableInstancePooling();
     }
