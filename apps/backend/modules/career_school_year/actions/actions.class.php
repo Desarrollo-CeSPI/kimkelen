@@ -216,13 +216,13 @@ class career_school_yearActions extends autoCareer_school_yearActions
   }
   
   public function executeSaveClose(sfWebRequest $request)
-  { $year = $request->getPostParameter('close_career_school_year[year]');
+  { 
     ini_set('max_execution_time', 0);
     if ($request->isMethod('POST'))
     {
       $year = $request->getPostParameter('close_career_school_year[year]');
       $career_school_year_id = $request->getParameter('id');
-      if (is_null($career_school_year_id) || is_null($year))
+      if (is_null($career_school_year_id))
       {
         $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
         $this->redirect('@career_school_year');
@@ -235,6 +235,13 @@ class career_school_yearActions extends autoCareer_school_yearActions
       {
         $this->result = array();
         $this->result = $this->career_school_year->close($year);
+        
+        if($this->career_school_year->checkAllClosedYears())
+        {
+            $this->career_school_year->setIsProcessed(true);
+            $this->career_school_year->save();
+        }
+            
         //Si hay errores muestro los errores
         if (is_array($this->result))
         {
@@ -252,11 +259,13 @@ class career_school_yearActions extends autoCareer_school_yearActions
       else
       {
         $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+        $this->setTemplate('close');
       }
     }
-    
-    $this->redirect('@career_school_year');
-
+    else
+    {
+        $this->redirect('@career_school_year');
+    }
   }
 
   public function executeCopyConfiguration(sfWebRequest $request)

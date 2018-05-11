@@ -20,48 +20,37 @@ class CloseCareerSchoolYearForm extends sfForm
     $this->validatorSchema->setOption("allow_extra_fields", true);
 
     $csy_id = sfContext::getInstance()->getRequest()->getParameter('id');
-    $career = CareerSchoolYearPeer::retrieveByPk($csy_id)->getCareer();
+    $csy=CareerSchoolYearPeer::retrieveByPk($csy_id);
+    $career = $csy->getCareer();
     
-    
+    $status = array (StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
     $c = new Criteria();
     $c->add(CareerSchoolYearPeer::ID, $csy_id);
-    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(StudentPeer::ID, StudentCareerSchoolYearPeer::STUDENT_ID);
-    //$c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::IN_COURSE);
-    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, true);
+    $c->add(StudentCareerSchoolYearPeer::STATUS, $status, Criteria::NOT_IN);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
     $c->setDistinct(StudentCareerSchoolYearPeer::YEAR);
     $c->clearSelectColumns();
     $c->addSelectColumn(StudentCareerSchoolYearPeer::YEAR);
     $stmt_y = StudentCareerSchoolYearPeer::doSelectStmt($c);
     $array_y = $stmt_y->fetchAll(PDO::FETCH_COLUMN);
-    
-    /*$c = new Criteria();
-    $c->add(DivisionPeer::CAREER_SCHOOL_YEAR_ID,$csy_id);
-    $c->setDistinct(DivisionPeer::YEAR);
-    $c->clearSelectColumns();
-    $c->addSelectColumn(DivisionPeer::YEAR);
-    
-    $stmt_y = DivisionPeer::doSelectStmt($c);
-    $array_y = $stmt_y->fetchAll(PDO::FETCH_COLUMN);
-    */
- 
+
     $years = array(''=>'');
     for($i=1;$i<=$career->getQuantityYears();$i++)
     {
-        if(! in_array($i, $array_y))
+        if(in_array($i, $array_y))
             $years[$i] = 'Año '.$i;
     }
-  
+    
+    /*
+    if(count($years) == $career->getQuantityYears() )
+    {
+        $csy->setIsProcessed(true);
+        $csy->save();
+    }
+  */
    $this->setWidget('year',new sfWidgetFormChoice(array('choices' => $years)) );
    $this->setValidator('year', new sfValidatorString(array('required'=>true)));
    
-  }
-  
-  public function save()
-  {
-    $csy = CareerSchoolYearPeer::retrieveByPK($this->getOption('career_school_year_id'));
-    $year = $this->getValue('year'); 
-    $csy->createLastYearDivisions($year);
   }
 
 }

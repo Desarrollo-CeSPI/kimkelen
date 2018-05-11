@@ -20,6 +20,8 @@
 <?php use_helper('Javascript', 'Object','I18N','Form') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/global.css') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/extended.css') ?>
+<?php use_javascript('spin.min.js')?>
+<?php use_javascript('main.js')?>
 
 
 <div id="sf_admin_container">
@@ -38,16 +40,12 @@
         <?php echo $form?>
 
       </fieldset>
-
+      <div id= "block_screen"> </div>
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Volver al listado de carreras'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
-        <li><input type="submit" value="<?php echo __('Guardar') ?>" /></li>
+        <li><input type="submit" value="<?php echo __('Guardar') ?>" onclick="blockScreenCareerSchoolYear()"/></li>
       </ul>
     </form>
   </div>
-     <div style="margin-top: 1px; clear: both;">
-     </div>
-
-  </div>
-
+     <div style="margin-top: 1px; clear: both;"></div>
 </div>

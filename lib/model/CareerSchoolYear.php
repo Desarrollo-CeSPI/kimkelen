@@ -666,6 +666,19 @@ class CareerSchoolYear extends BaseCareerSchoolYear
     return $this->getSubjectConfiguration()?$this->getSubjectConfiguration()->getAttendanceType() == SchoolBehaviourFactory::getInstance()->getAttendanceDay():null;
 
   }
+  
+  public function checkAllClosedYears()
+  {
+    $status = array (StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
+    
+    $c = new Criteria();
+    $c->add(CareerSchoolYearPeer::ID, $this->getId());
+    $c->add(StudentCareerSchoolYearPeer::STATUS, $status, Criteria::NOT_IN);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
+
+    return StudentCareerSchoolYearPeer::doCount($c) == 0;
+    
+  }
 
 }
 
