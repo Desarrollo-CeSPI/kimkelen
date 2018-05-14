@@ -1119,12 +1119,12 @@ class Course extends BaseCourse
     
   public function canPathwayPreceptors()
   {    
-    return TRUE; 
+     return $this->isCurrentSchoolYear();
   }
   
   public function canPathwayAttendanceSubject()
   { 
-      return TRUE;
+      return $this->isCurrentSchoolYear();
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));
