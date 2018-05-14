@@ -1123,27 +1123,8 @@ class Course extends BaseCourse
   }
   
   public function canPathwayAttendanceSubject()
-  {
-    //pregunto si la correlativa tiene falta por materia  
-    if(! is_null($this->getCourseSubject()))
-    {
-        $correlatives = $this->getCourseSubject()->getCareerSubject()->getCareerSubjectsCorrelatives();
-        $sy= SchoolYearPeer::retrieveCurrent();
-        foreach($correlatives as $c)
-        {
-            $cssy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($c, $sy);
-            
-            if(!is_null($cssy) && $cssy->isAttendanceForDay())
-            {
-                return false;
-            }
-        }
-    
-        $sy=SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
-        return (!$this->getIsClosed()  && $this->getSchoolYear()->getYear() == $sy->getYear());     
-    }
-    
-    return false;
+  { 
+      return TRUE;
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));

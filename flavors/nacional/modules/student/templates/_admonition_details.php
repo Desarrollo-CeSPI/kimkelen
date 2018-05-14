@@ -24,7 +24,7 @@
     <div class="title"><?php echo __('Student') ?>: </div>
     <div class="name"><?php echo $student ?></div>
     <div class="header_right">
-      <div class="title"><?php echo __('Course') ?>: </div>
+      <div class="title"><?php echo __('Year') ?>: </div>
       <div class="course"><?php echo $student_career_school_year->getYear() ?></div>
       <div class="title"><?php echo __('Division') ?>: </div>
       <div class="division"><?php echo $division->getDivisionTitle(); ?></div>
