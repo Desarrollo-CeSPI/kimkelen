@@ -288,7 +288,7 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
                     $css = array_shift($course_subject_students);
 
                     //Si tengo alguna materia sin cerrar
-                    if (!$css->areAllMarksClosed())
+                    if (!is_null($css) && !$css->areAllMarksClosed())
                     {
                         sfContext::getInstance()->getUser()->setFlash('error',"El alumno tiene cursadas sin cerrar.");
                     }
