@@ -53,6 +53,9 @@ generator:
             label: Address
             method: getPersonAddress
             decorator: text
+          person_cuil:
+            label: CUIL
+            method: getPersonCuil
           person_health_coverage:
             label: Health coverage
             method: getHealthCoverage
