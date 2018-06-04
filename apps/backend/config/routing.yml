@@ -134,6 +134,10 @@ rating_report:
   url:  rating_report
   param:  { module: rating_report, action: index }
 
+average_report:
+  url: average_report/filterBySchoolYear
+  param: {module: rating_report, action: filterBySchoolYear}
+  
 course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }

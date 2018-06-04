@@ -824,15 +824,15 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     return $class;
   }
 
-   public function getExemptString()
-  {
-    return self::EXEMPT;
-  }
+    public function getExemptString()
+    {
+     return self::EXEMPT;
+    }
 
-   public function getFebruaryExaminationNumber()
-  {
-    return self::FEBRUARY;
-  }
+    public function getFebruaryExaminationNumber()
+    {
+     return self::FEBRUARY;
+    }
 
   public function getPathwayPromotionNote()
   {
@@ -855,5 +855,27 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 	  }
 	  return false;
   }
+  
+  public function getAnualAverageWithDisapprovedSubjects($student_career_school_year)
+  {
+        $sum = 0;
+
+        $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
+                $student_career_school_year->getCareerSchoolYear(),$student_career_school_year->getStudent());
+
+        foreach ($course_subject_students as $course_subject_student)
+        {
+          $sum += $course_subject_student->getFinalMark();
+        }
+
+        if (count($course_subject_students))
+        {
+          return round(($sum / count($course_subject_students)), 2);
+        }
+        unset ($course_subject_students);
+        
+        return null;
+
+    }
 
 }

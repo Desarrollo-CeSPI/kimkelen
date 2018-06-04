@@ -71,4 +71,39 @@ class rating_reportActions extends sfActions
 
     $this->route = "rating_report/filterForDivision";
   }
+  
+    public function executeFilterBySchoolYear(sfWebRequest $request)
+    {
+        $this->form = new SchoolYearAverageReportFormFilter();
+      
+        if ($request->isMethod('POST'))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()));
+          if ($this->form->isValid())
+          {
+             $career_school_year = CareerSchoolYearPeer::retrieveByPK($request->getParameter('average_report[career_school_year_id]'));
+             $this->school_year = $career_school_year->getSchoolYear();
+             $this->year = $request->getParameter('average_report[year]');
+             
+             $this->career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($career_school_year->getCareer(), $this->school_year);
+             
+             $c = new Criteria();
+             $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$this->career_school_year->getId());
+             $c->add(StudentCareerSchoolYearPeer::YEAR,$this->year);
+             $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID,StudentPeer::ID);
+             $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::NOT_EQUAL);
+             $c->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
+             $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+             $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+             
+             $this->students = StudentPeer::doSelect($c);
+             $this->setLayout('cleanLayout');
+             $this->setTemplate('printAverage');
+            
+          }
+         
+        }
+
+        $this->route = "rating_report/filterBySchoolYear";
+    }
 }
