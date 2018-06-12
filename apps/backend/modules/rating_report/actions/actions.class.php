@@ -81,18 +81,16 @@ class rating_reportActions extends sfActions
           $this->form->bind($request->getParameter($this->form->getName()));
           if ($this->form->isValid())
           {
-             $career_school_year = CareerSchoolYearPeer::retrieveByPK($request->getParameter('average_report[career_school_year_id]'));
-             $this->school_year = $career_school_year->getSchoolYear();
              $this->year = $request->getParameter('average_report[year]');
              
-             $this->career_school_year = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($career_school_year->getCareer(), $this->school_year);
+             $this->career_school_year = $request->getParameter('average_report[career_school_year_id]');
+             $status = array(StudentCareerSchoolYearStatus::WITHDRAWN,StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);       
              
              $c = new Criteria();
-             $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$this->career_school_year->getId());
+             $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$this->career_school_year);
              $c->add(StudentCareerSchoolYearPeer::YEAR,$this->year);
              $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID,StudentPeer::ID);
-             $c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::NOT_EQUAL);
-             $c->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
+             $c->add(StudentCareerSchoolYearPeer::STATUS, $status , Criteria::NOT_IN);
              $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
              $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
              
