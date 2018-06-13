@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+    <file original="global" source-language="en" datatype="plaintext" date="2009-04-30T12:40:33Z">
+        <header/>
+        <body>     
+	    <trans-unit>
+                <source>Attendance</source>
+                <target>Inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Califications</source>
+                <target>Calificaciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanctions</source>
+                <target>Sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Phone</source>
+                <target>Teléfono</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Email</source>
+                <target>Correo eletrónico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Address</source>
+                <target>Dirección</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Students in charge</source>
+                <target>Estudiantes a cargo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Go back</source>
+                <target>Volver</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password</source>
+                <target>Contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Sign in</source>
+                <target>Ingresar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>school year</source>
+                <target>año lectivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Disciplinary sanctions report</source>
+                <target>Reporte de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Date</source>
+                <target>Fecha</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reason</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Sanction type</source>
+                <target>Tipo de sanción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Admonition details</source>
+                <target>Detalle de sanciones disciplinarias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course</source>
+                <target>Materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Total allowed</source>
+                <target>Total permitido</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student doesn't have any disciplinary sanctions.</source>
+                <target>No se registraron sanciones disciplinarias para este alumno</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Attendance report</source>
+                <target>Reporte de inasistencias</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Day</source>
+                <target>Fecha</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Absence</source>
+                <target>Ausencia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Is justified</source>
+                <target>Justificada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Justification type</source>
+                <target>Tipo de justificacion</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Subject</source>
+                <target>Materia</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Description</source>
+                <target>Descripción</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Unjustified</source>
+                <target>Sin justificar </target>
+            </trans-unit>
+            <trans-unit>
+                <source>Justified</source>
+                <target>Justificadas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Mark %number%</source>
+                <target>Nota %number%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course Average</source>
+                <target>Promedio Cursada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Course Status</source>
+                <target>Resultado Cursada</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Repproved examinations</source>
+                <target>Previas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Final Average</source>
+                <target>Promedio Def.</target>
+            </trans-unit>
+             <trans-unit>
+                <source>Anual average</source>
+                <target>Promedio anual</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Status</source>
+                <target>Estado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year %%year%%</source>
+                <target>%%year%° año</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Califications report</source>
+                <target>Reporte de calificaciones</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Required.</source>
+                <target>Este campo es requerido</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>The username and/or password is invalid.</source>
+                <target>Usuario y/o contraseña incorrecta</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Enter the digits here:</source>
+                <target>Ingrese los dígitos del recuadro aquí</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Show report</source>
+                <target>Ver reporte</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Change password</source>
+                <target>Cambiar contraseña</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Current</source>
+                <target>Actual</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>New</source>
+                <target>Nuevo</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Repeat</source>
+                <target>Repetir</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>confirm</source>
+                <target>Confirmar</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Current password is invalid</source>
+                <target>La contraseña actual es inválida</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Current and new password can't be the same</source>
+                <target>La contraseña actual no puede ser igual a la nueva</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>The two passwords must be the same.</source>
+                <target>Las dos contraseñas deben ser iguales.</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>Password changed successfuly</source>
+                <target>La contraseña fue restablecida satisfactoriamente.</target>
+            </trans-unit>
+	    <trans-unit>
+                <source>The password is too weak. It must be at least 8 characters long AND contain at least 2 alphabetical characters AND 2 digital characters AND one symbol among !@#$%^&amp;*-.</source>
+                <target>La contraseña ingresada es demasiado débil. Debe tener al menos 8 caracteres de longitud y contener: al menos dos (2) caracteres alfabéticos, al menos dos (2) caracteres numéricos y al menos un (1) caracter especial de los siguientes: !@#$%^&amp;*-</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Logout</source>
+                <target>Cerrar sesión</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Facebook account</source>
+                <target>Cuenta de Facebook</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Unlink</source>
+                <target>Desvincular</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password reset</source>
+                <target>Solicitud de cambio de contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>You have successfully requested information on how to reset your password.</source>
+                <target>Se le ha enviado un correo electrónico a su casilla de correo. En el mismo encontrará la información con los pasos a seguir para regenerar su contraseña.</target>
+            </trans-unit>
+            <trans-unit>
+              <source>Please check your e-mail to reset your password.</source>
+              <target>Por favor, chequee su casilla de correo para continuar con el proceso.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Hello, %name%</source>
+                <target>Hola, %name%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Thank you</source>
+                <target>¡Muchas gracias!</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username or email</source>
+                <target>Usuario o e-mail</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username or e-mail address not found please try again.</source>
+                <target>Usuario o e-mail inválidos. Por favor intente nuevamente.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Please enter a new password and confirm it. You will be redirected to login page afterwards.</source>
+                <target>Ingrese una nueva contraseña y confírmela. Será redireccionado luego a la pantalla de inicio de sesión.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Password confirm</source>
+                <target>Repetir contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Reset password</source>
+                <target>Cambiar mi contraseña</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The link you followed is not valid. If you wish to have your password reset please %link% and fill out the form and a link to reset your password will be provided.</source>
+                <target>El enlace ya no es válido. Si desea cambiar su contraseña por favor vaya %link% y siga las instrucciones.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>here</source>
+                <target>aquí</target>
+            </trans-unit>
+            <trans-unit>
+                <source>If you still do not have a registered user, you should ask for it at school.</source>
+                <target>Si aún no cuenta con un usuario registrado en el sistema, deberá solicitar su creación en la oficina de Alumnos del colegio.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Your e-mail address will be asked in order to send you further instructions about how to reset your password.</source>
+                <target>Se le solicitará su dirección de correo electrónico registrada o su nombre de usuario para poder enviarle un e-mail con instrucciones para crear una nueva contraseña.</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

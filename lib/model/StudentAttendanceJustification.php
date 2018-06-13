@@ -84,4 +84,4 @@ class StudentAttendanceJustification extends BaseStudentAttendanceJustification
   }
 }
 
-sfPropelBehavior::add('StudentAttendanceJustification', array('changelog'));
+try { sfPropelBehavior::add('StudentAttendanceJustification', array('changelog')); } catch(sfConfigurationException $e) {}

@@ -1,0 +1,9 @@
+default:
+  is_secure: true
+
+facebookLogin:
+  is_secure: false
+
+password:
+  is_secure: false
+

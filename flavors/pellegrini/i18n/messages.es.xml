@@ -4391,13 +4391,9 @@
 		<target>Motivos de sanciones</target>
 	    </trans-unit>
 	    <trans-unit>
-		<source>Disciplinary sanction type id</source>
-		<target>Motivo de sanción disciplinaria</target>
+		  <source>Disciplinary sanction type id</source>
+		  <target>Motivo de sanción disciplinaria</target>
 	    </trans-unit>
-            <trans-unit>
-                <source>Resolution number</source>
-                <target>Número de resolución</target>
-            </trans-unit>
             <trans-unit>   
                 <source>Set inactive in courses</source>
                 <target>Deshabilitar de los cursos</target>
@@ -4421,6 +4417,34 @@
             <trans-unit>
                 <source>Course result report</source>
                 <target>Reporte de resultado de cursadas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Resolution number</source>
+                <target>Número de resolución</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Enter system following this link</source>
+                <target>Ingrese al sistema desde el siguiente enlace</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Username and password will allow you to log in the system.</source>
+                <target>A través del siguiente nombre de usuario y contraseña podrá ingresar al sistema.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>You will be asked to change your password when you login for the first time.</source>
+                <target>Se le solicitará un cambio de contraseña obligatorio al ingresar por primera vez.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>You have successfully requested information on how to reset your password. Please check your e-mail to reset your password.</source>
+                <target>Se le ha enviado un correo electrónico a su casilla de correo. En el mismo encontrará la información con los pasos a seguir para regenerar su contraseña. Por favor, chequee su casilla de correo para encontrar este mensaje y continuar con el proceso.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Person must be active</source>
+                <target>La persona debe estar activa</target>
+            </trans-unit>
+            <trans-unit>
+                <source>User already created</source>
+                <target>El usuario ya fue generado</target>
             </trans-unit>
         </body>
     </file>

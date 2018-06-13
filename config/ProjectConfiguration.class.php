@@ -27,6 +27,7 @@ sfCoreAutoload::register();
 
 require_once dirname(__FILE__).'/../lib/config_handlers/ncFlavorConfigHandler.class.php';
 require_once dirname(__FILE__).'/../lib/config_handlers/ncFlavorViewConfigHandler.class.php';
+require_once dirname(__FILE__).'/../lib/config_handlers/ncFlavorFrontendViewConfigHandler.class.php';
 require_once dirname(__FILE__).'/../lib/config_handlers/ncFlavorAutoload.class.php';
 
 

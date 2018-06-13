@@ -61,5 +61,90 @@ class tutorActions extends autoTutorActions
     }
 
   }
+ 
+  public function executeGenerateUser($request)
+  {
+    $this->form = new GenerateUserForm();
+    
+    if ($request->isMethod('POST'))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()));
+      $this->tutor = TutorPeer::retrieveByPK($request->getParameter('tutor_id'));
+      $username = $request->getParameter('generate_user[username]');
+      if ($this->form->isValid())
+      {
+           try
+            {
+              //Chequeo que no exista un usuario con ese nombre
+              $this->user = sfGuardUserPeer::retrieveByUsername($username);
 
+              if(is_null($this->user))
+              {
+                  //si el tutor tiene email registrado en el sistema.
+                  
+                  if(is_null($this->tutor->getPerson()->getEmail()) || trim($this->tutor->getPerson()->getEmail() === ''))
+                  {
+                      $this->getUser()->setFlash('error', 'El tutor no tiene cuenta de email registrada.');
+                  }
+                  else {
+                      //creo el usuario
+                      $this->user = new sfGuardUser();
+                      $this->user->setUsername($username);
+                      
+                      /*Generar password aleatoria*/
+                      $this->password = randomPassword::generate();
+
+                      $this->user->setPassword($this->password);
+
+                      $this->user->setIsActive(true);
+                      $this->user->setMustChangePassword(true);
+                      $this->user->save(Propel::getConnection());
+                      
+                      //le seteo el usuario al tutor
+                      $this->tutor->getPerson()->setUserId($this->user->getId());
+                      $this->tutor->save(Propel::getConnection());
+
+                      $this->link = sfContext::getInstance()->getRequest()->getHost() . '/tutors_frontend.php';
+
+                      $this->setLayout('cleanLayout');
+                      $this->setTemplate('printUser');
+
+                  }
+              }
+              else
+              {
+                   $this->getUser()->setFlash('error', 'Ya existe un usuario con ese nombre.');
+
+              }
+            }
+            catch (Exception $e)
+            {
+              $this->getUser()->setFlash('error', 'Ocurrio un error durante la generación de usuario.');
+            }
+      }
+    }
+    else{
+        
+        $this->tutor = $this->getRoute()->getObject();
+    }
+       
+  }
+
+  public function executeDeactivate(sfWebRequest $request)
+  {
+    $this->tutor = $this->getRoute()->getObject();
+    $this->tutor->getPerson()->setIsActive(false);
+    $this->tutor->save();
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@tutor');
+  }
+
+  public function executeActivate(sfWebRequest $request)
+  {
+    $this->tutor = $this->getRoute()->getObject();
+    $this->tutor->getPerson()->setIsActive(true);
+    $this->tutor->save();
+    $this->getUser()->setFlash('info','The item was updated successfully.');
+    $this->redirect('@tutor');
+  }
 }

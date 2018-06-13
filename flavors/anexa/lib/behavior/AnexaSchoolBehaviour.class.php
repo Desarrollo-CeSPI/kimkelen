@@ -25,6 +25,7 @@
 class AnexaSchoolBehaviour extends BaseSchoolBehaviour
 {
 	protected $school_name = "Escuela Graduada Joaquín V. González";
+        protected $phone = "423-6700 / 423-6698 / 423-6699";
 
 
 	public function getListObjectActionsForSchoolYear()

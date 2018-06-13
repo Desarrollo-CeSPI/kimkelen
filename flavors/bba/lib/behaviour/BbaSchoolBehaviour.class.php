@@ -23,6 +23,7 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
 {
 
 	protected $school_name = "Bachillerato de Bellas Artes";
+        protected $phone= "0221 451 3185 / 452 7733 ";
 
   protected
   $_course_type_options = array(

@@ -1,0 +1,101 @@
+sfGuardExtraPlugin
+==================
+
+This plugin provides additional modules for `sfGuardPlugin`: `ForgotPassword` and `Register`.
+
+# Installation
+
+  * Install the plugin
+
+        symfony plugin:install sfGuardExtraPlugin
+
+  * Enable one or more modules in your `settings.yml` (optional).
+  For your frontend application: `sfGuardForgotPassword`, `sfGuardRegister`
+
+        [yml]
+        all:
+          .settings:
+            enabled_modules:      [sfGuardAuth, sfGuardForgotPassword, sfGuardRegister]
+
+  * The `sfGuardPlugin` automatically registered a route named `password` if the module `sfGuardAuth`
+  is enabled, so you must be sure that `sfGuardExtraPlugin` is enabled *before* `sfGuardPlugin` in
+  your ProjectConfiguration.class.php, so it can register the route early:
+
+        [php]
+        // in /config/ProjectConfiguration.class.php
+        public function setup()
+        {
+          // this list is incomplete: it depends on other plugins you could have installed before
+          $this->enablePlugins('sfPropelPlugin', 'sfGuardExtraPlugin', 'sfGuardPlugin');
+        }
+
+  * Add an `email` field to sfGuardUser schema
+
+        [yml]
+        sf_guard_user:
+          # [...]
+          email:     { type: varchar(255), required: true }
+          # [...]
+
+    Alternatively, you can add email field to sfGuardUserProfile schema, and add proxy methods to sfGuardUser class:
+
+        [php]
+        public function getEmail()
+        {
+          return $this->getProfile()->getEmail();
+        }
+        public function setEmail($email)
+        {
+          $this->getProfile()->setEmail($email);
+        }
+
+
+  * Add method `retrieveByUsernameOrEmail` to get a user by email or username in `lib/model/sfGuardPlugin/sfGuardUserPeer.class`.
+    The following is a working example, if you use sfGuardUserProfile:
+
+        [php]
+        public static function retrieveByUsernameOrEmail($usernameOrEmail, $isActive = true)
+        {
+          $c = new Criteria();
+          $c->addJoin(self::ID, sfGuardUserProfilePeer::USER_ID, Criteria::LEFT_JOIN);
+          $c0 = $c->getNewCriterion(self::USERNAME, $usernameOrEmail);
+          $c1 = $c->getNewCriterion(sfGuardUserProfilePeer::EMAIL, $usernameOrEmail);
+          $c2 = $c->getNewCriterion(self::IS_ACTIVE, $isActive);
+          $c0->addOr($c1);
+          $c0->addAnd($c2);
+          $c->add($c0);
+
+ 	        return self::doSelectOne($c);
+        }
+
+  * You can select the preferred behavior of password reset: set the new password to a random
+    string and mail it to user, or let the user choose the new password. The first behavior
+    is default. Set `reset_type` to `ask` for the second one (see below).
+
+  * Clear your cache
+
+        symfony cc
+
+# Email delivery
+
+Emails are sent using built-in `sfMailer`.
+
+You can customize the following mail parameters:
+
+    [yml]
+    all:
+      sf_guard_extra_plugin:
+        mail_from:        noreply@example.org
+        name_from:        noreply
+        subject_confirm:  Confirm Registration
+        subject_complete: Request complete
+        subject_request:  Request to reset password
+        subject_success:  Password reset successfully
+        reset_type:       set # set to `ask` for asking (see above)
+
+# Validators
+
+`sfGuardExtraPlugin` comes with a validator that you can use in your modules:
+`sfGuardValidatorUsernameOrEmail`.
+
+This validator is used by the `sfGuardForgotPassword` module to check if user exists for username or email.

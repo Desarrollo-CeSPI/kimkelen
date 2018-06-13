@@ -1,0 +1,15 @@
+dev:
+  sf_guard_extra_plugin:
+    subject_request:  Pedido de reseteo de contraseña
+    subject_success:  Nueva contraseña
+    reset_type:       set # set to `ask` for asking (see above)
+    mail_from: "no-responder@desarrollo.cespi.unlp.edu.ar"
+    name_from: 'Kimkëlen'
+
+prod:
+  sf_guard_extra_plugin:
+    subject_request:  Pedido de reseteo de contraseña
+    subject_success:  Nueva contraseña
+    reset_type:       set # set to `ask` for asking (see above)
+    mail_from: "no-responder@desarrollo.cespi.unlp.edu.ar"
+    name_from: 'Kimkëlen'

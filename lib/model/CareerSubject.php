@@ -294,4 +294,4 @@ class CareerSubject extends BaseCareerSubject
   
 }
 
-sfPropelBehavior::add('CareerSubject', array('career_subject_school_year_update'));
+try { sfPropelBehavior::add('CareerSubject', array('career_subject_school_year_update')); }catch(sfConfigurationException $e) {}
