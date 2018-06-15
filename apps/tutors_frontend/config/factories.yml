@@ -40,7 +40,7 @@ all:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       mailserver-desa.desarrollo.unlp.edu.ar
+          host:       
           port:       25
           
 storage:
