@@ -27,19 +27,21 @@
 
 <div style="clear:both;"></div>
 
-<div class="rowfirm_responsible">
+<div class="rowfirm_responsible colsleft" style="float: left; border: 0; border-top:1px solid #ccc; width: auto; margin-top:6rem;">
 	<div class="titletable"><?php echo __('Responsible signature') ?></div>
 </div>
 
-<div class="rowfirm_footer">
-	<div class="logo_footer">
-	  <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
-		<br><br>
-		<small><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName(); ?></small>
-	</div>
+
+<div class="rowfirm_authority colsright" style="border: 0; border-top:1px solid #ccc;  margin-top:6rem;">
+	<div class="titletable"><?php echo __('Authority signature') ?></div>
 </div>
 
-<div class="rowfirm_authority">
-	<div class="titletable"><?php echo __('Authority signature') ?></div>
+
+<div class="rowfirm_footer" style="text-align:center; margin-top:6rem;">
+  <div class="logo_footer">
+    <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
+    <br><br>
+    <small><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName(); ?></small>
+  </div>
 </div>
 

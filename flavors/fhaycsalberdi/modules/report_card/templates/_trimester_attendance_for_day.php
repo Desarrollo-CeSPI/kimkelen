@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<div class="kkabsences <?php echo ($has_to_show_repproveds) ? 'rowcom' : 'rowins' ?>">
+<div class="kkabsences <?php echo ($has_to_show_repproveds) ? 'rowcom' : 'rowins' ?>" style="width: 100%; margin-top: 10px;">
   <div class="titletable"><?php echo __('Students absences') ?></div>
   <table class="lefttable">
     <tr>
