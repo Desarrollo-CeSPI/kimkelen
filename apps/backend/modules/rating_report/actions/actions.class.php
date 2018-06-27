@@ -74,27 +74,19 @@ class rating_reportActions extends sfActions
   
     public function executeFilterBySchoolYear(sfWebRequest $request)
     {
-        $this->form = new SchoolYearAverageReportFormFilter();
+        $this->form = new DivisionRatingReportFormFilter();
       
         if ($request->isMethod('POST'))
         {
           $this->form->bind($request->getParameter($this->form->getName()));
           if ($this->form->isValid())
           {
-             $this->year = $request->getParameter('average_report[year]');
+             $params = $request->getParameter('division_rating_report'); 
              
-             $this->career_school_year = $request->getParameter('average_report[career_school_year_id]');
-             $status = array(StudentCareerSchoolYearStatus::WITHDRAWN,StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);       
-             
-             $c = new Criteria();
-             $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$this->career_school_year);
-             $c->add(StudentCareerSchoolYearPeer::YEAR,$this->year);
-             $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID,StudentPeer::ID);
-             $c->add(StudentCareerSchoolYearPeer::STATUS, $status , Criteria::NOT_IN);
-             $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
-             $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-             
-             $this->students = StudentPeer::doSelect($c);
+             $this->year =$params['year'] ;
+             $this->school_year = CareerSchoolYearPeer:: retrieveByPK($params['career_school_year_id'])->getSchoolYear();
+             $this->division = DivisionPeer::retrieveByPk($params['division_id']);
+             $this->students = $this->division->getStudents();
              $this->setLayout('cleanLayout');
              $this->setTemplate('printAverage');
             

@@ -36,7 +36,7 @@
     <table width="100%" class="gridtable_bordered">
       <tr class="head" valign="bottom">
         <td align="center"  height="22" colspan="2"><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName()?></td>
-        <td align="center"   height="22" colspan="8">Planilla de promedios <?php echo $school_year ?></td>
+        <td align="center"   height="22" colspan="8">Planilla de promedios <?php echo $division->getName() ?></td>
       </tr>
       <tr class="head" valign="bottom">
         <td align="center"  height="22" colspan="2"></td>
@@ -54,7 +54,7 @@
             <?php $j = 0; ?>
             <?php foreach ($students as $student):?>
             <?php $j++; ?>
-            <tr>
+            <tr><?php  ?>
                 <td><?php echo $j; ?></td>
                 <td style="text-align: left"><?php echo $student ?></td>
                 <?php $sum = 0; $count = 0;?>
@@ -93,7 +93,6 @@
              $student->clearAllReferences(true); 
              unset($student);
             ?>
-            
             <?php endforeach?>
             <?php unset($students);?>
       </tbody>    
