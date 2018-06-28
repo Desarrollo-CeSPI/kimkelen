@@ -406,7 +406,8 @@ class BaseAnalyticalBehaviour
             $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
             $exam = $csse->getExaminationSubject()->getExamination();
 
-            return $exam->getDateFrom();
+            return ($csse->getExaminationSubject()->getDate()) ? $csse->getExaminationSubject()->getDate() : $exam->getDateFrom();
+
           case 'StudentRepprovedCourseSubject':
               
             $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
@@ -421,7 +422,8 @@ class BaseAnalyticalBehaviour
             else
             {
                 $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
-                return $exam->getDateFrom(); 
+                return ($sers->getExaminationRepprovedSubject()->getDate()) ? $sers->getExaminationRepprovedSubject()->getDate() : $exam->getDateFrom(); 
+                
             }
            
         }
