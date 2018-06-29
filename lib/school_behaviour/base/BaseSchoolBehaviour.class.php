@@ -259,7 +259,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     //Students inscripted in the school_year
     $criteria->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
     $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $career_subject_school_year->getCareerSchoolYear()->getSchoolYearId());
-
+	$criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
 
     //Check if the students has the corresponds allows required to course this subject
     $criteria->addJoin(StudentPeer::ID, StudentCareerSubjectAllowedPeer::STUDENT_ID);

@@ -212,7 +212,8 @@ class studentActions extends autoStudentActions
       $s = SchoolYearStudentPeer::retrieveByPK($request->getParameter('school_year_student_id'));
       if ( !is_null ($s) )
       {
-        $s->delete();
+        $s->setIsDeleted(true);
+		$s->save(Propel::getConnection());
         $this->getUser()->setFlash('info','The item was deleted successfully.');
         $this->redirect('@student');
       }

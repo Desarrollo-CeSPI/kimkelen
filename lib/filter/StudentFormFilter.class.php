@@ -144,6 +144,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $c->add(SchoolYearPeer::ID , SchoolYearPeer::retrieveCurrent()->getId());
       $c->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
       $c->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID);
+      $c->add(SchoolYearStudentPeer::IS_DELETED,false);
       $c->clearSelectColumns();
       $c->addSelectColumn(StudentPeer::ID);
       $stmt = StudentPeer::doSelectStmt($c);
@@ -224,6 +225,7 @@ class StudentFormFilter extends BaseStudentFormFilter
 		$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
 		$criteria->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
 		$criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $current_school_year->getId());
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		
 	}else
 	{
@@ -278,6 +280,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     {
 		$criteria->addJoin(StudentPeer::ID,SchoolYearStudentPeer::STUDENT_ID);
                 $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID,SchoolYearPeer::retrieveCurrent()->getId());
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
 				
 	}

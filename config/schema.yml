@@ -479,6 +479,11 @@ classes:
         description:      Especifica la fecha de devolucion de la ficha de salud
         type:             date
         required:         false
+      is_deleted:
+        description:      Indica si esta borrada la matricula para ese año lectivo
+        type:             boolean
+        required:         true
+        default:          false
       _uniques:
         unique: [student_id, school_year_id ]
       _indexes:
