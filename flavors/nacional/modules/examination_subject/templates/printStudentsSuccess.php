@@ -99,7 +99,7 @@
               <?php endif; ?>
             <?php endif; ?>
           </td>
-          <td class"observations"></td>
+          <td class="observations"></td>
 
         </tr>
         <?php $i++; ?>
