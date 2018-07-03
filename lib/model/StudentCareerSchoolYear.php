@@ -270,4 +270,9 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
       'school_year' => $this->getCareerSchoolYear()->getSchoolYear()->getYear()
     );
   }
+  
+  public function getAnualAverageWithDisapprovedSubjects()
+  {
+    return SchoolBehaviourFactory::getEvaluatorInstance()->getAnualAverageWithDisapprovedSubjects($this);
+  }
 }
