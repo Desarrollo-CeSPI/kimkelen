@@ -175,7 +175,7 @@ class BaseAnalyticalBehaviour
             $this->remaining_years = array();
             $years = $this->get_career_student()->getCareer()->getYearsRange();
             $current_year = $this->get_current_school_year();
-            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();
+            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();
             if(!is_null($current_year))
             {
                 if($scsy_cursed)
@@ -328,7 +328,7 @@ class BaseAnalyticalBehaviour
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
-	$scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();	
+	$scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();	
 
         //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
         $this->init();

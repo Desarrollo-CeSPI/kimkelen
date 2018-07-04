@@ -148,7 +148,7 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
             {
                //chequeo que esté en 6to y tenga todas las materias aprobadas.
                 $this->student_career_school_years = $student->getStudentCareerSchoolYears();
-                $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
+                $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
                 
                 if(is_null($scsy_cursed))
                 {

@@ -1674,22 +1674,9 @@ class Student extends BaseStudent
         return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
   
-  public function getLastStudentCareerSchoolYearCursed()
+  public function getLastStudentCareerSchoolYearCoursed()
   {
-    $c = new Criteria();
-    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
-    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-    $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getId());
-    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-    $c->add(CourseSubjectStudentMarkPeer::MARK,NULL, Criteria::NOT_EQUAL);
-    $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-    return StudentCareerSchoolYearPeer::doSelectOne($c);
+      return SchoolBehaviourFactory::getEvaluatorInstance()->getLastStudentCareerSchoolYearCoursed($this);
   }
   
   public function isRepprovedInSchoolYear($school_year)

@@ -35,7 +35,7 @@
 				Todo <?php echo implode(', ', array_map('__', $analytical->get_remaining_years_string())); ?>.
 			<?php endif; ?>
 		</p>
-		<?php if (count($analytical->get_years_in_career()) != 1 ): ?>
+		<?php if ($analytical->has_completed_career()): ?>
 			<p>Se deja constancia que su último examen lo rindió el <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>.</p>
 		<?php endif; ?>
 		<p>Certificado de Estudios Incompleto.</p>

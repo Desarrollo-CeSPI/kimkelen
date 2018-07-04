@@ -689,7 +689,7 @@ class studentActions extends autoStudentActions
   {
       $this->p = array();
       $this->student_career_school_years = $student->getStudentCareerSchoolYears();
-      $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
+      $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
       $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED,StudentCareerSchoolYearStatus::FREE);
 
         foreach ($this->student_career_school_years as $scsy)
@@ -720,9 +720,9 @@ class studentActions extends autoStudentActions
       
        /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
         *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/   
-        if(!is_null($student->getLastStudentCareerSchoolYearCursed()))
+        if(!is_null($student->getLastStudentCareerSchoolYearCoursed()))
         {
-            $school_year = $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear();
+            $school_year = $student->getLastStudentCareerSchoolYearCoursed()->getCareerSchoolYear()->getSchoolYear();
             $scsy = $student->isRepprovedInSchoolYear($school_year); 
             $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear());
 
