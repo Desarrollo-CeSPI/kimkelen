@@ -409,6 +409,8 @@ class studentActions extends autoStudentActions
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
     $this->analytic->setObservations($request->getParameter('observations'));
     $this->analytic->save();
+    
+    $this->dipregep_number = $request->getParameter('dipregep');
 
     $this->setLayout('cleanLayout');
   }

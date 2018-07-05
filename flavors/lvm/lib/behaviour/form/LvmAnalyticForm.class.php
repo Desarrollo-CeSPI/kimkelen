@@ -12,6 +12,9 @@ class LvmAnalyticForm extends AnalyticForm
   public function configure()
   {
       parent::configure();
+      $this->widgetSchema['dipregep_number']= new sfWidgetFormInput();
+      $this->widgetSchema->setLabel("dipregep_number",' ');
+      $this->validatorSchema->setOption("allow_extra_fields", true);
       $this->unsetFields();
   }
   

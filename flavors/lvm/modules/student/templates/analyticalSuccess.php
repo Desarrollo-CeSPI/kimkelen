@@ -48,13 +48,40 @@
 </div>
 <script>
     window.addEventListener('load', function() {
-        document.getElementById("analytic_certificate_number" ).addEventListener('change', function() {
+        url = document.getElementById('link_print').href;
+       
+         document.getElementById("analytic_certificate_number" ).addEventListener('change', function() {
             certificate = document.getElementById("analytic_certificate_number" ).value;
-            url = document.getElementById('link_print').href;
+            link = url; 
             if(certificate.trim() != ''){
-                 document.getElementById('link_print').href= url + '&certificate=' + certificate;
+                 link = link + '&certificate=' + certificate;
+            }
+            dipregep = document.getElementById("analytic_dipregep_number" ).value;
+            
+            if(dipregep.trim() != ''){
+                link = link + '&dipregep=' + dipregep;
 
-            }      
+            }         
+            document.getElementById('link_print').href= link;
+           
         });
+        
+        document.getElementById("analytic_dipregep_number" ).addEventListener('change', function() {
+            dipregep = document.getElementById("analytic_dipregep_number" ).value;
+            link = url; 
+            if(dipregep.trim() != ''){
+                link = link + '&dipregep=' + dipregep;
+
+            }
+            certificate = document.getElementById("analytic_certificate_number" ).value;
+            
+            if(certificate.trim() != ''){
+                 link = link + '&certificate=' + certificate;
+
+            }
+            document.getElementById('link_print').href= link;
+            
+        });
+        
       })
 </script>
