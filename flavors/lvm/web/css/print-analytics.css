@@ -80,3 +80,7 @@
 .analytic_info{
     display: block;
 }
+
+.analytical_dipregep_info{
+    display: none;
+}

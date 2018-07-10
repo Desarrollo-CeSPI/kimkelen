@@ -33,7 +33,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             //chequeo que la carrera no sea el ciclo basico.
             $career_school_year = $scsy->getCareerSchoolYear();
             $career = $career_school_year->getCareer();
-            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCursed();	
+            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();	
             
             if($career->getCareerName() != 'Ciclo Básico de Formación Estética') 
             {

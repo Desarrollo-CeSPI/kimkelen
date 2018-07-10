@@ -23,7 +23,7 @@
                 <div class="title" id="header_analytical_data_center">
                     <div class="analytical_info">
                       	<div class="analytical_form">
-                            <?php echo $form; ?>
+                            <?php echo ($form) ? $form['certificate_number']->renderRow() : '' ?>
                         </div>
                         <div class="analytical_form_info">   
                             <?php echo __('Certificado N°'); ?>
@@ -46,6 +46,6 @@
 	</div>
 
 	<div class="header_row">
-		<?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
+		<?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form, 'dipregep_number' => $dipregep_number)) ?>
 	</div>
 </div>
