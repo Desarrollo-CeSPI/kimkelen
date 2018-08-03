@@ -7,7 +7,7 @@
 }
 
 .misma_pagina {
-   /* page-break-inside: avoid;*/
+    page-break-inside: avoid;
 }
 
 .table {
