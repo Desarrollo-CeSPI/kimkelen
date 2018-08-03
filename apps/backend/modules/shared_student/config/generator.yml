@@ -49,6 +49,9 @@ generator:
             label: Address
             method: getPersonAddress
             decorator: text
+          person_cuil:
+            label: CUIL
+            method: getPersonCuil
           person_is_active:
             label: Is Active?
             method: getPersonIsActive
@@ -61,6 +64,12 @@ generator:
             label: Division
             method: getCurrentDivisionsString
             decorator: text
+          tutors:
+            label: Tutores
+            method: getStudentTutorsString
+          tutors_email:
+            label: Email de tutores
+            method: getStudentTutorsEmailString
       fields:
         person:
         person_lastname:  { label: Lastname, column_name: PersonPeer::LASTNAME }
