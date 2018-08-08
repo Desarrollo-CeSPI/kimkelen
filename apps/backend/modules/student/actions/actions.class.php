@@ -174,6 +174,10 @@ class studentActions extends autoStudentActions
 	  $school_year_student->setStudent($this->student);
 	  $school_year_student->setSchoolYear(SchoolYearPeer::retrieveCurrent());
 	}
+        else
+        {
+            $school_year_student->setIsDeleted(false);
+        }
 			
 	$this->form = new SchoolYearStudentForm($school_year_student);	
 	$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));

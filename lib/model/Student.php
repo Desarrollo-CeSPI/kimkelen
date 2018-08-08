@@ -84,8 +84,7 @@ class Student extends BaseStudent
       $csy = SchoolYearPeer::retrieveCurrent();
     }
     $criteria = new Criteria();
-    $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
-    $criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
+    $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
     $array = $this->getSchoolYearStudents($criteria);
     return array_shift($array);
 
@@ -1324,6 +1323,7 @@ class Student extends BaseStudent
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
     $school_year_student = SchoolYearStudentPeer::doSelectOne($c);
     SchoolYearStudentPeer::clearInstancePool();
 

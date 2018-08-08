@@ -33,6 +33,7 @@
       <ul class="sf_admin_actions">
         <?php echo $helper->linkToList(array('label' => __('Go back'), 'params' => array(), 'class_suffix' => 'list',)) ?>
         <?php echo $helper->linkToSave($form->getObject(), array('params' => array(), 'class_suffix' => 'save_and_list', 'label' => __('Save'),)) ?>
+        <?php echo $helper->linkToDeleteSchoolYearStudent($student, array('label' => __('Delete'))) ?>
       </ul>
     </form>
   </div>
