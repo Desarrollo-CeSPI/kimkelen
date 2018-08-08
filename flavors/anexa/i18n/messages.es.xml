@@ -4587,6 +4587,14 @@
                 <source>Date</source>
                 <target>Fecha</target>
             </trans-unit>
+            <trans-unit>
+                <source>Average report</source>
+                <target>Reporte de promedios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>School year average report</source>
+                <target>Reporte de promedios por año lectivo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

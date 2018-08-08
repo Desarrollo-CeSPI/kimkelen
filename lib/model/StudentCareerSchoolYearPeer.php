@@ -168,12 +168,24 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
 
         return $scsys;
   }
+
   public static function retrieveByStudentAndCareerSchoolYear($student,$career_school_year) 
   {
         $c = new Criteria();
         $c->add(self::STUDENT_ID,$student->getId());
         $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year->getId());
         return  self::doSelectOne($c);
+  }
+  
+  public static function retrieveByStudentAndYear($student,$year)
+  {
+      $c= new Criteria();
+      $c->add(self::STUDENT_ID,$student->getId());
+      $c->add(self::YEAR,$year);
+      $c->add(self::STATUS, StudentCareerSchoolYearStatus::REPPROVED, Criteria::NOT_EQUAL);
+      
+      return self::doSelectOne($c);
+
   }
 
 }
