@@ -446,7 +446,7 @@ classes:
 
   SchoolYearStudent:
     tableName:          school_year_student
-    description:        Matrícula por año lectivo: inscripción de un alumno a un año lectivo.
+    description:        Matrícula por año lectivo, inscripción de un alumno a un año lectivo.
     columns:
       id:
       student_id:

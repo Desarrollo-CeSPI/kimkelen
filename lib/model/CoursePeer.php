@@ -161,6 +161,7 @@ class CoursePeer extends BaseCoursePeer
 		$c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
 		$c->add(PersonPeer::IS_ACTIVE,true);
 		$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
+                $c->add(SchoolYearStudentPeer::IS_DELETED,false);
 		return $c;
 
 	}

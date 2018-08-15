@@ -476,6 +476,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
 	/*is_deleted = false*/
 	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
 	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 	
     $has_students = $this->getSchoolYear()->countSchoolYearStudents($criteria) > 0;
@@ -493,6 +494,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
 	/*is deleted = false*/
 	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
 	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
     $has_students = $this->getSchoolYear()->countSchoolYearStudents($criteria) > 0;
 
@@ -611,6 +613,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
 	/*is_deleted = false*/
 	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
 	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 	
     $matriculated_school_year_students = $this->getSchoolYear()->countSchoolYearStudents($criteria, false);
