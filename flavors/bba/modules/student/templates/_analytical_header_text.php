@@ -20,12 +20,14 @@
 <div>
     <p class="header-text"> El director del
         <span><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?></span> Prof.<strong> Francisco A. De Santo</strong>
-        de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que
-        <strong><?php echo $student ?></strong>
-        con <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?></strong>
-        y sexo <strong><?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()) ?></strong>,
+        de la <?php echo __("Universidad Nacional de La Plata") ?> certifica que
+        <?php echo $student->getPerson()->getLastname() . ', '. $student->getPerson()->getFirstname() ?>,
+        <?php echo ($student->getPerson()->getIdentificationType() == IdentificationType::DNI) ? 'Documento Nacional de Identidad': BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> Nº 
+        <?php echo $student->getPerson()->getIdentificationNumber() ?>,
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
-        el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
-        título anterior Nivel Primario otorgado por <span><?php echo ($student->getOriginSchool()?'el/la ' .$student->getOriginSchool():__('la Dirección General de Cultura y Educación')); ?></span> con denominación Educación Primaria Básica, ha aprobado las siguientes asignaturas de la Educación Secundaria Básica y de Educación Secundaria Superior del Bachiller en <?php echo $student->getStudentOrientationString()?> (Especialidad <?php echo $student->getStudentSpecialityString() ?>) con las calificaciones que a continuación se detallan:
+        el día <?php echo format_date($student->getPerson()->getBirthDate(), "D") ?>,
+        título anterior Nivel Primario otorgado por <span><?php echo ($student->getOriginSchool()?'el/la ' .$student->getOriginSchool():__('la Dirección General de Cultura y Educación')); ?></span> 
+        con denominación Educación Primaria Básica, ha aprobado las siguientes asignaturas de la Educación Secundaria Básica y de Educación Secundaria Superior del Bachiller en 
+            <?php echo $student->getStudentOrientationString()?> (Especialidad <?php echo $student->getStudentSpecialityString() ?>) con las calificaciones que a continuación se detallan:
     </p>
 </div>

@@ -30,7 +30,7 @@
         <table class="table gridtable_bordered">
             <thead>
                 <tr>
-                    <th colspan="7"><?php echo __('Year ' . $year) .' - ' .$object->get_career_name($year) ?></th>
+                    <th colspan="7" class="text-center"><?php echo $year.'°'.__('Year') .' - ' .$object->get_career_name($year) ?></th>
                 </tr>
                 <tr>
                     <th class="text-left" rowspan="2" colspan="5"><?php echo __("General Subjects") ?></th>
@@ -59,8 +59,8 @@
             <?php foreach ($object->get_specific_subjects_in_year($year) as $css):?>
                 <tr>
                     <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -75,8 +75,8 @@
             <?php foreach ($object->get_suborientation_subjects_in_year($year) as $css):?>
                 <tr>
                     <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -91,8 +91,8 @@
             <?php foreach ($object->get_optional_subjects_in_year($year) as $css):?>
                 <tr>
                     <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
         <?php endif; ?>

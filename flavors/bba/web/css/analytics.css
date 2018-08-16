@@ -103,3 +103,8 @@
 .analytical_body_table {
     font-size: 13px;
 }
+
+.text-center{
+    text-align: center !important;
+    font-size: 14px !important;
+}

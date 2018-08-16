@@ -29,10 +29,6 @@
         </div>
 		
 		<div id="header_analytical_data_right" class="title">
-		<div>
-			<?php echo __("RMN Nº") ?> 
-			<?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
-		</div>
 		<?php if ($analytical->showCertificate()): ?>
             <?php echo __('Certificado N°'); ?>
             <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
