@@ -20,6 +20,16 @@
 
 class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
+    const
+        INGLES     = 207,
+        FRANCES    = 208,
+        PROTUGUES  = 209;
+    
+    protected $optional_required = array(
+        self::INGLES,
+        self::FRANCES,
+        self::PROTUGUES, 
+    );
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
@@ -73,8 +83,8 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                             }
                         }
 
-                        //si la materia no tiene orientacion ni optativas es general.
-                        if(is_null($css->getOrientation()) && !$css->getOption())
+                        //si la materia no tiene orientacion ni optativas es general. Y no es Espacio de Integración Artística
+                        if(is_null($css->getOrientation()) && !$css->getOption() && $css->getSubjectName() != 'Espacio de Integración Artística')
                         {
                             $this->add_general_subject_to_year($year_in_career, $css);
                         }
@@ -82,17 +92,23 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                         {
                             //chequeo si es una asignatura optativa
                             if($css->getOption())
-                            {
+                            {    //si es optativa obligatoria
+                                if(in_array($css->getSubjectId(), $this->optional_required))
+                                {
+                                    $this->add_general_subject_to_year($year_in_career, $css);
+                                }
+                                else{
                                     $this->add_optional_subject_to_year($year_in_career, $css);
+                                }
                             }
                             else
                             {
                                 //chequeo si es propia de la especialidad / suborientacion
                                 if(is_null($css->getSubOrientation()))
                                 {
-                                        $this->add_specific_subject_to_year($year_in_career, $css);
+                                    $this->add_specific_subject_to_year($year_in_career, $css);
                                 }else{
-                                        $this->add_suborientation_subject_to_year($year_in_career, $css);
+                                    $this->add_suborientation_subject_to_year($year_in_career, $css);
                                 }
                             }
                         }

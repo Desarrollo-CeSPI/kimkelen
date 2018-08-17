@@ -203,17 +203,21 @@ class BaseSubjectStudentAnalytic
     
     public function getOrientation()
     {
-		return $this->orientation;
-	}
-	
-	public function getSubOrientation()
-	{
-		return $this->sub_orientation;
-	}
-	
-	public function getOption()
-	{
-		return $this->option;
-	}
+        return $this->orientation;
+    }
 
+    public function getSubOrientation()
+    {
+        return $this->sub_orientation;
+    }
+
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    public function getSubjectId()
+    {
+        return $this->css->getCourseSubject()->getSubject()->getId();
+    }
 }
