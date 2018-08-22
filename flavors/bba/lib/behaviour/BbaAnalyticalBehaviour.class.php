@@ -21,9 +21,9 @@
 class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
     const
-        GRABADO    = 214,
-        PINTURA    = 114,
-        ESCULTURA  = 215,
+        TALLERES_EGP = 27,
+        INSTRUMENTO = 4,
+        PRACTICA_CORAL_ORQUESTAL = 32,
         ESPACIO_IA = 126,
         CBFE_1       = 9,
         CBFE_2       = 10,
@@ -34,9 +34,9 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         PRACTICAS_PROFESIONALIZANTES = 155;
     
     protected $optional_specific = array(
-        self::GRABADO,
-        self::PINTURA,
-        self::ESCULTURA,
+        self::TALLERES_EGP,
+        self::INSTRUMENTO,
+        self::PRACTICA_CORAL_ORQUESTAL,
     );
     
     protected $subjects = array(
@@ -131,7 +131,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                                 {   //si no tiene orientación es general, 
                                     $this->add_general_subject_to_year($year_in_career, $css);
                                      
-                                }elseif(in_array($css->getSubjectId(), $this->optional_specific))
+                                }elseif(in_array($career_subject->getSubject()->getId(), $this->optional_specific))
                                 {
                                     $this->add_specific_subject_to_year($year_in_career, $css);
                                 }else
