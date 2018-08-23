@@ -31,7 +31,20 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         PROYECTOS    = 136,
         ARTE_Y_SUBJETIVIDAD = 140,
         PROBLEMATICA_SOCIAL = 141,
-        PRACTICAS_PROFESIONALIZANTES = 155;
+        PRACTICAS_PROFESIONALIZANTES = 155,
+        TALLER_GRABADO = 214,
+        TALLER_PINTURA = 114,
+        TALLER_ESCULTURA = 215,
+        PIANO = 199,
+        GUITARRA=200,
+        VIOLIN = 201,
+        VIOLA =202,
+        FLAUTA_TRAVERSA = 203,
+        VIOLONCELLO = 204,
+        SAXOFON = 205,
+        CONTRABAJO= 206;
+    
+        
     
     protected $optional_specific = array(
         self::TALLERES_EGP,
@@ -62,6 +75,25 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 
     );
     
+    protected $general_subjects = array(
+        self::TALLERES_EGP,
+        self::INSTRUMENTO,
+    );
+    
+    protected $speciality_type = array(
+        self::TALLER_ESCULTURA => "Escultura",
+        self::TALLER_PINTURA => "Pintura",
+        self::TALLER_GRABADO => "Grabado",
+        self::PIANO => "Piano",
+        self::GUITARRA => "Guitarra",
+        self::VIOLIN => "Violín",
+        self::VIOLA => "Viola",
+        self::FLAUTA_TRAVERSA => "Flauta traversa",
+        self::VIOLONCELLO => "Violoncello",
+        self::SAXOFON => "Saxofón",
+        self::CONTRABAJO => "Contrabajo",
+    );
+
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
@@ -126,11 +158,20 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                             if($css->getOption())
                             {   //si es optativa, verifico la configuración de la materia que contiene a esta opción
                                 $career_subject = $css->getOptionalCareerSubject();
-                              
+                                
+                                //si tiene orientacion
                                 if(is_null($career_subject->getOrientation()))
-                                {   //si no tiene orientación es general, 
-                                    $this->add_general_subject_to_year($year_in_career, $css);
-                                     
+                                {   
+                                    //si es general
+                                    if(in_array($career_subject->getSubject()->getId(), $this->general_subjects))
+                                    {
+                                        $this->add_general_subject_to_year($year_in_career, $css);
+                                    }
+                                    else
+                                    {
+                                         $this->add_optional_subject_to_year($year_in_career, $css); 
+                                    }
+                                      
                                 }elseif(in_array($career_subject->getSubject()->getId(), $this->optional_specific))
                                 {
                                     $this->add_specific_subject_to_year($year_in_career, $css);
@@ -268,14 +309,33 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 		
 	}
 	
-	public function get_school_year($year)
-	{
-		return $this->objects[$year]['school_year'];
-	}
-	
-	public function get_division($year)
-	{
-		return $this->objects[$year]['division'];
-	}
+    public function get_school_year($year)
+    {
+        return $this->objects[$year]['school_year'];
+    }
+
+    public function get_division($year)
+    {
+        return $this->objects[$year]['division'];
+    }
+        
+    public function getSpecialityTypeString($career_student)
+    {
+        $scsy = $career_student->getStudent()->getLastStudentCareerSchoolYearCoursed();
+        if($scsy && $scsy->getYear() == $career_student->getCareer()->getMaxYear())
+        {
+           
+            $courses_subjects_student = $career_student->getStudent()->getCourseSubjectStudentsForSchoolYear($scsy->getCareerSchoolYear()->getSchoolYear());
+            foreach($courses_subjects_student as $css)
+            {
+                if(array_key_exists($css->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject()->getId(),$this->speciality_type))
+                {
+                    return $this->speciality_type[ $css->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject()->getId()];
+                }
+            }
+            
+        }
+        return NULL;
+    }
 	
 }

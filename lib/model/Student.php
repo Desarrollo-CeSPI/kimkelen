@@ -1721,6 +1721,11 @@ class Student extends BaseStudent
 
     return implode(';  ', $tutors);
   }
+  
+  public function getSpecialityTypeString()
+  {
+    return AnalyticalBehaviourFactory::getInstance($this)->getSpecialityTypeString($this->getCareerStudent());
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

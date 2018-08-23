@@ -93,6 +93,7 @@ class CareerStudentPeer extends BaseCareerStudentPeer
   {
     $criteria = new Criteria();
     $criteria->add(self::STUDENT_ID,$student_id);
+    $criteria->addDescendingOrderByColumn(self::CREATED_AT);
 
     return self::doSelectOne($criteria);
   }
