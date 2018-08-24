@@ -19,9 +19,13 @@
 <?php use_helper('Date') ?>
 
 <div class="header-text">
+    <p><?php echo $student->getPerson()->getLastname() . ', '.$student->getPerson()->getFirstname().', ' .$student->getPerson()->getFullIdentification() ?></p>
     <p>Año de ingreso: <?php echo $student->getInitialSchoolYear()->getYear(); ?>.</p>
     <?php if ($analytical->has_completed_career()): ?>
         <p>Fecha de egreso: <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>.</p>
+        <p>Ha egresado con el Título de Bachiller en <?php echo $student->getStudentOrientationString()?> 
+            (<?php echo ($student->getSpecialityTypeString()) ? $student->getSpecialityTypeString() . ' - ' : '';?>
+            Especialidad <?php echo $student->getStudentSpecialityString() ?>)</p>
     <?php else: ?>
         <p>Para terminar sus estudios secundarios deberá aprobar:
             <?php if ($analytical->has_missing_subjects() ): ?>
