@@ -174,6 +174,10 @@ class studentActions extends autoStudentActions
 	  $school_year_student->setStudent($this->student);
 	  $school_year_student->setSchoolYear(SchoolYearPeer::retrieveCurrent());
 	}
+        else
+        {   //borro flag de eliminado
+            $school_year_student->setIsDeleted(false); 
+        }
 			
 	$this->form = new SchoolYearStudentForm($school_year_student);	
 	$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
@@ -212,7 +216,8 @@ class studentActions extends autoStudentActions
       $s = SchoolYearStudentPeer::retrieveByPK($request->getParameter('school_year_student_id'));
       if ( !is_null ($s) )
       {
-        $s->delete();
+        $s->setIsDeleted(true);
+	$s->save(Propel::getConnection());
         $this->getUser()->setFlash('info','The item was deleted successfully.');
         $this->redirect('@student');
       }

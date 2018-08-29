@@ -843,6 +843,17 @@ class CourseSubject extends BaseCourseSubject
         {
           $criteria = new Criteria();
         }
+        
+        //busco los retirados o con reserva de banco
+        $c = new Criteria();
+        $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+        $criterion = $c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
+        $criterion->addOr($c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
+        $c->add($criterion);
+        $c->clearSelectColumns();
+        $c->addSelectColumn(StudentPeer::ID);
+        $stmt = StudentPeer::doSelectStmt($c);
+        $ids = $stmt->fetchAll(PDO::FETCH_COLUMN); 
 
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
         $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);

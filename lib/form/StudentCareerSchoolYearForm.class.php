@@ -109,12 +109,13 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
             $s = $student->getSchoolYearStudentForSchoolYear($this->getObject()->getCareerSchoolYear()->getSchoolYear());
             if(! is_null($s))
             {
-                $s->delete();
+                $s->setIsDeleted(true);
+		$s->save(Propel::getConnection());
             }
             //seteo en sus course_subject_student_mark is_closed en TRUE;
             $student->setCourseSubjectStudentMarksForSchoolYear($this->getObject()->getCareerSchoolYear()->getSchoolYear(),true);
             sfContext::getInstance()->getUser()->setFlash('info',  'The item was updated successfully.');
-        
+            
         break;
         case StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE:
             //Retirado con reserva de banco
@@ -145,9 +146,10 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
                     $s = $student->getSchoolYearStudentForSchoolYear($this->getObject()->getSchoolYear());
                     if(! is_null($s))
                     {
-                        $s->delete();
+                        $s->setIsDeleted(true);
+			$s->save(Propel::getConnection());
                     }
-
+              
                     //seteo en sus course_subject_student_mark is_closed en TRUE;
                     $student->setCourseSubjectStudentMarksForSchoolYear($this->getObject()->getCareerSchoolYear()->getSchoolYear(),true);
                     sfContext::getInstance()->getUser()->setFlash('info','The item was updated successfully.' );
@@ -186,7 +188,8 @@ class StudentCareerSchoolYearForm extends BaseStudentCareerSchoolYearForm
                     $s = $student->getSchoolYearStudentForSchoolYear($this->getObject()->getSchoolYear());
                     if(! is_null($s))
                     {
-                        $s->delete();
+                        $s->setIsDeleted(true);
+			$s->save(Propel::getConnection());
                     }
 
                      sfContext::getInstance()->getUser()->setFlash('info','The item was updated successfully.');

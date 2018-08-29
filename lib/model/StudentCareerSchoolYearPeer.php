@@ -119,6 +119,7 @@ class StudentCareerSchoolYearPeer extends BaseStudentCareerSchoolYearPeer
     $criteria->addAnd(DivisionPeer::YEAR, $year);
     $criteria->addJoin(SchoolYearStudentPeer::STUDENT_ID, self::STUDENT_ID);
     $criteria->addJoin(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $career_school_year->getSchoolYearId());
+    $criteria->add(SchoolYearStudentPeer::IS_DELETED,false);
     $criteria->setDistinct();
 
     return self::doCount($criteria);
