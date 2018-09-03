@@ -93,9 +93,9 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
                 $student_repproved_course_subject->save($con);
 
                 $career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
-                ##se corrobora si la previa es la última y del último año, hay que egresarlo
+                ##se corrobora si la previa es la última y está libre, hay que egresarlo
                 $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
-                if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getYear() >= CareerPeer::getMaxYear() && $previous == 0) {
+                if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE && $previous == 0) {
                         $career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
                         $career_student->setStatus(CareerStudentStatus::GRADUATE);
                         //se guarda el school_year en que termino esta carrera
