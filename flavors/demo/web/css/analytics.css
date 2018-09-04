@@ -17,10 +17,19 @@
     width: 55%;
     text-align: center;
 }
+
 #header_analytical_data_center h1
 {
     display: inline;
+
+    background-color: white;
+    border-bottom: none;
+    border-top: none;
+    margin: 0;
+    padding: 0;
+    
 }
+
 .title dd.detail{
     font-weight: normal;
     padding-left: 1em;
@@ -46,6 +55,7 @@
 .school_logo
 {
     float: left;
+    width: 130px;
 }
 
 @media print

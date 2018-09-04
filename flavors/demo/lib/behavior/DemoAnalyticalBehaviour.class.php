@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -16,22 +16,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php
-
-/**
- * Copy and rename this class if you want to extend and customize
  */
-class NacionalFormFactory extends BaseFormFactory {
-	
-  public function getStudentDisciplinarySanctionForm()
-  {
-    return 'NacionalStudentDisciplinarySanctionForm';
-  }
-  
-  public function getAnalyticForm()
-  {
-      return 'NacionalAnalyticForm';    
-  }
 
+class DemoAnalyticalBehaviour extends DefaultAnalyticalBehaviour
+{
+    
 }
