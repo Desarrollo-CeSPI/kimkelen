@@ -2011,3 +2011,9 @@ div.wc-cal-event{
 {
     background-image: url('../images/report_course.png') !important;
 }
+
+.student_judicial_restriction {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #C93C42;
+}
