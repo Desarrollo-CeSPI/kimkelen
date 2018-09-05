@@ -47,6 +47,29 @@ class BbaStudentFormFilter extends StudentFormFilter
     $this->getWidgetSchema()->moveField('career', sfWidgetFormSchema::BEFORE, 'year');
   }
   
+  public function unsetFields()
+  {
+    unset(
+      $this['global_file_number'],
+      $this['person_id'],
+      $this['folio_number'],
+      $this['order_of_merit'],
+      $this['occupation_id'],
+      $this['busy_starts_at'],
+      $this['busy_ends_at'],
+      $this['student_career_subject_allowed_list'],
+      $this['student_career_subject_allowed_pathway_list'],
+      $this['blood_group'],
+      $this['blood_factor'],
+      $this['emergency_information'],
+      $this['health_coverage_id'],
+      $this['order_of_merit'],
+      $this['folio_number'],
+      $this['origin_school_id'],
+      $this['educational_dependency'],
+      $this['judicial_restriction']    
+    );
+  }
   public function getFields()
   {
     return array_merge(parent::getFields(),

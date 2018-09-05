@@ -175,6 +175,9 @@ classes:
       educational_dependency:
         type: varchar(255)
         required: false
+      judicial_restriction:
+        type:               boolean
+        default:            false
 
   Brotherhood:
     tableName:            brotherhood

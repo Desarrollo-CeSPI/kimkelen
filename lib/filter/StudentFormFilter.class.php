@@ -66,7 +66,11 @@ class StudentFormFilter extends BaseStudentFormFilter
     
     $this->setWidget('health_info', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions(true))));
     $this->setValidator('health_info', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getKeys(),'required' => false)));
+   
+    $this->setWidget('judicial_restriction', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('judicial_restriction', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
     
+    $this->getWidgetSchema()->moveField('judicial_restriction', sfWidgetFormSchema::LAST);
   }
 
   public function unsetFields()
@@ -88,7 +92,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $this['order_of_merit'],
       $this['folio_number'],
       $this['origin_school_id'],
-      $this['educational_dependency']
+      $this['educational_dependency']   
     );
   }
 

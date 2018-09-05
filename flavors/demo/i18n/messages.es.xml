@@ -4392,6 +4392,10 @@
                 <target>Reporte de resultado de cursadas</target>
             </trans-unit>
             <trans-unit>
+                <source>Judicial restriction</source>
+                <target>Restricción judicial</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Year 1</source>
                 <target>Primer año</target>
             </trans-unit>
