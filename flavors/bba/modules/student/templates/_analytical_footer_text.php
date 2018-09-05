@@ -38,7 +38,7 @@
                 Todo <?php echo implode(', ', array_map('__', $analytical->get_remaining_years_string())); ?>.
             <?php endif; ?>
         </p>
-        <p>Certificado de Estudios Incompleto.</p>
+        <p>Certificado de Estudios Incompletos.</p>
     <?php endif; ?>
-    <p>Se extiende el presente certificado, confrontado con los registros y actas originales por los señores Secretario Administrativo y Jefe de la Oficina de Alumnos. En la ciudad de <?php echo __('escuela_ciudad'); ?>,a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
+    <p>Se extiende el presente certificado, confrontado con los registros y actas originales por los señores/as Secretario/a Administrativo/a y Jefe/a de la Oficina de Alumnos/as. En la ciudad de <?php echo __('escuela_ciudad'); ?>,a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
 </div>

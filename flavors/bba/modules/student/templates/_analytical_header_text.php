@@ -18,9 +18,9 @@
  *  */ ?>
 <?php use_helper('Date') ?>
 <div>
-    <p class="header-text"> El director del
-        <span><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?></span> Prof.<strong> Francisco A. De Santo</strong>
-        de la <?php echo __("Universidad Nacional de La Plata") ?> certifica que
+    <p class="header-text"> El Director/a del
+        <span><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?></span> "Prof.<strong> Francisco A. De Santo"</strong>
+        de la <?php echo __("Universidad Nacional") ?> certifica que
         <?php echo $student->getPerson()->getLastname() . ', '. $student->getPerson()->getFirstname() ?>,
         <?php echo ($student->getPerson()->getIdentificationType() == IdentificationType::DNI) ? 'Documento Nacional de Identidad': BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> Nº 
         <?php echo $student->getPerson()->getIdentificationNumber() ?>,
