@@ -20,7 +20,6 @@
 <?php use_stylesheet('report-card.css', 'first', array('media' => 'screen')) ?>
 <?php use_stylesheet('analytics.css', 'last', array('media' => 'all')) ?>
 <?php use_stylesheet('print-analytics.css', 'last', array('media' => 'print')) ?>
-<?php use_javascript('analytics.js','last')?>
 <div id="sf_admin_container">
     <div id="screen_header">
         <h1> <?php echo __("Analytical for %student%", array('%student%' => $career_student->getStudent())) ?></h1>
@@ -56,17 +55,23 @@
             if(certificate.trim() != ''){
                  link = link + '&certificate=' + certificate;
             }
-            dipregep = document.getElementById("analytic_dipregep_number" ).value;
             
-            if(dipregep.trim() != ''){
-                link = link + '&dipregep=' + dipregep;
-
-            }         
+            elem = document.getElementById("analytic_dipregep_number" );
+            if(elem)
+            {
+                dipregep = document.getElementById("analytic_dipregep_number" ).value;       
+                if(dipregep.trim() != ''){
+                    link = link + '&dipregep=' + dipregep;
+                }   
+            }             
             document.getElementById('link_print').href= link;
            
         });
         
-        document.getElementById("analytic_dipregep_number" ).addEventListener('change', function() {
+        elem = document.getElementById("analytic_dipregep_number" );
+        
+        if(elem){
+            document.getElementById("analytic_dipregep_number" ).addEventListener('change', function() {
             dipregep = document.getElementById("analytic_dipregep_number" ).value;
             link = url; 
             if(dipregep.trim() != ''){
@@ -82,6 +87,6 @@
             document.getElementById('link_print').href= link;
             
         });
-        
+        } 
       })
 </script>

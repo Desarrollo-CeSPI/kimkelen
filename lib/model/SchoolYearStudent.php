@@ -28,7 +28,7 @@ class SchoolYearStudent extends BaseSchoolYearStudent
  */
   public function canBeDeleted()
   {
-    return true;
+    return !$this->getIsDeleted();
   }
 
   public function createStudentCareerSchoolYear($con)

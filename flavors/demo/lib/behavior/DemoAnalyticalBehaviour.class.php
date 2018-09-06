@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -16,16 +16,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ ?>
-<?php use_helper('I18N')?>
-<?php $sys = $student->getSchoolYearStudentForSchoolYear(); ?>
-<?php if(! is_null($sys) && ! $sys->getIsDeleted()):?>
-<?php $divisions = $student->getCurrentDivisions()?>
-<?php if (count($divisions)): ?>
-  <div class="student_year"><?php echo count($divisions) > 1 ?  __('Currently inscripted in divisions:') : __('Currently inscripted in division:')?>
-    <?php foreach( $divisions as $division):?>
-    <?php echo link_to($division, 'division/show?id=' . $division->getId())?>,
-    <?php endforeach ?>
-  </div>
-<?php endif; ?>
-<?php endif; ?>
+ */
+
+class DemoAnalyticalBehaviour extends DefaultAnalyticalBehaviour
+{
+    
+}

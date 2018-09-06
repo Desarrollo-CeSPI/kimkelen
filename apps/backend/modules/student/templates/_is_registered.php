@@ -17,5 +17,5 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php $sys = $student->getSchoolYearStudentForSchoolYear() ?>
-<?php echo is_null($sys) ? image_tag('/sfPropelRevisitedGeneratorPlugin/images/cross-small.png') : strval($sys->getShift()) ?>
+<?php $sys = $student->getSchoolYearStudentForSchoolYear();?>
+<?php echo (is_null($sys) || $sys->getIsDeleted()) ? image_tag('/sfPropelRevisitedGeneratorPlugin/images/cross-small.png') : strval($sys->getShift()) ?>

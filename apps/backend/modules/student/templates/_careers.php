@@ -30,6 +30,9 @@
       <div class="student_career_withdraw"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsWithdraw() and print __('Withdraw') ?></div>
       <div class="student_career_withdraw"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsWithdrawWithReserve() and print __('Withdraw with reserve') ?></div>
       <div class="student_career_free"><?php $student->getCurrentOrLastStudentCareerSchoolYear()->IsFree() and print __('Free') ?></div>
+      <?php if($student->getJudicialRestriction()):?>
+      <div class="student_judicial_restriction"> <?php echo __('Judicial restriction')?></div>
+      <?php endif ;?>
     <?php elseif ($cs->isGraduate()): ?>
       <div class="student_career_graduate"><strong><?php echo __('Graduate') ?></div>
     <?php endif ?>

@@ -4391,6 +4391,46 @@
                 <source>Course result report</source>
                 <target>Reporte de resultado de cursadas</target>
             </trans-unit>
+            <trans-unit>
+                <source>Judicial restriction</source>
+                <target>Restricción judicial</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 1</source>
+                <target>Primer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 2</source>
+                <target>Segundo año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 3</source>
+                <target>Tercer año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 4</source>
+                <target>Cuarto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 5</source>
+                <target>Quinto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Year 6</source>
+                <target>Sexto año</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print averages</source>
+                <target>Planilla de promedios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Average report</source>
+                <target>Reporte de promedios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>School year average report</source>
+                <target>Reporte de promedios por año lectivo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

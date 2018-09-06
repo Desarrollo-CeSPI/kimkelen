@@ -33,4 +33,14 @@ class AnexaFormFactory extends BaseFormFactory {
   {
     return 'AnexaStudentsCareerSchoolYearConductForm';
   }
+  
+  public function getStudentFormFilter()
+  {
+    return 'AnexaStudentFormFilter';
+  }
+  
+  public function getStudentForm()
+  {
+    return 'AnexaStudentForm';
+  }
 }
