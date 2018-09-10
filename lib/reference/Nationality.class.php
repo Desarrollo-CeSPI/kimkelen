@@ -35,9 +35,9 @@ class Nationality extends BaseCustomOptionsHolder
   protected
     $_options = array(
         self::N_NATIVE       => 'Argentino',
-        self::N_NATURALIZED    => 'Naturalizado',
+        self::N_NATURALIZED    => 'Argentino naturalizado',
         self::N_FOREIGN  => 'Extranjero',
-        self::N_FOR_OPTION => 'Por opción'
+        self::N_FOR_OPTION => 'Argentino por opción'
       );
     
   public function getNationality($nationality)

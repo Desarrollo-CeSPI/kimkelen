@@ -229,9 +229,6 @@ DROP TABLE nationalities;
 ALTER TABLE `person` 
 ADD COLUMN `nationality_id` INT(11) NULL DEFAULT NULL AFTER `photo`;
 
-ALTER TABLE `person` 
-ADD INDEX `nationality_id` (`nationality_id` ASC);
-
 update person p, tutor t set  p.nationality_id = t.nationality where t.person_id = p.id and t.nationality is not null
 
 ALTER TABLE `tutor` 
