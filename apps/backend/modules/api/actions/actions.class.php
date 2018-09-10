@@ -52,6 +52,7 @@ class apiActions extends sfActions
 	 $s_birth_city =$this->getRequestParameter('ciudad_nacimiento_id');
 	 $s_health_coverage_id = $this->getRequestParameter('obra_social_id');
 	 $s_origin_school_id = $request->getParameter('escuela_procedencia_numero');
+         $s_nationality = $i_nationality->getNationality($this->getRequestParameter('nacionalidad_id'));
 	 
 	 //domicilio
 	 $s_city = $this->getRequestParameter('domicilio_ciudad_id');
@@ -146,12 +147,13 @@ class apiActions extends sfActions
 				$s_person->setBirthdate($s_birthdate);
 				$s_person->setIsActive(true);
 				$s_person->setBirthCity($s_birth_city);
+                                $s_person->setNationalityId($s_nationality);
 				
 				$s_person->save(Propel::getConnection());
 				
 				$student= new Student();
 				$student->setPerson($s_person); 
-				$student->setGlobalFileNumber('888888');
+				$student->setGlobalFileNumber('ingresante');
 				
 				//chequeo que la escuela este en la BBDD
 				$school = OriginSchoolPeer::retrieveByPk($s_origin_school_id);
@@ -213,6 +215,7 @@ class apiActions extends sfActions
 					$m_person->setBirthdate($m_birthdate);
 					$m_person->setIsActive(true);
 					$m_person->setBirthCity($m_birth_city);
+                                        $m_person->setNationalityId($m_nationality);
 					$m_person->save(Propel::getConnection());
 					
 					$m_tutor = new Tutor();
@@ -220,7 +223,6 @@ class apiActions extends sfActions
 					$m_tutor->setOccupationId($m_occupation);
 					$m_tutor->setOccupationCategoryId($m_occupation_category);
 					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
-					$m_tutor->setNationality($m_nationality);
 					$m_tutor->setIsAlive($m_is_alive);
 					$m_tutor->save(Propel::getConnection());		
 					
@@ -284,6 +286,7 @@ class apiActions extends sfActions
 					$p_person->setBirthdate($p_birthdate);
 					$p_person->setIsActive(true);
 					$p_person->setBirthCity($p_birth_city);
+                                        $p_person->setNationalityId($p_nationality);
 					$p_person->save(Propel::getConnection());
 					
 					$tutor = new Tutor();
@@ -291,7 +294,6 @@ class apiActions extends sfActions
 					$tutor->setOccupationId($p_occupation);
 					$tutor->setOccupationCategoryId($p_occupation_category);
 					$tutor->setStudyId($p_study);//coincide con la tabla sga_tipos_est_cur
-					$tutor->setNationality($p_nationality);
 					$tutor->save(Propel::getConnection());
 					
 					/* Recupero department, state ,country*/				

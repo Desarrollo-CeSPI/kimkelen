@@ -24,6 +24,7 @@
         <strong><?php echo $student ?></strong>
         con <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?></strong>
         y sexo <strong><?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()) ?></strong>,
+        <?php echo ($student->getPerson()->getFullNationality()) ? 'nacionalidad ' . $student->getPerson()->getFullNationality() . ','  : '';?>
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
         título anterior Nivel Primario otorgado por <span><?php echo ($student->getOriginSchool()?'el/la ' .$student->getOriginSchool():__('la Dirección General de Cultura y Educación')); ?></span> con denominación Educación Primaria Básica, ha aprobado las siguientes asignaturas de la Educación Secundaria Básica y de Educación Secundaria Superior del Bachiller en <?php echo $student->getStudentOrientationString()?> (Especialidad <?php echo $student->getStudentSpecialityString() ?>) con las calificaciones que a continuación se detallan:

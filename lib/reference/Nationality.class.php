@@ -29,34 +29,40 @@ class Nationality extends BaseCustomOptionsHolder
   const
     N_NATIVE      = 0,
     N_NATURALIZED   = 1,
-    N_FOREIGN= 2;
+    N_FOREIGN= 2,
+    N_FOR_OPTION = 3;
 
   protected
     $_options = array(
-        self::N_NATIVE       => 'Nativo',
+        self::N_NATIVE       => 'Argentino',
         self::N_NATURALIZED    => 'Naturalizado',
-        self::N_FOREIGN  => 'Extranjero'
+        self::N_FOREIGN  => 'Extranjero',
+        self::N_FOR_OPTION => 'Por opción'
       );
-      
+    
   public function getNationality($nationality)
   {
-	switch($nationality){
-			
-		case 1:
-			return self::N_NATIVE;
-		break;
-			
-		case 2:
-			return self::N_FOREIGN;
-		break;
-		
-		case 3:
-			return self::N_NATURALIZED;
-		break;
-		
-		default:
-			return null;
-		break;
-	} 
+    switch($nationality){
+
+            case 1:
+                    return self::N_NATIVE;
+            break;
+
+            case 2:
+                    return self::N_FOREIGN;
+            break;
+
+            case 3:
+                    return self::N_NATURALIZED;
+            break;
+
+            case 4:
+                    return self::N_FOR_OPTION;
+            break;
+
+            default:
+                    return null;
+            break;
+    } 
   }
 }
