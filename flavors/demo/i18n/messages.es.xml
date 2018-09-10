@@ -4431,6 +4431,10 @@
                 <source>School year average report</source>
                 <target>Reporte de promedios por año lectivo</target>
             </trans-unit>
+            <trans-unit>
+                <source>Nationality id</source>
+                <target>Nacionalidad</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

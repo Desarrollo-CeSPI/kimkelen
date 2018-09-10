@@ -96,6 +96,21 @@
                 </tr>
             <?php endforeach ?>
         <?php endif; ?>
+        <?php if(!is_null($object->get_subjectsEOP_in_year($year))): ?>
+            <thead>
+                <tr>
+                    <th class="text-left" colspan="7"><?php echo __("Asignaturas del Espacio Optativo de Profundización") ?> </th>
+                </tr>
+            </thead>
+            <tbody class="analytical_body_table">
+            <?php foreach ($object->get_subjectsEOP_in_year($year) as $css):?>
+                <tr>
+                    <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                </tr>
+            <?php endforeach ?>
+        <?php endif; ?>
             <tbody>
                 <tr>
                     <th colspan="5" style="text-align:left !important;">Año: <?php echo $object->get_school_year($year) .' - '. __($object->get_str_year_status($year)) ?></th>
