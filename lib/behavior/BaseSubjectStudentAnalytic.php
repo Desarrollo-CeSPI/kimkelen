@@ -203,17 +203,34 @@ class BaseSubjectStudentAnalytic
     
     public function getOrientation()
     {
-		return $this->orientation;
-	}
-	
-	public function getSubOrientation()
-	{
-		return $this->sub_orientation;
-	}
-	
-	public function getOption()
-	{
-		return $this->option;
-	}
+        return $this->orientation;
+    }
 
+    public function getSubOrientation()
+    {
+        return $this->sub_orientation;
+    }
+
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    public function getSubjectId()
+    {
+        return $this->css->getCourseSubject()->getSubject()->getId();
+    }
+    
+    public function getOptionalCareerSubject()
+    {
+        $career_subject_school_year = $this->css->getCourseSubject()->getCareerSubjectSchoolYear();
+        $c = new Criteria();
+        $c->add(OptionalCareerSubjectPeer::CHOICE_CAREER_SUBJECT_SCHOOL_YEAR_ID, $career_subject_school_year->getId());
+        $c->addJoin(OptionalCareerSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+       
+        $cssy = CareerSubjectSchoolYearPeer::doSelectOne($c);
+        return ($cssy) ? $cssy->getCareerSubject() : NULL ;
+
+    }
+    
 }

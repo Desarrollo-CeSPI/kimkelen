@@ -70,6 +70,10 @@ classes:
       photo:
         type:               varchar(255)
         required:           false
+      nationality_id:
+        type:               integer
+        description:        Nacionalidad de la persona
+        required:           false
 
   Personal:
     tableName:            personal
@@ -247,11 +251,6 @@ classes:
         foreignReference: id
         onDelete:         restrict
         default:          null
-      nationality:
-        description:      La nacionalidad del tutor (nativo, naturalizado, extrangero)
-        type:             integer
-        required:         false
-        default:          0
       occupation_category_id:
         type:             integer
         foreignTable:     occupation_category

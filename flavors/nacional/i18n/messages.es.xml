@@ -4660,6 +4660,10 @@
                 <source>Judicial restriction</source>
                 <target>Restricción judicial</target>
             </trans-unit>
+            <trans-unit>
+                <source>Nationality id</source>
+                <target>Nacionalidad</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
