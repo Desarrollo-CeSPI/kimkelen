@@ -24,6 +24,8 @@
         <span><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?></span>
         de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que
         <strong><?php echo $student ?></strong> <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?></strong> sexo <strong><?php echo BaseCustomOptionsHolder::getInstance('SexType')->getStringFor($student->getPerson()->getSex()) ?></strong>
+        ,
+        <?php echo ($student->getPerson()->getFullNationality()) ? 'nacionalidad ' . strtolower($student->getPerson()->getFullNationality()) . ', ' : ''?>
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
         que ingresó en este establecimiento en el año <span><?php echo $student->getInitialSchoolYear()->getYear(); ?></span>
