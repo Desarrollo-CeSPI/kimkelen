@@ -27,16 +27,16 @@
             <?php $school_name = SchoolBehaviourFactory::getInstance()->getSchoolName(); ?>
             <h1><?php echo $school_name ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
         </div>
-		
-		<div id="header_analytical_data_right" class="title">
-		<div>
-			<?php echo __("RMN Nº") ?> 
-			<?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
-		</div>
-		<?php if ($analytical->showCertificate()): ?>
-            <?php echo __('Certificado N°'); ?>
-            <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
-        <?php endif; ?>				
+        
+        <div id="header_analytical_data_right" class="title">
+            <div>
+                    <?php echo __("RMN Nº") ?> 
+                    <?php echo ($career_student->getCareer()->getResolutionNumber()) ? $career_student->getCareer()->getResolutionNumber() : '-';?>
+            </div>
+            <?php if ($analytical->showCertificate()): ?>
+                <?php echo __('Certificado N°'); ?>
+                <?php echo (isset($analytic)?$analytic->getId():__('S/N')); ?>
+            <?php endif; ?>				
         </div>
     </div>
 

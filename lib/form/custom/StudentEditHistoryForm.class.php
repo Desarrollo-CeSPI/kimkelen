@@ -122,7 +122,7 @@ class StudentEditHistoryForm extends sfFormPropel
 
   public function configureStudentApprovedCareerSubject()
   {
-    $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject());
+    $student_approved_career_subject = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->getObject(),$this->getObject()->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
 
     if (is_null($student_approved_career_subject))
     {

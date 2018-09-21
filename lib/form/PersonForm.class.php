@@ -126,6 +126,9 @@ class PersonForm extends BasePersonForm
         'message_with_no_value' => __('Select a department first'),
         )));
     $this->setDefault('birth_city',  SchoolBehaviourFactory::getInstance()->getDefaultCityId());
+    
+    $this->setWidget('nationality_id', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getOptions(true))));
+    $this->setValidator('nationality_id', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getKeys(), 'required' => false)));
 
     //field sex widget and validator
     $this->setWidget('sex', new sfWidgetFormSelect(array(

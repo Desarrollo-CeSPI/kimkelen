@@ -49,9 +49,6 @@ class TutorForm extends BaseTutorForm
 
     $this->setValidator('student_list', new sfValidatorPass());
 
-    $this->setWidget('nationality', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getOptions())));
-    $this->setValidator('nationality', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getKeys(), 'required' => false)));
-
     $this->setDefault('student_list',
             array_map(create_function('$st', 'return $st->getStudentId();'),
               $this->getObject()->getStudentTutors()));
@@ -60,8 +57,8 @@ class TutorForm extends BaseTutorForm
   public function getFormFieldsDisplay()
   {
     return array(
-          'Personal data'   =>  array( 'person-lastname', 'person-firstname', 'person-identification_type', 'is_alive', 'person-identification_number', 'person-sex', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department' ,'person-birth_city', 'tutor_type_id', 'person-observations' ),
-          'Statistics'      => array('nationality' ,'occupation_id', 'occupation_category_id', 'study_id'),
+          'Personal data'   =>  array( 'person-lastname', 'person-firstname', 'person-identification_type', 'is_alive', 'person-identification_number', 'person-sex', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department' ,'person-birth_city','person-nationality_id', 'tutor_type_id', 'person-observations' ),
+          'Statistics'      => array('occupation_id', 'occupation_category_id', 'study_id'),
           'Contact data'   => array('person-email', 'person-phone', 'person-address'),
    //       'System access'  => array('person-username', 'person-password', 'person-password_again'),
           'In charge of'  => array('student_list')

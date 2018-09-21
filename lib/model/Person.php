@@ -225,6 +225,24 @@ class Person extends BasePerson
   {
     return $this->getBirthdate('d-m-Y');
   }
+  
+  public function getFullNationality()
+  {
+      if(! is_null($this->getNationalityId()) && ! is_null($this->getBirthCountry()))
+      {
+         //Extranjero 
+        if($this->getNationalityId() == Nationality::N_FOREIGN)
+        {
+            $country = CountryPeer::retrieveByPK($this->getBirthCountry());
+            return $country->getNationality();
+        }
+        else
+        {
+            $country = CountryPeer::retrieveByPK(Country::ARGENTINA);
+            return $country->getNationality();
+        }
+      }
+  }
 }
 
 sfPropelBehavior::add('Person', array('changelog'));
