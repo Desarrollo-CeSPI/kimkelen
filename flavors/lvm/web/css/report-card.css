@@ -390,3 +390,22 @@ div.report-text p {
 	width: 300px;
 	height: 70px;
 }
+
+.header_text_title{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.student_title{
+    font-size: 22px;
+    font-weight:bold;
+
+}
+
+.report-content_student{
+    font-size: 14px
+}
+
+.tab_div{
+    margin-left: 15px;
+}
