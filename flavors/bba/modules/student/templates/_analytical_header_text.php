@@ -24,7 +24,7 @@
         <?php echo $student->getPerson()->getLastname() . ', '. $student->getPerson()->getFirstname() ?>,
         <?php echo ($student->getPerson()->getIdentificationType() == IdentificationType::DNI) ? 'Documento Nacional de Identidad': BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> Nº 
         <?php echo $student->getPerson()->getIdentificationNumber() ?>,
-        <?php echo ($student->getPerson()->getFullNationality()) ? 'nacionalidad ' . $student->getPerson()->getFullNationality() . ', ' : ''?>
+        <?php echo ($student->getPerson()->getFullNationality()) ? 'nacionalidad ' . strtolower($student->getPerson()->getFullNationality()) . ', ' : ''?>
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <?php echo format_date($student->getPerson()->getBirthDate(), "D") ?>,
         título anterior Nivel Primario otorgado por <span><?php echo ($student->getOriginSchool()?'el/la ' .$student->getOriginSchool():__('la Dirección General de Cultura y Educación')); ?></span> 
