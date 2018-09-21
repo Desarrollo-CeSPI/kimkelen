@@ -345,3 +345,19 @@ div.report-text p {
 	border-top: 1px solid;
 	text-align:center;
 }
+
+.report-content_student{
+    font-size: 16px
+}
+
+.tab_div{
+    margin-left: 15px;
+}
+
+.text-right{
+    float:right;
+}
+
+.logo_certificate img{
+    margin: 10px;
+}

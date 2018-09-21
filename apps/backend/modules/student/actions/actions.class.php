@@ -785,7 +785,7 @@ class studentActions extends autoStudentActions
   }
   public function executePrintEntryForm(sfWebRequest $request)
   {
-      $this->student = $this->getRoute()->getObject();
+      $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
       $this->setLayout('cleanLayout');
       
   }

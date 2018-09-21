@@ -394,6 +394,18 @@ div.report-text p {
 }
 
 .logo_certificate img{
-	width: 100px;
-	height: 45px;
+    width: 18%;
+    margin: 10px;
+}
+
+.report-content_student{
+    font-size: 16px
+}
+
+.tab_div{
+    margin-left: 15px;
+}
+
+.text-right{
+    float:right;
 }

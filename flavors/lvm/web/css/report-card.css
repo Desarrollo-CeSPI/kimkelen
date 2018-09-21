@@ -387,25 +387,16 @@ div.report-text p {
 }
 
 .logo_certificate img{
-	width: 300px;
-	height: 70px;
+	width: 66%;
 }
-
-.header_text_title{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.student_title{
-    font-size: 22px;
-    font-weight:bold;
-
-}
-
 .report-content_student{
-    font-size: 14px
+    font-size: 16px
 }
 
 .tab_div{
     margin-left: 15px;
+}
+
+.text-right{
+    float:right;
 }
