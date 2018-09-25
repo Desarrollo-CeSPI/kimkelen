@@ -66,8 +66,11 @@
                 <div>Ocupación: <?php echo $student_tutor->getTutor()->getOccupation()?> </div>
             </div>
         <?php endforeach;?>
-            
         <p class="text-right"><?php echo __('escuela_ciudad'); ?>, <?php echo date('d'); ?> de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?></p>
+        <div id="analytic_signatures">
+            <div id="signature_1" class="signature"><?php echo __('Firma de Padre/Madre o Tutor'); ?></div>
+            <div id="signature_2" class="signature"><?php echo __('Aclaración'); ?></div>
+        </div>
     </div>
 </div>
 

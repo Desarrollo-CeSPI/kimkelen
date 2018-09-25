@@ -390,7 +390,7 @@ div.report-text p {
 	width: 66%;
 }
 .report-content_student{
-    font-size: 16px
+    font-size: 14px
 }
 
 .tab_div{
@@ -398,5 +398,19 @@ div.report-text p {
 }
 
 .text-right{
-    float:right;
+    text-align:right;
+}
+
+#analytic_signatures .signature
+{
+    float: left;
+    width: 39%;
+    height: 1.5em;
+    text-align: center;
+    border-top: 1px solid;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 7em;
+    padding-top: 1em;
+    font-size:12px;
 }
