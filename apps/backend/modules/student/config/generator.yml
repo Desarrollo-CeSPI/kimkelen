@@ -330,3 +330,6 @@ generator:
             label: Student reincorporation
             action: reincorporation
             condition: canBeReincorporated
+          print_entry_form:
+            label: Print entry form
+            action: printEntryForm

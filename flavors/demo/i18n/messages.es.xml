@@ -4435,6 +4435,10 @@
                 <source>Nationality id</source>
                 <target>Nacionalidad</target>
             </trans-unit>
+            <trans-unit>
+                <source>Print entry form</source>
+                <target>Planilla de ingreso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
