@@ -72,7 +72,7 @@ generator:
           boletines:
             action: printReportCard
             label:  Imprimir boletines division
-            credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
+            credentials:  [[edit_division_preceptors,show_division_course_califications]]
             condition: canPrintReportCards
 
           student_conduct:
