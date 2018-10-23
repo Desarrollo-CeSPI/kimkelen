@@ -32,7 +32,7 @@
 <?php foreach ($attendances_array as $student_attendances): ?>
     <?php $course_subject = $student_attendances[0]->getCourseSubject() ?>
     <div class="course_subject_absence_show">
-        <?php echo $course_subject; ?>
+        <?php echo ($course_subject->getCourse()->getIsPathway()) ? $course_subject .' ('. __('Pathway') .')' : $course_subject; ?>
         <a class="absence_subject_a" href="#" onclick="jQuery('#absence_subject_table_<?php echo $course_subject->getId() ?>').toggle()"><?php echo __('show details') ?> </a>
         <?php $configurations = $course_subject->getCourseSubjectConfigurations() ?>
 
@@ -55,14 +55,14 @@
 
                     <?php if ($is_for_period):?>
 
-                        <?php foreach ($configurations as $config): ?>
+                        <?php foreach ($configurations as $config):?>
 
                             <?php $period = $config->getCareerSchoolYearPeriod() ?>    
                             <?php $free_class = $student->getFreeClass($period, $course_subject, $career_school_year) ?>
 
                             <tr class ="<?php echo $free_class ?>">
 
-                                <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), $period, $course_subject->getId()) ?>
+                                <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), $period, $course_subject->getId()); ?>
 
                                 <td ROWSPAN="<?php echo count($absences) == 0 ? '' : count($absences); ?>">
                                     <?php echo $period ?>
@@ -104,12 +104,51 @@
                                 </tr>
                           </tr>
                         <?php endforeach ?>
+                        <?php if (count($configurations) == 0 && $course_subject->getCourse()->getIsPathway()):?>
+                            <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), NULL, $course_subject->getId()); ?>
+                            <?php if (count($absences) == 0): ?>
+                                    <td>-</td>
+                                    <td><?php echo __('The student dont have any absence in this period') ?></td>
+                                    <td></td>
+                                    <td></td>
+                            <?php else:?>
+                                <?php foreach ($absences as $absence): ?>
+                                <tr>
+                                    <td>-</td>
+                                    <td>
+                                        <?php echo $absence->getFormattedDay() ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $absence->getValue() ?>
+                                    </td>
+                                    <td>
+                                        <?php echo is_null($absence->getStudentAttendanceJustificationId()) ? '-' : $absence->getStudentAttendanceJustification()->getJustificationType() ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach ?>
+                                 <tr class ="<?php $is_free and print "box_free" ?> <?php $is_almost_free and print "box_almost_free" ?>">
+                                    <?php $total_with_justification     = round($student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), NULL, $course_subject->getId(), true), 2 )?>
+                                    <?php $total_with_out_justification = round($student->getTotalAbsences($student_career_school_year->getCareerSchoolYearId(), NULL, $course_subject->getId(), false), 2) ?>
+                                    <td colspan="2" >
+                                      <?php echo __('Subtotal (with justificated): %subtotal%', array(
+                                          '%subtotal%' => $total_with_justification))
+                                      ?>
+                                    </td>
+                                    <td colspan="2" >
+                                      <?php echo __('Subtotal  (without justificated): %subtotal%', array(
+                                          '%subtotal%' => $total_with_out_justification))
+                                      ?>
+                                    </td>
+                                </tr>   
+                            <?php endif ?>
+                          
+                        <?php endif;?>
 
                     <?php else:?>
                         <?php $free_class = $student->getFreeClass(null, $course_subject, $career_school_year) ?>
 
                             <tr class ="<?php echo $free_class ?>">
-                                <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), null, $course_subject->getId()) ?>
+                                <?php $absences = $student->getAbsences($student_career_school_year->getCareerSchoolYearId(), null, $course_subject->getId()) ;?>
 
 
                                 <?php if (count($absences) == 0): ?>
