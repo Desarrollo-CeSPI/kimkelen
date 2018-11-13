@@ -47,11 +47,25 @@ class NacionalCourseSubjectMarksForm extends CourseSubjectMarksForm
     $tmp_sum = 0;
     $configuration = $this->object->getCareerSubjectSchoolYear()->getConfiguration();
     
-    $period = CareerSchoolYearPeriodPeer::retrieveCurrents($configuration->getCourseType());
-   
+    if($this->object->getCourseSubjectConfigurations())
+    {
+       $period = array();
+       foreach($this->object->getCourseSubjectConfigurations() as $csc)
+       {
+           $period[] = $csc->getCareerSchoolYearPeriod();
+       }
+       
+    }
+    else
+    {
+        $period = CareerSchoolYearPeriodPeer::retrieveCurrents($configuration->getCourseType());
+    }
+    
+    $current_period = $this->object->getCourse()->getCurrentPeriod();
+    
     foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
     {
-      $current_period = $course_subject_student->getCourseSubject()->getCourse()->getCurrentPeriod();
+      
       foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks() as $course_subject_student_mark)
       {
         $widget_name = $course_subject_student->getId().'_'.$course_subject_student_mark->getMarkNumber();
@@ -66,10 +80,10 @@ class NacionalCourseSubjectMarksForm extends CourseSubjectMarksForm
         {
           if($configuration->isNumericalMark())
           { $p = $period[$current_period-1];
-          
+
             $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student_mark->getMark()), array('class' => 'mark'));
             $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($course_subject_student->getStudent(), $this->object->getCareerSubjectSchoolYear()->getCareerSchoolYear());
-            if (StudentFreePeer::retrieveByStudentCareerSchoolYearCareerSchoolYearPeriodAndCourseSubject($student_career_school_year, $p, $course_subject_student->getCourseSubject()))
+            if (StudentFreePeer::retrieveByStudentCareerSchoolYearCareerSchoolYearPeriodAndCourseSubject($student_career_school_year, $p, $this->object))
             {
                 $widgets[$widget_name]->setAttribute('disabled', 'disabled');  
             } 
