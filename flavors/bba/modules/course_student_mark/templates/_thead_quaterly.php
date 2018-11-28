@@ -1,4 +1,6 @@
-<?php for ($i = 1; $i < $marks_count; $i++): ?>
-  <th align="center"><?php echo $i . '°C'; ?></th>
-<?php endfor; ?>
-<th align="center"><?php echo 'Ex. Final'; ?></th>
+
+  <th align="center"><?php echo'1°C'; ?></th>
+  <th align="center"><?php echo'2°C'; ?></th>
+  <?php if($marks_count == 3):?>
+    <th align="center"><?php echo 'Ex. Final'; ?></th>
+  <?php endif; ?>
