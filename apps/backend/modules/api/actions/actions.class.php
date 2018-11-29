@@ -53,6 +53,7 @@ class apiActions extends sfActions
 	 $s_health_coverage_id = $this->getRequestParameter('obra_social_id');
 	 $s_origin_school_id = $request->getParameter('escuela_procedencia_numero');
          $s_nationality = $i_nationality->getNationality($this->getRequestParameter('nacionalidad_id'));
+         $s_cuil = $request->getParameter('cuil');
 	 
 	 //domicilio
 	 $s_city = $this->getRequestParameter('domicilio_ciudad_id');
@@ -148,6 +149,7 @@ class apiActions extends sfActions
 				$s_person->setIsActive(true);
 				$s_person->setBirthCity($s_birth_city);
                                 $s_person->setNationalityId($s_nationality);
+                                $s_person->setCuil($s_cuil);
 				
 				$s_person->save(Propel::getConnection());
 				
