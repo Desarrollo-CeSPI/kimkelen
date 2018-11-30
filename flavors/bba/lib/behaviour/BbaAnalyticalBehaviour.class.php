@@ -47,7 +47,8 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         EOP_CE = 151,
         EOP_CS = 152,
         EOP_AV = 153,
-        EOP_AM = 154;        
+        EOP_AM = 154,
+        LENGUA_EXTRANJERA = 125;        
     
     protected $optional_specific = array(
         self::TALLERES_EGP,
@@ -81,6 +82,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     protected $general_subjects = array(
         self::TALLERES_EGP,
         self::INSTRUMENTO,
+        self::LENGUA_EXTRANJERA,
     );
     
     protected $speciality_type = array(

@@ -230,5 +230,33 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
     
     return $ret;
   }
+  
+  public function isFreeStudent(Student $student, CareerSchoolYearPeriod $career_school_year_period = null, CourseSubject $course_subject = null, CareerSchoolYear $career_school_year)
+  {
+    $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $career_school_year);
+
+    $c = new Criteria();
+    $c->add(StudentFreePeer::STUDENT_ID, $student_career_school_year->getStudentId());
+    $c->add(StudentFreePeer::IS_FREE, true);
+    $c->add(StudentFreePeer::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
+
+    if ( !is_null($career_school_year_period) && !is_null($career_school_year_period->getMaxAbsences()))
+    { 
+      $c->add(StudentFreePeer::CAREER_SCHOOL_YEAR_PERIOD_ID, $career_school_year_period->getId());  
+    }    
+
+    if (!is_null($course_subject))
+    {
+      $c->add(StudentFreePeer::COURSE_SUBJECT_ID, $course_subject->getId());
+    }else
+    {
+        $c->add(StudentFreePeer::COURSE_SUBJECT_ID, Criteria::ISNULL);
+    }
+
+    $student_free = StudentFreePeer::doSelectOne($c);
+    
+    
+    return is_null($student_free) ? false : $student_free->getIsFree();
+  }
 
 }

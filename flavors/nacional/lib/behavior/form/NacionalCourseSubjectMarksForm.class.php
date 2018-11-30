@@ -46,7 +46,7 @@ class NacionalCourseSubjectMarksForm extends CourseSubjectMarksForm
     $this->disableCSRFProtection();
     $tmp_sum = 0;
     $configuration = $this->object->getCareerSubjectSchoolYear()->getConfiguration();
-    
+    $course_marks = $configuration->getCourseMarks();
     if($this->object->getCourseSubjectConfigurations())
     {
        $period = array();
@@ -83,9 +83,38 @@ class NacionalCourseSubjectMarksForm extends CourseSubjectMarksForm
 
             $widgets[$widget_name] = new sfWidgetFormInput(array('default' => $course_subject_student_mark->getMark()), array('class' => 'mark'));
             $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($course_subject_student->getStudent(), $this->object->getCareerSubjectSchoolYear()->getCareerSchoolYear());
-            if (StudentFreePeer::retrieveByStudentCareerSchoolYearCareerSchoolYearPeriodAndCourseSubject($student_career_school_year, $p, $this->object))
+            
+            $is_free = StudentFreePeer::retrieveByStudentCareerSchoolYearCareerSchoolYearPeriodAndCourseSubject($student_career_school_year, $p, $this->object);
+            
+            //si está libre
+            if ($is_free)
             {
-                $widgets[$widget_name]->setAttribute('disabled', 'disabled');  
+                //si (la nota es la última) y (tiene más notas que periodos)
+                if($course_subject_student_mark->getMarkNumber() == $course_marks && count($period) < $course_marks )
+                {
+                    //está libre en todos los periodos
+                    $list_cssm = CourseSubjectStudentMarkPeer::retrieveByCourseSubjectStudent($course_subject_student->getId());
+                    $is_real_free = TRUE; 
+                    foreach($list_cssm as $cssm)
+                    {
+                        if(! is_null($cssm->getMark()) && $cssm->getMark() != 0)
+                        {
+                             $is_real_free = FALSE;
+                        }
+                        
+                    }
+                    
+                    if($is_real_free)
+                    {
+                        $widgets[$widget_name]->setAttribute('disabled', 'disabled');
+                    }
+    
+                }
+                else
+                { //no es la ultima
+                   $widgets[$widget_name]->setAttribute('disabled', 'disabled');
+                }
+                
             } 
             $validators[$widget_name] = new sfValidatorInteger($options, $messages);
           }
