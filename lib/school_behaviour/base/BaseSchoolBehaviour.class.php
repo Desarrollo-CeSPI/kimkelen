@@ -1252,4 +1252,24 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 
     return $total + $diff;
   }
+  
+  public function getStudentsForDivision($c, $division)
+    {
+        $ret = array();
+
+        $c =($c == null) ? new Criteria: $c ;
+        $c->add(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($division->getSchoolYear()), Criteria::IN);
+        $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
+        $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
+        $c->add(PersonPeer::IS_ACTIVE, true);
+
+        $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+
+        foreach ($division->getDivisionStudents($c) as $ds)
+        {
+          $ret[] = $ds->getStudent();
+        }
+        return $ret;
+    }
 }
