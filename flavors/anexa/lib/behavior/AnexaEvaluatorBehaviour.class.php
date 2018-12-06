@@ -127,7 +127,7 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
           if($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->isNumericalMark())
               $sum += $course_subject_student->getFinalMark();
           else  
-              return NULL;
+              return 0;
       }
 
       if (count($course_subject_students))
