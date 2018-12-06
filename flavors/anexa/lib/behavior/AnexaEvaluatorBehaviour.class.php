@@ -29,6 +29,8 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     self::DECEMBER => 'PEEE-dic',
     self::FEBRUARY => 'PEEE-feb',
   );
+  
+  const POSTPONED_NOTE = 6;
 
   public function getCourseSubjectStudentResult(CourseSubjectStudent $course_subject_student, PropelPDO $con = null)
   {
@@ -136,6 +138,14 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       }
     }
     return null;
+
+  }
+  
+  public function isApproved(CourseSubjectStudent $course_subject_student, $average, PropelPDO $con = null)
+  {
+    $minimum_mark = $course_subject_student->getCourseSubject($con)->getCareerSubjectSchoolYear($con)->getConfiguration($con)->getCourseMinimunMark();
+    return $average >= $minimum_mark
+      && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= self::POSTPONED_NOTE;
 
   }
 
