@@ -148,5 +148,11 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       && $course_subject_student->getMarkFor($course_subject_student->countCourseSubjectStudentMarks(null, false, $con), $con)->getMark() >= self::POSTPONED_NOTE;
 
   }
+  
+  public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
+  { //retorna siempre Diciembre.
+    return self::DECEMBER;
+
+  }
 
 }
