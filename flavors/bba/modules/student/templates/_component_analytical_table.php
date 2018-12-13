@@ -33,7 +33,7 @@
                     <th colspan="7" class="text-center"><?php echo $year.'°'.__('Year') .' - ' .$object->get_career_name($year) ?></th>
                 </tr>
                 <tr>
-                    <th rowspan="2"><?php echo __("Approval date") ?></th>
+                    <th rowspan="2"><?php echo __("Date") ?></th>
                     <th class="text-left" rowspan="2" colspan="4"><?php echo __("General Subjects") ?></th>
                     <th colspan="2" ><?php echo __("Calification") ?></th>
                 </tr>
