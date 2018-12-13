@@ -33,12 +33,19 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 	const MAXIMUN_MARK = 10; //nota maxima de un examen
 
 	const PATHWAY_PROMOTION_NOTE = 6;
+        const CBFE_1       = 9;
+        const CBFE_2       = 10;
 
 	protected
 		$_examination_number = array(
 		self::DECEMBER => 'Diciembre',
 		self::FEBRUARY => 'Febrero',
 	);
+        
+        protected $cbfe = array(
+            self::CBFE_1,
+            self::CBFE_2,
+        );
 
 	/**
 	 * This method returns the marks average of a student.
@@ -93,7 +100,7 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
         
     public function canPrintGraduateCertificate($student)
     {
-        if(!is_null($student->getCareerStudent()))
+        if(!is_null($student->getCareerStudent()) && !in_array($student->getCareerStudent()->getCareer()->getId(),$this->cbfe))
         {
             if ($student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE)
             {
