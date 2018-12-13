@@ -4802,10 +4802,6 @@
                 <source>Print entry form</source>
                 <target>Planilla de ingreso</target>
             </trans-unit>
-            <trans-unit>
-                <source>Approval date</source>
-                <target>Fecha de aprobación</target>
-            </trans-unit>v
         </body>
     </file>
 </xliff>
