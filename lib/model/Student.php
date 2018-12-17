@@ -1731,6 +1731,58 @@ class Student extends BaseStudent
   {
     return AnalyticalBehaviourFactory::getInstance($this)->getSpecialityTypeString($this->getCareerStudent());
   }
+  
+   public function getCourseSubjectStudentsForSecondQuaterly($student_career_school_year = null)
+  {
+    if (is_null($student_career_school_year))
+    {
+      $career_school_years = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this, SchoolYearPeer::retrieveCurrent());
+      $student_career_school_year = array_shift($career_school_years);
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    $second_quaterly = CareerSchoolYearPeriodPeer::retrieveSecondQuaterlyForCareerSchoolYear($career_school_year);
+    $results = array();
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::QUATERLY_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      foreach ($subject_configurations as $sc)
+      {
+        if ($sc->getCareerSchoolYearPeriodId() == $second_quaterly->getId())
+          $results[$css->getId()] = $css;
+      }
+    }
+    return $results;
+
+  }
+  
+  public function getCourseSubjectStudentsForFirstQuaterly($student_career_school_year = null)
+  {
+    if (is_null($student_career_school_year))
+    {
+      $career_school_years = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this, SchoolYearPeer::retrieveCurrent());
+      $student_career_school_year = array_shift($career_school_years);
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    $first_quaterly = CareerSchoolYearPeriodPeer::retrieveFirstQuaterlyForCareerSchoolYear($career_school_year);
+    $results = array();
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::QUATERLY_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      
+      foreach ($subject_configurations as $sc)
+      {
+        if ($sc->getCareerSchoolYearPeriodId() == $first_quaterly->getId())
+          $results[$css->getId()] = $css;
+      }
+    }
+    return $results;
+
+  }
+  
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
