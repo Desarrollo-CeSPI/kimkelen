@@ -186,5 +186,24 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return false;
 
     }
+    
+    public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
+    {
+        if($average == 0)
+            return  self::DECEMBER;
+        else
+           return (($average >= self::MIN_NOTE)) ? self::DECEMBER : self::FEBRUARY;
+
+    }
+    
+    public function getAverage($course_subject_student, $course_subject_student_examination)
+    {
+      //Está Libre
+      if($course_subject_student->getMarksAverage() == 0)
+          return $course_subject_student_examination->getMark();
+      else
+        return (string) (($course_subject_student->getMarksAverage() + $course_subject_student_examination->getMark()) / 2);
+    }
+
 
 }
