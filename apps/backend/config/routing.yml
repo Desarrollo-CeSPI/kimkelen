@@ -18,6 +18,10 @@ api_get_students:
     options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForYear }
     requirements:
       sf_format: json
+
+api_person:
+  url: /apisidcer/personas
+  param:   { module: api, action: getPerson }
     
 change_status_motive:
   class: sfPropelRouteCollection

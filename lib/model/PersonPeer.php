@@ -79,5 +79,22 @@ class PersonPeer extends BasePersonPeer
     return self::doSelect($c);
 
   }
+  
+  static public function getForDocumentTypeAndNumber($parameters)
+  {
+    $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($parameters['tipo_documento']);
+      
+    $c = new Criteria();
+    $c->add(PersonPeer::IDENTIFICATION_NUMBER, $parameters['numero_documento']);
+    $c->add(PersonPeer::IDENTIFICATION_TYPE, $document_type);
+    $p = self::doSelectOne($c);
+    if (!$p)
+    {
+      throw new sfError404Exception(sprintf('Person with document "%s" "%s" "%s"does not exist.', $parameters['pais'], $parameters['tipo_documento'], $parameters['numero_documento']));
+    }
+
+    return $p;
+
+  }
 
 }

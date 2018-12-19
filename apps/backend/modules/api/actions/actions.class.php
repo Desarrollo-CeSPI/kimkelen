@@ -367,5 +367,17 @@ class apiActions extends sfActions
         {
             $this->scsys = $this->getRoute()->getObject();
         }
+        
+        public function executeGetPerson(sfWebRequest $request)
+        {
+          $p = PersonPeer::getForDocumentTypeAndNumber($request->getGetParameters());
+          $this->person =   array(
+                'persona'  => $p->getId(),
+          );
+          
+          $this->getResponse()->setHttpHeader('Content-type','application/json');
+	  $this->getResponse()->setContent(json_encode($this->person));
+          $this->setLayout(false);
+        }
  
 }
