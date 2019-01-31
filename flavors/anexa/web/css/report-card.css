@@ -367,6 +367,33 @@ div.report-text p {
 }
 
 .logo_certificate img{
-	width: 210px;
-	height: 60px;
+    width: 40%;
+    margin:10px;
 }
+
+.report-content_student{
+    font-size: 14px
+}
+
+.tab_div{
+    margin-left: 15px;
+}
+
+.text-right{
+    text-align:right;
+}
+
+#analytic_signatures .signature
+{
+    float: left;
+    width: 39%;
+    height: 1.5em;
+    text-align: center;
+    border-top: 1px solid;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 7em;
+    padding-top: 1em;
+    font-size:12px;
+}
+

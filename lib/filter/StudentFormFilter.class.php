@@ -66,7 +66,11 @@ class StudentFormFilter extends BaseStudentFormFilter
     
     $this->setWidget('health_info', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getOptions(true))));
     $this->setValidator('health_info', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('HealthInfoStatus')->getKeys(),'required' => false)));
+   
+    $this->setWidget('judicial_restriction', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('judicial_restriction', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
     
+    $this->getWidgetSchema()->moveField('judicial_restriction', sfWidgetFormSchema::LAST);
   }
 
   public function unsetFields()
@@ -88,7 +92,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $this['order_of_merit'],
       $this['folio_number'],
       $this['origin_school_id'],
-      $this['educational_dependency']
+      $this['educational_dependency']   
     );
   }
 
@@ -144,6 +148,7 @@ class StudentFormFilter extends BaseStudentFormFilter
       $c->add(SchoolYearPeer::ID , SchoolYearPeer::retrieveCurrent()->getId());
       $c->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
       $c->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID);
+      $c->add(SchoolYearStudentPeer::IS_DELETED,false);
       $c->clearSelectColumns();
       $c->addSelectColumn(StudentPeer::ID);
       $stmt = StudentPeer::doSelectStmt($c);
@@ -224,6 +229,7 @@ class StudentFormFilter extends BaseStudentFormFilter
 		$criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
 		$criteria->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
 		$criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $current_school_year->getId());
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		
 	}else
 	{
@@ -278,6 +284,7 @@ class StudentFormFilter extends BaseStudentFormFilter
     {
 		$criteria->addJoin(StudentPeer::ID,SchoolYearStudentPeer::STUDENT_ID);
                 $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID,SchoolYearPeer::retrieveCurrent()->getId());
+		$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
 		$criteria->add(SchoolYearStudentPeer::HEALTH_INFO, $values);
 				
 	}

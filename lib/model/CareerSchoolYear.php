@@ -475,7 +475,12 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   */
   public function canCreateLastYearDivisions()
   {
-    $has_students = $this->getSchoolYear()->countSchoolYearStudents() > 0;
+	/*is_deleted = false*/
+	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
+	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
+	
+    $has_students = $this->getSchoolYear()->countSchoolYearStudents($criteria) > 0;
 
     return $this->getSchoolYear()->getIsActive() && SchoolYearPeer::doCount(new Criteria()) > 1 && $has_students;
   }
@@ -488,7 +493,11 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   */
   public function canCreateLastYearCommissions()
   {
-    $has_students = $this->getSchoolYear()->countSchoolYearStudents() > 0;
+	/*is deleted = false*/
+	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
+	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
+    $has_students = $this->getSchoolYear()->countSchoolYearStudents($criteria) > 0;
 
     $has_commissions = count(CoursePeer::retrieveComissionsForCareerSchoolYear($this))> 0;
 
@@ -603,7 +612,12 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 
   public function countNotMatriculatedStudents()
   {
-    $matriculated_school_year_students = $this->getSchoolYear()->countSchoolYearStudents(null, false);
+	/*is_deleted = false*/
+	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+        $criteria->addJoin(SchoolYearPeer::ID, SchoolYearStudentPeer::SCHOOL_YEAR_ID);
+	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
+	
+    $matriculated_school_year_students = $this->getSchoolYear()->countSchoolYearStudents($criteria, false);
     $matriculated_career_school_year_students = $this->countStudentCareerSchoolYears(null, true);
 
     return bcsub($matriculated_school_year_students, $matriculated_career_school_year_students, 0);

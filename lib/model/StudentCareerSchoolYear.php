@@ -249,6 +249,7 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
     $c->add(DivisionPeer::CAREER_SCHOOL_YEAR_ID, $this->getCareerSchoolYearId());
     $c->addJoin(DivisionPeer::ID, DivisionStudentPeer::DIVISION_ID);
     $c->add(DivisionStudentPeer::STUDENT_ID, $this->getStudentId());
+    $c->addAscendingOrderByColumn(DivisionPeer::DIVISION_TITLE_ID);
 
     return DivisionPeer::doSelect($c);
   }
@@ -269,5 +270,10 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
       'academic_year' => $this->getyear(),
       'school_year' => $this->getCareerSchoolYear()->getSchoolYear()->getYear()
     );
+  }
+  
+  public function getAnualAverageWithDisapprovedSubjects()
+  {
+    return SchoolBehaviourFactory::getEvaluatorInstance()->getAnualAverageWithDisapprovedSubjects($this);
   }
 }

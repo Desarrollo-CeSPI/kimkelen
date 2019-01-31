@@ -19,10 +19,13 @@
 <?php use_helper('Date') ?>
 
 <div class="header-text">
+    <p><?php echo $student->getPerson()->getLastname() . ', '.$student->getPerson()->getFirstname().', ' .$student->getPerson()->getFullIdentification() ?></p>
     <p>Año de ingreso: <?php echo $student->getInitialSchoolYear()->getYear(); ?>.</p>
     <?php if ($analytical->has_completed_career()): ?>
         <p>Fecha de egreso: <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>.</p>
-        <p>Habiendo terminado sus estudios secundarios el día <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>, se le extiende el certificado de <strong><?php echo $analytical->get_career_name(); ?> - <?php echo $analytical->get_plan_name(); ?></strong> con orientación en <strong><?php echo $analytical->get_orientation(); ?></strong>.</p>
+        <p>Ha egresado con el Título de Bachiller en <?php echo $student->getStudentOrientationString()?> 
+            (<?php echo ($student->getSpecialityTypeString()) ? $student->getSpecialityTypeString() . ' - ' : '';?>
+            Especialidad <?php echo $student->getStudentSpecialityString() ?>)</p>
     <?php else: ?>
         <p>Para terminar sus estudios secundarios deberá aprobar:
             <?php if ($analytical->has_missing_subjects() ): ?>
@@ -35,10 +38,7 @@
                 Todo <?php echo implode(', ', array_map('__', $analytical->get_remaining_years_string())); ?>.
             <?php endif; ?>
         </p>
-        <?php if (count($analytical->get_years_in_career()) != 1 ): ?>
-            <p>Se deja constancia que su último examen lo rindió el <?php echo format_datetime($analytical->get_last_exam_date()->format('U'), "D"); ?>.</p>
-        <?php endif; ?>
-        <p>Certificado de Estudios Incompleto.</p>
+        <p>Certificado de Estudios Incompletos.</p>
     <?php endif; ?>
-    <p>Para que conste y a pedido del interesado, se expide el presente certificado confrontado con los registros y actas originales por el Secretario Administrativo y Jefe de la Oficina de Alumnos, en la ciudad de <?php echo __('escuela_ciudad'); ?>, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
+    <p>Se extiende el presente certificado, confrontado con los registros y actas originales por los señores/as Secretario/a Administrativo/a y Jefe/a de la Oficina de Alumnos/as. En la ciudad de <?php echo __('escuela_ciudad'); ?>,a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
 </div>

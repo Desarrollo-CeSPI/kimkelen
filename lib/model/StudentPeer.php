@@ -51,8 +51,9 @@ class StudentPeer extends BaseStudentPeer
       $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
       $criteria->addJoin(SchoolYearStudentPeer::STUDENT_ID, self::ID);
       $criteria->addJoin(self::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
+      $criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
       $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-
+      
       if (is_numeric($query_string))
       {
         // Search by identification number

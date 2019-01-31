@@ -30,10 +30,11 @@
         <table class="table gridtable_bordered">
             <thead>
                 <tr>
-                    <th colspan="7"><?php echo __('Year ' . $year) .' - ' .$object->get_career_name($year) ?></th>
+                    <th colspan="7" class="text-center"><?php echo $year.'°'.__('Year') .' - ' .$object->get_career_name($year) ?></th>
                 </tr>
                 <tr>
-                    <th class="text-left" rowspan="2" colspan="5"><?php echo __("General Subjects") ?></th>
+                    <th rowspan="2"><?php echo __("Date") ?></th>
+                    <th class="text-left" rowspan="2" colspan="4"><?php echo __("General Subjects") ?></th>
                     <th colspan="2" ><?php echo __("Calification") ?></th>
                 </tr>
                 <tr>
@@ -44,7 +45,8 @@
             <tbody class="analytical_body_table">
             <?php foreach ($object->get_general_subjects_in_year($year) as $css):?>
                 <tr>
-                    <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
+                    <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
+                    <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
                     <td colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
@@ -58,9 +60,10 @@
             <tbody class="analytical_body_table">
             <?php foreach ($object->get_specific_subjects_in_year($year) as $css):?>
                 <tr>
-                    <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
+                    <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -74,9 +77,10 @@
             <tbody class="analytical_body_table">
             <?php foreach ($object->get_suborientation_subjects_in_year($year) as $css):?>
                 <tr>
-                    <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
+                    <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -90,9 +94,26 @@
             <tbody class="analytical_body_table">
             <?php foreach ($object->get_optional_subjects_in_year($year) as $css):?>
                 <tr>
-                    <td align="left" colspan="5" width="70%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                    <td class="text-center" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
+                    <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                </tr>
+            <?php endforeach ?>
+        <?php endif; ?>
+        <?php if(!is_null($object->get_subjectsEOP_in_year($year))): ?>
+            <thead>
+                <tr>
+                    <th class="text-left" colspan="7"><?php echo __("Asignaturas del Espacio Optativo de Profundización") ?> </th>
+                </tr>
+            </thead>
+            <tbody class="analytical_body_table">
+            <?php foreach ($object->get_subjectsEOP_in_year($year) as $css):?>
+                <tr>
+                    <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
+                    <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 </tr>
             <?php endforeach ?>
         <?php endif; ?>

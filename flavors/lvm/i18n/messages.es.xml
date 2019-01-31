@@ -9123,6 +9123,30 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Date</source>
                         <target>Fecha</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Student approved career subject</source>
+                        <target>Aprobada</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Average report</source>
+                        <target>Reporte de promedios</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>School year average report</source>
+                        <target>Reporte de promedios por año lectivo</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Judicial restriction</source>
+                        <target>Restricción judicial</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Nationality id</source>
+                        <target>Nacionalidad</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Print entry form</source>
+                        <target>Planilla de ingreso</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>

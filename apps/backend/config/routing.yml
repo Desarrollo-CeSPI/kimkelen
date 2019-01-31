@@ -110,6 +110,10 @@ print_free_certificate:
   url:  /student/:id/printFreeCertificate
   param:  {module: student, action: printFreeCertificate, sf_format: pdf }
 
+print_entry_form:
+  url:  /student/:id/printEntryForm
+  param:  {module: student, action: printEntryForm, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
@@ -134,6 +138,10 @@ rating_report:
   url:  rating_report
   param:  { module: rating_report, action: index }
 
+average_report:
+  url: average_report/filterBySchoolYear
+  param: {module: rating_report, action: filterBySchoolYear}
+  
 course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }

@@ -28,6 +28,7 @@ class LvmStudentFormFilter extends StudentFormFilter
 
   public function configure() {
     parent::configure();
+    $this->unsetFields();
     $this->setWidget('global_file_number', new sfWidgetFormFilterInput(array('with_empty' => false)));
   }
   public function unsetFields()
@@ -46,7 +47,8 @@ class LvmStudentFormFilter extends StudentFormFilter
       $this['blood_group'],
       $this['blood_factor'],
       $this['emergency_information'],
-      $this['health_coverage_id']
+      $this['health_coverage_id'],
+      $this['judicial_restriction']     
     );
   }
   public function getFields()

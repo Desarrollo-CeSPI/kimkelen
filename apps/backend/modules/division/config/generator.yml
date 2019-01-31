@@ -72,7 +72,7 @@ generator:
           boletines:
             action: printReportCard
             label:  Imprimir boletines division
-            credentials:  [[report_card, edit_division_preceptors,show_division_course_califications]]
+            credentials:  [[edit_division_preceptors,show_division_course_califications]]
             condition: canPrintReportCards
 
           student_conduct:
@@ -113,12 +113,6 @@ generator:
           show_course_result_report:
             label:   Course result report
             action:  showCourseResultReport
-            credentials:    [show_division_course_califications]
-            condition: canShowCourseResultReport
-            
-          print_average:
-            label: Print averages
-            action: printAverages
             credentials:    [show_division_course_califications]
             condition: canShowCourseResultReport
             

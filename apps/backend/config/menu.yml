@@ -104,6 +104,9 @@ root:
           subject_rating_reports:
             title: Planillon de calificaciones por materia
             url: rating_report/filterForSubject
+          year_average_reports:
+            title: Reporte de promedios por año
+            url: average_report/filterBySchoolYear
 
       school_years:
         title: Años lectivos

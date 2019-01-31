@@ -19,9 +19,10 @@
 ?>
 
 <tbody class="print_body">
-  <?php $i = 0; ?>
-  <?php foreach ($course_subject->getCourseSubjectStudents() as $course_subject_student): ?>
-    <?php if ($course_subject_student->getStudent()->getIsRegistered($course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear())): ?>
+  <?php $i = 0;?>
+  <?php foreach ($course_subject->getCourseSubjectStudentsForPrintReport() as $course_subject_student): ?>
+    <?php $last_scsy = $course_subject_student->getStudent()->getLastStudentCareerSchoolYearCoursed(); ?>
+    <?php if (!is_null($last_scsy) && $last_scsy->getCareerSchoolYear()->getSchoolYear() == $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()): ?>
       <?php $i++ ?>
       <?php $course_result = $course_subject_student->getCourseResult(); ?>
       <tr>

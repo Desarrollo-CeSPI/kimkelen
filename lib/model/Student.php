@@ -65,6 +65,7 @@ class Student extends BaseStudent
     }
     $criteria = new Criteria();
     $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
+    $criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
     return $this->countSchoolYearStudents($criteria) == 1;
 
   }
@@ -83,7 +84,7 @@ class Student extends BaseStudent
       $csy = SchoolYearPeer::retrieveCurrent();
     }
     $criteria = new Criteria();
-    $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
+    $criteria->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $csy->getId());
     $array = $this->getSchoolYearStudents($criteria);
     return array_shift($array);
 
@@ -912,6 +913,7 @@ class Student extends BaseStudent
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
 
     $school_year_student = SchoolYearStudentPeer::doSelectOne($c);
 
@@ -1182,9 +1184,11 @@ class Student extends BaseStudent
 
   public function canBeDeactivated()
   {
+	  /*is_deleted = false*/
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
 
     return (count(SchoolYearStudentPeer::doSelect($c)) == 0) && ($this->getPerson()->getIsActive());
   }
@@ -1319,6 +1323,7 @@ class Student extends BaseStudent
     $c = new Criteria();
     $c->add(SchoolYearStudentPeer::STUDENT_ID, $this->getId());
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
     $school_year_student = SchoolYearStudentPeer::doSelectOne($c);
     SchoolYearStudentPeer::clearInstancePool();
 
@@ -1674,22 +1679,9 @@ class Student extends BaseStudent
         return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
   
-  public function getLastStudentCareerSchoolYearCursed()
+  public function getLastStudentCareerSchoolYearCoursed()
   {
-    $c = new Criteria();
-    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
-    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-    $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
-    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getId());
-    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $this->getId());
-    $c->add(CourseSubjectStudentMarkPeer::MARK,NULL, Criteria::NOT_EQUAL);
-    $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-    return StudentCareerSchoolYearPeer::doSelectOne($c);
+      return SchoolBehaviourFactory::getEvaluatorInstance()->getLastStudentCareerSchoolYearCoursed($this);
   }
   
   public function isRepprovedInSchoolYear($school_year)
@@ -1734,6 +1726,63 @@ class Student extends BaseStudent
 
     return implode(';  ', $tutors);
   }
+  
+  public function getSpecialityTypeString()
+  {
+    return AnalyticalBehaviourFactory::getInstance($this)->getSpecialityTypeString($this->getCareerStudent());
+  }
+  
+   public function getCourseSubjectStudentsForSecondQuaterly($student_career_school_year = null)
+  {
+    if (is_null($student_career_school_year))
+    {
+      $career_school_years = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this, SchoolYearPeer::retrieveCurrent());
+      $student_career_school_year = array_shift($career_school_years);
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    $second_quaterly = CareerSchoolYearPeriodPeer::retrieveSecondQuaterlyForCareerSchoolYear($career_school_year);
+    $results = array();
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::QUATERLY_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      foreach ($subject_configurations as $sc)
+      {
+        if ($sc->getCareerSchoolYearPeriodId() == $second_quaterly->getId())
+          $results[$css->getId()] = $css;
+      }
+    }
+    return $results;
+
+  }
+  
+  public function getCourseSubjectStudentsForFirstQuaterly($student_career_school_year = null)
+  {
+    if (is_null($student_career_school_year))
+    {
+      $career_school_years = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this, SchoolYearPeer::retrieveCurrent());
+      $student_career_school_year = array_shift($career_school_years);
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    $first_quaterly = CareerSchoolYearPeriodPeer::retrieveFirstQuaterlyForCareerSchoolYear($career_school_year);
+    $results = array();
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::QUATERLY_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      
+      foreach ($subject_configurations as $sc)
+      {
+        if ($sc->getCareerSchoolYearPeriodId() == $first_quaterly->getId())
+          $results[$css->getId()] = $css;
+      }
+    }
+    return $results;
+
+  }
+  
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

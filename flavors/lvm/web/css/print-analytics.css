@@ -7,7 +7,7 @@
 }
 
 .misma_pagina {
-   /* page-break-inside: avoid;*/
+    page-break-inside: avoid;
 }
 
 .table {
@@ -79,4 +79,8 @@
 
 .analytic_info{
     display: block;
+}
+
+.analytical_dipregep_info{
+    display: none;
 }
