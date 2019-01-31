@@ -23,11 +23,11 @@ class CloseCareerSchoolYearForm extends sfForm
     $csy=CareerSchoolYearPeer::retrieveByPk($csy_id);
     $career = $csy->getCareer();
     
-    $status = array (StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
+    $status = array(StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
     $c = new Criteria();
-    $c->add(CareerSchoolYearPeer::ID, $csy_id);
+    $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $csy_id);
     $c->add(StudentCareerSchoolYearPeer::STATUS, $status, Criteria::NOT_IN);
-    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);    
     $c->setDistinct(StudentCareerSchoolYearPeer::YEAR);
     $c->clearSelectColumns();
     $c->addSelectColumn(StudentCareerSchoolYearPeer::YEAR);
