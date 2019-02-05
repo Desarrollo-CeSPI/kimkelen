@@ -33,10 +33,16 @@ class SchoolYear extends BaseSchoolYear
     if ($count_careers == 0)
       return false;
 
-    /*$c = new Criteria();
-    $c->add(CareerSchoolYearPeer::IS_PROCESSED, true);
-    $count_procesed = $this->countCareerSchoolYears($c);
-    return ($count_careers == $count_procesed);*/return TRUE;
+    
+    
+    $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, true);
+    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $this->getId());
+    
+    $count_procesed = StudentCareerSchoolYearPeer::doCount($c);
+    return ( $count_procesed > 0);;
   }
 
   public function canManualExamination(PropelPDO $con = null)

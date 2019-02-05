@@ -38,14 +38,13 @@
 
         <h2><?php echo __('Close courses') ?></h2>
         <?php echo $form?>
-
-      </fieldset>
-      <div id= "block_screen"> </div>
+      </fieldset>       
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Volver al listado de carreras'), '@career_school_year', array('class' => 'sf_admin_action_go_back')) ?></li>
         <li><input type="submit" value="<?php echo __('Guardar') ?>" onclick="blockScreenCareerSchoolYear()"/></li>
       </ul>
     </form>
   </div>
-     <div style="margin-top: 1px; clear: both;"></div>
+     <div id= "block_screen" style="position: absolute; margin-left: 48%"> </div>  
+     <div style="margin-top: 20px; clear: both;"></div>
 </div>
