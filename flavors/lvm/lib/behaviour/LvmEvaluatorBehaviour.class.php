@@ -805,4 +805,25 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return false;
 
     }
+    
+    public function canPrintWithdrawnCertificate($student)
+    {     
+        $scsy = $student->getLastStudentCareerSchoolYear();
+        
+        if(!is_null($scsy))
+        {
+           if($scsy->getStatus() == StudentCareerSchoolYearStatus::FREE)
+           {
+               return false;
+           }
+           else
+           {
+               if(!is_null($student->getCareerStudent())){
+
+                    return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+                }
+           }
+           return false; 
+        }   
+    }
 }
