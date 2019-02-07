@@ -370,14 +370,24 @@ class apiActions extends sfActions
         
         public function executeGetPerson(sfWebRequest $request)
         {
-          $p = PersonPeer::getForDocumentTypeAndNumber($request->getGetParameters());
-          $this->person =   array(
-                'persona'  => $p->getId(),
-          );
-          
+          $par = $request->getGetParameters();
+          $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
+         
+          $this->person = PersonPeer::getForDocumentTypeAndNumber($document_type,$par['numero_documento']);
+
           $this->getResponse()->setHttpHeader('Content-type','application/json');
-	  $this->getResponse()->setContent(json_encode($this->person));
+	  $this->getResponse()->setContent($this->person);
           $this->setLayout(false);
+        }
+        
+        public function executeGetPersonalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $this->person = PersonPeer::retrieveByPK($id);
+
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->getResponse()->setContent($this->person);
+            $this->setLayout(false);
         }
  
 }

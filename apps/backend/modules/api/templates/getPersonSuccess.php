@@ -1,1 +1,3 @@
-<?php echo json_encode($person)?>
+<?php echo json_encode( array(
+                'persona'  => $person->getId(),
+          ))?>

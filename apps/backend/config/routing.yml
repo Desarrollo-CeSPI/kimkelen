@@ -19,9 +19,14 @@ api_get_students:
     requirements:
       sf_format: json
 
+api_personal_data:
+  url: /api/personas/:id/datospersonales
+  param:   { module: api, action: getPersonalData }
+
 api_person:
-  url: /apisidcer/personas
+  url: /api/personas
   param:   { module: api, action: getPerson }
+
     
 change_status_motive:
   class: sfPropelRouteCollection
