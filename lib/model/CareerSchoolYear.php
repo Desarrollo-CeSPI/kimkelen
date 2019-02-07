@@ -171,22 +171,29 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     if ($this->getIsProcessed()) return false;
 
-    $c = new Criteria();
-    $c->add(CareerSchoolYearPeer::ID, $this->getId());
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
-    $c->add(CoursePeer::SCHOOL_YEAR_ID, $this->getSchoolYear()->getId());
-    $courses_actives = CoursePeer::doCount($c);
-
-    if ($courses_actives == 0)
+    $career_year = $this->getCareer()->getMaxYear();
+    
+    for( $i = 1; $i <= $career_year; $i ++)
     {
-      return false;
+        $c = new Criteria();
+        $c->add(CareerSchoolYearPeer::ID, $this->getId());
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+        $c->add(CoursePeer::SCHOOL_YEAR_ID, $this->getSchoolYear()->getId());
+        $c->add(CareerSubjectPeer::YEAR, $i);
+
+        $courses_actives = CoursePeer::doCount($c);
+        $c->add(CoursePeer::IS_CLOSED, true);
+        
+        if($courses_actives == CoursePeer::doCount($c))
+        {
+            return TRUE;
+        }
     }
-
-    $c->add(CoursePeer::IS_CLOSED, false);
-
-    return CoursePeer::doCount($c) == 0;
+     
+    return FALSE;
   }
 
   public function getMessageCantClose()
@@ -685,10 +692,10 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     $status = array (StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
     
-    $c = new Criteria();
-    $c->add(CareerSchoolYearPeer::ID, $this->getId());
+    $c = new Criteria();    
+    $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $this->getId());
     $c->add(StudentCareerSchoolYearPeer::STATUS, $status, Criteria::NOT_IN);
-    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);    
 
     return StudentCareerSchoolYearPeer::doCount($c) == 0;
     

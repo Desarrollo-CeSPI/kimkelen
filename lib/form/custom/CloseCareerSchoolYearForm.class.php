@@ -37,17 +37,26 @@ class CloseCareerSchoolYearForm extends sfForm
     $years = array(''=>'');
     for($i=1;$i<=$career->getQuantityYears();$i++)
     {
-        if(in_array($i, $array_y))
+        //esta dentro del año a procesar y el año tiene todos los cursos cerrados
+   
+        $c = new Criteria();
+        $c->add(CareerSchoolYearPeer::ID, $csy_id);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+        $c->add(CoursePeer::SCHOOL_YEAR_ID, $csy->getSchoolYear()->getId());
+        $c->add(CareerSubjectPeer::YEAR, $i);
+
+        $courses_actives = CoursePeer::doCount($c);
+        $c->add(CoursePeer::IS_CLOSED, true);
+        
+       
+        if(in_array($i, $array_y) && $courses_actives == CoursePeer::doCount($c))
             $years[$i] = 'Año '.$i;
-    }
     
-    /*
-    if(count($years) == $career->getQuantityYears() )
-    {
-        $csy->setIsProcessed(true);
-        $csy->save();
     }
-  */
+
    $this->setWidget('year',new sfWidgetFormChoice(array('choices' => $years)) );
    $this->setValidator('year', new sfValidatorString(array('required'=>true)));
    
