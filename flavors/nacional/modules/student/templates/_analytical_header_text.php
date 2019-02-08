@@ -19,7 +19,7 @@
 // @TODO: Agregar escuela de origen (origin_school de student?)
 ?>
 <?php use_helper('Date') ?>
-<div>
+<div class="analytical-header-text">
     <p class="header-text"> El/La director/a del
         <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?>
         de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que

@@ -68,7 +68,6 @@
 
 .school_logo
 {
-    float: left;
     width: 8%;
 }
 
@@ -125,4 +124,16 @@
 {
     font-size: 14px !important;
     width: 50em !important;
+}
+.header_row
+{
+    border: none;
+}
+
+.analytical-header-text{
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    margin-top: 3em !important;
+    margin-bottom: 1em !important;
+    padding: 1em 0 !important;
 }
