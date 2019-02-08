@@ -807,7 +807,10 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     }
     
     public function canPrintWithdrawnCertificate($student)
-    {     
+    {   
+        if ($this->canPrintGraduateCertificate($student))
+            return false;
+        
         $scsy = $student->getLastStudentCareerSchoolYear();
         
         if(!is_null($scsy))
