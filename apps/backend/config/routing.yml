@@ -18,10 +18,14 @@ api_get_students:
     options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForYear }
     requirements:
       sf_format: json
-
+      
 api_personal_data:
   url: /api/personas/:id/datospersonales
   param:   { module: api, action: getPersonalData }
+  
+api_analytical_data:
+  url: /api/personas/:id/datosanalitico
+  param:   { module: api, action: getAnalyticalData }
 
 api_person:
   url: /api/personas

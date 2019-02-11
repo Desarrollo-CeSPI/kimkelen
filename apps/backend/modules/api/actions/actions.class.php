@@ -389,5 +389,19 @@ class apiActions extends sfActions
             $this->getResponse()->setContent($this->person);
             $this->setLayout(false);
         }
+        
+        public function executeGetAnalyticalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $person = PersonPeer::retrieveByPK($id);
+            $this->student = $person->getStudent();
+            $this->career_student = CareerStudentPeer::retrieveByStudent($this->student->getId());
+            $this->analytical = AnalyticalBehaviourFactory::getInstance($this->student);
+            $this->analytical->process();
+
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->getResponse()->setContent($this->analytical);
+            $this->setLayout(false);
+        }
  
 }
