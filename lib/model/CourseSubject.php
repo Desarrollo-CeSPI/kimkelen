@@ -252,6 +252,17 @@ class CourseSubject extends BaseCourseSubject
 
   public function isFinalPeriod()
   {
+    //busco los retirados o con reserva de banco
+    $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+    $criterion = $c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
+    $criterion->addOr($c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
+    $c->add($criterion);
+    $c->clearSelectColumns();
+    $c->addSelectColumn(StudentPeer::ID);
+    $stmt = StudentPeer::doSelectStmt($c);
+    $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);  
+    
     $c = new Criteria();
     $c->add(CourseSubjectStudentMarkPeer::MARK, null, Criteria::ISNULL);
     $c->addAnd(CourseSubjectStudentMarkPeer::IS_CLOSED, false);
@@ -259,10 +270,11 @@ class CourseSubject extends BaseCourseSubject
     $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, $this->getId());
     $c->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
     $c->addJoin(StudentPeer::ID,CourseSubjectStudentPeer::STUDENT_ID);
-		$c->addJoin(StudentPeer::PERSON_ID,PersonPeer::ID);
-		$c->add(PersonPeer::IS_ACTIVE,true);
-
-		//die(var_dump(CourseSubjectStudentMarkPeer::doSelect($c)));
+    $c->addJoin(StudentPeer::PERSON_ID,PersonPeer::ID);
+    $c->add(PersonPeer::IS_ACTIVE,true);
+    $c->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+    
+    //die(var_dump(CourseSubjectStudentMarkPeer::doSelect($c)));   
     return CourseSubjectStudentMarkPeer::doCount($c) == 0;
 
   }
@@ -349,7 +361,7 @@ class CourseSubject extends BaseCourseSubject
      $criterion = $c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN, Criteria::EQUAL);
      $criterion->addOr($c->getNewCriterion(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::EQUAL));
      $c->add($criterion);
-	 $c->clearSelectColumns();
+     $c->clearSelectColumns();
      $c->addSelectColumn(StudentPeer::ID);
      $stmt = StudentPeer::doSelectStmt($c);
      $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -358,7 +370,8 @@ class CourseSubject extends BaseCourseSubject
      $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
      $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
      $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentCareerSchoolYearPeer::STUDENT_ID);
-	 $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+     $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+     $criteria->add(PersonPeer::IS_ACTIVE,TRUE);
      $criteria->setDistinct();    
      $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
 
@@ -823,4 +836,23 @@ class CourseSubject extends BaseCourseSubject
 				}
 		}
 	}
+        
+    public function getCourseSubjectStudentsForPrintCalifications($criteria = null, PropelPDO $con = null)
+    {
+        if ($criteria === null)
+        {
+          $criteria = new Criteria();
+        }
+
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
+        $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentCareerSchoolYearPeer::STUDENT_ID);
+        $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
+        $criteria->add(PersonPeer::IS_ACTIVE,TRUE);
+        $criteria->setDistinct();    
+        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+
+        return parent::getCourseSubjectStudents($criteria);
+    }
 }

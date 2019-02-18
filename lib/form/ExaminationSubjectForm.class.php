@@ -36,6 +36,9 @@ class ExaminationSubjectForm extends BaseExaminationSubjectForm
       $this["is_closed"]
     );
 
+    $this->setWidget('date', new csWidgetFormDateInput());
+    $this->setValidator('date', new mtValidatorDateString(array('required' => false)));
+    
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("multiple", true);
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("peer_method", 'doSelectActive');
     $this->widgetSchema["examination_subject_teacher_list"]->setOption("renderer_class", "csWidgetFormSelectDoubleList");

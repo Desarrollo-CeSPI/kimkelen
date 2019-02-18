@@ -38,6 +38,9 @@ class apiActions extends sfActions
 	 $i_identification_type =  BaseCustomOptionsHolder::getInstance('IdentificationType');
 	 $i_sex_type = BaseCustomOptionsHolder::getInstance('SexType');
 	 $i_nationality = BaseCustomOptionsHolder::getInstance('Nationality');
+         $i_occupation = BaseCustomOptionsHolder::getInstance('OccupationType');
+         $i_occupation_category = BaseCustomOptionsHolder::getInstance('OccupationCategoryType');
+
 	 
 	 $s_lastname = $this->getRequestParameter('apellido');// Es obligatorio
 	 $s_firstname = $this->getRequestParameter('nombres');// Es obligatorio
@@ -62,8 +65,8 @@ class apiActions extends sfActions
 	 $m_identification_number = $this->getRequestParameter('madre_nro_documento');
 	 $m_firstname = $this->getRequestParameter('madre_nombres'); 
 	 $m_lastname = $this->getRequestParameter('madre_apellido');
-	 $m_occupation = $this->getRequestParameter('madre_actividad_id');
-	 $m_occupation_category = $this->getRequestParameter('madre_ocupacion_id');
+	 $m_occupation = $i_occupation->getOccupation($this->getRequestParameter('madre_sector_actividad_id'));
+	 $m_occupation_category = $i_occupation_category->getOccupationCategory($this->getRequestParameter('madre_trab_ocupacion_id'));
 	 $m_study = $this->getRequestParameter('madre_estudios_id');
 	 $m_email = $this->getRequestParameter('madre_email');
 	 $m_phone = $this->getRequestParameter('madre_telefono_celular');
@@ -91,8 +94,8 @@ class apiActions extends sfActions
 	 $p_identification_number = $this->getRequestParameter('padre_nro_documento');
 	 $p_firstname = $this->getRequestParameter('padre_nombres'); 
 	 $p_lastname = $this->getRequestParameter('padre_apellido');
-	 $p_occupation = $this->getRequestParameter('padre_actividad_id');
-	 $p_occupation_category = $this->getRequestParameter('padre_ocupacion_id');
+	 $p_occupation = $i_occupation->getOccupation($this->getRequestParameter('padre_sector_actividad_id'));
+	 $p_occupation_category = $i_occupation_category->getOccupationCategory($this->getRequestParameter('padre_trab_ocupacion_id'));
 	 $p_study = $this->getRequestParameter('padre_estudios_id');
 	 $p_email = $this->getRequestParameter('padre_email');
 	 $p_phone = $this->getRequestParameter('padre_telefono_celular');
@@ -355,5 +358,10 @@ class apiActions extends sfActions
       $this->setLayout(false);
   
 	}
+        
+        public function executeGetStudents(sfWebRequest $request)
+        {
+            $this->scsys = $this->getRoute()->getObject();
+        }
  
 }

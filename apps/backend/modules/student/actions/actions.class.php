@@ -393,18 +393,24 @@ class studentActions extends autoStudentActions
     $this->career_student = CareerStudentPeer::retrieveByStudent($request->getParameter("id"));
     $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
     $this->analytical->process();
-    $this->analytic = new Analytic();
+    $form_class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getAnalyticForm();
+    $this->form  = new $form_class( new Analytic());
+    
   }
   
   public function executePrintAnalytical(sfWebRequest $request)
   {
     $this->career_student = CareerStudentPeer::retrieveByPK($request->getParameter("id"));
     $this->analytical = AnalyticalBehaviourFactory::getInstance($this->career_student->getStudent());
-    $this->analytical->process(); //falta el imprimir el analitico sin CBFE
+    $this->analytical->process(); 
     $this->analytic = new Analytic();
     $this->analytic->setCareerStudent($this->career_student);
+    $this->analytic->setCertificateNumber($request->getParameter('certificate'));
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
+    $this->analytic->setObservations($request->getParameter('observations'));
     $this->analytic->save();
+    
+    $this->dipregep_number = $request->getParameter('dipregep');
 
     $this->setLayout('cleanLayout');
   }
@@ -611,251 +617,37 @@ class studentActions extends autoStudentActions
 
   public function executeChangeStudentStatus(sfWebRequest $request)
   {
-	$this->student = $this->getRoute()->getObject();
+    $this->student = $this->getRoute()->getObject();
     $student_career_school_year = $this->student->getLastStudentCareerSchoolYear();
-    $this->form = new StudentCareerSchoolYearForm($student_career_school_year);  
+    $this->form = new StudentCareerSchoolYearForm($student_career_school_year);
   }
   
   public function executeUpdateChangeStudentStatus(sfWebRequest $request)
   {
     $this->student = StudentPeer::retrieveByPK($request->getParameter('student_id'));
-    $this->status = $request->getParameter('student_career_school_year[status]');
-    $this->motive = $request->getParameter('student_career_school_year[change_status_motive_id]');
-	
     $student_career_school_year = $this->student->getLastStudentCareerSchoolYear();
     
     if(is_null($student_career_school_year))
     {
-		$this->getUser()->setFlash('error', 'Ocurrió un error al guardar los datos');	
-	}
-	else
-	{	
-		switch($this->status){
-			
-			case StudentCareerSchoolYearStatus::WITHDRAWN:
-				//Retirado
-				
-				//cambio el estado
-				$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-				$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-				$a = $this->form->save();
-							
-				//desmatricular
-				$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear());
-				if(! is_null($s))
-				{
-					$s->delete();
-				}
-				
-				//deshabilito la persona
-				$this->student->getPerson()->setIsActive(false);
-				$this->student->getPerson()->save();
-				
-				//seteo en sus course_subject_student_mark is_closed en TRUE;
-				$this->student->setCourseSubjectStudentMarksForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear(),true);
-				$this->getUser()->setFlash('info',  'The item was updated successfully.');	 
-		  
-				break;
-				
-			case StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE:
-				//Retirado con reserva de banco
-				
-				$this->start_date   = $request->getParameter('student_career_school_year[start_date_reserve]');
-
-				//Si no existe la reserva la creo.
-				$student_reserve = $this->student->hasActiveReserve();
-		
-				if(is_null($student_reserve))
-				{ 
-					if(is_null($this->start_date) || $this->start_date == '')
-					{
-						$this->getUser()->setFlash('error','El campo Fecha de inicio de la reserva es obligatorio.');	
-					}
-					else
-					{
-						$this->start_date = str_replace('/', '-', $this->start_date);
-						$this->start_date = date('Y-m-d', strtotime($this->start_date));
-						
-						$student_reserve = new StudentReserveStatusRecord();
-						$student_reserve->setStudentId($this->student->getId());
-						$student_reserve->setStartDate(new DateTime($this->start_date));
-						StudentReserveStatusRecordPeer::doInsert($student_reserve);
-						
-						//cambio el estado
-						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-						$a = $this->form->save();
-
-						//desmatricular
-						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-						if(! is_null($s))
-						{
-							$s->delete();
-						}
-						
-						//seteo en sus course_subject_student_mark is_closed en TRUE;
-						$this->student->setCourseSubjectStudentMarksForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear(),true);
-						$this->getUser()->setFlash('info','The item was updated successfully.' );
-					}	
-					
-				}
-				else
-				{	//Ya existe la reserva solo modifico la fecha
-					$this->start_date = str_replace('/', '-', $this->start_date);
-					$this->start_date = date('Y-m-d', strtotime($this->start_date));	
-					$student_reserve->setStartDate(new DateTime($this->start_date));
-					$student_reserve->save();		
-					$this->getUser()->setFlash('info','The item was updated successfully.' );
-				}
-					
-				break;
-				
-			case StudentCareerSchoolYearStatus::FREE:
-				//Libre
-				
-				$max_year = $student_career_school_year->getCareerSchoolYear()->getCareer()->getMaxYear();
-				//chequeo que sea el ultimo año.
-				if($student_career_school_year->getYear() == $max_year)
-				{	
-					//chequeo que deba materias.
-					if($this->student->getCountStudentRepprovedCourseSubject() > 0)
-					{
-						//cambio el estado
-						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-						$a = $this->form->save();
-						
-						//si no esta activo, lo activo
-						if(!$this->student->getPerson()->getIsActive())
-						{
-							$this->student->getPerson()->setIsActive(true);
-							$this->student->getPerson()->save();	
-						}
-						
-						//desmatricular
-						$s = $this->student->getSchoolYearStudentForSchoolYear($student_career_school_year->getSchoolYear());
-						if(! is_null($s))
-						{
-							$s->delete();
-						}
-						
-						$this->getUser()->setFlash('info','The item was updated successfully.');
-					}
-					else
-					{
-						$this->getUser()->setFlash('error','El alumno no debe materias.');	
-					}
-					
-				}
-				else
-				{
-					$this->getUser()->setFlash('error', 'El alumno debe estar en el ultimo año de la carrera.');
-				}	
-				
-				break;
-			
-			case StudentCareerSchoolYearStatus::IN_COURSE:
-				//En curso
-				
-				//Chequeo que el estado anterior sea Retirado con Reserva de Banco.
-				if($student_career_school_year->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
-				{
-					$this->getUser()->setFlash('error', 'El estado anterior debe ser Retirado con reserva de Banco.');
-				}
-				else
-				{
-					$this->end_date = $request->getParameter('student_career_school_year[end_date_reserve]');
-					
-					if(is_null($this->end_date) || $this->end_date =='')
-					{
-						$this->getUser()->setFlash('error','El campo Fecha de fin de la reserva es obligatorio.');	
-					}
-					else
-					{
-						//guardo la fecha de fin de la reserva.
-						$this->end_date = str_replace('/', '-', $this->end_date);
-						$this->end_date = date('Y-m-d', strtotime($this->end_date));
-						
-						$student_reserve = $this->student->hasActiveReserve();
-						$student_reserve->setEndDate(new DateTime($this->end_date));
-						$student_reserve->save();
-						
-						//cambio el estado
-						$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-						$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-						$a = $this->form->save();
-						$this->getUser()->setFlash('info','The item was updated successfully.');		
-					}
-					
-				}
-				
-				break;
-			case StudentCareerSchoolYearStatus::APPROVED:
-				
-				if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE)
-				{
-					
-					if($student_career_school_year->getStatus() == StudentCareerSchoolYearStatus::FREE){
-						
-						//no debe materias.
-						if($this->student->getCountStudentRepprovedCourseSubject() == 0){
-							
-							//cambio el estado
-							$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-							$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-							$a = $this->form->save();
-							
-							//cambio el estado de la carrera.
-							$career = $student_career_school_year->getCareerSchoolYear()->getCareer();
-							$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $this->student->getId());
-							$career_student->setStatus(CareerStudentStatus::GRADUATE);
-							$current_school_year = SchoolYearPeer::retrieveCurrent();
-							$career_student->setGraduationSchoolYearId($current_school_year->getId());
-							$career_student->save(Propel::getConnection());
-							
-							//deshabilito la persona
-							$this->student->getPerson()->setIsActive(false);
-							$this->student->getPerson()->save();
-							
-							$this->getUser()->setFlash('info','The item was updated successfully.');
-						}	
-						else
-						{
-							$this->getUser()->setFlash('error','El alumno tiene materias previas sin aprobar.');
-					    }
-					    
-					}else{
-						/*SOLO CHEQUEA QUE TENGA LAS MATERIAS CERRADAS*/
-						
-						$course_subject_students = $this->student->getCourseSubjectStudentsForSchoolYear($student_career_school_year->getCareerSchoolYear()->getSchoolYear());
-						$css = array_shift($course_subject_students);
-						
-						/* Si tengo alguna materia sin cerrar */
-						if (!$css->areAllMarksClosed())
-						{
-							$this->getUser()->setFlash('error',"El alumno tiene cursadas sin cerrar.");
-						}
-						else
-						{
-							//cambio el estado
-							$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
-							$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));	
-							$a = $this->form->save();
-							$this->getUser()->setFlash('info','The item was updated successfully.');
-						}
-					}		
-				}
-				else
-				{
-					$this->getUser()->setFlash('error','El alumno debe estar cursando o estar Libre.');
-				}
-				
-				break;
-		}
-		
-	}
+	$this->getUser()->setFlash('error', 'Ocurrió un error al guardar los datos');	
+    }
+    else
+    {	$this->form = new StudentCareerSchoolYearForm($student_career_school_year);
+        if ($request->isMethod("post"))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+          if ($this->form->isValid())
+          {
+            $this->form->save();
+          }
+        }
+        else
+        {
+            $this->getUser()->setFlash('error', 'Ocurrió un error al guardar los datos');
+        } 
+    }
 	
-	$this->redirect('student/changeStudentStatus?id='.$this->student->getId());   
+    $this->redirect('student/changeStudentStatus?id='.$this->student->getId());   
       
   }
   
@@ -870,6 +662,7 @@ class studentActions extends autoStudentActions
   public function executePrintGraduateCertificate($request)
   {
 	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+          $this->buildCertificate($this->student);
 	  $this->setLayout('cleanLayout');
   }
   
@@ -881,36 +674,108 @@ class studentActions extends autoStudentActions
   
   public function executePrintWithdrawnCertificate($request)
   {
-	  $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
-          /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
-           *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
-          
-          $school_year = SchoolYearPeer::retrieveLastYearSchoolYear(SchoolYearPeer::retrieveCurrent());
-          
-          $scsy = $this->student->isRepprovedInSchoolYear($school_year);
-          $css = $this->student->getCourseSubjectStudentsForSchoolYear(SchoolYearPeer::retrieveCurrent());
-        
-          $dis_cs = array();
-          if(!is_null($scsy) && count($css) == 0 )
-          {
-             $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($this->student,$scsy->getCareerSchoolYear());
-            
-             if(is_null($dis_cs))
-             {
-                $dis_cs = array();
-             }
-          }
-          
-        $previous = StudentRepprovedCourseSubjectPeer::retrieveByStudentAndCareer($this->student, $this->student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getCareer());
-	
-        if(is_null($previous))
-        {
-           $previous = array();
-        }
-        
-        $this->p = array_merge($previous,$dis_cs);
-      
+	$this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+        $this->buildCertificate($this->student);
         $this->setLayout('cleanLayout');
+  }
+  
+  public function executePrintFreeCertificate($request)
+  {
+	$this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+        $this->buildCertificate($this->student);
+        $this->setLayout('cleanLayout');
+        //$this->setTemplate('printGraduateCertificate');
+  }
+  
+  public function buildCertificate($student)
+  {
+      $this->p = array();
+      $this->student_career_school_years = $student->getStudentCareerSchoolYears();
+      $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
+      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED,StudentCareerSchoolYearStatus::FREE);
+
+        foreach ($this->student_career_school_years as $scsy)
+        {
+            if (in_array($scsy->getStatus(), $status) || 
+               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_cursed->getId()))
+            {
+                $career_school_year = $scsy->getCareerSchoolYear();
+                $school_year = $career_school_year->getSchoolYear();
+
+                $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
+                foreach ($csss as $css)
+                {	    
+                    if ( ! $css->getIsNotAverageable())
+                    {
+                        $sacs = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($css, $school_year);
+                        
+                        if(is_null($sacs) && is_null($css->getStudentApprovedCourseSubject())) 
+                        {
+                                // No tiene nota -> el curso está incompleto
+                                $this->p[]=$css;
+                               
+                        }
+                    }
+                }
+            }
+        }
+      
+       /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
+        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/   
+        if(!is_null($student->getLastStudentCareerSchoolYearCoursed()))
+        {
+            $school_year = $student->getLastStudentCareerSchoolYearCoursed()->getCareerSchoolYear()->getSchoolYear();
+            $scsy = $student->isRepprovedInSchoolYear($school_year); 
+            $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear());
+
+            if(!is_null($scsy) && count($css) == 0 )
+            {
+                $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
+            }
+
+            foreach($dis_cs as $c)
+            {
+               $this->p[] = $c->getCourseSubjectStudent();
+            } 
+        }
+  
+  }
+  
+  public function executeBatchManageAllowedSubject(sfWebRequest $request, $objects)
+  {
+    $ids = array_map(create_function("\$o", "return \$o->getId();"), $objects);
+    $this->getUser()->setAttribute("multiple_register_students_ids", implode(",", $ids));
+
+    $this->redirect("student/multipleManageAllowedSubject");
+  }
+  
+  public function executeMultipleManageAllowedSubject(sfWebRequest $request)
+  {
+    $this->title = "Subjects to be coursed";
+    $this->help = "Sólo se administrarán las materias para aquellos alumnos que se encuentren matriculados.";
+    $this->url = 'student/multipleManageAllowedSubject';
+
+    $this->setTemplate("commonBatch");
+
+    $ids = $this->getUser()->getAttribute("multiple_register_students_ids");
+    $ids = explode(",", $ids);
+    $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getMultipleManageAllowedSubjectForm();
+    $this->form = new $form_name;
+    $this->form->setStudentsIds($ids);
+
+    if ($request->isMethod("post"))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "Los ítems fueron actualizados correctamente.");
+        $this->getUser()->getAttributeHolder()->remove("multiple_register_students_ids");
+
+        $this->redirect("@student");
+      }
+    }
   }
 
 }

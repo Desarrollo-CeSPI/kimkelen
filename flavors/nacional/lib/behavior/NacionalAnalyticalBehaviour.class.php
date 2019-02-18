@@ -20,5 +20,59 @@
 
 class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
+    public function getApprovationDateBySubject($approvationInstance)
+    {
+        switch(get_class($approvationInstance)) {
+          case 'StudentApprovedCourseSubject':
+            //return November/July
+            if($approvationInstance->getCourseSubject()->getCourseType() != CourseType::TRIMESTER)
+            {
+                $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+                if(!is_null($period))
+                {
+                    $month = date('m', strtotime($period->getEndAt()));
+                    if($month > 11 ){
+                        return $approvationInstance->getSchoolYear()->getYear()."-11-30";
+                    }
+                  return $period->getEndAt();
+                }
+                break;
+            }
+            else{
+                return $approvationInstance->getSchoolYear()->getYear()."-11-30";
+            }
+           
+            break;
+          case 'StudentDisapprovedCourseSubject': 
+              //return December/February
+            $cssid = $approvationInstance->getCourseSubjectStudentId();
+            $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
+            $exam = $csse->getExaminationSubject()->getExamination();
+                        
+            return ($csse->getExaminationSubject()->getDate()) ? $csse->getExaminationSubject()->getDate() : $exam->getDateFrom();
+          case 'StudentRepprovedCourseSubject':
+               
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
+            if(is_null($sers->getExaminationRepprovedSubject()))
+            {
+                //Estuvo en trayectorias. Es el año de la trayectoria + 1
+                $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
+                $year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
+                $year += 1;
+                return $year .'-07-01';
+            }
+            else
+            {
+                $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
+                return ($sers->getExaminationRepprovedSubject()->getDate()) ? $sers->getExaminationRepprovedSubject()->getDate() : $exam->getDateFrom(); 
+            }
+             
+            
+        }
+
+        //couldn't find when was approved. return null ¿error?
+        return;
+        
+    }
 	
 }

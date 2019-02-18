@@ -117,11 +117,47 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
         $criteria->addJoin(PathwayStudentPeer::PATHWAY_ID,PathwayPeer::ID);
         $criteria->add(PathwayPeer::SCHOOL_YEAR_ID,$sy->getId());
         $pathway = PathwayStudentPeer::doSelectOne($criteria, $con);
-
         if (!$pathway)
         {
           StudentCareerSubjectAllowedPeer::doDelete($c, $con);
-        }   
+        }
+        else
+        {   //Calculo las materias que rinde en trayectorias.  
+            try
+            {
+                $con->beginTransaction();
+                
+                $cri = new Criteria();
+                $cri->addJoin(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+                $cri->add(CourseSubjectStudentPeer::STUDENT_ID,$student_id);
+                $cri->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+                $cri->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID,CareerSubjectSchoolYearPeer::ID);
+                $cri->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID,CareerSubjectPeer::ID);
+                $cri->add(CareerSubjectPeer::CAREER_ID,$this->getValue("career_id"));
+                $cri->add(CareerSubjectPeer::YEAR,$pathway->getYear());
+                $cri->add(StudentDisapprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID,NULL);
+                $career_subjects = CareerSubjectPeer::doSelect($cri);
+                
+                foreach ($career_subjects as $career_subject)
+                { /* check if not exist */
+                  $scsap= StudentCareerSubjectAllowedPathwayPeer::doCountStudentAndCareerSubject($this->object, $career_subject);
+                  if($scsap == 0)
+                  {
+                      $obj = new StudentCareerSubjectAllowedPathway();
+                      $obj->setStudentId($this->object->getPrimaryKey());
+                      $obj->setCareerSubject($career_subject);
+                      $obj->save($con);
+                  }
+                }
+                
+                $con->commit();
+            }
+            catch (PropelException $e)
+            {
+              $con->rollBack();
+              throw $e;
+            }
+        }
     }
 
     $year = $this->getValue('year');
@@ -150,11 +186,15 @@ class StudentCareerSubjectAllowedManagementForm extends StudentForm
       $c->add(CareerSubjectPeer::YEAR, $year);
 
       foreach (CareerSubjectPeer::doSelect($c) as $career_subject)
-      {
-        $obj = new StudentCareerSubjectAllowed();
-        $obj->setStudentId($this->object->getPrimaryKey());
-        $obj->setCareerSubject($career_subject);
-        $obj->save($con);
+      { /* check if not exist */
+        $scsa= StudentCareerSubjectAllowedPeer::doCountStudentAndCareerSubject($this->object, $career_subject);
+        if($scsa == 0)
+        {
+            $obj = new StudentCareerSubjectAllowed();
+            $obj->setStudentId($this->object->getPrimaryKey());
+            $obj->setCareerSubject($career_subject);
+            $obj->save($con);
+        }
       }
 
       $prev_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($career_school_year->getSchoolYear());

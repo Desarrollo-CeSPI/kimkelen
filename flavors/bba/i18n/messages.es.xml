@@ -4770,6 +4770,26 @@
                 <source>Is computable</source>
                 <target>Es computable</target>
             </trans-unit>
+            <trans-unit>
+                <source>Course result report</source>
+                <target>Reporte de resultado de cursadas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print averages</source>
+                <target>Planilla de promedios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Date</source>
+                <target>Fecha</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Average report</source>
+                <target>Reporte de promedios</target>
+            </trans-unit>
+            <trans-unit>
+                <source>School year average report</source>
+                <target>Reporte de promedios por año lectivo</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

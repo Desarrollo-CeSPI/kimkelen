@@ -30,13 +30,13 @@
   <tr>
     <?php $marks_count = $configuration->getCourseMarks(); ?>
     <?php if ($configuration->getCourseType() == CourseType::TRIMESTER): ?>
-      <?php include_partial('thead_trimester', array('marks_count' => $marks_count)); ?>
+      <?php include_partial('course_student_mark/thead_trimester', array('marks_count' => $marks_count)); ?>
     <?php endif; ?>
     <?php if ($configuration->getCourseType() == CourseType::QUATERLY): ?>
-      <?php include_partial('thead_quaterly', array('marks_count' => $marks_count)); ?>
+      <?php include_partial('course_student_mark/thead_quaterly', array('marks_count' => $marks_count)); ?>
     <?php endif; ?>
     <?php if ($configuration->getCourseType() == CourseType::BIMESTER): ?>
-      <?php include_partial('thead_bimester', array('marks_count' => $marks_count)); ?>
+      <?php include_partial('course_student_mark/thead_bimester', array('marks_count' => $marks_count)); ?>
     <?php endif; ?>
     <?php if ($configuration->getCourseType() == CourseType::QUATERLY_OF_A_TERM): ?>
        <th align="center"><?php echo __('1°'); ?></th>

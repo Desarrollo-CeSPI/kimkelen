@@ -1,5 +1,4 @@
-<?php
-/*
+<?php /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -17,4 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php include_partial('course_student_mark/course_subject_marks_table', array('course_subjects' => array($course_subject)))?>
+<p>
+    El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
+    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
+    es alumno regular de <?php echo $student->getCurrentStudentCareerSchoolYear()->getYear() . '° año'?>, y cursa 1 o 2 (optativo) veces 
+    por semana a contraturno en el presente ciclo lectivo.
+</p>

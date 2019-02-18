@@ -10,6 +10,14 @@ api_confirm_student:
   url: /api/confirm_student.:sf_format
   param:   { module: api, action: confirmStudent }
   requirements: { sf_method: post , sf_format: json}
+
+api_get_students:
+    url: /api/:academic_year/get_students.:sf_format
+    class:   sfPropelRoute
+    param:   { module: api, action: getStudents }
+    options: { model: StudentCareerSchoolYear, type: object, method: getStudentsForYear }
+    requirements:
+      sf_format: json
     
 change_status_motive:
   class: sfPropelRouteCollection
@@ -98,6 +106,10 @@ print_withdrawn_certificate:
   url:  /student/:id/printWithdrawnCertificate
   param:  {module: student, action: printWithdrawnCertificate, sf_format: pdf }
 
+print_free_certificate:
+  url:  /student/:id/printFreeCertificate
+  param:  {module: student, action: printFreeCertificate, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }
@@ -122,6 +134,10 @@ rating_report:
   url:  rating_report
   param:  { module: rating_report, action: index }
 
+average_report:
+  url: average_report/filterBySchoolYear
+  param: {module: rating_report, action: filterBySchoolYear}
+  
 course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }

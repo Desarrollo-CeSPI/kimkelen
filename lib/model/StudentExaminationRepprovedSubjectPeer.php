@@ -25,6 +25,7 @@ class StudentExaminationRepprovedSubjectPeer extends BaseStudentExaminationReppr
   {
     $criteria = new Criteria();
     $criteria->add(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, $srcs->getId());
+    $criteria->addDescendingOrderByColumn(self::ID);
 	
     return self::doSelectOne($criteria);
   }

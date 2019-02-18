@@ -49,9 +49,8 @@ class rating_reportActions extends sfActions
   public function executeSubject(sfWebRequest $request)
   {
   	$params = $request->getParameter('subject_rating_report');
-  	$this->course_subject = CourseSubjectPeer::retrieveByPk($params['course_subject_id']);
-
-    $this->getUser()->setReferenceFor($this, 'rating_report');
+        $this->getUser()->setReferenceFor($this, 'rating_report');
+        $this->redirect('course_student_mark/printSubjectCalification?id=' . $params['course_subject_id'] );
   }
 
   public function executeFilterForDivision(sfWebRequest $request)
@@ -72,4 +71,29 @@ class rating_reportActions extends sfActions
 
     $this->route = "rating_report/filterForDivision";
   }
+  
+    public function executeFilterBySchoolYear(sfWebRequest $request)
+    {
+        $this->form = new DivisionRatingReportFormFilter();
+      
+        if ($request->isMethod('POST'))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()));
+          if ($this->form->isValid())
+          {
+             $params = $request->getParameter('division_rating_report'); 
+             
+             $this->year =$params['year'] ;
+             $this->school_year = CareerSchoolYearPeer:: retrieveByPK($params['career_school_year_id'])->getSchoolYear();
+             $this->division = DivisionPeer::retrieveByPk($params['division_id']);
+             $this->students = $this->division->getStudents();
+             $this->setLayout('cleanLayout');
+             $this->setTemplate('printAverage');
+            
+          }
+         
+        }
+
+        $this->route = "rating_report/filterBySchoolYear";
+    }
 }

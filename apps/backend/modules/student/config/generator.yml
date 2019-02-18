@@ -53,6 +53,9 @@ generator:
             label: Address
             method: getPersonAddress
             decorator: text
+          person_cuil:
+            label: CUIL
+            method: getPersonCuil
           person_health_coverage:
             label: Health coverage
             method: getHealthCoverage
@@ -96,6 +99,15 @@ generator:
           graduation_school_year_id:
             label: Año de egreso
             method: getGraduationSchoolYear
+          origin_school_id:
+            label: Escuela de procedencia
+            method: getOriginSchool
+          tutors:
+            label: Tutores
+            method: getStudentTutorsString
+          tutors_email:
+            label: Email de tutores
+            method: getStudentTutorsEmailString
           
       fields:
         person:
@@ -124,6 +136,9 @@ generator:
             label: Administrar matrícula
             credentials: [edit_student]
           _delete:
+            credentials: [edit_student]
+          manageAllowedSubject:
+            label: Materias a cursar
             credentials: [edit_student]
         display: [person_lastname, person_firstname, person_full_identification, person_is_active, person_sf_guard_user, _is_registered, _careers]
         layout: stacked
@@ -228,6 +243,11 @@ generator:
             label: Withdrawn certificate
             action: printWithdrawnCertificate
             condition: canPrintWithdrawnCertificate
+            
+          free_certificate:
+            label: Withdrawn certificate
+            action: printFreeCertificate
+            condition: canPrintFreeCertificate
           
 
       filter:

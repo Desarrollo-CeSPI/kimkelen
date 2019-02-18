@@ -18,7 +18,6 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-<?php use_stylesheet('/css/bootstrap.css') ?>
 
 <div id="analytical_footer" class="misma_pagina">
     <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>

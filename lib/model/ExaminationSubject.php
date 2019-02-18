@@ -25,11 +25,11 @@ class ExaminationSubject extends BaseExaminationSubject
     public function canBeClosed()
     {
         $c = new Criteria();
-        $c->addJoin(ExaminationSubjectPeer::ID, CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID);
         $c->add(CourseSubjectStudentExaminationPeer::MARK, null, Criteria::ISNULL);
         $c->add(CourseSubjectStudentExaminationPeer::IS_ABSENT, false);
         $c->add(CourseSubjectStudentExaminationPeer::CAN_TAKE_EXAMINATION, TRUE);
-        $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID , CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID , CourseSubjectStudentPeer::ID);
+        $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID , $this->getId());
           
         //quito los retirados
         $withdrawn_criteria = new Criteria();
@@ -39,8 +39,7 @@ class ExaminationSubject extends BaseExaminationSubject
 		$withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
 		$stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
 		$not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
-		
-		
+				
 		$c->add(CourseSubjectStudentPeer::STUDENT_ID, $not_in_w, Criteria::NOT_IN);
 
         return $this->countCourseSubjectStudentExaminations($c) == 0 && !$this->getIsClosed();
@@ -97,6 +96,7 @@ class ExaminationSubject extends BaseExaminationSubject
         $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
         $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
         $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
         
         //quito los retirados
         $withdrawn_criteria = new Criteria();

@@ -34,6 +34,13 @@ class BaseAnalyticalBehaviour
         self::YEAR_INCOMPLETE => 'Curso I',
     );
     
+    protected $valid_status = array(
+        StudentCareerSchoolYearStatus::APPROVED,
+        StudentCareerSchoolYearStatus::IN_COURSE,
+        StudentCareerSchoolYearStatus::FREE,
+        StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED  
+    );
+    
     /* @var $student Student */
     protected $student = null;
     protected $objects = array();
@@ -68,7 +75,21 @@ class BaseAnalyticalBehaviour
     
     public function get_subjects_in_year($year)
     {
-        return $this->objects[$year]['subjects'];
+	    return $this->objects[$year]['subjects'];
+    }
+
+    public function get_graduated_date()
+    {
+        $last = $this->get_years_in_career();
+        $count = count($this->get_years_in_career()) -1;
+        $last_date = date('Y-m-d');
+        foreach ($this->objects[$last[$count]]['subjects'] as $css) {
+          $date = $css->getApprovedDate();
+            if ($date > $last_date) {
+              $last_date = $date;
+            }
+        }
+        return $last_date;
     }
     
     public function get_missing_subjects()
@@ -78,17 +99,17 @@ class BaseAnalyticalBehaviour
     
     public function get_year_average($year)
     {
-      return $this->objects[$year]['average'];
+      return ($this->objects[$year]) ? $this->objects[$year]['average'] : NULL;
     }
     
     public function get_year_status($year)
-    {
-        return $this->objects[$year]['status'];
+    { 
+        return (!is_null($this->objects[$year])) ? $this->objects[$year]['status'] : NULL;
     }
 
     public function get_str_year_status($year)
     {
-        return $this->_str_year_statuses[$this->get_year_status($year)]; 
+        return (!is_null($this->get_year_status($year)))? $this->_str_year_statuses[$this->get_year_status($year)] : ""; 
     }
     
     public function get_total_average()
@@ -111,6 +132,11 @@ class BaseAnalyticalBehaviour
         return $this->get_career_student()->getCareer()->getPlanName();
     }
 
+    public function get_resolution_number()
+    {
+       return $this->get_career_student()->getCareer()->getResolutionNumber();
+    }
+
     public function get_orientation()
     {
         return $this->get_career_student()->getOrientation();
@@ -128,7 +154,7 @@ class BaseAnalyticalBehaviour
     
     public function get_current_school_year()
     {
-        return $this->get_student()->getCurrentStudentCareerSchoolYear();
+        return $this->get_student()->getCurrentOrLastStudentCareerSchoolYear();
     }
     
     public function get_remaining_years_string()
@@ -149,18 +175,31 @@ class BaseAnalyticalBehaviour
             $this->remaining_years = array();
             $years = $this->get_career_student()->getCareer()->getYearsRange();
             $current_year = $this->get_current_school_year();
-            
+            $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();
             if(!is_null($current_year))
             {
-				foreach ($years as $year)
-				{
-					if ($current_year->getYear() <= $year)
-					{
-						$this->remaining_years[] = $year;
-					}
-				}	
-			}
-            
+                if($scsy_cursed)
+                {
+                    foreach ($years as $year)
+                    {
+                        if ($current_year->getYear() < $year ||( $current_year->getYear() == $year && $current_year->getId() != $scsy_cursed->getId() 
+                                    && $scsy_cursed->getStatus() != StudentCareerSchoolYearStatus::REPPROVED ))
+                            {
+                                    $this->remaining_years[] = $year;
+                            }   	
+                    }
+                }
+                else
+                {
+                    foreach ($years as $year)
+                    {
+                        if ($current_year->getYear() < $year)
+                        {
+                            $this->remaining_years[] = $year;
+                        }
+                    }
+                }			
+            }   
         }
         return $this->remaining_years;
     }
@@ -269,13 +308,13 @@ class BaseAnalyticalBehaviour
     protected function process_total_average($avg_mark_for_year)
     {
         $sum = 0;
-        $count = 0;
+        $prom_anual = 0;
         foreach ($avg_mark_for_year as $year => $data)
         {
             if (self::YEAR_COMPLETE === $this->get_year_status($year))
             {
-                $sum += $data['sum'];
-                $count += $data['count'];
+                $prom_anual = $data['sum'] / $data['count'];
+                $sum += $prom_anual;
             }
             else
             {
@@ -283,36 +322,35 @@ class BaseAnalyticalBehaviour
                 return;
             }
         }
-        $this->total_average = ($sum/$count);
+        $this->total_average = ($sum/count($avg_mark_for_year));
     }
     
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
-		
+	$scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();	
+
         //Deberia recorrer todos los "scsy" y recuperar por c/año las materias
         $this->init();
         $avg_mark_for_year = array();
 
         foreach ($this->student_career_school_years as $scsy)
         {
-            //Si no repitio el año lo muestro en el analitico - Ver que pasa cuando se cambia de escuela y repite el ultimo año
-            //Siempre tomo el año "Aprobado" y "Cursando"
-            
-            if ($scsy->getStatus() == 1)
+            //Si está en el arreglo de estados válidos o está retirado y cursó materias en ese año o si repitio ero fue el ultimo año que cursó
+            if (in_array($scsy->getStatus(), $this->valid_status) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                         $scsy->getId() == $scsy_cursed->getId()) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED && 
+                         $scsy->getId() == $scsy_cursed->getId()) )
             {
-
-                $year_in_career = $scsy->getYear();
-                 
+                $year_in_career = $scsy->getYear(); 
                 $this->add_year_in_career($year_in_career);
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
 
                 $approved = StudentApprovedCareerSubjectPeer::retrieveByStudentAndSchoolYear($this->get_student(), $school_year);
-                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
+                $csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year, $scsy);
 				
                 foreach ($csss as $css)
-				{	
+                {	
                     if (!isset($this->objects[$year_in_career]))
                     {
                         // Inicialización por año
@@ -343,30 +381,55 @@ class BaseAnalyticalBehaviour
                     $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
                 }
                 $this->process_total_average($avg_mark_for_year);
-            }else{
-				if($scsy->getStatus() == 0 ){
-					
-					//recupero en año en curso
-					$year_in_career = $scsy->getYear();
-					$this->add_year_in_career($year_in_career);
-					$career_school_year = $scsy->getCareerSchoolYear();
-					$school_year = $career_school_year->getSchoolYear();
-					
-					$csss = SchoolBehaviourFactory::getInstance()->getCourseSubjectStudentsForAnalytics($this->get_student(), $school_year);
-
-					foreach ($csss as $css)
-					{
-						// No tiene nota -> el curso está incompleto
-						$this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
-						$this->add_subject_to_year($year_in_career, $css);
-						
-					}
-				}
-			}
+                
+            }            
         }
     }
 
 	public function showCertificate() {
 		return false;
 	}
+        
+    public function getApprovationDateBySubject($approvationInstance)
+    {
+        switch(get_class($approvationInstance)) {
+          case 'StudentApprovedCourseSubject':
+
+            $period = $approvationInstance->getCourseSubject()->getLastCareerSchoolYearPeriod();
+            if(!is_null($period))
+            {
+              return $period->getEndAt();
+            }
+            break;
+          case 'StudentDisapprovedCourseSubject': 
+            $cssid = $approvationInstance->getCourseSubjectStudentId();
+            $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
+            $exam = $csse->getExaminationSubject()->getExamination();
+
+            return ($csse->getExaminationSubject()->getDate()) ? $csse->getExaminationSubject()->getDate() : $exam->getDateFrom();
+
+          case 'StudentRepprovedCourseSubject':
+              
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
+            if(is_null($sers->getExaminationRepprovedSubject()))
+            {
+                //Estuvo en trayectorias. Es el año de la trayectoria + 1
+                $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
+                $year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
+                $year += 1;
+                return $year .'-07-01';
+            }
+            else
+            {
+                $exam = $sers->getExaminationRepprovedSubject()->getExaminationRepproved();
+                return ($sers->getExaminationRepprovedSubject()->getDate()) ? $sers->getExaminationRepprovedSubject()->getDate() : $exam->getDateFrom(); 
+                
+            }
+           
+        }
+
+        //couldn't find when was approved. return null ¿error?
+        return;
+        
+    }
 }

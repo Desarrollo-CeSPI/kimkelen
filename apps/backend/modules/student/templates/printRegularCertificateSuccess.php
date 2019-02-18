@@ -23,12 +23,7 @@
 	<div class="report-content">
 		<?php include_partial('certificate_header');?>
 		<div class="report-text">
-			<p>
-				El/La director/a del <?php echo SchoolBehaviourFactory::getInstance()->getSchoolName() ?> de la Universidad Nacional de La Plata, hace constar que
-			    <b><?php echo $student .' '. $student->getPerson()->getFullIdentification() ?> </b>
-			    es alumno regular de <?php echo $student->getCurrentStudentCareerSchoolYear()->getYear() . '° año'?>, y cursa 1 o 2 (optativo) veces 
-			    por semana a contraturno en el presente ciclo lectivo.
-			</p>
+			<?php include_partial('certificate_regular_text',array('student'=> $student));?>
 			<?php include_partial('certificate_footer_text');?>
 		</div>
 		<div id="signature"><?php echo __('Firma de la autoridad')?></div>

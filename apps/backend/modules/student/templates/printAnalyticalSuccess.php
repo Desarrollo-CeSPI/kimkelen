@@ -30,7 +30,7 @@
         <div class="report-content">
             <?php include_component('student', 'component_analytical_table', array('career_student' => $career_student)) ?>
         </div>
-        <?php include_partial('analytical_footer', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
+        <?php include_partial('analytical_footer', array('career_student' => $career_student, 'analytical' => $analytical,'analytic' => $analytic)) ?>
     </div>
 
     <div id="sf_admin_container">

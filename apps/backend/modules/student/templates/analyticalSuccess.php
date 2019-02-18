@@ -31,7 +31,7 @@
             <?php echo link_to(__('Volver al listado alumnos', array(), 'messages'), "@student", array()) ?>
         </li>
         <li class="sf_admin_action_print">
-            <?php echo link_to(__('Pantalla de  impresión', array(), 'messages'), 'student/printAnalytical?id=' . $career_student->getId().'&orientation=Portrait') ?>
+            <?php echo link_to(__('Pantalla de  impresión', array(), 'messages'), 'student/printAnalytical?id=' . $career_student->getId().'&orientation=Portrait&page_size=Legal') ?>
         </li>
     </ul>
     

@@ -237,7 +237,8 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
     $student_approved_course_subject = $this->getStudentApprovedCourseSubject();
 
-    $student_approved_career_subject = ($student_approved_course_subject) ? $student_approved_course_subject->getStudentApprovedCareerSubject() : StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this);
+    $school_year = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear();
+    $student_approved_career_subject = ($student_approved_course_subject) ? $student_approved_course_subject->getStudentApprovedCareerSubject() : StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this,$school_year);
 
     $config = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration();
   	
@@ -713,6 +714,18 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     {
       return $this->getMarksAverage();
     }
+  }
+  
+  public function getAvgColorDisapprovedReport()
+  {
+    $course_result = $this->getCourseResult();
+    return ($course_result instanceOf StudentDisapprovedCourseSubject) ? $course_result->getAvgColorDisapprovedReport() : '' ;
+  }
+  
+  public function getColorDisapprovedReport($number)
+  {
+    $course_result = $this->getCourseResult();
+    return ($course_result instanceOf StudentDisapprovedCourseSubject) ? $course_result->getColorDisapprovedReport($number) : '' ;
   }
 
 }

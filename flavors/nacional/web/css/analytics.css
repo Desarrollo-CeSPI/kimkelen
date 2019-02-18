@@ -93,18 +93,36 @@
     width: 39%;
     height: 1.5em;
     text-align: center;
-    padding-top: 5em;
-    border: 1px solid;
+    border-top: 1px solid;
     margin-right: 5%;
     margin-left: 5%;
-    margin-top: 2em;
+    margin-top: 10em;
+    padding-top: 1em;
 }
 
-.analytical_body_table {
+.analytical_body_table 
+{
     font-size: 13px;
 }
 
 .header-text
 {
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.analytical-observations
+{
+    display: none;    
+}
+
+.analytical-form
+{
+    display: inline-block;
+    font-size: 16px;    
+}
+
+#analytic_observations
+{
+    font-size: 14px !important;
+    width: 50em !important;
 }

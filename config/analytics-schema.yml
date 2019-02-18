@@ -20,3 +20,9 @@ classes:
         description:      Archivo del certificado
         type:             blob
       created_at:
+      certificate_number:
+        description:      numero de certificado
+        type: varchar(20)
+      observations:
+        description:      Observaciones en el certificado
+        type: varchar(100)

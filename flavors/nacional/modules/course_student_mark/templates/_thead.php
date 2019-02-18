@@ -21,7 +21,7 @@
 
 <tr class="head" valign="bottom">
   <td align="center" width="42%" height="22" colspan="2"><?php echo SchoolBehaviourFactory::getInstance()->getSchoolName()?></td>
-  <td align="center" width="42%" height="22" colspan="<?php echo $configuration->getCourseMarks() + ($is_block? 10 : 9)?>">Planilla de calificaciones <?php echo date('Y')?></td>
+  <td align="center" width="42%" height="22" colspan="<?php echo $configuration->getCourseMarks() + ($is_block? 10 : 9)?>">Planilla de calificaciones <?php echo $course->getSchoolYear()?></td>
 
 </tr>
 <tr class="head" valign="bottom">

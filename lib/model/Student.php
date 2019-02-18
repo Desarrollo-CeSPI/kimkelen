@@ -511,7 +511,9 @@ class Student extends BaseStudent
     }
     else
     {
-      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $division))
+      $is_pathway = (!is_null($course_subject) && $course_subject->getCourse()->getIsPathway()) ? true : false;  
+        // && el curso no es de trayectoria
+      if ($this->isAlmostFree($career_school_year_period, $course_subject, $career_school_year, $division) && !$is_pathway)
       {
         return 'almost_free';
       }
@@ -1376,6 +1378,9 @@ class Student extends BaseStudent
  public function getStudentCareerSchoolYearsAscending()
   {
     $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->addDescendingOrderByColumn(SchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
     return $this->getStudentCareerSchoolYears($c);
@@ -1630,8 +1635,9 @@ class Student extends BaseStudent
       'full_name'  => $this->getPerson()->getFullName(),
       'full_document' => $this->getPerson()->getFullIdentification(),
       'is_active' => $this->getPerson()->getIsActive(),
-      'status' => $this->getCurrentOrLastStudentCareerSchoolYear()->getStatusString(),
-      'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear()->getyear()
+      'status' => $this->getCurrentOrLastStudentCareerSchoolYear() ? $this->getCurrentOrLastStudentCareerSchoolYear()->getStatusString() : null,
+      'academic_year' => $this->getCurrentOrLastStudentCareerSchoolYear() ? $this->getCurrentOrLastStudentCareerSchoolYear()->getyear() : null ,
+      'school_year' => $this->getCurrentOrLastStudentCareerSchoolYear() ? $this->getCurrentOrLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear() : null
     );
   }
   
@@ -1647,18 +1653,15 @@ class Student extends BaseStudent
     
     if(!is_null($cs)){
 	 $sy = SchoolYearPeer::retrieveByPk($cs->getGraduationSchoolYearId());
-	}
-   
-    return ($sy) ? $sy->getYear() :'-';
-
+         return ($sy) ? $sy->getYear() :'-';     
+    }
+    return '';
   }
   
   public function canPrintGraduateCertificate()
   {
-	  if(!is_null($this->getCareerStudent())){
-		 return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
-	  }
-	  return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintGraduateCertificate($this);
+
   }
   
   public function canPrintRegularCertificate()
@@ -1668,29 +1671,12 @@ class Student extends BaseStudent
   
   public function canPrintWithdrawnCertificate()
   {
-	if(!is_null($this->getLastStudentCareerSchoolYear()))
-	{
-		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN 
-                        || $this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE);
-	}
-	return false;
+        return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
   
-  public function getLastStudentCareerSchoolYearCursed()
+  public function getLastStudentCareerSchoolYearCoursed()
   {
-    $c = new Criteria();
-    $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
-    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
-    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
-    
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
-    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
- 
-    
-    return StudentCareerSchoolYearPeer::doSelectOne($c);
+      return SchoolBehaviourFactory::getEvaluatorInstance()->getLastStudentCareerSchoolYearCoursed($this);
   }
   
   public function isRepprovedInSchoolYear($school_year)
@@ -1703,6 +1689,38 @@ class Student extends BaseStudent
     
     return StudentCareerSchoolYearPeer::doSelectOne($c);
     }
+    
+  public function canPrintFreeCertificate()
+  {
+	if(!is_null($this->getLastStudentCareerSchoolYear()))
+	{
+		return ($this->getLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE);
+	}
+	return false;
+  }
+
+  public function getStudentTutorsString()
+  {
+    $tutors = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $tutors[] = $student_tutor->getTutor() . " (" . $student_tutor->getTutor()->getPerson()->getFullIdentification() . ")";
+    }
+
+    return implode(',  ', $tutors);
+  }
+  
+  public function getStudentTutorsEmailString()
+  {
+    $tutors = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $email = ($student_tutor->getTutor()->getPerson()->getEmail())  ? $student_tutor->getTutor()->getPerson()->getEmail(): '-';
+      $tutors[] = $student_tutor->getTutor() . " (" . $email . ")";
+    }
+
+    return implode(';  ', $tutors);
+  }
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

@@ -2102,3 +2102,24 @@ div.wc-cal-event{
 {
     background-image: url('../images/certificate.png') !important;
 }
+
+.sf_admin_list .sf_admin_action_free_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.mark_yellow_red
+{
+   background-color: #FF0;
+   color:red;
+}
+
+.sf_admin_list .sf_admin_action_show_course_result_report a
+{
+    background-image: url('../images/report_course.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_print_average a
+{
+    background-image: url('../images/report--pencil.png') !important;
+}

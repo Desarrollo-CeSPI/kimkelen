@@ -28,5 +28,10 @@ class NacionalFormFactory extends BaseFormFactory {
   {
     return 'NacionalStudentDisciplinarySanctionForm';
   }
+  
+  public function getAnalyticForm()
+  {
+      return 'NacionalAnalyticForm';    
+  }
 
 }

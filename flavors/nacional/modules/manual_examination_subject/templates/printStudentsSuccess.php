@@ -37,7 +37,7 @@
   </div>
 
   <div class="article-div">
-    <div><?php echo __('Day') ?> _____ / _____ / _____ &nbsp;<?php echo __('Hora') ?> _____ : _____ </div>
+    <div><?php echo  (!is_null($examination_subject->getDate())) ?  __('Day') .' '. date_format(new DateTime($examination_subject->getDate()), "d/m/Y") :  __('Day') .' _____ / _____ / _____' ?>  &nbsp;<?php echo __('Hora') ?> _____ : _____ </div>
   </div>
 
   <div class="gray-background">
@@ -74,7 +74,7 @@
       <?php foreach ($students as $student): ?>
         <tr>
           <td class="orden"><?php echo $i ?> </td>
-          <td class="student" style="text-align: left"><?php echo $student ?> </td>
+          <td class="student" style="text-align: left"><?php echo $student ?><?php echo $student->owsCorrelativeFor($examination_subject->getCareerSubject()) ? " (" . __('Ows correlative') . ")": ""; ?> </td>
           <td class="division"><?php echo implode(', ', DivisionPeer::retrieveStudentSchoolYearDivisions($examination_subject->getCareerSchoolYear()->getSchoolYear(), $student)); ?> </td>
           <?php $ess = $examination_subject->getExaminationNoteForStudent($student); ?>
           <td class="calification number">

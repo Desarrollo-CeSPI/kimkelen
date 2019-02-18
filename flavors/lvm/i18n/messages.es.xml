@@ -4368,7 +4368,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 			</trans-unit>
 			<trans-unit>
 				<source>nombre_ultimo_anio_primario</source>
-				<target>6º año de la EPB</target>
+				<target>6º año de la EP</target>
 			</trans-unit>
 			<trans-unit>
 				<source>analytic_signature_1</source>
@@ -4380,7 +4380,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 			</trans-unit>
 			<trans-unit>
 				<source>analytic_signature_3</source>
-				<target>Jefe/a del Dpto. de Alumnos</target>
+				<target>Director/a de Enseñanza</target>
 			</trans-unit>
 			<trans-unit>
 				<source>analytic_signature_4</source>
@@ -8857,7 +8857,7 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
 			</trans-unit>
 			<trans-unit>
 				<source>nombre_ultimo_anio_primario</source>
-				<target>6º año de la EPB</target>
+				<target>6º año de la EP</target>
 			</trans-unit>
 			<trans-unit>
 				<source>analytic_signature_1</source>
@@ -9106,6 +9106,34 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                     <trans-unit>
                                 <source>Is computable</source>
                                 <target>Es computable</target>
+                    </trans-unit>
+                    <trans-unit>
+                                <source>Course result report</source>
+                                <target>Reporte de resultado de cursadas</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Print averages</source>
+                        <target>Planilla de promedios</target>
+                    </trans-unit>
+                    <trans-unit>
+                                <source>Certificate number</source>
+                                <target>Certificado N°</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Date</source>
+                        <target>Fecha</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Student approved career subject</source>
+                        <target>Aprobada</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Average report</source>
+                        <target>Reporte de promedios</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>School year average report</source>
+                        <target>Reporte de promedios por año lectivo</target>
                     </trans-unit>
 		</body>
 	</file>

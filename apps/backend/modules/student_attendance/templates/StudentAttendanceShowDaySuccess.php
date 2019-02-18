@@ -70,7 +70,18 @@
         <thead>
           <tr>
             <td></td>
-            <td></td>
+            <td>
+                <?php $name = 'day_disabled_1'  ?>
+                <?php echo $form[$name]; ?>
+                <?php echo __("Disabled"); ?>
+                <?php if ($form->getDefault($name)): ?>
+                  <script>disableDay(1)</script>
+                <?php endif ?>
+                <?php if (HolidayPeer::isHoliday($form->day)): ?>
+                  <script>disableDayUneditable(1)</script>
+                <?php endif; ?>      
+                
+            </td>
             <?php if ($absence_for_period): ?>
               <td colspan="<?php echo $count_career_school_year_period ?>"></td>
               <td colspan="<?php echo $count_career_school_year_period ?>"></td>
@@ -134,7 +145,7 @@
               <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student ?></td>
               
                 <td class="day_1 <?php echo $student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$form->day,$course_subject_id)?>">
-                  <?php $name = 'student_attendance_' . $student->getId() . '_' . $form->day ?>
+                  <?php $name = 'student_attendance_' . $student->getId() . '_' . 1 ?>
 
                   <?php echo $form[$name] ?>
                   <?php if ($form[$name]->hasError()): ?>
@@ -169,3 +180,6 @@
     </form>
   </div>
 </div>
+<script>
+    disableColumn(1);
+</script>

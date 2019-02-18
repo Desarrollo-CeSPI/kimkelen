@@ -43,4 +43,8 @@ class LvmFormFactory extends BaseFormFactory
   {
     return 'LvmStudentFormFilter';
   }
+  
+  public function getAnalyticForm() {
+      return 'LvmAnalyticForm';
+  }
 }

@@ -293,4 +293,24 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
     return 'TutorFormFilter';
   }
   
+  public function getMultipleStudentAttendancePathwayForm()
+  {
+      return 'MultipleStudentAttendancePathwayForm';
+  }
+
+  public function getStudentsCareerSchoolYearConductForm()
+  {
+      return 'StudentsCareerSchoolYearConductForm';
+  }
+  
+  public function getMultipleManageAllowedSubjectForm()
+  {
+      return 'MultipleManageAllowedSubjectForm';
+  }
+  
+  public function getAnalyticForm()
+  {
+      return 'AnalyticForm';    
+  }
+  
 }
