@@ -1451,11 +1451,11 @@ class Student extends BaseStudent
 
         if (!is_null($correlative))
         {
-        
             foreach ($this->getStudentRepprovedCourseSubjectForReportCards(SchoolYearPeer::retrieveCurrent()) as $repproved)
             {
-
-                if (is_null($repproved->getStudentApprovedCareerSubject()) && ($repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId() == $correlative->getId())) {
+                $cs = $repproved->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject();
+                if (is_null($repproved->getStudentApprovedCareerSubject()) && ($cs->getSubject()->getId() == $correlative->getSubject()->getId() 
+                        && $cs->getYear() == $correlative->getYear())) {
                   return true;
                 }
             }
