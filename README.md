@@ -3,134 +3,163 @@
 **Kimkëlen** es un sistema de gestión integrada de colegios secundarios realizado por el [CeSPI](http://www.cespi.unlp.edu.ar/) perteneciente a la  [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/).
 El sistema permite personalización a través de comportamientos o _behaviors_; cada comportamiento permite definir formas de evaluación según lo resuelva el colegio, seguimiento de inasistencias, sanciones disciplinarias, impresión de boletines, generación de reportes, etcétera.
 
-# Demo
+## Importante
 
-Presentamos un sitio de demo donde se podrá probar la funcionalidad del sistema. Para acceder ingresa a [Kimkelen Demo](http://demo.kimkelen.cespi.unlp.edu.ar/) con usuado "admin" y contraseña "admin".
-Los datos que se visualizan son ficticios y la base de datos se rastaurara periódicamente. 
+La aplicación se ha desarrollado usando Symfony 1.2 por lo que se imponen
+determinados requerimientos técnicos difíciles de cumplir con el pasar del
+tiempo. Es así, como hemos desarrollado un entorno de trabajo basado en
+[docker](https://www.docker.com/) para simplificar las limitaciones impuestas
+por determinadas librerías que ya se encuentran obsoletas.
 
-# Instalación
+Utilizando docker, se simplifica tanto el desarrollo como la instalación
+en producción de esta aplicación.
 
-La instalación de **Kimkëlen** requiere de la configuración de un Servidor de aplicaciones Web, como puede ser [Apache](http://httpd.apache.org/), configurado correctamente para ejecutar el lenguaje de programación PHP, Server así como de un servidor de Base de Datos, como MySQL.
-Se recomienda la instalación del producto por parte de un usuario con conocimientos en los componenentes antes enunciados.
+### Recomendaciones
 
-Para usuarios que utilizan el sistema operativo Windows se recomienda la instalación de [Wamp](http://www.wampserver.com/) o [XAMP](http://www.apachefriends.org/es/xampp.html) que incluye los componentes enumerados y permite una rápida configuración de los mismos. Tenga a bien realizar la instalación y configuración como se indica en los mencionados productos. 
+Se recomienda utilizar cualquier distribución Linux y usar docker como se
+explica a continuación.
+En la brevedad armaremos la documentación para trabajar con windows.
 
-Finalizada la instalación, como se indica en los pasos siguientes, el acceso al sistema deberá realizarse por medio de un navegador de internet, como Chrome, Mozilla Firefox o Internet Explorer.
+# Instalación de kimkelen usando docker
 
-## Descomprimir **Kimkëlen** 
+## Instalación de docker
 
-Antes de comenzar la configuración del sistema se deberá descargar el archivo comprimido desde [Github](https://github.com/Desarrollo-CeSPI/kimkelen/) y descomprimirlo en el directorio de aplicaciones del Servidor Web seleccionado. 
+Primero es necesario que la PC del desarrollador sea alguna distribución Linux
+cualquiera. Luego se debe instalar docker como se explica en la [documentación oficial](https://docs.docker.com/install/).
 
+**Se recomienda que el usuario con el que trabaja habitualmente con el sistema
+operativo sea miembro del grupo docker, para así no tener que usar el comando
+`sudo docker` sino directamente `docker`**
 
-## Editar la configuración de la base de datos
+## Instalación de docker-compose
 
-La configuración de la base de datos se realiza por medio de los archivos
-`databases.yml` y `propel.ini`. Se proveen estos archivos a modo de ejemplo en
-el directorio `config/`
+Una vez que docker se encuentra instalado en la PC, se debe instalar
+docker-compose como se indica en la [documentación oficial](https://docs.docker.com/compose/install/).
 
-```
-cp config/databases.yml-default config/databases.yml
-cp config/propel.ini-default config/propel.ini
-```
+## Trabajando en desarrollo
 
-Edite estos archivos según la configuración de su entorno. Debe especificar el dsn (nombre de la base de datos, host, usuario de la BBDD y contraseña de la BBDD)
-
-## Ejemplo de `databases.yml`
-
-```yml
-....
-all:
-  propel:
-    class:        sfPropelDatabase
-    param:
-      classname:  PropelPDO
-      dsn:        mysql:dbname=kimkelen;host=localhost
-      username:   root
-      password:   
-      encoding:   utf8
-      persistent: true
-      pooling:    true
-```
-
-## Ejemplo de `propel.ini`
-
-```yml
-propel.targetPackage       = lib.model
-propel.packageObjectModel  = true
-propel.project             = alumnos
-propel.database            = mysql
-propel.database.driver     = mysql
-propel.database.url        = mysql:dbname=kimkelen;host=localhost
-propel.database.creole.url = ${propel.database.url}
-propel.database.user       = root
-propel.database.password   = 
-propel.database.encoding   = utf8
-...
-```
-
-*Es importante destacar que la base de datos debe crearla usted manualmente, no es
-creada por ninguno de los pasos siguientes*
-
-## Instalar por primera vez
+Primero es necesario clonar este repositorio:
 
 ```
-php symfony kimkelen:flavor <COMPORTAMIENTO>
-php symfony propel:build-all-load 
-php symfony plugin:publish
-php symfony project:permissions
+git clone git@github.com:Desarrollo-CeSPI/kimkelen.git
 ```
 
-En el caso de que al ejecutar el comando "php symfony propel:build-all-load" se produzca algún error, reemplazar la ejecución del misimo por la ejecución de los siguientes comandos
+> Si va a realizar cambios, se recomienda que forkee el repositorio en GitHub y
+> utilice un repositorio personal para manejar sus personalizaciones bajo un
+> sistema de control de versiones.
 
-```
-php symfony propel:build-model
-php symfony propel:build-forms
-php symfony propel:build-filters
-php symfony propel:build-sql
-php symfony propel:insert-sql
-```
+### Configuraciones basadas en variables de ambiente
 
-## Actualizar la versión
+La modalidad de trabajo con docker impulsa un uso de variables de ambiente para
+las configuraciones de los contenedores. Es por ello, que toda la
+parametrización del producto se realiza a través de variables de ambiente.
 
-En el caso de que se desee actualizar la versión, no se deben ejecutar todos los comandos anteriores dado que algunos rearman la base de datos y se perderia información.
-Entonces, cuando ya se cuenta con Kimkelen y simplemente se actualiza a una nueva versión, se deberán ejecutar solo los siguientes comandos sobre nuevamente:
+Para trabajar durante el desarrollo, se recomienda entonces usar [direnv](https://direnv.net/)
+para lograr ciertas abstracciones que simplifican la labor sin pensar en que se
+está trabajando usando docker.
 
-```
-php symfony kimkelen:flavor <COMPORTAMIENTO>
-php symfony plugin:publish
-php symfony project:permissions
-php symfony propel:build-model
-php symfony propel:build-forms
-php symfony propel:build-filters
-```
+Direnv, es un producto que al ingresar a un directorio (y cualquier
+subdirectorio por debajo de un padre) que contenga un archivo `.envrc` setea las
+variables de ambiente que él defina. Una vez que se sale de ese directorio, las
+variables se eliminan del ambiente.
 
-## Datos Iniciales
+Este repositorio provee un archivo .envrc con el siguiente contenido que se usa
+exclusivamente durante el proceso de desarrollo:
 
-Por defecto, los comandos anteriores crean la base de datos pero no agregan los datos por defectos con lo que cuenta el sistema.
-En caso de queres crearlos, ejecutar el sieguiente comando:
-
-```
-php symfony propel:data-load
+```bash
+export COMPOSE_PROJECT_NAME=kimkelen PATH=$PWD/bin:$PATH APACHE_RUN_USER=$USER APACHE_RUN_GROUP=$(id -ng)
 ```
 
-> **Importante** Este comando borra TODOS los datos de la base. No debe ejecutarse una vez que el sistema se encuentre en uso para evitar la perdida de información 
+Direnv al procesar tal archivo define entonces 4 variables:
+
+* **COMPOSE_PROJECT_NAME:** Cuando usemos docker-compose en el directorio
+  `docker/` el proyecto de docker-compose se llamará kimkelen. Si esta variable
+  no existiese, entonces se llamaría como el nombre del directorio, que en este
+  caso es docker.
+* **PATH:** altera el PATH del sistema mientras trabajamos con kimkelen.
+  Esencialmente, buscará en el PATH `bin/` del directorio de este repositorio
+  antes que en el path del sistema. De esta forma, la distribución podría tener
+  instalado php 7, pero dentro del directorio php será 5.3. Asímismo sucede con el
+  comando mysql, que accede directamente al mysql de kimkelen dentro del stack de
+  docker-compose
+* **APACHE_RUN_USER:** usuario con el que correrá el apache dockerizado. Se
+  inicializa con su usuario del sistema.
+* **APACHE_RUN_GROUP:** lo mismo para el grupo con el que corre el apache
+  dockerizado.
 
 
-## ¿Qué es el **comportamiento** o **sabor**?
+### Iniciando el stack de trabajo
 
-Cada colegio tiene su propio esquema de enseñanza siguiendo reglas diferentes.
-Kimelen provee una forma desacoplada de programar esta lógica en lo que llamamos
-*sabores* o *comportamientos*
+Se debe ingresar al directorio `docker/` y correr docker-compose up`:
 
-El primer comando de la lista anterior setea el *comportamiento* del colegio.
-Considere que los comportamientos disponibles son los que se encuentran bajo el
-directorio `flavors/`
+```
+cd docker/ 
+docker-compose up
+```
 
-Un ejemplo entonces, sería:
+El comando anterior inicia por primera vez (o restaura de una corrida previa)
+los contenedores que dan soporte a kimkelen, esto es:
+
+* Apache con kimkelen instalado
+* Memcached para maneje de sesiones
+* Mysql
+* PHPMyAdmin
+
+Sólo se exportan los puertos:
+
+* Kimkelen en el puerto 8070, se podrá acceder desde http://localhost:8070
+* PHPMyAdmin en el puerto 8071, se podrá acceder desde http://localhost:8071
+
+**Para comprobar el correcto funcionamiento del stack en desarrollo el siguiente
+comando debe devolver:**
+
+```
+$ php -v
+PHP 5.3.29 (cli) (built: Mar  2 2018 05:47:50) 
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.3.0, Copyright (c) 1998-2014 Zend Technologies
+```
+> En caso que no funcione, debe existir algún problema con direnv o el stack no
+> ha sido iniciado con docker-compose
+
+## Inicializar con datos
+
+Una vez iniciado el stack completo, se deben correr los siguientes comandos para
+inicializar el producto:
 
 ```
 php symfony kimkelen:flavor demo
 ```
+
+> Este comando  inicializa la visualización llamada demo. Es la personalización
+> de kimkelen usada como punto de partida
+
+```
+php symfony propel:build-all-load
+```
+
+> Este comando crea la estructura y luego carga la base de datos con datos de
+> prueba iniciales
+
+```
+php symfony plugin:publish
+```
+
+> Este comando actualiza la vista con los propios del flavor aplicado en el
+> primer paso. Cada vez que se desee cambiar el flavor, se debe correr este
+> comando
+
+```
+php symfony project:permissions
+```
+
+> Este comando pone los permisos adecuados en el filesystem para trabajar
+
+```
+php symfony cache:clear
+```
+
+> Elimina datos de cache
 
 ## Datos iniciales
 
@@ -154,85 +183,18 @@ El sistema se instala con algunos datos cargados a decir:
 pueden compartir con otros colegios. 
 
 
-# Instalación con Capistrano
+## ¿Qué es el **comportamiento** o **sabor**?
 
-Recomendamos darle una oportunidad a este excelente producto. Leer más
-[aqui](https://github.com/capistrano/capistrano)
+Cada colegio tiene su propio esquema de enseñanza siguiendo reglas diferentes.
+Kimelen provee una forma desacoplada de programar esta lógica en lo que llamamos
+*sabores* o *comportamientos*
 
-Editar el Gemfile agregando
-```
-source "https://rubygems.org"
-gem "capifony"
-```
+El primer comando de la lista anterior setea el *comportamiento* del colegio.
+Considere que los comportamientos disponibles son los que se encuentran bajo el
+directorio `flavors/`
 
-Correr el comando `bundle update` en la raiz del proyecto
-
-Luego capificar la aplicación:
+Un ejemplo entonces, sería:
 
 ```
-cd ROOT_KIMKELEN
-capifony .
+php symfony kimkelen:flavor demo
 ```
-
-Editar el archivo `config/deploy.rb`
-
-## Ejemplo de archivo config/deploy.rb
-
-```ruby
-set :flavor, "demo"
-set :ssh_options, { :forward_agent => true }
-set :application, "kimekelen"
-set :user, application
-set :domain,      "desarrollo.cespi.unlp.edu.ar"
-set :deploy_to,   "/opt/applications/#{application}"
-
-set :repository,  "https://github.com/Desarrollo-CeSPI/kimkelen.git"
-set :scm,         :git
-
-role :web,        domain                         # Your HTTP server, Apache/etc
-role :app,        domain                         # This may be the same as your `Web` server
-role :db,         domain, :primary => true       # This is where symfony migrations will run
-
-set :deploy_via, :remote_cache
-set   :use_sudo,      false
-set  :keep_releases,  3
-set :symfony_version, "1.2.13"
-set :use_orm, false
-set :shared_files, %w(config/databases.yml config/app.yml)
-
- after "deploy:finalize_update" do
-   symfony.propel.setup
-    # Build classes
-       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-model"
-       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-forms"
-       run "#{try_sudo} #{php_bin} #{latest_release}/symfony propel:build-filters"
-
-    # Emulate
-       run "#{try_sudo} #{php_bin} #{latest_release}/symfony kimkelen:flavor #{flavor} "
-
-  symfony.cc
-  symfony.plugin.publish_assets
-  symfony.project.permissions
- end
-
-```
-
-## Comandos a correr
-
-```
-cap deploy:setup
-cap deploy
-```
-
-Resta conectarse y correr el comando:
-
-```
-php symfony kimkelen:flavor <comportamiento>
-```
-
-Los comportamientos se definen en el directorio `flavors`. El comportamiento por
-defecto sería *demo*
-
-## TODO
-
-* El `app.yml` queda vacío por lo que hay que copiarlo manualmente. Deberíamos hacer que en el primer deploy se copie

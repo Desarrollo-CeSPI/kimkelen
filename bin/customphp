@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -eo pipefail
+
+source /usr/local/bin/setenvdefaults
+
+exec php "$@"
+

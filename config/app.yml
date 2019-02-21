@@ -2,10 +2,17 @@ all:
   version:
     number: <?php echo file_get_contents(sfConfig::get('sf_root_dir').'/VERSION');?>
 
-  testing: true
+  testing: <?php echo $_ENV['TESTING']; ?>
+
   career:
     max_quantity_years: 10
   revisited_generator:
     show_disabled_actions: true
 
   close_course_subject_schol_year_max_error: 50
+
+  facebook:
+    app_id: <?php echo $_ENV['FACEBOOK_ID']; ?>
+
+    app_secret: <?php echo $_ENV['FACEBOOK_SECRET']; ?>
+

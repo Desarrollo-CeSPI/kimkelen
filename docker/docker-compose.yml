@@ -1,31 +1,47 @@
 version: '2'
 volumes:
-  kimkelen-uploads:
   kimkelen-db:
 services:
-  app: 
-    image: cespi/kimkelen:latest
-    ports:
-      # El puerto interno necesita ser igual al externo para que funcione wkhtmltopdf
-      - "8080:8080"
+  app: &php-app
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     environment:
       MEMCACHE_HOST: memcache
       MEMCACHE_PORT: 11211
       DB_NAME: kimkelen
       DB_HOST: db
       DB_USERNAME: root
-      DB_PASSWORD: root_pass
-      FLAVOR: anexa
-      PORT: 8080
+      DB_PASSWORD: root
+      DEBUG: 'true'
+      APACHE_RUN_GROUP: $APACHE_RUN_GROUP
+      APACHE_RUN_USER: $APACHE_RUN_USER
+      #    entrypoint: tail -f /dev/null
+    ports:
+      - "8070:80"
+    links:
+      - memcache
+      - db
     volumes:
-      - kimkelen-uploads:/uploads
+      - ../:/app
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
   memcache:
     image: memcached:1.4
     command: -m 256
   db:
     image: mysql:5.6
-    environment: 
+    environment:
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: kimkelen
-      MYSQL_ROOT_PASSWORD: root_pass
     volumes:
       - kimkelen-db:/var/lib/mysql
+    restart: unless-stopped
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8071:80"

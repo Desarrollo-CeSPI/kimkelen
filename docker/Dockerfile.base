@@ -1,0 +1,27 @@
+FROM cespi/php-5.3:modules-apache-latest
+RUN apk add -U --no-cache --virtual .build-deps $PHPIZE_DEPS cmake \
+  && curl -kLo /tmp/tidy.tgz https://github.com/htacg/tidy-html5/archive/5.6.0.tar.gz \
+  && tar xfz /tmp/tidy.tgz -C /tmp \
+  && cd /tmp/tidy*/build/cmake \
+  && cmake ../.. -DCMAKE_BUILD_TYPE=Release \
+  && make &&  make install \
+  && apk del .build-deps cmake \
+  && rm -fr /tmp/tidy* \
+  && ln -s /usr/local/include/tidybuffio.h /usr/local/include/buffio.h \
+  && docker-php-ext-configure tidy --with-tidy=/usr/local \
+  && docker-php-ext-install tidy \
+  && apk add -U git
+
+# Por wkhtmltopdf
+ADD docker/wkhtmltopdf-patch/wkhtmltopdf-full-bin.tar.gz /usr/local/bin
+RUN mv /usr/local/bin/libwkhtmltox.so* /usr/local/lib \
+    && apk add -U --no-cache \
+      gettext \
+      xvfb \
+      ttf-freefont \
+      fontconfig \
+      dbus \
+      libxrender-dev \
+    && apk add --allow-untrusted --no-cache \
+       --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+       qt5-qtbase

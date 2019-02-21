@@ -3,7 +3,6 @@
 /apps/backend/config/pdf_configs.yml
 /config/*xml
 /config/propel.ini
-/config/databases.yml
 /config/nc_flavor.yml
 /config/school_behaviour
 /cache/[a-zA-Z]*

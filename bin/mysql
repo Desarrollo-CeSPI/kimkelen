@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -eo pipefail
+
+DIR=`dirname $0`
+docker-compose -f $DIR/../docker/docker-compose.yml exec db mysql -proot kimkelen "$@"
+
