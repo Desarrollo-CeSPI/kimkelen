@@ -34,4 +34,9 @@ class City extends BaseCity
     }
     return ucfirst($chain);
   }
+  
+  public function getState()
+  {
+      return $this->getDepartment()->getState();
+  }
 }

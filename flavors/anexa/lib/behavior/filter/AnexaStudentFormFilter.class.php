@@ -23,36 +23,36 @@
  *
  * @author gramirez
  */
-class LvmStudentFormFilter extends StudentFormFilter
+class AnexaStudentFormFilter extends StudentFormFilter
 {
-
-  public function configure() {
-    parent::configure();
-    $this->unsetFields();
-    $this->setWidget('global_file_number', new sfWidgetFormFilterInput(array('with_empty' => false)));
-  }
   public function unsetFields()
   {
     unset(
+      $this['global_file_number'],
       $this['person_id'],
+      $this['folio_number'],
+      $this['order_of_merit'],
       $this['occupation_id'],
       $this['busy_starts_at'],
       $this['busy_ends_at'],
-      $this['order_of_merit'],
-      $this['folio_number'],
-      $this['origin_school_id'],
-      $this['educational_dependency'],
       $this['student_career_subject_allowed_list'],
       $this['student_career_subject_allowed_pathway_list'],
       $this['blood_group'],
       $this['blood_factor'],
       $this['emergency_information'],
       $this['health_coverage_id'],
-      $this['judicial_restriction']     
+      $this['order_of_merit'],
+      $this['folio_number'],
+      $this['origin_school_id'],
+      $this['educational_dependency'],
+      $this['judicial_restriction']    
     );
   }
-  public function getFields()
+  
+  public function configure()
   {
-    return array_merge(parent::getFields(), array('student' => 'Text', 'year' => 'Number', 'division' => 'Number', 'is_matriculated' => 'Boolean', 'global_file_number' => 'Number'));
+    parent::configure();
+    $this->unsetFields();
   }
+  
 }

@@ -81,5 +81,22 @@ class NacionalSchoolBehaviour extends BaseSchoolBehaviour
         return StudentRepprovedCourseSubjectPeer::doSelect($c);
       }
     }
+    
+    public function getStudentsForDivision($c,$division)
+    {
+        $ret = array();
+
+        $c =($c == null) ? new Criteria: $c ; 
+        $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
+        $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
+        $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+
+        foreach ($division->getDivisionStudents($c) as $ds)
+        {
+          $ret[] = $ds->getStudent();
+        }
+        return $ret;
+    }
 
 }

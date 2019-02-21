@@ -29,9 +29,11 @@ class SchoolYearStudentPeer extends BaseSchoolYearStudentPeer
    */
   static public function retrieveStudentsForSchoolYearCriteria(SchoolYear $school_year)
   {
+	/*is_deleted = false*/
     $c = new Criteria();
     $c->add(self::SCHOOL_YEAR_ID, $school_year->getId());
     $c->addJoin(self::STUDENT_ID, StudentPeer::ID);
+    $c->add(self::IS_DELETED, false);
     self::clearInstancePool();
     return $c;
 

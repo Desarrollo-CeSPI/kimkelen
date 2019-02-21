@@ -110,6 +110,10 @@ print_free_certificate:
   url:  /student/:id/printFreeCertificate
   param:  {module: student, action: printFreeCertificate, sf_format: pdf }
 
+print_entry_form:
+  url:  /student/:id/printEntryForm
+  param:  {module: student, action: printEntryForm, sf_format: pdf }
+
 move_students:
   url:  move_students
   param:  { module: division, action: moveStudents }

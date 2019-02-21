@@ -4595,6 +4595,18 @@
                 <source>School year average report</source>
                 <target>Reporte de promedios por año lectivo</target>
             </trans-unit>
+            <trans-unit>
+                <source>Judicial restriction</source>
+                <target>Restricción judicial</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Nationality id</source>
+                <target>Nacionalidad</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print entry form</source>
+                <target>Planilla de ingreso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

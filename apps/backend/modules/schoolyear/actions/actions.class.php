@@ -72,8 +72,8 @@ class schoolyearActions extends autoSchoolyearActions
   {
     $reference_array = array(
       "peer" => "SchoolYearStudentPeer",
-      "fk" => "SCHOOL_YEAR_ID",
-      "object_id" => $this->getRoute()->getObject()->getId(),
+      "fk" => "STUDENT_ID",
+      "object_ids" => $this->getRoute()->getObject()->getStudentsIds(),
       "back_to" => "@school_year",
       "title" => "School year student list",
     );

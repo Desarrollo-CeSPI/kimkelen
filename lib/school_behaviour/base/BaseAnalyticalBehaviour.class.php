@@ -432,4 +432,9 @@ class BaseAnalyticalBehaviour
         return;
         
     }
+    
+    public function getSpecialityTypeString($career_student)
+    {
+        return;
+    }
 }

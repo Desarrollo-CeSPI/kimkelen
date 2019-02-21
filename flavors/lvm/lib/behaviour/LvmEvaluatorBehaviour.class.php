@@ -599,9 +599,9 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $student_repproved_course_subject->save($con);
 
 	    $career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
-	    ##se corrobora si la previa es la última y del último año, hay que egresarlo
+	    ##se corrobora si la previa es la última y está libre, hay que egresarlo
 	    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
-	    if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getYear() >= CareerPeer::getMaxYear() && $previous == 0)
+	    if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE && $previous == 0)
 	    {
 		    $career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
 		    $career_student->setStatus(CareerStudentStatus::GRADUATE);
@@ -753,5 +753,80 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           
         unset ($course_subject_students);
 
+    }
+    
+    public function canPrintGraduateCertificate($student)
+    {
+        if(!is_null($student->getCareerStudent()))
+        {
+            if ($student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE)
+            {
+                return true;
+            }
+            else
+            {
+               //chequeo que esté en 6to y tenga todas las materias aprobadas.
+                $this->student_career_school_years = $student->getStudentCareerSchoolYears();
+                $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
+                
+                if(is_null($scsy_cursed))
+                {
+                    return false;
+                }
+
+                $max_year = $scsy_cursed->getCareerSchoolYear()->getCareer()->getMaxYear();
+
+                if($scsy_cursed->getYear() != $max_year)
+                    return false;
+
+                foreach ($this->student_career_school_years as $scsy)
+                {
+                    if($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED || $scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
+                            || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                             $scsy->getId() == $scsy_cursed->getId())){
+
+                        $career_school_year = $scsy->getCareerSchoolYear();
+                        $school_year = $career_school_year->getSchoolYear();
+
+                        $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
+                        foreach ($csss as $css)
+                        { 
+                            if (is_null($css->getStudentApprovedCareerSubject()) && is_null($css->getStudentApprovedCourseSubject()))
+                            {
+                                return false;                                                
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+    return false;
+
+    }
+    
+    public function canPrintWithdrawnCertificate($student)
+    {   
+        if ($this->canPrintGraduateCertificate($student))
+            return false;
+        
+        $scsy = $student->getLastStudentCareerSchoolYear();
+        
+        if(!is_null($scsy))
+        {
+           if($scsy->getStatus() == StudentCareerSchoolYearStatus::FREE)
+           {
+               return false;
+           }
+           else
+           {
+               if(!is_null($student->getCareerStudent())){
+
+                    return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+                }
+           }
+           return false; 
+        }   
     }
 }

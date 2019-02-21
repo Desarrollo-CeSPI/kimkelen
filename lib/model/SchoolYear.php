@@ -445,6 +445,12 @@ class SchoolYear extends BaseSchoolYear
 	{
 		return (TentativeRepprovedStudentPeer::countPending() > 0);
 	}
+ 
+  public function getStudentsIds(Criteria $c = null)
+  {
+    return array_map(create_function('$cs', 'return $cs->getId();'), SchoolYearStudentPeer::retrieveStudentsForSchoolYear($this));
+
+  }
 }
 
 sfPropelBehavior::add('SchoolYear', array('changelog'));

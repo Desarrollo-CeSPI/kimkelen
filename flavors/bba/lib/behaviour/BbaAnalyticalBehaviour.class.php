@@ -20,6 +20,93 @@
 
 class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 {
+    const
+        TALLERES_EGP = 27,
+        INSTRUMENTO = 4,
+        PRACTICA_CORAL_ORQUESTAL = 32,
+        ESPACIO_IA = 126,
+        CBFE_1       = 9,
+        CBFE_2       = 10,
+        CONTEXTUALIZACION = 135,
+        PROYECTOS    = 136,
+        ARTE_Y_SUBJETIVIDAD = 140,
+        PROBLEMATICA_SOCIAL = 141,
+        PRACTICAS_PROFESIONALIZANTES = 155,
+        TALLER_GRABADO = 214,
+        TALLER_PINTURA = 114,
+        TALLER_ESCULTURA = 215,
+        PIANO = 199,
+        GUITARRA=200,
+        VIOLIN = 201,
+        VIOLA =202,
+        FLAUTA_TRAVERSA = 203,
+        VIOLONCELLO = 204,
+        SAXOFON = 205,
+        CONTRABAJO= 206,
+        EOP_Lenguas = 150,
+        EOP_CE = 151,
+        EOP_CS = 152,
+        EOP_AV = 153,
+        EOP_AM = 154,
+        LENGUA_EXTRANJERA = 125;        
+    
+    protected $optional_specific = array(
+        self::TALLERES_EGP,
+        self::INSTRUMENTO,
+        self::PRACTICA_CORAL_ORQUESTAL,
+    );
+    
+    protected $subjects = array(
+        self::ESPACIO_IA,
+        self::PROYECTOS,
+        self::CONTEXTUALIZACION,
+        self::ARTE_Y_SUBJETIVIDAD,
+        self::PROBLEMATICA_SOCIAL,
+        self::PRACTICAS_PROFESIONALIZANTES,
+    );
+    
+    protected $cbfe = array(
+        self::CBFE_1,
+        self::CBFE_2,
+    );
+    
+    protected $suborientation_subjects = array(
+        self::CONTEXTUALIZACION,
+        self::PROYECTOS,
+        self::ARTE_Y_SUBJETIVIDAD,
+        self::PROBLEMATICA_SOCIAL,
+        self::PRACTICAS_PROFESIONALIZANTES,
+
+    );
+    
+    protected $general_subjects = array(
+        self::TALLERES_EGP,
+        self::INSTRUMENTO,
+        self::LENGUA_EXTRANJERA,
+    );
+    
+    protected $speciality_type = array(
+        self::TALLER_ESCULTURA => "Escultura",
+        self::TALLER_PINTURA => "Pintura",
+        self::TALLER_GRABADO => "Grabado",
+        self::PIANO => "Piano",
+        self::GUITARRA => "Guitarra",
+        self::VIOLIN => "Violín",
+        self::VIOLA => "Viola",
+        self::FLAUTA_TRAVERSA => "Flauta traversa",
+        self::VIOLONCELLO => "Violoncello",
+        self::SAXOFON => "Saxofón",
+        self::CONTRABAJO => "Contrabajo",
+    );
+    
+    protected $subjectsEOP = array(
+        self::EOP_Lenguas,
+        self::EOP_CE,
+        self::EOP_CS,
+        self::EOP_AV,
+        self::EOP_AM,
+    );
+
     public function process()
     {
         $this->student_career_school_years = $this->get_student()->getStudentCareerSchoolYears();
@@ -35,7 +122,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             $career = $career_school_year->getCareer();
             $scsy_cursed = $this->get_student()->getLastStudentCareerSchoolYearCoursed();	
             
-            if($career->getCareerName() != 'Ciclo Básico de Formación Estética') 
+            if(!in_array($career->getId(),$this->cbfe)) 
             {
                 if (in_array($scsy->getStatus(), $this->valid_status) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
                 $scsy->getId() == $scsy_cursed->getId()) || ($scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED && 
@@ -72,31 +159,59 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                                 $this->add_missing_subject($css);
                             }
                         }
-
-                        //si la materia no tiene orientacion ni optativas es general.
-                        if(is_null($css->getOrientation()) && !$css->getOption())
+                        if(in_array($css->getSubjectId(), $this->subjectsEOP))
                         {
-                            $this->add_general_subject_to_year($year_in_career, $css);
+                            $this->add_subjectEOP_to_year($year_in_career, $css);
                         }
                         else
                         {
-                            //chequeo si es una asignatura optativa
-                            if($css->getOption())
+                            //si la materia no tiene orientacion ni optativas es general. Y no es Espacio de Integración Artística
+                            if(is_null($css->getOrientation()) && !$css->getOption() && ! in_array($css->getSubjectId(), $this->subjects))
                             {
-                                    $this->add_optional_subject_to_year($year_in_career, $css);
+                                $this->add_general_subject_to_year($year_in_career, $css);
                             }
                             else
                             {
-                                //chequeo si es propia de la especialidad / suborientacion
-                                if(is_null($css->getSubOrientation()))
-                                {
+                                //chequeo si es una asignatura optativa
+                                if($css->getOption())
+                                {   //si es optativa, verifico la configuración de la materia que contiene a esta opción
+                                    $career_subject = $css->getOptionalCareerSubject();
+
+                                    //si tiene orientacion
+                                    if(is_null($career_subject->getOrientation()))
+                                    {   
+                                        //si es general
+                                        if(in_array($career_subject->getSubject()->getId(), $this->general_subjects))
+                                        {
+                                            $this->add_general_subject_to_year($year_in_career, $css);
+                                        }
+                                        else
+                                        {
+                                             $this->add_optional_subject_to_year($year_in_career, $css); 
+                                        }
+
+                                    }elseif(in_array($career_subject->getSubject()->getId(), $this->optional_specific))
+                                    {
                                         $this->add_specific_subject_to_year($year_in_career, $css);
-                                }else{
-                                        $this->add_suborientation_subject_to_year($year_in_career, $css);
+                                    }else
+                                    {
+                                       $this->add_optional_subject_to_year($year_in_career, $css); 
+                                    } 
+                                }
+                                else
+                                {   //chequeo si es propia de la especialidad
+                                    if((is_null($css->getSubOrientation()) && in_array($css->getSubjectId(), $this->suborientation_subjects))||
+                                            ! is_null($css->getSubOrientation()) )
+                                    {
+                                       $this->add_suborientation_subject_to_year($year_in_career, $css);   
+                                    }
+                                    else
+                                    {
+                                        $this->add_specific_subject_to_year($year_in_career, $css);
+                                    }
                                 }
                             }
                         }
-
                         $this->check_last_exam_date($css->getApprovedDate(false));
                     }
 
@@ -212,14 +327,48 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
 		
 	}
 	
-	public function get_school_year($year)
-	{
-		return $this->objects[$year]['school_year'];
-	}
-	
-	public function get_division($year)
-	{
-		return $this->objects[$year]['division'];
-	}
+    public function get_school_year($year)
+    {
+        return $this->objects[$year]['school_year'];
+    }
+
+    public function get_division($year)
+    {
+        return $this->objects[$year]['division'];
+    }
+        
+    public function getSpecialityTypeString($career_student)
+    {
+        $scsy = $career_student->getStudent()->getLastStudentCareerSchoolYearCoursed();
+        if($scsy && $scsy->getYear() == $career_student->getCareer()->getMaxYear())
+        {
+           
+            $courses_subjects_student = $career_student->getStudent()->getCourseSubjectStudentsForSchoolYear($scsy->getCareerSchoolYear()->getSchoolYear());
+            foreach($courses_subjects_student as $css)
+            {
+                if(array_key_exists($css->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject()->getId(),$this->speciality_type))
+                {
+                    return $this->speciality_type[ $css->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject()->getId()];
+                }
+            }
+            
+        }
+        return NULL;
+    }
+    
+    protected function add_subjectEOP_to_year($year, $css)
+    {
+        if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['subjectsEOP'] = array();
+        }
+        $this->objects[$year]['subjectsEOP'][] = $css;
+    }
+    
+    public function get_subjectsEOP_in_year($year)
+    {
+        return $this->objects[$year]['subjectsEOP'];
+    }
 	
 }

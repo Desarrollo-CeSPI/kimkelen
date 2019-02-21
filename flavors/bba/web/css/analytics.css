@@ -87,19 +87,28 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
-#analytic_signatures .signature 
+#analytic_signatures .signature
 {
     float: left;
     width: 39%;
     height: 1.5em;
     text-align: center;
-    padding-top: 5em;
-    border: 1px solid;
+    border-top: 1px solid;
     margin-right: 5%;
     margin-left: 5%;
-    margin-top: 2em;
+    margin-top: 10em;
+    padding-top: 1em;
 }
 
 .analytical_body_table {
     font-size: 13px;
+}
+
+.text-center{
+    text-align: center !important;
+    font-size: 14px !important;
+}
+
+#signature_4{
+    margin-left: 30% !important;
 }
