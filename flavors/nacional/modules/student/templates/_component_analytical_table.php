@@ -31,12 +31,13 @@
     <table class="table gridtable_bordered">
       <thead>
         <tr>
-          <th colspan="7"><?php echo __('Year ' . $year) ?></th>
+          <th colspan="8"><?php echo __('Year ' . $year) ?></th>
         </tr>
-        <tr>
+         <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
           <th rowspan="2"><?php echo __("Mes") ?></th>
           <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
+          <th rowspan="2"></th>
           <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
           <th colspan="2"><?php echo __("Calification") ?></th>
         </tr>
@@ -50,16 +51,17 @@
       <?php foreach ($object->get_subjects_in_year($year) as $css):?>
         <tr>
           <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
-          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
+          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? format_datetime($css->getApprovedDate()->format('U'),'dd') .' de ' . format_date($css->getApprovedDate()->format('U'), 'MMMM') :'<hr/>') ?> </td>
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
-          <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
+          <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa'):'' ?></td>
+          <td align="left" width="40%"><?php echo $css->getSubjectName() ?> <?php echo (!$css->getOption()) ? $css->getNumber($year):''?></td>
           <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
           <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
         </tr>
       <?php endforeach ?>
       <?php endif; ?>
         <tr>
-          <th colspan="5" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
+          <th colspan="6" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
           <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
         </tr>
       </tbody>
