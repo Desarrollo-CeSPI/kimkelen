@@ -35,8 +35,8 @@
         </tr>
         <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
-          <th rowspan="2"><?php echo __("Mes") ?></th>
-          <th rowspan="2"><?php echo __("Year") ?></th>
+          <th rowspan="2"><?php echo __("Approval date") ?></th>
+          <th rowspan="2"><?php echo __("Asignatura") ?></th>
           <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
           <th colspan="2"><?php echo __("Calification") ?></th>
         </tr>
@@ -49,11 +49,16 @@
       <?php foreach ($object->get_subjects_in_year($year) as $css):?>
         <tr>
           <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
-          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'MMMM')):'<hr/>') ?> </td>
-          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
-          <td align="left" width="40%"><?php echo $css->getSubjectName() ?></td>
-          <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-          <td class="text-center"><?php echo ($css->getMarkAsSymbol()? ucfirst(strtolower($css->getMarkAsSymbol())):'<strong>'.__('Adeuda').'</strong>') ?></td>
+          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? ucwords(format_datetime($css->getApprovedDate()->format('U'),'dd/MM/yyyy')):'<hr/>') ?> </td>
+          <td align="left" width="10%"><?php echo ($css->getOption() ? 'Optativa':'' ) ?></td>
+          <td align="left" width="45%"><?php echo $css->getSubjectName() ?></td>
+          <?php if( $css->getSubjectName() == 'Orientación Escolar'): ?>
+                <td class="text-center" width="10%">----</td>
+                <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
+          <?php else:?>
+                <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                <td class="text-center"><?php echo ($css->getMarkAsSymbol()? ucfirst(strtolower($css->getMarkAsSymbol())):'<strong>'.__('Adeuda').'</strong>') ?></td>
+          <?php endif;?>
         </tr>
       <?php endforeach ?>
         <tr>
