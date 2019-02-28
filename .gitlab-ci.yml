@@ -14,8 +14,6 @@ before_script:
 
 
 build-app:
-  tags:
-    - unlp
   stage: app
   script:
     - export LOCK_VERSION="$(git log -n 1 --pretty=format:%h -- docker/Dockerfile.base)"
