@@ -34,7 +34,7 @@
             <?php if ($student->getOriginSchool()->getSector() == SectorOriginSchoolType::SECTOR_UNLP):?>
                    UNLP,
             <?php elseif($student->getOriginSchool()->getSector() == SectorOriginSchoolType::SECTOR_PRIVATE):?>
-                <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> <span class="analytical_dipregep_info"> <?php echo ($form) ? 'N° '. $form['dipregep_number']->renderRow() : '' ?> </span> <?php echo ($dipregep_number) ? 'N° '. $dipregep_number : ''; ?> de la provincia de Buenos Aires,
+                <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> <span class="analytical_dipregep_info"> <?php echo ($form) ? 'N° '. $form['dipregep_number']->renderRow() : '' ?> </span> <?php echo isset($dipregep_number) ? 'N° '. $dipregep_number : ''; ?> de la provincia de Buenos Aires,
             <?php else: ?>
                 <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> de la provincia de Buenos Aires,
             <?php endif;?>
