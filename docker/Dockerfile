@@ -1,4 +1,4 @@
-FROM cespi/kimkelen:base
+FROM registry.gitlab.com/kimkelen/kimkelen:base-latest
 
 RUN mv /usr/local/bin/docker-php-entrypoint /usr/local/bin/original-docker-php-entrypoint
 ADD docker/entrypoint /usr/local/bin/docker-php-entrypoint

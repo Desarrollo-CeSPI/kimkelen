@@ -1,0 +1,29 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - app
+
+before_script:
+  - export IMAGE_TAG="$CI_BUILD_REF_NAME"
+  - export IMAGE_NAME="${CI_REGISTRY}/${CI_PROJECT_PATH}"
+  - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+  - apk add -U git
+
+
+build-app:
+  tags:
+    - unlp
+  stage: app
+  script:
+    - export LOCK_VERSION="$(git log -n 1 --pretty=format:%h -- docker/Dockerfile.base)"
+    - export BASE_IMAGE="$IMAGE_NAME:base-$LOCK_VERSION"
+    - docker pull "$BASE_IMAGE" || ( docker build --pull -f docker/Dockerfile.base -t "$BASE_IMAGE" . && docker push "$BASE_IMAGE" && docker tag "$BASE_IMAGE" "$IMAGE_NAME:base-latest" && docker push "$IMAGE_NAME:base-latest" )
+    - docker build --pull -f docker/Dockerfile -t "$IMAGE_NAME:$IMAGE_TAG" .
+    - docker push "$IMAGE_NAME:$IMAGE_TAG"
+    - docker tag "$IMAGE_NAME:$IMAGE_TAG" "IMAGE_NAME:latest"
+  only:
+    - docker
+
