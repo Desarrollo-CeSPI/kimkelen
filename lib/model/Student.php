@@ -1783,6 +1783,45 @@ class Student extends BaseStudent
 
   }
   
+  public function canManageMerdicalCertificate()
+  {
+      //matriculado y deben estar definidos los periodos lectivos.
+      $cs = $this->getCareerStudent();
+      if($this->getIsRegistered() && !is_null($cs ) )
+      {
+         $csy = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($cs->getCareer(), SchoolYearPeer::retrieveCurrent());
+         $p = CareerSchoolYearPeriodPeer::retrieveLastDay($csy);
+         return (is_null($p)) ? FALSE : TRUE;
+      }
+      return FALSE;
+  }
+  
+  public function getMessageCantManageMerdicalCertificate()
+  {
+    return "The student must be enrolled and the teaching periods must be defined.";
+  }
+  
+  public function getTheoricClass($date)
+  {
+      $c= new Criteria();
+      $c->add(MedicalCertificatePeer::STUDENT_ID, $this->getId());
+      $c->add(MedicalCertificatePeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+      $c->add(MedicalCertificatePeer::THEORIC_CLASS,true);
+      
+      $certificates = MedicalCertificatePeer::doSelect($c);
+      
+      foreach ($certificates as $cer)
+      {
+          $from = date_create($cer->getTheoricClassFrom());
+          $to = date_create($cer->getTheoricClassTo());
+          if($from <= $date && $to >= $date)
+          {
+              return TRUE;
+          }
+      }
+      return false;
+  }
+  
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));

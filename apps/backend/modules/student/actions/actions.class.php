@@ -789,5 +789,11 @@ class studentActions extends autoStudentActions
       $this->setLayout('cleanLayout');
       
   }
+  public function executeMedicalCertificates(sfWebRequest $request)
+  {
+    $this->back_url= $this->getUser()->getAttribute('back_url');
+    $this->getUser()->setReferenceFor($this);
+    $this->redirect("@medical_certificate");
+  }  
 
 }
