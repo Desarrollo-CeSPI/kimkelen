@@ -35,7 +35,7 @@
         </tr>
          <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
-          <th rowspan="2"><?php echo __("Mes") ?></th>
+          <th rowspan="2" ><?php echo __("Mes") ?></th>
           <th rowspan="2"><?php echo __("Año Lectivo") ?></th>
           <th rowspan="2"></th>
           <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
@@ -51,10 +51,10 @@
       <?php foreach ($object->get_subjects_in_year($year) as $css):?>
         <tr>
           <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
-          <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? format_datetime($css->getApprovedDate()->format('U'),'dd') .' de ' . format_date($css->getApprovedDate()->format('U'), 'MMMM') :'<hr/>') ?> </td>
+          <td class="text-center" width="20%"><?php echo ($css->getApprovedDate() ? format_datetime($css->getApprovedDate()->format('U'),'dd') .' de ' . format_date($css->getApprovedDate()->format('U'), 'MMMM') :'<hr/>') ?> </td>
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
           <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa'):'' ?></td>
-          <td align="left" width="40%"><?php echo $css->getSubjectName() ?> <?php echo (!$css->getOption()) ? $css->getNumber($year):''?></td>
+          <td align="left" width="30%"><?php echo $css->getSubjectName() ?> <?php echo (!$css->getOption()) ? $css->getNumber($year):''?></td>
           <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
           <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
         </tr>
