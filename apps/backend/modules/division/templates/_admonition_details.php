@@ -31,26 +31,35 @@
     </div>
   </div>
 </div>
+
 <div style="clear:both"></div>
 <div class="report-title"><?php echo __('Admonition details'); ?></div>
-<div style="clear:both"></div> 
-<?php $student_disciplinary_sanction_list = StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctions($student);?>
+<div style="clear:both"></div>
+<?php $periods_array = CareerSchoolYearPeriodPeer::getPeriodsArrayForCourseType($division->getCourseType(), $division->getCareerSchoolYearId()); ?>
+
+
 <div class="admonition_details">
- <?php if($student_disciplinary_sanction_list): ?>
+  <?php foreach ($periods_array as $short_name => $period): ?>
+    <?php if ($period->getIsClosed()): ?>
       <table class="gridtable">
         <thead>
           <tr>
-              <th><?php echo __('Year') ?></th>
-              <th><?php echo __('Resolution date') ?></th>
-              <th><?php echo __('Sanction type') ?></th>
-              <th><?php echo __('Total') ?></th>
+            <td colspan="4" class="partial_average"><?php echo $period->getName() ?></td>
           </tr>
         </thead>
-        <tbody>  
-			<?php foreach ($student_disciplinary_sanction_list as $student_disciplinary_sanction): ?>
+        <tbody>
+          <?php if (StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period)): ?>
+            <tr>
+              <th><?php echo __('Resolution date') ?></th>
+              <th><?php echo __('Reason') ?></th>
+              <th><?php echo __('Sanction type') ?></th>
+              <th><?php echo __('Total') ?></th>
+            </tr>
+            <?php foreach (StudentDisciplinarySanctionPeer::retrieveStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) as $student_disciplinary_sanction): ?>
+
               <tr>
-                <td><?php echo $student_disciplinary_sanction->getSchoolYear(); ?></td>
                 <td><?php echo $student_disciplinary_sanction->getFormattedRequestDate(); ?></td>
+                <td><?php echo $student_disciplinary_sanction->getDisciplinarySanctionType(); ?></td>
                 <td><?php echo $student_disciplinary_sanction->getSanctionType(); ?></td>
                 <td><?php echo $student_disciplinary_sanction->getValue(); ?></td>
               </tr>
@@ -58,14 +67,19 @@
           </tbody>
           <tfoot>
             <tr>
-              <td class="report-total" colspan ="4" class="total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForStudent($student) ?></td>
+              <td colspan ="4" class="total">Total: <?php echo StudentDisciplinarySanctionPeer::countStudentDisciplinarySanctionsForPeriod($student, $division->getSchoolYear(), $period) ?></td>
             </tr>
           </tfoot>
         </table>
-   <?php else: ?>   
-        <span class="report-notice"><?php echo __("Student doesn't have any disciplinary sanctions."); ?></span>   
+      <?php else: ?>
+        <tr>
+          <td style="text-align:left"><?php echo __("Student doesn't have any disciplinary sanctions.") ?></td>
+        </tr></tbody></table>
+    <?php endif; ?>
   <?php endif; ?>
+<?php endforeach; ?>
 </div>
+
 <div class="colsright">
   <div class="rowfirm_responsible">
     <div class="titletable"><?php echo __('Responsible signature') ?></div>
