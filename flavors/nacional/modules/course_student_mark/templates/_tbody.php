@@ -18,7 +18,7 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 <?php $i = 0;?>
-<?php foreach ($course_subject->getCourseSubjectStudentsForPrintCalifications() as $course_subject_student): ?>
+<?php foreach ($course_subject->getCourseSubjectStudentsForPrintReport() as $course_subject_student): ?>
   <?php $i++?>
   <?php $course_result = $course_subject_student->getCourseResult(); ?>
   <tr>
