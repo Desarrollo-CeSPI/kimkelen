@@ -34,6 +34,8 @@
     <?php endif?>
   <?php endif?>
   <li>
-	  <?php echo link_to("Ver planilla de inasistencias", 'student/showAssistanceSheet?id='. $student->getId());?>
+	  <?php echo link_to("Ver planilla de inasistencias", 'student/showAssistanceSheet?id='. $student->getId());?>     
   </li>
+  <li>
+      <?php echo link_to("Ver certificados médicos", 'student/MedicalCertificates?id='. $student->getId());?>
 </ul>
