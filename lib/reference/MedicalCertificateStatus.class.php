@@ -27,7 +27,8 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
     CANCELLED                       = 3,
     INITIATED       		= 4,
     HEALTH_DIRECTION                = 5,
-    IN_PROCESS                      = 6;
+    IN_PROCESS                      = 6,
+    OUT_OF_TERM                     = 7;
     
     protected
         $_options = array(
@@ -37,6 +38,8 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
         self::INITIATED 	         => 'Iniciado (Departamento de ALumnos)',
         self::HEALTH_DIRECTION		 => 'En la Dirección de Salud',
         self::IN_PROCESS                 => 'En proceso de convalidación',
+        self::OUT_OF_TERM                => 'Fuera de término'
+        
     );
   public function getOptionsForStatus($status)
   {
@@ -49,6 +52,7 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
                     self::NOT_VALIDATED       		 => 'No convalidado',
                     self::CANCELLED       		 => 'Cancelado',
                     self::VALIDATED       		 => 'Convalidado',
+                    self::OUT_OF_TERM                    => 'Fuera de término'
                   );
         break;
         case self::INITIATED:
@@ -57,6 +61,7 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
                     self::INITIATED       		 => 'Iniciado (Departamento de ALumnos)',
                     self::CANCELLED       		 => 'Cancelado',
                     self::HEALTH_DIRECTION       	 => 'En la Dirección de Salud',
+                    self::OUT_OF_TERM                => 'Fuera de término'
                   );
         break;
         case self::HEALTH_DIRECTION:
@@ -65,6 +70,7 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
                     self::HEALTH_DIRECTION       	 => 'En la Dirección de Salud',
                     self::CANCELLED       		 => 'Cancelado',
                     self::IN_PROCESS       	         => 'En proceso de convalidación',
+                    self::OUT_OF_TERM                    => 'Fuera de término'
                   );
         break;
         case self::IN_PROCESS:
@@ -74,12 +80,14 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
                     self::CANCELLED       		 => 'Cancelado',
                     self::VALIDATED       		 => 'Convalidado',
                     self::NOT_VALIDATED       		 => 'No convalidado',
+                    self::OUT_OF_TERM                    => 'Fuera de término'
                   );
         break;
         default:
                 return array(
                     ""          => "",
-                    self::INITIATED       		 => 'Iniciado (Departamento de ALumnos)',     
+                    self::INITIATED       		 => 'Iniciado (Departamento de ALumnos)', 
+                    self::OUT_OF_TERM                    => 'Fuera de término'
                 );
         break;
 			

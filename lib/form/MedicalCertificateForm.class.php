@@ -21,7 +21,7 @@ class MedicalCertificateForm extends BaseMedicalCertificateForm
                                                                 'application/pdf',
                                                                 'image/jpeg'
                                                                             ),
-                                                        'required' => (is_null($this->getObject()->getCertificate()))? true : false)));
+                                                        'required' => false)));
     $this->getWidgetSchema()->setHelp('certificate', 'El archivo debe ser de los siguientes tipos: jpeg, jpg, pdf.');
     
     $this->setWidget('certificate_status_id',  new sfWidgetFormSelect(array(
