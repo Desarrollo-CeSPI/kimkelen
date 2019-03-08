@@ -62,7 +62,7 @@
       <?php endif; ?>
         <tr>
           <th colspan="6" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
-          <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
+          <th colspan="2" width="20%"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
         </tr>
       </tbody>
     </table>
