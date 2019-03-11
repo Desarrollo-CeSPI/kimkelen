@@ -85,6 +85,35 @@ class studentActions extends autoStudentActions
     }
     $this->redirect('student/registerForCareer?id='.$career_student->getStudent()->getId());
   }
+  
+  public function executeEditRegistrationForCareer(sfWebRequest $request)
+  {
+    $career_student = CareerStudentPeer::retrieveByPK($request->getParameter('career_student_id'));
+    $class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getRegisterStudentForCareerForm();
+    $this->form = new $class($career_student);
+    $this->career_student = $career_student;
+    
+    if ($request->isMethod("post"))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "The item was updated successfully.");
+        $this->redirect("@student");
+      }
+    }
+    else
+    {
+        if ( is_null($career_student))
+        {
+          $this->getUser()->setFlash('error', 'No career selected');
+          $this->redirect('@student');
+        }
+    }
+    
+  }
 
   /**
    * This action saves a new career registration for selected student
