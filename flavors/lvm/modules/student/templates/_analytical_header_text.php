@@ -27,7 +27,7 @@
         <?php echo ($student->getPerson()->getFullNationality()) ? 'de nacionalidad ' . strtolower($student->getPerson()->getFullNationality()) . ', ' : ''?>
         nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
-        que ingresó en este establecimiento en el año <span><?php echo $student->getInitialSchoolYear()->getYear(); ?></span>
+        que ingresó en este establecimiento el día <span><?php echo format_date($career_student->getAdmissionDate(),'D'); ?></span>
         proveniente de <span><?php echo ($student->getOriginSchool()? $student->getOriginSchool():__('otra escuela')); ?></span> 
         
         <?php if ($student->getOriginSchool()):?>

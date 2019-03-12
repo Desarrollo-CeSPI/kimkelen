@@ -9155,6 +9155,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Admission date</source>
                         <target>Fecha de ingreso</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Career edit</source>
+                        <target>Editar inscripción a carrera</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>
