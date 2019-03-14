@@ -27,17 +27,15 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
     CANCELLED                       = 3,
     INITIATED       		= 4,
     HEALTH_DIRECTION                = 5,
-    IN_PROCESS                      = 6,
     OUT_OF_TERM                     = 7;
     
     protected
         $_options = array(
         self::VALIDATED       		 => 'Convalidado',
-        self::NOT_VALIDATED       	 => 'No convalidado',
+        self::NOT_VALIDATED       	 => 'Rechazado',
         self::CANCELLED      		 => 'Fuera de término',
         self::INITIATED 	         => 'Iniciado (Departamento de ALumnos)',
         self::HEALTH_DIRECTION		 => 'En la Dirección de Salud',
-        self::IN_PROCESS                 => 'En proceso de convalidación',
         self::OUT_OF_TERM                => 'Fuera de término'
         
     );
@@ -49,7 +47,7 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
         case self::NOT_VALIDATED:
                 return array(
                         ""          => "",
-                    self::NOT_VALIDATED       		 => 'No convalidado',
+                    self::NOT_VALIDATED       		 => 'Rechazado',
                     self::CANCELLED       		 => 'Cancelado',
                     self::VALIDATED       		 => 'Convalidado',
                     self::OUT_OF_TERM                    => 'Fuera de término'
@@ -69,18 +67,9 @@ class MedicalCertificateStatus extends BaseCustomOptionsHolder
                     ""          => "",
                     self::HEALTH_DIRECTION       	 => 'En la Dirección de Salud',
                     self::CANCELLED       		 => 'Cancelado',
-                    self::IN_PROCESS       	         => 'En proceso de convalidación',
-                    self::OUT_OF_TERM                    => 'Fuera de término'
-                  );
-        break;
-        case self::IN_PROCESS:
-            return array(
-                    ""          => "",
-                    self::IN_PROCESS       	         => 'En proceso de convalidación',
-                    self::CANCELLED       		 => 'Cancelado',
+                    self::OUT_OF_TERM                    => 'Fuera de término',
                     self::VALIDATED       		 => 'Convalidado',
-                    self::NOT_VALIDATED       		 => 'No convalidado',
-                    self::OUT_OF_TERM                    => 'Fuera de término'
+                    self::NOT_VALIDATED       		 => 'Rechazado',
                   );
         break;
         default:
