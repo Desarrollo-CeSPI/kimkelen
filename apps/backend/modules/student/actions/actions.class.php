@@ -727,8 +727,9 @@ class studentActions extends autoStudentActions
       
        /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
         *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
-        $last_scsy = $student->getLastStudentCareerSchoolYear($scsy_cursed->getCareerSchoolYear());
-        if(!is_null($scsy_cursed) && !is_null($last_scsy) && $last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED)
+        $last_scsy = $student->getLastStudentCareerSchoolYear();
+        if(!is_null($scsy_cursed) && !is_null($last_scsy) && $scsy_cursed->getStatus() == StudentCareerSchoolYearStatus::REPPROVED
+                 && $last_scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN)
         {
             $school_year = $student->getLastStudentCareerSchoolYearCoursed()->getCareerSchoolYear()->getSchoolYear();
             $scsy = $student->isRepprovedInSchoolYear($school_year); 
