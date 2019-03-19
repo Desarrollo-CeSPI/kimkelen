@@ -895,5 +895,10 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         return null;
 
     }
+    
+  public function canPrintRegularCertificate($student)
+  {
+      return ($student->getIsRegistered() && $student->getPerson()->getIsActive());
+  }
 
 }

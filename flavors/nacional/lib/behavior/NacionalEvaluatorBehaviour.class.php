@@ -186,5 +186,28 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return false;
 
     }
+    
+  public function canPrintRegularCertificate($student)
+  {
+      $school_year = SchoolYearPeer::retrieveCurrent();
+      $sy = SchoolYearPeer::retrieveLastYearSchoolYear($school_year);
+      
+      $total_previous = $student->getCountStudentRepprovedCourseSubject();
+      
+    
+      $last_year_previous = $student->getCountStudentRepprovedCourseSubjectForSchoolYear($sy);
+      
+      if( $student->isRepprovedInSchoolYear($sy))
+      {
+        return (($student->getIsRegistered() && $last_year_previous <= self::MAX_DISAPPROVED && $total_previous >= $last_year_previous )
+              || ($student->getIsRegistered() && $student->getBelongsToPathway()) );
+      
+      }
+      else
+      {
+          return (($student->getIsRegistered() && $last_year_previous <= self::MAX_DISAPPROVED && $total_previous == $last_year_previous )
+              || ($student->getIsRegistered() && $student->getBelongsToPathway()) );
+      }
+  }
 
 }
