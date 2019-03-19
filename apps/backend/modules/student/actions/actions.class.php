@@ -696,13 +696,15 @@ class studentActions extends autoStudentActions
   {
       $this->p = array();
       $this->student_career_school_years = $student->getStudentCareerSchoolYears();
-      $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
-      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED,StudentCareerSchoolYearStatus::FREE);
+      $scsy_coursed = $student->getLastStudentCareerSchoolYearCoursed();
+      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::FREE);
+      $status_i = array(StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED);
 
         foreach ($this->student_career_school_years as $scsy)
         {
             if (in_array($scsy->getStatus(), $status) || 
-               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_cursed->getId()))
+               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_coursed->getId())
+                || ( in_array($scsy->getStatus(), $status_i)  &&  $scsy->getId() == $scsy_coursed->getId()  ) )
             {
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
@@ -727,18 +729,13 @@ class studentActions extends autoStudentActions
       
        /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
         *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
-        $last_scsy = $student->getLastStudentCareerSchoolYear($scsy_cursed->getCareerSchoolYear());
-        if(!is_null($scsy_cursed) && !is_null($last_scsy) && $last_scsy->getStatus() == StudentCareerSchoolYearStatus::REPPROVED)
+        $last_scsy = $student->getLastStudentCareerSchoolYear();
+        if(!is_null($scsy_coursed) && !is_null($last_scsy) && $scsy_coursed->getStatus() == StudentCareerSchoolYearStatus::REPPROVED
+                 && $last_scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN)
         {
-            $school_year = $student->getLastStudentCareerSchoolYearCoursed()->getCareerSchoolYear()->getSchoolYear();
-            $scsy = $student->isRepprovedInSchoolYear($school_year); 
-            $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear());
-
-            if(!is_null($scsy) && count($css) == 0 )
-            {
-                $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
-            }
-
+            
+            $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy_coursed->getCareerSchoolYear());  
+            
             foreach($dis_cs as $c)
             {
                $this->p[] = $c->getCourseSubjectStudent();

@@ -1671,7 +1671,7 @@ class Student extends BaseStudent
   
   public function canPrintRegularCertificate()
   {
-	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
+      return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintRegularCertificate($this);
   }
   
   public function canPrintWithdrawnCertificate()
@@ -1782,6 +1782,20 @@ class Student extends BaseStudent
     return $results;
 
   }
+  
+    public function getCountStudentRepprovedCourseSubjectForSchoolYear($school_year)
+    {
+        $c = new Criteria();
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
+        $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+
+        return StudentRepprovedCourseSubjectPeer::doCount($c);
+    }
   
 }
 
