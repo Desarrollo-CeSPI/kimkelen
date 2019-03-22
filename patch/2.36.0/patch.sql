@@ -7,7 +7,7 @@ CREATE TABLE `medical_certificate` (
   `certificate` VARCHAR(255) NULL,
   `school_year_id` INT NOT NULL,
   `student_id` INT NOT NULL,
-  `certificate_state_id` INT NULL,
+  `certificate_status_id` INT NULL,
   `date` DATETIME NULL,
   `theoric_class` TINYINT NULL,
   `theoric_class_from` DATETIME NULL,
