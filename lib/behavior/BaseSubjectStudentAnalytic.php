@@ -248,4 +248,9 @@ class BaseSubjectStudentAnalytic
         return $this->roman_number[$number];
     }
     
+    public function getCourseSubjectStudent()
+    {
+        return $this->css;
+    }
+    
 }

@@ -359,7 +359,7 @@ class BaseAnalyticalBehaviour
                         $avg_mark_for_year[$year_in_career]['count'] = 0;
                     }
                     
-                    if ($this->subject_is_averageable($css))
+                    if (!$css->getCourseSubjectStudent()->getIsNotAverageable())
                     {
                         $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
                         $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
