@@ -46,6 +46,10 @@
 	</div>
 
 	<div class="header_row">
-		<?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form, 'dipregep_number' => $dipregep_number)) ?>
+                <?php if(isset($dipregep_number)):?>
+                    <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form, 'dipregep_number' => $dipregep_number)) ?>
+                <?php else: ?>
+                    <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form)) ?>
+                <?php endif;?>
 	</div>
 </div>

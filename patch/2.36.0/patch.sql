@@ -71,3 +71,8 @@ ADD CONSTRAINT `fk_log_medical_certificate_3`
   REFERENCES `student` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+ALTER TABLE `career_student` 
+ADD COLUMN `admission_date` DATETIME NULL DEFAULT NULL AFTER `graduation_school_year_id`;
+
+

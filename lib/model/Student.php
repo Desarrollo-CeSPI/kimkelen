@@ -156,7 +156,7 @@ class Student extends BaseStudent
    * @param integer $start_year
    */
 
-  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $con = null)
+  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $admission_date,$con = null)
   {
     if ($con == null)
     {
@@ -175,7 +175,7 @@ class Student extends BaseStudent
     $career_student->setStudentId($this->getId());
     $career_student->setStartYear($start_year);
     SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($career_student, $con);
-
+    $career_student->setAdmissionDate($admission_date);
     $career_student->save($con);
 
     SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($career_student, $start_year, $con);
@@ -1671,7 +1671,7 @@ class Student extends BaseStudent
   
   public function canPrintRegularCertificate()
   {
-	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
+      return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintRegularCertificate($this);
   }
   
   public function canPrintWithdrawnCertificate()
@@ -1821,6 +1821,20 @@ class Student extends BaseStudent
       }
       return false;
   }
+
+    public function getCountStudentRepprovedCourseSubjectForSchoolYear($school_year)
+    {
+        $c = new Criteria();
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
+        $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+
+        return StudentRepprovedCourseSubjectPeer::doCount($c);
+    }
   
 }
 

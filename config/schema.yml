@@ -207,6 +207,9 @@ classes:
         foreignReference: id
         required: false
         default: null
+      admission_date:
+        type:             date
+        required:         false   
       _uniques:
         career_student_unique: [ career_id, student_id ]
       _indexes:

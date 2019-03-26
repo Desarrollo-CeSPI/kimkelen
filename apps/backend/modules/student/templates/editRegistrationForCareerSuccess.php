@@ -21,43 +21,20 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('Career register')?></h1>
+  <h1><?php echo __('Career edit')?></h1>
 
   <div id="sf_admin_content">
-    <h2><?php echo __("Careers %student% is registered", array("%student%"=>$student))?></h2>
-    <?php if ($student->countCareerStudents()): ?>
       <table style="width: 100%">
         <tr>
           <th><?php echo __("Career") ?></th>
-          <th><?php echo __("Actions") ?></th>
         </tr>
-      <?php foreach($student->getCareerStudents() as $cs ): ?>
         <tr>
-          <td><?php echo $cs ?></td>
-          <td>
-            <ul class="sf_admin_actions">
-              <li class="sf_admin_action_delete">
-
-                <?php echo $sf_user->hasCredential('edit_student') && $cs->canBeDeleted()?
-                  link_to(__('Delete'),'student/deleteRegistrationForCareer?career_student_id='.$cs->getId(),array('confirm'=>__('Are you sure?'))):'' ?>
-              </li>
-              <li class="sf_admin_action_history">
-                <?php echo link_to(__("History"), "student/history?career_student_id=".$cs->getId()) ?>
-              </li>
-              <li class="sf_admin_action_edit">
-                <?php echo link_to(__("Edit"), "student/editRegistrationForCareer?career_student_id=".$cs->getId()) ?>
-              </li>
-            </ul>
-          </td>
+            <td><?php echo $career_student->getCareer() ?></td>
         </tr>
-      <?php endforeach ?>
       </table>
-    <?php endif ?>
-    <h2><?php echo __("Register to a new career", array("%student%"=>$student))?></h2>
-    <form action="<?php echo url_for('student/updateRegistrationForCareer') ?>" method="post">
-      <input type="hidden" name="id" value="<?php echo $student->getId() ?>" />
+      <form action="<?php echo url_for('student/editRegistrationForCareer') ?>" method="post">
       <fieldset>
-
+         <input type="hidden" name="career_student_id" value="<?php echo $career_student->getId() ?>" />
           <?php echo $form?>
       </fieldset>
 
