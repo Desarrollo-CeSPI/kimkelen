@@ -9147,6 +9147,18 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Print entry form</source>
                         <target>Planilla de ingreso</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Approval date</source>
+                        <target>Fecha de aprobación</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Admission date</source>
+                        <target>Fecha de ingreso</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Career edit</source>
+                        <target>Editar inscripción a carrera</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>

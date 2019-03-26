@@ -156,7 +156,7 @@ class Student extends BaseStudent
    * @param integer $start_year
    */
 
-  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $con = null)
+  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $admission_date,$con = null)
   {
     if ($con == null)
     {
@@ -175,7 +175,7 @@ class Student extends BaseStudent
     $career_student->setStudentId($this->getId());
     $career_student->setStartYear($start_year);
     SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($career_student, $con);
-
+    $career_student->setAdmissionDate($admission_date);
     $career_student->save($con);
 
     SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($career_student, $start_year, $con);
