@@ -21,6 +21,7 @@
 
 class CareerSubject extends BaseCareerSubject
 {
+  const TALLER_S_NACIO = 219;
   public function __toString()
   {
     $orientation = is_null($this->getOrientation()) ? '' : '( ' . $this->getOrientation() . ' )';
