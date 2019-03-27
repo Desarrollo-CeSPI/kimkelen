@@ -55,9 +55,12 @@
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
           <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa'):'' ?></td>
           <td align="left" width="30%"><?php echo $css->getSubjectName() ?> <?php echo (!$css->getOption()) ? $css->getNumber($year):''?></td>
-          <?php if( $css->getSubjectName() == 'Taller de Sexualidad'): ?>
+          <?php if( $css->getCourseSubjectStudent()->getIsNotAverageable() &&  $css->getSubjectName() == 'Taller de Sexualidad'): ?>
                 <td class="text-center" width="10%">----</td>
                 <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
+          <?php elseif($css->getIsEquivalence()):?>
+                <td class="text-center" width="10%">Aprobado</td>
+                <td class="text-center">Aprobado</td>
           <?php else:?>
                 <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>

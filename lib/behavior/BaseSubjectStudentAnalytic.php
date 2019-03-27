@@ -253,4 +253,13 @@ class BaseSubjectStudentAnalytic
         return $this->css;
     }
     
+    public function getIsEquivalence()
+    {
+        if (!is_null($this->approved))
+        {	
+            return $this->approved->getIsEquivalence();
+        }
+        return false;
+    }
+    
 }
