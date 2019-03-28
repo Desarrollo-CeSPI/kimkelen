@@ -23,7 +23,7 @@
     <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
     <div class="analytical-form">
         <?php if (!is_null($cs) && $career_student->getStudent()->hasApprovedCareerSubject($cs)):?>
-        Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-
+        <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
         <?php endif;?>
    <?php echo $form ?>
     </div>       

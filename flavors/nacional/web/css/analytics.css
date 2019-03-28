@@ -138,3 +138,7 @@
     margin-bottom: 2em !important;
     padding: 1em 0 !important;
 }
+
+#subject_observations{
+    margin-left: -2em;
+}
