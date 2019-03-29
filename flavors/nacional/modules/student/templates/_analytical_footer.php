@@ -18,15 +18,18 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-
+<?php $cs = CareerSubjectPeer::retrieveByPK(CareerSubject::TALLER_S_NACIO);?>
 <div id="analytical_footer" class="misma_pagina">
     <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
     <div class="analytical-form">
-           <?php echo $form ?>
+        <?php if (!is_null($cs) && $career_student->getStudent()->hasApprovedCareerSubject($cs)):?>
+        <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
+        <?php endif;?>
+   <?php echo $form ?>
     </div>       
     <div class="analytical-observations">
-        <?php if(isset($analytic) && $analytic->getObservations()): ?>
-        <div class="footer-text">Observaciones: <?php echo$analytic->getObservations() ?> </div>
+        <?php if(!is_null($cs) && $career_student->getStudent()->hasApprovedCareerSubject($cs)): ?>
+        <div class="footer-text">Observaciones: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones- <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> </div>
         <?php endif;?>
     </div>   
     <?php include_partial('analytical_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?> 

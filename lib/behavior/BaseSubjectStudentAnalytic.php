@@ -22,6 +22,16 @@ class BaseSubjectStudentAnalytic
 {
 
     protected $approved_date = null;
+    protected
+    $roman_number = array(
+      1 => 'I',
+      2 => 'II',
+      3 => 'III',
+      4 => 'IV',
+      5 => 'V',
+      6 => 'VI',
+      7 => 'VII',
+    );
 
     public function __construct($css,$school_year)
     {
@@ -231,6 +241,25 @@ class BaseSubjectStudentAnalytic
         $cssy = CareerSubjectSchoolYearPeer::doSelectOne($c);
         return ($cssy) ? $cssy->getCareerSubject() : NULL ;
 
+    }
+    
+    public function getNumber($number)
+    {
+        return $this->roman_number[$number];
+    }
+    
+    public function getCourseSubjectStudent()
+    {
+        return $this->css;
+    }
+    
+    public function getIsEquivalence()
+    {
+        if (!is_null($this->approved))
+        {	
+            return $this->approved->getIsEquivalence();
+        }
+        return false;
     }
     
 }

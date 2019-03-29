@@ -1,0 +1,60 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           MedicalCertificate
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          medical_certificate
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title:            Listado de certificados médicos
+        display:          [description,_certificate_status,date,theoric_class,theoric_class_from,theoric_class_to]
+        batch_actions:    []
+        object_actions:
+          _edit:
+            credentials:   [edit_medical_certificate]
+            condition: canEdit
+          _show:
+            credentials: [show_medical_certificate]
+          showHistory:
+            label: Ver historial
+            action: showHistory
+            credentials: [show_medical_certificate]
+        actions:
+          _back:
+            label:        Volver
+          _new:
+            label:        Nuevo certificado
+            credentials:    [edit_medical_certificate]
+      filter:
+        class:            false
+      form:    ~
+      edit:
+        title:            Editar
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar
+      new:
+        title:            Nuevo certificado
+
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar
+
+      show:
+        title:            Ver detalle
+        display: [_medical_certificate_show]
+        actions:
+          _list:
+            label:        Volver al listado

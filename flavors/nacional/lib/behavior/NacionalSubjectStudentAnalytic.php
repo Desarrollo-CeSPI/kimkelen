@@ -26,8 +26,15 @@ class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 		$instance = $this->approvationInstance();
 		switch (get_class($instance))
 		{
-			case 'StudentApprovedCourseSubject':
-				return 'Regular';
+			case 'StudentApprovedCourseSubject':  
+                            if ($this->getIsEquivalence())
+                            {
+                                return "Equivalencia";
+                            }
+                            else
+                            {
+                                return 'Regular';
+                            }
 			case 'StudentDisapprovedCourseSubject':
 				if ($instance->getExaminationNumber() == 1) 
 				{

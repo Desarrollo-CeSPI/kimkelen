@@ -4669,6 +4669,58 @@
                 <target>Planilla de ingreso</target>
             </trans-unit>
             <trans-unit>
+                <source>Certificate status</source>
+                <target>Estado del certificado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Certificate</source>
+                <target>Certificado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Theoric class</source>
+                <target>Clases teóricas</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Theoric class to</source>
+                <target>Clases teóricas hasta</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Current certificate</source>
+                <target>Certificado actual</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Delete certificate</source>
+                <target>Eliminar certificado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Current certificate status</source>
+                <target>Estado actual del certificado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New status</source>
+                <target>Estado nuevo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Medical certificates</source>
+                <target>Certificados médicos</target>
+            </trans-unit>
+            <trans-unit>
+                <source>User</source>
+                <target>Usuario</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Last date update</source>
+                <target>Última fecha de actualización</target>
+            </trans-unit>
+            <trans-unit>
+                <source>The student must be enrolled and the teaching periods must be defined.</source>
+                <target>El alumno debe estar matriculado y deben estar definidos los períodos lectivos.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Theoric class from</source>
+                <target>Clases teóricas desde</target>
+            </trans-unit>
+            <trans-unit>
                 <source>Admission date</source>
                 <target>Fecha de ingreso</target>
             </trans-unit>
