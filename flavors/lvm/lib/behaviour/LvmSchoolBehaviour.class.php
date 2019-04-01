@@ -202,6 +202,10 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
     foreach ($this->getCourseSubjectStudentsForCourseType($student, CourseType::QUATERLY,$school_year) as $css){
       $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
     }
+    
+    foreach ($this->getCourseSubjectStudentsForCourseType($student, CourseType::QUATERLY_OF_A_TERM,$school_year) as $css){
+      $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
+    }
    
     if ($student->hasCourseType(CourseType::BIMESTER, $student_career_school_year))
     {
