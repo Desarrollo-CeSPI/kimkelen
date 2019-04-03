@@ -450,22 +450,30 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       {
         $sum = 0;
         $sum_introduccion = 0;
+        $cant = 0;
         foreach ($student_approved_career_subjects as $student_approved_career_subject)
         {
           if (in_array($student_approved_career_subject->getCareerSubject()->getSubject()->getId(), $this->_introduccion))
           {
             $sum_introduccion += $student_approved_career_subject->getMark();
+            $cant ++;
           }
           else
           {
-            $sum += $student_approved_career_subject->getMark();
+            $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
+            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
           }
         }
         $sum += $sum_introduccion / 3;
-        $count = count($student_approved_career_subjects) - 2;
+        $count = $cant - 2;
       }
       elseif ($student_career_school_year->getYear() == 6)
       {
+          $cant = 0;
         $sum = 0;
         foreach ($student_approved_career_subjects as $student_approved_career_subject)
         {
@@ -475,25 +483,41 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           if ($is_historia)
           {
             $historia_mark = $this->getHistoriaDelArteMark($student_approved_career_subject->getStudent(), $student_approved_career_subject->getSchoolYear());
+            $cant ++;
           }
           else
           {
-            $sum += $student_approved_career_subject->getMark();
+            $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
+            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
           }
         }
 
         if (isset($historia_mark)){
           $sum += $historia_mark;
-          $count = count($student_approved_career_subjects) - 1;
+          $count = $cant - 1;
         }
         else {
-          $count = count($student_approved_career_subjects);
+          $count = $cant;
         }
       }
       else
       {
-        $sum = array_sum(array_map(create_function("\$css", "return \$css->getMark();"), $student_approved_career_subjects));
-        $count = count($student_approved_career_subjects);
+        $cant = 0;
+        $sum = 0;
+        foreach ($student_approved_career_subjects as $student_approved_career_subject)
+        {
+            $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
+            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
+        }
+        
       }
 
       if ($sum > 0 && $count > 0)
