@@ -517,6 +517,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
                $cant ++;
             }
         }
+        $count = $cant;
         
       }
 
