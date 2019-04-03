@@ -461,7 +461,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           else
           {
             $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
-            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            if(is_null($approved) || (!is_null($approved) && !$approved->getIsNotAverageable()))
             {
                $sum += $student_approved_career_subject->getMark();
                $cant ++;
@@ -488,7 +488,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           else
           {
             $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
-            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            if(is_null($approved) || (!is_null($approved) && !$approved->getIsNotAverageable()))
             {
                $sum += $student_approved_career_subject->getMark();
                $cant ++;
@@ -510,12 +510,14 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         $sum = 0;
         foreach ($student_approved_career_subjects as $student_approved_career_subject)
         {
-            $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);
-            if(!is_null($approved) && !$approved->getIsNotAverageable())
+            $approved = StudentApprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($student_approved_career_subject);         
+            
+            if(is_null($approved) || (!is_null($approved) && !$approved->getIsNotAverageable()))
             {
                $sum += $student_approved_career_subject->getMark();
                $cant ++;
             }
+           
         }
         $count = $cant;
         
