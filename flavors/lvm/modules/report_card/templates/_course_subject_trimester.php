@@ -35,11 +35,15 @@
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 
       <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-        <td><?php echo $course_subject_student->getMarkForIsClosed($mark_number) ?></td>
+        <td><?php echo (!$course_subject_student->getIsNotAverageable()) ? $course_subject_student->getMarkForIsClosed($mark_number) : "-" ?></td>
       <?php endfor; ?>
       <?php $course_result = $course_subject_student->getCourseResult() ?>
       <?php if ((!$course_subject_student->hasSomeMarkFree()) && ($course_subject_student->getConfiguration()->isNumericalMark())): ?>
+        <?php if (!$course_subject_student->getIsNotAverageable()):?>
         <td><?php echo ($course_result) ? $course_result->getResultStr() : '' ?></td>
+        <?php else: ?>
+        <td>-</td>
+        <?php endif ?>
       <?php else: ?>
         <td></td>
       <?php endif; ?>
@@ -53,8 +57,10 @@
       <td>
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
-        <?php elseif ($course_subject_student->getCOnfiguration()->isNumericalMark()): ?>
+        <?php elseif ($course_subject_student->getCOnfiguration()->isNumericalMark() && !$course_subject_student->getIsNotAverageable() ): ?>
           <?php echo $student->getPromDef($course_result) ?>
+        <?php elseif ($course_subject_student->getIsNotAverageable() ): ?> 
+          <?php echo "-" ?>
         <?php endif ?>
       </td>
       <?php if ($has_attendance_for_subject): ?>
