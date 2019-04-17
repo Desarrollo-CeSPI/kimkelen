@@ -33,7 +33,8 @@ class MedicalCertificate extends BaseMedicalCertificate
   public function canEdit()
   {
       if ( !is_null($this->getCertificateStatusId()) && 
-         ($this->getCertificateStatusId() == MedicalCertificateStatus::VALIDATED  || $this->getCertificateStatusId() == MedicalCertificateStatus::NOT_VALIDATED ) )
+         (($this->getCertificateStatusId() == MedicalCertificateStatus::VALIDATED && !$this->getTheoricClass() )
+              || $this->getCertificateStatusId() == MedicalCertificateStatus::NOT_VALIDATED ) )
               
               return false;
       else
