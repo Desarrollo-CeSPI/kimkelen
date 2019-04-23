@@ -17,31 +17,5 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php
-
-/**
- * Copy and rename this class if you want to extend and customize
- */
-class NacionalFormFactory extends BaseFormFactory {
-	
-  public function getStudentDisciplinarySanctionForm()
-  {
-    return 'NacionalStudentDisciplinarySanctionForm';
-  }
-  
-  public function getAnalyticForm()
-  {
-      return 'NacionalAnalyticForm';    
-  }
-  
-  public function getCourseSubjectMarksForm()
-  {
-    return 'NacionalCourseSubjectMarksForm';
-  }
-  
-  public function getStudentFormFilter()
-  {
-    return 'NacionalStudentFormFilter';
-  }
-
-}
+<?php use_helper('I18N', 'Date', 'Javascript') ?>
+<?php echo format_date($form->getObject()->getTheoricClassFrom(), 'd/MM/yyyy'); ?>

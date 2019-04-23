@@ -44,7 +44,6 @@ class MedicalCertificateForm extends BaseMedicalCertificateForm
     $this->setWidget('theoric_class_to', new csWidgetFormDateInput());
     $this->setValidator('theoric_class_to', new mtValidatorDateString(array("required" => false)));
     
-    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'checkDate'))));
     if($this->getObject()->getCertificate())
     {
       $this->setWidget('current_certificate', new mtWidgetFormPartial(array('module' => 'medical_certificate', 'partial' => 'downloable_certificate', 'form' => $this)));
@@ -54,20 +53,44 @@ class MedicalCertificateForm extends BaseMedicalCertificateForm
       $this->getWidgetSchema()->moveField('delete_certificate', sfWidgetFormSchema::BEFORE, 'certificate');
       $this->getWidgetSchema()->moveField('current_certificate', sfWidgetFormSchema::BEFORE, 'delete_certificate');
     }
-    
+        
     if(!is_null($this->getObject()->getCertificateStatusId()))
     {
-        $this->setWidget('current_certificate_status', new mtWidgetFormPartial(array('module' => 'medical_certificate', 'partial' => 'current_status', 'form' => $this)));
-        $this->setValidator('current_certificate_status', new sfValidatorPass(array('required' => false)));
-        $this->getWidgetSchema()->moveField('current_certificate_status', sfWidgetFormSchema::BEFORE, 'certificate_status_id');
+        if($this->getObject()->getCertificateStatusId() != MedicalCertificateStatus::VALIDATED)
+        {
+            $this->setWidget('current_certificate_status', new mtWidgetFormPartial(array('module' => 'medical_certificate', 'partial' => 'current_status', 'form' => $this)));
+            $this->setValidator('current_certificate_status', new sfValidatorPass(array('required' => false)));
+            $this->getWidgetSchema()->moveField('current_certificate_status', sfWidgetFormSchema::BEFORE, 'certificate_status_id');
+
+            $this->setValidator('certificate_status_id', new sfValidatorChoice(array(
+            'choices' => BaseCustomOptionsHolder::getInstance('MedicalCertificateStatus'
+                    . '')->getKeys(),
+            'required'=>false)               
+            ));
+            $this->getWidgetSchema()->setLabel('certificate_status_id', 'New status');
+            $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'checkDate'))));
+        }
+        else
+        {
+            $this->setWidget('theoric_class', new sfWidgetFormInputHidden());
+            $this->setWidget('current_certificate_status', new mtWidgetFormPartial(array('module' => 'medical_certificate', 'partial' => 'current_status', 'form' => $this)));
+            $this->setValidator('current_certificate_status', new sfValidatorPass(array('required' => false)));
+            $this->getWidgetSchema()->moveField('current_certificate_status', sfWidgetFormSchema::BEFORE, 'certificate');
+            $this->unsetFields();
+            $this->setWidget('current_theoric_class_from', new mtWidgetFormPartial(array('module' => 'medical_certificate', 'partial' => 'theoric_class_from', 'form' => $this)));
+            $this->setValidator('current_theoric_class_from', new sfValidatorPass(array('required' => false)));
+            $this->getWidgetSchema()->moveField('current_theoric_class_from', sfWidgetFormSchema::BEFORE, 'theoric_class_to');
+            $this->getWidgetSchema()->setLabel('current_theoric_class_from', 'Theoric class from');
+  
+        }
         
-        $this->setValidator('certificate_status_id', new sfValidatorChoice(array(
-        'choices' => BaseCustomOptionsHolder::getInstance('MedicalCertificateStatus'
-                . '')->getKeys(),
-        'required'=>false)               
-        ));
-        $this->getWidgetSchema()->setLabel('certificate_status_id', 'New status');
     }
+    else
+    {
+        $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'checkDate'))));
+    }
+    
+    
   }
  
   public function checkDate($validator, $values)
@@ -118,9 +141,10 @@ class MedicalCertificateForm extends BaseMedicalCertificateForm
       
       return $values;
   }
+  
   protected function doSave($con = null)
   { $values = $this->getValues();
-     
+
     parent::doSave($con);
     if(is_null($values['certificate']))
     {
@@ -145,5 +169,17 @@ class MedicalCertificateForm extends BaseMedicalCertificateForm
     
     $log->save();
            
+  }
+  
+  public function unsetFields()
+  {
+      unset(
+      $this['certificate'],
+      $this['certificate_status_id'],
+      $this['date'],
+      $this['theoric_class_from']
+           
+        
+    );
   }
 }
