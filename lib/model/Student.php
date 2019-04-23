@@ -749,7 +749,19 @@ class Student extends BaseStudent
       $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
       foreach ($subject_configurations as $sc)
       {
-        if ($sc->getCareerSchoolYearPeriod()->getCareerSchoolYearPeriodId() == $quaterly->getId())
+        if ($sc->getCareerSchoolYearPeriod())
+          $results[$css->getId()] = $css;
+      }
+    }
+    
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      foreach ($subject_configurations as $sc)
+      {
+          $start_at  = $sc->getCareerSchoolYearPeriod()->getStartAt();
+          $end_at = $sc->getCareerSchoolYearPeriod()->getEndAt();
+        if ($start_at >=  $quaterly->getStartAt() &&  $end_at <= $quaterly->getEndAt())
           $results[$css->getId()] = $css;
       }
     }
@@ -1834,6 +1846,31 @@ class Student extends BaseStudent
         $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
 
         return StudentRepprovedCourseSubjectPeer::doCount($c);
+    }
+    
+    public function getCourseSubjectStudentsForBimesterOfaTerm ($student_career_school_year = null)
+    {
+        if (is_null($student_career_school_year))
+    {
+      $career_school_years = StudentCareerSchoolYearPeer::retrieveCareerSchoolYearForStudentAndYear($this, SchoolYearPeer::retrieveCurrent());
+      $student_career_school_year = array_shift($career_school_years);
+    }
+
+    $career_school_year = $student_career_school_year->getCareerSchoolYear();
+
+    $first_quaterly = CareerSchoolYearPeriodPeer::retrieveFirstQuaterlyForCareerSchoolYear($career_school_year);
+    $results = array();
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      
+      foreach ($subject_configurations as $sc)
+      {
+        if ($sc->getCareerSchoolYearPeriodId() == $first_quaterly->getId())
+          $results[$css->getId()] = $css;
+      }
+    }
+    return $results;
     }
   
 }
