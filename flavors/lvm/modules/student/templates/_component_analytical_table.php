@@ -36,8 +36,8 @@
         <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
           <th rowspan="2"><?php echo __("Approval date") ?></th>
-          <th rowspan="2"><?php echo __("Asignatura") ?></th>
-          <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
+          <th rowspan="2"><?php echo __("Subject") ?></th>
+          <th class="text-left" rowspan="2"><?php echo __("Asignatura") ?></th>
           <th colspan="2"><?php echo __("Calification") ?></th>
         </tr>
         <tr>
