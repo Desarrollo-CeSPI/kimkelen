@@ -51,6 +51,7 @@ class BaseAnalyticalBehaviour
     /* @var $career_student CareerStudent */
     protected $career_student = null;
     protected $remaining_years = null;
+    protected $approved_subject = null;
 
 
     public function __construct(Student $a_student)
@@ -250,6 +251,7 @@ class BaseAnalyticalBehaviour
         $this->missing_subjects = array();
         $this->last_exam_date = null;
         $this->career_student = $this->get_student()->getCareerStudent();
+        $this->approved_subject = false;
     }
     
     protected function add_year_in_career($year)
@@ -436,5 +438,10 @@ class BaseAnalyticalBehaviour
     public function getSpecialityTypeString($career_student)
     {
         return;
+    }
+    
+    public function is_approved_subject()
+    {
+        return $this->approved_subject;
     }
 }

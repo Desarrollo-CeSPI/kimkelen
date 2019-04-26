@@ -18,17 +18,17 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-<?php $cs = CareerSubjectPeer::retrieveByPK(CareerSubject::TALLER_S_NACIO);?>
+
 <div id="analytical_footer" class="misma_pagina">
     <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
     <div class="analytical-form">
-        <?php if (!is_null($cs) && $career_student->getStudent()->hasApprovedCareerSubject($cs)):?>
+        <?php if ($analytical->is_approved_subject()):?>
         <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
         <?php endif;?>
    <?php echo $form ?>
     </div>       
     <div class="analytical-observations">
-        <?php if(!is_null($cs) && $career_student->getStudent()->hasApprovedCareerSubject($cs)): ?>
+        <?php if($analytical->is_approved_subject()): ?>
         <div class="footer-text">Observaciones: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones- <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> </div>
         <?php endif;?>
     </div>   

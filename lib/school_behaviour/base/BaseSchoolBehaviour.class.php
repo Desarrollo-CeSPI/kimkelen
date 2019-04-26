@@ -28,7 +28,8 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     CourseType::TRIMESTER => 'Anual con Régimen Trimestral',
     CourseType::QUATERLY => 'Anual con Régimen Cuatrimestral',
     CourseType::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-    CourseType::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino'
+    CourseType::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino',
+    CourseType::BIMESTER_OF_A_TERM => 'Bimestral con Régimen de un término',
   );
 
   const ATTENDANCE_DAY = 1;

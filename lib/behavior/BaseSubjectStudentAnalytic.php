@@ -262,4 +262,9 @@ class BaseSubjectStudentAnalytic
         return false;
     }
     
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+    
 }

@@ -749,7 +749,19 @@ class Student extends BaseStudent
       $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
       foreach ($subject_configurations as $sc)
       {
-        if ($sc->getCareerSchoolYearPeriod()->getCareerSchoolYearPeriodId() == $quaterly->getId())
+        if ($sc->getCareerSchoolYearPeriod())
+          $results[$css->getId()] = $css;
+      }
+    }
+    
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      foreach ($subject_configurations as $sc)
+      {
+          $start_at  = $sc->getCareerSchoolYearPeriod()->getStartAt();
+          $end_at = $sc->getCareerSchoolYearPeriod()->getEndAt();
+        if ($start_at >=  $quaterly->getStartAt() &&  $end_at <= $quaterly->getEndAt())
           $results[$css->getId()] = $css;
       }
     }
