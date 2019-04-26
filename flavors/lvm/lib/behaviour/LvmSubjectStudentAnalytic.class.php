@@ -85,7 +85,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
     public function getSubjectName()
     {
         if( in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion) ){
-            return 'Introducción a la problemática de las Ciencias';
+            return 'Introducción a la Problemática de las Ciencias Sociales, Ciencias Naturales y Gestión de las Organizaciones';
         }else{
              return $this->css->getCourseSubject()->getSubject()->getName();
         }
