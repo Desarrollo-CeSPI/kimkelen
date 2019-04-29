@@ -728,7 +728,7 @@ class Student extends BaseStudent
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
     $second_quaterly = CareerSchoolYearPeriodPeer::retrieveSecondQuaterlyForCareerSchoolYear($career_school_year);
-
+    if($student_career_school_year->getYear() == 5)var_dump($second_quaterly);
     return $this->getCourseSubjectStudentsForBimesterQuaterly($second_quaterly, $student_career_school_year);
 
   }
@@ -743,14 +743,14 @@ class Student extends BaseStudent
   public function getCourseSubjectStudentsForBimesterQuaterly($quaterly, $student_career_school_year = null)
   {
     $results = array();
-
+    
     foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER, $student_career_school_year) as $css)
     {
       $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
       foreach ($subject_configurations as $sc)
       {
-        if ($sc->getCareerSchoolYearPeriod())
-          $results[$css->getId()] = $css;
+        if ($sc->getCareerSchoolYearPeriod()->getCareerSchoolYearPeriodId() == $quaterly->getId())
+            $results[$css->getId()] = $css;
       }
     }
     
