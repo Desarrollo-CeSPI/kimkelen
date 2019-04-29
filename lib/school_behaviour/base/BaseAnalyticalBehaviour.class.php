@@ -82,13 +82,17 @@ class BaseAnalyticalBehaviour
     public function get_graduated_date()
     {
         $last = $this->get_years_in_career();
-        $count = count($this->get_years_in_career()) -1;
+        $count = count($this->get_years_in_career()) - 2;
         $last_date = date('Y-m-d');
-        foreach ($this->objects[$last[$count]]['subjects'] as $css) {
-          $date = $css->getApprovedDate();
-            if ($date > $last_date) {
-              $last_date = $date;
-            }
+
+        for ( $i = $count ; $i <  count($this->get_years_in_career()) ; $i++)
+        {
+             foreach ($this->objects[$last[$i]]['subjects'] as $css) {
+                $date = $css->getApprovedDate();
+                  if ($date > $last_date) {
+                    $last_date = $date;
+                  }
+              }
         }
         return $last_date;
     }
