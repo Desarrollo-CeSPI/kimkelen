@@ -728,7 +728,7 @@ class Student extends BaseStudent
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
     $second_quaterly = CareerSchoolYearPeriodPeer::retrieveSecondQuaterlyForCareerSchoolYear($career_school_year);
-    if($student_career_school_year->getYear() == 5)var_dump($second_quaterly);
+    
     return $this->getCourseSubjectStudentsForBimesterQuaterly($second_quaterly, $student_career_school_year);
 
   }
