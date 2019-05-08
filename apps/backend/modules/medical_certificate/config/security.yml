@@ -1,0 +1,8 @@
+edit:
+  credentials:  [edit_medical_certificate]
+
+new:
+  credentials:  [edit_medical_certificate]
+
+index:
+  credentials:  [show_medical_certificate]

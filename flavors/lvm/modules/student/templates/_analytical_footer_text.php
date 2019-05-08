@@ -21,7 +21,7 @@
 <?php use_helper('Date') ?>
 
 <div class="header-text">
-	<?php if ($analytical->has_completed_career()): ?>
+	<?php if ($analytical->has_completed_career() || $student->canPrintGraduateCertificate()): ?>
             <p>Habiendo terminado sus estudios secundarios el día <?php echo format_datetime($analytical->get_graduated_date()->format('U'), "D"); ?>, se le extiende el certificado de <strong>Bachiller Orientado</strong> en <strong><?php echo $analytical->get_orientation(); ?></strong> (<?php echo $analytical->get_resolution_number() ?>).</p>
 	<?php else: ?>
 		<p>Para terminar sus estudios secundarios deberá aprobar:
@@ -40,6 +40,5 @@
 		<?php endif; ?>
 		<p>Certificado de Estudios Incompleto.</p>
 	<?php endif; ?>
-	<p>Para que conste y a pedido del/a interesado/a, se expide el presente certificado confrontado con los registros y actas originales por el Departamento de Alumnos, en la ciudad de <?php echo __('escuela_ciudad'); ?>, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>
-
+	<p>Para que conste y a pedido del/a interesado/a, se expide el presente certificado confrontado con los registros y actas originales por el Departamento de Alumnos, en la ciudad de <?php echo __('escuela_ciudad'); ?>, a los <?php echo date('d'); ?> días del mes de <?php echo format_date(time(), 'MMMM'); ?> de <?php echo date('Y'); ?>.</p>       
 </div>

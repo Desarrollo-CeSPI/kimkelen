@@ -601,7 +601,21 @@ class CourseSubject extends BaseCourseSubject
     }
     else
     {
-      $periods = $this->getCareerSchoolYear()->getCareerSchoolYearPeriodsForYearAndCourseType($this->getYear(), $this->getCourseType());
+        if (!is_null($this->getCourseSubjectConfigurations()) && $this->getCourseType() == CourseType::BIMESTER)
+        {
+            $c = new Criteria();
+            $c->addJoin(CareerSchoolYearPeriodPeer::ID, CourseSubjectConfigurationPeer::CAREER_SCHOOL_YEAR_PERIOD_ID);
+            $c->add(CourseSubjectConfigurationPeer::COURSE_SUBJECT_ID, $this->getId());
+            $c->addAscendingOrderByColumn(CareerSchoolYearPeriodPeer::COURSE_TYPE);
+            $c->addAscendingOrderByColumn(CareerSchoolYearPeriodPeer::START_AT);
+
+            $periods = CareerSchoolYearPeriodPeer::doSelect($c);
+        }
+        else
+        {
+            $periods = $this->getCareerSchoolYear()->getCareerSchoolYearPeriodsForYearAndCourseType($this->getYear(), $this->getCourseType());
+
+        }
 
       return $periods;
     }

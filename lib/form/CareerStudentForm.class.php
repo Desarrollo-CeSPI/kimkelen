@@ -35,35 +35,48 @@ class CareerStudentForm extends BaseCareerStudentForm
     $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
     $this->getWidgetSchema()->setFormFormatterName('Revisited');
 
-    unset( $this['created_at'], $this['status'],$this['file_number'], $this['graduation_school_year_id']);
-    //career choice widget
-    $this->getWidget('career_id')->setOption('criteria',SchoolBehaviourFactory::getInstance()->getAvailableCareerForStudentCriteria($this->getObject()->getStudent()));
+    if ($this->getObject()->getId())
+    {
+        unset( $this['created_at'], $this['career_id'],$this['status'],$this['file_number'], $this['graduation_school_year_id'],$this['start_year'],$this['orientation_id'],$this['sub_orientation_id'],$this['orientation_change_observations']);
+        $this->setWidget('student_id', new sfWidgetFormInputHidden());
+        
+    }
+    else
+    {
+        unset( $this['created_at'], $this['status'],$this['file_number'], $this['graduation_school_year_id']);
+        //career choice widget
+        $this->getWidget('career_id')->setOption('criteria',SchoolBehaviourFactory::getInstance()->getAvailableCareerForStudentCriteria($this->getObject()->getStudent()));
 
-    $this->setWidget('student_id', new sfWidgetFormInputHidden());
+        $this->setWidget('student_id', new sfWidgetFormInputHidden());
 
-    $w = new sfWidgetFormChoice(array("choices" => array()));
-    $this->setWidget("start_year", new dcWidgetAjaxDependence(array(
-      "dependant_widget"            => $w,
-      "observe_widget_id"           => "career_student_career_id",
-      "message_with_no_value"       => "Seleccione una carrera y aparecerán los años que correspondan",
-      "get_observed_value_callback" => array(get_class($this), "getYears")
-    )));
+        $w = new sfWidgetFormChoice(array("choices" => array()));
+        $this->setWidget("start_year", new dcWidgetAjaxDependence(array(
+          "dependant_widget"            => $w,
+          "observe_widget_id"           => "career_student_career_id",
+          "message_with_no_value"       => "Seleccione una carrera y aparecerán los años que correspondan",
+          "get_observed_value_callback" => array(get_class($this), "getYears")
+        )));
 
-    $this->setWidget("orientation_id", new dcWidgetAjaxDependence(array(
-      "dependant_widget"            => $w,
-      "observe_widget_id"           => "career_student_career_id",
-      "message_with_no_value"       => "Seleccione una carrera y aparecerán las orientaciones correspondientes",
-      "get_observed_value_callback" => array(get_class($this), "getOrientations")
-    )));
+        $this->setWidget("orientation_id", new dcWidgetAjaxDependence(array(
+          "dependant_widget"            => $w,
+          "observe_widget_id"           => "career_student_career_id",
+          "message_with_no_value"       => "Seleccione una carrera y aparecerán las orientaciones correspondientes",
+          "get_observed_value_callback" => array(get_class($this), "getOrientations")
+        )));
 
-    $this->setWidget("sub_orientation_id", new dcWidgetAjaxDependence(array(
-      "dependant_widget"            => $w,
-      "observe_widget_id"           => "career_student_orientation_id",
-      "message_with_no_value"       => "Seleccione una orientación y aparecerán las sub orientaciones correspondientes",
-      "get_observed_value_callback" => array(get_class($this), "getSubOrientations")
-    )));
+        $this->setWidget("sub_orientation_id", new dcWidgetAjaxDependence(array(
+          "dependant_widget"            => $w,
+          "observe_widget_id"           => "career_student_orientation_id",
+          "message_with_no_value"       => "Seleccione una orientación y aparecerán las sub orientaciones correspondientes",
+          "get_observed_value_callback" => array(get_class($this), "getSubOrientations")
+        )));
 
-    $this->validatorSchema["start_year"] = new sfValidatorInteger();
+        $this->validatorSchema["start_year"] = new sfValidatorInteger();
+    
+    }
+    
+    $this->setWidget('admission_date', new csWidgetFormDateInput());
+    $this->setValidator('admission_date', new mtValidatorDateString(array("required" => false)));
   }
 
   /**
@@ -76,18 +89,27 @@ class CareerStudentForm extends BaseCareerStudentForm
     {
       $con = $this->getConnection();
     }
-    $this->updateObject();
+    
+    if($this->getObject()->getId())
+    {
+         parent::doSave();
+    }
+    else
+    {
+        $this->updateObject();
 
-    $start_year = $this->getValue("start_year");
+        $start_year = $this->getValue("start_year");
 
 
-    SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($this->getObject(),$con);
-    $this->object->save($con);
+        SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($this->getObject(),$con);
+        $this->object->save($con);
 
-    SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($this->object, $start_year , $con);
+        SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($this->object, $start_year , $con);
 
-    // embedded forms
-    $this->saveEmbeddedForms($con);
+        // embedded forms
+        $this->saveEmbeddedForms($con);
+    }
+    
   }
 
   public static function getYears($widget, $value)

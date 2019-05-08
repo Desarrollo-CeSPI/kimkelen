@@ -24,7 +24,7 @@
             </dl>
         </div>
         <div class="title" id="header_analytical_data_center">
-            <?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true)) ?>
+            <div><?php echo image_tag("kimkelen_logo_analitico.png", array( 'class'=>'school_logo', 'absolute' => true)) ?></div>
             <?php $school_name = SchoolBehaviourFactory::getInstance()->getSchoolName(); ?>
 	        <h1><?php echo $school_name ?> <small><?php echo __("Universidad Nacional de La Plata") ?></small></h1>
         </div>

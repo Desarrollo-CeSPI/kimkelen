@@ -74,5 +74,20 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         return;
         
     }
+    
+    protected function add_subject_to_year($year, $css)
+    {
+        if (!isset($this->objects[$year]))
+        {
+            $this->objects[$year] = array();
+            $this->objects[$year]['subjects'] = array();
+        }
+        $this->objects[$year]['subjects'][] = $css;
+        
+        if(! is_null($css->getApproved()) && $css->getApproved()->getCareerSubject()->getId() == CareerSubject::TALLER_S_NACIO)
+        {
+            $this->approved_subject = TRUE;
+        }
+    }
 	
 }

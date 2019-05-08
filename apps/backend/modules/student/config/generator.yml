@@ -248,6 +248,11 @@ generator:
             label: Withdrawn certificate
             action: printFreeCertificate
             condition: canPrintFreeCertificate
+            
+          medical_certificate:
+            label: Medical certificates
+            action: medicalCertificates
+            condition: canManageMerdicalCertificate
           
 
       filter:

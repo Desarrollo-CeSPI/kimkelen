@@ -71,6 +71,14 @@
         'student' => $student,
         'course_type' => CourseType::QUATERLY_OF_A_TERM)) : ''
   ?>
+    
+  <?php
+  isset($course_subject_students['BIMESTER_OF_A_TERM']) ? include_partial("student/current_course_subjects", array("course_subject_students" => $course_subject_students['BIMESTER_OF_A_TERM'],
+        'career_student' => $career_student,
+        'back_url' => $back_url,
+        'student' => $student,
+        'course_type' => CourseType::BIMESTER_OF_A_TERM)) : ''
+  ?>
 
   <?php if ($anual_average = $student_career_school_year->getAnualAverage()): ?>
     <div class="info_div">
