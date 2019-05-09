@@ -22,6 +22,16 @@ class BaseSubjectStudentAnalytic
 {
 
     protected $approved_date = null;
+    protected
+    $roman_number = array(
+      1 => 'I',
+      2 => 'II',
+      3 => 'III',
+      4 => 'IV',
+      5 => 'V',
+      6 => 'VI',
+      7 => 'VII',
+    );
 
     public function __construct($css,$school_year)
     {
@@ -203,17 +213,58 @@ class BaseSubjectStudentAnalytic
     
     public function getOrientation()
     {
-		return $this->orientation;
-	}
-	
-	public function getSubOrientation()
-	{
-		return $this->sub_orientation;
-	}
-	
-	public function getOption()
-	{
-		return $this->option;
-	}
+        return $this->orientation;
+    }
 
+    public function getSubOrientation()
+    {
+        return $this->sub_orientation;
+    }
+
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    public function getSubjectId()
+    {
+        return $this->css->getCourseSubject()->getSubject()->getId();
+    }
+    
+    public function getOptionalCareerSubject()
+    {
+        $career_subject_school_year = $this->css->getCourseSubject()->getCareerSubjectSchoolYear();
+        $c = new Criteria();
+        $c->add(OptionalCareerSubjectPeer::CHOICE_CAREER_SUBJECT_SCHOOL_YEAR_ID, $career_subject_school_year->getId());
+        $c->addJoin(OptionalCareerSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+       
+        $cssy = CareerSubjectSchoolYearPeer::doSelectOne($c);
+        return ($cssy) ? $cssy->getCareerSubject() : NULL ;
+
+    }
+    
+    public function getNumber($number)
+    {
+        return $this->roman_number[$number];
+    }
+    
+    public function getCourseSubjectStudent()
+    {
+        return $this->css;
+    }
+    
+    public function getIsEquivalence()
+    {
+        if (!is_null($this->approved))
+        {	
+            return $this->approved->getIsEquivalence();
+        }
+        return false;
+    }
+    
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+    
 }

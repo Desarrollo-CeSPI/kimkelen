@@ -19,11 +19,11 @@
 <?php
 class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 {
-    protected $materias_introduccion = array("Introducción a la problemática de Gestión de las organizaciones","Introducción a la problemática de las Ciencias Sociales","Introducción a la problemática de las Ciencias Naturales");
+    protected $materias_introduccion = array(28,29,30);
     
     public function getCondition()
     {
-        if(in_array($this->css->getCourseSubject()->getSubject()->getName(), $this->materias_introduccion)){
+        if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion)){
            
             $introduccion = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentsForIntroduccion($this->css->getStudent(), $this->css->getCourseSubject()->getCareerSchoolYear());
             
@@ -84,8 +84,8 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
     
     public function getSubjectName()
     {
-        if( in_array($this->css->getCourseSubject()->getSubject()->getName(), $this->materias_introduccion) ){
-            return 'Introducción a la problemática de las Ciencias';
+        if( in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion) ){
+            return 'Introducción a la Problemática de las Ciencias Sociales, Ciencias Naturales y Gestión de las Organizaciones';
         }else{
              return $this->css->getCourseSubject()->getSubject()->getName();
         }
@@ -93,8 +93,8 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
     
     public function getMark($as_label = true)
     {
-        
-        if(in_array($this->css->getCourseSubject()->getSubject()->getName(), $this->materias_introduccion))
+       
+        if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion))
         {
             
             $introduccion = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentsForIntroduccion($this->css->getStudent(), $this->css->getCourseSubject()->getCareerSchoolYear());
@@ -112,6 +112,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
                if ($approved)
                {
                 $count_approved++; 
+                
                 $avg_mark += $course_result->getFinalMark();
                 }
              }
@@ -141,7 +142,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
     }
     public function getMarkAsSymbol()
     {
-        if(in_array($this->css->getCourseSubject()->getSubject()->getName(), $this->materias_introduccion))
+        if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion))
         {
             $mark = $this->getMark();
             if($mark){
@@ -174,7 +175,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
     
     public function getApprovedDate($as_label = true)
     {
-        if(in_array($this->css->getCourseSubject()->getSubject()->getName(), $this->materias_introduccion))
+        if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->materias_introduccion))
         {
             
             $introduccion = SchoolBehaviourFactory::getEvaluatorInstance()->getCourseSubjectStudentsForIntroduccion($this->css->getStudent(), $this->css->getCourseSubject()->getCareerSchoolYear());

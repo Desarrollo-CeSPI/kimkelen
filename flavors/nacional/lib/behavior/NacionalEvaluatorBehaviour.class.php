@@ -93,9 +93,9 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
                 $student_repproved_course_subject->save($con);
 
                 $career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
-                ##se corrobora si la previa es la última y del último año, hay que egresarlo
+                ##se corrobora si la previa es la última y está libre, hay que egresarlo
                 $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
-                if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getYear() >= CareerPeer::getMaxYear() && $previous == 0) {
+                if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE && $previous == 0) {
                         $career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
                         $career_student->setStatus(CareerStudentStatus::GRADUATE);
                         //se guarda el school_year en que termino esta carrera
@@ -148,7 +148,7 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
             {
                //chequeo que esté en 6to y tenga todas las materias aprobadas.
                 $this->student_career_school_years = $student->getStudentCareerSchoolYears();
-                $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
+                $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
                 
                 if(is_null($scsy_cursed))
                 {
@@ -186,5 +186,28 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return false;
 
     }
+    
+  public function canPrintRegularCertificate($student)
+  {
+      $school_year = SchoolYearPeer::retrieveCurrent();
+      $sy = SchoolYearPeer::retrieveLastYearSchoolYear($school_year);
+      
+      $total_previous = $student->getCountStudentRepprovedCourseSubject();
+      
+    
+      $last_year_previous = $student->getCountStudentRepprovedCourseSubjectForSchoolYear($sy);
+      
+      if( $student->isRepprovedInSchoolYear($sy))
+      {
+        return (($student->getIsRegistered() && $last_year_previous <= self::MAX_DISAPPROVED && $total_previous >= $last_year_previous )
+              || ($student->getIsRegistered() && $student->getBelongsToPathway()) );
+      
+      }
+      else
+      {
+          return (($student->getIsRegistered() && $last_year_previous <= self::MAX_DISAPPROVED && $total_previous == $last_year_previous )
+              || ($student->getIsRegistered() && $student->getBelongsToPathway()) );
+      }
+  }
 
 }

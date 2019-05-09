@@ -491,7 +491,8 @@ a img
 .sf_admin_list .sf_admin_action_boletines a,
 .sf_admin_list .sf_admin_action_print_report_card a,
 .sf_admin_list .print_certificate a,
-.sf_admin_actions .print_certificate a
+.sf_admin_actions .print_certificate a,
+.sf_admin_action_print_entry_form a
 {
     background-image: url('../images/printer.png') !important;
 }
@@ -2149,4 +2150,26 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_print_average a
 {
     background-image: url('../images/report--pencil.png') !important;
+}
+
+.student_judicial_restriction {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #C93C42;
+}
+
+.sf_admin_list .sf_admin_action_medical_certificate a
+{
+    background-image: url('../images/medical-certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_history a
+{
+    background-image: url('../images/disciplinary_sanction.png') !important;
+}
+
+.theoric_class
+{
+    color:red;
+    display: block;
 }

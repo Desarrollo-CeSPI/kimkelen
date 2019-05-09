@@ -248,6 +248,11 @@ generator:
             label: Withdrawn certificate
             action: printFreeCertificate
             condition: canPrintFreeCertificate
+            
+          medical_certificate:
+            label: Medical certificates
+            action: medicalCertificates
+            condition: canManageMerdicalCertificate
           
 
       filter:
@@ -330,3 +335,6 @@ generator:
             label: Student reincorporation
             action: reincorporation
             condition: canBeReincorporated
+          print_entry_form:
+            label: Print entry form
+            action: printEntryForm

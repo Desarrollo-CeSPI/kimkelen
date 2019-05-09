@@ -85,6 +85,35 @@ class studentActions extends autoStudentActions
     }
     $this->redirect('student/registerForCareer?id='.$career_student->getStudent()->getId());
   }
+  
+  public function executeEditRegistrationForCareer(sfWebRequest $request)
+  {
+    $career_student = CareerStudentPeer::retrieveByPK($request->getParameter('career_student_id'));
+    $class = SchoolBehaviourFactory::getInstance()->getFormFactory()->getRegisterStudentForCareerForm();
+    $this->form = new $class($career_student);
+    $this->career_student = $career_student;
+    
+    if ($request->isMethod("post"))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "The item was updated successfully.");
+        $this->redirect("@student");
+      }
+    }
+    else
+    {
+        if ( is_null($career_student))
+        {
+          $this->getUser()->setFlash('error', 'No career selected');
+          $this->redirect('@student');
+        }
+    }
+    
+  }
 
   /**
    * This action saves a new career registration for selected student
@@ -174,6 +203,10 @@ class studentActions extends autoStudentActions
 	  $school_year_student->setStudent($this->student);
 	  $school_year_student->setSchoolYear(SchoolYearPeer::retrieveCurrent());
 	}
+        else
+        {   //borro flag de eliminado
+            $school_year_student->setIsDeleted(false); 
+        }
 			
 	$this->form = new SchoolYearStudentForm($school_year_student);	
 	$this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
@@ -212,7 +245,8 @@ class studentActions extends autoStudentActions
       $s = SchoolYearStudentPeer::retrieveByPK($request->getParameter('school_year_student_id'));
       if ( !is_null ($s) )
       {
-        $s->delete();
+        $s->setIsDeleted(true);
+	$s->save(Propel::getConnection());
         $this->getUser()->setFlash('info','The item was deleted successfully.');
         $this->redirect('@student');
       }
@@ -409,6 +443,8 @@ class studentActions extends autoStudentActions
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
     $this->analytic->setObservations($request->getParameter('observations'));
     $this->analytic->save();
+    
+    $this->dipregep_number = $request->getParameter('dipregep');
 
     $this->setLayout('cleanLayout');
   }
@@ -689,13 +725,15 @@ class studentActions extends autoStudentActions
   {
       $this->p = array();
       $this->student_career_school_years = $student->getStudentCareerSchoolYears();
-      $scsy_cursed = $student->getLastStudentCareerSchoolYearCursed();
-      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED,StudentCareerSchoolYearStatus::FREE);
+      $scsy_coursed = $student->getLastStudentCareerSchoolYearCoursed();
+      $status = array(StudentCareerSchoolYearStatus::APPROVED,StudentCareerSchoolYearStatus::FREE);
+      $status_i = array(StudentCareerSchoolYearStatus::IN_COURSE,StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED);
 
         foreach ($this->student_career_school_years as $scsy)
         {
             if (in_array($scsy->getStatus(), $status) || 
-               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_cursed->getId()))
+               ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  &&  $scsy->getId() == $scsy_coursed->getId())
+                || ( in_array($scsy->getStatus(), $status_i)  &&  $scsy->getId() == $scsy_coursed->getId()  ) )
             {
                 $career_school_year = $scsy->getCareerSchoolYear();
                 $school_year = $career_school_year->getSchoolYear();
@@ -719,18 +757,14 @@ class studentActions extends autoStudentActions
         }
       
        /* Si el alumno repitio el año lectivo anterior y no fue inscripto a ninguna materia durante este año
-        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/   
-        if(!is_null($student->getLastStudentCareerSchoolYearCursed()))
+        *  es porque lo retiraron al iniciar el año lectivo. Por lo tanto debo mostrar las materias por las cuales repitio.*/
+        $last_scsy = $student->getLastStudentCareerSchoolYear();
+        if(!is_null($scsy_coursed) && !is_null($last_scsy) && $scsy_coursed->getStatus() == StudentCareerSchoolYearStatus::REPPROVED
+                 && $last_scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN)
         {
-            $school_year = $student->getLastStudentCareerSchoolYearCursed()->getCareerSchoolYear()->getSchoolYear();
-            $scsy = $student->isRepprovedInSchoolYear($school_year); 
-            $css = $student->getCourseSubjectStudentsForSchoolYear($student->getLastStudentCareerSchoolYear()->getCareerSchoolYear()->getSchoolYear());
-
-            if(!is_null($scsy) && count($css) == 0 )
-            {
-                $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy->getCareerSchoolYear());  
-            }
-
+            
+            $dis_cs = StudentDisapprovedCourseSubjectPeer::retrieveByStudentAndCareerSchoolYear($student,$scsy_coursed->getCareerSchoolYear());  
+            
             foreach($dis_cs as $c)
             {
                $this->p[] = $c->getCourseSubjectStudent();
@@ -775,5 +809,17 @@ class studentActions extends autoStudentActions
       }
     }
   }
+  public function executePrintEntryForm(sfWebRequest $request)
+  {
+      $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+      $this->setLayout('cleanLayout');
+      
+  }
+  public function executeMedicalCertificates(sfWebRequest $request)
+  {
+    $this->back_url= $this->getUser()->getAttribute('back_url');
+    $this->getUser()->setReferenceFor($this);
+    $this->redirect("@medical_certificate");
+  }  
 
 }

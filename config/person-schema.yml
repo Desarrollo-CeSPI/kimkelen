@@ -70,6 +70,10 @@ classes:
       photo:
         type:               varchar(255)
         required:           false
+      nationality_id:
+        type:               integer
+        description:        Nacionalidad de la persona
+        required:           false
 
   Personal:
     tableName:            personal
@@ -175,6 +179,9 @@ classes:
       educational_dependency:
         type: varchar(255)
         required: false
+      judicial_restriction:
+        type:               boolean
+        default:            false
 
   Brotherhood:
     tableName:            brotherhood
@@ -244,11 +251,6 @@ classes:
         foreignReference: id
         onDelete:         restrict
         default:          null
-      nationality:
-        description:      La nacionalidad del tutor (nativo, naturalizado, extrangero)
-        type:             integer
-        required:         false
-        default:          0
       occupation_category_id:
         type:             integer
         foreignTable:     occupation_category
@@ -360,7 +362,7 @@ classes:
         required: true
       _uniques:
         license_type:  [name]
-
+        
   TokenUser:
     tableName: token_user
     description: Tokens válidos para reseteo de contraseña
@@ -377,3 +379,79 @@ classes:
         type: varchar(50)
         unique: true
       created_at:
+        
+  MedicalCertificate:
+    tableName: medical_certificate
+    description: Seguimiento de certificados médicos
+    columns:
+      id:
+      description:
+        type:               varchar(255)
+        required:           true
+      certificate:
+        type:               varchar(255)
+        required:           true
+      school_year_id:
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+      certificate_status_id:
+        type:             integer
+        required:           true
+      date:
+        type:             date
+      theoric_class:
+        type:               boolean
+        default:            false
+      theoric_class_from:
+        type:             date
+        required:         false
+      theoric_class_to:
+        type:             date
+        required:         false
+
+  LogMedicalCertificate:
+    tableName: log_medical_certificate
+    description: Log de seguimientos de certificados médicos
+    columns:
+      id:
+      updated_at:
+      medical_certificate_id:
+        type:             integer
+        foreignTable:     medical_certificate
+        foreignReference: id
+      username:
+        type:             varchar(255)
+      description:
+        type:               varchar(255)
+        required:           true
+      certificate:
+        type:               varchar(255)
+        required:           true
+      school_year_id:
+        type:             integer
+        foreignTable:     school_year
+        foreignReference: id
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+      certificate_status_id:
+        type:             integer
+        required:           true
+      date:
+        type:             date
+      theoric_class:
+        type:               boolean
+        default:            false
+      theoric_class_from:
+        type:             date
+        required:         false
+      theoric_class_to:
+        type:             date
+        required:         false
+

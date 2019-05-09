@@ -43,6 +43,7 @@ class CoursePeer extends BaseCoursePeer
     $c->addAnd(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE, Criteria::NOT_EQUAL);
     $c->setDistinct();
     $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
+    $c->add(SchoolYearStudentPeer::IS_DELETED, false);
     return $c;
 
   }
@@ -160,6 +161,7 @@ class CoursePeer extends BaseCoursePeer
 		$c->addJoin(SchoolYearStudentPeer::STUDENT_ID, StudentPeer::ID);
 		$c->add(PersonPeer::IS_ACTIVE,true);
 		$c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $course->getSchoolYearId());
+                $c->add(SchoolYearStudentPeer::IS_DELETED,false);
 		return $c;
 
 	}

@@ -26,6 +26,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
 
   const HISTORIA_DEL_ARTE = 134;
+  const ORIENTACION_ESCOLAR = 238 ;
 
   protected $_introduccion = array(28, 29, 30);
   protected
@@ -445,7 +446,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
       $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);
-
       if ($student_career_school_year->getYear() == 4)
       {
         $sum = 0;
@@ -471,7 +471,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         {
           $is_historia = self::HISTORIA_DEL_ARTE == $student_approved_career_subject->getCareerSubject()->getSubjectId()
           || in_array($student_approved_career_subject->getCareerSubjectid(), array(261,262));
-
           if ($is_historia)
           {
             $historia_mark = $this->getHistoriaDelArteMark($student_approved_career_subject->getStudent(), $student_approved_career_subject->getSchoolYear());
@@ -481,7 +480,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
             $sum += $student_approved_career_subject->getMark();
           }
         }
-
         if (isset($historia_mark)){
           $sum += $historia_mark;
           $count = count($student_approved_career_subjects) - 1;
@@ -491,18 +489,28 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         }
       }
       else
-      {
-        $sum = array_sum(array_map(create_function("\$css", "return \$css->getMark();"), $student_approved_career_subjects));
-        $count = count($student_approved_career_subjects);
-      }
+     {   $sum = 0;
+         $cant = 0;
+        foreach ($student_approved_career_subjects as $student_approved_career_subject)
+        {
+            if($student_approved_career_subject->getCareerSubject()->getId() != self::ORIENTACION_ESCOLAR)
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
+           
+        }
+       
+        $count = $cant;
 
+      }
       if ($sum > 0 && $count > 0)
       {
         return number_format(round(($sum / $count), 2), 2, '.', '');
       }
     }
     return null;
-
+       
   }
 
   public function hasApprovedAllCourseSubjects($student_career_school_year)
@@ -599,9 +607,9 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       $student_repproved_course_subject->save($con);
 
 	    $career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
-	    ##se corrobora si la previa es la última y del último año, hay que egresarlo
+	    ##se corrobora si la previa es la última y está libre, hay que egresarlo
 	    $previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
-	    if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getYear() >= CareerPeer::getMaxYear() && $previous == 0)
+	    if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE && $previous == 0)
 	    {
 		    $career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
 		    $career_student->setStatus(CareerStudentStatus::GRADUATE);
@@ -660,4 +668,173 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     /*No se crea nada ya que se debe inscribir en la mesa.*/
     
   }
+  
+  public function getLastStudentCareerSchoolYearCoursed($student)
+  {
+    $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$student->getId());
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+    $c->add(CourseSubjectStudentMarkPeer::MARK,NULL, Criteria::NOT_EQUAL);
+    $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
+   
+    $c->addAnd(CourseSubjectStudentMarkPeer::IS_CLOSED,TRUE);
+    $c->addJoin(CourseSubjectPeer::ID, StudentApprovedCourseSubjectPeer::COURSE_SUBJECT_ID);
+    
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+    return StudentCareerSchoolYearPeer::doSelectOne($c);
+  }
+
+    public function getAnualAverageWithDisapprovedSubjects($student_career_school_year)
+    {
+       
+        $course_subject_students = CourseSubjectStudentPeer::retrieveAverageableByCareerSchoolYearAndStudent(
+                  $student_career_school_year->getCareerSchoolYear(),$student_career_school_year->getStudent());
+
+        /* $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
+          $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);*/
+
+        if ($student_career_school_year->getYear() == 4)
+        {
+            $sum = 0;
+            $sum_introduccion = 0;
+            foreach ($course_subject_students as $course_subject_student)
+            {
+              if (in_array($course_subject_student->getCourseSubject()->getSubject()->getId(), $this->_introduccion))
+              {
+                $sum_introduccion += $course_subject_student->getFinalMark();
+              }
+              else
+              {
+                $sum += $course_subject_student->getFinalMark();
+              }
+            }
+            $sum += $sum_introduccion / 3;
+            $count = count($course_subject_students) - 2;
+        }
+        elseif ($student_career_school_year->getYear() == 6)
+        {
+          $sum = 0;
+          foreach ($course_subject_students as $course_subject_student)
+          {
+            $is_historia = self::HISTORIA_DEL_ARTE == $course_subject_student->getCourseSubject()->getSubject()->getId()
+            || in_array($course_subject_student->getCourseSubject()->getCareerSubject()->getId(), array(261,262));
+
+            if ($is_historia)
+            {
+              $historia_mark = $this->getHistoriaDelArteMark($course_subject_student->getStudent(), $course_subject_student->getCourseSubject()->getCareerSubject()->getCareerSchoolYear()->getSchoolYear());
+            }
+            else
+            {
+              $sum += $course_subject_student->getFinalMark();
+            }
+          }
+
+          if (isset($historia_mark)){
+            $sum += $historia_mark;
+            $count = count($course_subject_students) - 1;
+          }
+          else {
+            $count = count($course_subject_students);
+          }
+        }
+        else
+        {
+            $sum=0;
+          foreach ($course_subject_students as $course_subject_student)
+          {
+            $sum += $course_subject_student->getFinalMark();
+          }
+          $count = count($course_subject_students);              
+        }
+
+        if ($sum > 0 && $count > 0)
+        {
+          return round($sum/$count, 2);
+        }
+          
+        unset ($course_subject_students);
+
+    }
+    
+    public function canPrintGraduateCertificate($student)
+    {
+        if(!is_null($student->getCareerStudent()))
+        {
+            if ($student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE)
+            {
+                return true;
+            }
+            else
+            {
+               //chequeo que esté en 6to y tenga todas las materias aprobadas.
+                $this->student_career_school_years = $student->getStudentCareerSchoolYears();
+                $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
+                
+                if(is_null($scsy_cursed))
+                {
+                    return false;
+                }
+
+                $max_year = $scsy_cursed->getCareerSchoolYear()->getCareer()->getMaxYear();
+
+                if($scsy_cursed->getYear() != $max_year)
+                    return false;
+
+                foreach ($this->student_career_school_years as $scsy)
+                {
+                    if($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED || $scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
+                            || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                             $scsy->getId() == $scsy_cursed->getId())){
+
+                        $career_school_year = $scsy->getCareerSchoolYear();
+                        $school_year = $career_school_year->getSchoolYear();
+
+                        $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
+                        foreach ($csss as $css)
+                        { 
+                            if (is_null($css->getStudentApprovedCareerSubject()) && is_null($css->getStudentApprovedCourseSubject()))
+                            {
+                                return false;                                                
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+    return false;
+
+    }
+    
+    public function canPrintWithdrawnCertificate($student)
+    {   
+        if ($this->canPrintGraduateCertificate($student))
+            return false;
+        
+        $scsy = $student->getLastStudentCareerSchoolYear();
+        
+        if(!is_null($scsy))
+        {
+           if($scsy->getStatus() == StudentCareerSchoolYearStatus::FREE)
+           {
+               return false;
+           }
+           else
+           {
+               if(!is_null($student->getCareerStudent())){
+
+                    return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+                }
+           }
+           return false; 
+        }   
+    }
 }

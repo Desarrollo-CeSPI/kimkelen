@@ -203,6 +203,10 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
     foreach ($this->getCourseSubjectStudentsForCourseType($student, CourseType::QUATERLY,$school_year) as $css){
       $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
     }
+    
+    foreach ($this->getCourseSubjectStudentsForCourseType($student, CourseType::QUATERLY_OF_A_TERM,$school_year) as $css){
+      $ret[] = $this->getInstanceSubjectStudentAnalytic($css,$school_year);
+    }
    
     if ($student->hasCourseType(CourseType::BIMESTER, $student_career_school_year))
     {
@@ -230,6 +234,52 @@ class LvmSchoolBehaviour extends BaseSchoolBehaviour
   }
     
     return $ret;
+  }
+  
+  public function isFreeStudent(Student $student, CareerSchoolYearPeriod $career_school_year_period = null, CourseSubject $course_subject = null, CareerSchoolYear $career_school_year)
+  {
+    $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $career_school_year);
+
+    $c = new Criteria();
+    $c->add(StudentFreePeer::STUDENT_ID, $student_career_school_year->getStudentId());
+    $c->add(StudentFreePeer::IS_FREE, true);
+    $c->add(StudentFreePeer::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
+
+    if ( !is_null($career_school_year_period) && !is_null($career_school_year_period->getMaxAbsences()))
+    { 
+      $c->add(StudentFreePeer::CAREER_SCHOOL_YEAR_PERIOD_ID, $career_school_year_period->getId());  
+    }    
+
+    if (!is_null($course_subject))
+    {
+      $c->add(StudentFreePeer::COURSE_SUBJECT_ID, $course_subject->getId());
+    }else
+    {
+        $c->add(StudentFreePeer::COURSE_SUBJECT_ID, Criteria::ISNULL);
+    }
+
+    $student_free = StudentFreePeer::doSelectOne($c);
+    
+    
+    return is_null($student_free) ? false : $student_free->getIsFree();
+  }
+  
+  public function getCourseSubjectStudentsForCourseTypeArray($student, $course_type = null, $school_year = null)
+  {
+    if (is_null($school_year))
+    {	
+      $school_year = SchoolYearPeer::retrieveCurrent();
+    }
+
+    $c = new Criteria();
+    $c->add(CoursePeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $c->addJoin(CourseSubjectPeer::COURSE_ID, CoursePeer::ID);
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    CareerSubjectSchoolYearPeer::sorted($c);
+	
+    return $student->getCourseSubjectStudents($c);
+
   }
 
 }

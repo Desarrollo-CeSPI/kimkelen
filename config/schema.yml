@@ -207,6 +207,9 @@ classes:
         foreignReference: id
         required: false
         default: null
+      admission_date:
+        type:             date
+        required:         false   
       _uniques:
         career_student_unique: [ career_id, student_id ]
       _indexes:
@@ -446,7 +449,7 @@ classes:
 
   SchoolYearStudent:
     tableName:          school_year_student
-    description:        Matrícula por año lectivo: inscripción de un alumno a un año lectivo.
+    description:        Matrícula por año lectivo, inscripción de un alumno a un año lectivo.
     columns:
       id:
       student_id:
@@ -479,6 +482,11 @@ classes:
         description:      Especifica la fecha de devolucion de la ficha de salud
         type:             date
         required:         false
+      is_deleted:
+        description:      Indica si esta borrada la matricula para ese año lectivo
+        type:             boolean
+        required:         true
+        default:          false
       _uniques:
         unique: [student_id, school_year_id ]
       _indexes:

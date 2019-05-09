@@ -12,6 +12,10 @@ class LvmAnalyticForm extends AnalyticForm
   public function configure()
   {
       parent::configure();
+      $this->widgetSchema['dipregep_number']= new sfWidgetFormInput();
+      $this->widgetSchema->setLabel("dipregep_number",' ');
+      $this->setWidget('observations', new sfWidgetFormInput());
+      $this->validatorSchema->setOption("allow_extra_fields", true);
       $this->unsetFields();
   }
   
@@ -22,8 +26,7 @@ class LvmAnalyticForm extends AnalyticForm
       $this['id'],
       $this['career_student_id'],
       $this['certificate'],
-      $this['created_at'],
-      $this['observations']   
+      $this['created_at']  
          
     );
   }

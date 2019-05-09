@@ -23,8 +23,8 @@
     <?php $course_subject_student = CourseSubjectStudentPeer::retrieveByCourseSubjectAndStudent($course_subject->getId(),$student->getId()); ?>  
     <?php $course_result = $course_subject_student->getCourseResult() ?>
     <td class="mark <?php echo $course_subject_student->getAvgColorDisapprovedReport() ?>"><?php echo $course_subject_student->getAverageByConfig($configuration) ?></td>
-    <td class="mark <?php echo $course_subject_student->getColorDisapprovedReport(1) ?>" ><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
-    <td class="mark <?php echo $course_subject_student->getColorDisapprovedReport(2) ?>"><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStr() : '' ?></td>
+    <td class="mark <?php echo $course_subject_student->getColorDisapprovedReport(1) ?>" ><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
+    <td class="mark <?php echo $course_subject_student->getColorDisapprovedReport(2) ?>"><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
 <?php else: ?>
     <td>N/C</td>
     <td>N/C</td>

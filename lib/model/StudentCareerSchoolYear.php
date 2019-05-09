@@ -37,10 +37,12 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
       $quaterly_max = 0;
       $bimester_max = 0;
       $quaterly_of_a_term_max = 0;
+      $bimester_of_a_term_max = 0;
       $anual_period_max = 1;
       $quaterly_period_max = 1;
       $bimester_period_max = 1;
       $quaterly_of_a_term_period_max = 1;
+      $bimester_of_a_term_period_max = 1;
     foreach ($css as $course_subject_student)
     {
       $course_type = $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseType();
@@ -74,6 +76,13 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
           $course_subject_per_type['QUATERLY_OF_A_TERM']['periods'] = max($quaterly_of_a_term_period_max, $course_subject_student->countCourseSubjectStudentPeriods());
           $quaterly_of_a_term_max =($quaterly_of_a_term_max > $course_subject_student->countCourseSubjectStudentMarks())?$bimester_max:$course_subject_student->countCourseSubjectStudentMarks();
           $quaterly_of_a_term_period_max=($quaterly_of_a_term_period_max > $course_subject_student->countCourseSubjectStudentPeriods())?$quaterly_of_a_term_period_max:$course_subject_student->countCourseSubjectStudentPeriods();
+          break;
+        case 5:
+          $course_subject_per_type['BIMESTER_OF_A_TERM'][] = $course_subject_student;
+          $course_subject_per_type['BIMESTER_OF_A_TERM']['marks'] = max($bimester_of_a_term_max, $course_subject_student->countCourseSubjectStudentMarks());
+          $course_subject_per_type['BIMESTER_OF_A_TERM']['periods'] = max($bimester_of_a_term_period_max, $course_subject_student->countCourseSubjectStudentPeriods());
+          $bimester_of_a_term_max =($bimester_of_a_term_max > $course_subject_student->countCourseSubjectStudentMarks())?$bimester_max:$course_subject_student->countCourseSubjectStudentMarks();
+          $bimester_of_a_term_period_max=($bimester_of_a_term_period_max > $course_subject_student->countCourseSubjectStudentPeriods())?$bimester_of_a_term_period_max:$course_subject_student->countCourseSubjectStudentPeriods();
           break;
       }
     }
@@ -249,6 +258,7 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
     $c->add(DivisionPeer::CAREER_SCHOOL_YEAR_ID, $this->getCareerSchoolYearId());
     $c->addJoin(DivisionPeer::ID, DivisionStudentPeer::DIVISION_ID);
     $c->add(DivisionStudentPeer::STUDENT_ID, $this->getStudentId());
+    $c->addAscendingOrderByColumn(DivisionPeer::DIVISION_TITLE_ID);
 
     return DivisionPeer::doSelect($c);
   }
@@ -269,5 +279,10 @@ class StudentCareerSchoolYear extends BaseStudentCareerSchoolYear
       'academic_year' => $this->getyear(),
       'school_year' => $this->getCareerSchoolYear()->getSchoolYear()->getYear()
     );
+  }
+  
+  public function getAnualAverageWithDisapprovedSubjects()
+  {
+    return SchoolBehaviourFactory::getEvaluatorInstance()->getAnualAverageWithDisapprovedSubjects($this);
   }
 }

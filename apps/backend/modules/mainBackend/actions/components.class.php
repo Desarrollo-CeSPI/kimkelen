@@ -37,8 +37,13 @@ class mainBackendComponents extends sfComponents
 
   public function executeGeneralInformation()
   {
-    $this->current_school_year = SchoolYearPeer::retrieveCurrent();
-    $this->amount_sy_students = $this->current_school_year->countSchoolYearStudents();
+    /*is_deleted = false*/
+	$criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+	$criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
+	
+	$this->current_school_year = SchoolYearPeer::retrieveCurrent();
+    $this->amount_sy_students = $this->current_school_year->countSchoolYearStudents($criteria);
+
     $this->amount_teachers = TeacherPeer::doCount(new Criteria());
     $this->amount_students = StudentPeer::doCount(new Criteria());
   }

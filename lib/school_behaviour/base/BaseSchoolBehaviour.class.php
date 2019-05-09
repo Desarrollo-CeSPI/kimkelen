@@ -29,7 +29,8 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     CourseType::TRIMESTER => 'Anual con Régimen Trimestral',
     CourseType::QUATERLY => 'Anual con Régimen Cuatrimestral',
     CourseType::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-    CourseType::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino'
+    CourseType::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un termino',
+    CourseType::BIMESTER_OF_A_TERM => 'Bimestral con Régimen de un término',
   );
 
   const ATTENDANCE_DAY = 1;
@@ -260,7 +261,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     //Students inscripted in the school_year
     $criteria->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID, Criteria::INNER_JOIN);
     $criteria->addAnd(SchoolYearStudentPeer::SCHOOL_YEAR_ID, $career_subject_school_year->getCareerSchoolYear()->getSchoolYearId());
-
+	$criteria->addAnd(SchoolYearStudentPeer::IS_DELETED, false);
 
     //Check if the students has the corresponds allows required to course this subject
     $criteria->addJoin(StudentPeer::ID, StudentCareerSubjectAllowedPeer::STUDENT_ID);
@@ -1254,9 +1255,31 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return $total + $diff;
   }
   
+
   public function getPhone()
   {
     return $this->phone;
 
   }
+
+  public function getStudentsForDivision($c, $division)
+    {
+        $ret = array();
+
+        $c =($c == null) ? new Criteria: $c ;
+        $c->add(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($division->getSchoolYear()), Criteria::IN);
+        $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
+        $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
+        $c->add(PersonPeer::IS_ACTIVE, true);
+
+        $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+
+        foreach ($division->getDivisionStudents($c) as $ds)
+        {
+          $ret[] = $ds->getStudent();
+        }
+        return $ret;
+    }
+
 }

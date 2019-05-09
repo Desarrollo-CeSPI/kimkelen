@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<?php $is_block = $course->getYear() == 1 || $course->getYear() == 2?>
 <?php $i = 0;?>
-<?php foreach ($course_subject->getCourseSubjectStudentsForPrintCalifications() as $course_subject_student): ?>
+<?php foreach ($course_subject->getCourseSubjectStudentsForPrintReport() as $course_subject_student): ?>
   <?php $i++?>
   <?php $course_result = $course_subject_student->getCourseResult(); ?>
   <tr>
@@ -34,11 +33,6 @@
 	  <td><?php echo ($final_period)? $c->num2str($course_subject_student->getMarksAverage()) : '' ?></td>
     <td></td>
     <td></td>
-    <?php if ($is_block):?>
-      <td></td>
-      <td></td>
-      <td></td>
-    <?php endif?>
     <td></td>
     <td></td>
     <td></td>

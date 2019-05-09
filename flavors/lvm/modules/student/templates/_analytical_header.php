@@ -23,7 +23,7 @@
                 <div class="title" id="header_analytical_data_center">
                     <div class="analytical_info">
                       	<div class="analytical_form">
-                            <?php echo $form; ?>
+                            <?php echo ($form) ? $form['certificate_number']->renderRow() : '' ?>
                         </div>
                         <div class="analytical_form_info">   
                             <?php echo __('Certificado N°'); ?>
@@ -35,7 +35,14 @@
 			</div>
                         <div class="analytic_info">
                             <label><?php echo __("Curso") ?>: </label>
-                            <span class="detail"><?php $d = $career_student->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
+                            <span class="detail">
+                                <?php $scsy = $career_student->getStudent()->getLastStudentCareerSchoolYear();?>
+                                <?php if ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN ):?>
+                                    <?php $d = $career_student->getStudent()->getLastStudentCareerSchoolYearCoursed()->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
+                                <?php else: ?>
+                                    <?php $d = $scsy->getDivisions(); echo ($d[0]) ? str_replace(" ", "°", $d[0]) . " " .$career_student->getStudent()->getStudentOrientationString() :'';?></span>
+                                <?php endif;?>
+                                
 			</div>
                     </div>
                     
@@ -46,6 +53,10 @@
 	</div>
 
 	<div class="header_row">
-		<?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student)) ?>
+                <?php if(isset($dipregep_number)):?>
+                    <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form, 'dipregep_number' => $dipregep_number)) ?>
+                <?php else: ?>
+                    <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form)) ?>
+                <?php endif;?>
 	</div>
 </div>

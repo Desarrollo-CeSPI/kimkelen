@@ -71,4 +71,29 @@ class rating_reportActions extends sfActions
 
     $this->route = "rating_report/filterForDivision";
   }
+  
+    public function executeFilterBySchoolYear(sfWebRequest $request)
+    {
+        $this->form = new DivisionRatingReportFormFilter();
+      
+        if ($request->isMethod('POST'))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()));
+          if ($this->form->isValid())
+          {
+             $params = $request->getParameter('division_rating_report'); 
+             
+             $this->year =$params['year'] ;
+             $this->school_year = CareerSchoolYearPeer:: retrieveByPK($params['career_school_year_id'])->getSchoolYear();
+             $this->division = DivisionPeer::retrieveByPk($params['division_id']);
+             $this->students = $this->division->getStudents();
+             $this->setLayout('cleanLayout');
+             $this->setTemplate('printAverage');
+            
+          }
+         
+        }
+
+        $this->route = "rating_report/filterBySchoolYear";
+    }
 }

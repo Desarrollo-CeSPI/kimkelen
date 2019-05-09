@@ -44,6 +44,9 @@
               <li class="sf_admin_action_history">
                 <?php echo link_to(__("History"), "student/history?career_student_id=".$cs->getId()) ?>
               </li>
+              <li class="sf_admin_action_edit">
+                <?php echo link_to(__("Edit"), "student/editRegistrationForCareer?career_student_id=".$cs->getId()) ?>
+              </li>
             </ul>
           </td>
         </tr>

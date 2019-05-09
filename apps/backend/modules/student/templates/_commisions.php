@@ -25,6 +25,8 @@
 <?php use_helper('I18N')?>
 <?php /* @var $student Student */ ?>
 
+<?php $sys = $student->getSchoolYearStudentForSchoolYear(); ?>
+<?php if(! is_null($sys) && ! $sys->getIsDeleted()):?>
 <?php if (count($commisions)): ?>
   <div class="student_year">
   	<?php echo count($commisions) > 1 ?  __('Currently inscripted in commisions:') : __('Currently inscripted in commision:')?>
@@ -42,4 +44,5 @@
     	<a class="toggle-link" href="#" onclick="jQuery(this).closest('.student_commisions').find('.hide').toggle(500);return false">Ver todas</a>
     <?php endif ?>
   </div>
-<?php endif ?>
+<?php endif ;?>
+<?php endif ;?>

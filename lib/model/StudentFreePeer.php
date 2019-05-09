@@ -77,4 +77,24 @@ class StudentFreePeer extends BaseStudentFreePeer
 
     return self::doSelectOne($c);
   }
+  
+  static public function retrieveByStudentCareerSchoolYearCareerSchoolYearPeriodAndCourseSubject(StudentCareerSchoolYear $student_career_school_year, CareerSchoolYearPeriod $career_school_year_period = null, $course_subject = null)
+  {
+    $c = new Criteria();
+    $c->add(self::STUDENT_ID, $student_career_school_year->getStudentId());
+    $c->add(self::IS_FREE, true);
+    $c->add(self::CAREER_SCHOOL_YEAR_ID, $student_career_school_year->getCareerSchoolYearId());
+
+    if ( !is_null($career_school_year_period))
+    { 
+      $c->add(self::CAREER_SCHOOL_YEAR_PERIOD_ID, $career_school_year_period->getId());  
+    }    
+
+    if (!is_null($course_subject))
+    {
+      $c->add(self::COURSE_SUBJECT_ID, $course_subject->getId());
+    }    
+
+    return self::doSelectOne($c);
+  }
 }

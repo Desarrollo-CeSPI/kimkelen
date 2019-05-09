@@ -27,7 +27,7 @@
           <?php echo ($student->getOriginSchool()->getSector() != SectorOriginSchoolType::SECTOR_UNLP)? ' - Provincia de ' .  $student->getOriginSchool()->getCity()->getDepartment()->getState() : ''?>
         <?php endif ?> 
         </div>
-        <?php if ($analytical->has_completed_career()): ?>
+        <?php if ($analytical->has_completed_career() || $student->canPrintGraduateCertificate()): ?>
             <div class="footer-text">Completó sus estudios secundarios. <?php echo $analytical->get_career_student()->getCareer()->getCareerName(); ?>. </div>
         <?php else: ?>
             <div class="footer-text">Para terminar sus estudios secundarios deberá aprobar:

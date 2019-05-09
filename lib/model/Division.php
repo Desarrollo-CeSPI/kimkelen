@@ -54,22 +54,7 @@ class Division extends BaseDivision
 
   public function getStudents(Criteria $c = null)
   {
-    $ret = array();
-
-    $c =($c == null) ? new Criteria: $c ;
-    $c->add(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($this->getSchoolYear()), Criteria::IN);
-    $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
-    $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID, Criteria::INNER_JOIN);
-    $c->add(PersonPeer::IS_ACTIVE, true);
-
-    $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
-    $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
-
-    foreach ($this->getDivisionStudents($c) as $ds)
-    {
-      $ret[] = $ds->getStudent();
-    }
-    return $ret;
+    return  SchoolBehaviourFactory::getInstance()->getStudentsForDivision($c,$this);
   }
 
   public function deleteStudentFromCourses($id, $con)
@@ -160,7 +145,15 @@ class Division extends BaseDivision
       {
         $csy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($cs, $this->getSchoolYear());
 
-        $career_subject_school_year_ids = array_map(create_function('$o', 'return $o->getChoiceCareerSubjectSchoolYearId();'), $csy->getChoices());
+        if(!is_null($csy))
+        {
+           $career_subject_school_year_ids = array_map(create_function('$o', 'return $o->getChoiceCareerSubjectSchoolYearId();'), $csy->getChoices());
+        }
+        else
+        {
+            $career_subject_school_year_ids = array();
+        }
+        
 
         $c = new Criteria();
         $c->add(CoursePeer::DIVISION_ID, $this->getId());

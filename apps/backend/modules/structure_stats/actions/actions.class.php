@@ -111,7 +111,10 @@ class structure_statsActions extends sfActions
 
     if (!is_null($last_year_school_year = SchoolYearPeer::retrieveLastYearSchoolYear($this->school_year)))
     {
-      $total = bcsub($this->school_year->countSchoolYearStudents(null, true), $last_year_school_year->countSchoolYearStudents(), 0);
+	  $criteria = new Criteria(SchoolYearPeer::DATABASE_NAME);
+	  $criteria->add(SchoolYearStudentPeer::IS_DELETED, false);
+	  
+      $total = bcsub($this->school_year->countSchoolYearStudents($criteria, true), $last_year_school_year->countSchoolYearStudents($criteria), 0);
       $filters['is_entrant'] = true;
       $student_reports[] = $this->generateReportArray('Ingresantes con respecto al año lectivo anterior', $total, $filters);
     }

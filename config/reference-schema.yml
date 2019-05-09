@@ -46,6 +46,9 @@ classes:
       name:
         type: varchar(255)
         required: true
+      nationality:
+        type: varchar(255)
+        required: true
 
   State:
     tableName:            state
