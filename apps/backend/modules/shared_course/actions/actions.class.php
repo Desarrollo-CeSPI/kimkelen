@@ -319,7 +319,7 @@ class shared_courseActions extends autoShared_courseActions
     {
       $course_type = $course_subject->getCareerSubjectSchoolYear()->getConfiguration()->getCourseType();
 
-      $first_form = ($course_type == CourseType::BIMESTER || $course_type == CourseType::QUATERLY_OF_A_TERM || CourseType::BIMESTER_OF_A_TERM);
+      $first_form = ($course_type == CourseType::BIMESTER || $course_type == CourseType::QUATERLY_OF_A_TERM || $course_type == CourseType::BIMESTER_OF_A_TERM);
       $c->add(CourseSubjectConfigurationPeer::COURSE_SUBJECT_ID, $course_subject->getId());
 
       $new = (CourseSubjectConfigurationPeer::doSelect($c));
