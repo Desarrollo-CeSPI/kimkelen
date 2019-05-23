@@ -1,4 +1,5 @@
-<?php /*
+<?php 
+/*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
  *
@@ -15,14 +16,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
- */ 
-?>
-
+ */ ?>
 <tbody class="print_body">
   <?php $i = 0;?>
   <?php foreach ($course_subject->getCourseSubjectStudentsForPrintReport() as $course_subject_student): ?>
     <?php $last_scsy = $course_subject_student->getStudent()->getLastStudentCareerSchoolYearCoursed(); ?>
-    <?php if (!is_null($last_scsy) && $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() >= $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear()): ?>
+    <?php $scsy = $course_subject_student->getStudent()->getLastStudentCareerSchoolYear(); ?>
+    <?php if (!is_null($last_scsy) && ($scsy->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN || $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() >= $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear())): ?>
       <?php $i++ ?>
       <?php $course_result = $course_subject_student->getCourseResult(); ?>
       <tr>
@@ -37,3 +37,5 @@
     <?php endif; ?>
   <?php endforeach ?>
 </tbody>
+
+
