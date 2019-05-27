@@ -22,7 +22,7 @@
   <?php foreach ($course_subject->getCourseSubjectStudentsForPrintReport() as $course_subject_student): ?>
     <?php $last_scsy = $course_subject_student->getStudent()->getLastStudentCareerSchoolYearCoursed(); ?>
     <?php $scsy = $course_subject_student->getStudent()->getLastStudentCareerSchoolYear(); ?>
-    <?php if (!is_null($last_scsy) && ($scsy->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN || $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() >= $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear())): ?>
+    <?php if ((!is_null($scsy) && $scsy->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN) || (!is_null($last_scsy) && $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() >= $course_subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getYear())): ?>
       <?php $i++ ?>
       <?php $course_result = $course_subject_student->getCourseResult(); ?>
       <tr>
