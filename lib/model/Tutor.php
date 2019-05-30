@@ -86,4 +86,22 @@ class Tutor extends BaseTutor
 
     return implode(',  ', $students);
   }
+  
+  public function canAddPreceptor()
+  {
+    $c = new Criteria();
+    $c->add(PersonalPeer::PERSON_ID, $this->getPersonId());
+
+    return PersonalPeer::doCount($c) == 0;
+
+  }
+  
+  public function canAddTeacher()
+  {
+    $c = new Criteria();
+    $c->add(TeacherPeer::PERSON_ID, $this->getPersonId());
+
+    return TeacherPeer::doCount($c) == 0;
+
+  }
 }

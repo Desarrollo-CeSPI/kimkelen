@@ -61,5 +61,21 @@ class tutorActions extends autoTutorActions
     }
 
   }
+  
+  public function executeAggregateAsPreceptor(sfWebRequest $request)
+  {
+    $this->teacher = $this->getRoute()->getObject();
+    $this->teacher->createPreceptor();
+    $this->getUser()->setFlash('info','The preceptor has been created succesfuly.');
+    $this->redirect('@tutor');
+  }
+  
+  public function executeAggregateAsTeacher(sfWebRequest $request)
+  {
+    $this->personal = $this->getRoute()->getObject();
+    $this->personal->createTeacher();
+    $this->getUser()->setFlash('info','The teacher has been created succesfuly.');
+    $this->redirect('@personal');
+  }
 
 }
