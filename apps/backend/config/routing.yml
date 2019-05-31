@@ -154,7 +154,11 @@ average_report:
 course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }
-
+  
+tutor_aggregate_teacher:
+   url: tutor/aggregateAsTeacher
+   param: { module: tutor, action: aggregateAsTeacher }
+   
 resources:
   class: sfPropelRouteCollection
   options:

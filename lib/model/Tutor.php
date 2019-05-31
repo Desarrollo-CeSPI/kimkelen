@@ -104,4 +104,25 @@ class Tutor extends BaseTutor
     return TeacherPeer::doCount($c) == 0;
 
   }
+  
+  public function createTeacher(PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
+
+    $teacher = new Teacher();
+    $teacher->setPerson($this->getPerson());
+    $teacher->save($con);
+
+    $guard_user = $this->getPersonSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $teacher_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::TEACHER);
+      if (!array_key_exists($teacher_group, $guard_user->getGroups()))
+      {
+        $guard_user->addGroupByName($teacher_group);
+        $guard_user->save($con);
+      }
+    }
+
+  }
 }

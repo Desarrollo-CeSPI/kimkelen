@@ -64,18 +64,43 @@ class tutorActions extends autoTutorActions
   
   public function executeAggregateAsPreceptor(sfWebRequest $request)
   {
-    $this->teacher = $this->getRoute()->getObject();
-    $this->teacher->createPreceptor();
+    $this->tutor = $this->getRoute()->getObject();
+    $this->tutor->createPreceptor();
     $this->getUser()->setFlash('info','The preceptor has been created succesfuly.');
     $this->redirect('@tutor');
   }
   
   public function executeAggregateAsTeacher(sfWebRequest $request)
   {
-    $this->personal = $this->getRoute()->getObject();
-    $this->personal->createTeacher();
-    $this->getUser()->setFlash('info','The teacher has been created succesfuly.');
-    $this->redirect('@personal');
+    $this->tutor = TutorPeer::retrieveByPK($request->getParameter('id'));
+    
+    
+    /*if (is_null ($this->tutor->getPersonSfGuardUser()))
+    {*/
+        $teacher = new Teacher();
+        $teacher->setPerson($this->tutor->getPerson());
+        $this->form = new TeacherCustomForm($teacher);
+        
+        
+        if ($request->isMethod("post"))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+          if ($this->form->isValid())
+          {
+            //$this->form->save();
+
+            //$this->getUser()->setFlash("notice", "The item was updated successfully.");
+            //$this->redirect("@student");
+          }
+        }
+    /*}else
+    {
+        $this->tutor->createTeacher();
+        $this->getUser()->setFlash('info','The teacher has been created succesfuly.');
+        $this->redirect('@tutor');
+    }*/
   }
+  
+ 
 
 }
