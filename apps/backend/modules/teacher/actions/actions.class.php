@@ -90,5 +90,34 @@ class teacherActions extends autoTeacherActions
     }
     parent::executeDelete($request);
   }
+  
+  public function executeAggregateAsTutor(sfWebRequest $request)
+  {
+      
+    $this->teacher = TeacherPeer::retrieveByPK($request->getParameter('id'));
+    
+    
+        $tutor = new Tutor();
+        $tutor->setPerson($this->teacher->getPerson());
+        $this->form = new TutorCustomForm($tutor);
+        
+        
+        if ($request->isMethod("post"))
+        {
+          $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+          if ($this->form->isValid())
+          {
+            $this->form->save();
+
+            $this->getUser()->setFlash("notice", "The tutor has been created succesfuly.");
+            $this->redirect("@tutor");
+          }
+        }
+    
+    $this->teacher = $this->getRoute()->getObject();
+    /*$this->teacher->createPreceptor();
+    $this->getUser()->setFlash('info','The tutor has been created succesfuly.');
+    $this->redirect('@teacher');*/
+  }
 
 }

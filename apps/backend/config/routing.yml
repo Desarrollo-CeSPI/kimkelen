@@ -158,6 +158,14 @@ course_subject_student_mark_change_log:
 tutor_aggregate_teacher:
    url: tutor/aggregateAsTeacher
    param: { module: tutor, action: aggregateAsTeacher }
+
+tutor_aggregate_preceptor:
+   url: tutor/aggregateAsPreceptor
+   param: { module: tutor, action: aggregateAsPreceptor }
+   
+teacher_aggregate_tutor:
+   url: teacher/aggregateAsTutor
+   param: { module: teacher, action: aggregateAsTutor }
    
 resources:
   class: sfPropelRouteCollection

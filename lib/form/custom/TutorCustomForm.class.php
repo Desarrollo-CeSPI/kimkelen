@@ -20,14 +20,14 @@
 <?php
 
 /**
- * TeacherCustom form.
+ * TutorCustom form.
  *
  * @package    conservatorio
  * @subpackage form
  * @author     Your name here
  * @version    SVN: $Id: sfPropelFormTemplate.php 10377 2008-07-21 07:10:32Z dwhittle $
  */
-class TeacherCustomForm extends TeacherForm
+class TutorCustomForm extends TutorForm
 {
   public function configure()
   {
@@ -55,48 +55,28 @@ class TeacherCustomForm extends TeacherForm
            $this['person-nationality_id'],
            $this['examination_repproved_subject_teacher_list'],
            $this['examination_subject_teacher_list'],
-           $this['salary']
+           $this['salary'],
+           $this['person-username'],
+           $this['person-password'],
+           $this['person-password_again'],
+           $this['is_alive']     
     );
-   
-  
-    $this->setWidget('person-username', new sfWidgetFormInput());
-    $this->setValidator('person-username', new sfValidatorString(array('min_length' => 4, 'max_length' => 128, 'required' => true),array(
-        'min_length' => __('Username must be at least 4 characters long'),
-        'max_length' => __('Username must be at most 128 characters long')
-    )));
-    $this->getWidgetSchema()->setHelp('person-username',__('if blank no username will be assigned'));
     
-    $this->setWidget('person-password', new sfWidgetFormInputPassword());
-    $this->setWidget('person-password_again',new sfWidgetFormInputPassword());
-
-    $this->setValidator('person-password', new sfGuardSecurePasswordValidator(array('required' => true)));
-    $this->setValidator('person-password_again', new sfGuardSecurePasswordValidator(array('required' => true)));
-           
-        
-    $this->getWidgetSchema()->setLabel('person-username', 'Username');
-    $this->getWidgetSchema()->setLabel('person-password', 'Password');
-    $this->getWidgetSchema()->setLabel('person-password_again', 'Password again');
+    $this->getWidgetSchema()->moveField('tutor_type_id', sfWidgetFormSchema::BEFORE,'occupation_id' );
+    
+    $this->setValidator('tutor_type_id', new sfValidatorPropelChoice(array('model' => 'TutorType', 'column' => 'id', 'required' => true)));
  
   }
   
-  
-  protected function doSave($con = null)
+  public function getFormFieldsDisplay()
   {
-
-    BaseTeacherForm::doSave($con);
-    $guard_user = $this->getObject()->getPersonSfGuardUser();
-    if ( !is_null($guard_user))
-    {   $teacher_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::TEACHER);
-        if ( ! array_key_exists( $teacher_group,$guard_user->getGroups()) )
-        {
-          $guard_user->addGroupByName($teacher_group);
-          $guard_user->save($con);
-        }
-    }
-    
+    return array(
+          'Personal data'   =>  array( 'person-lastname', 'person-firstname', 'person-identification_type', 'is_alive', 'person-identification_number', 'person-sex', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department' ,'person-birth_city','person-nationality_id', 'tutor_type_id', 'person-observations' ),
+          'Statistics'      => array('occupation_id', 'occupation_category_id', 'study_id'),
+          'Contact data'   => array('person-email', 'person-phone', 'person-address'),
+   //       'System access'  => array('person-username', 'person-password', 'person-password_again'),
+          'In charge of'  => array('student_list')
+    );
   }
-
-  
-
-
+ 
 }

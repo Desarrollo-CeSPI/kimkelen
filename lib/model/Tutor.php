@@ -125,4 +125,25 @@ class Tutor extends BaseTutor
     }
 
   }
+  
+  public function createPreceptor(PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
+
+    $personal = new Personal();
+    $personal->setPerson($this->getPerson());
+    $personal->save($con);
+
+    $guard_user = $this->getPersonSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $personal_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::PERSONAL);
+      if (!array_key_exists($personal_group, $guard_user->getGroups()))
+      {
+        $guard_user->addGroupByName($personal_group);
+        $guard_user->save($con);
+      }
+    }
+
+  }
 }
