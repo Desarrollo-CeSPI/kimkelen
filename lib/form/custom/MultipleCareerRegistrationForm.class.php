@@ -51,14 +51,16 @@ class MultipleCareerRegistrationForm extends sfForm
         'dependant_widget' => $w2,
         'observe_widget_id' => 'multiple_career_registration_orientation_id',
         'related_column' => 'orientation_id'
-      ))
+      )),
+      "admission_date" => new csWidgetFormDateInput()  
     ));
     
     $this->setValidators(array(
       "career_id" => new sfValidatorPropelChoice(array("model" => "Career", "required" => true)),
       "orientation_id" => new sfValidatorPropelChoice(array("model" => "Orientation", "required" => false)),
       "sub_orientation_id" => new sfValidatorPropelChoice(array("model" => "SubOrientation", "required" => false)),
-      "start_year" => new sfValidatorInteger()
+      "start_year" => new sfValidatorInteger(),
+      "admission_date" => new mtValidatorDateString(array("required" => false))
     ));
     
     $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
@@ -96,6 +98,7 @@ class MultipleCareerRegistrationForm extends sfForm
     $this->widgetSchema->moveField("start_year", "after", "career_id");
     $this->widgetSchema->moveField("orientation_id", "after", "career_id");
     $this->widgetSchema->moveField("sub_orientation_id", "after", "orientation_id");
+    $this->widgetSchema->moveField("admission_date", "after", "start_year");
   }
   
   public function save($con = null)
@@ -120,11 +123,13 @@ class MultipleCareerRegistrationForm extends sfForm
       $orientation = OrientationPeer::retrieveByPK($values["orientation_id"]);
       $sub_orientation = SubOrientationPeer::retrieveByPK($values["sub_orientation_id"]);
       $start_year = $values["start_year"];
+      $admission_date = $values["admission_date"];
       
       unset($values["career_id"]);
       unset($values["orientation_id"]);
       unset($values["sub_orientation_id"]);
       unset($values["start_year"]);
+      unset($values["admission_date"]);
 
       foreach ($values as $student_id)
       {
@@ -132,7 +137,7 @@ class MultipleCareerRegistrationForm extends sfForm
         
         if (!$student->isRegisteredToCareer($career, $con))
         {                    
-          $student->registerToCareer($career, $orientation, $sub_orientation, $start_year, $con);        
+          $student->registerToCareer($career, $orientation, $sub_orientation, $start_year, $admission_date, $con);        
         }        
       }
 

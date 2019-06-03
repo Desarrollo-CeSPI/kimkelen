@@ -25,16 +25,16 @@
         de la <?php echo __("Universidad Nacional de La Plata") ?> CERTIFICA que
         <strong><?php echo substr($student->getPerson()->getFullName(), 0, strlen($student->getPerson()->getFullName()) -1 ); ?>,</strong> <strong><?php echo BaseCustomOptionsHolder::getInstance('IdentificationType')->getStringFor($student->getPerson()->getIdentificationType()) ?> <?php echo $student->getPerson()->getIdentificationNumber() ?>,</strong>
         <?php echo ($student->getPerson()->getFullNationality()) ? 'de nacionalidad ' . strtolower($student->getPerson()->getFullNationality()) . ', ' : ''?>
-        nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()); ?>, <?php echo ucwords($student->getPerson()->getBirthStaterepresentation()); ?>, <?php echo $student->getPerson()->getBirthCountryRepresentation() ?></span>,
+        nacido/a en <span><?php echo ucwords($student->getPerson()->getBirthCityRepresentation()) . ','; ?> <?php echo ($student->getPerson()->getBirthStaterepresentation() != 'Sin Provincias') ? ucwords($student->getPerson()->getBirthStaterepresentation()) . ', ' : ''; ?> <?php echo ucwords($student->getPerson()->getBirthCountryrepresentation()); ?></span>,
         el día <strong><?php echo format_date($student->getPerson()->getBirthDate(), "D") ?></strong>,
-        que ingresó en este establecimiento en el año <span><?php echo $student->getInitialSchoolYear()->getYear(); ?></span>
+        que ingresó en este establecimiento el día <span><?php echo format_date($career_student->getAdmissionDate(),'D'); ?></span>
         proveniente de <span><?php echo ($student->getOriginSchool()? $student->getOriginSchool():__('otra escuela')); ?></span> 
         
         <?php if ($student->getOriginSchool()):?>
             <?php if ($student->getOriginSchool()->getSector() == SectorOriginSchoolType::SECTOR_UNLP):?>
                    UNLP,
             <?php elseif($student->getOriginSchool()->getSector() == SectorOriginSchoolType::SECTOR_PRIVATE):?>
-                <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> <span class="analytical_dipregep_info"> <?php echo ($form) ? 'N° '. $form['dipregep_number']->renderRow() : '' ?> </span> <?php echo ($dipregep_number) ? 'N° '. $dipregep_number : ''; ?> de la provincia de Buenos Aires,
+                <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> <span class="analytical_dipregep_info"> <?php echo ($form) ? 'N° '. $form['dipregep_number']->renderRow() : '' ?> </span> <?php echo isset($dipregep_number) ? 'N° '. $dipregep_number : ''; ?> de la provincia de Buenos Aires,
             <?php else: ?>
                 <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?> de la provincia de Buenos Aires,
             <?php endif;?>

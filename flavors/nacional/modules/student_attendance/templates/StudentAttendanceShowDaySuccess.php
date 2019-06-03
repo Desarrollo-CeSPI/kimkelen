@@ -151,7 +151,7 @@
 
           <?php foreach ($form->students as $student): ?>
             <tr>
-              <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student ?></td>
+              <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student  ?> <?php  if($student->getTheoricClass(date_create($form->day))): ?> <span class="theoric_class">(Clases teóricas)</span><?php endif;?></td>
               
                 <td class="day_1 <?php echo $student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$form->day,$course_subject_id)?>">
                   <?php $name = 'student_attendance_' . $student->getId() . '_' . 1 ?>

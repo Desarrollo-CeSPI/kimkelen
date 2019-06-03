@@ -33,7 +33,7 @@
     <?php foreach ($student_career_school_year->getDivisions() as $division): ?>
 
       <div class="report-wrapper">
-        <?php include_partial('student/admonition_details', array('student' => $student, 'division' => $division, 'student_career_school_year' => $student_career_school_year)); ?>
+        <?php include_partial('admonition_details', array('student' => $student, 'division' => $division, 'student_career_school_year' => $student_career_school_year)); ?>
 
         <div style="clear:both"></div>
 

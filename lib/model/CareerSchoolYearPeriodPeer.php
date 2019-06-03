@@ -219,5 +219,25 @@ class CareerSchoolYearPeriodPeer extends BaseCareerSchoolYearPeriodPeer
       return self::doSelect($c);
       
   }
+  
+     static public function retrieveLastDay($career_school_year)
+  {
+    $c = new Criteria();
+    $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year->getId());
+    $c->addDescendingOrderByColumn(self::END_AT);    
+   
+    return self::doSelectOne($c);
+  
+  }
+  
+   static public function retrieveFirstDay($career_school_year)
+  {
+    $c = new Criteria();
+    $c->add(self::CAREER_SCHOOL_YEAR_ID,$career_school_year->getId());
+    $c->addAscendingOrderByColumn(self::END_AT);    
+   
+    return self::doSelectOne($c);
+  
+  }
 
 }

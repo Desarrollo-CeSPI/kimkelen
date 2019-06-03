@@ -51,6 +51,7 @@ class BaseAnalyticalBehaviour
     /* @var $career_student CareerStudent */
     protected $career_student = null;
     protected $remaining_years = null;
+    protected $approved_subject = null;
 
 
     public function __construct(Student $a_student)
@@ -81,13 +82,17 @@ class BaseAnalyticalBehaviour
     public function get_graduated_date()
     {
         $last = $this->get_years_in_career();
-        $count = count($this->get_years_in_career()) -1;
+        $count = count($this->get_years_in_career()) - 2;
         $last_date = date('Y-m-d');
-        foreach ($this->objects[$last[$count]]['subjects'] as $css) {
-          $date = $css->getApprovedDate();
-            if ($date > $last_date) {
-              $last_date = $date;
-            }
+
+        for ( $i = $count ; $i <  count($this->get_years_in_career()) ; $i++)
+        {
+             foreach ($this->objects[$last[$i]]['subjects'] as $css) {
+                $date = $css->getApprovedDate();
+                  if ($date > $last_date) {
+                    $last_date = $date;
+                  }
+              }
         }
         return $last_date;
     }
@@ -250,6 +255,7 @@ class BaseAnalyticalBehaviour
         $this->missing_subjects = array();
         $this->last_exam_date = null;
         $this->career_student = $this->get_student()->getCareerStudent();
+        $this->approved_subject = false;
     }
     
     protected function add_year_in_career($year)
@@ -359,7 +365,7 @@ class BaseAnalyticalBehaviour
                         $avg_mark_for_year[$year_in_career]['count'] = 0;
                     }
                     
-                    if ($this->subject_is_averageable($css))
+                    if (!$css->getCourseSubjectStudent()->getIsNotAverageable())
                     {
                         $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
                         $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
@@ -436,5 +442,10 @@ class BaseAnalyticalBehaviour
     public function getSpecialityTypeString($career_student)
     {
         return;
+    }
+    
+    public function is_approved_subject()
+    {
+        return $this->approved_subject;
     }
 }

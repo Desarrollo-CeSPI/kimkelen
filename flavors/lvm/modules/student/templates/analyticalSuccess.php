@@ -38,7 +38,7 @@
     <div class="report-content">
         <?php include_component('student', 'component_analytical_table', array('career_student' => $career_student)) ?>
     </div>
-    <?php include_partial('analytical_footer', array('career_student' => $career_student, 'analytical' => $analytical)) ?>
+    <?php include_partial('analytical_footer', array('career_student' => $career_student, 'analytical' => $analytical,'form' => $form)) ?>
 </div>    
    
 </div>
@@ -63,7 +63,45 @@
                 if(dipregep.trim() != ''){
                     link = link + '&dipregep=' + dipregep;
                 }   
-            }             
+            }
+            
+            elem = document.getElementById("analytic_observations" );
+            if(elem)
+            {
+                observations = document.getElementById("analytic_observations" ).value;       
+                if(observations.trim() != ''){
+                    link = link + '&observations=' + observations;
+                }   
+            } 
+            document.getElementById('link_print').href= link;
+           
+        });
+        
+        document.getElementById("analytic_observations" ).addEventListener('change', function() {
+            
+            certificate = document.getElementById("analytic_certificate_number" ).value;
+            link = url; 
+            if(certificate.trim() != ''){
+                 link = link + '&certificate=' + certificate;
+            }
+            
+            elem = document.getElementById("analytic_dipregep_number" );
+            if(elem)
+            {
+                dipregep = document.getElementById("analytic_dipregep_number" ).value;       
+                if(dipregep.trim() != ''){
+                    link = link + '&dipregep=' + dipregep;
+                }   
+            }
+            
+            elem = document.getElementById("analytic_observations" );
+            if(elem)
+            {
+                observations = document.getElementById("analytic_observations" ).value;       
+                if(observations.trim() != ''){
+                    link = link + '&observations=' + observations;
+                }   
+            } 
             document.getElementById('link_print').href= link;
            
         });
@@ -72,21 +110,27 @@
         
         if(elem){
             document.getElementById("analytic_dipregep_number" ).addEventListener('change', function() {
-            dipregep = document.getElementById("analytic_dipregep_number" ).value;
-            link = url; 
-            if(dipregep.trim() != ''){
-                link = link + '&dipregep=' + dipregep;
+                dipregep = document.getElementById("analytic_dipregep_number" ).value;
+                link = url; 
+                if(dipregep.trim() != ''){
+                    link = link + '&dipregep=' + dipregep;
 
-            }
-            certificate = document.getElementById("analytic_certificate_number" ).value;
-            
-            if(certificate.trim() != ''){
-                 link = link + '&certificate=' + certificate;
+                }
+                certificate = document.getElementById("analytic_certificate_number" ).value;
 
-            }
-            document.getElementById('link_print').href= link;
+                if(certificate.trim() != ''){
+                     link = link + '&certificate=' + certificate;
+
+                }
+
+                observations = document.getElementById("analytic_observations" ).value;       
+                if(observations.trim() != ''){
+                    link = link + '&observations=' + observations;
+                } 
+
+                document.getElementById('link_print').href= link;
             
-        });
+            });
         } 
       })
 </script>

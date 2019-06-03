@@ -26,6 +26,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
 
   const HISTORIA_DEL_ARTE = 134;
+  const ORIENTACION_ESCOLAR = 238 ;
 
   protected $_introduccion = array(28, 29, 30);
   protected
@@ -445,7 +446,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
       $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);
-
       if ($student_career_school_year->getYear() == 4)
       {
         $sum = 0;
@@ -471,7 +471,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         {
           $is_historia = self::HISTORIA_DEL_ARTE == $student_approved_career_subject->getCareerSubject()->getSubjectId()
           || in_array($student_approved_career_subject->getCareerSubjectid(), array(261,262));
-
           if ($is_historia)
           {
             $historia_mark = $this->getHistoriaDelArteMark($student_approved_career_subject->getStudent(), $student_approved_career_subject->getSchoolYear());
@@ -481,7 +480,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
             $sum += $student_approved_career_subject->getMark();
           }
         }
-
         if (isset($historia_mark)){
           $sum += $historia_mark;
           $count = count($student_approved_career_subjects) - 1;
@@ -491,18 +489,28 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         }
       }
       else
-      {
-        $sum = array_sum(array_map(create_function("\$css", "return \$css->getMark();"), $student_approved_career_subjects));
-        $count = count($student_approved_career_subjects);
-      }
+     {   $sum = 0;
+         $cant = 0;
+        foreach ($student_approved_career_subjects as $student_approved_career_subject)
+        {
+            if($student_approved_career_subject->getCareerSubject()->getId() != self::ORIENTACION_ESCOLAR)
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
+           
+        }
+       
+        $count = $cant;
 
+      }
       if ($sum > 0 && $count > 0)
       {
         return number_format(round(($sum / $count), 2), 2, '.', '');
       }
     }
     return null;
-
+       
   }
 
   public function hasApprovedAllCourseSubjects($student_career_school_year)
@@ -753,5 +761,80 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           
         unset ($course_subject_students);
 
+    }
+    
+    public function canPrintGraduateCertificate($student)
+    {
+        if(!is_null($student->getCareerStudent()))
+        {
+            if ($student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE)
+            {
+                return true;
+            }
+            else
+            {
+               //chequeo que esté en 6to y tenga todas las materias aprobadas.
+                $this->student_career_school_years = $student->getStudentCareerSchoolYears();
+                $scsy_cursed = $student->getLastStudentCareerSchoolYearCoursed();
+                
+                if(is_null($scsy_cursed))
+                {
+                    return false;
+                }
+
+                $max_year = $scsy_cursed->getCareerSchoolYear()->getCareer()->getMaxYear();
+
+                if($scsy_cursed->getYear() != $max_year)
+                    return false;
+
+                foreach ($this->student_career_school_years as $scsy)
+                {
+                    if($scsy->getStatus() == StudentCareerSchoolYearStatus::APPROVED || $scsy->getStatus() == StudentCareerSchoolYearStatus::IN_COURSE || $scsy->getStatus() == StudentCareerSchoolYearStatus::LAST_YEAR_REPPROVED
+                            || $scsy->getStatus() == StudentCareerSchoolYearStatus::FREE || ($scsy->getStatus() == StudentCareerSchoolYearStatus::WITHDRAWN  && 
+                             $scsy->getId() == $scsy_cursed->getId())){
+
+                        $career_school_year = $scsy->getCareerSchoolYear();
+                        $school_year = $career_school_year->getSchoolYear();
+
+                        $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
+                        foreach ($csss as $css)
+                        { 
+                            if (is_null($css->getStudentApprovedCareerSubject()) && is_null($css->getStudentApprovedCourseSubject()))
+                            {
+                                return false;                                                
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+    return false;
+
+    }
+    
+    public function canPrintWithdrawnCertificate($student)
+    {   
+        if ($this->canPrintGraduateCertificate($student))
+            return false;
+        
+        $scsy = $student->getLastStudentCareerSchoolYear();
+        
+        if(!is_null($scsy))
+        {
+           if($scsy->getStatus() == StudentCareerSchoolYearStatus::FREE)
+           {
+               return false;
+           }
+           else
+           {
+               if(!is_null($student->getCareerStudent())){
+
+                    return ! $student->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE; 
+                }
+           }
+           return false; 
+        }   
     }
 }

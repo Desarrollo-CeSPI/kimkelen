@@ -218,12 +218,8 @@
         <?php foreach ($css_two_q as $course_subject_student): ?>
           <?php $max_marks = ($course_subject_student->getCourseSubject()->countMarks() > $max_marks) ? $course_subject_student->getCourseSubject()->countMarks() : $max_marks ?>
         <?php endforeach; ?>
-
-
-        <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
-          <th><?php echo __($mark_number . '°C') ?></th>
-        <?php endfor; ?>
-
+       
+        <th><?php echo __('2°C') ?></th>
         <th><?php echo __('Prom.') ?></th>
         <th><?php echo __('Ex.R.') ?></th>
         <th><?php echo __('Ex.C.') ?></th>

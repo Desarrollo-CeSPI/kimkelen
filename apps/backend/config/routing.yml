@@ -1,3 +1,12 @@
+medical_certificate:
+  class: sfPropelRouteCollection
+  options:
+    model:                MedicalCertificate
+    module:               medical_certificate
+    prefix_path:          medical_certificate
+    column:               id
+    with_wildcard_routes: true
+    
 api_student:
   url:     /api/:document_type/:document_number/is_student.:sf_format
   class:   sfPropelRoute
