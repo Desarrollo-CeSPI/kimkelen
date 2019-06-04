@@ -111,18 +111,15 @@ class tutorActions extends autoTutorActions
           {
             $this->form->save();
 
-            $this->getUser()->setFlash("notice", "The teacher has been created succesfuly.");
+            $this->getUser()->setFlash("notice", "The item was created successfully.");
             $this->redirect("@tutor");
           }
         }
     }else
     {
         $this->tutor->createTeacher();
-        $this->getUser()->setFlash('info','The teacher has been created succesfuly.');
+        $this->getUser()->setFlash('info','The item was created successfully.');
         $this->redirect('@tutor');
     }
   }
-  
- 
-
 }

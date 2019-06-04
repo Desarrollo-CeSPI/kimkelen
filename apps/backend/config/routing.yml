@@ -167,6 +167,10 @@ teacher_aggregate_tutor:
    url: teacher/aggregateAsTutor
    param: { module: teacher, action: aggregateAsTutor }
    
+personal_aggregate_tutor:
+   url: personal/aggregateAsTutor
+   param: { module: personal, action: aggregateAsTutor }
+   
 resources:
   class: sfPropelRouteCollection
   options:

@@ -17,18 +17,18 @@
 <?php include_javascripts_for_form($form) ?>
 
 <div id="sf_admin_container">
-  <h1><?php echo __('Generate profile tutor for teacher %teacher%', array("%teacher%" => $teacher->getPerson()->getFullName())) ?></h1>
+  <h1><?php echo __('Generate profile tutor for preceptor %preceptor%', array("%preceptor%" => $preceptor->getPerson()->getFullName())) ?></h1>
   <div id="sf_admin_content">
-    <form action="<?php echo url_for('@teacher_aggregate_tutor') . '?id='.$teacher->getId()?>" method="post">
+    <form action="<?php echo url_for('@personal_aggregate_tutor') . '?id='.$preceptor->getId()?>" method="post">
 
-      <input type="hidden" name="teacher_id" value="<?php echo $teacher->getId() ?>" />
+      <input type="hidden" name="preceptor_id" value="<?php echo $preceptor->getId() ?>" />
       <fieldset>
            <?php echo $form ?>
         
       </fieldset>
       
       <ul class="sf_admin_actions">
-          <li><?php echo link_to(__('Back'), "@teacher", array('class' => 'sf_admin_action_go_back')) ?></li>
+          <li><?php echo link_to(__('Back'), "@personal", array('class' => 'sf_admin_action_go_back')) ?></li>
           <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
     </form>

@@ -65,7 +65,7 @@ class TutorCustomForm extends TutorForm
     $this->getWidgetSchema()->moveField('tutor_type_id', sfWidgetFormSchema::BEFORE,'occupation_id' );
     
     $this->setValidator('tutor_type_id', new sfValidatorPropelChoice(array('model' => 'TutorType', 'column' => 'id', 'required' => true)));
- 
+    $this->setValidator('student_list', new sfValidatorPass(array('required'=> true)));
   }
   
   public function getFormFieldsDisplay()
