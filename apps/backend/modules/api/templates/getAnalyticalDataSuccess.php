@@ -22,7 +22,9 @@
                 "nro_resolución_institucion"=>  null,
                 "fecha_ingreso"=>  "01/03/".$career_student->getStudent()->getInitialSchoolYear()->getYear(),
                 "fecha_egreso"=>  ($analytical->has_completed_career()) ? $analytical->get_last_exam_date()->format('d/m/Y'): NULL,
+                "tiene_sanciones"=> (StudentDisciplinarySanctionPeer::countTotalValueForStudent($student) == 0) ? "N":"S",
                 "titulo_anterior_nivel" =>  "Primario",
+                "titulo_anterior_origen" => '',
                 "titulo_anterior_nacionalidad"=> "",
                 "titulo_anterior_institucion"=> $student->getOriginSchool(),
                 "titulo_anterior_denominacion"=> "",
@@ -30,19 +32,18 @@
                 "titulo_anterior_nro_resolucion"=> "",
                 "titulo_apto_ejercicio"=> "NO",
                 "plan_vigente"=> "",
+                "tipo" => "",
                 "actividad_nombre"=> $css->getSubjectName(),
                 "actividad_codigo"=> "",
+                "creditos"=> "",
                 "fecha"=> $css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : NULL,
                 "nota"=> $css->getMark(),
                 "resultado"=> ($css->getMark())?"Aprobado" : "Desaprobado",
                 "folio_fisico"=> "",
                 "acta_resolucion"=> "",
                 "promedio"=> ($analytical->has_completed_career()) ? round($object->get_total_average(),2) : NULL ,
-                "creditos"=> "",
                 "promedio_sin_aplazos"=> "",
-                "forma_aprobacion"=> $condition,
-                "tiene_sanciones"=> (StudentDisciplinarySanctionPeer::countTotalValueForStudent($student) == 0) ? "N":"S",
-
+                "forma_aprobacion"=> $condition
           );?>
         <?php $analytical_array[$i] = $array; $i++?>
       <?php endforeach; ?>

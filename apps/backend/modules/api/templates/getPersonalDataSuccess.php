@@ -14,6 +14,9 @@
                 "nombre_provincia_procedencia"=> $person->getBirthStaterepresentation(),
                 "codigo_localidad_procedencia" => $person->getBirthCity(),
                 "nombre_localidad_procedencia" => $person->getBirthCityRepresentation(),
-                "direccion_procedencia" => $person->getAddress()->getFullAddress()
-
+                "direccion_procedencia" => $person->getAddress()->getFullAddress(),
+                "telefono_fijo" => '',
+                "telefono_celular" =>'',
+                "mail" => $person->getEmail(),
+                "documento" => $person->getFullIdentification()
           ))?>
