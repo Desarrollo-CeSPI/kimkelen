@@ -180,7 +180,7 @@ generator:
             action: manageCareerSubjectAllowed
 
           analytical:
-            credentials:  [show_equivalence]
+            credentials:  [print_report_card]
             action: analytical
             condition: canBeManagedForCareerSubjectAllowed
 
@@ -211,6 +211,7 @@ generator:
             label:  print report card
             action: printReportCard
             condition: canPrintReportCard
+            credentials: [print_report_card]
 
           student_reincorporation:
             credentials: [student_reincorporation_student]
@@ -222,7 +223,8 @@ generator:
             label: Student assistance and sanction report
             action: showAssistanceAndSanctionReport
             condition: canGenerateReport
-
+            credentials: [show_assistance_sanction_report]
+            
           change_student_status:
             label: Change student status
             credentials: [edit_student]
@@ -233,28 +235,32 @@ generator:
             label: Graduate certificate
             action: printGraduateCertificate
             condition: canPrintGraduateCertificate
+            credentials: [print_certificate]
          
           regular_certificate:
             label: Regular certificate
             action: printRegularCertificate
             condition: canPrintRegularCertificate
+            credentials: [print_certificate]
             
           withdrawn_certificate:
             label: Withdrawn certificate
             action: printWithdrawnCertificate
             condition: canPrintWithdrawnCertificate
+            credentials: [print_certificate]
             
           free_certificate:
             label: Withdrawn certificate
             action: printFreeCertificate
             condition: canPrintFreeCertificate
+            credentials: [print_certificate]
             
           medical_certificate:
             label: Medical certificates
             action: medicalCertificates
             condition: canManageMerdicalCertificate
-          
-
+            credentials: [show_medical_certificate]
+            
       filter:
       form:    ~
       edit:
@@ -315,6 +321,7 @@ generator:
             label:  print report card
             action: printReportCard
             condition: canPrintReportCard
+            credentials: [print_report_card]
           brothers:
             credentials: [edit_student]
             action: manageBrothers
@@ -338,3 +345,4 @@ generator:
           print_entry_form:
             label: Print entry form
             action: printEntryForm
+            credentials: [edit_student]

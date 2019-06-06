@@ -92,7 +92,7 @@ generator:
           seeAttendanceSheet:
             label:   Show attendance sheet
             action:  attendanceSheetByCourseSubject
-            credentials:    [show_course]
+            credentials:    [[show_absence_per_day,show_absence_per_subject]]
             condition: canSeeAttendanceSheet
 
           attendanceSubject:
