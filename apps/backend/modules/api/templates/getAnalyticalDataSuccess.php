@@ -2,7 +2,7 @@
 <?php $i = 0;?>
 <?php $analytical_array= array();?>
 <?php foreach ($analytical->get_years_in_career() as $year): ?>
-    <?php $subjects = $analytical->get_subjects_in_year($year);?>
+    <?php $subjects = $analytical->get_subjects_in_year($year); ?>
     <?php if (count($subjects) > 0):?>
     <?php foreach ($subjects as $css):?>
         <?php $condition =  $css->getCondition();?>
@@ -20,7 +20,7 @@
                 "nro_resolucion_ministerial" =>  $career_student->getCareer()->getResolutionNumber(),
                 "nro_resolucion_coneau" =>  NULL,
                 "nro_resolución_institucion"=>  null,
-                "fecha_ingreso"=>  "01/03/".$career_student->getStudent()->getInitialSchoolYear()->getYear(),
+                "fecha_ingreso"=>  $career_student->getAdmissionDate(),
                 "fecha_egreso"=>  ($analytical->has_completed_career()) ? $analytical->get_last_exam_date()->format('d/m/Y'): NULL,
                 "tiene_sanciones"=> (StudentDisciplinarySanctionPeer::countTotalValueForStudent($student) == 0) ? "N":"S",
                 "titulo_anterior_nivel" =>  "Primario",
@@ -41,7 +41,7 @@
                 "resultado"=> ($css->getMark())?"Aprobado" : "Desaprobado",
                 "folio_fisico"=> "",
                 "acta_resolucion"=> "",
-                "promedio"=> ($analytical->has_completed_career()) ? round($object->get_total_average(),2) : NULL ,
+                "promedio"=> ($analytical->has_completed_career()) ? round($analytical->get_total_average(),2) : NULL ,
                 "promedio_sin_aplazos"=> "",
                 "forma_aprobacion"=> $condition
           );?>
