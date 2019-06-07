@@ -79,7 +79,7 @@ generator:
             action: studentConduct
             label: Student conduct
             condition: canManageConduct
-            credentials: [edit_division_preceptors]
+            credentials: [edit_division_course_califications]
 
           show_disciplinary_sanction_report:
             label: Student disciplinary sanction report
