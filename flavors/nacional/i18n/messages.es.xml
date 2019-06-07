@@ -4756,6 +4756,10 @@
                 <source>Generate profile tutor for preceptor %preceptor%</source>
                 <target>Generar perfil tutor para el preceptor %preceptor%</target>
             </trans-unit>
+            <trans-unit>
+                <source>If is checked, then will show only students who attend theoretical classes.</source>
+                <target>Si esta chequeado, solo se mostraran alumnos que asistan a clases teóricas.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

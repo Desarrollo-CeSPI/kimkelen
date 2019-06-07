@@ -42,7 +42,12 @@ class NacionalStudentFormFilter extends StudentFormFilter
         'message_with_no_value' => 'Seleccione una carrera',
         'get_observed_value_callback' => array(get_class($this), 'getYears')
       )));
-      
+    
+    $this->setWidget('theoric_class', new sfWidgetFormInputCheckbox());
+    $this->setValidator('theoric_class', new sfValidatorBoolean());
+    $this->widgetSchema->setHelp('theoric_class', 'If is checked, then will show only students who attend theoretical classes.');
+
+    
     $this->getWidgetSchema()->setHelp('year', 'El año filtra de acuerdo al año lectivo elegido.');
     $this->getWidgetSchema()->moveField('career', sfWidgetFormSchema::BEFORE, 'year');
   }
@@ -62,7 +67,8 @@ class NacionalStudentFormFilter extends StudentFormFilter
         'disciplinary_sanction_count' => 'Number',
         'status' => 'Number',
         'health_info' => 'Text',
-        'judicial_restriction'=> 'Boolean'));
+        'judicial_restriction'=> 'Boolean',
+        'theoric_class'=> 'Boolean'));
    }
   
  
@@ -85,6 +91,16 @@ class NacionalStudentFormFilter extends StudentFormFilter
       $criteria->addJoin(CareerStudentPeer::STUDENT_ID, StudentPeer::ID);
       $criteria->addJoin(CareerStudentPeer::CAREER_ID,CareerSchoolYearPeer::CAREER_ID);
       //$criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+    }
+  }
+  
+  public function addTheoricClassColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if ($values)
+    { 
+      $criteria->addJoin(MedicalCertificatePeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+      $criteria->add(MedicalCertificatePeer::THEORIC_CLASS, TRUE);
+      $criteria->add(MedicalCertificatePeer::THEORIC_CLASS_TO, new DateTime(), Criteria::GREATER_EQUAL);
     }
   }
 }
