@@ -206,48 +206,54 @@ class apiActions extends sfActions
 				if(is_null($m_tutor))
 				{
 					//el tutor no existe. Lo creo
-					$m_person = new Person();
-					$m_person->setLastname($m_lastname);
-					$m_person->setFirstname($m_firstname);
-					$m_person->setIdentificationType($m_identification_type);
-					$m_person->setIdentificationNumber($m_identification_number);
-					$m_person->setSex(SexType::FEMALE);
-					$m_person->setPhone($m_phone);
-					$m_person->setEmail($m_email);
-					$m_person->setBirthdate($m_birthdate);
-					$m_person->setIsActive(true);
-					$m_person->setBirthCity($m_birth_city);
-                                        $m_person->setNationalityId($m_nationality);
-					$m_person->save(Propel::getConnection());
-					
-					$m_tutor = new Tutor();
-					$m_tutor->setPerson($m_person);
-					$m_tutor->setOccupationId($m_occupation);
-					$m_tutor->setOccupationCategoryId($m_occupation_category);
-					$m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
-					$m_tutor->setIsAlive($m_is_alive);
-					$m_tutor->save(Propel::getConnection());		
-					
-					/* Recupero department, state ,country*/				
-					if(!is_null($m_birth_city)){
-						$m_city = CityPeer::retrieveByPk($m_birth_city);
-						$m_tutor->getPerson()->setBirthCountry($m_city->getDepartment()->getState()->getCountry()->getId());
-						$m_tutor->getPerson()->setBirthState($m_city->getDepartment()->getState()->getId());
-						$m_tutor->getPerson()->setBirthDepartment($m_city->getDepartment()->getId());
-					}
+                                    $m_person = PersonPeer::retrieveByDocumentTypeAndNumber($m_identification_type,$m_identification_number);
 
-					//chequeo domicilio
-					if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
-						$a = new Address();
-						$a->setCityId($m_birth_city);
-						$a->setStreet($m_street);
-						$a->setNumber($m_number);
-						$a->setFloor($m_floor);
-						$a->setFlat($m_flat);
-						
-						$m_tutor->getPerson()->setAddress($a);
-						$m_tutor->getPerson()->save(Propel::getConnection());	
-					}	
+                                    if (is_null($m_person))
+                                    {
+                                        $m_person = new Person();
+                                        $m_person->setLastname($m_lastname);
+                                        $m_person->setFirstname($m_firstname);
+                                        $m_person->setIdentificationType($m_identification_type);
+                                        $m_person->setIdentificationNumber($m_identification_number);
+                                        $m_person->setSex(SexType::FEMALE);
+                                        $m_person->setPhone($m_phone);
+                                        $m_person->setEmail($m_email);
+                                        $m_person->setBirthdate($m_birthdate);
+                                        $m_person->setIsActive(true);
+                                        $m_person->setBirthCity($m_birth_city);
+                                        $m_person->setNationalityId($m_nationality);
+                                        $m_person->save(Propel::getConnection());
+                                    }
+                                        
+
+                                    $m_tutor = new Tutor();
+                                    $m_tutor->setPerson($m_person);
+                                    $m_tutor->setOccupationId($m_occupation);
+                                    $m_tutor->setOccupationCategoryId($m_occupation_category);
+                                    $m_tutor->setStudyId($m_study);//coincide con la tabla sga_tipos_est_cur
+                                    $m_tutor->setIsAlive($m_is_alive);
+                                    $m_tutor->save(Propel::getConnection());		
+
+                                    /* Recupero department, state ,country*/				
+                                    if(!is_null($m_birth_city)){
+                                            $m_city = CityPeer::retrieveByPk($m_birth_city);
+                                            $m_tutor->getPerson()->setBirthCountry($m_city->getDepartment()->getState()->getCountry()->getId());
+                                            $m_tutor->getPerson()->setBirthState($m_city->getDepartment()->getState()->getId());
+                                            $m_tutor->getPerson()->setBirthDepartment($m_city->getDepartment()->getId());
+                                    }
+
+                                    //chequeo domicilio
+                                    if( ! is_null($m_city) || ! is_null($m_street)  || ! is_null($m_number) || ! is_null($m_floor) || is_null($m_flat)){
+                                            $a = new Address();
+                                            $a->setCityId($m_birth_city);
+                                            $a->setStreet($m_street);
+                                            $a->setNumber($m_number);
+                                            $a->setFloor($m_floor);
+                                            $a->setFlat($m_flat);
+
+                                            $m_tutor->getPerson()->setAddress($a);
+                                            $m_tutor->getPerson()->save(Propel::getConnection());	
+                                    }	
 				}else{
 				
 					$data['info']= "El tutor con ".$i_identification_type->getStringFor($m_identification_type) . " " . $m_identification_number ;
@@ -277,20 +283,25 @@ class apiActions extends sfActions
 				if(is_null($tutor))
 				{
 					//el tutor no existe. Lo creo
-					$p_person = new Person();
-					$p_person->setLastname($p_lastname);
-					$p_person->setFirstname($p_firstname);
-					$p_person->setIdentificationType($p_identification_type);
-					$p_person->setIdentificationNumber($p_identification_number);
-					$p_person->setSex(SexType::MALE);
-					$p_person->setPhone($p_phone);
-					$p_person->setEmail($p_email);
-					$p_person->setBirthdate($p_birthdate);
-					$p_person->setIsActive(true);
-					$p_person->setBirthCity($p_birth_city);
-                                        $p_person->setNationalityId($p_nationality);
-					$p_person->save(Propel::getConnection());
+                                        $p_person = PersonPeer::retrieveByDocumentTypeAndNumber($p_identification_type,$p_identification_number);
 					
+                                        if(is_null($p_person))
+                                        {
+                                            $p_person = new Person();
+                                            $p_person->setLastname($p_lastname);
+                                            $p_person->setFirstname($p_firstname);
+                                            $p_person->setIdentificationType($p_identification_type);
+                                            $p_person->setIdentificationNumber($p_identification_number);
+                                            $p_person->setSex(SexType::MALE);
+                                            $p_person->setPhone($p_phone);
+                                            $p_person->setEmail($p_email);
+                                            $p_person->setBirthdate($p_birthdate);
+                                            $p_person->setIsActive(true);
+                                            $p_person->setBirthCity($p_birth_city);
+                                            $p_person->setNationalityId($p_nationality);
+                                            $p_person->save(Propel::getConnection());
+                                        }
+                                        
 					$tutor = new Tutor();
 					$tutor->setPerson($p_person);
 					$tutor->setOccupationId($p_occupation);
@@ -317,13 +328,13 @@ class apiActions extends sfActions
 						$tutor->getPerson()->setAddress($a);
 						$tutor->getPerson()->save(Propel::getConnection());	
 					}
-					if(! is_null($data['info'])){
+					if(isset($data['info'])){
 						$data['info']= $data['info']." ya existe en el sistema. Por favor actualice los datos.";
 					
 					}
 				}else
 				{	
-					if(! is_null($data['info'])){
+					if(isset($data['info'])){
 						$data['info']= "Los tutores con ". $i_identification_type->getStringFor($m_identification_type) . " " . $m_identification_number  ." y ".$i_identification_type->getStringFor($p_identification_type) . " " . $p_identification_number ." ya existen en el sistema. Por favor actualice los datos.";
 					}else{
 						$data['info']= "El tutor con ".$i_identification_type->getStringFor($p_identification_type) . " " . $p_identification_number ." ya existe en el sistema. Por favor actualice los datos.";	
