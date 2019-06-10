@@ -86,4 +86,64 @@ class Tutor extends BaseTutor
 
     return implode(',  ', $students);
   }
+  
+  public function canAddPreceptor()
+  {
+    $c = new Criteria();
+    $c->add(PersonalPeer::PERSON_ID, $this->getPersonId());
+
+    return PersonalPeer::doCount($c) == 0;
+
+  }
+  
+  public function canAddTeacher()
+  {
+    $c = new Criteria();
+    $c->add(TeacherPeer::PERSON_ID, $this->getPersonId());
+
+    return TeacherPeer::doCount($c) == 0;
+
+  }
+  
+  public function createTeacher(PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
+
+    $teacher = new Teacher();
+    $teacher->setPerson($this->getPerson());
+    $teacher->save($con);
+
+    $guard_user = $this->getPersonSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $teacher_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::TEACHER);
+      if (!array_key_exists($teacher_group, $guard_user->getGroups()))
+      {
+        $guard_user->addGroupByName($teacher_group);
+        $guard_user->save($con);
+      }
+    }
+
+  }
+  
+  public function createPreceptor(PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
+
+    $personal = new Personal();
+    $personal->setPerson($this->getPerson());
+    $personal->save($con);
+
+    $guard_user = $this->getPersonSfGuardUser();
+    if (!is_null($guard_user))
+    {
+      $personal_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::PERSONAL);
+      if (!array_key_exists($personal_group, $guard_user->getGroups()))
+      {
+        $guard_user->addGroupByName($personal_group);
+        $guard_user->save($con);
+      }
+    }
+
+  }
 }

@@ -165,6 +165,15 @@ class Personal extends BasePersonal
     return $this->getPerson()->getIsActive() == true;
 
   }
+  
+  public function canAddTutor()
+  {
+    $c = new Criteria();
+    $c->add(TutorPeer::PERSON_ID, $this->getPersonId());
+
+    return TutorPeer::doCount($c) == 0;
+
+  }
 
 }
 

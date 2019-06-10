@@ -26,18 +26,19 @@
 <?php //if (!is_null($student->getCurrentStudentCareerSchoolYear())): ?>
   <a class="<?php echo $class ?>" href="#student_current_courses" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historial de cursadas</a>
 <?php //endif ?>
-<?php if ($student->hasAttendancesPerDay()): ?>
-  <a class="tab" href="#student_absences_per_day" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historial de inasistencias por dia</a>
+<?php if (($sf_user->isPreceptor() || $sf_user->isAdministrator() )): ?>
+    <?php if ($student->hasAttendancesPerDay()): ?>
+      <a class="tab" href="#student_absences_per_day" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historial de inasistencias por dia</a>
+    <?php endif ?>
+    <?php if ($student->hasAttendancesPerSubject()): ?>
+      <a class="tab" href="#student_absences_per_subject" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historial de inasistencias por materia</a>
+    <?php endif ?>
 <?php endif ?>
-<?php if ($student->hasAttendancesPerSubject()): ?>
-  <a class="tab" href="#student_absences_per_subject" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historial de inasistencias por materia</a>
-<?php endif ?>
-
-<?php foreach ($student->getCareerStudents() as $career_student): ?>
+<?php /*foreach ($student->getCareerStudents() as $career_student): ?>
   <?php if ($student->countStudentApprovedCareerSubjects()): ?>
     <a class="tab" href="#student_history_<?php echo $career_student->getId() ?>" onclick="jQuery('fieldset').hide(); jQuery(jQuery(this).attr('href')).show(); jQuery('.tab').removeClass('tab-selected'); jQuery(this).addClass('tab-selected'); return false;">Historia Académica <?php echo $career_student->getCareer() ?></a>
   <?php endif ?>
-<?php endforeach ?>
+<?php endforeach */?>
 
 <?php if (!($sf_user->isTeacher())): ?>
   <fieldset id="student_person">

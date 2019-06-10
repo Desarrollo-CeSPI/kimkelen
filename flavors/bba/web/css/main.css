@@ -2126,4 +2126,14 @@ div.wc-cal-event{
 .sf_admin_list .sf_admin_action_show_history a
 {
     background-image: url('../images/disciplinary_sanction.png') !important;
-} 
+}
+
+.sf_admin_list .sf_admin_action_aggregate_profesor a
+{
+    background-image: url('../images/professor.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_aggregate_tutor a
+{
+    background-image: url('../images/tutor.png') !important;
+}
