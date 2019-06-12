@@ -225,6 +225,38 @@ class PersonForm extends BasePersonForm
     {
             throw new sfValidatorError($validator, 'invalid');
     }
+    
+    $person = PersonPeer::retrieveByDocumentTypeAndNumber($values['person-identification_type'], $values['person-identification_number']);
+    
+    if(!is_null($person) && is_null($this->getObject()->getId()))
+    {//Person exists
+        $tutor = TutorPeer::findByDocumentTypeAndNumber($values['person-identification_type'], $values['person-identification_number']);
+        if(!is_null($tutor))
+        {
+            $error = new sfValidatorError($validator, 'Ya existe una persona con perfil tutor con ese tipo y nro de documento.');
+            throw new sfValidatorErrorSchema($validator, array('person-identification_number' => $error));
+        }
+        
+        $guard_user = $person->getSfGuardUser();
+        if (!is_null($guard_user))
+        {
+          $personal_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::PERSONAL);
+          if (array_key_exists($personal_group, $guard_user->getGroups()))
+          {
+            $error = new sfValidatorError($validator, 'Ya existe una persona con perfil preceptor con ese tipo y nro de documento.');
+            throw new sfValidatorErrorSchema($validator, array('person-identification_number' => $error));
+          }
+
+          $teacher_group = BaseCustomOptionsHolder::getInstance('GuardGroups')->getStringFor(GuardGroups::TEACHER);
+          if (array_key_exists($teacher_group, $guard_user->getGroups()))
+          {
+            $error = new sfValidatorError($validator, 'Ya existe una persona con perfil profesor con ese tipo y nro de documento.');
+            throw new sfValidatorErrorSchema($validator, array('person-identification_number' => $error));
+          }
+        }
+            
+        
+    }
     return $values;
   }
 

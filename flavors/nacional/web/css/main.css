@@ -2173,3 +2173,13 @@ div.wc-cal-event{
     color:red;
     display: block;
 }
+
+.sf_admin_list .sf_admin_action_aggregate_profesor a
+{
+    background-image: url('../images/professor.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_aggregate_tutor a
+{
+    background-image: url('../images/tutor.png') !important;
+}

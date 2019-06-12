@@ -197,6 +197,15 @@ class Teacher extends BaseTeacher
   {
     return $this->getPerson()->getEmail();
   }
+  
+  public function canAddTutor()
+  {
+    $c = new Criteria();
+    $c->add(TutorPeer::PERSON_ID, $this->getPersonId());
+
+    return TutorPeer::doCount($c) == 0;
+
+  }
 
 }
 

@@ -84,4 +84,24 @@ class personalActions extends autoPersonalActions
     }
     parent::executeDelete($request);
   }
+  
+  public function executeAggregateAsTutor(sfWebRequest $request)
+  {
+    $this->preceptor = PersonalPeer::retrieveByPK($request->getParameter('id'));
+    $tutor = new Tutor();
+    $tutor->setPerson($this->preceptor->getPerson());
+    $this->form = new TutorCustomForm($tutor);
+
+    if ($request->isMethod("post"))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+
+        $this->getUser()->setFlash("notice", "The tutor has been created succesfuly.");
+        $this->redirect("@personal");
+      }
+    } 
+  }
 }

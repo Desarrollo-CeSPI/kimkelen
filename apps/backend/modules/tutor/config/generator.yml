@@ -76,6 +76,17 @@ generator:
             credentials:   [edit_tutor]
           _delete:
             credentials:   [edit_tutor]
+          aggregate_preceptor:
+            label:  Aggregate as a preceptor
+            action: aggregateAsPreceptor
+            condition:  canAddPreceptor
+            credentials:  [edit_tutor]   
+          aggregate_profesor:
+            label:  Aggregate as a teacher
+            action: aggregateAsTeacher
+            condition:  canAddTeacher
+            credentials:  [edit_tutor]
+            
       filter:
       form:
       edit:

@@ -66,24 +66,25 @@ generator:
           printCalification:
             label:   Print califications
             action:  printCalification
-            credentials:    [[edit_division_course_califications, show_division_course_califications]]
+            credentials:    [show_division_califications]
             condition: canPrintCalification
 
           boletines:
             action: printReportCard
             label:  Imprimir boletines division
-            credentials:  [[edit_division_preceptors,show_division_course_califications]]
+            credentials:  [print_report_card]
             condition: canPrintReportCards
 
           student_conduct:
             action: studentConduct
             label: Student conduct
             condition: canManageConduct
-            credentials: [edit_division_preceptors]
+            credentials: [edit_division_course_califications]
 
           show_disciplinary_sanction_report:
             label: Student disciplinary sanction report
             action: showDisciplinarySanctionReport
+            credentials: [show_disciplinary_sanction]
 
           division_configure:
             label:  Configuración de cantidad de inasistencias permitidas
@@ -99,12 +100,13 @@ generator:
           seeAttendanceSheet:
             label:   Show attendance sheet
             action:  attendanceSheetByDay
-            credentials:    [show_course]
+            credentials:    [[show_absence_per_day,show_absence_per_subject]]
             condition: canManageAttendance
 
           show_assistance_report:
             label: Student assistance report
             action: showAssistanceReport
+            credentials: [[show_absence_per_day,show_absence_per_subject]]
 
           _delete:
             credentials: [delete_division]

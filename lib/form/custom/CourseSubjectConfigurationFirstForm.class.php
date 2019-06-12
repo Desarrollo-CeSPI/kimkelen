@@ -34,13 +34,15 @@ class CourseSubjectConfigurationFirstForm extends sfFormPropel
 
 //    $cscs = CourseSubjectConfigurationPeer::retrieveBySubject($this->getObject());
     $c = new Criteria();
-    if(!is_null($this->getObject()->getCareerSubjectSchoolYear()->getSubjectConfiguration()))
+    if(!is_null($this->getObject()->getCareerSubjectSchoolYear()->getSubjectConfiguration()) && 
+           $this->getObject()->getCareerSubjectSchoolYear()->getSubjectConfiguration()->getCourseType() == CourseType::BIMESTER_OF_A_TERM 
+            )
     {
-        $c->add(CareerSchoolYearPeriodPeer::COURSE_TYPE, $this->getObject()->getCareerSubjectSchoolYear()->getSubjectConfiguration()->getCourseType());
+        $c->add(CareerSchoolYearPeriodPeer::COURSE_TYPE, CourseType::BIMESTER_OF_A_TERM);
     }else{
          $c->add(CareerSchoolYearPeriodPeer::COURSE_TYPE, CourseType::QUATERLY);
     }
-    
+   
     $c->add(CareerSchoolYearPeriodPeer::CAREER_SCHOOL_YEAR_ID, $this->getObject()->getCareerSubjectSchoolYear()->getCareerSchoolYearId());
     $this->setWidget('quaterly_id', new sfWidgetFormPropelChoice(array('model' => 'CareerSchoolYearPeriod', 'criteria' => $c)));
     $this->setValidator('quaterly_id', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYearPeriod')));
