@@ -41,4 +41,4 @@ commissionSubjectStudentsRegularity:
   credentials:  [edit_course]
 
 califications:
-  credentials:  [[edit_course, edit_commission]]
+  credentials:  [edit_division_course_califications]
