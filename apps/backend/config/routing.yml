@@ -1,3 +1,12 @@
+book:
+  class: sfPropelRouteCollection
+  options:
+    model:                Book
+    module:               book
+    prefix_path:          book
+    column:               id
+    with_wildcard_routes: true
+
 medical_certificate:
   class: sfPropelRouteCollection
   options:
@@ -99,6 +108,7 @@ sanction:
     prefix_path:          sanction
     column:               id
     with_wildcard_routes: true
+    
 student_print_analytical:
   url:  /student/:id/printAnalytical
   param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)

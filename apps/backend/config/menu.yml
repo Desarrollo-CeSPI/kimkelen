@@ -208,6 +208,18 @@ root:
                 title: Nuevo personal de la oficina de alumnos
                 url: student_office/new
                 credentials: [edit_student_office]
+      book:
+        title: Libros de actas
+        credentials: [edit_book]
+        menu:
+          list:
+            title: Book list
+            url: book/index
+            credentials: [edit_book]
+          new:
+            title: New book
+            url: book/new
+            credentials: [edit_book]  
 
   students:
     title: Alumnos

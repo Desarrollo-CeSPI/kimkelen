@@ -234,7 +234,7 @@ classes:
         onDelete:          cascade
         onUpdate:          cascade
       day:
-        description:       Dia de la semana en que se cursa un curso: los valores van de 1 (lunes) a 7 (domingo)
+        description:       Dia de la semana en que se cursa un curso. Los valores van de 1 (lunes) a 7 (domingo)
         type:              integer
         required:          true
       block:
@@ -709,3 +709,18 @@ classes:
         description: Número de folio del examen
         type: varchar(20)
         required: false
+        
+  Book:
+    tableName: book
+    description: Representa el libro de actas
+    columns:
+      id:
+      name:
+        type: varchar(45)
+        required: true
+      description: 
+        type: varchar(255)
+        required: false
+      is_active:
+        type: boolean
+        default: false

@@ -47,6 +47,9 @@ generator:
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
+          assign_book_fol:
+            condition: canAssignBook
+            credentials: [assign_book_fol]
         batch_actions: []
         actions:
           back:

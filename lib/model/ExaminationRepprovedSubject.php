@@ -220,13 +220,20 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
         return  StudentExaminationRepprovedSubjectPeer::doCount($criteria) ;
     }
 
-	  public function getYear() {
-		  return $this->getCareerSubject()->getYear();
-	  }
+    public function getYear() 
+    {
+            return $this->getCareerSubject()->getYear();
+    }
 
-		public function getSchoolYear() {
-			return $this->getExaminationRepproved()->getSchoolYear();
-		}
+    public function getSchoolYear() 
+    {
+            return $this->getExaminationRepproved()->getSchoolYear();
+    }
+    
+    public function canAssignBook()
+    {
+        return $this->getIsClosed();
+    }
 }
 
 sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));
