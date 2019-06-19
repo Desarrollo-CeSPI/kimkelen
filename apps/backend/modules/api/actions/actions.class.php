@@ -396,6 +396,22 @@ class apiActions extends sfActions
             $person = PersonPeer::retrieveByPK($id);
             $this->student = $person->getStudent();
             $this->career_student = CareerStudentPeer::retrieveByStudent($this->student->getId());
+            
+            //araucano code 
+            if($this->career_student->getSubOrientation())
+            {
+                $this->araucano_title_code = $this->career_student->getSubOrientation()->getAraucanoCode();
+            }
+            elseif($this->career_student->getOrientation())
+            {
+                $this->araucano_title_code = $this->career_student->getOrientation()->getAraucanoCode();
+            }
+            else
+            {
+                $this->araucano_title_code = $this->career_student->getCareer()->getAraucanoCode();
+            }
+            
+            $this->school = SchoolBehaviourFactory::getInstance();
             $this->analytical = AnalyticalBehaviourFactory::getInstance($this->student);
             $this->analytical->process();
 

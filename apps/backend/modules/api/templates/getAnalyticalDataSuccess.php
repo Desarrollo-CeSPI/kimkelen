@@ -10,9 +10,9 @@
         <?php $condition = ($condition == 'Regular') ? "P" : "E"?>
         <?php endif;?>
         <?php $array = array(
-                "titulo_araucano"=> NULL,
+                "titulo_araucano"=> $araucano_title_code,
                 "titulo_nombre"=>  $career_student->getCareer()->getCareerName(),
-                "responsable_academica"=>  NULL,
+                "responsable_academica"=>  $school->getAraucanoCode(),
                 "propuesta"=> $career_student->getCareer()->getId(),
                 "propuesta_nombre" =>  $career_student->getCareer()->getCareerName(),
                 "plan_alumno" => $career_student->getCareer()->getPlanName(),
@@ -26,8 +26,8 @@
                 "titulo_anterior_nivel" =>  "Primario",
                 "titulo_anterior_origen" => '',
                 "titulo_anterior_nacionalidad"=> "",
-                "titulo_anterior_institucion"=> $student->getOriginSchool(),
-                "titulo_anterior_denominacion"=> "",
+                "titulo_anterior_institucion"=> "No Corresponde",
+                "titulo_anterior_denominacion"=> "No Corresponde",
                 "titulo_anterior_revalidado"=> "",
                 "titulo_anterior_nro_resolucion"=> "",
                 "titulo_apto_ejercicio"=> "NO",

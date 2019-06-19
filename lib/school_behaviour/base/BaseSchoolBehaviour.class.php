@@ -23,6 +23,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
 {
 
   protected $school_name = "Kimkelen";
+  protected $araucano_code = "";
   protected
   $_course_type_options = array(
     CourseType::TRIMESTER => 'Anual con Régimen Trimestral',
@@ -1273,4 +1274,10 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
         }
         return $ret;
     }
+    
+    public function getAraucanoCode()
+  {
+    return $this->araucano_code;
+
+  }
 }
