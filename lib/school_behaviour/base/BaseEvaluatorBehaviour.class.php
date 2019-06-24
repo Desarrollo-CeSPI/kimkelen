@@ -137,6 +137,15 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         if (!is_null($result))
         {
           $result->close($con);
+          $log = new LogCloseCareerSchoolYear();
+          $log->setCourseSubjectStudent($course_subject_student);
+          $log->setCourseResult(get_class($result));
+          $log->setCourseResultId($result->getId());
+          $log->setUsername(sfContext::getInstance()->getUser());
+          
+          $log->save();
+          $log->clearAllReferences(true);
+          
         }
       }
       ###Liberando memoria ###

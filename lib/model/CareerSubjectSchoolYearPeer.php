@@ -145,8 +145,8 @@ class CareerSubjectSchoolYearPeer extends BaseCareerSubjectSchoolYearPeer
 		$c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $examination->getExaminationNumber());
 		$c->addJoin(CareerSubjectPeer::ID, self::CAREER_SUBJECT_ID);
 		$c->add(CareerSubjectPeer::YEAR, $year);
+                $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, NULL, Criteria::ISNULL);
 		$c->setDistinct();
-
 		return self::doSelect($c, $con);
 	}
 }
