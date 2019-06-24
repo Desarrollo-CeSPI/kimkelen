@@ -186,8 +186,8 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     return false;
 
     }
-    
-  public function canPrintRegularCertificate($student)
+
+    public function canPrintRegularCertificate($student)
   {
       $school_year = SchoolYearPeer::retrieveCurrent();
       $sy = SchoolYearPeer::retrieveLastYearSchoolYear($school_year);
@@ -209,5 +209,6 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
               || ($student->getIsRegistered() && $student->getBelongsToPathway()) );
       }
   }
+
 
 }

@@ -25,6 +25,7 @@
 class LvmSchoolBehaviour extends BaseSchoolBehaviour
 {
 	protected $school_name = "Liceo Víctor Mercante";
+        protected $araucano_code = 3185;
 
   public function getListObjectActionsForSchoolYear()
   {

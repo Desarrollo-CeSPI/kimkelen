@@ -75,6 +75,10 @@ classes:
         description:      Nombre de la materia
         type:             varchar(255)
         required:         true
+      araucano_code:
+        description:      Código araucano
+        type:             integer
+        required:         false
 
   SubOrientation:
     tableName: sub_orientation
@@ -92,6 +96,10 @@ classes:
         required: true
         onDelete: cascade
         onUpdate: cascade
+      araucano_code:
+        description:      Código araucano
+        type:             integer
+        required:         false
 
   Shift:
     tablename:            shift

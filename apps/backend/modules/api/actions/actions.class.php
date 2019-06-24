@@ -378,5 +378,61 @@ class apiActions extends sfActions
         {
             $this->scsys = $this->getRoute()->getObject();
         }
+        
+        public function executeGetPerson(sfWebRequest $request)
+        {
+          $par = $request->getGetParameters();
+          $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
+         
+          $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
+
+          if (is_null($this->person))
+          {
+             throw new sfError404Exception(sprintf('Person with document "%s" "%s" does not exist.',  $document_type, $par['numero_documento']));
+          }
+          $this->getResponse()->setHttpHeader('Content-type','application/json');
+	  $this->getResponse()->setContent($this->person);
+          $this->setLayout(false);
+        }
+        
+        public function executeGetPersonalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $this->person = PersonPeer::retrieveByPK($id);
+
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->getResponse()->setContent($this->person);
+            $this->setLayout(false);
+        }
+        
+        public function executeGetAnalyticalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $person = PersonPeer::retrieveByPK($id);
+            $this->student = $person->getStudent();
+            $this->career_student = CareerStudentPeer::retrieveByStudent($this->student->getId());
+            
+            //araucano code 
+            if($this->career_student->getSubOrientation())
+            {
+                $this->araucano_title_code = $this->career_student->getSubOrientation()->getAraucanoCode();
+            }
+            elseif($this->career_student->getOrientation())
+            {
+                $this->araucano_title_code = $this->career_student->getOrientation()->getAraucanoCode();
+            }
+            else
+            {
+                $this->araucano_title_code = $this->career_student->getCareer()->getAraucanoCode();
+            }
+            
+            $this->school = SchoolBehaviourFactory::getInstance();
+            $this->analytical = AnalyticalBehaviourFactory::getInstance($this->student);
+            $this->analytical->process();
+
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->getResponse()->setContent($this->analytical);
+            $this->setLayout(false);
+        }
  
 }
