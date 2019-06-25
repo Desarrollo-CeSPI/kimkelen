@@ -11,7 +11,7 @@
 echo json_encode( array(
                 'email'  => $person->getEmail(),
                 'telefono'  => $person->getPhone(),
-                'persona'  => $person->getId(),
+                'persona'  => $school->getLetter() .'_'. $person->getId(),
           ));
 
 endif; 
