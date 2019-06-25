@@ -385,11 +385,6 @@ class apiActions extends sfActions
           $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
           $this->school = SchoolBehaviourFactory::getInstance();
           $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
-
-          if (is_null($this->person))
-          {
-             throw new sfError404Exception(sprintf('Person with document "%s" "%s" does not exist.',  $document_type, $par['numero_documento']));
-          }
           $this->getResponse()->setHttpHeader('Content-type','application/json');
 	  $this->getResponse()->setContent($this->person);
           $this->setLayout(false);
