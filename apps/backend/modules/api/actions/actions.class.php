@@ -383,7 +383,7 @@ class apiActions extends sfActions
         {
           $par = $request->getGetParameters();
           $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
-         
+          $this->school = SchoolBehaviourFactory::getInstance();
           $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
 
           if (is_null($this->person))
@@ -399,7 +399,7 @@ class apiActions extends sfActions
         {
             $id = $this->getRequestParameter('id'); 
             $this->person = PersonPeer::retrieveByPK($id);
-
+            
             $this->getResponse()->setHttpHeader('Content-type','application/json');
             $this->getResponse()->setContent($this->person);
             $this->setLayout(false);
