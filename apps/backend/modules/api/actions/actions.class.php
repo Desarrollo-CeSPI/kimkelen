@@ -383,10 +383,21 @@ class apiActions extends sfActions
         {
           $par = $request->getGetParameters();
           $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
-          $this->school = SchoolBehaviourFactory::getInstance();
           $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
           $this->getResponse()->setHttpHeader('Content-type','application/json');
-	  $this->getResponse()->setContent($this->person);
+	  
+          if(is_null($this->person))
+          {
+                $this->array = array(
+                    'error'  => 404,
+                    'mensaje' => "404 Not Found",
+                    'descripcion' => "La persona no existe"
+                );
+          }
+          else
+          {
+              $this->array= $this->person->AsArray();
+          }
           $this->setLayout(false);
         }
         
@@ -395,39 +406,45 @@ class apiActions extends sfActions
             $id = $this->getRequestParameter('id'); 
             $this->person = PersonPeer::retrieveByPK($id);
             
+            if(is_null($this->person))
+            {
+                  $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no existe"
+                  );
+            }
+            else
+            {
+                $this->array= $this->person->getPersonalDataAsArray();
+            }
+
             $this->getResponse()->setHttpHeader('Content-type','application/json');
-            $this->getResponse()->setContent($this->person);
             $this->setLayout(false);
         }
         
         public function executeGetAnalyticalData(sfWebRequest $request)
         {
             $id = $this->getRequestParameter('id'); 
-            $person = PersonPeer::retrieveByPK($id);
-            $this->student = $person->getStudent();
-            $this->career_student = CareerStudentPeer::retrieveByStudent($this->student->getId());
-            
-            //araucano code 
-            if($this->career_student->getSubOrientation())
+            $person = PersonPeer::retrieveByPK($id); 
+            $student = (!is_null($person)) ? $person->getStudent() : NULL;
+            if(!is_null($student))
             {
-                $this->araucano_title_code = $this->career_student->getSubOrientation()->getAraucanoCode();
-            }
-            elseif($this->career_student->getOrientation())
-            {
-                $this->araucano_title_code = $this->career_student->getOrientation()->getAraucanoCode();
+                $this->array = $student->getAnalyticalDataAsArray();               
             }
             else
             {
-                $this->araucano_title_code = $this->career_student->getCareer()->getAraucanoCode();
+                $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no tiene historia academica"
+                  );
+                
             }
             
-            $this->school = SchoolBehaviourFactory::getInstance();
-            $this->analytical = AnalyticalBehaviourFactory::getInstance($this->student);
-            $this->analytical->process();
-
             $this->getResponse()->setHttpHeader('Content-type','application/json');
-            $this->getResponse()->setContent($this->analytical);
             $this->setLayout(false);
+            
         }
  
 }

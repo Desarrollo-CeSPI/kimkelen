@@ -243,6 +243,43 @@ class Person extends BasePerson
         }
       }
   }
+  
+  public function asArray()
+  {     
+        $school = SchoolBehaviourFactory::getInstance();
+        return array(
+                'email'  => $this->getEmail(),
+                'telefono'  => $this->getPhone(),
+                'persona'  => $school->getLetter().'_'. $this->getId(),
+          );
+
+
+  }
+  
+  public function getPersonalDataAsArray()
+  {  
+      sfContext::getInstance()->getConfiguration()->loadHelpers(array('Date'));
+      return array(
+                "apellido" => $this->getLastname(),
+                "nombres" => $this->getFirstname(),
+                "genero"=> ($this->getSex() == 1)? "Masculino"  :"Femenino",
+                "fecha_nacimiento" => format_date($this->getBirthdate(),'dd/MM/yyyy'),            
+                "nacionalidad" => $this->getFullNationality(),
+                "legajo" => $this->getStudent()->getGlobalFileNumber(),
+                "pais_origen" => $this->getBirthCountry(),
+                "codigo_pais_procedencia" => $this->getBirthCountry(),
+                "nombre_pais_procedencia" => $this->getBirthCountryRepresentation(),
+                "codigo_provincia_procedencia" => $this->getBirthState(),
+                "nombre_provincia_procedencia"=> $this->getBirthStaterepresentation(),
+                "codigo_localidad_procedencia" => $this->getBirthCity(),
+                "nombre_localidad_procedencia" => $this->getBirthCityRepresentation(),
+                "direccion_procedencia" => $this->getAddress()->getFullAddress(),
+                "telefono_fijo" => '',
+                "telefono_celular" =>'',
+                "mail" => $this->getEmail(),
+                "documento" => $this->getFullIdentification()
+          );
+  }
 }
 
 sfPropelBehavior::add('Person', array('changelog'));
