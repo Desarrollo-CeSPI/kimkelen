@@ -382,23 +382,35 @@ class apiActions extends sfActions
         public function executeGetPerson(sfWebRequest $request)
         {
           $par = $request->getGetParameters();
-          $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
-          $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
-          $this->getResponse()->setHttpHeader('Content-type','application/json');
-	  
-          if(is_null($this->person))
+          if (!isset($par['tipo_documento']) || !isset ($par['numero_documento']))
           {
-                $this->array = array(
-                    'error'  => 404,
-                    'mensaje' => "404 Not Found",
-                    'descripcion' => "La persona no existe"
-                );
+              $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Bad Request",
+                      'descripcion' => "Parámetro 'tipo_documento' y 'nro_documento' requerido"
+                  );
           }
           else
           {
-              $this->array= $this->person->AsArray();
+            $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
+            $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
+
+            if(is_null($this->person))
+            {
+                  $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no existe"
+                  );
+            }
+            else
+            {
+                $this->array= $this->person->AsArray();
+            }
           }
+          $this->getResponse()->setHttpHeader('Content-type','application/json');
           $this->setLayout(false);
+          
         }
         
         public function executeGetPersonalData(sfWebRequest $request)
