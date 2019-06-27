@@ -382,12 +382,13 @@ class apiActions extends sfActions
         public function executeGetPerson(sfWebRequest $request)
         {
           $par = $request->getGetParameters();
-          if (!isset($par['tipo_documento']) || !isset ($par['numero_documento']))
+          if (!isset($par['tipo_documento']) || !isset($par['numero_documento']) || !isset($par['pais'])
+                  || $par['tipo_documento']== '' || $par['numero_documento'] == '' || $par['pais']== '')
           {
               $this->array = array(
                       'error'  => 404,
                       'mensaje' => "404 Bad Request",
-                      'descripcion' => "Parámetro 'tipo_documento' y 'nro_documento' requerido"
+                      'descripcion' => "Parámetro 'pais', 'tipo_documento' y 'nro_documento' requerido"
                   );
           }
           else
