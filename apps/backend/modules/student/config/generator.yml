@@ -180,7 +180,7 @@ generator:
             action: manageCareerSubjectAllowed
 
           analytical:
-            credentials:  [print_report_card]
+            credentials:  [print_analytic]
             action: analytical
             condition: canBeManagedForCareerSubjectAllowed
 
