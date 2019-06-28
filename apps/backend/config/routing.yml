@@ -1,3 +1,12 @@
+medical_certificate:
+  class: sfPropelRouteCollection
+  options:
+    model:                MedicalCertificate
+    module:               medical_certificate
+    prefix_path:          medical_certificate
+    column:               id
+    with_wildcard_routes: true
+    
 api_student:
   url:     /api/:document_type/:document_number/is_student.:sf_format
   class:   sfPropelRoute
@@ -145,7 +154,23 @@ average_report:
 course_subject_student_mark_change_log:
   url:  /showMarkChangeLog
   param:  {module: course_student_mark, action: showMarkChangeLog }
+  
+tutor_aggregate_teacher:
+   url: tutor/aggregateAsTeacher
+   param: { module: tutor, action: aggregateAsTeacher }
 
+tutor_aggregate_preceptor:
+   url: tutor/aggregateAsPreceptor
+   param: { module: tutor, action: aggregateAsPreceptor }
+   
+teacher_aggregate_tutor:
+   url: teacher/aggregateAsTutor
+   param: { module: teacher, action: aggregateAsTutor }
+   
+personal_aggregate_tutor:
+   url: personal/aggregateAsTutor
+   param: { module: personal, action: aggregateAsTutor }
+   
 resources:
   class: sfPropelRouteCollection
   options:

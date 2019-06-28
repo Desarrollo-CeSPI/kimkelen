@@ -26,6 +26,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
 
   const HISTORIA_DEL_ARTE = 134;
+  const ORIENTACION_ESCOLAR = 238 ;
 
   protected $_introduccion = array(28, 29, 30);
   protected
@@ -445,7 +446,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
     {
       $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
       $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);
-
       if ($student_career_school_year->getYear() == 4)
       {
         $sum = 0;
@@ -471,7 +471,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         {
           $is_historia = self::HISTORIA_DEL_ARTE == $student_approved_career_subject->getCareerSubject()->getSubjectId()
           || in_array($student_approved_career_subject->getCareerSubjectid(), array(261,262));
-
           if ($is_historia)
           {
             $historia_mark = $this->getHistoriaDelArteMark($student_approved_career_subject->getStudent(), $student_approved_career_subject->getSchoolYear());
@@ -481,7 +480,6 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
             $sum += $student_approved_career_subject->getMark();
           }
         }
-
         if (isset($historia_mark)){
           $sum += $historia_mark;
           $count = count($student_approved_career_subjects) - 1;
@@ -491,18 +489,28 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         }
       }
       else
-      {
-        $sum = array_sum(array_map(create_function("\$css", "return \$css->getMark();"), $student_approved_career_subjects));
-        $count = count($student_approved_career_subjects);
-      }
+     {   $sum = 0;
+         $cant = 0;
+        foreach ($student_approved_career_subjects as $student_approved_career_subject)
+        {
+            if($student_approved_career_subject->getCareerSubject()->getId() != self::ORIENTACION_ESCOLAR)
+            {
+               $sum += $student_approved_career_subject->getMark();
+               $cant ++;
+            }
+           
+        }
+       
+        $count = $cant;
 
+      }
       if ($sum > 0 && $count > 0)
       {
         return number_format(round(($sum / $count), 2), 2, '.', '');
       }
     }
     return null;
-
+       
   }
 
   public function hasApprovedAllCourseSubjects($student_career_school_year)

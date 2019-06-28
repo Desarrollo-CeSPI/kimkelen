@@ -137,3 +137,11 @@
 .signature_4{
     margin-left: 30% !important;
 }
+
+#analytic_observations{
+    width: 50em !important;
+}
+
+.analytical-form{
+    display: inline-block;
+}

@@ -156,7 +156,7 @@ class Student extends BaseStudent
    * @param integer $start_year
    */
 
-  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $con = null)
+  public function registerToCareer(Career $career, Orientation $orientation = null, SubOrientation $sub_orientation = null, $start_year, $admission_date,$con = null)
   {
     if ($con == null)
     {
@@ -175,7 +175,7 @@ class Student extends BaseStudent
     $career_student->setStudentId($this->getId());
     $career_student->setStartYear($start_year);
     SchoolBehaviourFactory::getInstance()->setStudentFileNumberForCareer($career_student, $con);
-
+    $career_student->setAdmissionDate($admission_date);
     $career_student->save($con);
 
     SchoolBehaviourFactory::getInstance()->createStudentCareerSubjectAlloweds($career_student, $start_year, $con);
@@ -728,7 +728,7 @@ class Student extends BaseStudent
     $career_school_year = $student_career_school_year->getCareerSchoolYear();
 
     $second_quaterly = CareerSchoolYearPeriodPeer::retrieveSecondQuaterlyForCareerSchoolYear($career_school_year);
-
+    
     return $this->getCourseSubjectStudentsForBimesterQuaterly($second_quaterly, $student_career_school_year);
 
   }
@@ -743,13 +743,25 @@ class Student extends BaseStudent
   public function getCourseSubjectStudentsForBimesterQuaterly($quaterly, $student_career_school_year = null)
   {
     $results = array();
-
+    
     foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER, $student_career_school_year) as $css)
     {
       $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
       foreach ($subject_configurations as $sc)
       {
         if ($sc->getCareerSchoolYearPeriod()->getCareerSchoolYearPeriodId() == $quaterly->getId())
+            $results[$css->getId()] = $css;
+      }
+    }
+    
+    foreach ($this->getCourseSubjectStudentsForCourseType(CourseType::BIMESTER_OF_A_TERM, $student_career_school_year) as $css)
+    {
+      $subject_configurations = CourseSubjectConfigurationPeer::retrieveBySubject($css->getCourseSubject());
+      foreach ($subject_configurations as $sc)
+      {
+          $start_at  = $sc->getCareerSchoolYearPeriod()->getStartAt();
+          $end_at = $sc->getCareerSchoolYearPeriod()->getEndAt();
+        if ($start_at >=  $quaterly->getStartAt() &&  $end_at <= $quaterly->getEndAt())
           $results[$css->getId()] = $css;
       }
     }
@@ -1671,7 +1683,7 @@ class Student extends BaseStudent
   
   public function canPrintRegularCertificate()
   {
-	return ($this->getIsRegistered() && $this->getPerson()->getIsActive());
+      return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintRegularCertificate($this);
   }
   
   public function canPrintWithdrawnCertificate()
@@ -1782,6 +1794,59 @@ class Student extends BaseStudent
     return $results;
 
   }
+  
+  public function canManageMerdicalCertificate()
+  {
+      //matriculado y deben estar definidos los periodos lectivos.
+      $cs = $this->getCareerStudent();
+      if($this->getIsRegistered() && !is_null($cs ) )
+      {
+         $csy = CareerSchoolYearPeer::retrieveByCareerAndSchoolYear($cs->getCareer(), SchoolYearPeer::retrieveCurrent());
+         $p = CareerSchoolYearPeriodPeer::retrieveLastDay($csy);
+         return (is_null($p)) ? FALSE : TRUE;
+      }
+      return FALSE;
+  }
+  
+  public function getMessageCantManageMerdicalCertificate()
+  {
+    return "The student must be enrolled and the teaching periods must be defined.";
+  }
+  
+  public function getTheoricClass($date)
+  {
+      $c= new Criteria();
+      $c->add(MedicalCertificatePeer::STUDENT_ID, $this->getId());
+      $c->add(MedicalCertificatePeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+      $c->add(MedicalCertificatePeer::THEORIC_CLASS,true);
+      
+      $certificates = MedicalCertificatePeer::doSelect($c);
+      
+      foreach ($certificates as $cer)
+      {
+          $from = date_create($cer->getTheoricClassFrom());
+          $to = date_create($cer->getTheoricClassTo());
+          if($from <= $date && $to >= $date)
+          {
+              return TRUE;
+          }
+      }
+      return false;
+  }
+
+    public function getCountStudentRepprovedCourseSubjectForSchoolYear($school_year)
+    {
+        $c = new Criteria();
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID,$school_year->getId());
+        $c->add(CourseSubjectStudentPeer::STUDENT_ID,$this->getId());
+        $c->add(StudentRepprovedCourseSubjectPeer::STUDENT_APPROVED_CAREER_SUBJECT_ID, null, Criteria::ISNULL);
+
+        return StudentRepprovedCourseSubjectPeer::doCount($c);
+    }
   
 }
 

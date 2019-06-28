@@ -48,12 +48,14 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
         EOP_CS = 152,
         EOP_AV = 153,
         EOP_AM = 154,
-        LENGUA_EXTRANJERA = 125;        
+        LENGUA_EXTRANJERA = 125,
+        INTRO_PRACTICA_CORAL_ORQUESTAL = 132;        
     
     protected $optional_specific = array(
         self::TALLERES_EGP,
         self::INSTRUMENTO,
         self::PRACTICA_CORAL_ORQUESTAL,
+        self::INTRO_PRACTICA_CORAL_ORQUESTAL,
     );
     
     protected $subjects = array(

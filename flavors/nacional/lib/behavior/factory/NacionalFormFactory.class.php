@@ -38,5 +38,10 @@ class NacionalFormFactory extends BaseFormFactory {
   {
     return 'NacionalCourseSubjectMarksForm';
   }
+  
+  public function getStudentFormFilter()
+  {
+    return 'NacionalStudentFormFilter';
+  }
 
 }

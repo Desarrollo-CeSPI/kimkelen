@@ -26,14 +26,16 @@ class CourseType extends BaseCustomOptionsHolder
     TRIMESTER = 1,
     QUATERLY = 2,
     BIMESTER = 3,
-    QUATERLY_OF_A_TERM = 4;
+    QUATERLY_OF_A_TERM = 4,
+    BIMESTER_OF_A_TERM = 5;
 
   protected
   $_marks = array(
     self::TRIMESTER => 3,
     self::QUATERLY => 3,
     self::BIMESTER => 2,
-    self::QUATERLY_OF_A_TERM => 1
+    self::QUATERLY_OF_A_TERM => 1,
+    self::BIMESTER_OF_A_TERM => 1
   );
 
   protected
@@ -41,7 +43,8 @@ class CourseType extends BaseCustomOptionsHolder
     self::TRIMESTER => 'Anual con Régimen Trimestral',
     self::QUATERLY => 'Anual con Régimen Cuatrimestral',
     self::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-    self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término'
+    self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término',
+    self::BIMESTER_OF_A_TERM => 'Bimestral con Régimen de un término',
   );
 
   public static function getOption($key)
@@ -56,7 +59,8 @@ class CourseType extends BaseCustomOptionsHolder
       self::TRIMESTER => 'Anual con Régimen Trimestral',
       self::QUATERLY => 'Anual con Régimen Cuatrimestral',
       self::BIMESTER => 'Cuatrimestral con Régimen Bimestral',
-      self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término'
+      self::QUATERLY_OF_A_TERM => 'Cuatrimestral con Régimen de un término',
+      self::BIMESTER_OF_A_TERM => 'Bimestral con Régimen de un término',
     );
   }
 

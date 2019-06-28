@@ -145,7 +145,15 @@ class Division extends BaseDivision
       {
         $csy = CareerSubjectSchoolYearPeer::retrieveByCareerSubjectAndSchoolYear($cs, $this->getSchoolYear());
 
-        $career_subject_school_year_ids = array_map(create_function('$o', 'return $o->getChoiceCareerSubjectSchoolYearId();'), $csy->getChoices());
+        if(!is_null($csy))
+        {
+           $career_subject_school_year_ids = array_map(create_function('$o', 'return $o->getChoiceCareerSubjectSchoolYearId();'), $csy->getChoices());
+        }
+        else
+        {
+            $career_subject_school_year_ids = array();
+        }
+        
 
         $c = new Criteria();
         $c->add(CoursePeer::DIVISION_ID, $this->getId());

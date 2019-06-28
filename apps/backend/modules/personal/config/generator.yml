@@ -83,6 +83,12 @@ generator:
             action: aggregateAsTeacher
             condition:  canAddTeacher
             credentials:  [edit_personal]
+            
+          aggregate_tutor:
+            label:  Aggregate as a tutor
+            action: aggregateAsTutor
+            condition:  canAddTutor
+            credentials:  [edit_personal]
 
           activate:
             label: Set active in courses

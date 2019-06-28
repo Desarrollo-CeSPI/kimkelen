@@ -86,6 +86,11 @@ generator:
             action: aggregateAsPreceptor
             condition:  canAddPreceptor
             credentials:  [edit_teacher]
+          aggregate_tutor:
+            label:  Aggregate as a tutor
+            action: aggregateAsTutor
+            condition:  canAddTutor
+            credentials:  [edit_teacher]
 
           licenses:
             label:  Licenses

@@ -2018,3 +2018,23 @@ div.wc-cal-event{
     font-weight: bold;
     color: #C93C42;
 }
+
+.sf_admin_list .sf_admin_action_medical_certificate a
+{
+    background-image: url('../images/medical-certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_show_history a
+{
+    background-image: url('../images/disciplinary_sanction.png') !important;
+} 
+
+.sf_admin_list .sf_admin_action_aggregate_profesor a
+{
+    background-image: url('../images/professor.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_aggregate_tutor a
+{
+    background-image: url('../images/tutor.png') !important;
+}

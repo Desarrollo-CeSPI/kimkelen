@@ -79,5 +79,15 @@ class PersonPeer extends BasePersonPeer
     return self::doSelect($c);
 
   }
+  
+  public static function retrieveByDocumentTypeAndNumber($document_type,$document_number)
+  {
+    $c = new Criteria();
+    $c->add(self::IDENTIFICATION_NUMBER, $document_number);
+    $c->add(self::IDENTIFICATION_TYPE, $document_type);
+    $p = self::doSelectOne($c);
+
+    return $p;
+  }
 
 }
