@@ -36,6 +36,77 @@ operativo sea miembro del grupo docker, para así no tener que usar el comando
 Una vez que docker se encuentra instalado en la PC, se debe instalar
 docker-compose como se indica en la [documentación oficial](https://docs.docker.com/compose/install/).
 
+# Instalación en producción
+
+El siguiente ejemplo, muestra como iniciar el producto considerando que ya
+dispone de los pre-requisitos instalados en su sistema.
+
+## Docker compose para producción
+
+Cree una carpeta con el nombre del proyecto _-por ejemplo el nombre de su
+colegio_ y dentro de esta carpeta cree un archivo `docker-compose.yml` con el
+siguiente contenido:
+
+```yml
+version: '2'
+volumes:
+  db:
+  disciplinary-sanction-documents:
+  justification-documents:
+  persons-photos:
+services:
+  app:
+    image: registry.gitlab.com/kimkelen/kimkelen:latest
+    environment:
+      DB_HOST: db
+      DB_NAME: kimkelen
+      DB_PASSWORD: root
+      DB_USERNAME: root
+      DEBUG: 'false'
+      FLAVOR: demo
+      MEMCACHE_HOST: memcache
+      MEMCACHE_PORT: '11211'
+      TESTING: 'true'
+      FACEBOOK_ID: NONE
+      FACEBOOK_SECRET: NONE
+    ports:
+    - 80:80
+    volumes:
+    - disciplinary-sanction-documents:/app/data/disciplinary-sanction-documents
+    - justification-documents:/app/data/justification-documents
+    - persons-photos:/app/data/persons-photos
+  memcache:
+    image: memcached:1.4
+    command:
+    - -m
+    - '256'
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_DATABASE: kimkelen
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+    - db:/var/lib/mysql
+```
+
+Una vez creado, correr el siguiente comando:
+
+```
+docker-compose up
+```
+
+### Notas
+
+Debe considerar editar las variables de ambiente que permiten modificar su
+instalación:
+
+* `TESTING:` si el valor es true, muestra una leyenda que indica que es una versión de prueba
+* `FLAVOR:` configura el flavor de esta instalación de kimkelen. Por defecto se
+  asume **demo**.
+* `DEBUG:` configura el producto para trabajar en modo dev, esto es, se muestra
+  la barra de symfony y los errores con más detalle. Útil para detectar
+  problemas.
+
 ## Trabajando en desarrollo
 
 Primero es necesario clonar este repositorio:
@@ -183,6 +254,23 @@ El sistema se instala con algunos datos cargados a decir:
 pueden compartir con otros colegios. 
 
 
+## Problemas con la generación de PDFs
+
+Puede que en el ambiente de desarrollo, si es que se utiliza docker, no 
+funcionen los PDF, y esto se debe a que se utiliza la librería
+[wkhtmltopdf](https://wkhtmltopdf.org/). El problema es que dentro del
+contenedor, se utiliza el comando mencionado basándose en la URL que mantiene el
+navegador. Por tanto, si se utiliza un mapeo de puertos del puerto 8000 de la
+máquina local al puerto 80 del contenedor, el desarrollador va a estar
+probando la aplicación utilizando http://localhost:8000, y por lo tanto, la
+aplicación intentará generar un requerimiento desde dentro del contenedor a la
+URL http://localhost:8000, y no podrá conectarse porque dentro del contenedor
+únicamente se sirve contenido en el puerto 80.
+
+Para solucionar este problema, se aconseja utilizar para desarrollo el puerto
+80.
+es que dentro del contenedor docker
+
 ## ¿Qué es el **comportamiento** o **sabor**?
 
 Cada colegio tiene su propio esquema de enseñanza siguiendo reglas diferentes.
@@ -198,3 +286,4 @@ Un ejemplo entonces, sería:
 ```
 php symfony kimkelen:flavor demo
 ```
+
