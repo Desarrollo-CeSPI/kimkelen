@@ -67,8 +67,6 @@ services:
       MEMCACHE_HOST: memcache
       MEMCACHE_PORT: '11211'
       TESTING: 'true'
-      FACEBOOK_ID: NONE
-      FACEBOOK_SECRET: NONE
     ports:
     - 80:80
     volumes:
