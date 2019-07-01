@@ -10,8 +10,11 @@ RUN apk add -U --no-cache --virtual .build-deps $PHPIZE_DEPS cmake \
   && ln -s /usr/local/include/tidybuffio.h /usr/local/include/buffio.h \
   && docker-php-ext-configure tidy --with-tidy=/usr/local \
   && docker-php-ext-install tidy \
-  && apk add -U git
-
+  && apk add -U git 
+# MS Fonts
+RUN apk add --update --no-cache --virtual .ms-fonts msttcorefonts-installer --repository http://dl-3.alpinelinux.org/alpine/v3.6/community && \
+    update-ms-fonts --quiet && \
+    apk del .ms-fonts
 # Por wkhtmltopdf
 ADD docker/wkhtmltopdf-patch/wkhtmltopdf-full-bin.tar.gz /usr/local/bin
 RUN mv /usr/local/bin/libwkhtmltox.so* /usr/local/lib \
