@@ -213,11 +213,11 @@ root:
         credentials: [edit_book]
         menu:
           list:
-            title: Book list
+            title: Listado de libros de actas
             url: book/index
             credentials: [edit_book]
           new:
-            title: New book
+            title: Nuevo libro de actas
             url: book/new
             credentials: [edit_book]  
 
