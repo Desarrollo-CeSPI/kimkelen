@@ -124,7 +124,7 @@ class Student extends BaseStudent
    */
   public function canBeManagedForCareerSubjectAllowed()
   {
-    return $this->countCareerStudents() > 0;
+    return $this->countCareerStudents() > 0 && $this->getIsRegistered();
 
   }
 
@@ -233,7 +233,7 @@ class Student extends BaseStudent
 
   public function getMessageCantBeManagedForCareerSubjectAllowed()
   {
-    return "The student must be registered to career before you can manage allowed subjects.";
+    return "The student must be registered to career and enrolled before you can manage allowed subjects.";
 
   }
 
