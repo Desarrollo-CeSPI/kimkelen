@@ -16,7 +16,7 @@ RUN apk add --update --no-cache --virtual .ms-fonts msttcorefonts-installer --re
     update-ms-fonts --quiet && \
     apk del .ms-fonts
 # Por wkhtmltopdf
-ADD docker/wkhtmltopdf-patch/wkhtmltopdf-full-bin.tar.gz /usr/local/bin
+ADD docker/wkhtmltopdf-patch/wkhtmltopdf-full-bin2.tar.gz /usr/local/bin
 RUN mv /usr/local/bin/libwkhtmltox.so* /usr/local/lib \
     && apk add -U --no-cache \
       gettext \
