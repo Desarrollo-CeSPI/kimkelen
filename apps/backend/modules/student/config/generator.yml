@@ -182,7 +182,7 @@ generator:
           analytical:
             credentials:  [print_analytic]
             action: analytical
-            condition: canBeManagedForCareerSubjectAllowed
+            condition: canPrintAnalytical
 
           activate:
             label: Set active
