@@ -711,16 +711,117 @@ classes:
         required: false
         
   Book:
-    tableName: book
-    description: Representa el libro de actas
+    tableName:            book
+    description:          Representa el libro de actas
     columns:
       id:
       name:
-        type: varchar(45)
-        required: true
+        type:             varchar(45)
+        required:         true
       description: 
-        type: varchar(255)
-        required: false
+        type:             varchar(255)
+        required:         false
       is_active:
-        type: boolean
-        default: false
+        type:             boolean
+        default:          false
+        
+  Record:
+    tableName:            record
+    description:          representa el acta de examen/cursada.
+    columns:
+      id:
+      created_at:
+      record_type:
+        description:      tipo de acta Examen/Promoción
+        type:             integer
+        required:         true
+      course_origin_id:
+        description:      representa la mesa/cursada que da origen al acta
+        type:             integer
+        required:         true
+      lines:
+        description:      cantidad de renglones por folio
+        type:             integer
+        required:         true
+      status:
+        description:      estado del acta Activo/Baja
+        type:             integer
+        required:         true
+      username:
+        description:      usuario que generó el acta
+        type:             varchar(100)
+        required:         true
+  
+  RecordDetail:
+    tableName:            record_detail
+    description:          representa el detalle del acta
+    columns:
+      id:
+      created_at:  
+      updated_at:  
+      record_id:
+        description:      referencia a la cabecera del acta
+        type:             integer
+        foreignTable:     record
+        foreignReference: id
+        required:         true
+        onUpdate:         restrict
+        onDelete:         restrict
+      student_id:
+        description:      referencia al alumno
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        required:         true
+        onUpdate:         restrict
+        onDelete:         restrict
+      mark:
+        description:      Nota que obtuvo el alumno
+        type:             integer
+        required:         false
+        size:             5
+        scale:            2
+      is_absent:
+        description:      ausente
+        type:             Boolean
+        default:          false
+      result:
+        description:      Resultado que obtuvo el alumno Aprobado/Desaprobado
+        type:             integer
+        required:         true
+      line:
+        description:      representa el renglón
+        type:             integer
+      sheet:
+        description:      representa el folio lógico
+        type:             integer
+        required:         true
+      
+  RecordSheet:
+    tableName:            record_sheet
+    description:          representa el folio fisico y el libro donde se guarda el acta
+    columns:
+      id:
+      record_id:
+        description:      referencia a la cabecera del acta
+        type:             integer
+        foreignTable:     record
+        foreignReference: id
+        required:         true
+        onUpdate:         restrict
+        onDelete:         restrict
+      sheet:
+        description:      representa el folio lógico
+        type:             integer
+        required:         true
+      physical_sheet:
+        description:      representa el folio físico
+        type:             integer
+        required:         false
+      book_id:
+        description:      representa el libro
+        type:             integer
+        required:         false
+
+          
+         

@@ -1,0 +1,14 @@
+index:
+  credentials: [show_school_year]
+
+new:
+  credentials: [create_setting_parameter]
+
+show:
+  credentials: [create_setting_parameter]
+
+delete:
+  credentials: [create_setting_parameter]
+
+edit:
+  credentials: [edit_setting_parameter]

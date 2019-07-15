@@ -219,5 +219,92 @@ class examination_subjectActions extends autoExamination_subjectActions
 
      $this->students = $this->examination_subject->getStudents();
   }
+  
+  public function executeAssignBook(sfWebRequest $request)
+  {
+      
+  }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+      //calculo cantidad de hojas: cantidad de alumnos / cantidad de renglones por hoja.
+   /*   $examination_subject = $this->getRoute()->getObject();
+      $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+      $sheets = $examination_subject->countTotalStudents() / $setting->getValue();
+      $sheets = ceil($sheets);
+    */
 
+       $con =  Propel::getConnection();
+       
+       try
+       {  
+            $examination_subject = $this->getRoute()->getObject();
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::EXAMINATION);
+            $r->setCourseOriginId($examination_subject->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_subject->getId(), RecordType::EXAMINATION);
+
+            $i = 1;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save();
+
+            foreach ($examination_subject->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = new RecordDetail();
+               $rd->setRecordId($record->getId());
+               $rd->setStudent($csse->getCourseSubjectStudent()->getStudent());
+               $rd->setMark($csse->getMark());
+               $rd->setIsAbsent($csse->getIsAbsent());
+               if ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+               }
+               else
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+               }
+
+               $rd->setLine($i);
+
+               if ($i > ($sheet * $record->getLines()))
+               {
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save();
+
+               }
+               $rd->setSheet($sheet);
+               $i++;
+
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+            
+            $con->commit();
+        echo "listo";die();
+       }
+       catch (Exception $e)
+       {
+          $con->rollBack();
+          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+          $this->redirect('@examination_subject');
+       }
+              
+  }
 }

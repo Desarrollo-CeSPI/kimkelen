@@ -1,3 +1,12 @@
+setting_parameter:
+  class: sfPropelRouteCollection
+  options:
+    model:                SettingParameter
+    module:               setting_parameter
+    prefix_path:          setting_parameter
+    column:               id
+    with_wildcard_routes: true
+
 book:
   class: sfPropelRouteCollection
   options:

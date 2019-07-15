@@ -313,5 +313,19 @@ classes:
       letter_mark_average:
         type: integer
         required: true
-
+  
+  SettingParameter:
+    tableName: setting_parameter
+    description: Representa parámetros de configuarción
+    columns:
+      id:
+      name:
+        type: varchar(45)
+        required: true
+      description: 
+        type: varchar(100)
+        required: false
+      value:
+        type: integer
+        required: true
 

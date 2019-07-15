@@ -232,6 +232,49 @@ class ExaminationSubject extends BaseExaminationSubject
 	  {
 		  return $this->getCareerSubjectSchoolYear()->getCareerSubject();
 	  }
+    public function canAssignPhysicalSheet()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return !is_null($record);
+    }
+    
+    public function canGenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        return $this->getIsClosed() && ! is_null($setting->getValue()) ;
+    }
+    
+    public function getMessageCantGenerateRecord()
+    {
+        if($this->getIsClosed())
+        {
+            return "Can't generate record because the setting parameters are not configured.";
+        }
+        else 
+        {
+             return "Can't generate record because the examination subject is not closed.";
+
+        }
+
+    }
+    
+    public function getMessageCantAssignPhysicalSheet()
+    {
+        return "Can't assign physical sheet because the examination subject does not have a record.";  
+
+    }
+    public function getSortedByNameCourseSubjectStudentExaminations()
+    {
+        $criteria = new Criteria();
+        $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
+        $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+        
+        return $this->getCourseSubjectStudentExaminations($criteria);
+    }
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));

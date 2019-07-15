@@ -46,6 +46,10 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
   protected $form_factory; /* Used for delegating custom forms used for several
    * actions depending on each school behaviour
    */
+  
+  const LINES_COURSES = 'renglones_folio_cursada';
+  const LINES_EXAMINATION = 'renglones_folio_examen';
+  const LINES_PATHWAY = 'renglones_folio_trayectoria' ;
 
   public function __construct(BaseFormFactory $form_factory)
   {

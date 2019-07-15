@@ -192,3 +192,7 @@ table.gridtable_bordered tr {
     background-color: #ffffff;
     text-align:center;
 }
+
+.min-size{
+    font-size: 11px;
+}

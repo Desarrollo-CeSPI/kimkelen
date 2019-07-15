@@ -261,8 +261,7 @@ class Course extends BaseCourse
   public function canManageSubjects(PropelPDO $con = null)
   {
     return ($this->countStudents() == 0) && $this->isCurrentSchoolYear();
-    ;
-
+    
   }
 
   public function getMessageCantManageSubjects()

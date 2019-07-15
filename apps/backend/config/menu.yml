@@ -76,7 +76,6 @@ root:
           change_status_motive:
             title: Motivos de cambio de estado
             url: @change_status_motive
-      separator:
       users:
         title: Usuarios
         credentials: [[show_user, show_group]]
@@ -89,6 +88,10 @@ root:
             title: Grupos de usuarios
             url: sfGuardGroup/index
             credentials: [show_group]
+      setting_parameters:
+        title: Parámetros de configuración
+        url: @setting_parameter
+        credentials: [edit_setting_parameter]
 
   academics:
     title: Académica
