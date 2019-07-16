@@ -65,7 +65,7 @@
           <?php endif; ?>
         <?php endfor ?>
 
-        <?php if (($course_subject_student->getIsNotAverageable()) || ($course_subject_student->getConfiguration()->isNumericalMark())): ?>
+        <?php if (($course_subject_student->getIsNotAverageable()) || (! $course_subject_student->getConfiguration()->isNumericalMark())): ?>
           <td></td>
         <?php else: ?>
           <td><?php echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration()) ?></td>
