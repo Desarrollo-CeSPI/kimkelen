@@ -12,8 +12,8 @@ class RecordSheetForm extends BaseRecordSheetForm
   public function configure()
   {
        unset(
-        $this['record_id'],
-        $this['book_id']     
+        $this['record_id']
+           
         );
        
         $this->setWidget('sheet', new sfWidgetFormReadOnly(array(
@@ -22,9 +22,13 @@ class RecordSheetForm extends BaseRecordSheetForm
           )));
         
         $this->setValidator('physical_sheet',new sfValidatorInteger(array('required' => true)));
+        $this->setValidator('book_id',new sfValidatorPropelChoice(array('model' => 'Book', 'column' => 'id', 'required' => true)));
           $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
           $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
           $this->getWidgetSchema()->setFormFormatterName('Revisited');
+          
+        $this->getWidget('book_id')->setAttribute('class', 'book_sheet');
+        $this->getWidget('book_id')->setLabel('Book');
         
   }
 }

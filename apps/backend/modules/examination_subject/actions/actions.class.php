@@ -232,7 +232,6 @@ class examination_subjectActions extends autoExamination_subjectActions
     {
       // when POSTing
       $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
-       var_dump($request->getPostParameters());die();
     }
       
     $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
@@ -242,7 +241,7 @@ class examination_subjectActions extends autoExamination_subjectActions
     {
         $form = new RecordSheetForm($rs);
         $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
-        $this->forms[$rs->getId()]= new RecordSheetForm($rs);
+        $this->forms[$rs->getId()]= $form;
     }
       
     if ($request->isMethod("post"))
@@ -256,13 +255,16 @@ class examination_subjectActions extends autoExamination_subjectActions
         if ($form->isValid())
         {
           $valid--;
-          $form->save();
         }
       }
 
       if ($valid == 0)
-      {
-        $this->getUser()->setFlash('notice', 'Los ítem fueron guardaron satisfactoriamente.');
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
       }
       else
       {
