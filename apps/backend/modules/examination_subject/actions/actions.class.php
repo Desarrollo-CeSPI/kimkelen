@@ -219,9 +219,56 @@ class examination_subjectActions extends autoExamination_subjectActions
 
      $this->students = $this->examination_subject->getStudents();
   }
-  
-  public function executeAssignBook(sfWebRequest $request)
+                        
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
   {
+    try
+    {
+      // when GETting
+      $this->examination_subject = $this->getRoute()->getObject();
+     
+    }
+    catch (Exception $e)
+    {
+      // when POSTing
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
+       var_dump($request->getPostParameters());die();
+    }
+      
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= new RecordSheetForm($rs);
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+          $form->save();
+        }
+      }
+
+      if ($valid == 0)
+      {
+        $this->getUser()->setFlash('notice', 'Los ítem fueron guardaron satisfactoriamente.');
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+    }
       
   }
   

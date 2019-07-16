@@ -821,7 +821,10 @@ classes:
       book_id:
         description:      representa el libro
         type:             integer
+        foreignTable:     book
+        foreignReference: id
         required:         false
-
+        onUpdate:         restrict
+        onDelete:         restrict
           
          
