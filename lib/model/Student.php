@@ -1847,6 +1847,16 @@ class Student extends BaseStudent
 
         return StudentRepprovedCourseSubjectPeer::doCount($c);
     }
+    
+    public function canPrintAnalytical()
+    {
+        if(!is_null($this->getCareerStudent()))
+        {
+            return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE || $this->getIsRegistered(); 
+        }   
+ 
+        return FALSE;
+    }
   
 }
 
