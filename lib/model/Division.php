@@ -83,14 +83,14 @@ class Division extends BaseDivision
       return null;
     }
 
-    $c = new Criteria();
+    /*$c = new Criteria();
     $c->add(StudentPeer::ID, SchoolYearStudentPeer::retrieveStudentIdsForSchoolYear($this->getSchoolYear()), Criteria::IN);
-    $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);
+    $c->addJoin(DivisionStudentPeer::STUDENT_ID,  StudentPeer::ID);*/
 
     $con->beginTransaction();
     try
     {
-      foreach ($this->getDivisionStudents($c) as $division_student)
+      foreach ($this->getDivisionStudents() as $division_student)
       {
         if (!in_array($division_student->getStudentId(), $values))
         {
