@@ -33,7 +33,10 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
     $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $examination_repproved_subject->getCareerSubjectId());
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+    
+    $c->add(CareerSubjectPeer::SUBJECT_ID,$examination_repproved_subject->getCareerSubject()->getSubjectId());
+    $c->addAnd(CareerSubjectPeer::YEAR,$examination_repproved_subject->getCareerSubject()->getYear());
 
     return $c;
   }
@@ -81,6 +84,7 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
 
   public static function retrieveByCareerSubjectIdAndStudentId($career_subject_id, $student_id)
   {
+    $career_subject = CareerSubjectPeer::retrieveByPK($career_subject_id);
     $c = new Criteria();
     //Join con students
     $c->addJoin(self::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
@@ -88,7 +92,12 @@ class StudentRepprovedCourseSubjectPeer extends BaseStudentRepprovedCourseSubjec
 
     $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
     $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->add(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, $career_subject_id);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+    
+    $c->add(CareerSubjectPeer::SUBJECT_ID,$career_subject->getSubjectId());
+    $c->addAnd(CareerSubjectPeer::YEAR,$career_subject->getYear());
+    
+  
 
     return self::doSelectOne($c);
   }
