@@ -21,8 +21,10 @@ class RecordSheetForm extends BaseRecordSheetForm
             'value_callback' => array('RecordSheetPeer', 'retrieveByPK')
           )));
         
+        $this->setWidget('book_id', new sfWidgetFormInputHidden());
+        
         $this->setValidator('physical_sheet',new sfValidatorInteger(array('required' => true)));
-        $this->setValidator('book_id',new sfValidatorPropelChoice(array('model' => 'Book', 'column' => 'id', 'required' => true)));
+        $this->setValidator('book_id', new sfValidatorPropelChoice(array('model' => 'Book', 'column' => 'id', 'required' => false)));
           $sf_formatter_revisited = new sfWidgetFormSchemaFormatterRevisited($this);
           $this->getWidgetSchema()->addFormFormatter('Revisited', $sf_formatter_revisited);
           $this->getWidgetSchema()->setFormFormatterName('Revisited');

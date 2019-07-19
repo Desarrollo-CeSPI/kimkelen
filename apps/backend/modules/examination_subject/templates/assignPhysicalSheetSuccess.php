@@ -35,31 +35,25 @@
   </div>
   <div id="sf_admin_content">
      <form action="<?php echo url_for('examination_subject/assignPhysicalSheet') ?>" method="post">
-      <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
-        <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-      </ul> 
-         
-         <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
+        <ul class="sf_admin_actions">
+            <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
+            <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
+        </ul>  
+        <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
         <fieldset id="califications_fieldset">
-            <div class="sf_admin_form_row">           
-
-            <label for="book_id" ><?php echo __('Book') ?></label>
-
-            <select name="book_id" id="book_id" required="required">
-              <option value="" selected="selected"></option>
-              <?php foreach ($books as $b):?>
-              <option value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
-              <?php endforeach;?>
-             </select>
-        </div>
+            <div class="sf_admin_form_row">                          
+                <label for="book_id" class="required"><?php echo __('Book') ?></label>
+                <select name="book_id" id="book_id" required="required">
+                    <option value="" selected="selected"></option>
+                    <?php foreach ($books as $b):?>
+                    <option value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
             <?php foreach($forms as $form): ?>
-
                 <?php echo $form; ?>
-
             <?php endforeach; ?>
-        </fieldset>
-                          
+        </fieldset>                 
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
         
@@ -71,20 +65,15 @@
 </div>
 <script>
     window.addEventListener('load', function() {
-        
-       
         document.getElementById("book_id" ).addEventListener('change', function() {
-        books = document.getElementsByClassName('book_sheet');
-       
-       
-        book_id = document.getElementById("book_id").value;
-        for (i = 0; i < books.length; i++) 
-        {
-          document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
+            books = document.getElementsByClassName('book_sheet');
 
-        } 
-            
-        });
-          
-      })
+            book_id = document.getElementById("book_id").value;
+            for (i = 0; i < books.length; i++) 
+            {
+              //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
+              document.getElementsByClassName('book_sheet')[i].value = book_id;
+            }    
+        });      
+    })
 </script>
