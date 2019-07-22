@@ -230,9 +230,30 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
             return $this->getExaminationRepproved()->getSchoolYear();
     }
     
-    public function canAssignBook()
+    public function canAssignPhysicalSheet()
     {
-        return $this->getIsClosed();
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION_REPPROVED);
+        return !is_null($record);
+    }
+    
+    public function canGenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        return $this->getIsClosed() && ! is_null($setting->getValue()) ;
+    }
+    
+    public function getSortedByNameStudentExaminationRepprovedSubjects()
+    {
+        $c = new Criteria();
+        $c->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $this->getId());
+        $c->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID);
+        $c->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $c->addJoin(CourseSubjectStudentPeer::STUDENT_ID,  StudentPeer::ID);
+        $c->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $c->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $c->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+        
+        return $this->getStudentExaminationRepprovedSubjects($c);
     }
 }
 

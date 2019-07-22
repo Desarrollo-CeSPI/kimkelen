@@ -47,9 +47,14 @@ generator:
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
-          assign_book_fol:
-            condition: canAssignBook
-            credentials: [assign_book_fol]
+          assign_physical_sheet:
+            action: assignPhysicalSheet
+            condition: canAssignPhysicalSheet
+            credentials: [assign_physical_sheet]
+          generate_record:
+            action: generateRecord
+            condition: canGenerateRecord
+            credentials: [generate_record]
         batch_actions: []
         actions:
           back:

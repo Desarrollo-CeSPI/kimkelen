@@ -276,13 +276,6 @@ class examination_subjectActions extends autoExamination_subjectActions
   
   public function executeGenerateRecord(sfWebRequest $request)
   {
-      //calculo cantidad de hojas: cantidad de alumnos / cantidad de renglones por hoja.
-   /*   $examination_subject = $this->getRoute()->getObject();
-      $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
-      $sheets = $examination_subject->countTotalStudents() / $setting->getValue();
-      $sheets = ceil($sheets);
-    */
-
        $con =  Propel::getConnection();
        
        try

@@ -250,5 +250,95 @@ class pathway_commissionActions extends autoPathway_commissionActions
       $this->redirect("student_attendance/StudentAttendance?url=pathway_commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
     }
   }
+  
+  public function executeGenerateRecordSubject(sfWebRequest $request)
+  {
+       $con =  Propel::getConnection();
+       
+       try
+       {  
+            $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+
+                $r = new Record();
+                $r->setRecordType(RecordType::COURSE);
+                $r->setCourseOriginId($cs->getId());
+                $r->setLines($setting->getValue());
+                $r->setStatus(RecordStatus::ACTIVE); 
+                $r->setUsername(sfContext::getInstance()->getUser());
+                $r->save();
+
+                $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+
+                $i = 1;
+                $sheet =1;
+                $record_sheet = new RecordSheet();
+                $record_sheet->setRecord($record);
+                $record_sheet->setSheet($sheet);
+                $record_sheet->save();
+
+                foreach ($cs->getCourseSubjectStudentPathways() as $cssp)
+                {
+                   $rd = new RecordDetail();
+                   $rd->setRecordId($record->getId());
+                   $rd->setStudent($cssp->getStudent());
+                   $rd->setMark($cssp->getMark());
+                   $rd->setIsAbsent(FALSE);
+                   if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
+                   {
+                       $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                   }
+                   else
+                   {
+                       $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                   }
+
+                   $rd->setLine($i);
+
+                   if ($i > ($sheet * $record->getLines()))
+                   {
+                       $sheet ++;
+                       $record_sheet = new RecordSheet();
+                       $record_sheet->setRecord($record);
+                       $record_sheet->setSheet($sheet);
+                       $record_sheet->save();
+
+                   }
+                   $rd->setSheet($sheet);
+                   $i++;
+
+                   $rd->save();
+
+                   ####Liberando memoria###
+                   $rd->clearAllReferences(true);
+                   unset($rd);
+                   ##################*/
+                }
+            
+            
+            $con->commit();
+        echo "listo";die();
+       }
+       catch (Exception $e)
+       {
+          $con->rollBack();
+          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+          $this->redirect('@pathway_commission');
+       }
+              
+  }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      
+      if (count($this->course_subjects) == 1)
+      {
+          
+          $this->redirect("pathway_commission/generateRecordSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+  }
 
 }

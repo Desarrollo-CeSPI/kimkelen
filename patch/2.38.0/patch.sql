@@ -15,6 +15,7 @@ CREATE TABLE `setting_parameter` (
 
 insert into setting_parameter (name,description) values ('renglones_folio_cursada','Cantidad de líneas/renglones que se generará por cada folio en el Acta de Cursadas/Promoción');
 insert into setting_parameter (name,description) values ('renglones_folio_examen','Cantidad de líneas/renglones que se generará por cada folio en el Acta de Examen');
+insert into setting_parameter (name,description) values ('renglones_folio_trayectoria','Cantidad de líneas/renglones que se generará por cada folio en el Acta de Trayectoria');
 
 insert into sf_guard_permission(name,description) values ('edit_setting_parameter','Editar paramátros de configuración');
 insert into sf_guard_permission(name,description) values ('assign_physical_sheet','Asignar tomo/folio a actas.');

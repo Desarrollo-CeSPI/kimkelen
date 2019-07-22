@@ -28,14 +28,15 @@
 class RecordType extends BaseCustomOptionsHolder
 {
   const
-    PROMOTION   = 1,
+    COURSE   = 1,
     EXAMINATION      = 2,
-    REPPROVED_EXAMINATION = 3;
+    EXAMINATION_REPPROVED = 3;
 
   protected
     $_options = array(
-        self::PROMOTION    => 'Cursada/Promoción',
+        self::COURSE    => 'Comisiones/Trayectorias',
         self::EXAMINATION   => 'Examen',
-        self::REPPROVED_EXAMINATION => 'Previa/Libre'
+        self::EXAMINATION_REPPROVED => 'Previa/Libre',
+        
       );
 }

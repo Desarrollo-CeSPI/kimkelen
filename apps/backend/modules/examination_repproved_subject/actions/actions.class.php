@@ -251,5 +251,135 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $this->previous_url = $this->getUser()->setAttribute('referer_module', 'examination_repproved_subject');
 
   }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+    try
+    {
+      // when GETting
+      $this->examination_repproved_subject = $this->getRoute()->getObject();
+     
+    }
+    catch (Exception $e)
+    {
+      // when POSTing
+      $this->examination_repproved_subject = ExaminationRepprovedSubjectPeer::retrieveByPK($request->getParameter("id"));
+    }
+      
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= $form;
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+    }
+      
+  }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+       $con =  Propel::getConnection();
+       
+       try
+       {  
+            $examination_repproved_subject = $this->getRoute()->getObject();
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::EXAMINATION_REPPROVED);
+            $r->setCourseOriginId($examination_repproved_subject->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+
+            $i = 1;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save($con);
+
+            foreach ($examination_repproved_subject->getSortedByNameStudentExaminationRepprovedSubjects() as $sers)
+            {
+               $rd = new RecordDetail();
+               $rd->setRecordId($record->getId());
+               $rd->setStudent($sers->getStudent());
+               $rd->setMark($sers->getMark());
+               $rd->setIsAbsent($sers->getIsAbsent());
+               if ($sers->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+               }
+               else
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+               }
+
+               $rd->setLine($i);
+
+               if ($i > ($sheet * $record->getLines()))
+               {
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save($con);
+
+               }
+               $rd->setSheet($sheet);
+               $i++;
+
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+            
+            $con->commit();
+        echo "listo";die();
+       }
+       catch (Exception $e)
+       {
+          $con->rollBack();
+          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+          $this->redirect('@examination_repproved_subject');
+       }
+              
+  }
 
 }
