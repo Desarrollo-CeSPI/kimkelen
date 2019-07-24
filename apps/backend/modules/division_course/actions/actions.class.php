@@ -260,4 +260,30 @@ class division_courseActions extends autoDivision_courseActions
     $this->getUser()->setAttribute("referer_module", "division_course");
     $this->redirect("course_student_mark/revertCalificateNonNumericalMark?id=" . $this->course->getId());
   }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+       $con =  Propel::getConnection();
+       try
+       {    $course = $this->getRoute()->getObject();     
+            $cs = $course->getCourseSubject();
+            $cs->generateRecord();
+       }
+       catch (Exception $e)
+       {
+          $con->rollBack();
+          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
+          $this->redirect('@division_course');
+       }
+              
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+      $course = $this->getRoute()->getObject();     
+      $cs = $course->getCourseSubject();
+      $this->getUser()->setAttribute("referer_module", "division_course");
+      $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $cs->getId());
+  }
+  
 }

@@ -11,16 +11,22 @@
 
  <?php if (!empty($course_subjects)): ?>
   <h1><?php echo __('Course subjects for commission') ?></h1>
-
+    <ul class="sf_admin_actions">
+        <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $url); ?></li>
+    </ul>
     <div id="related_courses">
       <table>
         <?php foreach ($course_subjects as $course_subject):?>
           <tr>
             <th><?php echo $course_subject ?></th>
-            <td><?php echo link_to(__('Generate record'), "pathway_commission/generateRecordSubject?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId())?></td>
+            <?php $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($course_subject->getId(), RecordType::COURSE); ?>        
+            <td><?php echo (! is_null($r))? link_to(__('Assign physical sheet'), "$url/assignPhysicalSheetSubject?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId()) : ''?></td>
           </tr>
         <?php endforeach?>
       </table>
     </div>
+  <ul class="sf_admin_actions">
+    <li class ="sf_admin_action_list"><?php echo link_to(__('Back'), $url); ?></li>
+  </ul>
   <?php endif; ?>
 </div>

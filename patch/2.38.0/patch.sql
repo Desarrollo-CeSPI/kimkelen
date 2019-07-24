@@ -20,7 +20,7 @@ insert into setting_parameter (name,description) values ('renglones_folio_trayec
 insert into sf_guard_permission(name,description) values ('edit_setting_parameter','Editar paramátros de configuración');
 insert into sf_guard_permission(name,description) values ('assign_physical_sheet','Asignar tomo/folio a actas.');
 insert into sf_guard_permission(name,description) values ('generate_record','Generar actas.');
-
+insert into sf_guard_permission(name,description) values ('print_record','Imprimir actas.');
 
 CREATE TABLE `record` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ CREATE TABLE `record_detail` (
   `updated_at` DATETIME NULL,
   `record_id` INT NOT NULL,
   `student_id` INT NOT NULL,
-  `mark` INT NULL,
+  `mark` DOUBLE NULL,
   `is_absent` TINYINT(1) NULL DEFAULT 0,
   `result` INT NOT NULL,
   `line` INT NOT NULL,

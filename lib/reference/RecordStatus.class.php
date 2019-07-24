@@ -29,11 +29,11 @@ class RecordStatus extends BaseCustomOptionsHolder
 {
   const
     ACTIVE   = 1,
-    LOW      = 2;
+    ANNULLED      = 2;
 
   protected
     $_options = array(
         self::ACTIVE    => 'Activo',
-        self::LOW   => 'Baja'
+        self::ANNULLED   => 'Baja'
       );
 }

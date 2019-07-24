@@ -35,6 +35,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   
   const APPROVED = 1;
   const DISAPPROVED = 2;
+  const ABSENT = 3;
 
 	const PATHWAY_PROMOTION_NOTE = 7;
 
@@ -53,6 +54,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   $_result_string = array(
     self::APPROVED => 'Aprobado',
     self::DISAPPROVED => 'Desaprobado',
+    self::ABSENT => 'Ausente'
   );
 
   public function getExaminationNumbers()
@@ -918,6 +920,11 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   public function getDisapprovedResult()
   {
       return self::DISAPPROVED;
+  }
+  
+  public function getAbsentResult()
+  {
+      return self::ABSENT;
   }
   public function getResultStringFor($key)
   {

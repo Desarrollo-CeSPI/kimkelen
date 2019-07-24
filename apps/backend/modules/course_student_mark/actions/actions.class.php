@@ -258,5 +258,49 @@ class course_student_markActions extends sfActions
     $this->setTemplate('print');
  
   }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+    $this->cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+      
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= $form;
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+    }
+  }
     
 }

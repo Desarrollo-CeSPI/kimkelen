@@ -777,7 +777,7 @@ classes:
         onDelete:         restrict
       mark:
         description:      Nota que obtuvo el alumno
-        type:             integer
+        type:             decimal
         required:         false
         size:             5
         scale:            2

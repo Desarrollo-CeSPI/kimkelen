@@ -308,78 +308,16 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
   
   public function executeGenerateRecord(sfWebRequest $request)
   {
-       $con =  Propel::getConnection();
-       
-       try
-       {  
-            $examination_repproved_subject = $this->getRoute()->getObject();
-            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
-
-            $r = new Record();
-            $r->setRecordType(RecordType::EXAMINATION_REPPROVED);
-            $r->setCourseOriginId($examination_repproved_subject->getId());
-            $r->setLines($setting->getValue());
-            $r->setStatus(RecordStatus::ACTIVE); 
-            $r->setUsername(sfContext::getInstance()->getUser());
-            $r->save();
-
-            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
-
-            $i = 1;
-            $sheet =1;
-            $record_sheet = new RecordSheet();
-            $record_sheet->setRecord($record);
-            $record_sheet->setSheet($sheet);
-            $record_sheet->save($con);
-
-            foreach ($examination_repproved_subject->getSortedByNameStudentExaminationRepprovedSubjects() as $sers)
-            {
-               $rd = new RecordDetail();
-               $rd->setRecordId($record->getId());
-               $rd->setStudent($sers->getStudent());
-               $rd->setMark($sers->getMark());
-               $rd->setIsAbsent($sers->getIsAbsent());
-               if ($sers->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
-               {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
-               }
-               else
-               {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
-               }
-
-               $rd->setLine($i);
-
-               if ($i > ($sheet * $record->getLines()))
-               {
-                   $sheet ++;
-                   $record_sheet = new RecordSheet();
-                   $record_sheet->setRecord($record);
-                   $record_sheet->setSheet($sheet);
-                   $record_sheet->save($con);
-
-               }
-               $rd->setSheet($sheet);
-               $i++;
-
-               $rd->save();
-
-               ####Liberando memoria###
-               $rd->clearAllReferences(true);
-               unset($rd);
-               ##################*/
-            }
-            
-            $con->commit();
-        echo "listo";die();
-       }
-       catch (Exception $e)
-       {
-          $con->rollBack();
-          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
-          $this->redirect('@examination_repproved_subject');
-       }
-              
+    $examination_repproved_subject = $this->getRoute()->getObject();
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+    if (!is_null($record))
+    {
+        $record->setStatus(RecordStatus::ANNULLED);
+        $record->save();
+    }
+    $examination_repproved_subject->generateRecord(); 
+    $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+    $this->redirect('@examination_repproved_subject');             
   }
 
 }

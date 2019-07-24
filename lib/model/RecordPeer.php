@@ -7,6 +7,7 @@ class RecordPeer extends BaseRecordPeer
         $c = new Criteria();
         $c->add(RecordPeer::RECORD_TYPE,$record_type);
         $c->add(RecordPeer::COURSE_ORIGIN_ID,$course_origin_id);
+        $c->add(RecordPeer::STATUS, RecordStatus::ACTIVE);
         
         return RecordPeer::doSelectOne($c);
     }

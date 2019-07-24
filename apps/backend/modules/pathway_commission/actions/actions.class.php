@@ -254,70 +254,10 @@ class pathway_commissionActions extends autoPathway_commissionActions
   public function executeGenerateRecordSubject(sfWebRequest $request)
   {
        $con =  Propel::getConnection();
-       
        try
-       {  
+       {              
             $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
-            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
-
-                $r = new Record();
-                $r->setRecordType(RecordType::COURSE);
-                $r->setCourseOriginId($cs->getId());
-                $r->setLines($setting->getValue());
-                $r->setStatus(RecordStatus::ACTIVE); 
-                $r->setUsername(sfContext::getInstance()->getUser());
-                $r->save();
-
-                $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
-
-                $i = 1;
-                $sheet =1;
-                $record_sheet = new RecordSheet();
-                $record_sheet->setRecord($record);
-                $record_sheet->setSheet($sheet);
-                $record_sheet->save();
-
-                foreach ($cs->getCourseSubjectStudentPathways() as $cssp)
-                {
-                   $rd = new RecordDetail();
-                   $rd->setRecordId($record->getId());
-                   $rd->setStudent($cssp->getStudent());
-                   $rd->setMark($cssp->getMark());
-                   $rd->setIsAbsent(FALSE);
-                   if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
-                   {
-                       $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
-                   }
-                   else
-                   {
-                       $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
-                   }
-
-                   $rd->setLine($i);
-
-                   if ($i > ($sheet * $record->getLines()))
-                   {
-                       $sheet ++;
-                       $record_sheet = new RecordSheet();
-                       $record_sheet->setRecord($record);
-                       $record_sheet->setSheet($sheet);
-                       $record_sheet->save();
-
-                   }
-                   $rd->setSheet($sheet);
-                   $i++;
-
-                   $rd->save();
-
-                   ####Liberando memoria###
-                   $rd->clearAllReferences(true);
-                   unset($rd);
-                   ##################*/
-                }
-            
-            
-            $con->commit();
-        echo "listo";die();
+            $cs->generateRecordPathway();
        }
        catch (Exception $e)
        {
@@ -332,12 +272,36 @@ class pathway_commissionActions extends autoPathway_commissionActions
   {
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'pathway_commission';
       
       if (count($this->course_subjects) == 1)
       {
-          
           $this->redirect("pathway_commission/generateRecordSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
+      
+      $this->setTemplate('generateRecord','commission');
+      
+  }
+  
+  public function executeAssignPhysicalSheetSubject(sfWebRequest $request)
+  {  
+    $this->getUser()->setAttribute("referer_module", "pathway_commission");
+    $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $request->getParameter('course_subject_id'));
+      
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'pathway_commission';
+      
+      if (count($this->course_subjects) == 1)
+      { 
+          $this->redirect("pathway_commission/assignPhysicalSheetSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('assignPhysicalSheet','commission');
       
   }
 

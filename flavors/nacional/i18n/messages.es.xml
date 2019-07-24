@@ -4796,6 +4796,14 @@
                 <source>Assign physical sheet to %examination_subject%</source>
                 <target>Asignar folio físico a %examination_subject%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Print record</source>
+                <target>Imprimir acta</target>
+            </trans-unit>Edit Setting parameter
+            <trans-unit>
+                <source>Edit Setting parameter</source>
+                <target>Editar parámtero de configuración</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -275,6 +275,86 @@ class ExaminationSubject extends BaseExaminationSubject
         
         return $this->getCourseSubjectStudentExaminations($criteria);
     }
+    
+    public function generateRecord(PropelPDO $con = null)
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::EXAMINATION);
+            $r->setCourseOriginId($this->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+
+            $line =1 ;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save();
+
+            foreach ($this->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = new RecordDetail();
+               $rd->setRecordId($record->getId());
+               $rd->setStudent($csse->getCourseSubjectStudent()->getStudent());
+               $rd->setMark($csse->getMark());
+               $rd->setIsAbsent($csse->getIsAbsent());
+               if ($csse->getIsAbsent())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
+               }
+               elseif ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+               }
+               else
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+               }
+
+               if ($line > $record->getLines())
+               {
+                   $line = 1;
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save();
+
+               }
+               $rd->setLine($line);
+               $rd->setSheet($sheet);
+               $line++;
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }   
+    }
+    
+    public function canPrintRecord()
+    {
+        return $this->canAssignPhysicalSheet();
+    }
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));
