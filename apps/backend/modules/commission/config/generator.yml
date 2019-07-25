@@ -142,6 +142,11 @@ generator:
             action: generateRecord
             condition: canGenerateRecord
             credentials: [generate_record]
+            
+          print_record:
+            action: printRecord
+            condition: canPrintRecord
+            credentials: [print_record]
 
       filter:
       form:    ~

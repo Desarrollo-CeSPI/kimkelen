@@ -20,7 +20,7 @@
           <tr>
             <th><?php echo $course_subject ?></th>
             <?php $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($course_subject->getId(), RecordType::COURSE); ?>        
-            <td><?php echo (! is_null($r))? link_to(__('Assign physical sheet'), "$url/assignPhysicalSheetSubject?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId()) : ''?></td>
+            <td><?php echo (! is_null($r))? link_to(__($title), "course_student_mark/$action?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId()) : ''?></td>
           </tr>
         <?php endforeach?>
       </table>

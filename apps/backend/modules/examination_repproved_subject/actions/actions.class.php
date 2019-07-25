@@ -319,5 +319,14 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
     $this->redirect('@examination_repproved_subject');             
   }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->examination_subject = $this->getRoute()->getObject();
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+      $this->setLayout('cleanLayout');
+      $this->setTemplate('printRecord','examination_subject');
+      
+  }
 
 }

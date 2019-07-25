@@ -1153,5 +1153,10 @@ class Course extends BaseCourse
     
     return $this->getIsClosed() && ! is_null($setting->getValue()) ;
   }
+  
+  public function canPrintRecord()
+  {
+      return $this->canAssignPhysicalSheet();
+  }
 }
 sfPropelBehavior::add('Course', array('changelog'));

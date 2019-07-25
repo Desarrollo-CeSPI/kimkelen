@@ -251,23 +251,6 @@ class pathway_commissionActions extends autoPathway_commissionActions
     }
   }
   
-  public function executeGenerateRecordSubject(sfWebRequest $request)
-  {
-       $con =  Propel::getConnection();
-       try
-       {              
-            $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
-            $cs->generateRecordPathway();
-       }
-       catch (Exception $e)
-       {
-          $con->rollBack();
-          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
-          $this->redirect('@pathway_commission');
-       }
-              
-  }
-  
   public function executeGenerateRecord(sfWebRequest $request)
   {
       $this->course = $this->getRoute()->getObject();
@@ -276,17 +259,11 @@ class pathway_commissionActions extends autoPathway_commissionActions
       
       if (count($this->course_subjects) == 1)
       {
-          $this->redirect("pathway_commission/generateRecordSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+          $this->getUser()->setAttribute("referer_module", "pathway_commission");
+          $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       
       $this->setTemplate('generateRecord','commission');
-      
-  }
-  
-  public function executeAssignPhysicalSheetSubject(sfWebRequest $request)
-  {  
-    $this->getUser()->setAttribute("referer_module", "pathway_commission");
-    $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $request->getParameter('course_subject_id'));
       
   }
   
@@ -294,11 +271,32 @@ class pathway_commissionActions extends autoPathway_commissionActions
   {
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
+      $this->title = 'Assign physical sheet';
+      $this->action = 'assignPhysicalSheet';
       $this->url = 'pathway_commission';
+
       
       if (count($this->course_subjects) == 1)
       { 
-          $this->redirect("pathway_commission/assignPhysicalSheetSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+          $this->getUser()->setAttribute("referer_module", "pathway_commission");
+          $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('assignPhysicalSheet','commission');
+      
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'pathway_commission';
+      $this->title = 'Print record';
+      $this->action = 'printRecord';
+      
+      if (count($this->course_subjects) == 1)
+      { 
+          $this->redirect("course_student_mark/printRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       
       $this->setTemplate('assignPhysicalSheet','commission');

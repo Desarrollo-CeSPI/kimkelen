@@ -28,16 +28,15 @@
     </div>
   </div>  
   <div style="text-align: center">
-     <h2>Acta de Examen</h2>
+      <h2>Acta de <?php echo ($cs->getCourse()->isPathway())? 'Trayectoria' : 'Cursada'?></h2>
   </div>
 
   <div class="gray-background">
       <strong><?php echo __('Subject'); ?></strong>:
-      <strong><?php echo $examination_subject->getSubject() . ' - ' . $examination_subject->getYear() . ' año'  ?></strong>
+      <strong><?php echo $cs->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject() . ' - ' . $cs->getCareerSubjectSchoolYear()->getYear() . ' año'  ?></strong>
       
       <span class="right">
-          <strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?> 
-          <strong> <?php echo __('Day')?>:</strong><?php echo  (!is_null($examination_subject->getDate())) ? date_format(new DateTime($examination_subject->getDate()), "d/m/Y") : ': _____ / _____ / _____' ?>  &nbsp; </span>
+          <strong><?php echo __('School year'); ?></strong>: <?php echo $cs->getCourse()->getSchoolYear() ?> 
   </div>
   <br>
   <div class="gray-background">
@@ -80,30 +79,7 @@
   </table>
 
   <br>
-  <div class="article-div">
-    <strong>Art 34º: </strong><span class="sub">Exámenes regulares:</span> La evaluación en las mesas de exámenes regulares, regulares complementarios o regulares previos, se realizará sobre aquellos contenidos desarrollados durante el ciclo lectivo cursado.
-  </div>
-
-  <div class="article-div">
-    <strong>Art 35º: </strong><span class="sub">Exámenes libres:</span> La evaluación en las mesas de exámenes de alumnos libres, se realizará sobre aquellos contenidos del programa del ciclo lectivo cursado de acuerdo a las reglamentaciones vigentes.
-  </div>
-
-  <div class="article-div">
-    <strong>En ambos casos: </strong>"La evaluación podrá ser oral y/o escrita y/o práctica. Siempre que se utilice más de una modalidad, éstas no podrán ser eliminatorias entre sí, debiendo tener un carácter complementario.
-  </div>
-
-  <div class="article-div">
-    <p>La Mesa Examinadora para la evaluación de los alumnos inscriptos en la presente acta, ha utilizado la modalidad (marcar lo que corresponda)</p>
-    <div>
-      <span><?php echo __('Oral'); ?>:</span>
-      <span class="little-box"></span>
-      <span><?php echo __('Escrita'); ?>:</span>
-      <span class="little-box"></span>
-      <span><?php echo __('Práctica'); ?>:</span>
-      <span class="little-box"></span>
-    </div>
-  </div>
-
+  
   <div>
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>

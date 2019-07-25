@@ -263,18 +263,19 @@ class division_courseActions extends autoDivision_courseActions
   
   public function executeGenerateRecord(sfWebRequest $request)
   {
-       $con =  Propel::getConnection();
-       try
-       {    $course = $this->getRoute()->getObject();     
-            $cs = $course->getCourseSubject();
-            $cs->generateRecord();
-       }
-       catch (Exception $e)
-       {
-          $con->rollBack();
-          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
-          $this->redirect('@division_course');
-       }
+        $course = $this->getRoute()->getObject();     
+        $cs = $course->getCourseSubject();
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+        
+        if (!is_null($record))
+        {
+            $record->setStatus(RecordStatus::ANNULLED);
+            $record->save();
+        }
+        
+        $cs->generateRecord();
+        $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+        $this->redirect('@division_course');
               
   }
   
@@ -284,6 +285,16 @@ class division_courseActions extends autoDivision_courseActions
       $cs = $course->getCourseSubject();
       $this->getUser()->setAttribute("referer_module", "division_course");
       $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $cs->getId());
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $course = $this->getRoute()->getObject(); 
+      $this->cs = $course->getCourseSubject();
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+      $this->setLayout('cleanLayout');
+      $this->setTemplate('printRecord','course_student_mark');
+      
   }
   
 }

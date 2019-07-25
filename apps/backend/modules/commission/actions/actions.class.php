@@ -407,49 +407,51 @@ class commissionActions extends autoCommissionActions
     $this->redirect("course_student_mark/revertCalificateNonNumericalMark?id=" . $this->course->getId());
   }
   
-  public function executeGenerateRecordSubject(sfWebRequest $request)
-  {
-       $con =  Propel::getConnection();
-       try
-       {              
-            $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
-            $cs->generateRecord();
-       }
-       catch (Exception $e)
-       {
-          $con->rollBack();
-          $this->getUser()->setFlash('error', 'Ocurrió un error y no se guardaron los cambios.');
-          $this->redirect('@commission');
-       }
-              
-  }
-  
   public function executeGenerateRecord(sfWebRequest $request)
   {
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'commission';
       
       if (count($this->course_subjects) == 1)
       {
-          $this->redirect("commission/generateRecordSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+          $this->getUser()->setAttribute("referer_module", "commission");
+          $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       
-  }
-  public function executeAssignPhysicalSheetSubject(sfWebRequest $request)
-  {
-    $this->getUser()->setAttribute("referer_module", "commission");
-    $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $request->getParameter('course_subject_id'));
   }
   
   public function executeAssignPhysicalSheet(sfWebRequest $request)
   {
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
+      $this->title = 'Assign physical sheet';
+      $this->action = 'assignPhysicalSheet';
+      $this->url = 'commission';
       
       if (count($this->course_subjects) == 1)
       { 
-          $this->redirect("commission/assignPhysicalSheetSubject?course_subject_id=" . $this->course->getCourseSubject()->getId());
+          $this->getUser()->setAttribute("referer_module", "commission");
+          $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
+      
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'commission';
+      $this->title = 'Print record';
+      $this->action = 'printRecord';
+      
+      if (count($this->course_subjects) == 1)
+      { 
+          $this->getUser()->setAttribute("referer_module", "commission");
+          $this->redirect("course_student_mark/printRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('assignPhysicalSheet','commission');
       
   }
    

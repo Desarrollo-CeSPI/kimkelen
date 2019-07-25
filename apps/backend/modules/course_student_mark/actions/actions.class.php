@@ -302,5 +302,36 @@ class course_student_markActions extends sfActions
       }
     }
   }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+        $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+        if (!is_null($record))
+        {
+            $record->setStatus(RecordStatus::ANNULLED);
+            $record->save();
+        }
+        if($cs->getCourse()->isPathway())
+        {
+            $cs->generateRecordPathway();
+        }
+        else
+        {
+            $cs->generateRecord();
+        }
+        
+        $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+        return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+              
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+      $this->setLayout('cleanLayout');
+      
+  }
     
 }

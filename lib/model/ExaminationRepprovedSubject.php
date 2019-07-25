@@ -289,7 +289,7 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
                $rd->setStudent($sers->getStudent());
                $rd->setMark($sers->getMark());
                $rd->setIsAbsent($sers->getIsAbsent());
-               if ($csse->getIsAbsent())
+               if ($sers->getIsAbsent())
                {
                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
                }
@@ -330,6 +330,10 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
             $con->rollBack();
             throw $e;
         }   
+    }
+    public function canPrintRecord()
+    {
+        return $this->canAssignPhysicalSheet();
     }
 }
 

@@ -77,7 +77,13 @@ generator:
             action: generateRecord
             condition: canGenerateRecord
             credentials: [generate_record]
-
+            params:         confirm='¿Está seguro? Si el acta ya se encuentra generada se perderán los datos generados anteriormente.'
+          
+          print_record:
+            action: printRecord
+            condition: canPrintRecord
+            credentials: [print_record]
+            
       filter:
         display: [name, school_year_id]
       form:    ~
