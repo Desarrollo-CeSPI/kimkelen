@@ -67,7 +67,18 @@
           <td class="calification text">
             <?php $c = new num2text();?>
             <?php if(!$rd->getIsAbsent()):?>
-               <?php echo $c->num2str($rd->getMark()) ?>
+              
+              <?php $c = new num2text();
+                $mark = $rd->getMark();
+                $mark_parts = explode(',', $mark);
+                
+                if (1 === count($mark_parts))
+                {
+                    $mark_parts = explode('.', $mark);    
+                }
+                $mark_symbol = (1 === count($mark_parts)) ? trim($c->num2str($mark_parts[0])) :trim($c->num2str($mark_parts[0])) . ('00' !== $mark_parts[1]?','.$mark_parts[1]:''); ?>
+
+               <?php echo $mark_symbol; ?>
               <?php else: ?>
                 <?php echo __('Absent'); ?>
               <?php endif; ?>

@@ -31,7 +31,7 @@
     <table class="table gridtable_bordered">
       <thead>
         <tr>
-          <th colspan="8"><?php echo __('Year ' . $year) ?></th>
+          <th colspan="9"><?php echo __('Year ' . $year) ?></th>
         </tr>
          <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
@@ -40,6 +40,8 @@
           <th rowspan="2"></th>
           <th class="text-left" rowspan="2"><?php echo __("Subject") ?></th>
           <th colspan="2"><?php echo __("Calification") ?></th>
+          <th rowspan="2" class="text-center"><?php echo __("Tomo") ?></th>
+          <th rowspan="2" class="text-center"><?php echo __("Folio") ?></th>
         </tr>
         <tr>
           <th>Nro.</th>
@@ -65,12 +67,14 @@
                 <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
           <?php endif;?>
+          <td class="text-center" width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
+          <td class="text-center" width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
         </tr>
       <?php endforeach ?>
       <?php endif; ?>
         <tr>
-          <th colspan="6" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
-          <th colspan="2" width="20%"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
+          <th colspan="7" style="text-align:left !important;"><?php echo ucfirst(strtolower($object->get_plan_name())) .'.  '. __($object->get_str_year_status($year)) ?></th>
+          <th colspan="2" width="30%"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? round($object->get_year_average($year), 2) : '-'); ?>    </th>
         </tr>
       </tbody>
     </table>
