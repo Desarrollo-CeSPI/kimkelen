@@ -470,7 +470,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 		if ($student_examination_repproved_subject->getMark() >= $this->getExaminationNote())
 		{
 			$student_approved_career_subject = new StudentApprovedCareerSubject();
-			$student_approved_career_subject->setCareerSubject($student_examination_repproved_subject->getExaminationRepprovedSubject()->getCareerSubject());
+                        $car_sub = $student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubject();
+                        $student_approved_career_subject->setCareerSubject($car_sub);
 			$student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
 			$student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());
 
