@@ -9259,6 +9259,30 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Can't assign physical sheet because the examination subject does not have a record.</source>
                         <target>No puede asignar folio físico porque la mesa de examen no tiene acta generada.</target>
                     </trans-unit>
+                    <trans-unit>
+                <source>Sheet</source>
+                <target>Folio</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Physical sheet</source>
+                <target>Folio físico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Book</source>
+                <target>Libro</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Assign physical sheet to %examination_subject%</source>
+                <target>Asignar folio físico a %examination_subject%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print record</source>
+                <target>Imprimir acta</target>
+            </trans-unit>Edit Setting parameter
+            <trans-unit>
+                <source>Edit Setting parameter</source>
+                <target>Editar parámtero de configuración</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

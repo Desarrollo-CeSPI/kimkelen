@@ -4739,6 +4739,10 @@
                 <source>Edit Setting parameter</source>
                 <target>Editar parámtero de configuración</target>
             </trans-unit>
+            <trans-unit>
+                <source>Value</source>
+                <target>Valor</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -16,14 +16,14 @@ generator:
         name:
           label:           Nombre
       list:
-        title:             Libros
+        title:             Libros de actas
         display:           [name, description, is_active]
         object_actions:
           _edit:
             credentials:   [edit_book]
           _delete:
             credentials:   [edit_book]
-            condition:     
+            condition:     canBeDeleted
         batch_actions:     []
         actions:
           _new:
