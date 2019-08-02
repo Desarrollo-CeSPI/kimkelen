@@ -233,15 +233,18 @@ class examination_subjectActions extends autoExamination_subjectActions
       // when POSTing
       $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
     }
-      
+    
+    $this->url='examination_subject';
     $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
     $this->books = BookPeer::retrieveActives();
     $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
     foreach ($record->getRecordSheets() as $rs)
     {
         $form = new RecordSheetForm($rs);
         $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
         $this->forms[$rs->getId()]= $form;
+        
     }
       
     if ($request->isMethod("post"))
@@ -265,11 +268,13 @@ class examination_subjectActions extends autoExamination_subjectActions
           $form->save();
         }
         $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        $this->redirect('@examination_subject');
       }
       else
       {
         $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
       }
+      
     }
       
   }

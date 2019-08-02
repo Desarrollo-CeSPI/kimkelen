@@ -26,7 +26,7 @@ CREATE TABLE `record` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` DATETIME NOT NULL,
   `record_type` INT NOT NULL,
-  `course_result_id` INT NOT NULL,
+  `course_origin_id` INT NOT NULL,
   `lines` INT NOT NULL,
   `status` INT NOT NULL,
  `username` VARCHAR(100) NOT NULL,

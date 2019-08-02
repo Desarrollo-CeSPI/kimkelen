@@ -34,9 +34,9 @@
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_subject->getCareerSubjectSchoolYear()->getSchoolYear())) ?></h3>
   </div>
   <div id="sf_admin_content">
-     <form action="<?php echo url_for('examination_subject/assignPhysicalSheet') ?>" method="post">
+     <form action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
-            <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
+            <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
             <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
         </ul>  
         <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
@@ -46,7 +46,7 @@
                 <select name="book_id" id="book_id" required="required">
                     <option value="" selected="selected"></option>
                     <?php foreach ($books as $b):?>
-                    <option value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
+                    <option <?php if(!is_null($record_sheet->getBook()) && $record_sheet->getBook()->getId() == $b->getId()):?> selected="selected" <?php endif; ?> value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
                     <?php endforeach;?>
                 </select>
             </div>
@@ -55,7 +55,7 @@
             <?php endforeach; ?>
         </fieldset>                 
       <ul class="sf_admin_actions">
-        <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
+        <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
         
         <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
        

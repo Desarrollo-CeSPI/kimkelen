@@ -37,12 +37,12 @@
       
       <span class="right">
           <strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?> 
-          <strong> <?php echo __('Day')?>:</strong><?php echo  (!is_null($examination_subject->getDate())) ? date_format(new DateTime($examination_subject->getDate()), "d/m/Y") : ': _____ / _____ / _____' ?>  &nbsp; </span>
+          <strong> <?php echo __('Day')?>:</strong><?php echo  (!is_null($examination_subject->getDate())) ? ' ' . date_format(new DateTime($examination_subject->getDate()), "d/m/Y") : ' _____ / _____ / _____' ?>  &nbsp; </span>
   </div>
   <br>
   <div class="gray-background">
     <span><strong><?php echo 'Acta N°: '; ?></strong>  <?php echo $record->getId(); ?> </span>
-    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo $rs->getBook(); ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo $rs->getPhysicalSheet(); ?></span>
+    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' - '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' - '; ?></span>
   </div>
   <br>
   <table class="gridtable_bordered">
@@ -90,6 +90,12 @@
 
   <div class="article-div">
     <strong>En ambos casos: </strong>"La evaluación podrá ser oral y/o escrita y/o práctica. Siempre que se utilice más de una modalidad, éstas no podrán ser eliminatorias entre sí, debiendo tener un carácter complementario.
+  </div>
+  
+  <div class="article-div">
+    <div class="observation-box">
+      <strong><?php echo __('Observations'); ?></strong>:
+    </div>
   </div>
 
   <div class="article-div">

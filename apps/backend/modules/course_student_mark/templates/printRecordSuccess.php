@@ -90,7 +90,11 @@
   </table>
 
   <br>
-  
+  <div class="article-div">
+    <div class="observation-box">
+      <strong><?php echo __('Observations'); ?></strong>:
+    </div>
+  </div>
   <div>
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>

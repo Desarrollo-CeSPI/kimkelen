@@ -419,6 +419,7 @@ class commissionActions extends autoCommissionActions
           $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       
+      
   }
   
   public function executeAssignPhysicalSheet(sfWebRequest $request)

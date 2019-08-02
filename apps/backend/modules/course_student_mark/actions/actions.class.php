@@ -266,6 +266,7 @@ class course_student_markActions extends sfActions
     $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
     $this->books = BookPeer::retrieveActives();
     $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
     foreach ($record->getRecordSheets() as $rs)
     {
         $form = new RecordSheetForm($rs);

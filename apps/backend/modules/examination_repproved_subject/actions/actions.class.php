@@ -269,6 +269,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
     $this->books = BookPeer::retrieveActives();
     $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
     foreach ($record->getRecordSheets() as $rs)
     {
         $form = new RecordSheetForm($rs);
@@ -297,6 +298,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
           $form->save();
         }
         $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        $this->redirect('@examination_repproved_subject'); 
       }
       else
       {

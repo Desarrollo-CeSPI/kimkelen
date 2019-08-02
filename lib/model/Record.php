@@ -37,4 +37,12 @@ class Record extends BaseRecord
         return RecordDetailPeer::doCount($c);
     }
     
+    public function getRecordSheet()
+    {
+        $c = new Criteria();
+        $c->add(RecordSheetPeer::RECORD_ID, $this->getId());
+
+        return RecordSheetPeer::doSelectOne($c);
+    }
+    
 }

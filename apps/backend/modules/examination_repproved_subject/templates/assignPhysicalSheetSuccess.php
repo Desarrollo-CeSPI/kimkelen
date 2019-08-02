@@ -44,9 +44,9 @@
             <div class="sf_admin_form_row">                          
                 <label for="book_id" class="required"><?php echo __('Book') ?></label>
                 <select name="book_id" id="book_id" required="required">
-                    <option value="" selected="selected"></option>
+                    <option  value="" selected="selected"></option>
                     <?php foreach ($books as $b):?>
-                    <option value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
+                    <option <?php if(!is_null($record_sheet->getBook()) && $record_sheet->getBook()->getId() == $b->getId()):?> selected="selected" <?php endif; ?> value="<?php echo $b->getId()?>"><?php echo $b->getName()?></option>
                     <?php endforeach;?>
                 </select>
             </div>
