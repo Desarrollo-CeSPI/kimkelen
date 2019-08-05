@@ -38,33 +38,6 @@ all:
   sf_guard_plugin:
     success_signin_url: homepage
 
-  mailer:
-    defaults:
-      connection:
-        # default connection uses mail() native function
-        #type: native
-        #params: []
-        # Using a SMTP server
-        type:               smtp
-        params:
-          server:           localhost
-          port:             25
-          encryption:       OFF     # can be SSL, TLS, or OFF
-          authentication:           # only if there is an authentication required
-          username:         syncadmin
-          password:         ecdhcdp
-          timeout:          10      # connection failed after this time (seconds)
-          requires_ehlo:    off     # depending on the target server
-
-      from: info@conservatorio.edu.ar # define your default sender's email
-      reply-to: ~
-      return-path: ~
-      cc: ~
-      bcc: ~
-      subject-template: Conservatorio - Gilardo Gilardi "%s" # Change this to customize all your subjects, exemple "[My Company] %s"
-      # About I18N : note that the subject_template AND the subject will be individually passed into the i18n process.
-      i18n-catalogue: messages # Whenever you would like to put your mail translations in a separate catalogue
-
   nc_change_log_behavior:
     username_cli:         migracion
     formatter_class:      ncChangeLogEntryFormatterCustom
@@ -73,12 +46,6 @@ all:
     date_time_format:     'd/m/Y H:i:s'
     time_format:          'H:i:s'
 
-  nc_bi_plugin:
-    bi_server_url: http://163.10.20.70:8080/pentaho
-    #bi_server_url: pentaho.cespi.unlp.edu.ar:8080/pentaho
-    report_suffix: content/reporting
-    timeout: 30.0
-    probe_timeout: 3.0
 
   sf_guard_secure_plugin:
     login_failure:

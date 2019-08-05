@@ -1,0 +1,23 @@
+export TIMEZONE=${TIMEZONE:-'America/Argentina/Buenos_Aires'}
+export MEMORY_LIMIT=${MEMORY_LIMIT:-'512M'}
+export MAX_EXECUTION_TIME=${MAX_EXECUTION_TIME:-'200'}
+export MEMCACHE_HOST=${MEMCACHE_HOST:-'memcache'}
+export MEMCACHE_PORT=${MEMCACHE_PORT:-'11211'}
+export SESSION_SAVE_HANDLER=${SESSION_SAVE_HANDLER:-'memcached'}
+export SESSION_SAVE_PATH=${SESSION_SAVE_PATH:-"$MEMCACHE_HOST:$MEMCACHE_PORT"}
+export SESSION_NAME=${SESSION_NAME:-'kimkelen'}
+export MAIL_HOST=${MAIL_HOST:-'smtp.example.com'}
+export MAIL_FROM=${MAIL_FROM:-'kimkelen@example.com'}
+export MAIL_PORT={MAIL_PORT:-25}
+export FLAVOR=${FLAVOR:-demo}
+
+export DB_PORT=${DB_PORT:-'3306'}
+
+export DEBUG=${DEBUG:-'false'}
+export TESTING=${TESTING:-'true'}
+
+export BACKEND_SESSION_NAME=${SESSION_NAME}_back
+export FRONTEND_SESSION_NAME=${SESSION_NAME}_front
+
+export FACEBOOK_ID=${FACEBOOK_ID:-'FIXME'}
+export FACEBOOK_SECRET=${FACEBOOK_SECRET:-'FIXME'}
