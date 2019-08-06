@@ -16,6 +16,7 @@ before_script:
 build-app:
   stage: app
   script:
+    - export IMAGE_TAG="$CI_BUILD_REF_NAME"
     - export LOCK_VERSION="$(git log -n 1 --pretty=format:%h -- docker/Dockerfile.base)"
     - export BASE_IMAGE="$IMAGE_NAME:base-$LOCK_VERSION"
     - docker pull "$BASE_IMAGE" || ( docker build --pull -f docker/Dockerfile.base -t "$BASE_IMAGE" . && docker push "$BASE_IMAGE" && docker tag "$BASE_IMAGE" "$IMAGE_NAME:base-latest" && docker push "$IMAGE_NAME:base-latest" )

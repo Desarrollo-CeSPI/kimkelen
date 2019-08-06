@@ -1,5 +1,5 @@
 FROM registry.gitlab.com/kimkelen/kimkelen:base-latest
-
+ARG REVISION
 RUN mv /usr/local/bin/docker-php-entrypoint /usr/local/bin/original-docker-php-entrypoint
 ADD docker/entrypoint /usr/local/bin/docker-php-entrypoint
 ADD docker/setenvdefaults /usr/local/bin/setenvdefaults
