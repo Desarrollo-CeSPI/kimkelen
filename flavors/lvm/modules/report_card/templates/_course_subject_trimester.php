@@ -38,7 +38,7 @@
         <td><?php echo (!$course_subject_student->getIsNotAverageable()) ? $course_subject_student->getMarkForIsClosed($mark_number) : "-" ?></td>
       <?php endfor; ?>
       <?php $course_result = $course_subject_student->getCourseResult(); ?>
-      <?php if ((!$course_subject_student->hasSomeMarkFree()) && ($course_subject_student->getConfiguration()->isNumericalMark())): ?>
+      <?php if ( $course_subject_student->getConfiguration()->isNumericalMark()): ?>
         <?php if (!$course_subject_student->getIsNotAverageable()):?>
         <td><?php echo ($course_result && $course_subject_student->getAllMarksWithNote()) ? $course_result->getResultStr() : '' ?></td>
         <?php else: ?>
