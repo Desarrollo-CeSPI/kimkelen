@@ -1,0 +1,28 @@
+dev:
+  propel:
+    param:
+      classname:  DebugPDO
+      debug:
+        realmemoryusage: true
+        details:
+          time:       { enabled: true }
+          slow:       { enabled: true, threshold: 0.1 }
+          mem:        { enabled: true }
+          mempeak:    { enabled: true }
+          memdelta:   { enabled: true }
+
+all:
+  propel:
+    class:        sfPropelDatabase
+    param:
+      classname:  PropelPDO
+      dsn:        mysql:dbname=<?php echo $_ENV['DB_NAME']; ?>;host=<?php echo $_ENV['DB_HOST'];?>;port=<?php echo $_ENV['DB_PORT'];?>
+
+      username:   <?php echo $_ENV['DB_USERNAME']; ?>
+
+      password:   <?php echo $_ENV['DB_PASSWORD']; ?>
+
+      encoding:   <?php echo $_ENV['DB_ENCODING']; ?>
+
+      persistent: true
+      pooling:    true

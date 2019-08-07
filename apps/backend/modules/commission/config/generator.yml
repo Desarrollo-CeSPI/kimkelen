@@ -116,11 +116,12 @@ generator:
             label:          Load Attendances
             action:         attendanceSubject
             condition:      hasAttendanceForSubject
+            credentials: [edit_absense_per_subject]
 
           seeAttendanceSheet:
             label:          Show attendance sheet
             action:         attendanceSheetByCourseSubject
-            credentials:    [show_course]
+            credentials:    [[show_absence_per_day,show_absence_per_subject]]
             condition:      canSeeAttendanceSheet
             
           revertCalificateNonNumericalMark:

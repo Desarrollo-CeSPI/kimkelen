@@ -50,7 +50,7 @@
 </div><!--end login-->
 
 
-<?php use_javascript('jquery-1.6.2.min.js') ?>
+<?php use_javascript('jquery.js') ?>
 <?php javascript_tag() ?>
 jQuery('#signin_username').focus();
 <?php end_javascript_tag() ?>

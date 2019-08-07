@@ -727,5 +727,17 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $course_result = $this->getCourseResult();
     return ($course_result instanceOf StudentDisapprovedCourseSubject) ? $course_result->getColorDisapprovedReport($number) : '' ;
   }
+  
+  public function getAllMarksWithNote()
+  {
+      foreach ($this->getCourseSubjectStudentMarks() as $cssm)
+      {
+          if(is_null($cssm->getMark()) && $cssm->getIsFree() == 0)
+          {
+              return FALSE;
+          }
+      }
+      return TRUE;
+  }
 
 }

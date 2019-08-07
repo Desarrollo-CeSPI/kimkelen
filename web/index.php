@@ -22,5 +22,7 @@
 
 require_once(dirname(__FILE__).'/../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('backend', 'prod', false);
+$debug = strcasecmp($_ENV['DEBUG'], 'true') == 0;
+
+$configuration = ProjectConfiguration::getApplicationConfiguration('backend', $debug?'dev':'prod', $debug);
 sfContext::createInstance($configuration)->dispatch();

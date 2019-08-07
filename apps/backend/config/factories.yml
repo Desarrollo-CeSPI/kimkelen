@@ -5,10 +5,9 @@ prod:
       level: err
       loggers:
         sf_file_debug:
-          class: sfFileLogger
+          class: sfConsoleLogger
           param:
             level: err
-            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
 
 cli:
   controller:
@@ -45,8 +44,10 @@ all:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       ~
-          port:       ~
+          host: <?php echo $_ENV['MAIL_HOST']; ?>
+
+          port: <?php echo $_ENV['MAIL_PORT']; ?>
+
 
   user:
     class: myUser
@@ -59,6 +60,15 @@ all:
     class: pmI18N
 
   storage:
-    class: sfSessionStorage
+    class: sfCacheSessionStorage
     param:
-      session_name: "kimkelen-<?php echo sfConfig::get('nc_flavor_flavors_current') ?>"
+      cache:
+        class: sfMemcacheCache
+        param:
+          servers:
+            localservers:
+              host: <?php echo $_ENV['MEMCACHE_HOST']; ?>
+
+              port: <?php echo $_ENV['MEMCACHE_PORT']; ?>
+
+      session_name: <?php echo $_ENV['SESSION_NAME']; ?>

@@ -180,9 +180,9 @@ generator:
             action: manageCareerSubjectAllowed
 
           analytical:
-            credentials:  [print_report_card]
+            credentials:  [print_analytic]
             action: analytical
-            condition: canBeManagedForCareerSubjectAllowed
+            condition: canPrintAnalytical
 
           activate:
             label: Set active
@@ -235,25 +235,25 @@ generator:
             label: Graduate certificate
             action: printGraduateCertificate
             condition: canPrintGraduateCertificate
-            credentials: [print_certificate]
+            credentials: [[print_certificate, print_graduate_certificate]]
          
           regular_certificate:
             label: Regular certificate
             action: printRegularCertificate
             condition: canPrintRegularCertificate
-            credentials: [print_certificate]
+            credentials: [[print_certificate, print_regular_certificate]]
             
           withdrawn_certificate:
             label: Withdrawn certificate
             action: printWithdrawnCertificate
             condition: canPrintWithdrawnCertificate
-            credentials: [print_certificate]
+            credentials: [[print_certificate, print_withdrawn_certificate]]
             
           free_certificate:
             label: Withdrawn certificate
             action: printFreeCertificate
             condition: canPrintFreeCertificate
-            credentials: [print_certificate]
+            credentials: [[print_certificate, print_free_certificate]]
             
           medical_certificate:
             label: Medical certificates

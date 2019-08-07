@@ -37,10 +37,10 @@
       <?php for ($mark_number = 1; $mark_number <= $max_marks; $mark_number++): ?>
         <td><?php echo (!$course_subject_student->getIsNotAverageable()) ? $course_subject_student->getMarkForIsClosed($mark_number) : "-" ?></td>
       <?php endfor; ?>
-      <?php $course_result = $course_subject_student->getCourseResult() ?>
-      <?php if ((!$course_subject_student->hasSomeMarkFree()) && ($course_subject_student->getConfiguration()->isNumericalMark())): ?>
+      <?php $course_result = $course_subject_student->getCourseResult(); ?>
+      <?php if ( $course_subject_student->getConfiguration()->isNumericalMark()): ?>
         <?php if (!$course_subject_student->getIsNotAverageable()):?>
-        <td><?php echo ($course_result) ? $course_result->getResultStr() : '' ?></td>
+        <td><?php echo ($course_result && $course_subject_student->getAllMarksWithNote()) ? $course_result->getResultStr() : '' ?></td>
         <?php else: ?>
         <td>-</td>
         <?php endif ?>

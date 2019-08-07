@@ -8,7 +8,7 @@ dev:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
     web_debug:              on
     cache:                  off
-    no_script_name:         off
+    no_script_name:         on
     etag:                   off
 
 test:
