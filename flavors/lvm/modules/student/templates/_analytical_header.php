@@ -56,6 +56,7 @@
                 <?php if(isset($dipregep_number)):?>
                     <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form, 'dipregep_number' => $dipregep_number)) ?>
                 <?php else: ?>
+		<?php if (!isset($form)) $form = null; ?>
                     <?php include_partial('analytical_header_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student,'form' => $form)) ?>
                 <?php endif;?>
 	</div>
