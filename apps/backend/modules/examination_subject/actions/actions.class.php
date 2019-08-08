@@ -295,7 +295,7 @@ class examination_subjectActions extends autoExamination_subjectActions
   
   public function executePrintRecord(sfWebRequest $request)
   {
-      $this->examination_subject = $this->getRoute()->getObject();
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
       $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
       $this->setLayout('cleanLayout');
       

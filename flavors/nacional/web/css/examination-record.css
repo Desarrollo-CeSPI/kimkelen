@@ -196,3 +196,8 @@ table.gridtable_bordered tr {
 .min-size{
     font-size: 11px;
 }
+
+.record-footer{
+    bottom: 0px;
+    position: fixed;
+}  

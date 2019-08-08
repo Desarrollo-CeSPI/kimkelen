@@ -79,37 +79,12 @@
     </tbody>
   </table>
 
-  <br>
-  <div class="article-div">
-    <strong>Art 34º: </strong><span class="sub">Exámenes regulares:</span> La evaluación en las mesas de exámenes regulares, regulares complementarios o regulares previos, se realizará sobre aquellos contenidos desarrollados durante el ciclo lectivo cursado.
-  </div>
-
-  <div class="article-div">
-    <strong>Art 35º: </strong><span class="sub">Exámenes libres:</span> La evaluación en las mesas de exámenes de alumnos libres, se realizará sobre aquellos contenidos del programa del ciclo lectivo cursado de acuerdo a las reglamentaciones vigentes.
-  </div>
-
-  <div class="article-div">
-    <strong>En ambos casos: </strong>"La evaluación podrá ser oral y/o escrita y/o práctica. Siempre que se utilice más de una modalidad, éstas no podrán ser eliminatorias entre sí, debiendo tener un carácter complementario.
-  </div>
-  
+  <br> 
   <div class="article-div">
     <div class="observation-box">
       <strong><?php echo __('Observations'); ?></strong>:
     </div>
   </div>
-
-  <div class="article-div">
-    <p>La Mesa Examinadora para la evaluación de los alumnos inscriptos en la presente acta, ha utilizado la modalidad (marcar lo que corresponda)</p>
-    <div>
-      <span><?php echo __('Oral'); ?>:</span>
-      <span class="little-box"></span>
-      <span><?php echo __('Escrita'); ?>:</span>
-      <span class="little-box"></span>
-      <span><?php echo __('Práctica'); ?>:</span>
-      <span class="little-box"></span>
-    </div>
-  </div>
-
   <div>
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>
@@ -134,29 +109,27 @@
     </div>
   </div>
   <br>
-  <div class="article-div">
-    La Plata, __________ de ______________________ de __________
-  </div>
-
-  <div style="margin-left: 25px;" class="signature">
-    <p class="signature-text">Vocal</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
-
-  <div class="signature">
-    <p class="signature-text">Presidente</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
-
-  <div class="signature">
-    <p class="signature-text">Vocal</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
-  
-  <div>
-      <span class="right min-size">
-          Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
-      </span>
+  <div class="record-footer">
+      <div class="article-div">
+        La Plata, __________ de ______________________ de __________
+      </div>
+      <div style="margin-left: 25px;" class="signature">
+        <p class="signature-text">Vocal</p>
+        <p class="signature-subtext">Firma y aclaración</p>
+      </div>
+      <div class="signature">
+        <p class="signature-text">Presidente</p>
+        <p class="signature-subtext">Firma y aclaración</p>
+      </div>
+      <div class="signature">
+        <p class="signature-text">Vocal</p>
+        <p class="signature-subtext">Firma y aclaración</p>
+      </div>
+      <div>
+          <span class="right min-size" style="margin-bottom: 0px !important;">
+              Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
+          </span>
+      </div>
   </div>
 
 </div>
