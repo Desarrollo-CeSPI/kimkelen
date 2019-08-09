@@ -31,28 +31,39 @@ class report_cardActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    ini_set('max_execution_time', '10000');
+    $this->getUser()->setAttribute('division_student_id', null);
+    $this->getUser()->setAttribute('student_id', null);
     $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
     $this->career_id = $this->division->getCareer()->getId();
     $this->students = $this->division->getStudents();
-    $this->getUser()->setAttribute('students', $this->students);
     $this->back_url= '@division';
     $this->setLayout('cleanLayout');
   }
 
   public function executeReportCardsToPDF(sfWebRequest $request)
   {
-    ini_set('max_execution_time', '10000');
-    $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
+    $division_student_id = $this->getUser()->getAttribute('division_student_id');
+   
+    
+    if ($division_student_id == null)
+        $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
+    else{
 
+        $this->division = DivisionPeer::retrieveByPK($division_student_id);
+        $this->students = array(StudentPeer::retrieveByPK ($this->getUser()->getAttribute('student_id')));
+        
+        $this->getUser()->setAttribute('division_student_id', null);
+        $this->getUser()->setAttribute('student_id', null);
+        
+    }
+    
     if (is_null($this->division))
     {
-      $this->division = DivisionPeer::retrieveByPk($this->getUser()->getAttribute('division_id'));
+        $this->division = DivisionPeer::retrieveByPk($this->getUser()->getAttribute('division_id'));
     }
-
-
-
-    $this->students = $this->getUser()->getAttribute('students');
+    if (is_null($this->students))
+        $this->students = $this->division->getStudents();
+    
     $this->career_id = $this->division->getCareer()->getId();
 
     $this->setLayout('cleanLayout');
@@ -61,7 +72,7 @@ class report_cardActions extends sfActions
 
   public function executeSubsetReportCardsToPDF(sfWebRequest $request)
   {
-    ini_set('max_execution_time', '10000');
+      
     $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
 
     if (is_null($this->division))
@@ -84,13 +95,21 @@ class report_cardActions extends sfActions
 
   public function executePrintStudent(sfWebRequest $request)
   {
+      
+      
     $this->student_career_school_year = StudentCareerSchoolYearPeer::retrieveByPK($request->getParameter('student_career_school_year_id'));
+    
     $this->students = array($this->student_career_school_year->getStudent());
     $this->career_id = $this->student_career_school_year->getCareerSchoolYear()->getCareerId();
     $this->division = DivisionPeer::retrieveByStudentCareerSchoolYear($this->student_career_school_year);
-
+    
+       
     $this->getUser()->setAttribute('division_id', $this->division->getId());
-    $this->getUser()->setAttribute('students', $this->students);
+    $this->getUser()->setAttribute('division_student_id', $this->division->getId());
+    $this->getUser()->setAttribute('student_id', $this->student_career_school_year->getStudent()->getId());
+    
+    
+ 
     $this->back_url = '@student';
 
     $this->setLayout('cleanLayout');

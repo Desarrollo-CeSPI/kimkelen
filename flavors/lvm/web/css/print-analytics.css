@@ -20,21 +20,33 @@
 }
 
 .table thead th{
-    font-size: 10px;
+    font-size: 11px;
     padding-top: 1px !important;
     padding-bottom: 0 !important;
 }
 
+.text-center strong{
+    font-size: 10.5px;
+
+}
+
+.header-text{
+    font-size: 10.5px;
+    padding-top: 1px !important;
+    padding-bottom: 0px !important;
+
+}
+
 .table td {
-    font-size: 8px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    font-size: 9.2px;
+    padding-top: 1px !important;
+    padding-bottom: 0px !important;
 }
 
 .table tbody th {
-    font-size: 10px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    font-size: 11px;
+  /*  padding-top: 0 !important;
+    padding-bottom: 0 !important;*/
 }
 
 .analytical_body_table {
