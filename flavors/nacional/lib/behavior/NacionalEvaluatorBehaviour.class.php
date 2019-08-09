@@ -24,6 +24,13 @@
 class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
 {
     const BIMESTER_POSTPONED_NOTE = 6;
+    const ESI = 234;
+    const FISICA = 109;
+   
+    protected $_mandatory_subjects = array(
+        self::ESI,
+        self::FISICA,
+    );
 
     /*
      * Returns if a student has approved or not the course subject
@@ -38,6 +45,7 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
         if ((CourseType::BIMESTER == $course_subject_student->getCourseSubject()->getCourseType()
                 && $course_subject_student->getCourseSubject()->getYear() > 4
                 && ($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getIsOption())
+                && !in_array($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject()->getId(), $this->_mandatory_subjects)
         ) || (CourseType::TRIMESTER == $course_subject_student->getCourseSubject()->getCourseType() && $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks() == 4)) {
                 $last_mark_value = self::BIMESTER_POSTPONED_NOTE;
         } else {

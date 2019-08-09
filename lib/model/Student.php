@@ -1850,12 +1850,7 @@ class Student extends BaseStudent
     
     public function canPrintAnalytical()
     {
-        if(!is_null($this->getCareerStudent()))
-        {
-            return $this->getCareerStudent()->getStatus() == CareerStudentStatus::GRADUATE || $this->getIsRegistered(); 
-        }   
- 
-        return FALSE;
+        return !is_null($this->getCareerStudent());  
     }
   
 }
