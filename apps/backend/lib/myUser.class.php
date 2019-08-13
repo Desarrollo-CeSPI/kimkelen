@@ -346,6 +346,11 @@ class myUser extends sfGuardSecurityUser
 
     return PersonalPeer::doSelectOne($c);
   }
+  
+  public function isOnlyRead()
+  {
+    return $this->getAttribute('login_role') == 'Ver solamente';
+  }
 
   /**
    * This method returns the personals ids related in head_personal_personal of the head_personal. The User must be headPreceptor
