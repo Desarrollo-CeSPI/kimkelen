@@ -271,7 +271,10 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
   
   public function executeGenerateRecord(sfWebRequest $request)
   { 
+      
+    $examination_subject = $this->getRoute()->getObject();
     $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_subject->getId(), RecordType::EXAMINATION);
+    
     if (!is_null($record))
     {
         $record->setStatus(RecordStatus::ANNULLED);
@@ -284,7 +287,7 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
   
   public function executePrintRecord(sfWebRequest $request)
   {
-      $this->examination_subject = $this->getRoute()->getObject();
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
       $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
       $this->setLayout('cleanLayout');
       $this->setTemplate('printRecord','examination_subject');

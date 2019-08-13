@@ -119,31 +119,32 @@
     </div>
   </div>
   <br>
-  <div class="article-div">
-    La Plata, __________ de ______________________ de __________
-  </div>
+  <div class="record-footer">
+    <div class="article-div">
+      La Plata, __________ de ______________________ de __________
+    </div>
 
-  <div style="margin-left: 25px;" class="signature">
-    <p class="signature-text">Vocal</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
+    <div style="margin-left: 25px;" class="signature">
+      <p class="signature-text">Vocal</p>
+      <p class="signature-subtext">Firma y aclaración</p>
+    </div>
 
-  <div class="signature">
-    <p class="signature-text">Presidente</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
+    <div class="signature">
+      <p class="signature-text">Presidente</p>
+      <p class="signature-subtext">Firma y aclaración</p>
+    </div>
 
-  <div class="signature">
-    <p class="signature-text">Vocal</p>
-    <p class="signature-subtext">Firma y aclaración</p>
-  </div>
-  
-  <div>
-      <span class="right min-size">
-          Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
-      </span>
-  </div>
+    <div class="signature">
+      <p class="signature-text">Vocal</p>
+      <p class="signature-subtext">Firma y aclaración</p>
+    </div>
 
+    <div>
+        <span class="right min-size">
+            Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
+        </span>
+    </div>
+  </div>
 </div>
 <div style="page-break-before: always;"></div>
 <?php endforeach;?>

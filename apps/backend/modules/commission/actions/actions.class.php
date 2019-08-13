@@ -412,10 +412,9 @@ class commissionActions extends autoCommissionActions
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
       $this->url = 'commission';
-      
+      $this->getUser()->setAttribute("referer_module", "commission");
       if (count($this->course_subjects) == 1)
-      {
-          $this->getUser()->setAttribute("referer_module", "commission");
+      {          
           $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       
@@ -429,10 +428,10 @@ class commissionActions extends autoCommissionActions
       $this->title = 'Assign physical sheet';
       $this->action = 'assignPhysicalSheet';
       $this->url = 'commission';
-      
+      $this->getUser()->setAttribute("referer_module", "commission");
       if (count($this->course_subjects) == 1)
       { 
-          $this->getUser()->setAttribute("referer_module", "commission");
+          
           $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       

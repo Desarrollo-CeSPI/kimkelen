@@ -289,7 +289,7 @@ class division_courseActions extends autoDivision_courseActions
   
   public function executePrintRecord(sfWebRequest $request)
   {
-      $course = $this->getRoute()->getObject(); 
+      $course = CoursePeer::retrieveByPK($request->getParameter('id')); 
       $this->cs = $course->getCourseSubject();
       $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
       $this->setLayout('cleanLayout');

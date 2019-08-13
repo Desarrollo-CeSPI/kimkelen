@@ -146,7 +146,7 @@ h2 {
 }
 
 .article-div {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .observation-box {
@@ -198,6 +198,6 @@ table.gridtable_bordered tr {
 }
 
 .record-footer{
-    bottom: 0px;
-    position: fixed;
+    bottom: 0% !important;
+
 }  

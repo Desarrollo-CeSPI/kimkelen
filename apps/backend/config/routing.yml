@@ -141,6 +141,26 @@ print_free_certificate:
 print_entry_form:
   url:  /student/:id/printEntryForm
   param:  {module: student, action: printEntryForm, sf_format: pdf }
+  
+print_examination_subject_record :
+  url:  /examination_subject/:id/printRecord
+  param:  {module: examination_subject, action: printRecord, sf_format: pdf }
+
+print_examination_repproved_subject_record :
+  url:  /examination_repproved_subject/:id/printRecord
+  param:  {module: examination_repproved_subject, action: printRecord, sf_format: pdf }
+
+print_manual_examination_subject_record :
+  url:  /manual_examination_subject/:id/printRecord
+  param:  {module: manual_examination_subject, action: printRecord, sf_format: pdf }
+
+print_course_record :
+  url:  /course_student_mark/printRecord/course_subject_id/:course_subject_id
+  param:  {module: course_student_mark, action: printRecord, sf_format: pdf }
+
+print_division_course_record :
+  url:  /division_course/:id/printRecord
+  param:  {module: division_course, action: printRecord, sf_format: pdf }
 
 move_students:
   url:  move_students

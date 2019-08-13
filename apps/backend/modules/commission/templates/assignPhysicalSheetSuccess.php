@@ -1,10 +1,10 @@
 <?php use_helper('I18N', 'Date') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/global.css') ?>
 <?php use_stylesheet('/sfPropelRevisitedGeneratorPlugin/css/extended.css') ?>
-<?php include_partial('pathway_commission/assets') ?>
+<?php //include_partial('pathway_commission/assets') ?>
 
 <div id="sf_admin_container">
-<?php include_partial('pathway_commission/flashes') ?>
+<?php //include_partial('pathway_commission/flashes') ?>
 
   <div id="sf_admin_header">
   </div>
