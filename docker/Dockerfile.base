@@ -1,0 +1,30 @@
+FROM cespi/php-5.3:modules-apache-latest
+RUN apk add -U --no-cache --virtual .build-deps $PHPIZE_DEPS cmake \
+  && curl -kLo /tmp/tidy.tgz https://github.com/htacg/tidy-html5/archive/5.6.0.tar.gz \
+  && tar xfz /tmp/tidy.tgz -C /tmp \
+  && cd /tmp/tidy*/build/cmake \
+  && cmake ../.. -DCMAKE_BUILD_TYPE=Release \
+  && make &&  make install \
+  && apk del .build-deps cmake \
+  && rm -fr /tmp/tidy* \
+  && ln -s /usr/local/include/tidybuffio.h /usr/local/include/buffio.h \
+  && docker-php-ext-configure tidy --with-tidy=/usr/local \
+  && docker-php-ext-install tidy \
+  && apk add -U git 
+# MS Fonts
+RUN apk add --update --no-cache --virtual .ms-fonts msttcorefonts-installer --repository http://dl-3.alpinelinux.org/alpine/v3.6/community && \
+    update-ms-fonts --quiet && \
+    apk del .ms-fonts
+# Por wkhtmltopdf
+#ADD docker/wkhtmltopdf-patch/wkhtmltopdf-full-bin2.tar.gz /usr/local/bin
+ADD docker/wkhtmltopdf /usr/local/bin
+RUN  apk add -U --no-cache \
+      gettext \
+      xvfb \
+      ttf-freefont \
+      fontconfig \
+      dbus \
+      libxrender-dev \
+    && apk add --allow-untrusted --no-cache \
+       --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+       qt5-qtbase

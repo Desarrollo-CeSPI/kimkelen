@@ -312,12 +312,12 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     
     public function get_suborientation_subjects_in_year($year)
     {
-        return $this->objects[$year]['suborientation_subjects'];
+        return isset($this->objects[$year]['suborientation_subjects']) ? $this->objects[$year]['suborientation_subjects'] : NULL;
     }
     
     public function get_optional_subjects_in_year($year)
     {
-		return $this->objects[$year]['optional_subjects'];
+		return isset($this->objects[$year]['optional_subjects']) ? $this->objects[$year]['optional_subjects'] : NULL ;
 	}
 	
     public function get_career_name($year)
@@ -372,7 +372,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     
     public function get_subjectsEOP_in_year($year)
     {
-        return $this->objects[$year]['subjectsEOP'];
+        return isset($this->objects[$year]['subjectsEOP']) ? $this->objects[$year]['subjectsEOP'] : NULL;
     }
 	
 }

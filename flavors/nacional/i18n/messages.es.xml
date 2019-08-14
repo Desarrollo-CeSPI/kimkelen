@@ -1081,8 +1081,8 @@
             </trans-unit>
 
             <trans-unit>
-                <source>The student must be registered to career before you can manage allowed subjects.</source>
-                <target>El alumno debe estar inscripto en una carrera antes de que puedan administrarse sus materias a cursar.</target>
+                <source>The student must be registered to career and enrolled before you can manage allowed subjects.</source>
+                <target>El alumno debe estar inscripto en una carrera y matriculado antes de que puedan administrarse sus materias a cursar.</target>
             </trans-unit>
 
             <trans-unit>

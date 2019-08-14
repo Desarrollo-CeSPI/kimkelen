@@ -124,7 +124,7 @@ class Student extends BaseStudent
    */
   public function canBeManagedForCareerSubjectAllowed()
   {
-    return $this->countCareerStudents() > 0;
+    return $this->countCareerStudents() > 0 && $this->getIsRegistered();
 
   }
 
@@ -233,7 +233,7 @@ class Student extends BaseStudent
 
   public function getMessageCantBeManagedForCareerSubjectAllowed()
   {
-    return "The student must be registered to career before you can manage allowed subjects.";
+    return "The student must be registered to career and enrolled before you can manage allowed subjects.";
 
   }
 
@@ -1847,7 +1847,7 @@ class Student extends BaseStudent
 
         return StudentRepprovedCourseSubjectPeer::doCount($c);
     }
-    
+
     public function getAnalyticalDataAsArray()
     {
         sfContext::getInstance()->getConfiguration()->loadHelpers(array('Date'));
@@ -1915,6 +1915,12 @@ class Student extends BaseStudent
             }
         }
         return $analytical_array;
+    }
+
+    public function canPrintAnalytical()
+    {
+        return !is_null($this->getCareerStudent());  
+
     }
   
 }
