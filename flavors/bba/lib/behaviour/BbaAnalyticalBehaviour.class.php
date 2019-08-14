@@ -161,6 +161,8 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                                 $this->add_missing_subject($css);
                             }
                         }
+                        
+                        $this->add_subject_to_year($year_in_career, $css);
                         if(in_array($css->getSubjectId(), $this->subjectsEOP))
                         {
                             $this->add_subjectEOP_to_year($year_in_career, $css);
