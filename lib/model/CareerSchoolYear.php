@@ -171,22 +171,29 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     if ($this->getIsProcessed()) return false;
 
-    $c = new Criteria();
-    $c->add(CareerSchoolYearPeer::ID, $this->getId());
-    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
-    $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
-    $c->add(CoursePeer::SCHOOL_YEAR_ID, $this->getSchoolYear()->getId());
-    $courses_actives = CoursePeer::doCount($c);
-
-    if ($courses_actives == 0)
+    $career_year = $this->getCareer()->getMaxYear();
+    
+    for( $i = 1; $i <= $career_year; $i ++)
     {
-      return false;
+        $c = new Criteria();
+        $c->add(CareerSchoolYearPeer::ID, $this->getId());
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+        $c->addJoin(CoursePeer::ID, CourseSubjectPeer::COURSE_ID);
+        $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+        $c->add(CoursePeer::SCHOOL_YEAR_ID, $this->getSchoolYear()->getId());
+        $c->add(CareerSubjectPeer::YEAR, $i);
+
+        $courses_actives = CoursePeer::doCount($c);
+        $c->add(CoursePeer::IS_CLOSED, true);
+        
+        if($courses_actives == CoursePeer::doCount($c))
+        {
+            return TRUE;
+        }
     }
-
-    $c->add(CoursePeer::IS_CLOSED, false);
-
-    return CoursePeer::doCount($c) == 0;
+     
+    return FALSE;
   }
 
   public function getMessageCantClose()
@@ -206,7 +213,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
    * @param PropelPDO $con
    */
 
-  public function close(array $errors = Array(), PropelPDO $con = null)
+  public function close($year, array $errors = Array(), PropelPDO $con = null)
   {
     $con = (is_null($con)) ? Propel::getConnection() : $con;
 
@@ -215,6 +222,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
     $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
     $c->addJoin(StudentPeer::ID, StudentCareerSchoolYearPeer::STUDENT_ID);
     //$c->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::IN_COURSE);
+    $c->add(StudentCareerSchoolYearPeer::YEAR,$year);
     $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);
     $c->setDistinct(StudentPeer::ID);
 
@@ -290,7 +298,7 @@ class CareerSchoolYear extends BaseCareerSchoolYear
         throw new Exception('Hay errores no se puede cerrar el año!');
       }
       //Se setea a la carrera como procesada.
-      $this->setIsProcessed(true);
+      //$this->setIsProcessed(true);
       $this->save($con);
       Propel::enableInstancePooling();
     }
@@ -678,6 +686,19 @@ class CareerSchoolYear extends BaseCareerSchoolYear
   {
     return $this->getSubjectConfiguration()?$this->getSubjectConfiguration()->getAttendanceType() == SchoolBehaviourFactory::getInstance()->getAttendanceDay():null;
 
+  }
+  
+  public function checkAllClosedYears()
+  {
+    $status = array (StudentCareerSchoolYearStatus::WITHDRAWN, StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE);
+    
+    $c = new Criteria();    
+    $c->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $this->getId());
+    $c->add(StudentCareerSchoolYearPeer::STATUS, $status, Criteria::NOT_IN);
+    $c->add(StudentCareerSchoolYearPeer::IS_PROCESSED, false);    
+
+    return StudentCareerSchoolYearPeer::doCount($c) == 0;
+    
   }
 
 }

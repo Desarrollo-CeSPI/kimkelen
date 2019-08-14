@@ -378,5 +378,86 @@ class apiActions extends sfActions
         {
             $this->scsys = $this->getRoute()->getObject();
         }
+        
+        public function executeGetPerson(sfWebRequest $request)
+        {
+          $par = $request->getGetParameters();
+          if (!isset($par['tipo_documento']) || !isset($par['numero_documento']) || !isset($par['pais'])
+                  || $par['tipo_documento']== '' || $par['numero_documento'] == '' || $par['pais']== '')
+          {
+              $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Bad Request",
+                      'descripcion' => "Parámetro 'pais', 'tipo_documento' y 'nro_documento' requerido"
+                  );
+          }
+          else
+          {
+            $document_type =BaseCustomOptionsHolder::getInstance('IdentificationType')->getIdentificationType($par['tipo_documento']);
+            $this->person = PersonPeer::retrieveByDocumentTypeAndNumber($document_type,$par['numero_documento']);
+
+            if(is_null($this->person))
+            {
+                  $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no existe"
+                  );
+            }
+            else
+            {
+                $this->array= $this->person->AsArray();
+            }
+          }
+          $this->getResponse()->setHttpHeader('Content-type','application/json');
+          $this->setLayout(false);
+          
+        }
+        
+        public function executeGetPersonalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $this->person = PersonPeer::retrieveByPK($id);
+            
+            if(is_null($this->person))
+            {
+                  $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no existe"
+                  );
+            }
+            else
+            {
+                $this->array= $this->person->getPersonalDataAsArray();
+            }
+
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->setLayout(false);
+        }
+        
+        public function executeGetAnalyticalData(sfWebRequest $request)
+        {
+            $id = $this->getRequestParameter('id'); 
+            $person = PersonPeer::retrieveByPK($id); 
+            $student = (!is_null($person)) ? $person->getStudent() : NULL;
+            if(!is_null($student))
+            {
+                $this->array = $student->getAnalyticalDataAsArray();               
+            }
+            else
+            {
+                $this->array = array(
+                      'error'  => 404,
+                      'mensaje' => "404 Not Found",
+                      'descripcion' => "La persona no tiene historia academica"
+                  );
+                
+            }
+            
+            $this->getResponse()->setHttpHeader('Content-type','application/json');
+            $this->setLayout(false);
+            
+        }
  
 }

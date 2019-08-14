@@ -25,6 +25,8 @@
 class AnexaSchoolBehaviour extends BaseSchoolBehaviour
 {
 	protected $school_name = "Escuela Graduada Joaquín V. González";
+        protected $araucano_code = 3186;
+        protected $letter = "G";
 
 
 	public function getListObjectActionsForSchoolYear()

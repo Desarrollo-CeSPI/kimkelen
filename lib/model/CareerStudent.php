@@ -418,6 +418,23 @@ class CareerStudent extends BaseCareerStudent
   {
     return SchoolYearPeer::retrieveByPk($this->getGraduationSchoolYearId());
   }
+  
+  public function getAraucanoTitleCode()
+  {
+               
+    if($this->getSubOrientation())
+    {
+        return $this->getSubOrientation()->getAraucanoCode();
+    }
+    elseif($this->getOrientation())
+    {
+        return $this->getOrientation()->getAraucanoCode();
+    }
+    else
+    {
+        return $this->getCareer()->getAraucanoCode();
+    }      
+  }
 
 }
 sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));

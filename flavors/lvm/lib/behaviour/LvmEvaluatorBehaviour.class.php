@@ -274,8 +274,17 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
       if (!is_null($result))
       {
         $result->close($con);
+        
+        $log = new LogCloseCareerSchoolYear();
+        $log->setCourseSubjectStudent($course_subject_student);
+        $log->setCourseResult(get_class($result));
+        $log->setCourseResultId($result->getId());
+        $log->setUsername(sfContext::getInstance()->getUser());
+
+        $log->save();
         ###Liberando memoria ###
         $result->clearAllReferences(true);
+        $log->clearAllReferences(true);
         unset($result);
       }
       $course_subject_student->clearAllReferences(true);

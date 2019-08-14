@@ -48,6 +48,10 @@ classes:
         description:      Numero de la resolucion ministerial
         type:             varchar(255)
         required:         false
+      araucano_code:
+        description:      Código araucano
+        type:             integer
+        required:         false
 
   SubjectConfiguration:
     tableName:            subject_configuration

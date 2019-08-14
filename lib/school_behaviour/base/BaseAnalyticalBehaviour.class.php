@@ -76,7 +76,7 @@ class BaseAnalyticalBehaviour
     
     public function get_subjects_in_year($year)
     {
-	    return $this->objects[$year]['subjects'];
+	return (isset($this->objects[$year]) ? $this->objects[$year]['subjects'] : NULL);
     }
 
     public function get_graduated_date()

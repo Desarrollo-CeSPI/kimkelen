@@ -826,5 +826,30 @@ classes:
         required:         false
         onUpdate:         restrict
         onDelete:         restrict
-          
-         
+                
+  LogCloseCareerSchoolYear:
+    tablename:            log_close_career_school_year
+    description:          Los de cierre de cursadas.
+    columns:
+      id:
+      created_at:
+      course_subject_student_id:
+        description:      Referencia la cursada de un alumno
+        type:             integer
+        foreignTable:     course_subject_student
+        foreignReference: id
+        required:         true
+        onDelete:         restrict
+      course_result:
+        description:      resultado de la cursada Approved/Dispproved
+        type: varchar(50)
+        required:         true
+      course_result_id:
+        description:      Referencia el resultado de la cursada del alumno
+        type:             integer
+        required:         true
+      username:
+        description:       Usuario que proceso el cierre
+        type: varchar(50)
+        required:          true
+

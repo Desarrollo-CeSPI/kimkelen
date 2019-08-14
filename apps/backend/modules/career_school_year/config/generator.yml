@@ -22,8 +22,8 @@ generator:
             condition:    canClose
             label:        Close courses
             credentials:  [edit_school_year]
-            params:
-              onclick= blockScreen();
+            #params:
+             # onclick= blockScreen();
 
           configuration:
             action:         configuration
