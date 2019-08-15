@@ -21,6 +21,7 @@ insert into sf_guard_permission(name,description) values ('edit_setting_paramete
 insert into sf_guard_permission(name,description) values ('assign_physical_sheet','Asignar tomo/folio a actas.');
 insert into sf_guard_permission(name,description) values ('generate_record','Generar actas.');
 insert into sf_guard_permission(name,description) values ('print_record','Imprimir actas.');
+insert into sf_guard_permission(name,description) values ('edit_book','Crear libros de actas.');
 
 CREATE TABLE `record` (
   `id` INT NOT NULL AUTO_INCREMENT,
