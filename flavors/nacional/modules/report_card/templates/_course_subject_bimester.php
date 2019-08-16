@@ -65,7 +65,7 @@
         <?php foreach ($periods[0] as $period): ?>
           <td>
             <?php
-            echo $period->getIsClosed() ? round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2) : '&nbsp'
+            echo round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2)
             ?>
           </td>
         <?php endforeach; ?>
@@ -123,7 +123,7 @@
         <?php foreach ($periods[1] as $period): ?>
           <td>
             <?php
-            echo $period->getIsClosed() ? round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2) : '&nbsp'
+            echo round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2)
             ?>
           </td>
           <?php endforeach; ?>
