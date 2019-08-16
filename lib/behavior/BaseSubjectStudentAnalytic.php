@@ -267,4 +267,60 @@ class BaseSubjectStudentAnalytic
         return $this->approved;
     }
     
+    public function getBookSheet()
+    {
+        $approvationInstance = $this->approvationInstance();
+        
+        $c = new Criteria();
+        $c->addJoin(RecordPeer::ID, RecordDetailPeer::RECORD_ID);
+        $c->addJoin(RecordSheetPeer::RECORD_ID, RecordPeer::ID);
+        $c->add(RecordPeer::STATUS, RecordStatus::ACTIVE);
+        
+        
+        switch(get_class($approvationInstance)) {
+          case 'StudentApprovedCourseSubject':
+              
+                $c->add(RecordPeer::RECORD_TYPE, RecordType::COURSE);
+                $c->add(RecordPeer::COURSE_ORIGIN_ID,$approvationInstance->getCourseSubject()->getId());
+                $c->add(RecordDetailPeer::STUDENT_ID,$approvationInstance->getStudent()->getId());
+                return RecordSheetPeer::doSelectOne($c);
+            break;
+          case 'StudentDisapprovedCourseSubject':
+              $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($approvationInstance->getCourseSubjectStudent()->getId());
+                  
+                $c->add(RecordPeer::RECORD_TYPE, RecordType::EXAMINATION);
+                $c->add(RecordPeer::COURSE_ORIGIN_ID,$csse->getExaminationSubject()->getId());
+                $c->add(RecordDetailPeer::STUDENT_ID,$csse->getCourseSubjectStudent()->getStudent()->getId());
+                return RecordSheetPeer::doSelectOne($c);
+                
+            break;
+          case 'StudentRepprovedCourseSubject':
+               
+            $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
+            if(is_null($sers->getExaminationRepprovedSubject()))
+            {
+                //Estuvo en trayectorias. Es el año de la trayectoria + 1
+                $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
+                $c->add(RecordPeer::RECORD_TYPE, RecordType::COURSE);
+                $c->add(RecordPeer::COURSE_ORIGIN_ID,$cssp->getCourseSubject()->getId());
+                $c->add(RecordDetailPeer::STUDENT_ID,$cssp->getStudent()->getId());
+                return RecordSheetPeer::doSelectOne($c);
+            }
+            else
+            {
+                $c->add(RecordPeer::RECORD_TYPE, RecordType::EXAMINATION_REPPROVED);
+                $c->add(RecordPeer::COURSE_ORIGIN_ID,$sers->getExaminationRepprovedSubject()->getId());
+                $c->add(RecordDetailPeer::STUDENT_ID,$approvationInstance->getCourseSubjectStudent()->getStudent()->getId()); 
+                return RecordSheetPeer::doSelectOne($c);
+                
+            }
+            
+            break;
+            
+        }
+        
+        return;
+        
+    }
+    
 }

@@ -133,6 +133,22 @@ generator:
           _delete:
             condition:      canBeDeleted
             credentials:    [edit_course]
+          
+          assign_physical_sheet:
+            action: assignPhysicalSheet
+            condition: canAssignPhysicalSheet
+            credentials: [assign_physical_sheet]
+            
+          generate_record:
+            action: generateRecord
+            condition: canGenerateRecord
+            credentials: [generate_record]
+            params:         confirm='¿Está seguro? Si el acta ya se encuentra generada se perderán los datos generados anteriormente.'
+            
+          print_record:
+            action: printRecord
+            condition: canPrintRecord
+            credentials: [print_record]
 
       filter:
       form:    ~

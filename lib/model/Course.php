@@ -261,8 +261,7 @@ class Course extends BaseCourse
   public function canManageSubjects(PropelPDO $con = null)
   {
     return ($this->countStudents() == 0) && $this->isCurrentSchoolYear();
-    ;
-
+    
   }
 
   public function getMessageCantManageSubjects()
@@ -1125,6 +1124,39 @@ class Course extends BaseCourse
   public function canPathwayAttendanceSubject()
   { 
       return !$this->getIsClosed();
+  }
+  
+  public function canAssignPhysicalSheet()
+  {
+      foreach ($this->getCourseSubjects() as $cs)
+      {
+          $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+          if (! is_null($r))
+          {
+              return TRUE;
+          }
+      }
+
+    return FALSE;
+  }
+
+  public function canGenerateRecord()
+  { 
+      if ($this->isPathway())
+      {
+          $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+      }
+      else
+      {
+          $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_COURSES);
+      }
+    
+    return $this->getIsClosed() && ! is_null($setting->getValue()) ;
+  }
+  
+  public function canPrintRecord()
+  {
+      return $this->canAssignPhysicalSheet();
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));

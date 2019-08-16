@@ -146,7 +146,7 @@ h2 {
 }
 
 .article-div {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .observation-box {
@@ -192,3 +192,12 @@ table.gridtable_bordered tr {
     background-color: #ffffff;
     text-align:center;
 }
+
+.min-size{
+    font-size: 11px;
+}
+
+.record-footer{
+    bottom: 0% !important;
+
+}  

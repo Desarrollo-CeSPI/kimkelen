@@ -877,4 +877,151 @@ class CourseSubject extends BaseCourseSubject
 
      return parent::getCourseSubjectStudents($criteria);
   }
+  
+    public function generateRecord()
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();      
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_COURSES);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::COURSE);
+            $r->setCourseOriginId($this->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::COURSE);
+
+            $i = 1;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save();
+
+            foreach ($this->getCourseSubjectStudents() as $cssp)
+            {
+                $rd = new RecordDetail();
+                $rd->setRecordId($record->getId());
+                $rd->setStudent($cssp->getStudent());
+                $rd->setMark($cssp->getAverageByConfig());
+                $rd->setIsAbsent(FALSE);
+
+                if (is_null($cssp->getStudentApprovedCourseSubject()))
+                {
+                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                }
+                else
+                {
+                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                }
+
+               if ($i > $record->getLines())
+               {
+                   $i = 1;
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save();
+
+               }
+               $rd->setLine($i);
+               $rd->setSheet($sheet);
+               $i++;
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }   
+            
+    }
+  
+    public function generateRecordPathway()
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();          
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::COURSE);
+            $r->setCourseOriginId($this->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::COURSE);
+
+            $i = 1;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save();
+
+            foreach ($this->getCourseSubjectStudentPathways() as $cssp)
+            {
+                $rd = new RecordDetail();
+                $rd->setRecordId($record->getId());
+                $rd->setStudent($cssp->getStudent());
+                $rd->setMark($cssp->getMark());
+                $rd->setIsAbsent(FALSE);
+
+                if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
+                {
+                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                }
+                else
+                {
+                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                }
+
+               if ($i > $record->getLines())
+               {
+                   $i =1;
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save();
+
+               }
+               $rd->setLine($i);
+               $rd->setSheet($sheet);
+               $i++;
+
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+ 
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }             
+    }
 }

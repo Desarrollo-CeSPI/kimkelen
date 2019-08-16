@@ -116,7 +116,7 @@ table.lefttable tr {
 
 .signature {
   float:left;
-  margin-top: 100px;
+  margin-top: 70px;
   margin-right: 90px;
   border-top-style: dotted;
   border-top-width: thin;
@@ -156,7 +156,7 @@ h2 {
 }
 
 .article-div {
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .observation-box {
