@@ -54,7 +54,7 @@
       <?php else: ?>
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject()  ?></td>
       <?php endif; ?>
-      <td>
+      <td <?php if (!$division->hasAttendanceForDay()):?> class="table-border-right"<?php endif; ?>>
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
@@ -112,7 +112,7 @@
       <?php else: ?>
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject() ?></td>
       <?php endif; ?>
-      <td>
+      <td <?php if (!$division->hasAttendanceForDay()):?> class="table-border-right"<?php endif; ?> >
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
