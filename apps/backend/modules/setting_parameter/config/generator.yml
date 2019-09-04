@@ -1,0 +1,34 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           SettingParameter
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          setting_parameter
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Parámteros de configuración             
+        display:           [description,value]
+        actions: []
+        batch_actions: []
+        object_actions:
+          _edit:
+#            condition:      canBeEdited
+            credentials:    [edit_setting_parameter]
+      filter:
+        class: false
+      form:    ~
+      edit:
+        actions:
+          _list:
+            label:        Volver al listado
+          _save_and_list:
+            label:        Guardar
+      new: false

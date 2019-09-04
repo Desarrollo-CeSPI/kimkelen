@@ -31,7 +31,7 @@
     <table class="table gridtable_bordered">
       <thead>
         <tr>
-          <th colspan="7" class="analytical_year"><?php echo __('Year ' . $year) ?></th>
+          <th colspan="8" class="analytical_year"><?php echo __('Year ' . $year) ?></th>
         </tr>
         <tr>
           <th rowspan="2"><?php echo __("Condition") ?></th>
@@ -39,6 +39,8 @@
           <th rowspan="2"><?php echo __("Subject") ?></th>
           <th class="text-left" rowspan="2"><?php echo __("Asignatura") ?></th>
           <th colspan="2"><?php echo __("Calification") ?></th>
+          <th rowspan="2" ><?php echo __("Tomo") ?></th>
+          <th rowspan="2" ><?php echo __("Folio") ?></th>
         </tr>
         <tr>
           <th>Nro.</th>
@@ -59,10 +61,12 @@
                 <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 <td class="text-center"><?php echo ($css->getMarkAsSymbol()? ucfirst(strtolower($css->getMarkAsSymbol())):'<strong>'.__('Adeuda').'</strong>') ?></td>
           <?php endif;?>
+          <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
+          <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
         </tr>
       <?php endforeach ?>
         <tr>
-          <th colspan="5" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
+          <th colspan="6" style="text-align:left !important;"><?php echo __($object->get_str_year_status($year)) ?></th>
           <th colspan="2"><?php echo __('Average') ?>: <?php echo ( $object->get_year_average($year) ? number_format(round($object->get_year_average($year), 2), 2, '.', '') : '-') ;?>    </th>
         </tr>
       </tbody>

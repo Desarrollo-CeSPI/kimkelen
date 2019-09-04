@@ -250,5 +250,56 @@ class pathway_commissionActions extends autoPathway_commissionActions
       $this->redirect("student_attendance/StudentAttendance?url=pathway_commission&year=$year&course_subject_id=$course_subject_id&career_school_year_id=$career_school_year_id&division_id=");
     }
   }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'pathway_commission';
+      
+      if (count($this->course_subjects) == 1)
+      {
+          $this->getUser()->setAttribute("referer_module", "pathway_commission");
+          $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('generateRecord','commission');
+      
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->title = 'Assign physical sheet';
+      $this->action = 'assignPhysicalSheet';
+      $this->url = 'pathway_commission';
+      $this->getUser()->setAttribute("referer_module", "pathway_commission");
+      
+      if (count($this->course_subjects) == 1)
+      { 
+          $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('assignPhysicalSheet','commission');
+      
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->course = $this->getRoute()->getObject();
+      $this->course_subjects = $this->course->getCourseSubjects();
+      $this->url = 'pathway_commission';
+      $this->title = 'Print record';
+      $this->action = 'printRecord';
+      
+      if (count($this->course_subjects) == 1)
+      { 
+          $this->redirect("course_student_mark/printRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
+      }
+      
+      $this->setTemplate('assignPhysicalSheet','commission');
+      
+  }
 
 }

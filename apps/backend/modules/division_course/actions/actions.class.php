@@ -260,4 +260,41 @@ class division_courseActions extends autoDivision_courseActions
     $this->getUser()->setAttribute("referer_module", "division_course");
     $this->redirect("course_student_mark/revertCalificateNonNumericalMark?id=" . $this->course->getId());
   }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+        $course = $this->getRoute()->getObject();     
+        $cs = $course->getCourseSubject();
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+        
+        if (!is_null($record))
+        {
+            $record->setStatus(RecordStatus::ANNULLED);
+            $record->save();
+        }
+        
+        $cs->generateRecord();
+        $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+        $this->redirect('@division_course');
+              
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+      $course = $this->getRoute()->getObject();     
+      $cs = $course->getCourseSubject();
+      $this->getUser()->setAttribute("referer_module", "division_course");
+      $this->redirect("course_student_mark/assignPhysicalSheet?course_subject_id=" . $cs->getId());
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $course = CoursePeer::retrieveByPK($request->getParameter('id')); 
+      $this->cs = $course->getCourseSubject();
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+      $this->setLayout('cleanLayout');
+      $this->setTemplate('printRecord','course_student_mark');
+      
+  }
+  
 }
