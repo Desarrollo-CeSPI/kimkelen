@@ -4804,6 +4804,10 @@
                 <source>Edit Setting parameter</source>
                 <target>Editar parámtero de configuración</target>
             </trans-unit>
+            <trans-unit>
+                <source>Historical sanctions</source>
+                <target>Sanciones históricas</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

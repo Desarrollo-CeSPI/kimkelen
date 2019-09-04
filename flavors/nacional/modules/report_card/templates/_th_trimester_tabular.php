@@ -37,7 +37,7 @@
   <th><?php echo __('Ex.Reg.') ?></th>
   <th><?php echo __('Ex.Comp.') ?></th>
   <th><?php echo __('Ex.Prev.') ?></th>
-  <th><?php echo __('Prom.Def.') ?></th>
+  <th <?php if ($has_attendance_for_subject):?> class="table-border-right"<?php endif; ?> ><?php echo __('Prom.Def.') ?></th>
 
   <?php if ($has_attendance_for_subject): ?>
     <th><?php echo __('Inasist. 1°T') ?></th>

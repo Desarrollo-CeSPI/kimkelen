@@ -211,7 +211,9 @@ table.lefttable tr {
 
 .colsleft{
   float:left;
-  width: 34%;
+  width: 40%;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .colsright{
@@ -234,7 +236,7 @@ table.lefttable tr {
 
 .rowins{
   border:1px solid #ccc;
-  margin-top:10px;
+  margin-top:5px;
   padding:0px 5px;
 }
 
@@ -374,4 +376,8 @@ div.report-text p {
     margin-top: 7em;
     padding-top: 1em;
     font-size:12px;
+}
+
+.table-border-right{
+    border-right: 1px solid #ccc;
 }

@@ -46,7 +46,7 @@
       <?php else: ?>
         <td></td>
       <?php endif; ?>
-      <td>
+      <td <?php if ($has_attendance_for_subject):?> class="table-border-right"<?php endif; ?> >
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>

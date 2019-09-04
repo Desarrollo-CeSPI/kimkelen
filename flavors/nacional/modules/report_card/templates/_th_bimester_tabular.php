@@ -36,7 +36,7 @@
   <th><?php echo __('Ex.Reg.') ?></th>
   <th><?php echo __('Ex.Comp.') ?></th>
   <th><?php echo __('Ex.Prev.') ?></th>
-  <th><?php echo __('Prom.Def.') ?></th>
+  <th <?php if (!$division->hasAttendanceForDay()):?> class="table-border-right"<?php endif; ?> ><?php echo __('Prom.Def.') ?></th>
 
   <?php if (!$division->hasAttendanceForDay()): ?>
 
