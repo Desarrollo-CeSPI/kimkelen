@@ -91,13 +91,6 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 		return self::PATHWAY_PROMOTION_NOTE;
 	}
         
-        /*en bba todos los alumnos pueden rendir en diciembre */
-        public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
-        {
-           return self::DECEMBER;
-
-        }
-        
     public function canPrintGraduateCertificate($student)
     {
         if(!is_null($student->getCareerStudent()) && !in_array($student->getCareerStudent()->getCareer()->getId(),$this->cbfe))
