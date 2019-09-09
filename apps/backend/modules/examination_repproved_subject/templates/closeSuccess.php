@@ -39,7 +39,7 @@
             <th><?php echo __("Mark") ?></th>
             <th><?php echo __("Result") ?></th>
           </tr>
-          <?php foreach ($examination_repproved_subject->getStudentExaminationRepprovedSubjects() as $student_examination_repproved_subject): ?>
+          <?php foreach ($examination_repproved_subject->getSortedStudentExaminationRepprovedSubjects() as $student_examination_repproved_subject): ?>
             <tr class="<?php echo $student_examination_repproved_subject->getResultClass() ?>">
               <td><?php echo $student_examination_repproved_subject->getStudent() ?></td>
               <td><?php echo $student_examination_repproved_subject->getMark() ? $student_examination_repproved_subject->getMark() : __("Is absent") ?></td>

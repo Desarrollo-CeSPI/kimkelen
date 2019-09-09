@@ -227,6 +227,21 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
 		public function getSchoolYear() {
 			return $this->getExaminationRepproved()->getSchoolYear();
 		}
+                
+    public function getSortedStudentExaminationRepprovedSubjects()
+    {
+        $criteria = new Criteria();
+        $criteria->add(ExaminationRepprovedSubjectPeer::ID, $this->getId());
+        $criteria->addJoin(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, ExaminationRepprovedSubjectPeer::ID);
+        $criteria->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID);
+        $criteria->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+        
+        return $this->getStudentExaminationRepprovedSubjects($criteria);
+    }
 }
 
 sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));
