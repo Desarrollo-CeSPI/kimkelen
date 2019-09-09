@@ -54,7 +54,7 @@
       <?php else: ?>
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject()  ?></td>
       <?php endif; ?>
-      <td>
+      <td <?php if (!$division->hasAttendanceForDay()):?> class="table-border-right"<?php endif; ?>>
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
@@ -65,7 +65,7 @@
         <?php foreach ($periods[0] as $period): ?>
           <td>
             <?php
-            echo $period->getIsClosed() ? round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2) : '&nbsp'
+            echo round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2)
             ?>
           </td>
         <?php endforeach; ?>
@@ -112,7 +112,7 @@
       <?php else: ?>
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject() ?></td>
       <?php endif; ?>
-      <td>
+      <td <?php if (!$division->hasAttendanceForDay()):?> class="table-border-right"<?php endif; ?> >
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
@@ -123,7 +123,7 @@
         <?php foreach ($periods[1] as $period): ?>
           <td>
             <?php
-            echo $period->getIsClosed() ? round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2) : '&nbsp'
+            echo round($student->getTotalAbsences($division->getCareerSchoolYearId(), $period, $course_subject_student->getCourseSubjectId(), true), 2)
             ?>
           </td>
           <?php endforeach; ?>

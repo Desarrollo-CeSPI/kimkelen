@@ -307,7 +307,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
     
     public function get_specific_subjects_in_year($year)
     {
-        return $this->objects[$year]['specific_subjects'];
+        return isset($this->objects[$year]['specific_subjects']) ? $this->objects[$year]['specific_subjects']: NULL;
     }
     
     public function get_suborientation_subjects_in_year($year)
