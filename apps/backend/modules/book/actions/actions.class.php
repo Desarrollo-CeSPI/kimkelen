@@ -13,4 +13,14 @@ require_once dirname(__FILE__).'/../lib/bookGeneratorHelper.class.php';
  */
 class bookActions extends autoBookActions
 {
+    
+  public function executeCheckSheetBook(sfWebRequest $request)
+  {
+    $book_id = $request->getParameter('book_id');
+    $physical_sheet = $request->getParameter('physical_sheet');
+    
+    $records_sheets = RecordSheetPeer::retrieveByPshysicalSheetAndBook($physical_sheet,$book_id);
+     
+    return $this->renderPartial('check_sheet_book',array('records_sheets' => $records_sheets));
+  }
 }

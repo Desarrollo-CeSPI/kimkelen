@@ -33,14 +33,19 @@
     <h3><?php echo __('Examination %examination%', array('%examination%' => $examination_subject->getExamination())) ?></h3>
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_subject->getCareerSubjectSchoolYear()->getSchoolYear())) ?></h3>
   </div>
+  
   <div id="sf_admin_content">
+      
      <form action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
             <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-        </ul>  
+        </ul> 
+        
         <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
+        <div id="check_sheet_book" style="display: none"></div>
         <fieldset id="califications_fieldset">
+            
             <div class="sf_admin_form_row">                          
                 <label for="book_id" class="required"><?php echo __('Book') ?></label>
                 <select name="book_id" id="book_id" required="required">
@@ -57,7 +62,7 @@
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
         
-        <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
+        <li><input id="submit" type="submit" value="<?php echo __('Save') ?>"  /></li>
        
       </ul>
 </form>
@@ -74,6 +79,56 @@
               //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
               document.getElementsByClassName('book_sheet')[i].value = book_id;
             }    
-        });      
-    })
+        }); 
+        
+        
+            elements = document.getElementsByClassName("physical_sheet" )
+            for (i = 0; i < elements.length; i++) 
+            {
+                document.getElementsByClassName('physical_sheet')[i].addEventListener('input', function(e) {
+                book = document.getElementById("book_id").value;
+             
+                if (book !== '' )
+                {
+                    
+                    jQuery.ajax({
+                    url:  "../../checkSheetBook?book_id=" + book +"&physical_sheet="+this.value,
+                    success: function (data)
+                    {
+                      var element = jQuery('#check_sheet_book');
+                      element.html(data);
+                      element.show();
+                    }
+                  });
+                }
+                    
+
+              });
+              
+            } 
+                
+    });
+    
+    function checkSheetBook(e)
+{
+    /*var $el = jQuery(html_id);
+    if ($el.data('present')) {
+        $el.fadeToggle('fast');
+      } else {
+          jQuery.ajax({
+                url: url,
+                data: { klass: klass, id: id },
+                cache: false,
+                error:    function(xhr, status, error) { alert(xhr.status); },
+                success:  function(data) {
+                              $el.html(data)
+                               .fadeIn('fast')
+                               .data('present', true);
+                        }
+              });
+        }*/
+}
+    
+    
+    
 </script>
