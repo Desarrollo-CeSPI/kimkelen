@@ -48,8 +48,13 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             $cssid = $approvationInstance->getCourseSubjectStudentId();
             $csse = CourseSubjectStudentExaminationPeer::retrieveLastByCourseSubjectStudentId($cssid);
             $exam = $csse->getExaminationSubject()->getExamination();
-                        
-            return ($csse->getExaminationSubject()->getDate()) ? $csse->getExaminationSubject()->getDate() : $exam->getDateFrom();
+            if ($csse->getDate())
+            {
+                return $csse->getDate();
+            }else
+            {
+                return ($csse->getExaminationSubject()->getDate()) ? $csse->getExaminationSubject()->getDate() : $exam->getDateFrom();
+            }
           case 'StudentRepprovedCourseSubject':
                
             $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($approvationInstance); 
