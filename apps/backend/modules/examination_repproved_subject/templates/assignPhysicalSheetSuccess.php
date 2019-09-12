@@ -34,10 +34,10 @@
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_repproved_subject->getSchoolYear())) ?></h3>
   </div>
   <div id="sf_admin_content">
-     <form action="<?php echo url_for('examination_repproved_subject/assignPhysicalSheet') ?>" method="post">
+     <form  action="<?php echo url_for('examination_repproved_subject/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li><?php echo link_to(__('Back'), '@examination_repproved_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
-            <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
+            <li><input  type="submit" value="<?php echo __('Save') ?>" /></li>
         </ul>  
         <input type="hidden" id="id" name="id" value="<?php echo $examination_repproved_subject->getId() ?>"/>
         <fieldset id="califications_fieldset">
@@ -51,29 +51,18 @@
                 </select>
             </div>
             <?php foreach($forms as $form): ?>
-                <?php echo $form; ?>
+                <?php echo $form['id']->render() ?>
+                <?php echo $form['_csrf_token']->render() ?>
+                <?php echo $form['book_id']->render() ?>
+                <?php echo $form['sheet']->render() ?>
+                <?php echo $form['physical_sheet']->renderRow(array('oninput' => "checkSheetBook(this," . $form['sheet']->getValue() .")")) ?>
+                <div id="check_sheet_book_<?php echo $form['sheet']->getValue()?>" class="check_sheet_book_desc" style="display: none"></div>
             <?php endforeach; ?>
         </fieldset>                 
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), '@examination_repproved_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
-        
-        <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-       
+        <li><input  type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
 </form>
   </div>
 </div>
-<script>
-    window.addEventListener('load', function() {
-        document.getElementById("book_id" ).addEventListener('change', function() {
-            books = document.getElementsByClassName('book_sheet');
-
-            book_id = document.getElementById("book_id").value;
-            for (i = 0; i < books.length; i++) 
-            {
-              //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
-              document.getElementsByClassName('book_sheet')[i].value = book_id;
-            }    
-        });      
-    })
-</script>

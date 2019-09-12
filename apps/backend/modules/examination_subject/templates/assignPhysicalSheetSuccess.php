@@ -26,7 +26,6 @@
   <?php include_javascripts_for_form($form) ?>
 <?php endforeach ?>
 
-
 <div id="sf_admin_container">
   <h1><?php echo __('Assign physical sheet to %examination_subject%', array('%examination_subject%' => $examination_subject->getCareerSubjectSchoolYear()->getCareerSubject())) ?></h1>
   <div class="examination">
@@ -36,12 +35,11 @@
   
   <div id="sf_admin_content">
       
-     <form action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
+     <form id="form" action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
-            <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
+            <li><input id="submit" type="submit" value="<?php echo __('Save') ?>"  /></li>
         </ul> 
-        
         <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
         <div id="check_sheet_book" style="display: none"></div>
         <fieldset id="califications_fieldset">
@@ -56,79 +54,18 @@
                 </select>
             </div>
             <?php foreach($forms as $form): ?>
-                <?php echo $form; ?>
+                <?php echo $form['id']->render() ?>
+                <?php echo $form['_csrf_token']->render() ?>
+                <?php echo $form['book_id']->render() ?>
+                <?php echo $form['sheet']->render() ?>
+                <?php echo $form['physical_sheet']->renderRow(array('oninput' => "checkSheetBook(this," . $form['sheet']->getValue() .")")) ?>
+                <div id="check_sheet_book_<?php echo $form['sheet']->getValue()?>" class="check_sheet_book_desc" style="display: none"></div>
             <?php endforeach; ?>
         </fieldset>                 
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
-        
-        <li><input id="submit" type="submit" value="<?php echo __('Save') ?>"  /></li>
-       
+        <li><input id="submit" type="submit" value="<?php echo __('Save') ?>"  /></li> 
       </ul>
 </form>
   </div>
 </div>
-<script>
-    window.addEventListener('load', function() {
-        document.getElementById("book_id" ).addEventListener('change', function() {
-            books = document.getElementsByClassName('book_sheet');
-
-            book_id = document.getElementById("book_id").value;
-            for (i = 0; i < books.length; i++) 
-            {
-              //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
-              document.getElementsByClassName('book_sheet')[i].value = book_id;
-            }    
-        }); 
-        
-        
-            elements = document.getElementsByClassName("physical_sheet" )
-            for (i = 0; i < elements.length; i++) 
-            {
-                document.getElementsByClassName('physical_sheet')[i].addEventListener('input', function(e) {
-                book = document.getElementById("book_id").value;
-             
-                if (book !== '' )
-                {
-                    
-                    jQuery.ajax({
-                    url:  "../../checkSheetBook?book_id=" + book +"&physical_sheet="+this.value,
-                    success: function (data)
-                    {
-                      var element = jQuery('#check_sheet_book');
-                      element.html(data);
-                      element.show();
-                    }
-                  });
-                }
-                    
-
-              });
-              
-            } 
-                
-    });
-    
-    function checkSheetBook(e)
-{
-    /*var $el = jQuery(html_id);
-    if ($el.data('present')) {
-        $el.fadeToggle('fast');
-      } else {
-          jQuery.ajax({
-                url: url,
-                data: { klass: klass, id: id },
-                cache: false,
-                error:    function(xhr, status, error) { alert(xhr.status); },
-                success:  function(data) {
-                              $el.html(data)
-                               .fadeIn('fast')
-                               .data('present', true);
-                        }
-              });
-        }*/
-}
-    
-    
-    
-</script>

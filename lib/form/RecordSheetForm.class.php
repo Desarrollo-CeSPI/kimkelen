@@ -37,4 +37,9 @@ class RecordSheetForm extends BaseRecordSheetForm
         $this->getWidget('physical_sheet')->setAttribute('class', 'physical_sheet');
                 
   }
+  
+  public function getJavaScripts() 
+  {
+      return array_merge(parent::getJavaScripts(),array('physical_sheet.js'));
+  }
 }

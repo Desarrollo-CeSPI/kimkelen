@@ -33,12 +33,13 @@
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $cs->getCareerSubjectSchoolYear()->getSchoolYear())) ?></h3>
   </div>
   <div id="sf_admin_content">
-     <form action="<?php echo url_for('course_student_mark/assignPhysicalSheet') ?>" method="post">
+     <form id="form" action="<?php echo url_for('course_student_mark/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li class="sf_admin_action_list"><?php echo link_to(__('Back'), "@$referer_module") ?></li>
-            <li class="sf_admin_action_save"><input type="submit" value="<?php echo __('Guardar cambios') ?>" /></li>
+            <li class="sf_admin_action_save"><input type="submit" value="<?php echo __('Save') ?>" /></li>
         </ul>
         <input type="hidden" id="course_subject_id" name="course_subject_id" value="<?php echo $cs->getId() ?>"/>
+        <div id="check_sheet_book" style="display: none"></div>
         <fieldset id="califications_fieldset">
             <div class="sf_admin_form_row">                          
                 <label for="book_id" class="required"><?php echo __('Book') ?></label>
@@ -50,27 +51,18 @@
                 </select>
             </div>
             <?php foreach($forms as $form): ?>
-                <?php echo $form; ?>
+                <?php echo $form['id']->render() ?>
+                <?php echo $form['_csrf_token']->render() ?>
+                <?php echo $form['book_id']->render() ?>
+                <?php echo $form['sheet']->render() ?>
+                <?php echo $form['physical_sheet']->renderRow(array('oninput' => "checkSheetBook(this," . $form['sheet']->getValue() .")")) ?>
+                <div id="check_sheet_book_<?php echo $form['sheet']->getValue()?>" class="check_sheet_book_desc" style="display: none"></div>
             <?php endforeach; ?>
         </fieldset>                 
-      <ul class="sf_admin_actions">
+        <ul class="sf_admin_actions">
             <li class="sf_admin_action_list"><?php echo link_to(__('Back'), "@$referer_module") ?></li>
-            <li class="sf_admin_action_save"><input type="submit" value="<?php echo __('Guardar cambios') ?>" /></li>
+            <li class="sf_admin_action_save"><input type="submit" value="<?php echo __('Save') ?>" /></li>
         </ul>
 </form>
   </div>
 </div>
-<script>
-    window.addEventListener('load', function() {
-        document.getElementById("book_id" ).addEventListener('change', function() {
-            books = document.getElementsByClassName('book_sheet');
-
-            book_id = document.getElementById("book_id").value;
-            for (i = 0; i < books.length; i++) 
-            {
-              //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
-              document.getElementsByClassName('book_sheet')[i].value = book_id;
-            }    
-        });      
-    })
-</script>
