@@ -25,6 +25,10 @@ medical_certificate:
     column:               id
     with_wildcard_routes: true
     
+check_sheet_book:
+  url:  /checkSheetBook
+  param:  {module: book, action: checkSheetBook}
+    
 api_student:
   url:     /api/:document_type/:document_number/is_student.:sf_format
   class:   sfPropelRoute

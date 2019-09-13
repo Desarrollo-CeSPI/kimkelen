@@ -34,10 +34,10 @@
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_repproved_subject->getSchoolYear())) ?></h3>
   </div>
   <div id="sf_admin_content">
-     <form action="<?php echo url_for('examination_repproved_subject/assignPhysicalSheet') ?>" method="post">
+     <form id="form_sheet" action="<?php echo url_for('examination_repproved_subject/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li><?php echo link_to(__('Back'), '@examination_repproved_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
-            <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
+            <li><input  type="submit" value="<?php echo __('Save') ?>" /></li>
         </ul>  
         <input type="hidden" id="id" name="id" value="<?php echo $examination_repproved_subject->getId() ?>"/>
         <fieldset id="califications_fieldset">
@@ -51,14 +51,17 @@
                 </select>
             </div>
             <?php foreach($forms as $form): ?>
-                <?php echo $form; ?>
+                <?php echo $form['id']->render() ?>
+                <?php echo $form['_csrf_token']->render() ?>
+                <?php echo $form['book_id']->render() ?>
+                <?php echo $form['sheet']->render() ?>
+                <?php echo $form['physical_sheet']->renderRow(array('oninput' => "checkSheetBook(this," . $form['sheet']->getValue() .")")) ?>
+                <div id="check_sheet_book_<?php echo $form['sheet']->getValue()?>" class="check_sheet_book_desc" style="display: none"></div>
             <?php endforeach; ?>
         </fieldset>                 
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), '@examination_repproved_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
-        
-        <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-       
+        <li><input  id="btn_submit" type="submit" value="<?php echo __('Save') ?>" /></li>
       </ul>
 </form>
   </div>
@@ -73,7 +76,77 @@
             {
               //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
               document.getElementsByClassName('book_sheet')[i].value = book_id;
-            }    
-        });      
-    })
+            } 
+            
+            elements = document.getElementsByClassName("check_sheet_book_desc" )
+            for (i = 0; i < elements.length; i++) 
+            {
+                document.getElementsByClassName('check_sheet_book_desc')[i].hide();
+                
+            }
+            elements = document.getElementsByClassName('physical_sheet');
+            for (i = 0; i < elements.length; i++) 
+            {
+                url = "/checkSheetBook?book_id="+ book_id +"&physical_sheet="+document.getElementsByClassName('physical_sheet')[i].value ;
+                jQuery.ajax({
+                async:false,
+                url: url,
+                success: function (data)
+                { 
+                  j = i+1;       
+                  var element = jQuery('#check_sheet_book_' + j);
+                  element.html(data);
+                  element.show();
+                  
+                  
+                }
+            });
+                      
+            }
+        }); 
+        
+        document.getElementById("form_sheet" ).addEventListener('submit', function(e) {
+            e.preventDefault();
+            elements = document.getElementsByClassName("check_sheet_book_desc" )
+            for (i = 0; i < elements.length; i++) 
+            {
+               col = document.getElementsByClassName('warning change_status');
+               if(col.length > 0)
+               {
+                   if(confirm("Existen folios que ya se encuentran asignados. ¿Desea continuar?"))
+                   {
+                       form = document.getElementById("form_sheet");
+                        var submitFormFunction = Object.getPrototypeOf(form).submit;
+                        submitFormFunction.call(form);
+                   }
+               }
+               else
+               {
+                   form = document.getElementById("form_sheet");
+                        var submitFormFunction = Object.getPrototypeOf(form).submit;
+                        submitFormFunction.call(form);
+               }
+                
+            }
+            
+        });
+    });
+    
+    function checkSheetBook(e,num)
+    {
+        book = document.getElementById("book_id").value;
+        if (book !== '' )
+        {   url = "/checkSheetBook?book_id="+ book +"&physical_sheet="+e.value ;
+            jQuery.ajax({
+            async:false,
+            url: url,
+            success: function (data)
+            {                      
+              var element = jQuery('#check_sheet_book_' + num);
+              element.html(data);
+              element.show();
+            }
+          });
+        }
+    }
 </script>

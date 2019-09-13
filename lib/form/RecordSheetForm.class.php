@@ -34,29 +34,8 @@ class RecordSheetForm extends BaseRecordSheetForm
         $this->getWidget('book_id')->setAttribute('class', 'book_sheet');
         $this->getWidget('book_id')->setLabel('Book');
         $this->getWidget('physical_sheet')->setLabel("Hoja " . $this->getObject()->getSheet() . " - Folio físico");
-        
-        $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'checkSheetBook'))));
-        
+        $this->getWidget('physical_sheet')->setAttribute('class', 'physical_sheet');
+                
   }
-  
-  public function checkSheetBook($validator, $values)
-  {
-     $c = new Criteria();
-     $c->addJoin(RecordSheetPeer::RECORD_ID,RecordPeer::ID);
-     $c->add(RecordPeer::STATUS, RecordStatus::ACTIVE);
-     $c->add(RecordSheetPeer::PHYSICAL_SHEET,$values['physical_sheet']);
-     $c->addAnd(RecordSheetPeer::BOOK_ID,$values['book_id']);
-     $c->add(RecordSheetPeer::ID,$values['id'],Criteria::NOT_EQUAL);
 
-     
-     $result = RecordSheetPeer::doCount($c);
- 
-      if ($result > 0 )
-      {
-        $error = new sfValidatorError($validator, 'El folio físico ya se encuentra asignado');
-        throw new sfValidatorErrorSchema($validator, array('date' => $error));
-      }
-      
-      return $values;
-  }
 }

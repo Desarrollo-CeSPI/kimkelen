@@ -45,4 +45,32 @@ class Record extends BaseRecord
         return RecordSheetPeer::doSelectOne($c);
     }
     
+    public function getFullName()
+    {
+
+        switch($this->getRecordType())
+        {
+          case RecordType::COURSE:
+             
+              $cs = CourseSubjectPeer::retrieveByPK($this->getCourseOriginId());
+              
+              $name =  'Curso: '. (($cs->getCourse()->getIsPathway())? '(Trayectoria) ': '' ). $cs->getCourse()->getName() . " | " . $cs->getCourse()->getSchoolYear();
+                
+            break;
+          case RecordType::EXAMINATION :
+              
+              $es = ExaminationSubjectPeer::retrieveByPK($this->getCourseOriginId());
+              $name = 'Mesa: '. $es->getCareerSubjectSchoolYear();
+            break;
+          case RecordType::EXAMINATION_REPPROVED:
+            $ers = ExaminationRepprovedSubjectPeer::retrieveByPK($this->getCourseOriginId()) ;
+            $name = 'Mesa previa: '. $ers->getCareerSubject() ." | ". $ers->getExaminationRepproved()->getSchoolYear() ;
+            
+            break;
+            
+            
+        }
+        return "Acta N°" . $this->getId() ." - " . $name;
+    }
+    
 }

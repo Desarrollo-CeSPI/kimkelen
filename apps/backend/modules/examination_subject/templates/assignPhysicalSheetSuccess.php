@@ -26,21 +26,23 @@
   <?php include_javascripts_for_form($form) ?>
 <?php endforeach ?>
 
-
 <div id="sf_admin_container">
   <h1><?php echo __('Assign physical sheet to %examination_subject%', array('%examination_subject%' => $examination_subject->getCareerSubjectSchoolYear()->getCareerSubject())) ?></h1>
   <div class="examination">
     <h3><?php echo __('Examination %examination%', array('%examination%' => $examination_subject->getExamination())) ?></h3>
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_subject->getCareerSubjectSchoolYear()->getSchoolYear())) ?></h3>
   </div>
+  
   <div id="sf_admin_content">
-     <form action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
+      
+     <form id="form_sheet" action="<?php echo url_for($url.'/assignPhysicalSheet') ?>" method="post">
         <ul class="sf_admin_actions">
             <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
-            <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-        </ul>  
+        </ul> 
         <input type="hidden" id="id" name="id" value="<?php echo $examination_subject->getId() ?>"/>
+        <div id="check_sheet_book" style="display: none"></div>
         <fieldset id="califications_fieldset">
+            
             <div class="sf_admin_form_row">                          
                 <label for="book_id" class="required"><?php echo __('Book') ?></label>
                 <select name="book_id" id="book_id" required="required">
@@ -51,14 +53,17 @@
                 </select>
             </div>
             <?php foreach($forms as $form): ?>
-                <?php echo $form; ?>
+                <?php echo $form['id']->render() ?>
+                <?php echo $form['_csrf_token']->render() ?>
+                <?php echo $form['book_id']->render() ?>
+                <?php echo $form['sheet']->render() ?>
+                <?php echo $form['physical_sheet']->renderRow(array('oninput' => "checkSheetBook(this," . $form['sheet']->getValue() .")")) ?>
+                <div id="check_sheet_book_<?php echo $form['sheet']->getValue()?>" class="check_sheet_book_desc" style="display: none"></div>
             <?php endforeach; ?>
         </fieldset>                 
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), "@$url", array('class' => 'sf_admin_action_go_back')) ?></li>
-        
-        <li><input type="submit" value="<?php echo __('Save') ?>" /></li>
-       
+        <li><input id="btn_submit" type="submit" value="<?php echo __('Save') ?>"  /></li> 
       </ul>
 </form>
   </div>
@@ -73,7 +78,77 @@
             {
               //document.getElementsByClassName('book_sheet')[i].selectedIndex = book_id;
               document.getElementsByClassName('book_sheet')[i].value = book_id;
-            }    
-        });      
-    })
+            } 
+            
+            elements = document.getElementsByClassName("check_sheet_book_desc" )
+            for (i = 0; i < elements.length; i++) 
+            {
+                document.getElementsByClassName('check_sheet_book_desc')[i].hide();
+                
+            }
+            elements = document.getElementsByClassName('physical_sheet');
+            for (i = 0; i < elements.length; i++) 
+            {
+                url = "/checkSheetBook?book_id="+ book_id +"&physical_sheet="+document.getElementsByClassName('physical_sheet')[i].value ;
+                jQuery.ajax({
+                async:false,
+                url: url,
+                success: function (data)
+                { 
+                  j = i+1;       
+                  var element = jQuery('#check_sheet_book_' + j);
+                  element.html(data);
+                  element.show();
+                  
+                  
+                }
+            });
+                      
+            }
+        }); 
+        
+        document.getElementById("form_sheet" ).addEventListener('submit', function(e) {
+            e.preventDefault();
+            elements = document.getElementsByClassName("check_sheet_book_desc" )
+            for (i = 0; i < elements.length; i++) 
+            {
+               col = document.getElementsByClassName('warning change_status');
+               if(col.length > 0)
+               {
+                   if(confirm("Existen folios que ya se encuentran asignados. ¿Desea continuar?"))
+                   {
+                       form = document.getElementById("form_sheet");
+                        var submitFormFunction = Object.getPrototypeOf(form).submit;
+                        submitFormFunction.call(form);
+                   }
+               }
+               else
+               {
+                   form = document.getElementById("form_sheet");
+                        var submitFormFunction = Object.getPrototypeOf(form).submit;
+                        submitFormFunction.call(form);
+               }
+                
+            }
+            
+        });
+    });
+    
+    function checkSheetBook(e,num)
+    {
+        book = document.getElementById("book_id").value;
+        if (book !== '' )
+        {   url = "/checkSheetBook?book_id="+ book +"&physical_sheet="+e.value ;
+            jQuery.ajax({
+            async:false,
+            url: url,
+            success: function (data)
+            {                      
+              var element = jQuery('#check_sheet_book_' + num);
+              element.html(data);
+              element.show();
+            }
+          });
+        }
+    }
 </script>
