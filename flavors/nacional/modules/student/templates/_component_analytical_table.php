@@ -53,8 +53,8 @@
           <td class="text-center" width="5%"><?php echo ($css->getCondition()?$css->getCondition():'<hr/>') ?></td>
           <td class="text-center" width="20%"><?php echo ($css->getApprovedDate() ? format_datetime($css->getApprovedDate()->format('U'),'dd') .' de ' . format_date($css->getApprovedDate()->format('U'), 'MMMM') :'<hr/>') ?> </td>
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
-          <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa'):'' ?></td>
-          <td align="left" width="30%"><?php echo $css->getSubjectName() ?> <?php echo (!$css->getOption()) ? $css->getNumber($year):''?></td>
+          <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa') . ' ' .$css->getNumber($year) :'' ?></td>
+          <td align="left" width="30%"><?php echo $css->getSubjectName() ?></td>
           <?php if( $css->getCourseSubjectStudent()->getIsNotAverageable() &&  $css->getSubjectName() == 'Taller de Sexualidad'): ?>
                 <td class="text-center" width="10%">----</td>
                 <td class="text-center"><?php echo __('Sin calificaciones') ?></td>

@@ -20,41 +20,70 @@
 
 class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
 {
+    const INGLES = 10;
+    const FRANCES = 9 ;
+    
+    protected
+    $language = array(
+      self::INGLES,
+      self::FRANCES
+    );
 
-	public function getCondition()
-	{
-		$instance = $this->approvationInstance();
-		switch (get_class($instance))
-		{
-			case 'StudentApprovedCourseSubject':  
-                            if ($this->getIsEquivalence())
-                            {
-                                return "Equivalencia";
-                            }
-                            else
-                            {
-                                return 'Regular';
-                            }
-			case 'StudentDisapprovedCourseSubject':
-				if ($instance->getExaminationNumber() == 1) 
-				{
-					return 'Regular';
-				}
-				else
-				{
-					return 'R. Comp.';
-				}
-			case 'StudentRepprovedCourseSubject':
-				if (is_null($instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()) || $instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1)
-				{
-					return 'R. Prev.';
-				}
-				else
-				{
-					return 'Libre';
-				}
-		}
-		return;
-	}
+    public function getCondition()
+    {
+        $instance = $this->approvationInstance();
+        switch (get_class($instance))
+        {
+            case 'StudentApprovedCourseSubject':  
+                if ($this->getIsEquivalence())
+                {
+                    return "Equivalencia";
+                }
+                else
+                {
+                    return 'Regular';
+                }
+            case 'StudentDisapprovedCourseSubject':
+                if ($instance->getExaminationNumber() == 1) 
+                {
+                        return 'Regular';
+                }
+                else
+                {
+                        return 'R. Comp.';
+                }
+            case 'StudentRepprovedCourseSubject':
+                if (is_null($instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()) || $instance->getLastStudentExaminationRepprovedSubject()->getExaminationRepprovedSubject()->getExaminationRepproved()->getExaminationType() == 1)
+                {
+                        return 'R. Prev.';
+                }
+                else
+                {
+                        return 'Libre';
+                }
+        }
+        return;
+    }
+        
+    public function getSubjectName()
+    {
+        if($this->getOption())
+        {
+            return $this->css->getCourseSubject()->getSubject()->getName();
+        }
+        else
+        {
+            $year = $this->css->getCourseSubject()->getCareerSubject()->getYear();
+            if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->language) && $year == 6) 
+            {
+                return "Idioma " .$this->getNumber($year). ': ' . $this->css->getCourseSubject()->getSubject()->getName();
+            }
+            else
+            {
+                return $this->css->getCourseSubject()->getSubject()->getName() . ' ' . $this->getNumber($year);
+            }
+        }
+        
+    }
 
 }
