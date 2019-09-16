@@ -74,7 +74,7 @@ class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         else
         {
             $year = $this->css->getCourseSubject()->getCareerSubject()->getYear();
-            if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->language)) //Inglés o frances)
+            if(in_array($this->css->getCourseSubject()->getSubject()->getId(), $this->language) && $year == 6) 
             {
                 return "Idioma " .$this->getNumber($year). ': ' . $this->css->getCourseSubject()->getSubject()->getName();
             }
