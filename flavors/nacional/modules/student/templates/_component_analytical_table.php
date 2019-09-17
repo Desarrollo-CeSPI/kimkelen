@@ -55,7 +55,7 @@
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
           <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa') . ' ' .$css->getNumber($year) :'' ?></td>
           <td align="left" width="30%"><?php echo $css->getSubjectName() ?></td>
-          <?php if( $css->getCourseSubjectStudent()->getIsNotAverageable() &&  $css->getSubjectName() == 'Taller de Sexualidad'): ?>
+          <?php if( $css->getCourseSubjectStudent()->getIsNotAverageable() &&  $css->getSubjectName() == 'Taller de Sexualidad II'): ?>
                 <td class="text-center" width="10%">----</td>
                 <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
           <?php elseif($css->getIsEquivalence()):?>
