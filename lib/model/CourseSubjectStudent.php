@@ -440,6 +440,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $c = new Criteria();
     $c->add(StudentFreePeer::STUDENT_ID, $this->getStudentId());
     $c->add(StudentFreePeer::IS_FREE, true);
+    $c->add(StudentFreePeer::CAREER_SCHOOL_YEAR_ID, $this->getCourseSubject()->getCareerSchoolYear()->getId());
 
     if ($this->getCourseSubject()->hasAttendanceForSubject())
     {
