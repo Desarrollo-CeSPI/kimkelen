@@ -820,6 +820,13 @@ class studentActions extends autoStudentActions
     $this->back_url= $this->getUser()->getAttribute('back_url');
     $this->getUser()->setReferenceFor($this);
     $this->redirect("@medical_certificate");
-  }  
+  }
+
+  public function executePrintStudentCard(sfWebRequest $request)
+  {
+      $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
+      $this->setLayout('cleanLayout');
+      
+  }
 
 }

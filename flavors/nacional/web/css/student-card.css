@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/09/2019, 13:22:11
+    Author     : nvidela
+*/
+
+.logo_student_card
+{ 
+  width: 20%
+}
+
+.header-img
+{
+    
+    margin-left: 10%;
+    display: inline;
+    margin-right: 10%;
+
+}
+
+.title
+{
+    margin-left: 10%;
+    margin-right: 10%;
+    border-top: 2px solid #ccc;
+}
+.title-text
+{
+    width: 49%;
+    display: inline-block;
+    margin-top: -7px;
+     
+}
+
+.title-section
+{
+    text-align: left;
+    background-color: #ccc;
+    padding: 2px;
+    font-weight: bold;
+}
+
+.text-section
+{
+    font-weight: bold;
+}
+
+.body-section
+{
+    font-size: 13px;
+}
+.field-section
+{
+    padding: 3px;
+    text-align: justify;
+}
+
+.box-student-card
+{
+    margin-top:20px;
+    margin-left: 15%;
+    text-align: center;
+    padding:10px;
+    width: 70%;
+    border: 1px solid #aaa;
+    font-size: 13px;
+    font-style: italic;
+}

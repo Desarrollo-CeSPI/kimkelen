@@ -4760,6 +4760,10 @@
                 <source>If is checked, then will show only students who attend theoretical classes.</source>
                 <target>Si esta chequeado, solo se mostraran alumnos que asistan a clases teóricas.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Student card</source>
+                <target>PLANILLA DE ACTUALIZACIÓN DEL ALUMNO</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -112,9 +112,14 @@ sanction:
     prefix_path:          sanction
     column:               id
     with_wildcard_routes: true
+    
 student_print_analytical:
   url:  /student/:id/printAnalytical
   param:  {module: student, action: printAnalytical, sf_format: pdf } # vista de impresión desde browser (debido a bug en wkhtmltopdf que no permite separar tablas por página: page-break-inside:avoid)
+
+print_student_card:
+  url:  /student/:id/printStudentCard
+  param:  {module: student, action: printStudentCard, sf_format: pdf }
 
 print_graduate_certificate:
   url:  /student/:id/printGraduateCertificate
@@ -788,7 +793,6 @@ subject:
 search_schools:
   url: /request/search_schools_ajax
   param: { module: json, action: searchSchools, sf_format: json }
-
 
 get_careers:
   url:   /carreras-de-año-lectivo
