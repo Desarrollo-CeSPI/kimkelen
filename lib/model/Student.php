@@ -1922,6 +1922,17 @@ class Student extends BaseStudent
         return !is_null($this->getCareerStudent());  
 
     }
+    
+    public function getYearsOld()
+    {
+        
+    $start_date = new DateTime($this->getPerson()->getBirthdate());
+    //hoy
+    $now = new DateTime("now");
+    $interval = $now->diff($start_date);
+    $years = $interval->format('%y');
+    return $years;
+    }
   
 }
 

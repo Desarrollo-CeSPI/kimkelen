@@ -56,12 +56,13 @@ and open the template in the editor.
 .field-section
 {
     padding: 3px;
-    text-align: justify;
+    text-align: left;
 }
 
 .box-student-card
 {
-    margin-top:20px;
+    margin-top:2%;
+    margin-bottom: 2%;
     margin-left: 15%;
     text-align: center;
     padding:10px;
@@ -69,4 +70,59 @@ and open the template in the editor.
     border: 1px solid #aaa;
     font-size: 13px;
     font-style: italic;
+}
+
+.table-student-card
+{
+    width: 99%; 
+    border-collapse: collapse;
+    margin-left: 0.5%;
+    margin-top: 1%;
+    
+}
+
+.table-student-card thead
+{
+    background-color: #555;
+    color: #fff;
+    
+}
+th,td{
+    border: 0.5px solid #555;
+}
+
+tbody td
+{
+    height: 20px;
+}
+
+.row-large
+{
+    width: 28%;
+}
+
+.row-short
+{
+    width: 15%;
+}
+
+.text-information
+{
+    font-size:12px;
+}
+
+.text-declaration{
+    font-style: italic;
+    font-size: 11px;
+}
+
+.options
+{
+    font-weight: bold;
+}
+
+
+#student_birthdate
+{
+    margin-left: 25px;
 }

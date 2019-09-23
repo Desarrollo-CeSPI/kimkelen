@@ -25,7 +25,7 @@
 	<label class="text-section">Apellido y nombres: </label> <?php echo $student ?>    
     </div>
     <div class="field-section">
-	<label class="text-section"> Edad: </label> <?php echo ".........."?>
+        <label class="text-section"> Edad: </label> <?php echo ($student->getPerson()->getBirthdate())? __($student->getYearsOld()) ." años " : ".........."?>
         <label class="text-section"> Fecha de nacimiento: </label> <?php echo ($student->getPerson()->getBirthDate()) ? format_date($student->getPerson()->getBirthDate(), "dd/MM/yyyy") : ".............................." ?>
         <label class="text-section"> Lugar de nacimiento: </label> <?php echo ($student->getPerson()->getBirthCityRepresentation()) ? ucwords($student->getPerson()->getBirthCityRepresentation()) . ', ' .ucwords($student->getPerson()->getBirthStaterepresentation()) .', '. $student->getPerson()->getBirthCountryRepresentation() : ".............................."?> 
     </div>
@@ -54,86 +54,12 @@
 </div>
 
 <?php foreach ($student->getStudentTutors() as $st):?>
-    <div class="title-section">
-        <?php echo __('Datos de la madre, padre o tutor legal')?>
-    </div>
-    <div class="body-section">
-            <div class="field-section">
-                <label class="text-section"> Apellido y nombres: </label> <?php echo ".........................................................................................." ?>    
-                <label class="text-section"> ¿Vive?: </label> <?php echo "SI (   ) NO (   )"?>
-            </div>
-            <div class="field-section">
-                <label class="text-section"> Nacionalidad: </label> <?php echo ".........................................."?>
-                <label class="text-section"> Documento: </label> 
-                <label class="text-section"> Tipo: </label><?php echo "...................." ?>
-                <label class="text-section"> Número: </label><?php echo "..........................." ?>
-            </div>
-            <div class="field-section">
-                <label class="text-section"> Domicilio: </label> 
-                <label class="text-section"> Calle: </label> <?php echo ".........................................."?> 
-                <label class="text-section"> e/ </label><?php echo "..........................................." ?>
-                <label class="text-section"> N° </label><?php echo "............................" ?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Piso: </label> <?php echo "...................."?>
-                <label class="text-section"> Dto: </label> <?php echo  "...................."?>
-                <label class="text-section"> Localidad: </label> <?php echo ".................................................."?>
-                <label class="text-section"> C.P.: </label> <?php echo ".................."?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Teléfono (no celular): </label> <?php echo "..............................."?>
-                <label class="text-section"> Teléfonos alternativos (consignar varios): </label> <?php echo ".............................."?>
-            </div>
-            <div class="field-section"> 
-                <?php echo "........................................................"?>
-                <label class="text-section"> Correo electrónico: </label> <?php echo ".............................................................."?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Ocupación: </label> <?php echo "................................................................................................................................."?>
-            </div>
-        </div>
+    <?php include_partial('tutors_student_card',array('tutor'=> $st->getTutor())) ?>
 <?php endforeach;?>
 
 <?php if (count($student->getStudentTutors()) < 2): ?>
     <?php for($i = count($student->getStudentTutors()) ; $i < 2 ; $i++):?>
-        <div class="title-section">
-            <?php echo __('Datos de la madre, padre o tutor legal')?>
-        </div>
-        <div class="body-section">
-            <div class="field-section">
-                <label class="text-section"> Apellido y nombres: </label> <?php echo ".........................................................................................." ?>    
-                <label class="text-section"> ¿Vive?: </label> <?php echo "SI (   ) NO (   )"?>
-            </div>
-            <div class="field-section">
-                <label class="text-section"> Nacionalidad: </label> <?php echo ".........................................."?>
-                <label class="text-section"> Documento: </label> 
-                <label class="text-section"> Tipo: </label><?php echo "...................." ?>
-                <label class="text-section"> Número: </label><?php echo "..........................." ?>
-            </div>
-            <div class="field-section">
-                <label class="text-section"> Domicilio: </label> 
-                <label class="text-section"> Calle: </label> <?php echo ".........................................."?> 
-                <label class="text-section"> e/ </label><?php echo "..........................................." ?>
-                <label class="text-section"> N° </label><?php echo "............................" ?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Piso: </label> <?php echo "...................."?>
-                <label class="text-section"> Dto: </label> <?php echo  "...................."?>
-                <label class="text-section"> Localidad: </label> <?php echo ".................................................."?>
-                <label class="text-section"> C.P.: </label> <?php echo ".................."?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Teléfono (no celular): </label> <?php echo "..............................."?>
-                <label class="text-section"> Teléfonos alternativos (consignar varios): </label> <?php echo ".............................."?>
-            </div>
-            <div class="field-section"> 
-                <?php echo "........................................................"?>
-                <label class="text-section"> Correo electrónico: </label> <?php echo ".............................................................."?>
-            </div>
-            <div class="field-section"> 
-                <label class="text-section"> Ocupación: </label> <?php echo "................................................................................................................................."?>
-            </div>
-        </div>
+        <?php include_partial('tutors_student_card',array('tutor'=> NULL)) ?>
     <?php endfor;?>
 <?php endif; ?>
 
@@ -141,6 +67,84 @@
     Las firmas registradas serán las que deban rubricar la documentación enviada por el establecimiento. 
 </div>
 
+<div class="title-section">
+    <?php echo __('Personas autorizadas a retirar al alumno/a (Deberán ser mayores de 18 años)')?>
+</div>
+
+<table class="table-student-card">
+    <thead>
+        <tr>
+            <th class="row-large"><?php echo __('Nombre y Apellido')?></th>
+            <th class=""><?php echo __('Documento (Tipo y N°)')?></th>
+            <th class="row-short"><?php echo __('Parentesco')?></th>
+            <th class="row-short"><?php echo __('Teléfono particular')?></th>
+            <th class="row-short"><?php echo __('Teléfono celular')?></th>
+            <th class="row-short"><?php echo __('Firma')?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-information">
+    <p class="field-section text-section"> Las personas autorizadas para el retiro de los alumnos únicamente podrán ser las designdas por la madre, 
+    padre o tutor en esta planilla y al momento del retiro deberán acreditar la identidad con el DNI.</p>
+
+    <p class="field-section text-section text-declaration"> Declaro conocer y aceptar las condiciones establecidas en el Reglamento para los Colegios de Pregrado de la UNLP
+    y los requisitos necesarios para justificar inasistencias por razones de salud.</p>
+
+    <div class="title-section">
+        Marcar lo que corresponda
+    </div>
+
+
+    <p class="field-section">¿Autoriza a su hijo/a a ser fotografiado/a y/o filmado/a para la página web del Colegio Nacional "Rafael Hernández" 
+    en actividades con fines educativos?<span class="options"> SI (  ) NO (  ) </span></p>
+
+    <p class="field-section">¿Autoriza a su hijo/a a ingresar al establecimiento después del horario de entrada o retirarse del establecimiento
+        antes del horario habitual de salida, ante la ausencia del profesor correspondiente? <span class="options"> SI (  ) NO (  ) </span></p>
 
 
 
+    <p class="field-section text-section">
+        La modificación de la autorización de ingreso y de retiro del alumno deberá realizarse mediante la
+        concurrencia del padre, madre o tutor quien deberá completar nuevamente la planilla.
+    </p>
+    <p class="field-section text-section">
+        Se informa a los Sres. Padres, madres o tutores legales que cualquier cambio temporal y/o permanente
+        del orden personal, familiar, socioeconómico, legal y/o de salud del alumno/a deberá ser notificado a la
+        institución a la mayor brevedad posible con caracter obligatorio.
+    </p>
+</div>
