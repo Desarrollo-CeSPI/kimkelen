@@ -22,34 +22,66 @@
 </div>
 <div class="body-section">
     <div class="field-section">
-	<label class="text-section">Apellido y nombres: </label> <?php echo $student ?>    
+        <div class="col col_100">
+            <label class="text-section">Apellido y nombres: </label> <?php echo $student ?>
+        </div>
     </div>
     <div class="field-section">
-        <label class="text-section"> Edad: </label> <?php echo ($student->getPerson()->getBirthdate())? __($student->getYearsOld()) ." años " : ".........."?>
-        <label class="text-section"> Fecha de nacimiento: </label> <?php echo ($student->getPerson()->getBirthDate()) ? format_date($student->getPerson()->getBirthDate(), "dd/MM/yyyy") : ".............................." ?>
-        <label class="text-section"> Lugar de nacimiento: </label> <?php echo ($student->getPerson()->getBirthCityRepresentation()) ? ucwords($student->getPerson()->getBirthCityRepresentation()) . ', ' .ucwords($student->getPerson()->getBirthStaterepresentation()) .', '. $student->getPerson()->getBirthCountryRepresentation() : ".............................."?> 
+        <div class="col col_10">
+            <label class="text-section"> Edad: </label> <?php echo ($student->getPerson()->getBirthdate()) ? $student->getYearsOld() :".............." ?>
+        </div>
+        <div class="col col_30">       
+            <label class="text-section"> Fecha de nacimiento: </label> <?php echo ($student->getPerson()->getBirthdate()) ? format_date($student->getPerson()->getBirthDate(), "dd/MM/yyyy") : ".............." ?>
+        </div>
+        <div class="col col_60"> 
+            <label class="text-section"> Lugar de nacimiento: </label> 
+            <?php echo ($student->getPerson()->getBirthCityRepresentation()) ? ucwords($student->getPerson()->getBirthCityRepresentation()) . ', ' .ucwords($student->getPerson()->getBirthStaterepresentation()) .', '. $student->getPerson()->getBirthCountryRepresentation() : "............................................................" ?> 
+        </div>
     </div>
     <div class="field-section">
-        <label class="text-section"> Nacionalidad: </label> <?php echo ($student->getPerson()->getFullNationality())? strtolower($student->getPerson()->getFullNationality())  : ".............................."?>
-        <label class="text-section"> DNI N°: </label> <?php echo $student->getPerson()->getIdentificationNumber() ?>
+        <div class="col col_60">
+            <label class="text-section"> Nacionalidad: </label> <?php echo ($student->getPerson()->getFullNationality()) ? strtolower($student->getPerson()->getFullNationality()) : ".............................."?>
+        </div>
+        <div class="col col_40">   
+            <label class="text-section"> DNI N°: </label> <?php echo $student->getPerson()->getIdentificationNumber() ?>
+        </div>
     </div>
     <div class="field-section">
-	<label class="text-section"> Domicilio: </label> 
-        <label class="text-section"> Calle: </label> <?php echo ($student->getPerson()->getAddress()->getStreet()) ? $student->getPerson()->getAddress()->getStreet() : ".............................."?>
-        <label class="text-section"> N°: </label> <?php echo ($student->getPerson()->getAddress()->getNumber()) ? $student->getPerson()->getAddress()->getNumber() : ".........."?>
+        <div class="col col_80">
+            <label class="text-section"> Domicilio: </label> 
+            <label class="text-section"> Calle: </label> <?php echo ($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getStreet()) ? $student->getPerson()->getAddress()->getStreet() : "................................................................................................"?>
+        </div> 
+        <div class="col col_20">
+            <label class="text-section"> N°: </label> <?php echo ($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getNumber()) ? $student->getPerson()->getAddress()->getNumber() : "......................." ?>
+        </div>
+    </div>
+    <div class="field-section">
+        <div class="col col_20">
+            <label class="text-section"> Piso: </label> <?php echo ($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getFloor()) ? $student->getPerson()->getAddress()->getFloor() : "....................."?> 
+        </div>
+        <div class="col col_20">
+            <label class="text-section"> Dto: </label> <?php echo ($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getFlat()) ? $student->getPerson()->getAddress()->getFlat() : "....................."?>
+        </div>     
+        <div class="col col_40">
+            <label class="text-section"> Localidad: </label> <?php echo($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getCity()) ? $student->getPerson()->getAddress()->getCity() : "..........................................."?>
+        </div>
+        <div class="col col_20">
+            <label class="text-section"> C.P.: </label> <?php echo ($student->getPerson()->getAddress() && $student->getPerson()->getAddress()->getPostalCode())? $student->getPerson()->getAddress()->getPostalCode() : "....................."?>
+        </div> 
     </div>
     <div class="field-section"> 
-        <label class="text-section"> Piso: </label> <?php echo ($student->getPerson()->getAddress()->getFloor()) ? $student->getPerson()->getAddress()->getFloor() : ".........."?>
-        <label class="text-section"> Dto: </label> <?php echo ($student->getPerson()->getAddress()->getFlat()) ? $student->getPerson()->getAddress()->getFlat() : ".........."?>
-        <label class="text-section"> Localidad: </label> <?php echo ($student->getPerson()->getAddress()->getCity()) ? $student->getPerson()->getAddress()->getCity() : ".............................."?>
-        <label class="text-section"> C.P.: </label>
+        
+        <div class="col col_40">
+            <label class="text-section"> Teléfono (no celular): </label> <?php echo ($student->getPerson()->getPhone()) ? $student->getPerson()->getPhone() : "............................."?>  
+        </div>
+        <div class="col col_60">
+            <label class="text-section"> Teléfonos alternativos: </label> <?php echo ($student->getPerson()->getAlternativePhone()) ? $student->getPerson()->getAlternativePhone(): ".........................................................."?>
+        </div>
     </div>
     <div class="field-section"> 
-        <label class="text-section"> Teléfono (no celular): </label> <?php echo ($student->getPerson()->getPhone()) ? $student->getPerson()->getPhone() : ".............................."?>
-        <label class="text-section"> Teléfono alternativo: </label> <?php echo ".............................."?>
-    </div>
-    <div class="field-section"> 
-        <label class="text-section"> Correo electrónico: </label> <?php echo ($student->getPerson()->getEmail()) ? $student->getPerson()->getEmail() : ".............................................................................................................."?>
+        <div class="col col_100">
+            <label class="text-section"> Correo electrónico: </label> <?php echo ($student->getPerson()->getEmail()) ? $student->getPerson()->getEmail() : ".........................................................................................................................."?>
+        </div>
     </div>
 </div>
 

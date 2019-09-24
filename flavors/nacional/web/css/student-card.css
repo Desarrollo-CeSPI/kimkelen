@@ -121,8 +121,44 @@ tbody td
     font-weight: bold;
 }
 
-
-#student_birthdate
+.col
 {
-    margin-left: 25px;
+    display: inline-block;
+}
+.col_10
+{
+    width: 10%;
+}
+.col_20
+{
+    width: 19%;
+}
+
+.col_30
+{
+    width: 29%;
+}
+.col_40
+{
+    width: 39%;
+}
+.col_50
+{
+    width: 49%;
+}
+.col_60
+{
+    width: 59%;
+}
+.col_70
+{
+    width: 69%;
+}
+
+.col_80{
+    width: 79%;
+}
+
+.col_100{
+    width: 99%;
 }
