@@ -184,6 +184,12 @@ classes:
       judicial_restriction:
         type:               boolean
         default:            false
+      photos_authorization:
+        type:               boolean
+        default:            false
+      withdrawal_authorization:
+        type:               boolean
+        default:            false
 
   Brotherhood:
     tableName:            brotherhood
@@ -442,5 +448,38 @@ classes:
       theoric_class_to:
         type:             date
         required:         false
+        
+  AuthorizedPerson:
+    tableName:   authorized_person
+    description:            Representa los datos comunes para las diferentes personas del sistema
+    columns:
+      id:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      family_relationship:
+        type:             integer
+      
+  StudentAuthorizedPerson:
+    tableName:            student_authorized_person
+    description:          representa la relación entre un alumno y la personas autorizadas a retiralo
+    columns:
+      id:
+      authorized_person_id:
+        type:             integer
+        foreignTable:     authorized_person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+    
 
 

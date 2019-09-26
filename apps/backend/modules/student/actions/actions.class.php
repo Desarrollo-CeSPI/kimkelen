@@ -828,5 +828,10 @@ class studentActions extends autoStudentActions
       $this->setLayout('cleanLayout');
       
   }
+  
+  public function executeAuthorizedPersons(sfWebRequest $request)
+  {
+    $this->forward('authorized_person', 'indexByStudent');
+  }
 
 }

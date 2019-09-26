@@ -1,3 +1,12 @@
+authorized_person:
+  class: sfPropelRouteCollection
+  options:
+    model:                AuthorizedPerson
+    module:               authorized_person
+    prefix_path:          authorized_person
+    column:               id
+    with_wildcard_routes: true
+
 medical_certificate:
   class: sfPropelRouteCollection
   options:
@@ -119,7 +128,7 @@ student_print_analytical:
 
 print_student_card:
   url:  /student/:id/printStudentCard
-  param:  {module: student, action: printStudentCard, sf_format: pdf }
+  param:  {module: student, action: printStudentCard, sf_format: pdf, orientation:portrait, page-size:Legal }
 
 print_graduate_certificate:
   url:  /student/:id/printGraduateCertificate

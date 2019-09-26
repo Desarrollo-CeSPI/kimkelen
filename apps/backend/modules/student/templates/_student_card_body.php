@@ -163,10 +163,14 @@
 
 
     <p class="field-section">¿Autoriza a su hijo/a a ser fotografiado/a y/o filmado/a para la página web del Colegio Nacional "Rafael Hernández" 
-    en actividades con fines educativos?<span class="options"> SI (  ) NO (  ) </span></p>
+    en actividades con fines educativos?
+     <span class="options"> <?php echo ($student->getPhotosAuthorization()) ? ' SI ( X  ) NO (  )' : ' SI (  ) NO ( X )' ?> </span>
+    </p>
 
     <p class="field-section">¿Autoriza a su hijo/a a ingresar al establecimiento después del horario de entrada o retirarse del establecimiento
-        antes del horario habitual de salida, ante la ausencia del profesor correspondiente? <span class="options"> SI (  ) NO (  ) </span></p>
+        antes del horario habitual de salida, ante la ausencia del profesor correspondiente? 
+        <span class="options"> <?php echo ($student->getWithdrawalAuthorization()) ? ' SI ( X  ) NO (  )' : ' SI (  ) NO ( X )' ?></span>
+    </p>
 
 
 

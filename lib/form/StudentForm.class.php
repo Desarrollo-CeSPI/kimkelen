@@ -56,6 +56,12 @@ class StudentForm extends BaseStudentForm
 
 	  $this->setValidator('origin_school_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'OriginSchool', 'column' => 'id')));
 	  $this->getWidgetSchema()->setLabel('origin_school_id', 'Origin school');
+          
+          $this->setWidget('photos_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
+          $this->setWidget('withdrawal_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
+          
+          $this->getWidgetSchema()->setLabel('photos_authorization', 'Autorización a a ser fotografiado y/o filmado');
+          $this->getWidgetSchema()->setLabel('withdrawal_authorization', 'Autorización a ingresar o retirarse del establecimiento');
   }
 
   public function unsetFields()
@@ -76,6 +82,7 @@ class StudentForm extends BaseStudentForm
           'Personal data'   =>  $personal_data_fields,
           'Contact data'    =>  array('person-email', 'person-phone', 'person-alternative_phone','person-address'),
           'Health data'   =>  array('blood_group', 'blood_factor', 'health_coverage_id', 'emergency_information'),
+          'Authorizations' => array('photos_authorization' ,'withdrawal_authorization')
     );
   }
 

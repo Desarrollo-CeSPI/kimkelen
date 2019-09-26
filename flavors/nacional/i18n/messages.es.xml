@@ -4764,6 +4764,18 @@
                 <source>Student card</source>
                 <target>PLANILLA DE ACTUALIZACIÓN DEL ALUMNO</target>
             </trans-unit>
+            <trans-unit>
+                <source>Postal code</source>
+                <target>Código postal</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Alternative phone</source>
+                <target>Teléfono alternativo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Authorizations</source>
+                <target>Autorizaciones</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
