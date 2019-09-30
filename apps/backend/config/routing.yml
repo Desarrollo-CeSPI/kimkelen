@@ -1,3 +1,12 @@
+family_relationship:
+  class: sfPropelRouteCollection
+  options:
+    model:                FamilyRelationship
+    module:               family_relationship
+    prefix_path:          family_relationship
+    column:               id
+    with_wildcard_routes: true
+
 authorized_person:
   class: sfPropelRouteCollection
   options:

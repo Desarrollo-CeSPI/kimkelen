@@ -4776,6 +4776,10 @@
                 <source>Authorizations</source>
                 <target>Autorizaciones</target>
             </trans-unit>
+            <trans-unit>
+                <source>Family relationship</source>
+                <target>Parentesco</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

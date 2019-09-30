@@ -17,9 +17,19 @@ ALTER TABLE `authorized_person`
 ADD INDEX `index2` (`person_id` ASC);
 
 ALTER TABLE `authorized_person` 
+ADD INDEX `index3` (`family_relationship` ASC);
+
+ALTER TABLE `authorized_person` 
 ADD CONSTRAINT `fk_authorized_person_1`
   FOREIGN KEY (`person_id`)
   REFERENCES `person` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `authorized_person` 
+ADD CONSTRAINT `fk_authorized_person_2`
+  FOREIGN KEY (`family_relationship`)
+  REFERENCES `family_relationship` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
@@ -48,4 +58,11 @@ ADD CONSTRAINT `fk_student_authorized_person_2`
   REFERENCES `student` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+CREATE TABLE `family_relationship` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+
 
