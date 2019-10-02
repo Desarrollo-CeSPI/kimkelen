@@ -346,3 +346,7 @@ generator:
             label: Print entry form
             action: printEntryForm
             credentials: [edit_student]
+          authorized_persons_to_withdraw:
+            label: Authorized persons to withdraw
+            action: authorizedPersons
+            credentials: [show_authorized_persons]

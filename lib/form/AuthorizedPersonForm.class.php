@@ -18,29 +18,27 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
             $this->getObject()->setPerson($person);
     }
 
-	  $personForm = new PersonForm($person, array('related_class' => 'authorizedPerson', 'embed_as' => 'person'));
-	  $this->embedMergeForm('person', $personForm);
-          
-          $c = new Criteria();
-          
-          if(sfContext::getInstance()->getUser()->isPreceptor())
-          {
-              $c = self::getCriteriaForAvailableStudents();
-     
-                
-          }
-          
-          $this->setValidator('person-sex', new mtValidatorDateString(array('required' => false)));
-          $this->setWidget('student_list',
-            new csWidgetFormStudentMany(array('criteria'=> $c)));
+    $personForm = new PersonForm($person, array('related_class' => 'authorizedPerson', 'embed_as' => 'person'));
+    $this->embedMergeForm('person', $personForm);
 
-            $this->getWidget('student_list')->setLabel('Students');
+    $c = new Criteria();
 
-            $this->setValidator('student_list', new sfValidatorPass());
+    if(sfContext::getInstance()->getUser()->isPreceptor())
+    {
+        $c = self::getCriteriaForAvailableStudents();
+    }
+    
+    $this->getWidget('family_relationship_id')->setLabel('Family relationship');
+    $this->setValidator('person-sex', new mtValidatorDateString(array('required' => false)));
+    $this->setWidget('student_list',
+      new csWidgetFormStudentMany(array('criteria'=> $c)));
 
-            $this->setDefault('student_list',
-            array_map(create_function('$st', 'return $st->getStudentId();'),
-            $this->getObject()->getStudentAuthorizedPersons()));
+    $this->getWidget('student_list')->setLabel('Students');
+    $this->setValidator('student_list', new sfValidatorPass());
+
+    $this->setDefault('student_list',
+    array_map(create_function('$st', 'return $st->getStudentId();'),
+    $this->getObject()->getStudentAuthorizedPersons()));
 
 
   }
@@ -52,7 +50,7 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
   }
   
    public static function getCriteriaForAvailableStudents()
-  {echo "afdasfaf";
+  {
     $ret = array();
     
     $preceptor = PersonalPeer::retrievePreceptorBySfGuardUserId(sfContext::getInstance()->getUser()->getGuardUser()->getId());
@@ -82,7 +80,7 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
   
   public function getFormFieldsDisplay()
   {
-    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-phone', 'person-alternative_phone','family_relationship');
+    $personal_data_fields = array('person-lastname', 'person-firstname', 'person-identification_type', 'person-identification_number', 'person-phone', 'person-alternative_phone','family_relationship_id');
 
     return array(
           'Personal data'   =>  $personal_data_fields,

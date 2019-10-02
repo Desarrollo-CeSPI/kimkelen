@@ -571,7 +571,8 @@ a img
 }
 
 .sf_admin_actions .sf_admin_action_tutors a,
-.sf_admin_list .sf_admin_action_tutors a
+.sf_admin_list .sf_admin_action_tutors a,
+.sf_admin_actions .sf_admin_action_authorized_persons_to_withdraw a
 {
     background-image: url('../images/user-orange-female.png') !important;
 }

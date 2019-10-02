@@ -10,4 +10,10 @@
  */
 class authorized_personGeneratorConfiguration extends BaseAuthorized_personGeneratorConfiguration
 {
+    
+  public function getForm($object = null) 
+  {
+    $form = SchoolBehaviourFactory::getInstance()->getFormFactory()->getAuthorizedPersonForm();
+    return new $form($object);
+  }
 }

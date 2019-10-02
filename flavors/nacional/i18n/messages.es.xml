@@ -4780,6 +4780,14 @@
                 <source>Family relationship</source>
                 <target>Parentesco</target>
             </trans-unit>
+            <trans-unit>
+                <source>Authorized persons to withdraw</source>
+                <target>Personas autorizadas a retirar</target>
+            </trans-unit>Authorized to withdraw
+            <trans-unit>
+                <source>Authorized to withdraw</source>
+                <target>Autorizada a retirar</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -10,14 +10,14 @@ ADD COLUMN `withdrawal_authorization` TINYINT(4) NULL DEFAULT 0 AFTER `photos_au
 CREATE TABLE `authorized_person` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `person_id` INT NULL,
-  `family_relationship` INT NULL,
+  `family_relationship_id` INT NULL,
   PRIMARY KEY (`id`));
 
 ALTER TABLE `authorized_person` 
 ADD INDEX `index2` (`person_id` ASC);
 
 ALTER TABLE `authorized_person` 
-ADD INDEX `index3` (`family_relationship` ASC);
+ADD INDEX `index3` (`family_relationship_id` ASC);
 
 ALTER TABLE `authorized_person` 
 ADD CONSTRAINT `fk_authorized_person_1`
@@ -28,7 +28,7 @@ ADD CONSTRAINT `fk_authorized_person_1`
 
 ALTER TABLE `authorized_person` 
 ADD CONSTRAINT `fk_authorized_person_2`
-  FOREIGN KEY (`family_relationship`)
+  FOREIGN KEY (`family_relationship_id`)
   REFERENCES `family_relationship` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
@@ -64,5 +64,8 @@ CREATE TABLE `family_relationship` (
   `name` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+
+insert into sf_guard_permission (name, descrption) values ('show_authorized_persons' , 'Listar y ver detalle de personas autorizadas a retirar al alumno');
+insert into sf_guard_permission (name, descrption) values ('edit_authorized_persons' , 'Editar personas autorizadas a retirar al alumno');
 
 
