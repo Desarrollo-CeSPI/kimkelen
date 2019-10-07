@@ -822,7 +822,7 @@ class studentActions extends autoStudentActions
     $this->redirect("@medical_certificate");
   }
 
-  public function executePrintStudentCard(sfWebRequest $request)
+  public function executePrintStudentPersonalCard(sfWebRequest $request)
   {
       $this->student = StudentPeer::retrieveByPk($request->getParameter('id'));
       $this->setLayout('cleanLayout');

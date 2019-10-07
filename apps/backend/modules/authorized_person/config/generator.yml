@@ -56,7 +56,7 @@ generator:
         batch_actions:     []
         actions:
           _new:
-            label:         Nuevo persona
+            label:         Nueva persona
             credentials:   [edit_authorized_person]
           _user_export:
         object_actions:

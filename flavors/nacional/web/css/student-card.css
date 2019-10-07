@@ -162,3 +162,12 @@ tbody td
 .col_100{
     width: 99%;
 }
+
+.signatures .col_40
+{
+    border-top: 1px solid #555; 
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 10%;
+    
+}

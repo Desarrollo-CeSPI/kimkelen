@@ -17,6 +17,11 @@ class AuthorizedPerson extends BaseAuthorizedPerson
       return $this->getPerson()->getFirstname();
   }
   
+  public function getPersonFullname()
+  {
+      return $this->getPerson()->getFullName();
+  }
+  
   public function getPersonFullIdentification()
   {
       return $this->getPerson()->getFullIdentification();

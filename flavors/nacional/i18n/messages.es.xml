@@ -4786,7 +4786,23 @@
             </trans-unit>Authorized to withdraw
             <trans-unit>
                 <source>Authorized to withdraw</source>
-                <target>Autorizada a retirar</target>
+                <target>Autorizado/a a retirar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Person</source>
+                <target>Persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Edit Authorized person</source>
+                <target>Editar persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New Authorized person</source>
+                <target>Nueva persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student personal card</source>
+                <target>Planilla personal del alumno</target>
             </trans-unit>
         </body>
     </file>

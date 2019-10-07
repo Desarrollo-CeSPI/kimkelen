@@ -31,8 +31,10 @@ class AuthorizedPersonFormFilter extends BaseAuthorizedPersonFormFilter
     $this->setValidator('year' , new sfValidatorChoice(array('choices' => array_keys($years), 'required' => false)));
 
     
-    $this->setWidget('division_id', new sfWidgetFormPropelChoice(array('model' => 'Division', 'peer_method' => 'retrieveSchoolYearDivisions', 'add_empty' => true)));
-    $this->setValidator('division_id', new sfValidatorPropelChoice(array('model' => 'Division', 'required' => false)));
+    $user_criteria = $this->getDivisionCriteriaForUser(sfContext::getInstance()->getUser());
+    $this->setWidget('division', new sfWidgetFormPropelChoice(array('model' => 'Division', 'criteria' => $user_criteria, 'add_empty' => true)));
+    $this->setValidator('division', new sfValidatorPropelChoice(array('model' => 'Division', 'criteria' => $user_criteria, 'required' => false)));
+    $this->widgetSchema->setHelp('division', 'Filtra por la división actual del alumno.');
     
     //widgets options
     $this->getWidgetSchema()->setHelp('lastname', 'Se filtrara por apellido de la persona.');
@@ -104,5 +106,27 @@ class AuthorizedPersonFormFilter extends BaseAuthorizedPersonFormFilter
       $criteria->addJoin(StudentAuthorizedPersonPeer::AUTHORIZED_PERSON_ID, AuthorizedPersonPeer::ID);
       
     }
+  }
+  
+  private function getDivisionCriteriaForUser($user)
+  {
+    $criteria = new Criteria();
+    $school_year = SchoolYearPeer::retrieveCurrent();
+    $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $school_year->getId());
+    $criteria->addJoin(CareerSchoolYearPeer::ID, DivisionPeer::CAREER_SCHOOL_YEAR_ID);
+    if($user->isPreceptor())
+    {
+      AdminGeneratorFiltersClass::addDivisionPreceptorCriteria($criteria, $user);
+    }
+
+    if($user->isTeacher())
+    {
+      AdminGeneratorFiltersClass::addDivisionTeacherCriteria($criteria, $user);
+    }
+
+    $criteria->addAscendingOrderByColumn(DivisionPeer::YEAR);
+    $criteria->addAscendingOrderByColumn(DivisionPeer::DIVISION_TITLE_ID);
+
+    return $criteria;
   }
 }

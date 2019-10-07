@@ -27,25 +27,43 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
     {
         $c = self::getCriteriaForAvailableStudents();
     }
-    
+    $this->setValidator('person-phone',new sfValidatorString(array( 'required' => true)));
+
     $this->getWidget('family_relationship_id')->setLabel('Family relationship');
-    $this->setValidator('person-sex', new mtValidatorDateString(array('required' => false)));
     $this->setWidget('student_list',
       new csWidgetFormStudentMany(array('criteria'=> $c)));
-
+    $this->setValidator('family_relationship_id', new sfValidatorPropelChoice(array('model' => 'FamilyRelationship', 'column' => 'id', 'required' => true)));
+    
     $this->getWidget('student_list')->setLabel('Students');
     $this->setValidator('student_list', new sfValidatorPass());
 
     $this->setDefault('student_list',
     array_map(create_function('$st', 'return $st->getStudentId();'),
     $this->getObject()->getStudentAuthorizedPersons()));
+    
+    $this->setValidator('person-identification_type', new sfValidatorChoice(array(
+        'choices' => BaseCustomOptionsHolder::getInstance('IdentificationType')->getKeys(),
+        'required'=>true)
+    ));
+    $this->setValidator('person-identification_number',new sfValidatorString(array('max_length' => 20, 'required' => true)));
 
+    $this->setValidator('person-sex',new sfValidatorString(array( 'required' => false)));
+    $this->setValidator('person-cuil',new sfValidatorString(array('required' => false)));
+    $this->setValidator('person-is_active',new sfValidatorString(array( 'required' => false)));    
 
   }
 
   public function unsetFields()
   {
-    unset($this['person_id']);
+    unset($this['person-birthdate']);
+    unset($this['person-birth_country']);
+    unset($this['person-birth_state']);
+    unset($this['person-birth_department']);
+    unset($this['person-birth_city']);
+    unset($this['person-observations']);
+    unset($this['person-address_id']);
+    unset($this['person-user_id']);
+    unset($this['person-nationality_id']);
     
   }
   
@@ -134,6 +152,8 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
     }
 
   }
+  
+
 
 
 }

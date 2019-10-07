@@ -67,5 +67,6 @@ CREATE TABLE `family_relationship` (
 
 insert into sf_guard_permission (name, descrption) values ('show_authorized_persons' , 'Listar y ver detalle de personas autorizadas a retirar al alumno');
 insert into sf_guard_permission (name, descrption) values ('edit_authorized_persons' , 'Editar personas autorizadas a retirar al alumno');
+insert into sf_guard_permission (name, descrption) values ('print_student_card' , 'Imprimir planilla personal del alumno');
 
 

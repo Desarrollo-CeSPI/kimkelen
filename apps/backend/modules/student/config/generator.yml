@@ -349,4 +349,8 @@ generator:
           authorized_persons_to_withdraw:
             label: Authorized persons to withdraw
             action: authorizedPersons
-            credentials: [show_authorized_persons]
+            credentials: [show_authorized_person]
+          student_card:
+            label: Student personal card
+            action: printStudentPersonalCard
+            credentials: [print_student_card]

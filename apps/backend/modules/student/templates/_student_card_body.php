@@ -115,52 +115,43 @@
         </tr>
     </thead>
     <tbody>
+        <?php foreach($student->getStudentAuthorizedPersons() as $sap): ?>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?php echo $sap->getAuthorizedPerson()->getPersonFullname();?></td>
+            <td><?php echo $sap->getAuthorizedPerson()->getPersonFullIdentification();?></td>
+            <td><?php echo $sap->getAuthorizedPerson()->getFamilyRelationship();?></td>
+            <td><?php echo $sap->getAuthorizedPerson()->getPerson()->getPhone();?></td>
+            <td><?php echo $sap->getAuthorizedPerson()->getPerson()->getAlternativePhone();?></td>
             <td></td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <?php endforeach; ?>
+        <?php if (count($student->getStudentAuthorizedPersons()) < 4): ?>
+            <?php for($i = count($student->getStudentAuthorizedPersons()) ; $i < 4 ; $i++):?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <?php endfor;?>
+        <?php endif; ?> 
     </tbody>
 </table>
 
 <div class="text-information">
     <p class="field-section text-section"> Las personas autorizadas para el retiro de los alumnos únicamente podrán ser las designdas por la madre, 
-    padre o tutor en esta planilla y al momento del retiro deberán acreditar la identidad con el DNI.</p>
+    padre o tutor en esta planilla y al momento del retiro deberán acreditar la identidad con el DNI.
+    </p>
 
     <p class="field-section text-section text-declaration"> Declaro conocer y aceptar las condiciones establecidas en el Reglamento para los Colegios de Pregrado de la UNLP
-    y los requisitos necesarios para justificar inasistencias por razones de salud.</p>
+    y los requisitos necesarios para justificar inasistencias por razones de salud.
+    </p>
 
     <div class="title-section">
         Marcar lo que corresponda
     </div>
-
 
     <p class="field-section">¿Autoriza a su hijo/a a ser fotografiado/a y/o filmado/a para la página web del Colegio Nacional "Rafael Hernández" 
     en actividades con fines educativos?
@@ -172,8 +163,6 @@
         <span class="options"> <?php echo ($student->getWithdrawalAuthorization()) ? ' SI ( X  ) NO (  )' : ' SI (  ) NO ( X )' ?></span>
     </p>
 
-
-
     <p class="field-section text-section">
         La modificación de la autorización de ingreso y de retiro del alumno deberá realizarse mediante la
         concurrencia del padre, madre o tutor quien deberá completar nuevamente la planilla.
@@ -183,4 +172,13 @@
         del orden personal, familiar, socioeconómico, legal y/o de salud del alumno/a deberá ser notificado a la
         institución a la mayor brevedad posible con caracter obligatorio.
     </p>
+</div>
+
+<div class="signatures">
+    <div class="col col_40"> 
+        Firma y aclaración de madre,padre o tutor legal
+    </div>
+    <div class="col col_40"> 
+        Firma y aclaración de madre,padre o tutor legal
+    </div>
 </div>
