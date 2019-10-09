@@ -14,7 +14,7 @@ generator:
       actions:
       exportation:
         enabled: true
-        title: Authorized person list
+        title: Personas autorizadas a reitrar a los alumnos
         type: xls
         fieldSelection:
           lastname:
@@ -41,6 +41,10 @@ generator:
             label: Alternative phone
             method: getPersonAlternativePhone
             decorator: text
+          authorized_to_withdraw:
+            label: Authorized to withdraw
+            method: getStudentAuthorizedPersonsString
+            decorator: text
           
       fields:
         #necesario para que no se cuelgue el list
@@ -51,7 +55,7 @@ generator:
       list:
         title:             Listado de personas autorizadas a retirar a los alumnos
         peer_method:       doSelectJoinAll
-        display:           [  person , family_relationship ,_student_authorized_person ]
+        display:           [  person_lastname,person_firstname ,person_full_identification, person_phone ,_student_authorized_person ]
         sort: [ person_lastname ]
         batch_actions:     []
         actions:
@@ -65,7 +69,7 @@ generator:
           _edit:
             credentials:   [edit_authorized_person]
           _delete:
-            credentials:   [edit_authorized_person]            
+            credentials:   [delete_authorized_person]            
       filter:
       form:
       edit:

@@ -55,5 +55,16 @@ class AuthorizedPerson extends BaseAuthorizedPerson
       $con->rollBack();
     }
   }
+  
+   public function getStudentAuthorizedPersonsString()
+  { 
+    $students = array();
+    foreach ($this->getStudentAuthorizedPersons() as $sap)
+    {
+      $students[] = $sap->getStudent();
+    }
+
+    return implode(',  ', $students);
+  }
 }
 

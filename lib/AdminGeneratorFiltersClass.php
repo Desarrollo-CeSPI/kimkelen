@@ -435,6 +435,14 @@ class AdminGeneratorFiltersClass
         $criteria->add(DivisionPreceptorPeer::PRECEPTOR_ID, $preceptor->getId());
       }
       
+       if (!is_null($user->getAttribute('authorized_person_student_id')))
+       {
+           $student_id = $user->getAttribute('authorized_person_student_id');
+            $criteria->addjoin(StudentAuthorizedPersonPeer::AUTHORIZED_PERSON_ID, AuthorizedPersonPeer::ID);
+            $criteria->add(StudentAuthorizedPersonPeer::STUDENT_ID, $student_id);
+            sfContext::getInstance()->getUser()->setAttribute('authorized_person_student_id',NULL);
+       }
+      
     }
 
     return $criteria;

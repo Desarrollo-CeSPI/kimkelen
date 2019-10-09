@@ -4804,6 +4804,10 @@
                 <source>Student personal card</source>
                 <target>Planilla personal del alumno</target>
             </trans-unit>
+            <trans-unit>
+                <source>Person full identification</source>
+                <target>N° documento</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

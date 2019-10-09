@@ -16,19 +16,8 @@ class authorized_personActions extends autoAuthorized_personActions
     
   public function executeIndexByStudent(sfWebRequest $request)
   {
-    parent::executeIndex($request);
-
-    $student_id = $request->getParameter('id');
-    $this->pager = $this->getPager();
-    $c = new Criteria();
-    $c->addjoin(StudentAuthorizedPersonPeer::AUTHORIZED_PERSON_ID, AuthorizedPersonPeer::ID);
-    $c->add(StudentAuthorizedPersonPeer::STUDENT_ID, $student_id);
-
-    $this->pager->SetCriteria($c);
-
-    $this->pager->init();
-
-    $this->setTemplate('index');
+    $this->getUser()->setAttribute('authorized_person_student_id',$request->getParameter('id'));
+    $this->redirect('authorized_person/index');
 
   }
 }

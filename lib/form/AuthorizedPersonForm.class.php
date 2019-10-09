@@ -32,7 +32,7 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
     $this->getWidget('family_relationship_id')->setLabel('Family relationship');
     $this->setWidget('student_list',
       new csWidgetFormStudentMany(array('criteria'=> $c)));
-    $this->setValidator('family_relationship_id', new sfValidatorPropelChoice(array('model' => 'FamilyRelationship', 'column' => 'id', 'required' => true)));
+    $this->setValidator('family_relationship_id', new sfValidatorPropelChoice(array('model' => 'FamilyRelationship', 'column' => 'id', 'required' => false)));
     
     $this->getWidget('student_list')->setLabel('Students');
     $this->setValidator('student_list', new sfValidatorPass());

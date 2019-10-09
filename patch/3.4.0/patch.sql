@@ -65,8 +65,9 @@ CREATE TABLE `family_relationship` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC));
 
-insert into sf_guard_permission (name, descrption) values ('show_authorized_persons' , 'Listar y ver detalle de personas autorizadas a retirar al alumno');
-insert into sf_guard_permission (name, descrption) values ('edit_authorized_persons' , 'Editar personas autorizadas a retirar al alumno');
-insert into sf_guard_permission (name, descrption) values ('print_student_card' , 'Imprimir planilla personal del alumno');
+insert into sf_guard_permission (name, description) values ('show_authorized_person' , 'Listar y ver detalle de personas autorizadas a retirar al alumno');
+insert into sf_guard_permission (name, description) values ('edit_authorized_person' , 'Editar personas autorizadas a retirar al alumno');
+insert into sf_guard_permission (name, description) values ('delete_authorized_person' , 'Eliminar personas autorizadas a retirar al alumno');
+insert into sf_guard_permission (name, description) values ('print_student_card' , 'Imprimir planilla personal del alumno');
 
 

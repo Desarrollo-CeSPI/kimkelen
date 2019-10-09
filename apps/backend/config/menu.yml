@@ -279,6 +279,10 @@ root:
         title: Listado de tutores
         url: tutor/index
         credentials: [show_tutor]
+      authorized_persons:
+        title: Listado de personas autorizadas a retirar a los alumnos
+        url: authorized_person/index
+        credentials: [show_authorized_person]
 
   help:
     title: Ayuda
