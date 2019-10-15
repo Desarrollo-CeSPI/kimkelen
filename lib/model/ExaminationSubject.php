@@ -241,21 +241,8 @@ class ExaminationSubject extends BaseExaminationSubject
     public function canGenerateRecord()
     {   
         $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
-        return $this->getIsClosed() && ! is_null($setting->getValue()) ;
-    }
-    
-    public function getMessageCantGenerateRecord()
-    {
-        if($this->getIsClosed())
-        {
-            return "Can't generate record because the setting parameters are not configured.";
-        }
-        else 
-        {
-             return "Can't generate record because the examination subject is not closed.";
-
-        }
-
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && is_null($record) ;
     }
     
     public function getMessageCantAssignPhysicalSheet()
@@ -313,15 +300,17 @@ class ExaminationSubject extends BaseExaminationSubject
                {
                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
                }
-               elseif ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+               elseif(!is_null($csse->getMark()))
                {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    if ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
                }
-               else
-               {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
-               }
-
                if ($line > $record->getLines())
                {
                    $line = 1;
@@ -355,6 +344,14 @@ class ExaminationSubject extends BaseExaminationSubject
     {
         return $this->canAssignPhysicalSheet();
     }
+    
+    public function canRegenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && !is_null($record) ;
+    }
+    
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));

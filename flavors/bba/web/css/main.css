@@ -2143,6 +2143,11 @@ div.wc-cal-event{
     background-image: url('../images/documents.png') !important;
 }
 
+.sf_admin_list .sf_admin_action_regenerate_record a
+{
+    background-image: url('../images/documents.png') !important;
+}
+
 .sf_admin_list .sf_admin_action_print_record a
 {
     background-image: url('../images/printer_record.png') !important;

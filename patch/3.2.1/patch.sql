@@ -42,11 +42,10 @@ CREATE TABLE `record_detail` (
   `student_id` INT NOT NULL,
   `mark` DOUBLE NULL,
   `is_absent` TINYINT(1) NULL DEFAULT 0,
-  `result` INT NOT NULL,
+  `result` INT NULL,
   `line` INT NOT NULL,
   `sheet` INT NOT NULL,
   PRIMARY KEY (`id`));
-
 
 ALTER TABLE `record_detail` 
 ADD INDEX `index2` (`record_id` ASC),

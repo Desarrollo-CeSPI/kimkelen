@@ -278,7 +278,6 @@ class examination_subjectActions extends autoExamination_subjectActions
     }
       
   }
-  
   public function executeGenerateRecord(sfWebRequest $request)
   { 
     $examination_subject = $this->getRoute()->getObject();

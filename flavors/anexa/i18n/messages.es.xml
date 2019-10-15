@@ -4743,6 +4743,10 @@
                 <source>Value</source>
                 <target>Valor</target>
             </trans-unit>
+            <trans-unit>
+                <source>Regenerate record</source>
+                <target>Regenerar acta</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

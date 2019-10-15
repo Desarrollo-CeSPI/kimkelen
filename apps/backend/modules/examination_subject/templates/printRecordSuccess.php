@@ -42,7 +42,7 @@
   <br>
   <div class="gray-background">
     <span><strong><?php echo 'Acta N°: '; ?></strong>  <?php echo $record->getId(); ?> </span>
-    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' - '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' - '; ?></span>
+    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' _________________ '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' ________ '; ?></span>
   </div>
   <br>
   <table class="gridtable_bordered">
@@ -64,7 +64,7 @@
         <tr>
           <td class="orden"><?php echo $rd->getLine() ?> </td>
           <td class="student" style="text-align: left"><?php echo $rd->getStudent() ?></td>
-          <td class="calification number"><?php echo ($rd->getMark())? $rd->getMark(): '-'; ?></td>
+          <td class="calification number"><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
           <td class="calification text">
             <?php $c = new num2text();?>
             <?php if(!$rd->getIsAbsent()):?>

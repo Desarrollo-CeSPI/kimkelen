@@ -4804,6 +4804,10 @@
                 <source>Edit Setting parameter</source>
                 <target>Editar parámtero de configuración</target>
             </trans-unit>
+            <trans-unit>
+                <source>Regenerate record</source>
+                <target>Regenerar acta</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
