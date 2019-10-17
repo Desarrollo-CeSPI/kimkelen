@@ -236,10 +236,18 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
         return !is_null($record);
     }
     
+    public function canRegenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION_REPPROVED);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && !is_null($record) ;
+    }
+    
     public function canGenerateRecord()
     {   
         $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
-        return $this->getIsClosed() && ! is_null($setting->getValue()) ;
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION_REPPROVED);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && is_null($record) ;
     }
     
     public function getSortedByNameStudentExaminationRepprovedSubjects()

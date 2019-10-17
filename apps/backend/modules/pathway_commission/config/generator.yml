@@ -72,12 +72,17 @@ generator:
             action: assignPhysicalSheet
             condition: canAssignPhysicalSheet
             credentials: [assign_physical_sheet]
-            
+          
           generate_record:
             action: generateRecord
             condition: canGenerateRecord
             credentials: [generate_record]
-            params:         confirm='¿Está seguro? Si el acta ya se encuentra generada se perderán los datos generados anteriormente.'
+                
+          regenerate_record:
+            action: generateRecord
+            condition: canRegenerateRecord
+            credentials: [generate_record]
+            params:         confirm='¿Está seguro? Si regenera el acta se perderán los datos generados anteriormente.'
           
           print_record:
             action: printRecord

@@ -293,7 +293,10 @@ class CourseSubject extends BaseCourseSubject
 
   public function getCountStudents()
   {
-    return $this->countCourseSubjectStudents();
+      if($this->getCourse()->getIsPathway())
+          return $this->countCourseSubjectStudentPathways();
+      else
+        return $this->countCourseSubjectStudents();
 
   }
 
@@ -878,7 +881,7 @@ class CourseSubject extends BaseCourseSubject
      return parent::getCourseSubjectStudents($criteria);
   }
   
-    public function generateRecord()
+    public function generateRecord($con=NULL)
     {
         $con = is_null($con) ? Propel::getConnection() : $con;
 
@@ -912,6 +915,7 @@ class CourseSubject extends BaseCourseSubject
                 $rd->setMark($cssp->getAverageByConfig());
                 $rd->setIsAbsent(FALSE);
 
+                
                 if (is_null($cssp->getStudentApprovedCourseSubject()))
                 {
                     $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
@@ -920,7 +924,8 @@ class CourseSubject extends BaseCourseSubject
                 {
                     $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
                 }
-
+                
+               
                if ($i > $record->getLines())
                {
                    $i = 1;
@@ -985,13 +990,16 @@ class CourseSubject extends BaseCourseSubject
                 $rd->setMark($cssp->getMark());
                 $rd->setIsAbsent(FALSE);
 
-                if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
+                if(!is_null($cssp->getMark()))
                 {
-                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
-                }
-                else
-                {
-                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
                 }
 
                if ($i > $record->getLines())

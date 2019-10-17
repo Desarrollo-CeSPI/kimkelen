@@ -1144,19 +1144,65 @@ class Course extends BaseCourse
   { 
       if ($this->isPathway())
       {
-          $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+            foreach ($this->getCourseSubjects() as $cs)
+            {   $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+                if ($cs->getCountStudents() != 0 && ! is_null($setting->getValue()) && is_null($record))
+                {
+                    return TRUE;
+                }
+            }
       }
       else
       {
-          $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_COURSES);
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_COURSES);
+            foreach ($this->getCourseSubjects() as $cs)
+            {   $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+                if ($this->getIsClosed() && ! is_null($setting->getValue()) && is_null($record))
+                {
+                    return TRUE;
+                }
+            }
       }
-    
-    return $this->getIsClosed() && ! is_null($setting->getValue()) ;
+       
+    return FALSE ;
   }
   
   public function canPrintRecord()
   {
       return $this->canAssignPhysicalSheet();
+  }
+  
+  public function canRegenerateRecord()
+  { 
+      if ($this->isPathway())
+      {
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_PATHWAY);
+            foreach ($this->getCourseSubjects() as $cs)
+            {
+                $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+                if ($cs->getCountStudents() != 0 && ! is_null($setting->getValue()) && !is_null($r))
+                {
+                    return TRUE;
+                }
+            }
+      }
+      else
+      {
+           $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_COURSES);
+          
+           foreach ($this->getCourseSubjects() as $cs)
+            {
+                $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+                if ($this->getIsClosed() != 0 && ! is_null($setting->getValue()) && !is_null($r))
+                {
+                    return TRUE;
+                }
+            }
+      }
+       
+    return FALSE;  
+      
   }
 }
 sfPropelBehavior::add('Course', array('changelog'));

@@ -41,9 +41,6 @@ generator:
             action:         changelogMarks
             label:          Auditoria de notas
             credentials:    [edit_examination_repproved_subject]
-          print_students:
-            label: Print students
-            action: printStudents
           _delete:
             condition: canDelete
             credentials: [edit_examination_repproved_subject]
@@ -55,7 +52,13 @@ generator:
             action: generateRecord
             condition: canGenerateRecord
             credentials: [generate_record]
-            params:         confirm='¿Está seguro? Si el acta ya se encuentra generada se perderán los datos generados anteriormente.'
+                
+          regenerate_record:
+            action: generateRecord
+            condition: canRegenerateRecord
+            credentials: [generate_record]
+            params:         confirm='¿Está seguro? Si regenera el acta se perderán los datos generados anteriormente.'
+          
           print_record:
             action: printRecord
             condition: canPrintRecord
