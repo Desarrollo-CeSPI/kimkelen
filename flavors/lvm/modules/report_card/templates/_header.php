@@ -26,7 +26,8 @@
       <div class="title"><?php echo __('Course') ?>: </div>
       <div class="course"><?php echo $division->getYear(); ?></div>
       <div class="title"><?php echo __('Division') ?>: </div>
-      <div class="division"><?php echo $division->getDivisionTitle(); ?></div>
+      <?php $scsy = StudentCareerSchoolYearPeer::retrieveByStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear())?>
+      <div class="division"><?php $d = $scsy->getDivisions(); echo ($d[0]) ? $d[0]->getDivisionTitle() : '' ?></div>
       <?php if ($student_career->getOrientation()): ?>
         <div class="title"><?php echo __('Career orientation') ?>: </div>
         <div class="orientation"><?php echo (($student_career->getOrientation()) ? $student_career->getOrientation() : '-'); ?></div>
