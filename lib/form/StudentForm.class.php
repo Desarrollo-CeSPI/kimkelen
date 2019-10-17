@@ -60,8 +60,8 @@ class StudentForm extends BaseStudentForm
           $this->setWidget('photos_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
           $this->setWidget('withdrawal_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
           
-          $this->getWidgetSchema()->setLabel('photos_authorization', 'Autorización a a ser fotografiado y/o filmado');
-          $this->getWidgetSchema()->setLabel('withdrawal_authorization', 'Autorización a ingresar o retirarse del establecimiento');
+          $this->getWidgetSchema()->setLabel('photos_authorization', 'Autorización para ser fotografiado y/o filmado');
+          $this->getWidgetSchema()->setLabel('withdrawal_authorization', 'Autorización para ingresar o retirarse del establecimiento');
   }
 
   public function unsetFields()

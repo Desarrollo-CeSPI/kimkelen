@@ -176,9 +176,9 @@
 
 <div class="signatures">
     <div class="col col_40"> 
-        Firma y aclaración de madre,padre o tutor legal
+        Firma y aclaración de madre, padre o tutor legal
     </div>
     <div class="col col_40"> 
-        Firma y aclaración de madre,padre o tutor legal
+        Firma y aclaración de madre, padre o tutor legal
     </div>
 </div>

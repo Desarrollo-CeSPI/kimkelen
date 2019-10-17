@@ -1924,15 +1924,35 @@ class Student extends BaseStudent
     }
     
     public function getYearsOld()
-    {
-        
-    $start_date = new DateTime($this->getPerson()->getBirthdate());
-    //hoy
-    $now = new DateTime("now");
-    $interval = $now->diff($start_date);
-    $years = $interval->format('%y');
-    return $years;
+    { 
+        $start_date = new DateTime($this->getPerson()->getBirthdate());
+        //hoy
+        $now = new DateTime("now");
+        $interval = $now->diff($start_date);
+        $years = $interval->format('%y');
+        return $years;
     }
+    
+    public function getWithdrawalAuthorizationString()
+    {
+        return ($this->getWithdrawalAuthorization())? 'Sí': 'No';
+    }
+    
+    public function getPhotosAuthorizationString()
+    {
+        return ($this->getPhotosAuthorization())? 'Sí': 'No';
+    }
+    
+    public function getStudentAuthorizedPersonsString()
+  {
+    $ap = array();
+    foreach ($this->getStudentAuthorizedPersons() as $sap)
+    {
+      $ap[] = $sap->getAuthorizedPerson() . " (" . $sap->getAuthorizedPerson()->getPerson()->getFullIdentification() . ")";
+    }
+
+    return implode(',  ', $ap);
+  }
   
 }
 

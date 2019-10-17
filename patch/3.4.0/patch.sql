@@ -7,6 +7,12 @@ ALTER TABLE `student`
 ADD COLUMN `photos_authorization` TINYINT(4) NULL DEFAULT 0 AFTER `judicial_restriction`,
 ADD COLUMN `withdrawal_authorization` TINYINT(4) NULL DEFAULT 0 AFTER `photos_authorization`;
 
+CREATE TABLE `family_relationship` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+
 CREATE TABLE `authorized_person` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `person_id` INT NULL,
@@ -59,11 +65,6 @@ ADD CONSTRAINT `fk_student_authorized_person_2`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
-CREATE TABLE `family_relationship` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
 
 insert into sf_guard_permission (name, description) values ('show_authorized_person' , 'Listar y ver detalle de personas autorizadas a retirar al alumno');
 insert into sf_guard_permission (name, description) values ('edit_authorized_person' , 'Editar personas autorizadas a retirar al alumno');

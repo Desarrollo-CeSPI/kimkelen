@@ -18,7 +18,7 @@
  */ ?>
 <div class="header_student_card">
     <div class="header-img">
-        <?php echo image_tag("kimkelen_logo.png", array( 'class'=>'logo_student_card', 'absolute' => true)) ?> 
+        <?php echo image_tag("logo_nacio.png", array( 'class'=>'logo_student_card', 'absolute' => true)) ?> 
     </div> 
     <div class="header-img">
         <?php echo image_tag("unlp_logo.png", array( 'class'=>'logo_unlp_student_card', 'absolute' => true)) ?>

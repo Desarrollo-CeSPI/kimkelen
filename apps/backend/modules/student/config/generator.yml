@@ -108,6 +108,15 @@ generator:
           tutors_email:
             label: Email de tutores
             method: getStudentTutorsEmailString
+          photos_authorization:
+            label: Autorización para fotos
+            method: getPhotosAuthorizationString
+          withdrawal_authorization:
+            label: Autorización para retiro
+            method: getWithdrawalAuthorizationString
+          authorized_persons:
+            label: Personas autorizadas a retirar al alumno
+            method: getStudentAuthorizedPersonsString
           
       fields:
         person:
