@@ -57,8 +57,8 @@ class StudentForm extends BaseStudentForm
 	  $this->setValidator('origin_school_id', new sfValidatorPropelChoice(array('required' => false, 'model' => 'OriginSchool', 'column' => 'id')));
 	  $this->getWidgetSchema()->setLabel('origin_school_id', 'Origin school');
           
-          $this->setWidget('photos_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
-          $this->setWidget('withdrawal_authorization', new sfWidgetFormChoice(array('choices' =>array(0=>'No',1=>"Sí"))));
+          $this->setWidget('photos_authorization', new sfWidgetFormChoice(array('choices' =>array(NULL => '',0=>'No',1=>"Sí"))));
+          $this->setWidget('withdrawal_authorization', new sfWidgetFormChoice(array('choices' =>array(NULL => '',0=>'No',1=>"Sí"))));
           
           $this->getWidgetSchema()->setLabel('photos_authorization', 'Autorización para ser fotografiado y/o filmado');
           $this->getWidgetSchema()->setLabel('withdrawal_authorization', 'Autorización para ingresar o retirarse del establecimiento');

@@ -359,7 +359,9 @@ generator:
             label: Authorized persons to withdraw
             action: authorizedPersons
             credentials: [show_authorized_person]
+            condition: canPrintStudentCard
           student_card:
             label: Student personal card
             action: printStudentPersonalCard
             credentials: [print_student_card]
+            condition: canPrintStudentCard

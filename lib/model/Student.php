@@ -1944,15 +1944,20 @@ class Student extends BaseStudent
     }
     
     public function getStudentAuthorizedPersonsString()
-  {
-    $ap = array();
-    foreach ($this->getStudentAuthorizedPersons() as $sap)
     {
-      $ap[] = $sap->getAuthorizedPerson() . " (" . $sap->getAuthorizedPerson()->getPerson()->getFullIdentification() . ")";
-    }
+      $ap = array();
+      foreach ($this->getStudentAuthorizedPersons() as $sap)
+      {
+        $ap[] = $sap->getAuthorizedPerson() . " (" . $sap->getAuthorizedPerson()->getPerson()->getFullIdentification() . ")";
+      }
 
-    return implode(',  ', $ap);
-  }
+      return implode(',  ', $ap);
+    }
+    
+    public function canPrintStudentCard()
+    {
+        return $this->getIsRegistered();
+    }
   
 }
 

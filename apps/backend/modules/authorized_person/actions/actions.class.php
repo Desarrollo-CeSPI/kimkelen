@@ -20,4 +20,12 @@ class authorized_personActions extends autoAuthorized_personActions
     $this->redirect('authorized_person/index');
 
   }
+  
+  public function executeDelete(sfWebRequest $request)
+  {
+      $ap = AuthorizedPersonPeer::retrieveByPK($request->getParameter('id'));
+      $ap->getPerson()->delete();
+      parent::executeDelete($request);
+      
+  }
 }

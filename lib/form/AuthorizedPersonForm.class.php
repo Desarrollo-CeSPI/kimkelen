@@ -13,6 +13,7 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
   {  
     $this->unsetFields();
     $person = $this->getObject()->getPerson();
+
     if (is_null($person)) {
             $person = new Person();
             $this->getObject()->setPerson($person);
@@ -22,11 +23,8 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
     $this->embedMergeForm('person', $personForm);
 
     $c = new Criteria();
-
-    if(sfContext::getInstance()->getUser()->isPreceptor())
-    {
-        $c = self::getCriteriaForAvailableStudents();
-    }
+    $c = self::getCriteriaForAvailableStudents();
+   
     $this->setValidator('person-phone',new sfValidatorString(array( 'required' => true)));
 
     $this->getWidget('family_relationship_id')->setLabel('Family relationship');
@@ -54,7 +52,7 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
   }
 
   public function unsetFields()
-  {
+  { unset($this['person_id']);
     unset($this['person-birthdate']);
     unset($this['person-birth_country']);
     unset($this['person-birth_state']);
@@ -70,17 +68,30 @@ class AuthorizedPersonForm extends BaseAuthorizedPersonForm
    public static function getCriteriaForAvailableStudents()
   {
     $ret = array();
-    
-    $preceptor = PersonalPeer::retrievePreceptorBySfGuardUserId(sfContext::getInstance()->getUser()->getGuardUser()->getId());
-    $c = new Criteria();         
-    $c->addJoin(StudentPeer::ID, DivisionStudentPeer::STUDENT_ID);
-    $c->addJoin(DivisionStudentPeer::DIVISION_ID,DivisionPreceptorPeer::DIVISION_ID);
-    $c->addJoin(DivisionPreceptorPeer::DIVISION_ID, DivisionPeer::ID);
-    $c->addJoin(DivisionPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
-    $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
-    $c->add(DivisionPreceptorPeer::PRECEPTOR_ID, $preceptor->getId());
+    if(sfContext::getInstance()->getUser()->isPreceptor())
+    {
+        $preceptor = PersonalPeer::retrievePreceptorBySfGuardUserId(sfContext::getInstance()->getUser()->getGuardUser()->getId());
+        $c = new Criteria();         
+        $c->addJoin(StudentPeer::ID, DivisionStudentPeer::STUDENT_ID);
+        $c->addJoin(DivisionStudentPeer::DIVISION_ID,DivisionPreceptorPeer::DIVISION_ID);
+        $c->addJoin(DivisionPreceptorPeer::DIVISION_ID, DivisionPeer::ID);
+        $c->addJoin(DivisionPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+        $c->add(DivisionPreceptorPeer::PRECEPTOR_ID, $preceptor->getId());
 
-    $students = StudentPeer::doSelect($c);           
+        $students = StudentPeer::doSelect($c);           
+    }
+    else
+    {
+        $sy = SchoolYearPeer::retrieveCurrent();
+        $c = new Criteria();         
+        $c->addJoin(StudentPeer::ID, SchoolYearStudentPeer::STUDENT_ID);
+        $c->add(SchoolYearStudentPeer::SCHOOL_YEAR_ID,$sy->getId());
+        $c->add(SchoolYearStudentPeer::IS_DELETED,false);
+        $students = StudentPeer::doSelect($c);           
+
+    }
+    
                 
     foreach ($students as $st)
     {

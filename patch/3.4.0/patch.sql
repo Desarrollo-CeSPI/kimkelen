@@ -4,8 +4,8 @@ ALTER TABLE `person`
 ADD COLUMN `alternative_phone` VARCHAR(255) NULL AFTER `phone`;
 
 ALTER TABLE `student` 
-ADD COLUMN `photos_authorization` TINYINT(4) NULL DEFAULT 0 AFTER `judicial_restriction`,
-ADD COLUMN `withdrawal_authorization` TINYINT(4) NULL DEFAULT 0 AFTER `photos_authorization`;
+ADD COLUMN `photos_authorization` TINYINT(4) NULL DEFAULT NULL AFTER `judicial_restriction`,
+ADD COLUMN `withdrawal_authorization` TINYINT(4) NULL DEFAULT NULL AFTER `photos_authorization`;
 
 CREATE TABLE `family_relationship` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -70,5 +70,6 @@ insert into sf_guard_permission (name, description) values ('show_authorized_per
 insert into sf_guard_permission (name, description) values ('edit_authorized_person' , 'Editar personas autorizadas a retirar al alumno');
 insert into sf_guard_permission (name, description) values ('delete_authorized_person' , 'Eliminar personas autorizadas a retirar al alumno');
 insert into sf_guard_permission (name, description) values ('print_student_card' , 'Imprimir planilla personal del alumno');
+insert into sf_guard_permission (name, description) values ('edit_family_relationship' , 'Editar y dar de alta tipos de parentesco');
 
 
