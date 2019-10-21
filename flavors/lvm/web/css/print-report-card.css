@@ -44,7 +44,7 @@ body {
   border-bottom:1px solid #ccc;
   float:left;
   width:100%;
-  padding:5px 0px;
+  padding:3px 0px;
 }
 
 .header_row .header_right
@@ -65,8 +65,8 @@ body {
 .header_row .name
 {
   float:left;
-  font-size:16px;
-  padding-top: 62px;
+  font-size:14px;
+  padding-top: 65px;
 }
 
 .header_row .course
@@ -82,7 +82,7 @@ body {
 {
   float:left;
   font-size:13px;
-  width:100px;
+  width:20px;
   padding-top: 65px;
 }
 
@@ -172,7 +172,7 @@ table.gridtable th {
 }
 
 table.gridtable td {
-  padding: 3px;
+  padding: 2px;
   border-bottom:1px solid #ccc;
   background-color: #ffffff;
 }
