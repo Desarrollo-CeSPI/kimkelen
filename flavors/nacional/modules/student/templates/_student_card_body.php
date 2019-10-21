@@ -88,7 +88,7 @@
     </div>
 
     <?php $school_name = SchoolBehaviourFactory::getInstance()->getSchoolName(); ?>
-    <p class="field-section">¿Autoriza a su hijo/a a ser fotografiado/a y/o filmado/a para la página web del Colegio <?php echo $school_name ?>
+    <p class="field-section">¿Autoriza a su hijo/a a ser fotografiado/a y/o filmado/a para la página web del <?php echo $school_name ?>
     en actividades con fines educativos?
      <span class="options">  
          <?php if(!is_null($student->getPhotosAuthorization())):?>

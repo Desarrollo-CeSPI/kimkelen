@@ -2040,3 +2040,33 @@ div.wc-cal-event{
 {
     background-image: url('../images/tutor.png') !important;
 }
+
+.warning.change_status
+{
+  display:block !important;
+}
+
+.sf_admin_list .sf_admin_action_graduate_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_regular_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_withdrawn_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_list .sf_admin_action_free_certificate a
+{
+    background-image: url('../images/certificate.png') !important;
+}
+
+.sf_admin_action_change_student_status a
+{
+  background-image: url('../images/change_status.png') !important;
+}
