@@ -59,7 +59,7 @@ class TutorForm extends BaseTutorForm
     return array(
           'Personal data'   =>  array( 'person-lastname', 'person-firstname', 'person-identification_type', 'is_alive', 'person-identification_number', 'person-sex', 'person-cuil', 'person-birthdate', 'person-birth_country', 'person-birth_state','person-birth_department' ,'person-birth_city','person-nationality_id', 'tutor_type_id', 'person-observations' ),
           'Statistics'      => array('occupation_id', 'occupation_category_id', 'study_id'),
-          'Contact data'   => array('person-email', 'person-phone', 'person-address'),
+          'Contact data'   => array('person-email', 'person-phone','person-alternative_phone', 'person-address'),
    //       'System access'  => array('person-username', 'person-password', 'person-password_again'),
           'In charge of'  => array('student_list')
     );

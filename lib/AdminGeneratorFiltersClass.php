@@ -422,6 +422,28 @@ class AdminGeneratorFiltersClass
         self::addCommissionHeadPreceptorCriteria($criteria, $user);
       }
     }
+    elseif ($event->getSubject() instanceof authorized_personActions)
+    {
+      if ($user->isPreceptor())
+      {
+        //filter by preceptor
+        $preceptor = PersonalPeer::retrievePreceptorBySfGuardUserId($user->getGuardUser()->getId());
+        $criteria->addJoin(AuthorizedPersonPeer::ID, StudentAuthorizedPersonPeer::AUTHORIZED_PERSON_ID); 
+        $criteria->addJoin(StudentAuthorizedPersonPeer::STUDENT_ID, StudentPeer::ID); 
+        $criteria->addJoin(StudentPeer::ID, DivisionStudentPeer::STUDENT_ID);
+        $criteria->addJoin(DivisionStudentPeer::DIVISION_ID,DivisionPreceptorPeer::DIVISION_ID);
+        $criteria->add(DivisionPreceptorPeer::PRECEPTOR_ID, $preceptor->getId());
+      }
+      
+       if (!is_null($user->getAttribute('authorized_person_student_id')))
+       {
+           $student_id = $user->getAttribute('authorized_person_student_id');
+            $criteria->addjoin(StudentAuthorizedPersonPeer::AUTHORIZED_PERSON_ID, AuthorizedPersonPeer::ID);
+            $criteria->add(StudentAuthorizedPersonPeer::STUDENT_ID, $student_id);
+            sfContext::getInstance()->getUser()->setAttribute('authorized_person_student_id',NULL);
+       }
+      
+    }
 
     return $criteria;
 
