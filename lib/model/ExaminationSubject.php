@@ -296,6 +296,18 @@ class ExaminationSubject extends BaseExaminationSubject
                $rd->setStudent($csse->getCourseSubjectStudent()->getStudent());
                $rd->setMark($csse->getMark());
                $rd->setIsAbsent($csse->getIsAbsent());
+               
+               if($csse->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+               
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $csse->getStudent());
+               if(count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+              
                if ($csse->getIsAbsent())
                {
                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
@@ -352,6 +364,48 @@ class ExaminationSubject extends BaseExaminationSubject
         return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && !is_null($record) ;
     }
     
+    public function saveCalificationsInRecord()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        if(!is_null($record))
+        {
+            foreach ($this->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $csse->getStudent());
+               $rd->setMark($csse->getMark());
+               $rd->setIsAbsent($csse->getIsAbsent());
+               
+               if($csse->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $csse->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+
+               if ($csse->getIsAbsent())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
+               }
+               elseif(!is_null($csse->getMark()))
+               {
+                    if ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
+               }
+
+               $rd->save();
+            }
+        }      
+    } 
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));

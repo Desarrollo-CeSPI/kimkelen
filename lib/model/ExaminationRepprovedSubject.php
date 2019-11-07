@@ -297,17 +297,33 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
                $rd->setStudent($sers->getStudent());
                $rd->setMark($sers->getMark());
                $rd->setIsAbsent($sers->getIsAbsent());
+              
+               
+               if($sers->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+               
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $sers->getStudent());
+               if(count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+               
                if ($sers->getIsAbsent())
                {
                    $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
                }
-               elseif ($sers->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+               elseif(!is_null($sers->getMark()))
                {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
-               }
-               else
-               {
-                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                   if ($sers->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
                }
 
                if ($i >  $record->getLines())

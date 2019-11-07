@@ -91,6 +91,7 @@ class manual_examination_subjectActions extends autoManual_examination_subjectAc
         {
           $form->getObject()->setCanTakeExamination(true);
           $form->save();
+          $this->examination_subject->saveCalificationsInRecord();
         }
 
         $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');

@@ -90,6 +90,7 @@ class examination_subjectActions extends autoExamination_subjectActions
         foreach ($this->forms as $form)
         {
           $form->getObject()->setCanTakeExamination(true);
+          $this->examination_subject->saveCalificationsInRecord();
           $form->save();
         }
 

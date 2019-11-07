@@ -40,6 +40,8 @@ CREATE TABLE `record_detail` (
   `updated_at` DATETIME NULL,
   `record_id` INT NOT NULL,
   `student_id` INT NOT NULL,
+  `must_correlative` TINYINT(1) DEFAULT 0,
+  `division` VARCHAR(20) NULL,
   `mark` DOUBLE NULL,
   `is_absent` TINYINT(1) NULL DEFAULT 0,
   `result` INT NULL,

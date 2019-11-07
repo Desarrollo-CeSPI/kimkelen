@@ -775,6 +775,13 @@ classes:
         required:         true
         onUpdate:         restrict
         onDelete:         restrict
+      division:
+        type:             varchar(20)
+        required:         false
+      owes_correlative:
+        description:      debe correlativa
+        type:             Boolean
+        default:          false
       mark:
         description:      Nota que obtuvo el alumno
         type:             decimal
