@@ -71,7 +71,7 @@
             </tr>
           </thead>
           <tbody class="print_body">
-            <?php foreach ($student->getAbsences($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
+            <?php foreach ($student->getAbsencesReport($student_career_school_year->getCareerSchoolYearId()) as $absence): ?>
               <tr>
                 <td><?php echo $absence->getFormattedDay(); ?></td>
                 <td><?php echo $absence->getValueString() ?></td>
