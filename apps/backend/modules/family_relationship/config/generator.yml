@@ -1,0 +1,51 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           FamilyRelationship
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          family_relationship
+    with_propel_route:     1
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Parentescos
+        batch_actions: []
+        layout: stacked
+        params: 
+        display: [name]
+        object_actions:
+          _edit:
+            credentials: [edit_family_relationship]
+          _delete:
+            credentials: [edit_family_relationship]
+            condition: canBeDeleted
+        actions:
+          _new:
+            credentials: [edit_family_relationship]
+            label:      Nuevo
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title: Editar parentesco
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar
+      new:
+        title: Nuevo parentesco
+        actions:
+          _list:
+            label:          Volver al listado
+          _save_and_list:
+            label:          Guardar
+          _save_and_add:
+            label:          Guardar y agregar otro
+

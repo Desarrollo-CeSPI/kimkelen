@@ -32,6 +32,8 @@ classes:
         type:               varchar(255)
       phone:
         type:               varchar(255)
+      alternative_phone:
+        type:               varchar(255)
       birthdate:
         type:               date
         required:           false
@@ -182,6 +184,12 @@ classes:
       judicial_restriction:
         type:               boolean
         default:            false
+      photos_authorization:
+        type:               boolean
+        default:            false
+      withdrawal_authorization:
+        type:               boolean
+        default:            false
 
   Brotherhood:
     tableName:            brotherhood
@@ -322,6 +330,8 @@ classes:
         type:             varchar(255)
       flat:
         type:             varchar(255)
+      postal_code:
+        type:             varchar(10)
 
   License:
     tableName:  license
@@ -438,5 +448,52 @@ classes:
       theoric_class_to:
         type:             date
         required:         false
+        
+  AuthorizedPerson:
+    tableName:   authorized_person
+    description:            Representa a las personas autorizadas a retirar al alumno
+    columns:
+      id:
+      person_id:
+        type:             integer
+        foreignTable:     person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      family_relationship_id:
+        type:             integer
+        foreignTable:     family_relationship
+        foreignReference: id
+        onDelete:         restrict
+        default:          null
+      
+  StudentAuthorizedPerson:
+    tableName:            student_authorized_person
+    description:          representa la relación entre un alumno y la personas autorizadas a retiralo
+    columns:
+      id:
+      authorized_person_id:
+        type:             integer
+        foreignTable:     authorized_person
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+      student_id:
+        type:             integer
+        foreignTable:     student
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         cascade
+  
+  FamilyRelationship:
+    tableName:            family_relationship
+    description:          representa parentesco
+    columns:
+      id:
+      name:
+        type:             varchar(255)
+        required:         true
+      _uniques:
+        name: [name]
 
 

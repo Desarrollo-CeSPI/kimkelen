@@ -1,0 +1,20 @@
+index:
+  credentials: [show_authorized_person]
+
+new:
+  credentials: [edit_authorized_person]
+
+create:
+  credentials: [edit_authorized_person]
+
+edit:
+  credentials: [edit_authorized_person]
+
+update:
+  credentials: [edit_authorized_person]
+
+show:
+  credentials: [show_authorized_person]
+
+delete:
+  credentials: [delete_authorized_person]

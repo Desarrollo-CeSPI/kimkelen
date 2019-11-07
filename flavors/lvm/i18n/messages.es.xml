@@ -9239,6 +9239,54 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Generate profile tutor for preceptor %preceptor%</source>
                         <target>Generar perfil tutor para el preceptor %preceptor%</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Student card</source>
+                        <target>PLANILLA DE ACTUALIZACIÓN DEL ALUMNO</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Postal code</source>
+                        <target>Código postal</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Alternative phone</source>
+                        <target>Teléfono alternativo</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Authorizations</source>
+                        <target>Autorizaciones</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Family relationship</source>
+                        <target>Parentesco</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Authorized persons to withdraw</source>
+                        <target>Personas autorizadas a retirar</target>
+                    </trans-unit>Authorized to withdraw
+                    <trans-unit>
+                        <source>Authorized to withdraw</source>
+                        <target>Autorizado/a a retirar</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Person</source>
+                        <target>Persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Edit Authorized person</source>
+                        <target>Editar persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>New Authorized person</source>
+                        <target>Nueva persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Student personal card</source>
+                        <target>Planilla personal del alumno</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Person full identification</source>
+                        <target>N° documento</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>
