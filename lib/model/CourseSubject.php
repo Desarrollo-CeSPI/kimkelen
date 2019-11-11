@@ -1032,4 +1032,44 @@ class CourseSubject extends BaseCourseSubject
             throw $e;
         }             
     }
+    
+    public function saveCalificationsInRecord()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::COURSE);
+        if(!is_null($record))
+        {
+            foreach ($this->getCourseSubjectStudentPathways() as $cssp)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $cssp->getStudent());
+               $rd->setMark($cssp->getMark());
+               $rd->setIsAbsent(FALSE);
+               
+               if($cssp->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getCourse()->getSchoolYear(), $cssp->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+
+
+               if(!is_null($cssp->getMark()))
+               {
+                    if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
+               }
+
+               $rd->save();
+            }
+        }
+    }
 }

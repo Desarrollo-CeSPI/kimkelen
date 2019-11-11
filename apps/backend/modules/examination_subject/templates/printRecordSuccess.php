@@ -50,13 +50,13 @@
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('N°'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
-        <th rowspan="2"><?php echo __('Division'); ?></th>
+        <th class="division_record" rowspan="2"><?php echo __('Division'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
-        <th rowspan="2"><?php echo __('Resultado'); ?></th>
+        <th class="result_record" rowspan="2"><?php echo __('Resultado'); ?></th>
       </tr>
       <tr>
-        <th colspan="1"><?php echo __('Números'); ?></th>
-        <th colspan="1"><?php echo __('Letras'); ?></th>
+        <th class="number_record" colspan="1"><?php echo __('Números'); ?></th>
+        <th class="number_record" colspan="1"><?php echo __('Letras'); ?></th>
       </tr>
     </thead>
     <tbody>
@@ -64,7 +64,7 @@
       <?php foreach ($record->getRecordDetailsForSheet($rs->getSheet()) as $rd): ?>
         <tr>
           <td class="orden"><?php echo $rd->getLine() ?> </td>
-          <td class="student" style="text-align: left"><?php echo $rd->getStudent() ?></td>
+          <td class="student" style="text-align: left"><?php echo $rd->getStudent() ?> <?php if($rd->getOwesCorrelative()): ?> <span class="owes_correlative"><?php echo "(". __('Owes correlative') . ")" ?></span> <?php endif; ?></td>
           <td> <?php echo $rd->getDivision() ?> </td>
           <td class="calification number"><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
           <td class="calification text">

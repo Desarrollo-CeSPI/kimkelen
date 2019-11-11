@@ -4747,6 +4747,10 @@
                 <source>Regenerate record</source>
                 <target>Regenerar acta</target>
             </trans-unit>
+            <trans-unit>
+                <source>Owes correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

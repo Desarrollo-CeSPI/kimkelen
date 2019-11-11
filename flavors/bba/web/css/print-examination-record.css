@@ -202,3 +202,24 @@ table.gridtable_bordered tr {
     background-color: #ffffff;
     text-align:center;
 }
+
+.owes_correlative
+{
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.division_record
+{
+    width: 35px;
+}
+
+.number_record
+{
+    width: 100px;
+}
+
+.result_record
+{
+    width: 110px;
+}

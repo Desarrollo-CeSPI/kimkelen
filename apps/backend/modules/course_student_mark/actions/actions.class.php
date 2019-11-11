@@ -144,6 +144,14 @@ class course_student_markActions extends sfActions
       foreach ($this->forms as $form)
       {
         $form->save();
+        
+        if($this->getCourse()->getIsPathway())
+        {
+            foreach($this->course_subjects as $cs)
+            {
+                $cs->saveCalificationsInRecord();
+            }
+        }
       }
 
       $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');

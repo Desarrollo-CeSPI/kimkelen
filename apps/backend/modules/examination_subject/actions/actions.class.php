@@ -175,15 +175,15 @@ class examination_subjectActions extends autoExamination_subjectActions
 
   }
 
-  public function executePrintStudents(sfWebRequest $request)
+ /* public function executePrintStudents(sfWebRequest $request)
   {
-    /* @var $examination_subject ExaminationSubject */
+    // @var $examination_subject ExaminationSubject 
     $this->examination_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_subject->getStudents();
     
     $this->setLayout('cleanLayout');
 
-  }
+  }*/
 
   /**
    * Redefines parent::getPager because we need to add a custom parameter: career

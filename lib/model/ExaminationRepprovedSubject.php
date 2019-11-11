@@ -359,6 +359,49 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
     {
         return $this->canAssignPhysicalSheet();
     }
+    
+    public function saveCalificationsInRecord()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION_REPPROVED);
+        if(!is_null($record))
+        {
+            foreach ($this->getSortedByNameStudentExaminationRepprovedSubjects() as $sers)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $sers->getStudent());
+               $rd->setMark($sers->getMark());
+               $rd->setIsAbsent($sers->getIsAbsent());
+               
+               if($sers->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $sers->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+
+               if ($sers->getIsAbsent())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
+               }
+               elseif(!is_null($sers->getMark()))
+               {
+                    if ($sers->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
+               }
+
+               $rd->save();
+            }
+        }      
+    }
 }
 
 sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));

@@ -138,6 +138,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
         foreach ($this->forms as $form)
         {
           $form->save();
+          $this->examination_repproved_subject->saveCalificationsInRecord();
         }
 
         $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
@@ -229,14 +230,14 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
       return $pager;
   }
 
-  public function executePrintStudents(sfWebRequest $request)
+ /* public function executePrintStudents(sfWebRequest $request)
   {
     $this->examination_repproved_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_repproved_subject->getStudents();
     $this->previous_url = $request->getReferer();
     $this->setLayout('cleanLayout');
 
-  }
+  }*/
 
   public function executeChangelogMarks(sfWebRequest $request)
   {
