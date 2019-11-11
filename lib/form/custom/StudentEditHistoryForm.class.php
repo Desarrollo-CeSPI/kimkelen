@@ -189,13 +189,13 @@ class StudentEditHistoryForm extends sfFormPropel
         $this->setDefault($name_date, $course_subject_student_examination->getDate());
         $this->getWidget($name_date)->setLabel(__('Day'));
 
-        $name_folio_number = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_folio_number';
+        /*$name_folio_number = 'course_subject_student_examination_id_' . $course_subject_student_examination->getId() .'_folio_number';
         $fields[] = $name_folio_number;
 
         $this->setWidget($name_folio_number, new sfWidgetFormInput());
         $this->setValidator($name_folio_number, new sfValidatorString(array('required' => false)));
         $this->setDefault($name_folio_number, $course_subject_student_examination->getFolioNumber());
-        $this->getWidget($name_folio_number)->setLabel(__('Folio number'));
+        $this->getWidget($name_folio_number)->setLabel(__('Folio number'));*/
 
       }
 
@@ -421,7 +421,7 @@ class StudentEditHistoryForm extends sfFormPropel
           $mark = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_mark'];
           $is_absent = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_is_absent'];
           $date = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_date'];
-          $folio = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_folio_number'];
+          //$folio = $values['course_subject_student_examination_id_' . $course_subject_student_examination->getId() . '_folio_number'];
 
 
           if ($mark !== $course_subject_student_examination->getMark() || $is_absent !== $course_subject_student_examination->getIsAbsent())
@@ -430,7 +430,7 @@ class StudentEditHistoryForm extends sfFormPropel
             $course_subject_student_examination->setMark($mark);
             $course_subject_student_examination->setIsAbsent($is_absent);
             $course_subject_student_examination->setDate($date);
-            $course_subject_student_examination->setFolioNumber($folio);
+           // $course_subject_student_examination->setFolioNumber($folio);
             $course_subject_student_examination->save($con);
 
             SchoolBehaviourFactory::getEvaluatorInstance()->closeCourseSubjectStudentExamination($course_subject_student_examination, $con);
