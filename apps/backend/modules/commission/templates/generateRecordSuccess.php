@@ -19,7 +19,9 @@
         <?php foreach ($course_subjects as $course_subject):?>
           <tr>
             <th><?php echo $course_subject->getCareerSubjectSchoolYear() ?></th>
-            <td><?php echo link_to(__('Generate record'), "course_student_mark/generateRecord?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId())?></td>
+            <?php $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($course_subject->getId(), RecordType::COURSE); ?>
+            <?php $title = is_null($record) ? 'Generate record' : 'Regenerate record'  ?>
+            <td><?php echo link_to(__($title), "course_student_mark/generateRecord?id=" . $course->getId() . "&course_subject_id=" . $course_subject->getId())?></td>
           </tr>
         <?php endforeach?>
       </table>

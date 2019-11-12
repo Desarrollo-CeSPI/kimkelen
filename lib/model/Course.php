@@ -1194,7 +1194,7 @@ class Course extends BaseCourse
            foreach ($this->getCourseSubjects() as $cs)
             {
                 $r = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
-                if ($this->getIsClosed() != 0 && ! is_null($setting->getValue()) && !is_null($r))
+                if ($this->getIsClosed()  && ! is_null($setting->getValue()) && !is_null($r))
                 {
                     return TRUE;
                 }
