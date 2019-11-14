@@ -915,7 +915,16 @@ class CourseSubject extends BaseCourseSubject
                 $rd->setMark($cssp->getAverageByConfig());
                 $rd->setIsAbsent(FALSE);
 
-                
+                if($cssp->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getCourse()->getSchoolYear(), $cssp->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
                 if (is_null($cssp->getStudentApprovedCourseSubject()))
                 {
                     $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
@@ -990,6 +999,17 @@ class CourseSubject extends BaseCourseSubject
                 $rd->setMark($cssp->getMark());
                 $rd->setIsAbsent(FALSE);
 
+                if($cssp->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getCourse()->getSchoolYear(), $cssp->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+               
                 if(!is_null($cssp->getMark()))
                 {
                     if ($cssp->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getPathwayPromotionNote())

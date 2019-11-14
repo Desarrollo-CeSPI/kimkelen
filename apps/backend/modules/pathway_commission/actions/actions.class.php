@@ -256,10 +256,9 @@ class pathway_commissionActions extends autoPathway_commissionActions
       $this->course = $this->getRoute()->getObject();
       $this->course_subjects = $this->course->getCourseSubjects();
       $this->url = 'pathway_commission';
-      
+      $this->getUser()->setAttribute("referer_module", "pathway_commission");
       if (count($this->course_subjects) == 1)
       {
-          $this->getUser()->setAttribute("referer_module", "pathway_commission");
           $this->redirect("course_student_mark/generateRecord?course_subject_id=" . $this->course->getCourseSubject()->getId());
       }
       

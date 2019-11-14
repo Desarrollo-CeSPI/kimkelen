@@ -41,7 +41,7 @@
   <br>
   <div class="gray-background">
     <span><strong><?php echo 'Acta N°: '; ?></strong>  <?php echo $record->getId(); ?> </span>
-    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' _________________ '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' ________ '; ?></span>
+    <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' _______________________ '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' ________ '; ?></span>
   </div>
   <br>
   <table class="gridtable_bordered">
@@ -49,12 +49,13 @@
       <tr class="printColumns">
         <th rowspan="2"><?php echo __('N°'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
+        <th class="division_record" rowspan="2"><?php echo __('Division'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
-        <th rowspan="2"><?php echo __('Resultado'); ?></th>
+        <th class="result_record" rowspan="2"><?php echo __('Resultado'); ?></th>
       </tr>
       <tr>
-        <th><?php echo __('Números'); ?></th>
-        <th><?php echo __('Letras'); ?></th>
+        <th class="number_record" colspan="1"><?php echo __('Números'); ?></th>
+        <th class="number_record" colspan="1"><?php echo __('Letras'); ?></th>
       </tr>
     </thead>
     <tbody>
@@ -63,6 +64,7 @@
         <tr>
           <td class="orden"><?php echo $rd->getLine() ?> </td>
           <td class="student" style="text-align: left"><?php echo $rd->getStudent() ?></td>
+          <td> <?php echo $rd->getDivision() ?> </td>
           <td class="calification number"><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
           <td class="calification text">
             <?php $c = new num2text();?>
