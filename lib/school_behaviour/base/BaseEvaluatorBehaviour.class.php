@@ -938,7 +938,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   }
   public function getResultStringFor($key)
   {
-    return (!is_null($key))? $this->_result_string[$key] : '';
+    return (!is_null($key) && isset($key))? $this->_result_string[$key] : '';
 
   }
 
