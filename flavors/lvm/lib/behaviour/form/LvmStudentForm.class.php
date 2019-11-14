@@ -46,8 +46,9 @@ class LvmStudentForm extends StudentForm
     }
     return array(
           'Personal data'   =>  $personal_data_fields,
-          'Contact data'    =>  array('person-email', 'person-phone', 'person-address'),
+          'Contact data'    =>  array('person-email', 'person-phone', 'person-alternative_phone' ,'person-address'),
           'Health data'   =>  array('blood_group', 'blood_factor', 'health_coverage_id', 'emergency_information'),
+          'Authorizations' => array('photos_authorization' ,'withdrawal_authorization')
           //'System access'   =>  array('person-username', 'person-password', 'person-password_again' ),
 //          'Work data'       =>  array('occupation_id', 'busy_starts_at', 'busy_ends_at'),
     );

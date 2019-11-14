@@ -71,6 +71,18 @@ class StudentFormFilter extends BaseStudentFormFilter
     $this->setValidator('judicial_restriction', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
     
     $this->getWidgetSchema()->moveField('judicial_restriction', sfWidgetFormSchema::LAST);
+    
+    $this->setWidget('withdrawal_authorization', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('withdrawal_authorization', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
+  
+    $this->setWidget('photos_authorization', new sfWidgetFormChoice(array('choices' => array('' => 'si o no', 1 => 'si', 0 => 'no'))));
+    $this->setValidator('photos_authorization', new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))));
+  
+    $this->getWidgetSchema()->setLabel('photos_authorization', 'Autorización para ser fotografiado y/o filmado');
+    $this->getWidgetSchema()->setLabel('withdrawal_authorization', 'Autorización para ingresar o retirarse del establecimiento');
+
+    $this->getWidgetSchema()->moveField('photos_authorization', sfWidgetFormSchema::LAST);
+    $this->getWidgetSchema()->moveField('withdrawal_authorization', sfWidgetFormSchema::LAST);
   }
 
   public function unsetFields()
@@ -189,7 +201,10 @@ class StudentFormFilter extends BaseStudentFormFilter
         'is_graduated' => 'Boolean',
         'disciplinary_sanction_count' => 'Number',
         'status' => 'Number',
-        'health_info' => 'Text'));
+        'health_info' => 'Text',
+        'withdrawal_authorization' => 'Boolean',
+        'photos_authorization' => 'Boolean'
+          ));
   }
 
   public function addIsGraduatedColumnCriteria(Criteria $criteria, $field, $values)
@@ -296,6 +311,22 @@ class StudentFormFilter extends BaseStudentFormFilter
     {
       $criteria->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
       $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $values);
+    }
+  }
+  
+  public function addWithdrawalAuthorizationColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if ($values)
+    { 
+      $criteria->add(StudentPeer::WITHDRAWAL_AUTHORIZATION, TRUE);
+    }
+  }
+  
+  public function addPhotosAuthorizationColumnCriteria(Criteria $criteria , $field, $values)
+  {
+    if ($values)
+    { 
+      $criteria->add(StudentPeer::PHOTOS_AUTHORIZATION, TRUE);
     }
   }
 }

@@ -41,6 +41,10 @@ generator:
             label: Phone
             method: getPersonPhone
             decorator: text
+          person_alternative_phone:
+            label: Alternative phone
+            method: getPersonAlternativePhone
+            decorator: text
           person_email:
             label: Email
             method: getPersonEmail

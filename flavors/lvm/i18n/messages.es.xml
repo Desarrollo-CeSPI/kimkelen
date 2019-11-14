@@ -9260,37 +9260,85 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <target>No puede asignar folio físico porque la mesa de examen no tiene acta generada.</target>
                     </trans-unit>
                     <trans-unit>
-                <source>Sheet</source>
-                <target>Folio</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Physical sheet</source>
-                <target>Folio físico</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Book</source>
-                <target>Libro</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Assign physical sheet to %examination_subject%</source>
-                <target>Asignar folio físico a %examination_subject%</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Print record</source>
-                <target>Imprimir acta</target>
-            </trans-unit>Edit Setting parameter
-            <trans-unit>
-                <source>Edit Setting parameter</source>
-                <target>Editar parámtero de configuración</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Regenerate record</source>
-                <target>Regenerar acta</target>
-            </trans-unit>
-            <trans-unit>
-                <source>Owes correlative</source>
-                <target>Debe correlativa</target>
-            </trans-unit>
+                        <source>Sheet</source>
+                        <target>Folio</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Physical sheet</source>
+                        <target>Folio físico</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Book</source>
+                        <target>Libro</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Assign physical sheet to %examination_subject%</source>
+                        <target>Asignar folio físico a %examination_subject%</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Print record</source>
+                        <target>Imprimir acta</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Edit Setting parameter</source>
+                        <target>Editar parámtero de configuración</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Regenerate record</source>
+                        <target>Regenerar acta</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Owes correlative</source>
+                        <target>Debe correlativa</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Student card</source>
+                        <target>PLANILLA DE ACTUALIZACIÓN DEL ALUMNO</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Postal code</source>
+                        <target>Código postal</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Alternative phone</source>
+                        <target>Teléfono alternativo</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Authorizations</source>
+                        <target>Autorizaciones</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Family relationship</source>
+                        <target>Parentesco</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Authorized persons to withdraw</source>
+                        <target>Personas autorizadas a retirar</target>
+                    </trans-unit>Authorized to withdraw
+                    <trans-unit>
+                        <source>Authorized to withdraw</source>
+                        <target>Autorizado/a a retirar</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Person</source>
+                        <target>Persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Edit Authorized person</source>
+                        <target>Editar persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>New Authorized person</source>
+                        <target>Nueva persona</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Student personal card</source>
+                        <target>Planilla personal del alumno</target>
+                    </trans-unit>
+                    <trans-unit>
+                        <source>Person full identification</source>
+                        <target>N° documento</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>

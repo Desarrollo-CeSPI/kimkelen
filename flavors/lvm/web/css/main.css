@@ -500,7 +500,8 @@ a img
 .sf_admin_list .sf_admin_action_print_report_card a,
 .sf_admin_list .print_certificate a,
 .sf_admin_actions .print_certificate a,
-.sf_admin_actions .sf_admin_action_print_entry_form a
+.sf_admin_actions .sf_admin_action_print_entry_form a,
+.sf_admin_action_student_card a
 {
     background-image: url('../images/printer.png') !important;
 }
@@ -579,7 +580,8 @@ a img
 }
 
 .sf_admin_actions .sf_admin_action_tutors a,
-.sf_admin_list .sf_admin_action_tutors a
+.sf_admin_list .sf_admin_action_tutors a,
+.sf_admin_actions .sf_admin_action_authorized_persons_to_withdraw a
 {
     background-image: url('../images/user-orange-female.png') !important;
 }

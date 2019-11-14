@@ -76,6 +76,9 @@ root:
           change_status_motive:
             title: Motivos de cambio de estado
             url: @change_status_motive
+          family_relationship:
+           title: Tipos de parentesco
+           url: @family_relationship
       users:
         title: Usuarios
         credentials: [[show_user, show_group]]
@@ -294,6 +297,10 @@ root:
         title: Listado de tutores
         url: tutor/index
         credentials: [show_tutor]
+      authorized_persons:
+        title: Listado de personas autorizadas a retirar a los alumnos
+        url: authorized_person/index
+        credentials: [show_authorized_person]
 
   help:
     title: Ayuda

@@ -1,0 +1,96 @@
+generator:
+  class: sfPropelRevisitedGenerator
+  param:
+    model_class:           AuthorizedPerson
+    theme:                 extended
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          authorized_person
+    with_propel_route:     1
+
+    config:
+      actions:
+      exportation:
+        enabled: true
+        title: Personas autorizadas a reitrar a los alumnos
+        type: xls
+        fieldSelection:
+          lastname:
+            label: Lastname
+            method: getPersonLastname
+            decorator: text
+          person_firstname:
+            label: Firstname
+            method: getPersonFirstname
+            decorator: text
+          person_full_identification:
+            label: Identification number
+            method: getPersonFullIdentification
+            decorator: text
+          family_relatioship:
+            label: Family relationship
+            method: getFamilyRelationship
+            decorator: text
+          person_phone:
+            label: Phone
+            method: getPersonPhone
+            decorator: text
+          person_alternative_phone:
+            label: Alternative phone
+            method: getPersonAlternativePhone
+            decorator: text
+          authorized_to_withdraw:
+            label: Authorized to withdraw
+            method: getStudentAuthorizedPersonsString
+            decorator: text
+          
+      fields:
+        #necesario para que no se cuelgue el list
+        person:
+        person_lastname:  { label: Lastname, column_name: PersonPeer::LASTNAME }
+        person_firstname: { label: Firstname, column_name: PersonPeer::FIRSTNAME }
+        student_authorized_person : {label: Authorized to withdraw }
+      list:
+        title:             Listado de personas autorizadas a retirar a los alumnos
+        peer_method:       doSelectJoinAll
+        display:           [  person_lastname,person_firstname ,person_full_identification, person_phone ,_student_authorized_person ]
+        sort: [ person_lastname ]
+        batch_actions:     []
+        actions:
+          _new:
+            label:         Nueva persona
+            credentials:   [edit_authorized_person]
+          _user_export:
+        object_actions:
+          _show:
+            credentials:   [show_authorized_person]
+          _edit:
+            credentials:   [edit_authorized_person]
+          _delete:
+            credentials:   [delete_authorized_person]            
+      filter:
+      form:
+      edit:
+        actions:
+          _list:
+            label:            Volver al listado
+          _save_and_list:
+            label:            Guardar
+      new:
+        actions:
+          _list:
+            label:            Volver al listado
+          _save_and_list:
+            label:            Guardar
+          _save_and_add:
+            label:            Guardar y agregar otro
+      show:
+        title:              Detalles del persona "%%person%%"
+        display:
+          'Personal data': [ _person ]
+          'Authorized to withdraw':  [ _students ]
+        actions:
+          _list:
+            label:            Volver al listado

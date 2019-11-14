@@ -71,7 +71,8 @@ class apiActions extends sfActions
 	 $m_occupation_category = $i_occupation_category->getOccupationCategory($this->getRequestParameter('madre_trab_ocupacion_id'));
 	 $m_study = $this->getRequestParameter('madre_estudios_id');
 	 $m_email = $this->getRequestParameter('madre_email');
-	 $m_phone = $this->getRequestParameter('madre_telefono_celular');
+	 $m_phone = $this->getRequestParameter('madre_telefono');
+         $m_alternative_phone = $this->getRequestParameter('madre_telefono_celular');
 	 $m_birthdate =$this->getRequestParameter('madre_fecha_nacimiento');
 	 $m_birth_city =$this->getRequestParameter('madre_ciudad_nacimiento_id');
 	 $m_nationality = $i_nationality->getNationality($this->getRequestParameter('madre_nacionalidad_id'));
@@ -100,7 +101,8 @@ class apiActions extends sfActions
 	 $p_occupation_category = $i_occupation_category->getOccupationCategory($this->getRequestParameter('padre_trab_ocupacion_id'));
 	 $p_study = $this->getRequestParameter('padre_estudios_id');
 	 $p_email = $this->getRequestParameter('padre_email');
-	 $p_phone = $this->getRequestParameter('padre_telefono_celular');
+         $p_phone = $this->getRequestParameter('padre_telefono');
+	 $p_alternative_phone = $this->getRequestParameter('padre_telefono_celular');
 	 $p_birthdate =$this->getRequestParameter('padre_fecha_nacimiento');
 	 $p_birth_city =$this->getRequestParameter('padre_ciudad_nacimiento_id');
 	 $p_nationality = $i_nationality->getNationality($this->getRequestParameter('padre_nacionalidad_id'));
@@ -217,6 +219,7 @@ class apiActions extends sfActions
                                         $m_person->setIdentificationNumber($m_identification_number);
                                         $m_person->setSex(SexType::FEMALE);
                                         $m_person->setPhone($m_phone);
+                                        $m_person->setAlternativePhone($m_alternative_phone);
                                         $m_person->setEmail($m_email);
                                         $m_person->setBirthdate($m_birthdate);
                                         $m_person->setIsActive(true);
@@ -294,6 +297,7 @@ class apiActions extends sfActions
                                             $p_person->setIdentificationNumber($p_identification_number);
                                             $p_person->setSex(SexType::MALE);
                                             $p_person->setPhone($p_phone);
+                                            $p_person->setAlternativePhone($p_alternative_phone);
                                             $p_person->setEmail($p_email);
                                             $p_person->setBirthdate($p_birthdate);
                                             $p_person->setIsActive(true);

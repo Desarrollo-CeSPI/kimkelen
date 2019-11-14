@@ -4562,7 +4562,7 @@
             <trans-unit>
                 <source>Print record</source>
                 <target>Imprimir acta</target>
-            </trans-unit>Edit Setting parameter
+            </trans-unit>
             <trans-unit>
                 <source>Edit Setting parameter</source>
                 <target>Editar parámtero de configuración</target>
@@ -4582,6 +4582,82 @@
             <trans-unit>
                 <source>Owes correlative</source>
                 <target>Debe correlativa</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student card</source>
+                <target>PLANILLA DE ACTUALIZACIÓN DEL ALUMNO</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Postal code</source>
+                <target>Código postal</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Alternative phone</source>
+                <target>Teléfono alternativo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Authorizations</source>
+                <target>Autorizaciones</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Family relationship</source>
+                <target>Parentesco</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Authorized persons to withdraw</source>
+                <target>Personas autorizadas a retirar</target>
+            </trans-unit>Authorized to withdraw
+            <trans-unit>
+                <source>Authorized to withdraw</source>
+                <target>Autorizado/a a retirar</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Person</source>
+                <target>Persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Edit Authorized person</source>
+                <target>Editar persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>New Authorized person</source>
+                <target>Nueva persona</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Student personal card</source>
+                <target>Planilla personal del alumno</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Person full identification</source>
+                <target>N° documento</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change %student% status</source>
+                <target>Cambiar el estado de %student%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change student status</source>
+                <target>Cambiar estado del alumno</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Withdraw with reserve</source>
+                <target>Retirado con reserva de banco</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Change status motive id</source>
+                <target>Motivo</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Status id</source>
+                <target>Estado</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Start date reserve</source>
+                <target>Fecha de inicio de la reserva</target>
+            </trans-unit>
+            <trans-unit>
+                <source>End date reserve</source>
+                <target>Fecha de fin de la reserva</target>
             </trans-unit>
         </body>
     </file>

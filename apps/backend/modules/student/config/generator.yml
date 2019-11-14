@@ -108,6 +108,15 @@ generator:
           tutors_email:
             label: Email de tutores
             method: getStudentTutorsEmailString
+          photos_authorization:
+            label: Autorización para fotos
+            method: getPhotosAuthorizationString
+          withdrawal_authorization:
+            label: Autorización para retiro
+            method: getWithdrawalAuthorizationString
+          authorized_persons:
+            label: Personas autorizadas a retirar al alumno
+            method: getStudentAuthorizedPersonsString
           
       fields:
         person:
@@ -346,3 +355,13 @@ generator:
             label: Print entry form
             action: printEntryForm
             credentials: [edit_student]
+          authorized_persons_to_withdraw:
+            label: Authorized persons to withdraw
+            action: authorizedPersons
+            credentials: [show_authorized_person]
+            condition: canPrintStudentCard
+          student_card:
+            label: Student personal card
+            action: printStudentPersonalCard
+            credentials: [print_student_card]
+            condition: canPrintStudentCard

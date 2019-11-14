@@ -1,0 +1,178 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/09/2019, 13:22:11
+    Author     : nvidela
+*/
+
+.logo_student_card
+{ 
+  width: 6%
+}
+
+.logo_unlp_student_card
+{ 
+  width: 21%
+}
+
+.header-img
+{
+    
+    margin-left: 10%;
+    display: inline;
+    margin-right: 10%;
+
+}
+
+.title
+{
+    margin-left: 10%;
+    margin-right: 10%;
+    border-top: 2px solid #ccc;
+}
+.title-text
+{
+    width: 49%;
+    display: inline-block;
+    margin-top: -7px;
+     
+}
+
+.title-section
+{
+    text-align: left;
+    background-color: #ccc;
+    padding: 2px;
+    font-weight: bold;
+}
+
+.text-section
+{
+    font-weight: bold;
+}
+
+.body-section
+{
+    font-size: 13px;
+}
+.field-section
+{
+    padding: 3px;
+    text-align: left;
+}
+
+.box-student-card
+{
+    margin-top:2%;
+    margin-bottom: 2%;
+    margin-left: 15%;
+    text-align: center;
+    padding:10px;
+    width: 70%;
+    border: 1px solid #aaa;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.table-student-card
+{
+    width: 99%; 
+    border-collapse: collapse;
+    margin-left: 0.5%;
+    margin-top: 1%;
+    
+}
+
+.table-student-card thead
+{
+    background-color: #555;
+    color: #fff;
+    
+}
+th,td{
+    border: 0.5px solid #555;
+}
+
+tbody td
+{
+    height: 20px;
+}
+
+.row-large
+{
+    width: 28%;
+}
+
+.row-short
+{
+    width: 15%;
+}
+
+.text-information
+{
+    font-size:12px;
+}
+
+.text-declaration{
+    font-style: italic;
+    font-size: 11px;
+}
+
+.options
+{
+    font-weight: bold;
+}
+
+.col
+{
+    display: inline-block;
+}
+.col_10
+{
+    width: 10%;
+}
+.col_20
+{
+    width: 19%;
+}
+
+.col_30
+{
+    width: 29%;
+}
+.col_40
+{
+    width: 39%;
+}
+.col_50
+{
+    width: 49%;
+}
+.col_60
+{
+    width: 59%;
+}
+.col_70
+{
+    width: 69%;
+}
+
+.col_80{
+    width: 79%;
+}
+
+.col_100{
+    width: 99%;
+}
+
+.signatures .col_40
+{
+    border-top: 1px solid #555; 
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 10%;
+    
+}
