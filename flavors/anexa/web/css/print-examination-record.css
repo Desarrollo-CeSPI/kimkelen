@@ -210,3 +210,24 @@ h2 {
   padding: 1px 13px;
   margin-right: 4px;
 }
+
+.owes_correlative
+{
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.division_record
+{
+    width: 35px;
+}
+
+.number_record
+{
+    width: 100px;
+}
+
+.result_record
+{
+    width: 110px;
+}

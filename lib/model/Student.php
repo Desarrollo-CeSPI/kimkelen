@@ -1903,7 +1903,7 @@ class Student extends BaseStudent
                         "fecha"=> $css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : NULL,
                         "nota"=> $css->getMark(),
                         "resultado"=> ($css->getMark())?"Aprobado" : "Desaprobado",
-                        "folio_fisico"=> "",
+                        "folio_fisico"=>  (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '',
                         "acta_resolucion"=> "",
                         "promedio"=> ($analytical->has_completed_career()) ? round($analytical->get_total_average(),2) : NULL ,
                         "promedio_sin_aplazos"=> "",

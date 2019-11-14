@@ -32,6 +32,10 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   const MINIMUN_MARK = 0; //nota minima de un examen
   const MAXIMUN_MARK = 10; //nota maxima de un examen
   const EXEMPT = 'Eximido';
+  
+  const APPROVED = 1;
+  const DISAPPROVED = 2;
+  const ABSENT = 3;
 
 	const PATHWAY_PROMOTION_NOTE = 7;
 
@@ -44,6 +48,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   $_examination_number_short = array(
     self::DECEMBER => 'Reg',
     self::FEBRUARY => 'Comp',
+  );
+  
+  protected
+  $_result_string = array(
+    self::APPROVED => 'Aprobado',
+    self::DISAPPROVED => 'Desaprobado',
+    self::ABSENT => 'Ausente'
   );
 
   public function getExaminationNumbers()
@@ -909,6 +920,26 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
   public function canPrintRegularCertificate($student)
   {
       return ($student->getIsRegistered() && $student->getPerson()->getIsActive());
+  }
+  
+  public function getApprovedResult()
+  {
+      return self::APPROVED;
+  }
+  
+  public function getDisapprovedResult()
+  {
+      return self::DISAPPROVED;
+  }
+  
+  public function getAbsentResult()
+  {
+      return self::ABSENT;
+  }
+  public function getResultStringFor($key)
+  {
+    return (!is_null($key))? $this->_result_string[$key] : '';
+
   }
 
 }

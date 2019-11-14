@@ -4890,6 +4890,58 @@
                 <source>Generate profile tutor for preceptor %preceptor%</source>
                 <target>Generar perfil tutor para el preceptor %preceptor%</target>
             </trans-unit>
+            <trans-unit>
+                <source>Can't generate record because the examination subject is not closed.</source>
+                <target>No puede generar el acta ya que la mesa no está cerrada.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Generate record</source>
+                <target>Generar acta</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Assign physical sheet</source>
+                <target>Asignar folio físico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Can't generate record because the setting parameters are not configured.</source>
+                <target>No puede generar el acta ya que los parámetros no están configurados.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Can't assign physical sheet because the examination subject does not have a record.</source>
+                <target>No puede asignar folio físico porque la mesa de examen no tiene acta generada.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Sheet</source>
+                <target>Folio</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Physical sheet</source>
+                <target>Folio físico</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Book</source>
+                <target>Libro</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Assign physical sheet to %examination_subject%</source>
+                <target>Asignar folio físico a %examination_subject%</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print record</source>
+                <target>Imprimir acta</target>
+            </trans-unit>Edit Setting parameter
+            <trans-unit>
+                <source>Edit Setting parameter</source>
+                <target>Editar parámtero de configuración</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Regenerate record</source>
+                <target>Regenerar acta</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Owes correlative</source>
+                <target>Debe correlativa</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
