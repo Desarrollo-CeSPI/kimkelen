@@ -69,6 +69,8 @@ services:
       TESTING: 'true'
       MAIL_PORT: 25
       MAIL_HOST: localhost
+      FACEBOOK_ID: 'demo'
+      FACEBOOK_SECRET= 'demo'
     ports:
     - 80:80
     volumes:
