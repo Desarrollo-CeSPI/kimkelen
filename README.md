@@ -67,6 +67,8 @@ services:
       MEMCACHE_HOST: memcache
       MEMCACHE_PORT: '11211'
       TESTING: 'true'
+      MAIL_PORT:25
+      MAIL_HOST: localhost
     ports:
     - 80:80
     volumes:
