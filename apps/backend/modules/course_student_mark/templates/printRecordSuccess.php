@@ -126,22 +126,13 @@
       La Plata, __________ de ______________________ de __________
     </div>
 
-    <div style="margin-left: 25px;" class="signature">
-      <p class="signature-text">Vocal</p>
+
+    <div style="float: right" class="signature">
+      <p class="signature-text">Profesor</p>
       <p class="signature-subtext">Firma y aclaración</p>
     </div>
 
-    <div class="signature">
-      <p class="signature-text">Presidente</p>
-      <p class="signature-subtext">Firma y aclaración</p>
-    </div>
-
-    <div class="signature">
-      <p class="signature-text">Vocal</p>
-      <p class="signature-subtext">Firma y aclaración</p>
-    </div>
-
-    <div>
+    <div class="box-sheet">
         <span class="right min-size">
             Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
         </span>
