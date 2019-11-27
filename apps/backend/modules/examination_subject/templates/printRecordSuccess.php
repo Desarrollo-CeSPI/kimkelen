@@ -40,12 +40,11 @@
           <strong><?php echo __('School year'); ?></strong>: <?php echo $examination_subject->getExamination()->getSchoolYear() ?> 
           <strong> <?php echo __('Day')?>:</strong><?php echo  (!is_null($examination_subject->getDate())) ? ' ' . date_format(new DateTime($examination_subject->getDate()), "d/m/Y") : ' _____ / _____ / _____' ?>  &nbsp; </span>
   </div>
-  <br>
+  
   <div class="gray-background">
     <span><strong><?php echo 'Acta N°: '; ?></strong>  <?php echo $record->getId(); ?> </span>
     <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' _______________________ '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' ________ '; ?></span>
   </div>
-  <br>
   <table class="gridtable_bordered">
     <thead>
       <tr class="printColumns">

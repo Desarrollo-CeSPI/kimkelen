@@ -35,14 +35,22 @@
       <strong><?php echo __('Subject'); ?></strong>:
       <strong><?php echo $cs->getCareerSubjectSchoolYear()->getCareerSubject()->getSubject() . ' - ' . $cs->getCareerSubjectSchoolYear()->getYear() . ' año'  ?></strong>
       
-      <span class="right">
-          <strong><?php echo __('School year'); ?></strong>: <?php echo $cs->getCourse()->getSchoolYear() ?> 
+      <span class="right"> 
+          <strong><?php echo __('School year'); ?>:</strong> <?php echo $cs->getCourse()->getSchoolYear() ?> 
+      </span>
   </div>
-  <br>
   <div class="gray-background">
     <span><strong><?php echo 'Acta N°: '; ?></strong>  <?php echo $record->getId(); ?> </span>
     <span class="right"><strong><?php echo 'Tomo: '; ?></strong><?php echo ($rs->getBook()) ? $rs->getBook() : ' _______________________ '; ?>     <strong> <?php echo 'Folio físico: '; ?></strong><?php echo ($rs->getPhysicalSheet())? $rs->getPhysicalSheet() : ' ________ '; ?></span>
   </div>
+  
+  <div class="white-background">
+    <span><strong> <?php echo __('Teacher') ?>:</strong></span>
+    <span>     <?php echo $cs->getCourse()->getTeachersStr() ?> </span>
+  </div>
+    
+ 
+
   <br>
   <table class="gridtable_bordered">
     <thead>
