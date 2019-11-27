@@ -32,7 +32,7 @@
         <td><?php echo $student; ?></td>
         <?php $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear()); ?>
         <?php foreach ($periods as $period): ?>
-          <td><?php echo $form['conduct_' . $student->getId() . '_' . $period->getId()]->render(); ?><?php include_partial('changelog', array('student_career_school_year_conduct' => StudentCareerSchoolYearConductPeer::retrieveOrCreate($student_career_school_year, $period))) ?></td>
+          <td><?php echo $form['conduct_' . $student->getId() . '_' . $period->getId()]->render(); ?><?php //include_partial('changelog', array('student_career_school_year_conduct' => StudentCareerSchoolYearConductPeer::retrieveOrCreate($student_career_school_year, $period))) ?></td>
           <?php echo $form->renderHiddenFields() ?>
         <?php endforeach; ?>
       </tr>
