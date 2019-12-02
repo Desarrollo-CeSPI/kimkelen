@@ -77,6 +77,10 @@ classes:
       is_pathway:
         type: boolean
         default: false
+      evaluation_date:
+        description:       En el caso de trayectorias fecha de examen
+        type:              date
+        required:          false
       _indexes:
         course_division: [school_year_id, division_id]
 

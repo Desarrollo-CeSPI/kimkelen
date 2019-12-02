@@ -4603,6 +4603,10 @@
                 <source>End date reserve</source>
                 <target>Fecha de fin de la reserva</target>
             </trans-unit>
+            <trans-unit>
+                <source>Evaluation date</source>
+                <target>Fecha de examen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
