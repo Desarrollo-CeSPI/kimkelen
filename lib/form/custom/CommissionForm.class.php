@@ -34,7 +34,7 @@ class CommissionForm extends BaseCourseForm
   {
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Asset'));
 
-    unset($this["is_closed"], $this["division_id"], $this["current_period"], $this['related_division_id'], $this['is_pathway']);
+    unset($this["is_closed"], $this["division_id"], $this["current_period"], $this['related_division_id'], $this['is_pathway'],$this['evaluation_date']);
 
     $this->setWidget('starts_at', new csWidgetFormDateInput());
     $this->setValidator('starts_at', new mtValidatorDateString());

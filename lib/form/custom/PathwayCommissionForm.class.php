@@ -29,6 +29,9 @@ class PathwayCommissionForm extends CommissionForm
     {
         parent::configure();
         $this->widgetSchema["school_year_id"] = new sfWidgetFormPropelChoice(array('model' => 'SchoolYear', 'add_empty' => false));
+        $this->setWidget('evaluation_date', new csWidgetFormDateInput());
+        $this->setValidator('evaluation_date', new mtValidatorDateString(array('required' => false)));
+        
     }
     
     public function doSave($con = null)
