@@ -44,7 +44,7 @@ body {
   border-bottom:1px solid #ccc;
   float:left;
   width:100%;
-  padding:3px 0px;
+  padding:0px 0px;
 }
 
 .header_row .header_right
@@ -57,7 +57,7 @@ body {
   float:left;
   font-weight:bold;
   font-size:13px;
-  padding-top:65px;
+  padding-top:40px;
   padding-right:5px;
   padding-left: 5px;
 }
@@ -66,7 +66,7 @@ body {
 {
   float:left;
   font-size:14px;
-  padding-top: 65px;
+  padding-top: 40px;
 }
 
 .header_row .course
@@ -74,7 +74,7 @@ body {
   float:left;
   font-size:13px;
   width:20px;
-  padding-top: 65px;
+  padding-top: 40px;
 
 }
 
@@ -83,21 +83,21 @@ body {
   float:left;
   font-size:13px;
   width:20px;
-  padding-top: 65px;
+  padding-top: 40px;
 }
 
 .header_row .orientation
 {
   float:left;
   font-size:13px;
-  padding-top: 65px;
+  padding-top: 40px;
 }
 
 .header_row .school_year
 {
   float:right;
   font-size:13px;
-  padding-top: 65px;
+  padding-top: 40px;
 }
 
 .row_top
@@ -120,7 +120,7 @@ body {
 .report-content .title {
   font-size: 10px;
   font-weight: bold;
-  padding:5px;
+  padding:3px;
   text-transform: uppercase;
   background:#f2f2f2;
   border-bottom:1px solid #ccc;
@@ -129,7 +129,7 @@ body {
 .report-content .report-average{
   font-size: 12px;
   font-weight: bold;
-  padding:5px;
+  padding:3px;
   text-transform: uppercase;
   background:#f2f2f2;
   border-bottom:1px solid #ccc;
@@ -338,4 +338,9 @@ table.gridtable_bordered tr {
 {
   float:left;
   font-size:13px;
+}
+
+.logo_report_card
+{
+    width: 50px;
 }

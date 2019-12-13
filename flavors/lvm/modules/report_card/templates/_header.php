@@ -19,7 +19,7 @@
  */ ?>
 <div class="report-header">
   <div class="header_row">
-      <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
+      <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true, 'class'=> 'logo_report_card')) ?></div>
     <div class="title"><?php echo __('Student') ?>: </div>
     <div class="name"><?php echo $student ?></div>
     <div class="header_right">
