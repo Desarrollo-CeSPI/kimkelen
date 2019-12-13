@@ -453,7 +453,13 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
   {
     if ($this->hasApprovedAllCourseSubjects($student_career_school_year))
     {
-      $c = StudentApprovedCareerSubjectPeer::retrieveCriteriaForStudentCareerSchoolYear($student_career_school_year);
+      $c = new Criteria();
+      $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $student_career_school_year->getStudentId());
+      $c->addJoin(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID,  CareerSubjectPeer::ID);
+      $c->addJoin(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+      $c->add(CareerSubjectPeer::YEAR,$student_career_school_year->getYear());
+      $c->add(SchoolYearPeer::YEAR, $student_career_school_year->getCareerSchoolYear()->getSchoolYear()->getYear(), Criteria::GREATER_EQUAL);  
+        
       $student_approved_career_subjects = StudentApprovedCareerSubjectPeer::doSelect($c);
       if ($student_career_school_year->getYear() == 4)
       {
@@ -472,6 +478,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         }
         $sum += $sum_introduccion / 3;
         $count = count($student_approved_career_subjects) - 2;
+        
       }
       elseif ($student_career_school_year->getYear() == 6)
       {
@@ -513,6 +520,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         $count = $cant;
 
       }
+      
       if ($sum > 0 && $count > 0)
       {
         return number_format(round(($sum / $count), 2), 2, '.', '');
