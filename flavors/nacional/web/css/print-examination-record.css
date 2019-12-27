@@ -9,7 +9,7 @@
 body {
   text-align:center;
   font-family:Trebuchet MS, sans-serif;
-  font-size:13px;
+  font-size:12px;
   color:#333;
 }
 
@@ -24,12 +24,13 @@ body {
 .record-header {
   float:left;
   width:100%;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .record-header .logo
 {
   float:left !important;
+  width: 100%;
 }
 
 .record-header .logo_fvet
@@ -146,7 +147,7 @@ table.lefttable tr {
 }
 
 h2 {
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 #sfWebDebug,
@@ -156,7 +157,7 @@ h2 {
 }
 
 .article-div {
-  margin: 15px 0;
+  margin: 13px 0;
 }
 
 .observation-box {
@@ -177,7 +178,7 @@ h2 {
 
 table.gridtable_bordered {
     font-family:arial,sans-serif;
-    font-size:14px;
+    font-size:12px;
     color:#333333;
     border:1px solid #ccc;
     border-collapse: collapse;
@@ -213,15 +214,18 @@ table.gridtable_bordered tr {
 {
     width: 35px;
 }
-
-.number_record
+.calification_number
 {
-    width: 100px;
+    width: 40px;
+}
+.calification_letter
+{
+    width: 70px;
 }
 
 .result_record
 {
-    width: 110px;
+    width: 80px;
 }
 
 .box-sheet
@@ -229,4 +233,37 @@ table.gridtable_bordered tr {
     width: 100%;
     float: right;
     margin-top: 10px;
+}
+
+.period_record
+{
+    width: 15px;
+}
+
+.student
+{
+    text-align: left;
+}
+
+.orden
+{
+    width: 15px;
+}
+
+.white-background
+{
+   padding: 4px;
+   font-weight: bold;
+}
+
+.logo_print_record
+{
+    width: 30px;
+}
+
+.sheet-record
+{
+    float:right !important;
+    font-size: 10px;
+    margin-bottom: 0px !important;
 }

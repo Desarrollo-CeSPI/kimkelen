@@ -23,15 +23,12 @@
 <?php foreach ($record->getRecordSheets() as $rs):?>
 <div class="record-wrapper">
   <div class="record-header">
-    <div>
-      <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true)) ?></div>
-    </div>
+      <div class="logo"><?php echo image_tag("kimkelen_logo.png", array('absolute' => true,'class' => 'logo_print_record')) ?></div>
   </div>  
   <div style="text-align: center">
      <h2>Acta de Examen</h2>
   </div>
-
-  <h4><?php echo 'Exámenes de Alumnos: ' . $examination_subject->getExamination() ; ?></h4>
+  <div class="white-background"><?php echo 'Exámenes de Alumnos: ' . $examination_subject->getExamination() ; ?></div>
   <div class="gray-background">
       <strong><?php echo __('Subject'); ?></strong>:
       <strong><?php echo $examination_subject->getSubject() . ' - ' . $examination_subject->getYear() . ' año'  ?></strong>
@@ -48,26 +45,26 @@
   <table class="gridtable_bordered">
     <thead>
       <tr class="printColumns">
-        <th rowspan="2"><?php echo __('N°'); ?> </th>
+        <th class="orden" rowspan="2"><?php echo __('N°'); ?> </th>
         <th rowspan="2"><?php echo __('Apellido y Nombre'); ?></th>
         <th class="division_record" rowspan="2"><?php echo __('Division'); ?></th>
         <th colspan="2"><?php echo __('Mark'); ?></th>
         <th class="result_record" rowspan="2"><?php echo __('Resultado'); ?></th>
       </tr>
       <tr>
-        <th class="number_record" colspan="1"><?php echo __('Números'); ?></th>
-        <th class="number_record" colspan="1"><?php echo __('Letras'); ?></th>
+        <th class="calification_number" colspan="1"><?php echo __('Números'); ?></th>
+        <th class="calification_letter" colspan="1"><?php echo __('Letras'); ?></th>
       </tr>
     </thead>
     <tbody>
       <?php $i = 1; ?>
       <?php foreach ($record->getRecordDetailsForSheet($rs->getSheet()) as $rd): ?>
         <tr>
-          <td class="orden"><?php echo $rd->getLine() ?> </td>
-          <td class="student" style="text-align: left"><?php echo $rd->getStudent() ?> <?php if($rd->getOwesCorrelative()): ?> <span class="owes_correlative"><?php echo "(". __('Owes correlative') . ")" ?></span> <?php endif; ?></td>
+          <td><?php echo $rd->getLine() ?> </td>
+          <td class="student"><?php echo $rd->getStudent() ?> <?php if($rd->getOwesCorrelative()): ?> <span class="owes_correlative"><?php echo "(". __('Owes correlative') . ")" ?></span> <?php endif; ?></td>
           <td> <?php echo $rd->getDivision() ?> </td>
-          <td class="calification number"><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
-          <td class="calification text">
+          <td><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
+          <td>
             <?php $c = new num2text();?>
             <?php if(!$rd->getIsAbsent()):?>
                <?php echo $c->num2str($rd->getMark()) ?>
@@ -80,8 +77,6 @@
       <?php endforeach; ?>
     </tbody>
   </table>
-
-  <br>
   <div class="article-div">
     <strong>Art 34º: </strong><span class="sub">Exámenes regulares:</span> La evaluación en las mesas de exámenes regulares, regulares complementarios o regulares previos, se realizará sobre aquellos contenidos desarrollados durante el ciclo lectivo cursado.
   </div>
@@ -109,8 +104,7 @@
       <span class="little-box"></span>
     </div>
   </div>
-  
-  </br>
+
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>
       <span class="little-box">
@@ -133,7 +127,6 @@
       </span>
     </div>
 
-  <br>
   <div class="record-footer">
       <div class="article-div">
         La Plata, __________ de ______________________ de __________
@@ -150,8 +143,8 @@
         <p class="signature-text">Vocal</p>
         <p class="signature-subtext">Firma y aclaración</p>
       </div>
-      <div>
-          <span class="right min-size" style="margin-bottom: 0px !important;">
+      <div class="sheet-record">
+          <span>
               Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
           </span>
       </div>

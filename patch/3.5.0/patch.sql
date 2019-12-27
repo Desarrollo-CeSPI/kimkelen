@@ -28,8 +28,10 @@ CREATE TABLE `record` (
   `created_at` DATETIME NOT NULL,
   `record_type` INT NOT NULL,
   `course_origin_id` INT NOT NULL,
+  `total_marks` INT NULL,
   `lines` INT NOT NULL,
   `status` INT NOT NULL,
+  `teachers` VARCHAR(255) NULL,
  `username` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`));
 
@@ -40,7 +42,8 @@ CREATE TABLE `record_detail` (
   `updated_at` DATETIME NULL,
   `record_id` INT NOT NULL,
   `student_id` INT NOT NULL,
-  `must_correlative` TINYINT(1) DEFAULT 0,
+  `owes_correlative` TINYINT(1) DEFAULT 0,
+  `partial_marks` VARCHAR(255) NULL,
   `division` VARCHAR(20) NULL,
   `mark` DOUBLE NULL,
   `is_absent` TINYINT(1) NULL DEFAULT 0,
