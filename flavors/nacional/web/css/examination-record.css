@@ -139,6 +139,7 @@ table.lefttable tr {
 .gray-background{
   background:#f2f2f2;
   padding: 4px;
+  margin-bottom: 4px;
 }
 
 h2 {
@@ -200,4 +201,10 @@ table.gridtable_bordered tr {
 .record-footer{
     bottom: 0% !important;
 
-}  
+}
+
+.white-background{
+  background:#ffffff;
+  padding: 4px;
+  margin-bottom: 4px;
+}

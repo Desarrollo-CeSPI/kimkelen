@@ -739,6 +739,10 @@ classes:
         description:      representa la mesa/cursada que da origen al acta
         type:             integer
         required:         true
+      total_marks:
+        description:      para las actas de cursadas, la cantidad de notas parciales.
+        type:             integer
+        required:         false
       lines:
         description:      cantidad de renglones por folio
         type:             integer
@@ -747,6 +751,10 @@ classes:
         description:      estado del acta Activo/Baja
         type:             integer
         required:         true
+      teachers:
+        description:      docentes
+        type:             varchar(255)
+        required:         false
       username:
         description:      usuario que generó el acta
         type:             varchar(100)
@@ -782,6 +790,10 @@ classes:
         description:      debe correlativa
         type:             Boolean
         default:          false
+      partial_marks:
+        description:      para las actas de cursadas las notas parciales.
+        type:             varchar(255)
+        required:         false
       mark:
         description:      Nota que obtuvo el alumno
         type:             decimal

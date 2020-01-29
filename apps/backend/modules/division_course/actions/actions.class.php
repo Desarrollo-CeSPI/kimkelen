@@ -291,10 +291,8 @@ class division_courseActions extends autoDivision_courseActions
   {
       $course = CoursePeer::retrieveByPK($request->getParameter('id')); 
       $this->cs = $course->getCourseSubject();
-      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
-      $this->setLayout('cleanLayout');
-      $this->setTemplate('printRecord','course_student_mark');
-      
+      $this->redirect("course_student_mark/printRecord?course_subject_id=" . $this->cs->getId());
+         
   }
   
 }

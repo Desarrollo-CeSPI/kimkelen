@@ -149,9 +149,12 @@ table.lefttable tr {
 }
 
 .signature {
-  padding: 0 70px;
-  border-bottom-style: dotted;
-  border-bottom-width: thin;
+  float: left;
+margin-top: 50px;
+margin-right: 90px;
+border-top-style: dotted;
+border-top-width: thin;
+min-width: 200px;
 }
 
 .signature-left{
@@ -165,7 +168,12 @@ table.lefttable tr {
 }
 
 .signature-text {
-  padding-bottom: 50px;
+  text-align: center;
+}
+
+.signature-subtext {
+ font-size: 9px !important;
+ text-align: center;
 }
 
 .record-header .school-name
@@ -192,7 +200,7 @@ h2 {
 }
 
 .article-div {
-  margin: 20px 0;
+  margin: 11px 0;
 }
 
 .observation-box {
@@ -222,14 +230,13 @@ h2 {
     width: 35px;
 }
 
-.number_record
+.calification_number
 {
-    width: 100px;
+    width: 40px;
 }
-
-.result_record
+.calification_letter
 {
-    width: 110px;
+    width: 70px;
 }
 
 .box-sheet
@@ -237,4 +244,70 @@ h2 {
     width: 100%;
     float: right;
     margin-top: 10px;
+}
+
+table.gridtable_bordered {
+    font-family:arial,sans-serif;
+    font-size:12px;
+    color:#333333;
+    border:1px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    text-align:left;
+}
+
+table.gridtable_bordered th {
+    padding: 3px;
+    border:1px solid #ccc;
+    font-size:12px;
+}
+
+table.gridtable_bordered td {
+    padding: 3px;
+    border:1px solid #ccc;
+    background-color: #ffffff;
+}
+
+table.gridtable_bordered tr {
+    border:1px solid #ccc;
+    background-color: #ffffff;
+    text-align:center;
+}
+
+
+.period_record
+{
+    width: 15px;
+}
+
+.student
+{
+    text-align: left;
+}
+
+.orden
+{
+    width: 15px;
+}
+
+.white-background
+{
+   padding: 4px;
+   font-weight: bold;
+}
+
+.logo_print_record
+{
+    width: 120px;
+}
+
+.sheet-record
+{
+    float:right !important;
+    font-size: 10px;
+    margin-bottom: 0px !important;
+}
+.result_record
+{
+    width: 80px;
 }

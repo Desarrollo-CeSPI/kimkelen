@@ -740,5 +740,15 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
       }
       return TRUE;
   }
+  
+  public function getMarksAsArray()
+  {
+      $marks = array();
+      foreach ($this->getCourseSubjectStudentMarks() as $cssm)
+      {
+          $marks[$cssm->getMarkNumber()]=$cssm->getMark();
+      }
+      return $marks;
+  }
 
 }

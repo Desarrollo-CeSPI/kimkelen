@@ -894,7 +894,9 @@ class CourseSubject extends BaseCourseSubject
             $r->setRecordType(RecordType::COURSE);
             $r->setCourseOriginId($this->getId());
             $r->setLines($setting->getValue());
+            $r->setTotalMarks($this->countMarks());
             $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setTeachers($this->getCourse()->getTeachersStr());
             $r->setUsername(sfContext::getInstance()->getUser());
             $r->save();
 
@@ -912,6 +914,7 @@ class CourseSubject extends BaseCourseSubject
                 $rd = new RecordDetail();
                 $rd->setRecordId($record->getId());
                 $rd->setStudent($cssp->getStudent());
+                $rd->setPartialMarks(serialize($cssp->getMarksAsArray()));
                 $rd->setMark($cssp->getAverageByConfig());
                 $rd->setIsAbsent(FALSE);
 

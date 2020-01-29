@@ -126,6 +126,11 @@ generator:
             action: generateRecord
             condition: canGenerateRecord
             credentials: [generate_record]
+         
+          regenerate_record:
+            action: generateRecord
+            condition: canRegenerateRecord
+            credentials: [generate_record]
             params:         confirm='¿Está seguro? Si el acta ya se encuentra generada se perderán los datos generados anteriormente.'
             
           print_record:
