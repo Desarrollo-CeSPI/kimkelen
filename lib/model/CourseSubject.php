@@ -871,7 +871,7 @@ class CourseSubject extends BaseCourseSubject
      $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
       
      $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
-     $criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
+     //$criteria->add(CourseSubjectStudentPeer::IS_NOT_AVERAGEABLE, false);
      $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
      $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentCareerSchoolYearPeer::STUDENT_ID);
      $criteria->add(StudentPeer::ID, $ids, Criteria::NOT_IN);
@@ -909,7 +909,7 @@ class CourseSubject extends BaseCourseSubject
             $record_sheet->setSheet($sheet);
             $record_sheet->save();
 
-            foreach ($this->getCourseSubjectStudents() as $cssp)
+            foreach ($this->getCourseSubjectStudentsForPrintReport() as $cssp)
             {
                 $rd = new RecordDetail();
                 $rd->setRecordId($record->getId());
