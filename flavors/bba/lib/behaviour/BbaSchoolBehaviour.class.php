@@ -22,10 +22,10 @@
 class BbaSchoolBehaviour extends BaseSchoolBehaviour
 {
 
-	protected $school_name = "Bachillerato de Bellas Artes";
-        protected $araucano_code = 3231;
-        protected $letter = "B";
-
+    protected $school_name = "Bachillerato de Bellas Artes";
+    protected $araucano_code = 3231;
+    protected $letter = "B";
+    protected $phone= "0221 451 3185 / 452 7733 ";
 
   protected
   $_course_type_options = array(

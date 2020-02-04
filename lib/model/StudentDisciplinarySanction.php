@@ -98,4 +98,4 @@ class StudentDisciplinarySanction extends BaseStudentDisciplinarySanction
   }
 }
 
-sfPropelBehavior::add('StudentDisciplinarySanction', array('changelog'));
+try { sfPropelBehavior::add('StudentDisciplinarySanction', array('changelog'));} catch(sfConfigurationException $e) {}

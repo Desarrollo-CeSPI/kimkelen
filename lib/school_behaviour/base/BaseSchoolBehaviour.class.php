@@ -25,6 +25,7 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
   protected $school_name = "Kimkelen";
   protected $araucano_code = "";
   protected $letter = "";
+  protected $phone = "";
   protected
   $_course_type_options = array(
     CourseType::TRIMESTER => 'Anual con Régimen Trimestral',
@@ -1256,6 +1257,13 @@ class BaseSchoolBehaviour extends InterfaceSchoolBehaviour
     return $total + $diff;
   }
   
+
+  public function getPhone()
+  {
+    return $this->phone;
+
+  }
+
   public function getStudentsForDivision($c, $division)
     {
         $ret = array();

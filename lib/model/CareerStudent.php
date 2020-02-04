@@ -437,4 +437,5 @@ class CareerStudent extends BaseCareerStudent
   }
 
 }
-sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));
+
+try { sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear')); }catch(sfConfigurationException $e) {}

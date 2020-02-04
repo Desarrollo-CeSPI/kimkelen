@@ -13,6 +13,6 @@ all:
 
   facebook:
     app_id: <?php echo $_ENV['FACEBOOK_ID']; ?>
-
+    
     app_secret: <?php echo $_ENV['FACEBOOK_SECRET']; ?>
 

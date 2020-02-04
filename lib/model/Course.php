@@ -1127,4 +1127,5 @@ class Course extends BaseCourse
       return !$this->getIsClosed();
   }
 }
-sfPropelBehavior::add('Course', array('changelog'));
+
+try { sfPropelBehavior::add('Course', array('changelog')); }catch(sfConfigurationException $e) {}

@@ -1,0 +1,16 @@
+dev:
+  facebook:
+    app_id: #YOUR_FACEBOOK_API_ID#
+    app_secret: #YOUR_FACEBOOK_API_KEY#
+
+  sf_guard_extra_plugin:
+    mail_from: "no-responder@example.org"
+    name_from:        Kimkëlen
+    subject_request:  Pedido de reseteo de contraseña
+    subject_success:  Nueva contraseña
+    reset_type:       set # set to `ask` for asking (see above)
+
+prod:
+  facebook:
+    api_id: #YOUR_FACEBOOK_API_ID#
+    app_secret: #YOUR_FACEBOOK_API_KEY#

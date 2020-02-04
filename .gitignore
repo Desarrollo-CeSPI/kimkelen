@@ -2,6 +2,8 @@
 /apps/backend/config/pdf_configs.yml
 /config/*xml
 /config/propel.ini
+/apps/tutors_frontend/config/app.yml
+/config/deploy*.rb
 /config/nc_flavor.yml
 /config/school_behaviour
 /cache/[a-zA-Z]*
@@ -27,4 +29,5 @@
 /web/dcFormExtraPlugin
 /web/sfTCPDFPlugin
 /web/css
+/web/js/frontend
 /web/images

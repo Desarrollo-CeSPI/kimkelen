@@ -87,6 +87,7 @@ class Tutor extends BaseTutor
     return implode(',  ', $students);
   }
   
+
   public function canAddPreceptor()
   {
     $c = new Criteria();
@@ -146,4 +147,46 @@ class Tutor extends BaseTutor
     }
 
   }
+
+  public function canBeDeactivated()
+  {
+      return $this->getPerson()->getIsActive();
+  }
+  
+  public function canBeActivated()
+  {
+      return !$this->getPerson()->getIsActive();
+  }
+
+
+  public function getStudentsArray()
+  {
+	$students = array();
+    foreach ($this->getStudentTutors() as $student_tutor)
+    {
+      $students[] = $student_tutor->getStudent();
+    }
+
+    return $students;
+	  
+  }
+  
+  public function canGenerateUser()
+  {
+      return is_null($this->getPerson()->getUserId()) && $this->getPerson()->getIsActive();
+  }
+
+  public function getMessageCantGenerateUser()
+  {
+    $has_id = $this->getPerson()->getUserId();
+
+    if ($has_id)
+    {
+      return 'User already created';
+    }
+    elseif (!$this->getPerson()->getIsActive()){
+      return 'Person must be active';
+    }
+  }
 }
+

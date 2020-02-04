@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:         Kimkëlen tutores
+    description:   Sistema de acceso a tutores
+    keywords:      kimkelen, CeSPI, Sistema de alumnos, frontend
+    language:      es_AR
+    #robots:       index, follow
+
+  stylesheets:    []
+
+  javascripts:    []
+    #jquery-ui-1.7.2.custom.min.js, jquery.cookie.js, no-conflict.js, /sfProtoculousPlugin/js/prototype.js, main.js, i18n/jquery-ui-i18n.js]
+
+  has_layout:     on
+  layout:         layout

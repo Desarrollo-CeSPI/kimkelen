@@ -25,6 +25,7 @@ class sfContext
   protected
     $dispatcher    = null,
     $configuration = null,
+    $mailerConfiguration = array(),
     $factories     = array();
 
   protected static
@@ -504,5 +505,26 @@ class sfContext
     {
       $this->getLogger()->shutdown();
     }
+  }
+
+
+  /**
+   * Retrieves the mailer.
+   *
+   * @return sfMailer The current sfMailer implementation instance.
+   */
+  public function getMailer()
+  {
+    if (!isset($this->factories['mailer']))
+    {
+      $this->factories['mailer'] = new $this->mailerConfiguration['class']($this->dispatcher, $this->mailerConfiguration);
+    }
+
+    return $this->factories['mailer'];
+  }
+
+  public function setMailerConfiguration($configuration)
+  {
+    $this->mailerConfiguration = $configuration;
   }
 }

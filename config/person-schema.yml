@@ -373,6 +373,23 @@ classes:
       _uniques:
         license_type:  [name]
         
+  TokenUser:
+    tableName: token_user
+    description: Tokens válidos para reseteo de contraseña
+    columns:
+      id:
+      sf_guard_user_id:
+        type:             integer
+        foreignTable:     sf_guard_user
+        required: true
+        foreignReference: id
+        onUpdate:         cascade
+        onDelete:         restrict
+      token:
+        type: varchar(50)
+        unique: true
+      created_at:
+        
   MedicalCertificate:
     tableName: medical_certificate
     description: Seguimiento de certificados médicos
@@ -406,7 +423,6 @@ classes:
       theoric_class_to:
         type:             date
         required:         false
-
 
   LogMedicalCertificate:
     tableName: log_medical_certificate
@@ -495,5 +511,4 @@ classes:
         required:         true
       _uniques:
         name: [name]
-
 

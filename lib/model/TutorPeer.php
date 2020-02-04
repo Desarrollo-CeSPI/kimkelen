@@ -31,4 +31,15 @@ class TutorPeer extends BaseTutorPeer
 
 		return $s;
 	 }
+	 
+	 public static function retrieveByUsername($username)
+	 {
+		$c = new Criteria();
+		$c->addJoin(TutorPeer::PERSON_ID, PersonPeer::ID);
+		$c->addJoin(PersonPeer::USER_ID, sfGuardUserPeer::ID);
+		$c->add(sfGuardUserPeer::USERNAME,$username );
+		$t = self::doSelectOne($c);
+
+		return $t;
+	 }
 }

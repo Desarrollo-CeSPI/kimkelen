@@ -111,4 +111,4 @@ class StudentReincorporation extends BaseStudentReincorporation
   }
 }
 
-sfPropelBehavior::add('StudentReincorporation', array('changelog'));
+try { sfPropelBehavior::add('StudentReincorporation', array('changelog')); } catch(sfConfigurationException $e) {}

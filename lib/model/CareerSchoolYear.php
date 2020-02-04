@@ -704,4 +704,4 @@ class CareerSchoolYear extends BaseCareerSchoolYear
 }
 
 
-sfPropelBehavior::add('CareerSchoolYear', array('changelog'));
+try { sfPropelBehavior::add('CareerSchoolYear', array('changelog')); }catch(sfConfigurationException $e) {}

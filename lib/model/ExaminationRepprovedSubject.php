@@ -244,4 +244,4 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
     }
 }
 
-sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));
+try { sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject')); }catch(sfConfigurationException $e) {}

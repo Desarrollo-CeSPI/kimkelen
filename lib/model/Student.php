@@ -1690,6 +1690,7 @@ class Student extends BaseStudent
   {
         return SchoolBehaviourFactory::getEvaluatorInstance()->canPrintWithdrawnCertificate($this);
   }
+
   
   public function getLastStudentCareerSchoolYearCoursed()
   {
@@ -1705,8 +1706,9 @@ class Student extends BaseStudent
     $c->add(StudentCareerSchoolYearPeer::STATUS,StudentCareerSchoolYearStatus::REPPROVED);
     
     return StudentCareerSchoolYearPeer::doSelectOne($c);
+
     }
-    
+  
   public function canPrintFreeCertificate()
   {
 	if(!is_null($this->getLastStudentCareerSchoolYear()))
@@ -1737,6 +1739,19 @@ class Student extends BaseStudent
     }
 
     return implode(';  ', $tutors);
+  }
+
+
+  public function getIsTutor($tutor)
+  {
+	  
+	  $c = new Criteria();
+	  $c->add(StudentTutorPeer::STUDENT_ID, $this->getId());
+	  $c->add(StudentTutorPeer::TUTOR_ID, $tutor->getId());
+	  
+	  $st = StudentTutorPeer::doSelectOne($c);
+	  
+	  return (!is_null($st));
   }
   
   public function getSpecialityTypeString()
@@ -1959,6 +1974,7 @@ class Student extends BaseStudent
         return $this->getIsRegistered();
     }
   
+
 }
 
-sfPropelBehavior::add('Student', array('person_delete'));
+try { sfPropelBehavior::add('Student', array('person_delete')); } catch(sfConfigurationException $e ) {}

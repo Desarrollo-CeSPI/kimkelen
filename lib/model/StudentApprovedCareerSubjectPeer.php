@@ -145,5 +145,4 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
 }
 
 
-
-sfPropelBehavior::add('StudentApprovedCareerSubjectPeer', array('changelog'));
+try { sfPropelBehavior::add('StudentApprovedCareerSubjectPeer', array('changelog')); } catch(sfConfigurationException $e) {}
