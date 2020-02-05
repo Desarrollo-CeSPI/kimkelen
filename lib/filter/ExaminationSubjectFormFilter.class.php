@@ -48,7 +48,10 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
       $criteria->addJoin(ExaminationSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
       $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
       $criteria->addJoin(CareerSchoolYearPeer::CAREER_ID, CareerPeer::ID);
+      $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+      $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID);
       $criteria->add(CareerPeer::ID, $value);
+      $criteria->addAscendingOrderByColumn(SubjectPeer::NAME);
     }
    
     $criteria->setDistinct(CoursePeer::ID); 
@@ -65,10 +68,12 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
       $criteria->setIgnoreCase(true);
       $criteria->addJoin(ExaminationSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
       $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
-      $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID);
-      $criteria->add(SubjectPeer::NAME, $value, Criteria::LIKE);
-      $criteria->add(SubjectPeer::FANTASY_NAME, $value, Criteria::LIKE);
-      
+      $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID);     
+      $criterion = $criteria->getNewCriterion(SubjectPeer::NAME, $value, Criteria::LIKE);
+      $criterion->addOr($criteria->getNewCriterion(SubjectPeer::FANTASY_NAME, $value, Criteria::LIKE));
+      $criteria->add($criterion); 
+      $criteria->addAscendingOrderByColumn(SubjectPeer::NAME);
+
     }
   }
 
@@ -78,6 +83,8 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
     {
       $criteria->addJoin(ExaminationSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
       $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+      $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID);
+      $criteria->addAscendingOrderByColumn(SubjectPeer::NAME);
       $criteria->add(CareerSubjectPeer::YEAR, $value['text']);
     }
   }
@@ -86,9 +93,15 @@ class ExaminationSubjectFormFilter extends BaseExaminationSubjectFormFilter
   {
     $criteria->addJoin(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, ExaminationSubjectPeer::ID);
     $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $criteria->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $criteria->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $criteria->addJoin(CareerSubjectSchoolYearPeer::CAREER_SUBJECT_ID, CareerSubjectPeer::ID);
+    $criteria->addJoin(CareerSubjectPeer::SUBJECT_ID, SubjectPeer::ID);
     $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID);
     $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
     $criteria->add(PersonPeer::ID, $value);
+    $criteria->addAscendingOrderByColumn(SubjectPeer::NAME);
+
 
   }
 
