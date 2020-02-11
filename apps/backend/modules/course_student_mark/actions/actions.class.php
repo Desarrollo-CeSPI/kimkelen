@@ -144,6 +144,14 @@ class course_student_markActions extends sfActions
       foreach ($this->forms as $form)
       {
         $form->save();
+        
+        if($this->getCourse()->getIsPathway())
+        {
+            foreach($this->course_subjects as $cs)
+            {
+                $cs->saveCalificationsInRecord();
+            }
+        }
       }
 
       $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
@@ -257,6 +265,82 @@ class course_student_markActions extends sfActions
     $this->course_subjects = array( CourseSubjectPeer::retrieveByPK($this->getRequest()->getParameter("id")));
     $this->setTemplate('print');
  
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+    $this->cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+      
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= $form;
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+    }
+  }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+        $cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($cs->getId(), RecordType::COURSE);
+        if (!is_null($record))
+        {
+            $record->setStatus(RecordStatus::ANNULLED);
+            $record->save();
+        }
+        if($cs->getCourse()->isPathway())
+        {
+            $cs->generateRecordPathway();
+        }
+        else
+        {
+            $cs->generateRecord();
+        }
+        
+        $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+        return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+              
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->cs = CourseSubjectPeer::retrieveByPK($request->getParameter('course_subject_id'));
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->cs->getId(), RecordType::COURSE);
+      $this->setLayout('cleanLayout');
+      
   }
     
 }

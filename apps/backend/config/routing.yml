@@ -1,3 +1,21 @@
+setting_parameter:
+  class: sfPropelRouteCollection
+  options:
+    model:                SettingParameter
+    module:               setting_parameter
+    prefix_path:          setting_parameter
+    column:               id
+    with_wildcard_routes: true
+
+book:
+  class: sfPropelRouteCollection
+  options:
+    model:                Book
+    module:               book
+    prefix_path:          book
+    column:               id
+    with_wildcard_routes: true
+
 family_relationship:
   class: sfPropelRouteCollection
   options:
@@ -24,6 +42,10 @@ medical_certificate:
     prefix_path:          medical_certificate
     column:               id
     with_wildcard_routes: true
+    
+check_sheet_book:
+  url:  /checkSheetBook
+  param:  {module: book, action: checkSheetBook}
     
 api_student:
   url:     /api/:document_type/:document_number/is_student.:sf_format
@@ -158,6 +180,26 @@ print_free_certificate:
 print_entry_form:
   url:  /student/:id/printEntryForm
   param:  {module: student, action: printEntryForm, sf_format: pdf }
+  
+print_examination_subject_record :
+  url:  /examination_subject/:id/printRecord
+  param:  {module: examination_subject, action: printRecord, sf_format: pdf }
+
+print_examination_repproved_subject_record :
+  url:  /examination_repproved_subject/:id/printRecord
+  param:  {module: examination_repproved_subject, action: printRecord, sf_format: pdf }
+
+print_manual_examination_subject_record :
+  url:  /manual_examination_subject/:id/printRecord
+  param:  {module: manual_examination_subject, action: printRecord, sf_format: pdf }
+
+print_course_record :
+  url:  /course_student_mark/printRecord/course_subject_id/:course_subject_id
+  param:  {module: course_student_mark, action: printRecord, sf_format: pdf }
+
+print_division_course_record :
+  url:  /division_course/:id/printRecord
+  param:  {module: division_course, action: printRecord, sf_format: pdf }
 
 move_students:
   url:  move_students

@@ -139,6 +139,7 @@ table.lefttable tr {
 .gray-background{
   background:#f2f2f2;
   padding: 4px;
+  margin-bottom: 4px;
 }
 
 h2 {
@@ -146,7 +147,7 @@ h2 {
 }
 
 .article-div {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .observation-box {
@@ -191,4 +192,19 @@ table.gridtable_bordered tr {
     border:1px solid #ccc;
     background-color: #ffffff;
     text-align:center;
+}
+
+.min-size{
+    font-size: 11px;
+}
+
+.record-footer{
+    bottom: 0% !important;
+
+}
+
+.white-background{
+  background:#ffffff;
+  padding: 4px;
+  margin-bottom: 4px;
 }

@@ -138,6 +138,7 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
         foreach ($this->forms as $form)
         {
           $form->save();
+          $this->examination_repproved_subject->saveCalificationsInRecord();
         }
 
         $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
@@ -229,14 +230,14 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
       return $pager;
   }
 
-  public function executePrintStudents(sfWebRequest $request)
+ /* public function executePrintStudents(sfWebRequest $request)
   {
     $this->examination_repproved_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_repproved_subject->getStudents();
     $this->previous_url = $request->getReferer();
     $this->setLayout('cleanLayout');
 
-  }
+  }*/
 
   public function executeChangelogMarks(sfWebRequest $request)
   {
@@ -250,6 +251,85 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $this->students = $this->examination_repproved_subject->getStudents();
     $this->previous_url = $this->getUser()->setAttribute('referer_module', 'examination_repproved_subject');
 
+  }
+  
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+    try
+    {
+      // when GETting
+      $this->examination_repproved_subject = $this->getRoute()->getObject();
+     
+    }
+    catch (Exception $e)
+    {
+      // when POSTing
+      $this->examination_repproved_subject = ExaminationRepprovedSubjectPeer::retrieveByPK($request->getParameter("id"));
+    }
+      
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= $form;
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        $this->redirect('@examination_repproved_subject'); 
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+    }
+      
+  }
+  
+  public function executeGenerateRecord(sfWebRequest $request)
+  {
+    $examination_repproved_subject = $this->getRoute()->getObject();
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_repproved_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+    if (!is_null($record))
+    {
+        $record->setStatus(RecordStatus::ANNULLED);
+        $record->save();
+    }
+    $examination_repproved_subject->generateRecord(); 
+    $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+    $this->redirect('@examination_repproved_subject');             
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->examination_subject = ExaminationRepprovedSubjectPeer::retrieveByPK($request->getParameter("id"));
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION_REPPROVED);
+      $this->setLayout('cleanLayout');
+      $this->setTemplate('printRecord','examination_subject');
+      
   }
 
 }

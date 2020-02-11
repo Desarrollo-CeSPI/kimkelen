@@ -79,7 +79,6 @@ root:
           family_relationship:
            title: Tipos de parentesco
            url: @family_relationship
-      separator:
       users:
         title: Usuarios
         credentials: [[show_user, show_group]]
@@ -92,6 +91,10 @@ root:
             title: Grupos de usuarios
             url: sfGuardGroup/index
             credentials: [show_group]
+      setting_parameters:
+        title: Parámetros de configuración
+        url: @setting_parameter
+        credentials: [edit_setting_parameter]
 
   academics:
     title: Académica
@@ -211,6 +214,18 @@ root:
                 title: Nuevo personal de la oficina de alumnos
                 url: student_office/new
                 credentials: [edit_student_office]
+      book:
+        title: Libros de actas
+        credentials: [edit_book]
+        menu:
+          list:
+            title: Listado de libros de actas
+            url: book/index
+            credentials: [edit_book]
+          new:
+            title: Nuevo libro de actas
+            url: book/new
+            credentials: [edit_book]  
 
   students:
     title: Alumnos

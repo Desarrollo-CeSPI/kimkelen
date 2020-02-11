@@ -141,9 +141,21 @@ table.lefttable tr {
 }
 
 .signature {
-      padding: 0 70px;
-  border-bottom-style: dotted;
-  border-bottom-width: thin;
+  float:left;
+  margin-top: 50px;
+  margin-right: 90px;
+  border-top-style: dotted;
+  border-top-width: thin;
+  min-width: 200px;
+}
+
+.signature-subtext {
+ font-size: 9px !important;
+ text-align: center;
+}
+
+.signature-text {
+ text-align: center;
 }
 
 .signature-left{
@@ -155,10 +167,6 @@ table.lefttable tr {
 .signature-center{
   float:center;
     margin: 0px 535px;
-}
-
-.signature-text {
-  padding-bottom: 50px;
 }
 
 
@@ -174,6 +182,8 @@ table.lefttable tr {
 .gray-background{
   background:#f2f2f2;
   padding: 4px;
+  margin-bottom: 4px;
+
 }
 
 h2 {
@@ -200,3 +210,8 @@ h2 {
   margin-right: 4px;
 }
 
+.white-background{
+  background:#ffffff;
+  padding: 4px;
+  margin-bottom: 4px;
+}

@@ -90,6 +90,7 @@ class examination_subjectActions extends autoExamination_subjectActions
         foreach ($this->forms as $form)
         {
           $form->getObject()->setCanTakeExamination(true);
+          $this->examination_subject->saveCalificationsInRecord();
           $form->save();
         }
 
@@ -174,15 +175,15 @@ class examination_subjectActions extends autoExamination_subjectActions
 
   }
 
-  public function executePrintStudents(sfWebRequest $request)
+ /* public function executePrintStudents(sfWebRequest $request)
   {
-    /* @var $examination_subject ExaminationSubject */
+    // @var $examination_subject ExaminationSubject 
     $this->examination_subject = $this->getRoute()->getObject();
     $this->students = $this->examination_subject->getStudents();
     
     $this->setLayout('cleanLayout');
 
-  }
+  }*/
 
   /**
    * Redefines parent::getPager because we need to add a custom parameter: career
@@ -219,5 +220,84 @@ class examination_subjectActions extends autoExamination_subjectActions
 
      $this->students = $this->examination_subject->getStudents();
   }
+                        
+  public function executeAssignPhysicalSheet(sfWebRequest $request)
+  {
+    try
+    {
+      // when GETting
+      $this->examination_subject = $this->getRoute()->getObject();
+     
+    }
+    catch (Exception $e)
+    {
+      // when POSTing
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
+    }
+    
+    $this->url='examination_subject';
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
+    $this->books = BookPeer::retrieveActives();
+    $this->forms= array();
+    $this->record_sheet = $record->getRecordSheet();
+    foreach ($record->getRecordSheets() as $rs)
+    {
+        $form = new RecordSheetForm($rs);
+        $form->getWidgetSchema()->setNameFormat("record_sheet_{$rs->getId()}[%s]");
+        $this->forms[$rs->getId()]= $form;
+        
+    }
+      
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
 
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      { 
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+        }
+        $this->getUser()->setFlash('notice', 'Los ítems fueron guardaron satisfactoriamente.');
+        $this->redirect('@examination_subject');
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron algunos errores. Por favor, intente nuevamente la operación.');
+      }
+      
+    }
+      
+  }
+  public function executeGenerateRecord(sfWebRequest $request)
+  { 
+    $examination_subject = $this->getRoute()->getObject();
+    $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($examination_subject->getId(), RecordType::EXAMINATION);
+    if (!is_null($record))
+    {
+        $record->setStatus(RecordStatus::ANNULLED);
+        $record->save();
+    }
+    $examination_subject->generateRecord(); 
+    $this->getUser()->setFlash('info', 'El acta fue generada correctamente.');
+    $this->redirect('@examination_subject');              
+  }
+  
+  public function executePrintRecord(sfWebRequest $request)
+  {
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
+      $this->record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->examination_subject->getId(), RecordType::EXAMINATION);
+      $this->setLayout('cleanLayout');
+      
+  }
 }

@@ -232,6 +232,182 @@ class ExaminationSubject extends BaseExaminationSubject
 	  {
 		  return $this->getCareerSubjectSchoolYear()->getCareerSubject();
 	  }
+    public function canAssignPhysicalSheet()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return !is_null($record);
+    }
+    
+    public function canGenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && is_null($record) ;
+    }
+    
+    public function getMessageCantAssignPhysicalSheet()
+    {
+        return "Can't assign physical sheet because the examination subject does not have a record.";  
+
+    }
+    public function getSortedByNameCourseSubjectStudentExaminations()
+    {
+        $criteria = new Criteria();
+        $criteria->add(CourseSubjectStudentExaminationPeer::EXAMINATION_SUBJECT_ID, $this->getId());
+        $criteria->addJoin(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+        $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+        $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+        $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
+        
+        return $this->getCourseSubjectStudentExaminations($criteria);
+    }
+    
+    public function generateRecord(PropelPDO $con = null)
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();
+            $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+
+            $r = new Record();
+            $r->setRecordType(RecordType::EXAMINATION);
+            $r->setCourseOriginId($this->getId());
+            $r->setLines($setting->getValue());
+            $r->setStatus(RecordStatus::ACTIVE); 
+            $r->setUsername(sfContext::getInstance()->getUser());
+            $r->save();
+
+            $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+
+            $line =1 ;
+            $sheet =1;
+            $record_sheet = new RecordSheet();
+            $record_sheet->setRecord($record);
+            $record_sheet->setSheet($sheet);
+            $record_sheet->save();
+
+            foreach ($this->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = new RecordDetail();
+               $rd->setRecordId($record->getId());
+               $rd->setStudent($csse->getCourseSubjectStudent()->getStudent());
+               $rd->setMark($csse->getMark());
+               $rd->setIsAbsent($csse->getIsAbsent());
+               
+               if($csse->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+               
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $csse->getStudent());
+               if(count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+              
+               if ($csse->getIsAbsent())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
+               }
+               elseif(!is_null($csse->getMark()))
+               {
+                    if ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
+               }
+               if ($line > $record->getLines())
+               {
+                   $line = 1;
+                   $sheet ++;
+                   $record_sheet = new RecordSheet();
+                   $record_sheet->setRecord($record);
+                   $record_sheet->setSheet($sheet);
+                   $record_sheet->save();
+
+               }
+               $rd->setLine($line);
+               $rd->setSheet($sheet);
+               $line++;
+               $rd->save();
+
+               ####Liberando memoria###
+               $rd->clearAllReferences(true);
+               unset($rd);
+               ##################*/
+            }
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }   
+    }
+    
+    public function canPrintRecord()
+    {
+        return $this->canAssignPhysicalSheet();
+    }
+    
+    public function canRegenerateRecord()
+    {   
+        $setting = SettingParameterPeer::retrieveByName(BaseSchoolBehaviour::LINES_EXAMINATION);
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        return $this->countTotalStudents() != 0 && ! is_null($setting->getValue()) && !is_null($record) ;
+    }
+    
+    public function saveCalificationsInRecord()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        if(!is_null($record))
+        {
+            foreach ($this->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $csse->getStudent());
+               $rd->setMark($csse->getMark());
+               $rd->setIsAbsent($csse->getIsAbsent());
+               
+               if($csse->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
+               {
+                   $rd->setOwesCorrelative(TRUE);
+               }
+
+               $division=DivisionPeer::retrieveStudentSchoolYearDivisions($this->getSchoolYear(), $csse->getStudent());
+               if(!is_null($division) && count($division) > 0)
+               {
+                    $rd->setDivision($division[0]);
+               }
+
+               if ($csse->getIsAbsent())
+               {
+                   $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getAbsentResult());
+               }
+               elseif(!is_null($csse->getMark()))
+               {
+                    if ($csse->getMark() < SchoolBehaviourFactory::getEvaluatorInstance()->getExaminationNote())
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getDisapprovedResult());
+                    }
+                    else
+                    {
+                        $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
+                    }
+               }else {
+                   $rd->setResult(NULL);
+               }
+
+               $rd->save();
+            }
+        }      
+    } 
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));
