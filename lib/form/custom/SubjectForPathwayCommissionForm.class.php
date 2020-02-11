@@ -31,7 +31,7 @@ class SubjectForPathwayCommissionForm extends SubjectForCommissionForm
 	{
 		sfContext::getInstance()->getConfiguration()->loadHelpers(array('Asset'));
 
-		unset($this["starts_at"], $this["name"], $this["quota"], $this["is_closed"], $this["current_period"], $this["related_division_id"], $this["division_id"], $this["is_pathway"]
+		unset($this["starts_at"], $this["name"], $this["quota"], $this["is_closed"], $this["current_period"], $this["related_division_id"], $this["division_id"], $this["is_pathway"],$this["evaluation_date"]
 		);
 
 

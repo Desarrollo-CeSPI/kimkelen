@@ -33,7 +33,7 @@ class DivisionCourseForm extends BaseCourseForm
   {
     sfContext::getInstance()->getConfiguration()->loadHelpers(array('Asset'));   
 
-    unset($this["is_closed"], $this["school_year_id"], $this['current_period']);
+    unset($this["is_closed"], $this["school_year_id"], $this['current_period'],$this['is_pathway'],$this['evaluation_date'],$this['related_division_id']);
 
     $this->widgetSchema["division_id"] = new mtWidgetFormPlain(array(
       "object" => $this->getObject()->getDivision(),

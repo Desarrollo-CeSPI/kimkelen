@@ -4799,6 +4799,10 @@
                 <source>Person full identification</source>
                 <target>N° documento</target>
             </trans-unit>
+            <trans-unit>
+                <source>Evaluation date</source>
+                <target>Fecha de examen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

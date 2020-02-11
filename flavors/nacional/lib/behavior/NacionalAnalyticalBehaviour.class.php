@@ -51,9 +51,11 @@ class NacionalAnalyticalBehaviour extends DefaultAnalyticalBehaviour
             {
                 //Estuvo en trayectorias. Es el año de la trayectoria + 1
                 $cssp = CourseSubjectStudentPathwayPeer::retrieveByCourseSubjectStudent($approvationInstance->getCourseSubjectStudent());
-                $year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
+                /*$year = $cssp->getPathwayStudent()->getPathway()->getSchoolYear()->getYear();
                 $year += 1;
-                return $year .'-07-01';
+                return $year .'-07-01';*/
+                return $cssp->getCourseSubject()->getCourse()->getEvaluationDate();
+                
             }
             else
             {
