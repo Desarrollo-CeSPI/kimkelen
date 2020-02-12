@@ -26,7 +26,7 @@
 
   <?php include_partial('examination_subject/body_record',array( 'record'=>$record, 'rs' => $rs)); ?>
 
-  <?php include_partial('examination_subject/footer_record',array( 'record'=>$record, 'rs' => $rs)); ?>
+  <?php include_partial('examination_subject/footer_record',array( 'record'=>$record, 'rs' => $rs, 'examination_subject'=>$examination_subject)); ?>
 
 </div>
 <div style="page-break-before: always;"></div>
