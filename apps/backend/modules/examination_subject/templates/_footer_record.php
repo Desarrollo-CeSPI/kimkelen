@@ -51,23 +51,35 @@
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>
       <span class="little-box">
-        <?php echo $record->countRecordDetailsForSheet($rs->getSheet()) ?>
+        <?php echo  $record->countRecordDetailsForSheet($rs->getSheet()) ?>
       </span>
 
       <strong><?php echo __('Aprobados'); ?>:</strong>
-      <span class="little-box">
-        <?php echo $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getApprovedResult()) ?>
-      </span>
-
+      <?php if($examination_subject->getIsClosed()) : ?>
+        <span class="little-box">
+          <?php echo $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getApprovedResult())?>
+        </span>
+      <?php else: ?>
+      <span class="little-box"></span>
+      <?php endif; ?>
+      
       <strong><?php echo __('Aplazados'); ?>:</strong>
+      <?php if($examination_subject->getIsClosed()) : ?>
       <span class="little-box">
-        <?php echo $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getDisapprovedResult()) ?>
+        <?php echo ($examination_subject->getIsClosed()) ? $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getDisapprovedResult()) : '' ?>
       </span>
-
+      <?php else: ?>
+      <span class="little-box"></span>
+      <?php endif; ?>
+      
       <strong><?php echo __('Ausentes'); ?>:</strong>
+      <?php if($examination_subject->getIsClosed()) : ?>
       <span class="little-box">
-        <?php echo $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getAbsentResult()) ?>
+        <?php echo  ($examination_subject->getIsClosed()) ? $record->countRecordDetailsForSheetAndResult($rs->getSheet(),$evaluator_instance->getAbsentResult()) : '' ?>
       </span>
+      <?php else: ?>
+      <span class="little-box"></span>
+      <?php endif; ?>
     </div>
 
   <div class="record-footer">
