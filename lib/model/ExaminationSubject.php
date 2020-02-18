@@ -260,6 +260,18 @@ class ExaminationSubject extends BaseExaminationSubject
         $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
         $criteria->addAscendingOrderByColumn(PersonPeer::FIRSTNAME);
         
+        //quito los retirados
+        $withdrawn_criteria = new Criteria();
+	$withdrawn_criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID, Criteria::INNER_JOIN);
+	$withdrawn_criteria->add(StudentCareerSchoolYearPeer::STATUS, StudentCareerSchoolYearStatus::WITHDRAWN);
+	$withdrawn_criteria->clearSelectColumns();
+	$withdrawn_criteria->addSelectColumn(StudentCareerSchoolYearPeer::STUDENT_ID);
+	$stmt_w = StudentCareerSchoolYearPeer::doSelectStmt($withdrawn_criteria);
+	$not_in_w = $stmt_w->fetchAll(PDO::FETCH_COLUMN);
+		
+		
+	$criteria->add(StudentPeer::ID, $not_in_w, Criteria::NOT_IN);
+        
         return $this->getCourseSubjectStudentExaminations($criteria);
     }
     
