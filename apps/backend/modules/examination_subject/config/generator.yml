@@ -35,6 +35,7 @@ generator:
           califications:
             action: califications
             credentials: [[edit_examination_subject_califications, edit_closed_examination]]
+            condition: canBeCalificate
           close:
             action: close
             label: Close examination

@@ -408,6 +408,33 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
             }
         }      
     }
+    
+    public function canBeCalificate()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION_REPPROVED);
+        if(!is_null($record))
+        {
+            foreach ($this->getSortedByNameStudentExaminationRepprovedSubjects() as $sers)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $sers->getStudent());
+               if (is_null($rd))
+               {
+                   return FALSE;
+               }
+            }
+            if(count($this->getSortedByNameStudentExaminationRepprovedSubjects()) != count($record->getRecordDetails()))
+            {
+                return FALSE;
+            }
+        }
+        
+        return TRUE;  
+    }
+    
+    public function getMessageCantBeCalificate()
+    {
+        return "Debe regenerar el acta ya que fueron modificados los alumnos en la mesa";
+    }
 }
 
 sfPropelBehavior::add('ExaminationRepprovedSubject', array('examination_repproved_subject'));
