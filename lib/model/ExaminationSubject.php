@@ -419,7 +419,34 @@ class ExaminationSubject extends BaseExaminationSubject
                $rd->save();
             }
         }      
-    } 
+    }
+    
+    public function canBeCalificate()
+    {
+        $record = RecordPeer::retrieveByCourseOriginIdAndRecordType($this->getId(), RecordType::EXAMINATION);
+        if(!is_null($record))
+        {
+            foreach ($this->getSortedByNameCourseSubjectStudentExaminations() as $csse)
+            {
+               $rd = RecordDetailPeer::retrieveByRecordAndStudent($record, $csse->getStudent());
+               if (is_null($rd))
+               {
+                   return FALSE;
+               }
+            }
+            if(count($this->getSortedByNameCourseSubjectStudentExaminations()) != count($record->getRecordDetails()))
+            {
+                return FALSE;
+            }
+        }
+        
+        return TRUE;  
+    }
+    
+    public function getMessageCantBeCalificate()
+    {
+        return "Debe regenerar el acta ya que fueron modificados los alumnos en la mesa";
+    }
 }
 
 sfPropelBehavior::add('ExaminationSubject', array('examination_subject'));

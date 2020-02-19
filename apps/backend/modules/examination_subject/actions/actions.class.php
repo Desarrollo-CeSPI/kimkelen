@@ -169,7 +169,7 @@ class examination_subjectActions extends autoExamination_subjectActions
       {
         $this->form->save();
 
-        $this->getUser()->setFlash('notice', 'Los alumnos seleccionados han sido correctamente inscriptos a la mesa de examen.');
+        $this->getUser()->setFlash('notice', 'Los alumnos seleccionados han sido correctamente inscriptos a la mesa de examen. En caso de haber generado el acta deberá regenerarla.');
       }
     }
 
