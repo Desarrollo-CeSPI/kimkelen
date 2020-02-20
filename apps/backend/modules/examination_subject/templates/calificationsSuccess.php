@@ -33,7 +33,7 @@
     <h3><?php echo __('School year %%school_year%%', array('%%school_year%%' => $examination_subject->getCareerSubjectSchoolYear()->getSchoolYear())) ?></h3>
   </div>
   <div id="sf_admin_content">
-    <form action="<?php echo url_for('examination_subject/califications') ?>" method="post">
+    <form action="<?php echo url_for('examination_subject/updateCalifications') ?>" method="post">
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), '@examination_subject', array('class' => 'sf_admin_action_go_back')) ?></li>
         <?php if (!$examination_subject->getIsClosed()): ?>

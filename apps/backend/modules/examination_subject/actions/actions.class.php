@@ -71,6 +71,24 @@ class examination_subjectActions extends autoExamination_subjectActions
 
     $this->forms = $this->getForms($this->examination_subject, $show);
 
+  }
+  
+  public function executeUpdateCalifications(sfWebRequest $request)
+  {
+    try
+    {
+      // when GETting
+      $this->examination_subject = $this->getRoute()->getObject();
+    }
+    catch (Exception $e)
+    {
+      // when POSTing
+      $this->examination_subject = ExaminationSubjectPeer::retrieveByPK($request->getParameter("id"));
+    }
+    $show = $this->examination_subject->getIsClosed();
+
+    $this->forms = $this->getForms($this->examination_subject, $show);
+
     if ($request->isMethod("post"))
     {
       $valid = count($this->forms);
@@ -90,8 +108,9 @@ class examination_subjectActions extends autoExamination_subjectActions
         foreach ($this->forms as $form)
         {
           $form->getObject()->setCanTakeExamination(true);
-          $this->examination_subject->saveCalificationsInRecord();
           $form->save();
+          $this->examination_subject->saveCalificationsInRecord();
+          
         }
 
         $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
@@ -101,7 +120,7 @@ class examination_subjectActions extends autoExamination_subjectActions
         $this->getUser()->setFlash('error', 'Ocurrieron errores al intentar calificar los alumnos. Por favor, intente nuevamente la operación.');
       }
     }
-
+    $this->setTemplate('califications');
   }
 
   public function executeClose(sfWebRequest $request)
