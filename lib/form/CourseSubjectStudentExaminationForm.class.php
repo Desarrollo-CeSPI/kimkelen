@@ -57,18 +57,14 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
 		if(! $configuration->isNumericalMark())
 		{
 			$letter_mark = LetterMarkPeer::getLetterMarkByValue((Int)$this->getObject()->getMark());
-			$letter_list = LetterMarkPeer::doSelect(new Criteria());
-			$choices = array();
-			foreach( $letter_list as $l ){
-				$choices[$l->getValue()] = $l->getLetter();
-			}
-			$this->setWidget('mark',  new sfWidgetFormSelect(array('choices'  => $choices)));
+                        
+			$this->setWidget('mark', new sfWidgetFormPropelChoice(array('model' => 'LetterMark', 'key_method' => 'getValue', 'add_empty' => true)));
 			
 			if(!is_null($letter_mark)) {
-				$this->setDefault('mark', $letter_mark->getValue());
-			 }
+				$this->setDefault("mark", $letter_mark->getValue());
+                        }
 			
-			$this->setValidator('mark', new sfValidatorChoice(array('choices' => array_keys($choices))));
+			$this->setValidator('mark',new sfValidatorPropelChoice(array('model' => 'LetterMark','column' => 'value', 'required' => false)));
 		}
 		else
 		{
@@ -91,7 +87,7 @@ class CourseSubjectStudentExaminationForm extends BaseCourseSubjectStudentExamin
   
   public function validateAbsence($validator, $values)
   {
-    if ($values["is_absent"] && !is_null($values["mark"]))
+    if (($values["is_absent"] && $values["mark"] != '') || ($values["is_absent"] && !is_null($values["mark"])))
     {
       throw new sfValidatorError($validator, "The student can't be absent and have a mark.");
     }
