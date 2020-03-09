@@ -13,24 +13,30 @@ class Record extends BaseRecord
         return RecordDetailPeer::doSelect($c);
     }
     
-    public function countRecordDetailsForSheet($sheet)
+    public function countRecordDetailsForSheet($sheet=NULL)
     {
         $c = new Criteria();
         $c->addJoin(RecordDetailPeer::RECORD_ID, RecordPeer::ID);
         $c->add(RecordDetailPeer::RECORD_ID,$this->getId());
-        $c->add(RecordDetailPeer::SHEET,$sheet);
+        if(! is_null($sheet))
+        {
+            $c->add(RecordDetailPeer::SHEET,$sheet);
+        }
         $c->add(RecordPeer::STATUS, RecordStatus::ACTIVE);
         
         return RecordDetailPeer::doCount($c);
     }
     
     
-    public function countRecordDetailsForSheetAndResult($sheet,$result)
+    public function countRecordDetailsForSheetAndResult($sheet=NULL,$result)
     {
         $c = new Criteria();
         $c->addJoin(RecordDetailPeer::RECORD_ID, RecordPeer::ID);
         $c->add(RecordDetailPeer::RECORD_ID,$this->getId());
-        $c->add(RecordDetailPeer::SHEET,$sheet);
+        if(! is_null($sheet))
+        {
+            $c->add(RecordDetailPeer::SHEET,$sheet);
+        }
         $c->add(RecordPeer::STATUS, RecordStatus::ACTIVE);
         $c->add(RecordDetailPeer::RESULT,$result);
         
