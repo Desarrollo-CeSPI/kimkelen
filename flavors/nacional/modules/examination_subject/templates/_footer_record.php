@@ -18,8 +18,6 @@
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
 
-  
-<?php $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();?>
 <div class="article-div">
     <strong>Art 34º: </strong><span class="sub">Exámenes regulares:</span> La evaluación en las mesas de exámenes regulares, regulares complementarios o regulares previos, se realizará sobre aquellos contenidos desarrollados durante el ciclo lectivo cursado.
   </div>
@@ -31,6 +29,10 @@
   <div class="article-div">
     <strong>En ambos casos: </strong>"La evaluación podrá ser oral y/o escrita y/o práctica. Siempre que se utilice más de una modalidad, éstas no podrán ser eliminatorias entre sí, debiendo tener un carácter complementario.
   </div>
+  
+<?php $evaluator_instance = SchoolBehaviourFactory::getEvaluatorInstance();?>
+    <?php if ($rs->getSheet() == count($record->getRecordSheets())):?>
+    
   <div class="article-div">
     <div class="observation-box">
       <strong><?php echo __('Observations'); ?></strong>:
@@ -47,7 +49,6 @@
       <span class="little-box"></span>
     </div>
   </div>
-    <?php if ($rs->getSheet() == count($record->getRecordSheets())):?>
     <div class="article-div">
       <strong><?php echo __('Total de alumnos'); ?>:</strong>
       <span class="little-box">
@@ -69,9 +70,7 @@
         <?php echo $record->countRecordDetailsForSheetAndResult(NULL,$evaluator_instance->getAbsentResult()) ?>
       </span>
     </div>
-    <?php endif; ?>
-
-  <div class="record-footer">
+    <div class="record-footer">
       <div class="article-div">
         La Plata, __________ de ______________________ de __________
       </div>
@@ -87,6 +86,10 @@
         <p class="signature-text">Vocal</p>
         <p class="signature-subtext">Firma y aclaración</p>
       </div>
+    </div>
+    <?php endif; ?>
+
+  <div class="record-footer">
       <div class="sheet-record">
           <span>
               Hoja <?php echo $rs->getSheet() . '/' . count($record->getRecordSheets())?>
