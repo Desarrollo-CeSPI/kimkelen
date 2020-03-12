@@ -28,9 +28,9 @@
    <?php echo $form ?>
     </div>       
     <div class="analytical-observations">
-        <?php if($analytical->is_approved_subject()): ?>
-        <div class="footer-text">Observaciones: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones- <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> </div>
-        <?php endif;?>
+       
+        Observaciones: <?php echo ($analytical->is_approved_subject()) ? 'Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-' : '' ?> <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> 
+ 
     </div>   
     <?php include_partial('analytical_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?> 
 </div>
