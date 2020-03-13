@@ -54,7 +54,8 @@
             observations = document.getElementById("analytic_observations" ).value;
             url = document.getElementById('link_print').href;
             if(observations.trim() != ''){
-                 document.getElementById('link_print').href= url + '&observations=' + observations;
+                observations = encodeURIComponent(observations);
+                document.getElementById('link_print').href= url + '&observations=' + observations;
             }      
         });
       })

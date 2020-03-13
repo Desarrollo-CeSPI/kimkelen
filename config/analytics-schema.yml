@@ -25,4 +25,4 @@ classes:
         type: varchar(20)
       observations:
         description:      Observaciones en el certificado
-        type: varchar(100)
+        type: varchar(255)
