@@ -223,8 +223,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $c->add(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, $career_school_year->getId());
 
     foreach (StudentRepprovedCourseSubjectPeer::doSelect($c, $con) as $repproved)
-    {
-      $repproved->delete($con);
+    {   // en el caso de haber rendido libre esas calificaciones no se borran
+        $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($repproved);
+        if(is_null($sers))
+        {
+             $repproved->delete($con);
+        }
     }
 
   }
