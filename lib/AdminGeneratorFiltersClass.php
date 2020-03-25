@@ -275,10 +275,6 @@ class AdminGeneratorFiltersClass
       {
         TeacherPeer::joinWithCourses($criteria, $user->getGuardUser()->getId(), true);
       }
-      if ($user->isHeadPreceptor())
-      {
-        self::addCommissionHeadPreceptorCriteria($criteria, $user);
-      }
     }
     else if ($event->getSubject() instanceOf final_examinationActions)
     {
@@ -495,7 +491,6 @@ class AdminGeneratorFiltersClass
   public static function addCommissionHeadPreceptorCriteria($criteria, $user)
   {
     $personal_in = $user->getPersonalIds();
-
     $criteria->add(CoursePreceptorPeer::PRECEPTOR_ID, $personal_in, Criteria::IN);
     $criteria->addJoin(CoursePreceptorPeer::COURSE_ID, CoursePeer::ID);
     $criteria->setDistinct();
