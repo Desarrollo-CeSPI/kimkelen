@@ -63,7 +63,7 @@ class MatriculateGraduatedStudentsForm extends sfForm
       
       foreach ($students as $student)
       {
-        $student->registerToCareer($destiny_career_school_year->getCareer(), null, null, $destiny_career_school_year->getCareer()->getMinYear(), $con);
+        $student->registerToCareer($destiny_career_school_year->getCareer(), null, null, $destiny_career_school_year->getCareer()->getMinYear(),new DateTime(), $con);
         $shift = $student->getShiftForSchoolYear($last_year_school_year);
 
         if (!$student->getIsRegistered($destiny_career_school_year->getSchoolYear()))
