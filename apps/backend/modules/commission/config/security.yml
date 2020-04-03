@@ -26,7 +26,7 @@ manageCourseDays:
   credentials:  [edit_course_day]
 
 students:
-  credentials:  [edit_course]
+  credentials:  [show_course]
 
 courseTeachers:
   credentials:  [edit_course]
