@@ -22,10 +22,13 @@
   <table class="lefttable">
       <?php foreach ($examination_repproveds as $examination_repproved): ?>
      <tr> 
-		 <?php if (is_null($examination_repproved->getStudentApprovedCareerSubject())): ?>
+         <?php $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($examination_repproved);?>
+          <?php if (is_null($examination_repproved->getStudentApprovedCareerSubject())): ?>
+          <?php if(is_null($sers) || (!is_null($sers) && $sers->getExaminationRepprovedSubject()->getExamination()->getExaminationType() != ExaminationRepprovedType::FREE) ): ?>
           <td><?php echo $examination_repproved->getCourseSubjectStudent()->getCourseSubject()->getCourse() . ' ('. $examination_repproved->getCourseSubjectStudent()->getCourseSubject()->getCourse()->getSchoolYear() . ')' ; ?></td>
           <td><?php echo $examination_repproved->getMarksShortStrByCurrentSchoolYear() ? $examination_repproved->getMarksShortStrByCurrentSchoolYear() : '-' ?></td>
           <td><span style="font-size: 9px">(Pendiente)</span></td>
+          <?php endif; ?>
           <?php endif; ?>
     </tr>
 <?php endforeach; ?>
