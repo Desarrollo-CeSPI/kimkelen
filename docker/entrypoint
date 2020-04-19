@@ -15,6 +15,8 @@ echo 'SetEnvIf Request_URI "^/robots.txt$" dontlog' > /etc/apache2/conf.d/docker
 echo 'CustomLog logs/access.log combined env=!dontlog' >> /etc/apache2/conf.d/docker.conf 
 echo 'ServerTokens Prod' >> /etc/apache2/conf.d/docker.conf 
 echo 'ServerSignature Off' >> /etc/apache2/conf.d/docker.conf 
+echo 'TraceEnable Off' >> /etc/apache2/conf.d/docker.conf 
+
 
 CMD='cd /app && rm -fr cache/* && ./symfony propel:build-all --classes-only && ./symfony plugin:publish && ./symfony fix-perms && ./symfony kimkelen:flavor $FLAVOR'
 
