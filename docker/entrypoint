@@ -3,7 +3,8 @@
 
 source /usr/local/bin/setenvdefaults
 
-echo -e "date.timezone = $TIMEZONE\n"\
+echo -e "expose_php = Off\n"\
+	"date.timezone = $TIMEZONE\n"\
         "memory_limit = $MEMORY_LIMIT\n"\
         "max_execution_time = $MAX_EXECUTION_TIME\n" > /usr/local/etc/php/conf.d/php.ini
 
@@ -12,6 +13,10 @@ envsubst '${DB_NAME} ${DB_HOST} ${DB_USERNAME} ${DB_PASSWORD}' < /app/config/pro
 
 echo 'SetEnvIf Request_URI "^/robots.txt$" dontlog' > /etc/apache2/conf.d/docker.conf
 echo 'CustomLog logs/access.log combined env=!dontlog' >> /etc/apache2/conf.d/docker.conf 
+echo 'ServerTokens Prod' >> /etc/apache2/conf.d/docker.conf 
+echo 'ServerSignature Off' >> /etc/apache2/conf.d/docker.conf 
+echo 'TraceEnable Off' >> /etc/apache2/conf.d/docker.conf 
+
 
 CMD='cd /app && rm -fr cache/* && ./symfony propel:build-all --classes-only && ./symfony plugin:publish && ./symfony fix-perms && ./symfony kimkelen:flavor $FLAVOR'
 
