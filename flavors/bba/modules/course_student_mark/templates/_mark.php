@@ -40,6 +40,9 @@
       <?php echo $form[$course_subject_student->getId().'_free_'.$mark->getMarkNumber()]->render()?>
 
     <?php endif?>
+    
+    <?php echo $form[$course_subject_student->getId().'_observation_'.$mark->getMarkNumber()]->render()?>
+
 
       <a id="course_subject_student_mark_change_log_<?php echo $mark->getId() ?>" style="display: none;"> </a>
       <?php

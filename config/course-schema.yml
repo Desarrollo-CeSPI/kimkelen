@@ -295,8 +295,26 @@ classes:
         description:      El alumno esta libre en este periodo
         type: boolean
         default:  false
+      observation_mark_id:
+        type:              integer
+        foreignTable:      observation_mark
+        foreignReference:  id
+        required:          false
+        default:  null
       _indexes:
         course_subject_student: [course_subject_student_id]
+
+  ObservationMark :
+    tableName:            observation_mark
+    description:          Tabla para almacenar las observaciones de las calificaciones 
+    columns:
+      id:
+      letter:
+        type:             varchar(2)
+        required:         true   
+      description:
+        type: varchar(255)
+        required: true
 
   StudentApprovedCareerSubject:
     tableName:            student_approved_career_subject
