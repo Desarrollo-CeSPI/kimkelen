@@ -834,4 +834,10 @@ class studentActions extends autoStudentActions
     $this->forward('authorized_person', 'indexByStudent');
   }
 
+  public function executePrintObservationsCard(sfWebRequest $request)
+  {
+    $this->student = $this->getRoute()->getObject();
+    $this->student_career_school_years = $this->student->getStudentCareerSchoolYears();
+  }
+
 }

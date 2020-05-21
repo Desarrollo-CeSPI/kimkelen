@@ -115,4 +115,21 @@ class report_cardActions extends sfActions
     $this->setLayout('cleanLayout');
     $this->setTemplate('index');
   }
+
+   public function executePrintObservationsCard(sfWebRequest $request)
+   {
+        $this->students = array(StudentPeer::retrieveByPk($request->getParameter('student_id')));
+	$this->setLayout('cleanLayout');
+   }
+   
+    public function executePrintStudentObservationsCard(sfWebRequest $request)
+    {
+        $this->student_career_school_year = StudentCareerSchoolYearPeer::retrieveByPK($request->getParameter('student_career_school_year_id'));
+        $this->students = array($this->student_career_school_year->getStudent());
+        $this->career_id = $this->student_career_school_year->getCareerSchoolYear()->getCareerId();
+        $this->division = DivisionPeer::retrieveByStudentCareerSchoolYear($this->student_career_school_year);
+    
+        $this->back_url = '@student';
+        $this->setLayout('cleanLayout');
+    }  
 }

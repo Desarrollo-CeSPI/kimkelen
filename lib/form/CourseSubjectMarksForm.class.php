@@ -89,18 +89,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $validators[$free_widget_name] = new sfValidatorBoolean();
         }
         $tmp_sum = $this->evaluationFinalProm($course_subject_student, $course_subject_student_mark, $tmp_sum);
-       
-        // OBSERVATIONS
-          $observation_widget_name = $course_subject_student->getId().'_observation_'.$course_subject_student_mark->getMarkNumber();
-          $name_observation_element = 'course_student_mark_'. $this->getObject()->getId() . '_' . $observation_widget_name;
-          
-          //$observation_mark = LetterMarkPeer::getLetterMarkByValue((Int)$course_subject_student_mark->getObservationMark());
-            
-            if(!is_null($course_subject_student_mark->getObservationMarkId())) {
-              $this->setDefault($observation_widget_name, $course_subject_student_mark->getObservationMarkId());
-            }
-            $widgets[$observation_widget_name] = new sfWidgetFormPropelChoice(array('model'=> 'ObservationMark', 'add_empty' => true));
-            $validators[$observation_widget_name] = new sfValidatorPropelChoice(array('model' => 'ObservationMark', 'required' => false)); 
 
       }
       $tmp_sum = 0;
@@ -143,9 +131,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       {
         $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
         $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
-       
-       $observation_mark  = $values[$course_subject_student->getId() . '_observation_' . $course_subject_student_mark->getMarkNumber()];
-       //$observation_mark = ObservationMarkPeer::retrieveByPk((int)$observation_value);
       
         if ((!is_null($is_free)))
         {
@@ -166,10 +151,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
 
           $course_subject_student_mark->setMark($value);
           $course_subject_student_mark->setIsFree($is_free);
-          if(! is_null($observation_mark))
-          { 
-             $course_subject_student_mark->setObservationMarkId((int)$observation_mark);
-          }
           $course_subject_student_mark->save($con);
         }
       }
