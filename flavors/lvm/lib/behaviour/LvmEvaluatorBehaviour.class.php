@@ -741,16 +741,22 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
         }
         else
         {
-            $sum=0;
+          $sum=0;
+          $count=0;
           foreach ($course_subject_students as $course_subject_student)
           {
-            $sum += $course_subject_student->getFinalMark();
-          }
-          $count = count($course_subject_students);              
+            if($course_subject_student->getCourseSubject()->getCareerSubject()->getId() != self::ORIENTACION_ESCOLAR)
+            {
+               $sum += $course_subject_student->getFinalMark();
+              $count ++;
+            }  
+            
+          }              
         }
 
         if ($sum > 0 && $count > 0)
         {
+
           return round($sum/$count, 2);
         }
           
