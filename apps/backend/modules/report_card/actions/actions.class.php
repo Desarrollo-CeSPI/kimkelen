@@ -164,8 +164,8 @@ class report_cardActions extends sfActions
           $this->students = $this->division->getStudents();
 
       $this->career_id = $this->division->getCareer()->getId();
-
+      $this->observations = ObservationMarkPeer::doSelect(new Criteria());
       $this->setLayout('cleanLayout');
-      $this->setTemplate('index');
+      $this->setTemplate('printStudentObservationsCard');
     }
 }
