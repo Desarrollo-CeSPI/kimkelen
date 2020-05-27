@@ -117,6 +117,11 @@ generator:
             action:  showCourseResultReport
             credentials:    [show_division_course_califications]
             condition: canShowCourseResultReport
+
+          print_observations_card:
+            action: printObservationsCard
+            label:  Imprimir planilla de observaciones division
+            credentials:  [print_observations_card]
             
       filter:
         class:  ~

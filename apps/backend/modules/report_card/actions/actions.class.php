@@ -115,12 +115,6 @@ class report_cardActions extends sfActions
     $this->setLayout('cleanLayout');
     $this->setTemplate('index');
   }
-
-   public function executePrintObservationsCard(sfWebRequest $request)
-   {
-        $this->students = array(StudentPeer::retrieveByPk($request->getParameter('student_id')));
-	$this->setLayout('cleanLayout');
-   }
    
     public function executePrintStudentObservationsCard(sfWebRequest $request)
     {
@@ -139,33 +133,28 @@ class report_cardActions extends sfActions
         $this->setLayout('cleanLayout');
     }
    
-  public function executeObservationsCardsToPDF(sfWebRequest $request)
+  public function executeExportObservationsCard(sfWebRequest $request)
     {
-      $division_student_id = $this->getUser()->getAttribute('division_student_id');
-
-
-      if ($division_student_id == null)
-          $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
-      else{
-
-          $this->division = DivisionPeer::retrieveByPK($division_student_id);
-          $this->students = array(StudentPeer::retrieveByPK ($this->getUser()->getAttribute('student_id')));
-
-          $this->getUser()->setAttribute('division_student_id', null);
-          $this->getUser()->setAttribute('student_id', null);
-
-      }
-
-      if (is_null($this->division))
-      {
-          $this->division = DivisionPeer::retrieveByPk($this->getUser()->getAttribute('division_id'));
-      }
-      if (is_null($this->students))
-          $this->students = $this->division->getStudents();
-
-      $this->career_id = $this->division->getCareer()->getId();
+      $this->student_career_school_year = StudentCareerSchoolYearPeer::retrieveByPK($request->getParameter('student_career_school_year_id'));
+        $this->students = array($this->student_career_school_year->getStudent());
+        $this->career_id = $this->student_career_school_year->getCareerSchoolYear()->getCareerId();
+        $this->division = DivisionPeer::retrieveByStudentCareerSchoolYear($this->student_career_school_year);
+    
       $this->observations = ObservationMarkPeer::doSelect(new Criteria());
       $this->setLayout('cleanLayout');
       $this->setTemplate('printStudentObservationsCard');
     }
+
+    public function executePrintObservationsCard(sfWebRequest $request)
+  {
+    $this->getUser()->setAttribute('division_student_id', null);
+    $this->getUser()->setAttribute('student_id', null);
+    $this->division = DivisionPeer::retrieveByPK($this->getUser()->getReferenceFor('division'));
+    $this->career_id = $this->division->getCareer()->getId();
+    $this->students = $this->division->getStudents();
+    $this->back_url= '@division';
+    $this->observations = ObservationMarkPeer::doSelect(new Criteria());
+    $this->setTemplate('printStudentObservationsCard');
+    $this->setLayout('cleanLayout');
+  }
 }

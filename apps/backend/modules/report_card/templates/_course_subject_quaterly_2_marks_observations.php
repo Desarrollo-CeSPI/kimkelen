@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,17 +19,19 @@
  */ ?>
 <div class="title"><?php echo __('Observations') ;?></div>
 <table class="gridtable">
-  <tr>
-    <th class='th-subject-name'><?php echo __('Cuatrimestrales') ?></th>
-    <th><?php echo __('1°C') ?></th>
-    <th><?php echo __('2°C') ?></th>
-  </tr>
-  <?php foreach ($course_subject_students as $course_subject_student): ?>
-    <tr>
-      <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(3) ?></td>
-    </tr>
-  <?php endforeach; ?>
+	<tr>
+
+		<th class='th-subject-name'><?php echo __('Anuales (Rég. Cuatrimestral)') ?></th>
+		<th><?php echo __('1°C') ?></th>
+		<th><?php echo __('2°C') ?></th>
+
+	</tr>
+	<?php foreach ($course_subject_students as $course_subject_student): ?>
+		<tr>
+			<td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
+			<td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
+			<td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+			
+		</tr>
+	<?php endforeach; ?>
 </table>
