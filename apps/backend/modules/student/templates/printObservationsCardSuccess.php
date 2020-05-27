@@ -28,7 +28,6 @@
         <th><?php echo __('Year') ?></th>
         <th><?php echo __('Status') ?></th>
         <th></th>
-        <th></th>
       <tr>
     </thead>
     <?php foreach ($student_career_school_years as $student_career_school_year): ?>
@@ -38,8 +37,7 @@
         <td><?php echo $student_career_school_year->getYear() ?></td>
         <td><?php echo __($student_career_school_year->getStatusString()) ?></td>
         <?php if (count($student->getCurrentDivisions($student_career_school_year->getCareerSchoolYear()->getId())) != 0) : ?>
-          <td><?php echo link_to(__('Imprimir periodos cerrados'), 'report_card/printStudentObservationsCard?student_career_school_year_id=' . $student_career_school_year->getId()) ?></td>
-          <td><?php echo link_to(__('Imprimir todos los periodos'), 'report_card/printStudentObservationsAllPeriod?student_career_school_year_id=' . $student_career_school_year->getId()) ?></td>
+          <td><?php echo link_to(__('Print'), 'report_card/printStudentObservationsCard?student_career_school_year_id=' . $student_career_school_year->getId()) ?></td>
         <?php endif; ?>
       </tr>
     <?php endforeach ?>

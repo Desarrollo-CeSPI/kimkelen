@@ -757,7 +757,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   
     if ($mark)
     {
-      return ($mark->getIsClosed()) ? $mark->getObservationMark()->getDescription() : null;
+      return ($mark->getIsClosed() && !is_null($mark->getObservationMark())) ? $mark->getObservationMark()->getLetter() : null;
     }
     else
     {

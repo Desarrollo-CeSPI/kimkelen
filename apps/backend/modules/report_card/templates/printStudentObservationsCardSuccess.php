@@ -21,7 +21,7 @@
 <?php use_helper('Asset', 'I18N') ?>
 
 <div class="non-printable">
-  <div><a href="<?php echo url_for('@export_report_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a></div>
+  <div><a href="<?php echo url_for('@export_observations_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a></div>
   <div><a href="<?php echo url_for($back_url) ?>"><?php echo __('Go back') ?></a></div>
 </div>
 
@@ -43,65 +43,44 @@
 
       <?php if ($student->hasCourseType(CourseType::QUATERLY, $student_career_school_year)): ?>
         <?php $periods = CareerSchoolYearPeriodPeer::getQuaterlyPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
-
-
-
         <?php if ($course_subject_students_attendance_day = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForDay(CourseType::QUATERLY, $student_career_school_year)): ?>
-
-
-
-		      <?php $course_subject_students_attendance_day_3 = SchoolBehaviourFactory::getInstance()->divideQuaterlyCourseSubjectStudents($course_subject_students_attendance_day, 3); ?>
-		      <?php $course_subject_students_attendance_day_2 =  SchoolBehaviourFactory::getInstance()->divideQuaterlyCourseSubjectStudents($course_subject_students_attendance_day, 2); ?>
-
-
-          <?php if (count($course_subject_students_attendance_day_3) > 0): ?>
-		        <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day_3, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
-			    <?php endif; ?>
-
-			    <?php if (count($course_subject_students_attendance_day_2) > 0): ?>
-		        <?php include_partial('course_subject_quaterly_2_marks', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day_2, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
-		      <?php endif; ?>
-
-	      <?php endif ?>
-
+          <?php include_partial('course_subject_quaterly_observations', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_day, 'periods' => $periods, 'has_attendance_for_subject' => false, 'student_career_school_year' => $student_career_school_year)) ?>
+        <?php endif ?>
         <?php if ($course_subject_student_attendance_subject = $student->getCourseSubjectStudentsForCourseTypeAndAttendanceForSubject(CourseType::QUATERLY, $student_career_school_year)): ?>
-
-		      <?php $course_subject_students_attendance_subject_3 = SchoolBehaviourFactory::getInstance()->divideQuaterlyCourseSubjectStudents($course_subject_student_attendance_subject, 3); ?>
-		      <?php $course_subject_students_attendance_subject_2 =  SchoolBehaviourFactory::getInstance()->divideQuaterlyCourseSubjectStudents($course_subject_student_attendance_subject, 2); ?>
-
-
-		      <?php if (count($course_subject_students_attendance_subject_3) > 0): ?>
-		      <?php include_partial('course_subject_quaterly', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_subject_3, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>
-          <?php endif; ?>
-
-
-		      <?php if (count($course_subject_students_attendance_subject_2) > 0): ?>
-			      <?php include_partial('course_subject_quaterly_2_marks', array('student' => $student, 'course_subject_students' => $course_subject_students_attendance_subject_2, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>
-		      <?php endif; ?>
-
-
-	      <?php endif ?>
-
-
-
-
+          <?php include_partial('course_subject_quaterly_observations', array('student' => $student, 'course_subject_students' => $course_subject_student_attendance_subject, 'periods' => $periods, 'has_attendance_for_subject' => true, 'student_career_school_year' => $student_career_school_year)) ?>
+        <?php endif ?>
       <?php endif; ?>
 
       <?php if ($student->hasCourseType(CourseType::BIMESTER, $student_career_school_year)): ?>
 
         <?php $periods = CareerSchoolYearPeriodPeer::getBimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
-        <?php include_partial('course_subject_bimester', array('student' => $student, 'periods' => array_chunk($periods, 2), 'division' => $division, 'student_career_school_year' => $student_career_school_year)) ?>
+        <?php include_partial('course_subject_bimester_observations', array('student' => $student, 'periods' => array_chunk($periods, 2), 'division' => $division, 'student_career_school_year' => $student_career_school_year)) ?>
 
       <?php endif; ?>
+         
+       <div style="clear:both;"></div>
+       <div class="rowins">
+        <div class="titletable"><?php echo __('Referencias') ?></div>
+        <table class="lefttable">
+          <tr>
+            <th><?php echo __('Letter') ?></th>
+            <th><?php echo __('Observation') ?></th>
+          </tr>
+          
 
-      <?php if (!is_null($average = $student_career_school_year->getAnualAverage())): ?>
-        <?php include_partial('average', array('average' => $average)); ?>
-      <?php endif; ?>
+            <?php foreach ($observations as $o): ?>
+           <tr>
+                <td><?php echo $o->getLetter();?></td>
+                <td><?php echo $o->getDescription();?></td>
+           </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
 
-      <?php include_partial('footer', array('student' => $student, 'division' => $division)); ?>
     </div>
 
   </div>
+
   <div style="clear:both;"></div>
   <div style="page-break-before: always;"></div>
 

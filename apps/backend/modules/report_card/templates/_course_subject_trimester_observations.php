@@ -19,13 +19,19 @@
  */ ?>
 <div class="title"><?php echo __('Observations') ;?></div>
 <table class="gridtable">
-  <tr><?php include_partial('th_trimester_tabular_observations', array('has_attendance_for_subject' => $has_attendance_for_subject)) ?></tr>
+    <tr>
+        <th class='th-subject-name'><?php echo __('Anuales') ?></th>
+        <th><?php echo __('1°T') ?></th>
+	<th><?php echo __('2°T') ?></th>
+	<th><?php echo __('3°T') ?></th>
+    </tr>
   <?php foreach ($course_subject_students as $course_subject_student): ?>
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(3) ?></td>
+      
+	<td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
+        <td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+        <td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(3)?></td>
     </tr>
   <?php endforeach; ?>
 </table>

@@ -17,7 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<th class='th-subject-name'><?php echo __('Anuales') ?></th>
-<th><?php echo __('1°T') ?></th>
-<th><?php echo __('2°T') ?></th>
-<th><?php echo __('3°T') ?></th>
+<div class="title"><?php echo __('Observations') ;?></div>
+<table class="gridtable">
+  <tr>
+    <?php include_partial('th_quaterly_tabular_observations') ?>
+  </tr>
+  <?php foreach ($course_subject_students as $course_subject_student): ?>
+    <tr>
+      <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
+      <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
+      <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td><?php echo $course_subject_student->getObservationForIsClosed(3) ?></td>
+    </tr>
+  <?php endforeach; ?>
+</table>
