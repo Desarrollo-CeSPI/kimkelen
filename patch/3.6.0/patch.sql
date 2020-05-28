@@ -16,3 +16,10 @@ ADD CONSTRAINT `fk_course_subject_student_mark_4`
   REFERENCES `observation_mark` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+INSERT INTO observation_mark (letter,description) 
+VALUES ('A','Estableció un vínculo continuo con la asignatura. Participó de la totalidad de las actividades propuestas. Profundizó en la construcción del conocimiento.'),
+('E','Estableció un vínculo continuo con la asignatura. Participó parcialmente de las actividades propuestas. Abordó la construcción del conocimiento.'),
+('I','Estableció un vínculo discontinuo con la asignatura. Participó parcialmente de las actividades propuestas. Se dificultó la construcción del conocimiento.'),
+('O','Estableció un mínimo vínculo con la asignatura. No participó de las actividades propuestas. No se pudo concretar la construcción del conocimiento.'),
+('U','No estableció vínculo con la asignatura. No se ha podido iniciar el trayecto académico correspondiente.');
