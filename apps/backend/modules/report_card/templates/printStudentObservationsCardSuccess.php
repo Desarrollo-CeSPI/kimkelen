@@ -92,23 +92,7 @@
       <?php endif; ?>
          
        <div style="clear:both;"></div>
-       <div class="rowins">
-        <div class="titletable"><?php echo __('Referencias') ?></div>
-        <table class="lefttable">
-          <tr>
-            <th><?php echo __('Letter') ?></th>
-            <th><?php echo __('Observation') ?></th>
-          </tr>
-          
-
-            <?php foreach ($observations as $o): ?>
-           <tr>
-                <td><?php echo $o->getLetter();?></td>
-                <td><?php echo $o->getDescription();?></td>
-           </tr>
-            <?php endforeach; ?>
-        </table>
-    </div>
+       
 
     </div>
 

@@ -30,8 +30,8 @@
   <?php foreach ($course_subject_students_first_q as $course_subject_student): ?>
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
+      <td class="observation_mark_bimester""><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>
@@ -48,8 +48,8 @@
   <?php foreach ($course_subject_students_second_q as $course_subject_student): ?>
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-      <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
+      <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>

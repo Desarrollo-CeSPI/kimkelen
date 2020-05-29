@@ -426,6 +426,12 @@ div.report-text p {
 
 .observation_mark_trimester
 {
-    text-align: center;
+    text-align: left;
     width: 28%;
+}
+
+.observation_mark_bimester
+{
+  text-align: left;
+  width: 39%;
 }
