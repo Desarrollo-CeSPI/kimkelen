@@ -521,5 +521,12 @@ public function executeExportCalificationTable(sfWebRequest $request)
 	$response->setHttpHeader("Pragma","no-cache");
 	$response->setHttpHeader("Expires","0");
   }
- 
+  
+  public function executePrintObservationsCard(sfWebRequest $request)
+  {
+    $this->getUser()->setReferenceFor($this);
+
+    $this->redirect("report_card/printObservationsCard");
+
+  } 
 }

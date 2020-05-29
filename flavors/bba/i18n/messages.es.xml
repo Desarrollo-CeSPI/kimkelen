@@ -4994,6 +4994,22 @@
                 <source>Evaluation date</source>
                 <target>Fecha de examen</target>
             </trans-unit>
+            <trans-unit>
+                <source>Letter</source>
+                <target>Letra</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Calificate non numerical mark in current period</source>
+                <target>Eximir alumnos en el periodo actual</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Revert calificate non numerical mark in current period</source>
+                <target>Deseximir alumnos en el periodo actual</target>
+            </trans-unit>
+            <trans-unit>
+                <source>Print observations card</source>
+                <target>Imprimir planilla de observaciones</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

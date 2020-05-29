@@ -454,5 +454,74 @@ class commissionActions extends autoCommissionActions
       $this->setTemplate('assignPhysicalSheet','commission');
       
   }
+
+   public function executeCalificateNonNumericalMarkInCurrentPeriod(sfWebRequest $request)
+  {
+    $course = $this->getRoute()->getObject();
+    $con = (is_null($con)) ? Propel::getConnection() : $con;
+    try
+    {
+        $con->beginTransaction();
+        $course_subject_students = $course->getIsAverageableCourseSubjectStudent();
+
+        foreach($course_subject_students as $course_subject_student)
+        {
+              //$course_subject_student->setIsNotAverageable(true);
+              $course_subject_student_mark = CourseSubjectStudentMarkPeer::retrieveByCourseSubjectStudentAndPeriod($course_subject_student->getId(),$course->getCurrentPeriod());
+              $course_subject_student_mark->setIsClosed(true);
+              $course_subject_student_mark->save($con);
+
+        }
+
+        $course->setCurrentPeriod($course->getCurrentPeriod() + 1);
+        if ($course->getCourseSubject()->countMarks() < ($course->getCurrentPeriod() + 1))
+        {
+            $course->setIsClosed(true);
+        }
+
+        $course->save($con);
+        $con->commit();
+        $this->getUser()->setFlash('info', 'Los alumnos fueron eximidos correctamente.');
+    }
+     catch (Exception $e)
+    {
+      $con->rollBack();
+      $this->getUser()->setFlash('error', 'Ocurrió un error. Intente nuevamente.');
+    }
+
+    $this->redirect('@commission');
+  }
+  public function executeRevertCalificateNonNumericalMarkInCurrentPeriod(sfWebRequest $request)
+  {
+    $course = $this->getRoute()->getObject();
+    $con = (is_null($con)) ? Propel::getConnection() : $con;
+    try
+    {
+        $con->beginTransaction();
+        $course_subject_students = $course->getIsAverageableCourseSubjectStudent();
+
+        foreach($course_subject_students as $course_subject_student)
+        {
+              //$course_subject_student->setIsNotAverageable(true);
+              $course_subject_student_mark = CourseSubjectStudentMarkPeer::retrieveByCourseSubjectStudentAndPeriod($course_subject_student->getId(),$course->getCurrentPeriod());
+              $course_subject_student_mark->setIsClosed(false);
+              $course_subject_student_mark->save($con);
+
+        }
+        $course->setCurrentPeriod($course->getCurrentPeriod() - 1);
+        $course->save($con);
+        $con->commit();
+        $this->getUser()->setFlash('info', 'Los alumnos fueron deseximidos correctamente.');
+    }
+    catch (Exception $e)
+    {
+      $con->rollBack();
+       $this->getUser()->setFlash('error', 'Ocurrió un error. Intente nuevamente.');
+    }
+
+    $this->redirect('@commission');
+  }
+
+
    
 }

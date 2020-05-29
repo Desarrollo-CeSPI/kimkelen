@@ -321,6 +321,10 @@ export_report_cards:
   url: /report_card/Boletines.pdf
   param: { module: report_card, action: reportCardsToPDF, sf_format: pdf }
 
+export_observations_card:
+  url: /report_card/:student_id/:division_id/export_obervations_card
+  param: { module: report_card, action: exportObservationsCard, sf_format: pdf, page-size: Letter }
+
 student_free:
   class: sfPropelRouteCollection
   options:

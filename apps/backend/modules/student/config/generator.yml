@@ -365,3 +365,7 @@ generator:
             action: printStudentPersonalCard
             credentials: [print_student_card]
             condition: canPrintStudentCard
+          print_observations_card:
+            label: Print observations card
+            action: printObservationsCard
+            credentials: [print_observations_card]

@@ -33,6 +33,12 @@ class CourseSubjectStudentMarkPeer extends BaseCourseSubjectStudentMarkPeer
     $c->add(self::COURSE_SUBJECT_STUDENT_ID, $course_subject_student_id);
     self::doDelete($c,$con);
   }
-  
+  static function retrieveByCourseSubjectStudentAndPeriod($css_id,$period)
+  {
+    $c = new Criteria();
+    $c->add(self::COURSE_SUBJECT_STUDENT_ID, $css_id);
+    $c->add(self::MARK_NUMBER, $period);
+    return self::doSelectOne($c);
+  }
 
 }

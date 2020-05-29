@@ -39,7 +39,10 @@
       <?php echo __($mark->getFreeLabel())?>
       <?php echo $form[$course_subject_student->getId().'_free_'.$mark->getMarkNumber()]->render()?>
 
-    <?php endif?>
+      <?php echo __('Observations') . ":" ?>
+    
+      <?php echo $form[$course_subject_student->getId().'_observation_'.$mark->getMarkNumber()]->render()?>
+   <?php endif; ?>
 
       <a id="course_subject_student_mark_change_log_<?php echo $mark->getId() ?>" style="display: none;"> </a>
       <?php

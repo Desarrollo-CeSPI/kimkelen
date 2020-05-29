@@ -89,7 +89,6 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
           $validators[$free_widget_name] = new sfValidatorBoolean();
         }
         $tmp_sum = $this->evaluationFinalProm($course_subject_student, $course_subject_student_mark, $tmp_sum);
-        
 
       }
       $tmp_sum = 0;
@@ -132,7 +131,7 @@ class CourseSubjectMarksForm extends BaseCourseSubjectForm
       {
         $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
         $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
-        
+      
         if ((!is_null($is_free)))
         {
           if ($is_free)
