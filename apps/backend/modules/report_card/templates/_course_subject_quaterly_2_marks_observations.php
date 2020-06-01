@@ -17,13 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<div class="title"><?php echo __('Observations') ;?></div>
+<div class="title"><?php echo __('Observations') ;?> <span class="observation_title"><?php echo __('Informes de trayectorias académicas') ;?></span></div>
 <table class="gridtable">
 	<tr>
 
 		<th class='th-subject-name'><?php echo __('Anuales (Rég. Cuatrimestral)') ?></th>
-		<th><?php echo __('1°C') ?></th>
-		<th><?php echo __('2°C') ?></th>
+		<th colspan="2"></th>
 
 	</tr>
 	<?php foreach ($course_subject_students as $course_subject_student): ?>

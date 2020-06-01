@@ -17,13 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Kimkëlen.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
-<div class="title"><?php echo __('Observations') ?></div>
+<div class="title"><?php echo __('Observations') ?> <span class="observation_title"><?php echo __('Informes de trayectorias académicas') ;?></span> </div>
 <table class="gridtable">
   <?php if (count($course_subject_students_first_q = $student->getCourseSubjectStudentsForBimesterFirstQuaterly($student_career_school_year)) > 0): ?>
     <tr>
        <th class='th-subject-name'><?php echo __('Bimestrales')?> - 1°C</th>
-       <th><?php echo __('1°B') ?></th>
-       <th><?php echo __('2°B') ?></th>
+       <th colspan="2"></th>
     </tr>
   <?php endif; ?>
 
@@ -41,8 +40,7 @@
   <?php if (count($course_subject_students_second_q = $student->getCourseSubjectStudentsForBimesterSecondQuaterly($student_career_school_year)) > 0): ?>
     <tr>
       <th class='th-subject-name'><?php echo __('Bimestrales')?> - 2°C</th>
-      <th><?php echo __('1°B') ?></th>
-      <th><?php echo __('2°B') ?></th>
+      <th colspan="2"></th>
     </tr>
   <?php endif; ?>
   <?php foreach ($course_subject_students_second_q as $course_subject_student): ?>
