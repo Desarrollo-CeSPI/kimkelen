@@ -473,12 +473,11 @@ class commissionActions extends autoCommissionActions
 
         }
 
-        $course->setCurrentPeriod($course->getCurrentPeriod() + 1);
         if ($course->getCourseSubject()->countMarks() < ($course->getCurrentPeriod() + 1))
         {
             $course->setIsClosed(true);
         }
-
+        $course->setCurrentPeriod($course->getCurrentPeriod() + 1);
         $course->save($con);
         $con->commit();
         $this->getUser()->setFlash('info', 'Los alumnos fueron eximidos correctamente.');
