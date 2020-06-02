@@ -244,6 +244,7 @@ class division_courseActions extends autoDivision_courseActions
   {
     $course = $this->getRoute()->getObject();
     $con = (is_null($con)) ? Propel::getConnection() : $con;
+
     try
     {
         $con->beginTransaction();
@@ -258,11 +259,11 @@ class division_courseActions extends autoDivision_courseActions
 
         }
                 
-        $course->setCurrentPeriod($course->getCurrentPeriod() + 1);
-        if ($course->getCourseSubject()->countMarks() < ($course->getCurrentPeriod() + 1))
+ 	if ($course->getCourseSubject()->countMarks() < ($course->getCurrentPeriod() + 1))
         {
             $course->setIsClosed(true);
         }
+        $course->setCurrentPeriod($course->getCurrentPeriod() + 1);
 
         $course->save($con);
         $con->commit();

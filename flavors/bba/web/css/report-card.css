@@ -435,3 +435,8 @@ div.report-text p {
   text-align: left;
   width: 39%;
 }
+
+.observation_title
+{
+  margin-left:20em;
+}
