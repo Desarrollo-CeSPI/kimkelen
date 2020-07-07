@@ -5010,6 +5010,10 @@
                 <source>Print observations card</source>
                 <target>Imprimir planilla de observaciones</target>
             </trans-unit>
+            <trans-unit>
+                <source>Observation final</source>
+                <target>Observación final</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
