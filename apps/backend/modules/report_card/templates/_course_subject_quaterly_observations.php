@@ -23,6 +23,7 @@
     <th class='th-subject-name'><?php echo __('Cuatrimestrales') ?></th>
     <th><?php echo __('1°C') ?></th>
     <th><?php echo __('2°C') ?></th>
+    <th> </th>
   </tr>
   <?php foreach ($course_subject_students as $course_subject_student): ?>
     <tr>
@@ -30,6 +31,7 @@
       <td><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
       <td><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
       <td><?php echo $course_subject_student->getObservationForIsClosed(3) ?></td>
+      <td><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObservationFinal()) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>
