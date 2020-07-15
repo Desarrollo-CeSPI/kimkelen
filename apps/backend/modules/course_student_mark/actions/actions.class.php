@@ -154,6 +154,33 @@ class course_student_markActions extends sfActions
         }
       }
 
+     //Para el caso de las observaciones finales
+      $course_subjects = $this->getCourse()->getCourseSubjects();
+      $all_closed = true;
+      foreach ($course_subjects as $cs)
+      { $calification_final = 0;
+        foreach($cs->getCourseSubjectStudents() as $css)
+        {
+            if(!is_null($css->getObservationFinal()))
+            {
+               $calification_final ++;
+            }
+        }
+        if($calification_final == count($cs->getCourseSubjectStudents()))
+        {
+            $result = true;
+        }
+        $all_closed = $all_closed && $result;
+      }
+
+      if ($all_closed)
+      {
+        $course = $this->getCourse()->setIsClosed(true);
+        $course->save(); 
+
+      }
+      //FIN para el caso de las observaciones finales
+
       $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
       return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
     }
