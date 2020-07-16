@@ -166,6 +166,7 @@ class course_student_markActions extends sfActions
                $calification_final ++;
             }
         }
+        $result = false;
         if($calification_final == count($cs->getCourseSubjectStudents()))
         {
             $result = true;
