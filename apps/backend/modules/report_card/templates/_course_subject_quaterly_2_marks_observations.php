@@ -22,14 +22,15 @@
 	<tr>
 
 		<th class='th-subject-name'><?php echo __('Anuales (Rég. Cuatrimestral)') ?></th>
-		<th colspan="2"></th>
+		<th colspan="3"></th>
 
 	</tr>
 	<?php foreach ($course_subject_students as $course_subject_student): ?>
 		<tr>
 			<td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 			<td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-			<td class="observation_mark_bimester""><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+			<td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+                        <td class="observation_mark_bimester"><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObservationFinal()) ?></td>
 			
 		</tr>
 	<?php endforeach; ?>

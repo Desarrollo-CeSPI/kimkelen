@@ -196,6 +196,10 @@ classes:
         description: El alumno no será calificado numéricamente en este curso
         type: boolean
         default:  false
+      observation_final:
+        type:              integer
+        required:          false
+        default:  null
       _uniques:
         course_subject_student_unique: [ course_subject_id, student_id ]
       _indexes:

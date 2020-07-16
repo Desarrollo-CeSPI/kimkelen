@@ -101,6 +101,22 @@ class BbaCourseSubjectMarksForm extends CourseSubjectMarksForm
           $validators[$observation_widget_name] = new sfValidatorPropelChoice(array('model' => 'ObservationMark', 'required' => false)); 
 
       }
+     // OBSERVATIONS final
+
+
+      $observation_final_widget_name = $course_subject_student->getId().'_observation_final';
+      
+     if(!is_null($course_subject_student->getObservationFinal())) {
+          $this->setDefault($observation_final_widget_name, $course_subject_student->getObservationFinal());
+    }
+   
+      $widgets[$observation_final_widget_name] = new sfWidgetFormSelect(array(
+          'choices'  => BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getOptions(true)
+           ));
+     $validators[$observation_final_widget_name] = new sfValidatorChoice(array(
+        'choices' => BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getKeys(),
+        'required'=>false));
+      
       $tmp_sum = 0;
     }
 
@@ -177,6 +193,14 @@ class BbaCourseSubjectMarksForm extends CourseSubjectMarksForm
           $course_subject_student_mark->save($con);
         }
       }
+
+       $observation_final  = $values[$course_subject_student->getId() . '_observation_final'];
+       if(! is_null($observation_final))
+        { 
+           $course_subject_student->setObservationFinal((int)$observation_final);
+        }
+        $course_subject_student->save($con);
+
     }
   }
 

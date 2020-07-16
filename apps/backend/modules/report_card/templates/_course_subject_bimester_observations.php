@@ -22,7 +22,7 @@
   <?php if (count($course_subject_students_first_q = $student->getCourseSubjectStudentsForBimesterFirstQuaterly($student_career_school_year)) > 0): ?>
     <tr>
        <th class='th-subject-name'><?php echo __('Bimestrales')?> - 1°C</th>
-       <th colspan="2"></th>
+       <th colspan="3"></th>
     </tr>
   <?php endif; ?>
 
@@ -30,7 +30,8 @@
     <tr>
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
       <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
-      <td class="observation_mark_bimester""><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td class="observation_mark_bimester"><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor( $course_subject_student->getObservationFinal()) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>
@@ -40,7 +41,7 @@
   <?php if (count($course_subject_students_second_q = $student->getCourseSubjectStudentsForBimesterSecondQuaterly($student_career_school_year)) > 0): ?>
     <tr>
       <th class='th-subject-name'><?php echo __('Bimestrales')?> - 2°C</th>
-      <th colspan="2"></th>
+      <th colspan="3"></th>
     </tr>
   <?php endif; ?>
   <?php foreach ($course_subject_students_second_q as $course_subject_student): ?>
@@ -48,6 +49,7 @@
       <td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
       <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
       <td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
+      <td class="observation_mark_bimester"><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObervationFinal()) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>

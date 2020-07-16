@@ -21,7 +21,7 @@
 <table class="gridtable">
     <tr>
         <th class='th-subject-name'><?php echo __('Anuales') ?></th>
-        <th colspan="3"></th>
+        <th colspan="4"></th>
     </tr>
   <?php foreach ($course_subject_students as $course_subject_student): ?>
     <tr>
@@ -30,6 +30,7 @@
 	<td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
         <td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
         <td class="observation_mark_trimester"><?php echo $course_subject_student->getObservationForIsClosed(3)?></td>
+        <td class="observation_mark_trimester"><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObservationFinal()) ?></td>
     </tr>
   <?php endforeach; ?>
 </table>

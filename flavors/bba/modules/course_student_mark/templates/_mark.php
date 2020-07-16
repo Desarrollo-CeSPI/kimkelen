@@ -63,3 +63,5 @@
       ?>
   </div>
 <?php endforeach; ?>
+<?php echo __('Observation final') . ":" ?>
+<?php echo $form[$course_subject_student->getId().'_observation_final']->render()?>
