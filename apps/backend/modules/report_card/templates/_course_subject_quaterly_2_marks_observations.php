@@ -30,7 +30,7 @@
 			<td class='subject_name'><?php echo $course_subject_student->getCourseSubject()->getCareerSubject()->getSubject()->getName() ?></td>
 			<td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(1) ?></td>
 			<td class="observation_mark_bimester"><?php echo $course_subject_student->getObservationForIsClosed(2) ?></td>
-                        <td class="observation_mark_bimester"><?php echo BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObservationFinal()) ?></td>
+    <td class="observation_mark_bimester"><?php echo (!is_null($course_subject_student->getObservationFinal())) ?  BaseCustomOptionsHolder::getInstance('ObservationFinalType')->getStringFor($course_subject_student->getObservationFinal()):'' ?></td>
 			
 		</tr>
 	<?php endforeach; ?>
