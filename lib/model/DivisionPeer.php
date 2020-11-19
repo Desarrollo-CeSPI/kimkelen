@@ -141,7 +141,7 @@ class DivisionPeer extends BaseDivisionPeer
     $criteria->addJoin(self::ID, DivisionStudentPeer::DIVISION_ID);
     $criteria->add(DivisionStudentPeer::STUDENT_ID, $student->getId());
     $criteria->addAscendingOrderByColumn(self::YEAR);
-
+    $criteria->addAscendingOrderByColumn(DivisionPeer::DIVISION_TITLE_ID);
     return self::doSelect($criteria);
 
   }
