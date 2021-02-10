@@ -23,7 +23,7 @@
  * Description of CourseSubjectMarksForm
  *
  * @author ncuesta
- */
+ */   
 class CourseSubjectNotAverageableMarksForm extends sfForm
 {
   public function configure()
