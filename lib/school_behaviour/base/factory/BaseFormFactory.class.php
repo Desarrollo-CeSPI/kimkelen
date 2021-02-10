@@ -318,4 +318,8 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
     return 'AuthorizedPersonForm';
   }
   
+  public function getCourseSubjectNotAverageableMarksForm()
+  {
+    return 'CourseSubjectNotAverageableMarksForm';
+  }
 }
