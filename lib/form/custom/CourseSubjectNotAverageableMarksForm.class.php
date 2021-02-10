@@ -42,7 +42,7 @@ class CourseSubjectNotAverageableMarksForm extends sfForm
       'max'     => 'La calificación debe ser a lo sumo %max%.',
       'invalid' => 'El valor ingresado es inválido, solo se aceptan numeros enteros.'
     );
-
+var_dump($this->object);
     $this->disableCSRFProtection();
     $tmp_sum = 0;
     $configuration = $this->object->getCareerSubjectSchoolYear()->getConfiguration();
