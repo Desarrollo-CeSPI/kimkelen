@@ -24,7 +24,7 @@
  *
  * @author ncuesta
  */   
-class CourseSubjectNotAverageableMarksForm extends sfForm
+class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
 {
   public function configure()
   {
