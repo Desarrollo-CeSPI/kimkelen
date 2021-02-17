@@ -98,7 +98,7 @@ class course_student_markComponents extends sfComponents
   }
   
   
-  public function executeMarks_not_aveageable()
+  public function executeMarks_not_averageable()
   {
 
     $this->course         = $this->getVar('course');
