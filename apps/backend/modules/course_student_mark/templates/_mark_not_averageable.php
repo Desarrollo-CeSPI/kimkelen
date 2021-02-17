@@ -21,7 +21,7 @@
 <?php echo $form->renderGlobalErrors() ?>
 <?php echo $form->renderHiddenFields() ?>
 
-  <?php $field = $form[$course_subject_student->getId()]; ?>
+  <?php $field = $form[$course_subject_student->getId() . "_calification_final"]; ?>
   <?php $request_value = $sf_request->getParameter($form->getName() . '[' . $course_subject_student->getId() . ']'); ?>
   <div class='mark-container'>
     <?php echo __('Nota:'); ?>&nbsp;&nbsp;
