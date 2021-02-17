@@ -96,5 +96,29 @@ class course_student_markComponents extends sfComponents
 
 	  //$this->pathway_mark = $this->course_subject_student->getCourseSubjectStudentPathwayMark()->getMark();
   }
+  
+  
+  public function executeMarksNotAveageable()
+  {
+
+    $this->course         = $this->getVar('course');
+    $this->course_subject = $this->getVar('course_subject');
+
+    $this->configuration  = $this->course_subject->getCareerSubjectSchoolYear()->getConfiguration();
+
+	  if (!$this->course->getIsPathway()) {
+      $this->course_subject_students = $this->course_subject->getCourseSubjectStudents();
+	  }else {
+		  $this->course_subject_students = $this->course_subject->getCourseSubjectStudentPathways();
+	  }
+  }
+  
+  
+  public function executeMarkNotAverageable()
+  {
+    $this->course_subject = $this->getVar('course_subject');
+
+    $this->course_subject_student = $this->getVar('course_subject_student');
+  }
 
 }
