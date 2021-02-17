@@ -107,7 +107,7 @@ class course_student_markComponents extends sfComponents
     $this->configuration  = $this->course_subject->getCareerSubjectSchoolYear()->getConfiguration();
 
 	  if (!$this->course->getIsPathway()) {
-      $this->course_subject_students = $this->course_subject->getCourseSubjectStudents();
+      $this->course_subject_students = $this->course_subject->getCourseSubjectStudentsNotAverageable();
 	  }else {
 		  $this->course_subject_students = $this->course_subject->getCourseSubjectStudentPathways();
 	  }

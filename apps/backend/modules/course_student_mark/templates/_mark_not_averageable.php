@@ -22,7 +22,7 @@
 <?php echo $form->renderHiddenFields() ?>
 
   <?php $field = $form[$course_subject_student->getId() . "_calification_final"]; ?>
-  <?php $request_value = $sf_request->getParameter($form->getName() . '[' . $course_subject_student->getId() . ']'); ?>
+  <?php $request_value = $sf_request->getParameter($form->getName() . '[' . $course_subject_student->getId() . '_calification_final]'); ?>
   <div class='mark-container'>
     <?php echo __('Nota:'); ?>&nbsp;&nbsp;
     <?php echo $field->render(array('class' => 'mark' . ($field->hasError() ? ' with-error' : ''), 'value' => ((isset($request_value) && $request_value) ? $request_value : $field->getValue()))); ?>
