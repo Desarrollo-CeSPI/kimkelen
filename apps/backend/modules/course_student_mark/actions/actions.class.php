@@ -399,8 +399,17 @@ class course_student_markActions extends sfActions
 
     $this->course = $this->getCourse();
     $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
-    $this->forms = $this->getForms($this->course_subjects, $this->course->getIsPathway());
-
+    
+    foreach ($this->course_subjects as $course_subject)
+    {
+      
+        $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getCourseSubjectNotAverageableMarksForm();
+        $forms[$course_subject->getId()] = new $form_name($course_subject);
+    }
+    
+    $this->forms = $forms;
+    
+    
     $valid = count($this->forms);
 
     foreach ($this->forms as $form)
