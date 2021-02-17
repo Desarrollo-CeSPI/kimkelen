@@ -57,7 +57,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
     $this->setWidgets($widgets);
     $this->setValidators($validators);
 
-    $this->widgetSchema->setNameFormat('course_student_mark['.$this->object->getId().'][%s]');
+    $this->widgetSchema->setNameFormat('course_student_mark['.$this->object->getId().'_calification_final][%s]');
   }
 
 
