@@ -33,7 +33,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
 
     $this->disableCSRFProtection();
     
-    foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
+    foreach ($this->object->getCourseSubjectStudentsNotAverageable() as $course_subject_student)
     {
       
         
