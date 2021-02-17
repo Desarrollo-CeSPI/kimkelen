@@ -83,7 +83,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
       }
       
       $value = $values[$course_subject_student->getId() . '_calification_final'];
-      
+      die($value);
         if($value == 1)
         {//aprobado
 
@@ -97,7 +97,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
             $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
 
         }
-        else
+        elseif($value == 2)
         {
           $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
           $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
