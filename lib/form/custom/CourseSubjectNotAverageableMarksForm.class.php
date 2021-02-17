@@ -72,7 +72,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
   protected function doSave($con = null)
   {
     $values = $this->getValues();
-
+    $c = new Criteria();
     foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
     {
       foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
@@ -83,7 +83,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
       }
       
       $value = $values[$course_subject_student->getId() . '_calification_final'];
-      die($value);
+      
         if($value == 1)
         {//aprobado
 
