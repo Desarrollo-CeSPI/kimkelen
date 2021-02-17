@@ -59,7 +59,7 @@
 
         <fieldset id="marks_fieldset_<?php echo $course_subject->getId() ?>" class="marks-fieldset">
           <h2><?php echo $course_subject->getCareerSubject() ?></h2>
-          <?php include_component('course_student_mark', 'marks', array('course' => $course, 'course_subject' => $course_subject, 'form' => $forms[$course_subject->getId()])) ?>
+          <?php include_component('course_student_mark', 'marks_not_averageable', array('course' => $course, 'course_subject' => $course_subject, 'form' => $forms[$course_subject->getId()])) ?>
         </fieldset>
       <?php endforeach; ?>
 
