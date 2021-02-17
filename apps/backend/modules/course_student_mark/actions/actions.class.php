@@ -388,5 +388,51 @@ class course_student_markActions extends sfActions
     $this->forms = $forms;
 
   }
+  
+  
+  public function executeUpdateNotAverageable(sfWebRequest $request)
+  {
+    if (!$request->isMethod('POST'))
+    {
+      $this->redirect('course_student_mark/notAverageableCalifications');
+    }
+
+    $this->course = $this->getCourse();
+    $this->course_subjects = $this->course->getCourseSubjectsForUser($this->getUser());
+    $this->forms = $this->getForms($this->course_subjects, $this->course->getIsPathway());
+
+    $valid = count($this->forms);
+
+    foreach ($this->forms as $form)
+    {
+      $form->bind($request->getParameter($form->getName()));
+
+      if ($form->isValid())
+      {
+        $valid--;
+      }
+    }
+
+    if ($valid == 0)
+    {
+      foreach ($this->forms as $form)
+      {
+        $form->save();
+      }
+
+      //FIN para el caso de las observaciones finales
+
+      $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
+      return $this->redirect(sprintf('@%s', $this->getUser()->getAttribute('referer_module', 'homepage')));
+    }
+    else
+    {
+      $this->getUser()->setFlash('error', 'Ocurrieron errores al intentar calificar los alumnos. Por favor, intente nuevamente la operación.');
+    }
+    $this->setTemplate('index');
+
+  }
+  
+  
     
 }
