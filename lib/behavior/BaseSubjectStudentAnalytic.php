@@ -173,9 +173,16 @@ class BaseSubjectStudentAnalytic
         }
         else
         {
-            $sacs = $this->css->getStudentApprovedCourseSubject();          
+            $sacs = $this->css->getStudentApprovedCourseSubject(); 
+            
+            if($sacs->isNotAverageable() && ! is_null($sacs->etNotAverageableCalification()) )
+            {
+                return "sarasa";
+            }else{
             return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
-        }
+             }
+        
+            }
  
     }
 
