@@ -85,7 +85,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
       $value = $values[$course_subject_student->getId() . '_calification_final'];
       
       $c1 = new Criteria();
-      $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $course_subject_student->getId());
+      $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, $course_subject_student->getId());
             
       $sdcs = StudentDisapprovedCourseSubjectPeer::doSelectOne($c1);
       $sacs = StudentApprovedCourseSubjectPeer::retrieveForCourseSujectStudent($course_subject_student);
