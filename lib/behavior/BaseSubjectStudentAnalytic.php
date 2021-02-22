@@ -34,7 +34,7 @@ class BaseSubjectStudentAnalytic
     );
 
     public function __construct($css,$school_year)
-    {var_dump($css->getId());
+    {
         $this->css = $css;
 
         $this->approved = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->css,$school_year);
@@ -172,17 +172,18 @@ class BaseSubjectStudentAnalytic
             return $this->approved->getMark();
         }
         else
-        {var_dump($this->css);
+        {
             $sacs = $this->css->getStudentApprovedCourseSubject(); 
             
-            if($sacs->isNotAverageable() && ! is_null($sacs->etNotAverageableCalification()) )
+            if($this->css->isNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
             {
                 return "sarasa";
             }else{
-            return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
-             }
-        
+                
+                return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
             }
+        
+        }
  
     }
 
