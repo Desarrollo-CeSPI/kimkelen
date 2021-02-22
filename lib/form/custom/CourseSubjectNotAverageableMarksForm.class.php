@@ -73,7 +73,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
   {
     $values = $this->getValues();
     $c = new Criteria();
-    foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
+    foreach ($this->object->getCourseSubjectStudentsNotAverageable() as $course_subject_student)
     {
       foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
       {
@@ -83,7 +83,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
       }
       
       $value = $values[$course_subject_student->getId() . '_calification_final'];
-      die($value);
+      
       $c1 = new Criteria();
       $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $course_subject_student->getId());
             
