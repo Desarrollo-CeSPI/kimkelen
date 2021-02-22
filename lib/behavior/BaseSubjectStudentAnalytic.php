@@ -34,7 +34,7 @@ class BaseSubjectStudentAnalytic
     );
 
     public function __construct($css,$school_year)
-    {
+    {var_dump($css->getId());
         $this->css = $css;
 
         $this->approved = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($this->css,$school_year);
