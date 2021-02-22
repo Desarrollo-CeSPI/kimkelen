@@ -177,7 +177,7 @@ class BaseSubjectStudentAnalytic
             
             if($this->css->getIsNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
             {
-                return "sarasa";
+                return "Aprobado";
             }else{
                 
                 return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
@@ -191,6 +191,13 @@ class BaseSubjectStudentAnalytic
     {
         if (!$this->approved && is_null($this->css->getStudentApprovedCourseSubject()))
             return $this->getNullLabel();
+        
+        
+        if($this->css->getIsNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
+        {
+            return "Aprobado";
+        }
+        
         $c = new num2text();
         $mark = $this->getMark();
         $mark_parts = explode(',', $mark);
