@@ -172,7 +172,7 @@ class BaseSubjectStudentAnalytic
             return $this->approved->getMark();
         }
         else
-        {
+        {var_dump($this->css);
             $sacs = $this->css->getStudentApprovedCourseSubject(); 
             
             if($sacs->isNotAverageable() && ! is_null($sacs->etNotAverageableCalification()) )
