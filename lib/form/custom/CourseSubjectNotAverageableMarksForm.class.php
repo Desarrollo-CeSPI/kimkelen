@@ -84,25 +84,53 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
       
       $value = $values[$course_subject_student->getId() . '_calification_final'];
       
+      $c1 = new Criteria();
+      $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_ID, $course_subject_student->getId());
+            
+      $sdcs = StudentDisapprovedCourseSubjectPeer::doSelectOne($c1);
+      $sacs = StudentApprovedCourseSubjectPeer::retrieveForCourseSujectStudent($course_subject_student);
+        
         if($value == 1)
         {//aprobado
+            
+            ///si estaba desaprobado o no tiene nota aprobado
+            if(!is_null($sdcs) || is_null($sacs))
+            {
+                if(!is_null($sdcs))
+                {
+                    $sdcs->delete();
+                }
 
-            $school_year = $course_subject_student->getCourseSubject($con)->getCourse($con)->getSchoolYear($con);
-            $student_approved_course_subject = new StudentApprovedCourseSubject();
-            $student_approved_course_subject->setCourseSubject($course_subject_student->getCourseSubject($con));
-            $student_approved_course_subject->setStudent($course_subject_student->getStudent($con));
-            $student_approved_course_subject->setSchoolYear($school_year);
+                $school_year = $course_subject_student->getCourseSubject($con)->getCourse($con)->getSchoolYear($con);
+                $student_approved_course_subject = new StudentApprovedCourseSubject();
+                $student_approved_course_subject->setCourseSubject($course_subject_student->getCourseSubject($con));
+                $student_approved_course_subject->setStudent($course_subject_student->getStudent($con));
+                $student_approved_course_subject->setSchoolYear($school_year);
 
-            $student_approved_course_subject->save();
-            $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
+                $student_approved_course_subject->save();
+                $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
+
+            }
+   
 
         }
         elseif($value == 2)
         {
-          $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
-          $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
-          $student_disapproved_course_subject->setExaminationNumber(1);
-          $student_disapproved_course_subject->save();
+            
+            ///si estaba aprobado o no tiene nota desaprobado
+            if(!is_null($sacs) || is_null($sdcs))
+            {
+                if(!is_null($sacs))
+                {
+                    $sacs->delete();
+                }
+
+                $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
+                $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
+                $student_disapproved_course_subject->setExaminationNumber(1);
+                $student_disapproved_course_subject->save();
+                
+            }
 
         }
         
