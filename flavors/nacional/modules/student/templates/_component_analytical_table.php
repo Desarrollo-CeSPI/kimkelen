@@ -57,12 +57,12 @@
           <td class="text-center" width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('Y') : '<hr/>') //($css->getSchoolYear()?$css->getSchoolYear():'<hr/>') ?></td>
           <td class="text-center" width="10%"><?php echo ($css->getOption()) ? __('Optativa') . ' ' .$css->getNumber($year) :'' ?></td>
           <td align="left" width="30%"><?php echo $css->getSubjectName() ?></td>
-          <?php if( $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
-                <td class="text-center" width="10%">----</td>
-                <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
-          <?php elseif($css->getIsEquivalence() || (!is_null($css->getCourseSubjectStudent()->getNotAverageableCalification()) && $css->getCourseSubjectStudent()->getIsNotAverageable())):?>
+          <?php if($css->getIsEquivalence() || (!is_null($css->getCourseSubjectStudent()->getNotAverageableCalification()) && $css->getCourseSubjectStudent()->getIsNotAverageable())): ?>
                 <td class="text-center" width="10%">Aprobado</td>
                 <td class="text-center">Aprobado</td>
+          <?php elseif( $css->getCourseSubjectStudent()->getIsNotAverageable()):?>
+                <td class="text-center" width="10%">----</td>
+                <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
           <?php else:?>
                 <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
                 <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
