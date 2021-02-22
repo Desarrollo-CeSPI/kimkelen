@@ -175,7 +175,7 @@ class BaseSubjectStudentAnalytic
         {
             $sacs = $this->css->getStudentApprovedCourseSubject(); 
             
-            if($this->css->isNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
+            if($this->css->getIsNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
             {
                 return "sarasa";
             }else{
