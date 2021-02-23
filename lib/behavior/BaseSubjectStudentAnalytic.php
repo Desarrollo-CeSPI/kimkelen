@@ -175,9 +175,18 @@ class BaseSubjectStudentAnalytic
         {
             $sacs = $this->css->getStudentApprovedCourseSubject(); 
             
-            if($this->css->getIsNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
+            if($this->css->getIsNotAverageable() )
             {
-                return "Aprobado";
+                if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+                {
+                    return "Aprobado";
+                }
+                else
+                {
+                    return $this->getNullLabel();
+                }
+
+
             }else{
                 
                 return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
