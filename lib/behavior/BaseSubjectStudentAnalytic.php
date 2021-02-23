@@ -193,9 +193,18 @@ class BaseSubjectStudentAnalytic
             return $this->getNullLabel();
         
         
-        if($this->css->getIsNotAverageable() && ! is_null($this->css->getNotAverageableCalification()) )
+        if($this->css->getIsNotAverageable() )
         {
-            return "Aprobado";
+            if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+            {
+                return "Aprobado";
+            }
+            else
+            {
+                return $this->getNullLabel();
+            }
+            
+            
         }
         
         $c = new num2text();
