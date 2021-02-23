@@ -60,7 +60,7 @@
           <?php if($css->getIsEquivalence() || ($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable())): ?>
                 <td class="text-center" width="10%">Aprobado</td>
                 <td class="text-center">Aprobado</td>
-          <?php elseif( $css->getCourseSubjectStudent()->getIsNotAverageable()):?>
+          <?php elseif( $css->getCourseSubjectStudent()->getIsNotAverageable()  && is_null($css->getCourseSubjectStudent()->getNotAverageableCalification())):?>
                 <td class="text-center" width="10%">----</td>
                 <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
           <?php else:?>
