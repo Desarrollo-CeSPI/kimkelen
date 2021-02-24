@@ -210,7 +210,7 @@ class commissionActions extends autoCommissionActions
   {
     $this->course = $this->getRoute()->getObject();
 
-    $this->getUser()->setAttribute("referer_module", "division_course");
+    $this->getUser()->setAttribute("referer_module", "commission");
 
     $this->redirect("course_student_mark/notAverageableCalifications?id=".$this->course->getId());
   }
