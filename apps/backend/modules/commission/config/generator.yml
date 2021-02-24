@@ -100,6 +100,11 @@ generator:
             action:         califications
             credentials:    [edit_division_course_califications]
             condition:      canEditMarks
+            
+          not_averageable_califications:
+            action:      notAverageableCalifications
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
 
           changelog:
             action:         changelogMarks
