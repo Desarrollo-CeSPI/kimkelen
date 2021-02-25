@@ -51,7 +51,7 @@
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
           
-          <?php if($course_result->getIsNotAverageable() && $course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+          <?php if($course_result->getCourseSubjectStudent()->getIsNotAverageable() && $course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
             <?php echo "dfdg"; ?>
           <?php else: ?>    
               <?php echo $student->getPromDef($course_result) ?>
