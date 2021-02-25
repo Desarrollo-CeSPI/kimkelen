@@ -28,7 +28,7 @@ class NotAverageableCalificationType extends BaseCustomOptionsHolder
 
   protected
     $_options = array(
-        self::APPROVED    => 'Aprobado/Promovido',
+        self::APPROVED    => 'Aprobado',
         self::DISAPPROVED    => 'Desaprobado'
       );
 
