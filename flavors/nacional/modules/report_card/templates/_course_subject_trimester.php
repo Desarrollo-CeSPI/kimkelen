@@ -50,7 +50,12 @@
         <?php if ($is_repproved): ?>
           <?php echo $course_subject_student->getFinalAvg() ?>
         <?php else: ?>
-          <?php echo $student->getPromDef($course_result) ?>
+          
+          <?php if($course_result->getIsNotAverageable() && $course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+            <?php echo "dfdg"; ?>
+          <?php else: ?>    
+              <?php echo $student->getPromDef($course_result) ?>
+          <?php endif ?>
         <?php endif ?>
       </td>
       <?php if ($has_attendance_for_subject): ?>
