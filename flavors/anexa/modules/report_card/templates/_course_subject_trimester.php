@@ -58,7 +58,18 @@
 				<?php endif; ?>
 				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(1)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
 				<td><?php echo (($course_result instanceOf StudentDisapprovedCourseSubject) && $course_subject_student_examination = $course_subject_student->getCourseSubjectStudentExaminationsForExaminationNumber(2)) ? $course_subject_student_examination->getMarkStrByConfig() : '' ?></td>
-			  <td> <?php echo $student->getPromDef($course_result) ?></td>
+			  <td> 
+                              <?php if( !is_null($course_result) && $course_result->getCourseSubjectStudent()->getIsNotAverageable() && ! is_null($course_result->getCourseSubjectStudent()->getNotAverageableCalification())): ?>
+                                <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+                                  <?php echo __("Promovido"); ?>
+                                <?php else: ?>  
+                                    <?php echo __("Trayectoria en curso"); ?>
+                                <?php endif; ?>
+
+                              <?php else: ?> 
+                              <?php echo $student->getPromDef($course_result) ?>
+                              <?php endif ?>
+                          </td>
 			<?php endif; ?>
 
 		</tr>
