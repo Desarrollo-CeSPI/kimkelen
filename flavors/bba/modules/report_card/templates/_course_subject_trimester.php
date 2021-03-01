@@ -34,7 +34,21 @@
       <?php else: ?>
         <td></td>
       <?php endif; ?>
-     <td> <?php echo  $student->getPromDef($course_result) ?></td>
+     <td> 
+     
+         
+        <?php if ($course_subject_student->getCOnfiguration()->isNumericalMark() && !$course_subject_student->getIsNotAverageable() ): ?>
+          <?php echo $student->getPromDef($course_result) ?>
+        <?php elseif ($course_subject_student->getIsNotAverageable() ): ?> 
+          <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+              <?php echo __("Trayectoria completa"); ?>
+            <?php elseif($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED): ?>  
+                <?php echo __("Trayectoria en curso"); ?>
+             <?php else:?>
+            <?php endif; ?>
+        <?php endif ?>
+     
+     </td>
     </tr>
   <?php endforeach; ?>
 </table>
