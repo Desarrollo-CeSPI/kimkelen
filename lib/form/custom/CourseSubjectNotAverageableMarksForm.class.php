@@ -75,14 +75,10 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
     $c = new Criteria();
     foreach ($this->object->getCourseSubjectStudentsNotAverageable() as $course_subject_student)
     {
-      foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
-      {
-          $course_subject_student_mark->setIsClosed(TRUE);
-          $course_subject_student_mark->save($con);
-        
-      }
+        $value = $values[$course_subject_student->getId() . '_calification_final'];
       
-      $value = $values[$course_subject_student->getId() . '_calification_final'];
+      
+      
       
       $c1 = new Criteria();
       $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, $course_subject_student->getId());
@@ -110,6 +106,12 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
                 $student_approved_course_subject->save();
                 $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
 
+                foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
+                {
+                    $course_subject_student_mark->setIsClosed(TRUE);
+                    $course_subject_student_mark->save($con);
+
+                }
             }
    
 
@@ -129,7 +131,13 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
                 $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
                 $student_disapproved_course_subject->setExaminationNumber(1);
                 $student_disapproved_course_subject->save();
-                
+              
+                foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
+                {
+                    $course_subject_student_mark->setIsClosed(TRUE);
+                    $course_subject_student_mark->save($con);
+
+                }
             }
 
         }
