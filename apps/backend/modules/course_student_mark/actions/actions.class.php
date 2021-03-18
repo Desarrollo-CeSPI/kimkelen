@@ -452,9 +452,12 @@ class course_student_markActions extends sfActions
 
       if ($all_closed)
       {
-        $course = $this->getCourse()->setIsClosed(true);
-        $course->save(); 
-
+        //llevo el periodo al último
+            
+        $last_period =  $this->getCourse()->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration()->getCourseMarks();
+        $this->course->setCurrentPeriod($last_period); 
+        $this->course->save();
+            
       }
       //FIN cerrar curso
 
