@@ -435,7 +435,7 @@ class course_student_markActions extends sfActions
       $all_closed = true;
       foreach ($course_subjects as $cs)
       { $calification_final = 0;
-        foreach($cs->getCourseSubjectStudents() as $css)
+        foreach($cs->getCourseSubjectStudentsNotAverageable() as $css)
         {
             if(!is_null($css->getNotAverageableCalification()))
             {
@@ -443,8 +443,8 @@ class course_student_markActions extends sfActions
             }
         }
         $result = false;
-        var_dump($calification_final);var_dump(count($cs->getCourseSubjectStudents())); die();
-        if($calification_final == count($cs->getCourseSubjectStudents()))
+        
+        if($calification_final == count($cs->getCourseSubjectStudentsNotAverageable()))
         {
             $result = true;
         }
