@@ -443,6 +443,7 @@ class course_student_markActions extends sfActions
             }
         }
         $result = false;
+        var_dump($calification_final);var_dump(count($cs->getCourseSubjectStudents())); die();
         if($calification_final == count($cs->getCourseSubjectStudents()))
         {
             $result = true;
