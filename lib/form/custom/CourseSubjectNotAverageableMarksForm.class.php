@@ -112,6 +112,10 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
                     $course_subject_student_mark->save($con);
 
                 }
+                
+                $course_subject_student->setIsNotAverageable(TRUE);
+                $course_subject_student->setNotAverageableCalification($value);
+                $course_subject_student->save();
             }
    
 
@@ -138,13 +142,15 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
                     $course_subject_student_mark->save($con);
 
                 }
+                
+                $course_subject_student->setIsNotAverageable(TRUE);
+                $course_subject_student->setNotAverageableCalification($value);
+                $course_subject_student->save();
             }
 
         }
         
-        $course_subject_student->setIsNotAverageable(TRUE);
-        $course_subject_student->setNotAverageableCalification($value);
-        $course_subject_student->save(); 
+         
         
       }
          
