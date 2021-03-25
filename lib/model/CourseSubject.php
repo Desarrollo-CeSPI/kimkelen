@@ -1127,4 +1127,19 @@ class CourseSubject extends BaseCourseSubject
 
      return parent::getCourseSubjectStudents($criteria);
   }
+  
+  public function isNotAverageable()
+  {
+      $c = new Criteria();
+      $c->add(CourseSubjectStudentPeer::NOT_AVERAGEABLE_CALIFICATION,null, Criteria::ISNOTNULL);
+      $c->add(CourseSubjectStudentPeer::COURSE_SUBJECT_ID,$this->getId());
+      
+      if(CourseSubjectStudentPeer::doCount($c) == 0)
+      {
+          return FALSE;
+      }
+      
+      return TRUE;
+      
+  }
 }
