@@ -40,7 +40,8 @@
 
       <?php foreach ($course->getNonOptionalCourseSubjects() as $course_subject):?>
         <?php if ($course_subject->isNotAverageable()):?>
-         lclc
+                   <?php include_partial('shared_course/course_subject_students_not_averageable', array('course_subject' => $course_subject))?>
+
           <?php else: ?>
           <?php include_partial('shared_course/course_subject_students', array('course_subject' => $course_subject))?>
           <?php endif; ?>
