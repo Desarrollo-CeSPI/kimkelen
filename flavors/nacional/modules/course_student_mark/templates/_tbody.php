@@ -29,7 +29,7 @@
     <?php endforeach; ?>
     
     <td><?php if($final_period): ?>
-        <?php if($course_subject_student->getIsNotAverageable() && is_null($course_subject_student->getNotAverageableCalification())) : ?>
+        <?php if($course_subject_student->getIsNotAverageable() && !is_null($course_subject_student->getNotAverageableCalification())) : ?>
     
             <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
               <?php echo __("Trayectoria completa"); ?>
