@@ -28,7 +28,22 @@
       <td><?php echo ((!$cssm->getMark())?__('free'): $cssm->getMark()?  $cssm : ''); ?></td>
     <?php endforeach; ?>
     
-    <td><?php echo ($final_period)? $course_subject_student->getMarksAverage() : '' ?></td>
+    <td><?php if($final_period): ?>
+        <?php if($course_subject_student->getIsNotAverageable() && is_null($course_subject_student->getNotAverageableCalification())) : ?>
+    
+            <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+              <?php echo __("Trayectoria completa"); ?>
+            <?php else: ?>  
+                <?php echo __("Trayectoria en curso"); ?>
+            <?php endif; ?>
+        <?php else : ?>
+            <?php echo $course_subject_student->getMarksAverage(); ?>
+        <?php endif; ?>
+        
+        <?php else : ?>
+        <?php echo '' ?>
+        <?php endif; ?>
+    </td>
 	  <?php $c = new num2text(); ?>
 	  <td><?php echo ($final_period)? $c->num2str($course_subject_student->getMarksAverage()) : '' ?></td>
     <td></td>
