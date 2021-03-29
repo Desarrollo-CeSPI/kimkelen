@@ -31,7 +31,23 @@
         <?php foreach ($course_subject_student->getCourseSubjectStudentMarks() as $key => $cssm): ?>
               <td><?php echo ((!$cssm->getMark())? '' : $cssm->getMarkByConfig($configuration)); ?></td>
         <?php endforeach; ?>
-        <td align="center"><?php echo ($final_period) ? $course_subject_student->getAverageByConfig($configuration) : '' ?></td>
+        <td align="center">
+            <?php if($final_period): ?>
+        <?php if($course_subject_student->getIsNotAverageable() && !is_null($course_subject_student->getNotAverageableCalification())) : ?>
+    
+            <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+              <?php echo __("Trayectoria completa"); ?>
+            <?php else: ?>  
+                <?php echo __("Trayectoria en curso"); ?>
+            <?php endif; ?>
+        <?php else : ?>
+            <?php echo $course_subject_student->getAverageByConfig($configuration) ; ?>
+        <?php endif; ?>
+        
+        <?php else : ?>
+        <?php echo '' ?>
+        <?php endif; ?>
+            </td>
         <td></td>
       </tr>
     <?php endif; ?>
