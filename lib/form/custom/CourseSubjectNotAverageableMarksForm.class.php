@@ -33,7 +33,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
 
     $this->disableCSRFProtection();
     
-    foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
+    foreach ($this->object->getCourseSubjectStudentsNotAverageable() as $course_subject_student)
     {
       
         
@@ -57,7 +57,7 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
     $this->setWidgets($widgets);
     $this->setValidators($validators);
 
-    $this->widgetSchema->setNameFormat('course_student_mark['.$this->object->getId().'][%s]');
+    $this->widgetSchema->setNameFormat('course_student_mark['.$this->object->getId().'_calification_final][%s]');
   }
 
 
@@ -72,38 +72,88 @@ class CourseSubjectNotAverageableMarksForm extends BaseCourseSubjectForm
   protected function doSave($con = null)
   {
     $values = $this->getValues();
-
     $c = new Criteria();
-    $c->add(CourseSubjectStudentMarkPeer::IS_CLOSED, false);
-    foreach ($this->object->getCourseSubjectStudents() as $course_subject_student)
+    foreach ($this->object->getCourseSubjectStudentsNotAverageable() as $course_subject_student)
     {
-      foreach ($course_subject_student->getAvailableCourseSubjectStudentMarks($c) as $course_subject_student_mark)
-      {
-        $is_free = $values[$course_subject_student->getId() . '_free_' . $course_subject_student_mark->getMarkNumber()];
-        $value = $values[$course_subject_student->getId() . '_' . $course_subject_student_mark->getMarkNumber()];
+        $value = $values[$course_subject_student->getId() . '_calification_final'];
       
-        if ((!is_null($is_free)))
-        {
-          if ($is_free)
-          {
-            $value = 0;
-          }
-          else
-          {
-            if($value != null)
+      
+      
+      
+      $c1 = new Criteria();
+      $c1->add(StudentDisapprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, $course_subject_student->getId());
+            
+      $sdcs = StudentDisapprovedCourseSubjectPeer::doSelectOne($c1);
+      $sacs = StudentApprovedCourseSubjectPeer::retrieveForCourseSujectStudent($course_subject_student);
+        
+        if($value == 1)
+        {//aprobado
+            
+            ///si estaba desaprobado o no tiene nota aprobado
+            if(!is_null($sdcs) || is_null($sacs))
             {
-              if (!$course_subject_student->getConfiguration()->isNumericalMark())
-              {
-                $value = LetterMarkPeer::retrieveByPk($value)->getValue();
-              }
-            }
-          }
+                if(!is_null($sdcs))
+                {
+                    $sdcs->delete();
+                }
 
-          $course_subject_student_mark->setMark($value);
-          $course_subject_student_mark->setIsFree($is_free);
-          $course_subject_student_mark->save($con);
+                $school_year = $course_subject_student->getCourseSubject($con)->getCourse($con)->getSchoolYear($con);
+                $student_approved_course_subject = new StudentApprovedCourseSubject();
+                $student_approved_course_subject->setCourseSubject($course_subject_student->getCourseSubject($con));
+                $student_approved_course_subject->setStudent($course_subject_student->getStudent($con));
+                $student_approved_course_subject->setSchoolYear($school_year);
+
+                $student_approved_course_subject->save();
+                $course_subject_student->setStudentApprovedCourseSubject($student_approved_course_subject);
+
+                foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
+                {
+                    $course_subject_student_mark->setIsClosed(TRUE);
+                    $course_subject_student_mark->save($con);
+
+                }
+                
+                $course_subject_student->setIsNotAverageable(TRUE);
+                $course_subject_student->setNotAverageableCalification($value);
+                $course_subject_student->save();
+            }
+   
+
         }
+        elseif($value == 2)
+        {
+            
+            ///si estaba aprobado o no tiene nota desaprobado
+            if(!is_null($sacs) || is_null($sdcs))
+            {
+                if(!is_null($sacs))
+                {
+                    $sacs->delete();
+                }
+
+                $student_disapproved_course_subject = new StudentDisapprovedCourseSubject();
+                $student_disapproved_course_subject->setCourseSubjectStudent($course_subject_student);
+                $student_disapproved_course_subject->setExaminationNumber(1);
+                $student_disapproved_course_subject->save();
+              
+                foreach ($course_subject_student->getCourseSubjectStudentMarks($c) as $course_subject_student_mark)
+                {
+                    $course_subject_student_mark->setIsClosed(TRUE);
+                    $course_subject_student_mark->save($con);
+
+                }
+                
+                $course_subject_student->setIsNotAverageable(TRUE);
+                $course_subject_student->setNotAverageableCalification($value);
+                $course_subject_student->save();
+            }
+
+        }
+        
+         
+        
       }
+         
     }
-  }
+  
 }

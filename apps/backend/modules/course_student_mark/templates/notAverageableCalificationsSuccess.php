@@ -25,7 +25,7 @@
   <?php include_partial('course_student_mark/flashes') ?>
 
   <div id="sf_admin_content">
-    <form action="<?php echo url_for('course_student_mark/update') ?>" method="post">
+    <form action="<?php echo url_for('course_student_mark/updateNotAverageable') ?>" method="post">
       <input type="hidden" id="id" name="id" value="<?php echo $course->getId() ?>"/>
       <ul class="sf_admin_actions">
         <li class="sf_admin_action_list"><?php echo link_to(__('Back'), "@$referer_module") ?></li>
@@ -59,7 +59,7 @@
 
         <fieldset id="marks_fieldset_<?php echo $course_subject->getId() ?>" class="marks-fieldset">
           <h2><?php echo $course_subject->getCareerSubject() ?></h2>
-          <?php include_component('course_student_mark', 'marks', array('course' => $course, 'course_subject' => $course_subject, 'form' => $forms[$course_subject->getId()])) ?>
+          <?php include_component('course_student_mark', 'marks_not_averageable', array('course' => $course, 'course_subject' => $course_subject, 'form' => $forms[$course_subject->getId()])) ?>
         </fieldset>
       <?php endforeach; ?>
 

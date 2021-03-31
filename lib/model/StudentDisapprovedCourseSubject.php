@@ -59,6 +59,10 @@ class StudentDisapprovedCourseSubject extends BaseStudentDisapprovedCourseSubjec
 
   public function getResultStr()
   {
+    if ($this->getCourseSubjectStudent()->getIsNotAverageable())
+    {
+      return "";
+    }
     return SchoolBehaviourFactory::getEvaluatorInstance()->getStudentDisapprovedResultStringShort($this);
   }
 

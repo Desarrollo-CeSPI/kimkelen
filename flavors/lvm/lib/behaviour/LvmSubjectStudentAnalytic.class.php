@@ -134,8 +134,27 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
             }
             else
             {
+                if($this->css->getIsNotAverageable() )
+                {
+                    if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+                    {
+                        return "Aprobado";
+                    }
+                    else
+                    {
+                        return $this->getNullLabel();
+                    }
+
+
+                }
+                else
+                {
+                
                 $sacs = $this->css->getStudentApprovedCourseSubject();          
                 return (!is_null($sacs) ? $sacs->getMark() : ($as_label ? $this->getNullLabel() : null));
+            
+                }
+                
             }  
             
         }
@@ -161,6 +180,20 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         {
             if (!$this->approved && is_null($this->css->getStudentApprovedCourseSubject()))
                 return $this->getNullLabel();
+            
+            if($this->css->getIsNotAverageable() )
+            {
+                if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+                {
+                    return "Aprobado";
+                }
+                else
+                {
+                    return $this->getNullLabel();
+                }
+
+
+            }
             $c = new num2text();
             $mark = $this->getMark();
             $mark_parts = explode(',', $mark);

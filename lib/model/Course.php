@@ -435,8 +435,16 @@ class Course extends BaseCourse
         $this->setIsClosed(true);
       }
 
-      $this->updatePeriod($con);
+      if($this->getCourseSubject()->isNotAverageable())
+      {
+          $this->setCurrentPeriod($this->getCurrentPeriod()+ 1);
+      }
+      else
+      {
+          $this->updatePeriod($con);
 
+      }
+      
 
       $this->save($con);
       $con->commit();
