@@ -66,9 +66,12 @@
         <?php endfor ?>
 
         <?php if ($course_subject_student->getIsNotAverageable()): ?>
+            <?php if(! is_null($course_subject_student->getNotAverageableCalification())): ?>
+          <td>echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration())</td>
+             <?php else:?>
           <td></td>
-
-        <?php else: ?>
+            <?php endif; ?>
+        <?php else: ?>  
           <td><?php echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration()) ?></td>
         <?php endif; ?>
 
