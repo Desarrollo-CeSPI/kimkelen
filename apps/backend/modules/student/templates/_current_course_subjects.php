@@ -58,7 +58,13 @@
 
         <?php for ($i = 1; $i <= $marks; $i++): ?>
           <?php if ($course_subject_student->getIsNotAverageable()): ?>
-            <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
+            <?php if(! is_null($course_subject_student->getNotAverageableCalification())): ?>
+          <td></td>
+             <?php else:?>
+          <td><?php echo SchoolBehaviourFactory::getEvaluatorInstance()->getExemptString() ?></td>
+            <?php endif; ?>
+        
+        
 
           <?php else: ?>
             <td><?php echo ($mark = $course_subject_student->getMarkFor($i)) ? $mark->getMarkByConfig($course_subject_student->getConfiguration()) : "-" ?></td>
@@ -67,7 +73,7 @@
 
         <?php if ($course_subject_student->getIsNotAverageable()): ?>
             <?php if(! is_null($course_subject_student->getNotAverageableCalification())): ?>
-          <td>echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration())</td>
+          <td><?php echo $course_subject_student->getAverageByConfig($course_subject_student->getConfiguration()) ?></td>
              <?php else:?>
           <td></td>
             <?php endif; ?>
