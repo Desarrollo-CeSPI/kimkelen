@@ -717,10 +717,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
         {
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
-                "T. Completa";
+               return  "T. Completa";
             }else
             {
-                "T. en Curso";
+                return "T. en Curso";
             }
         }
         return $this->getMarksAverage();
