@@ -443,7 +443,7 @@ class CareerStudent extends BaseCareerStudent
       $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
       $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
   
-      $c->add(StudentCareerSchoolYear::STUDENT_ID,$this->getStudent()->getId());
+      $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$this->getStudent()->getId());
       $c->add(SchoolYearPeer::YEAR,$year);
       $c->add(CareerSchoolYearPeer::CAREER_ID,$this->getCareer()->getId());
       
