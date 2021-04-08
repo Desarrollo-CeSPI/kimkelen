@@ -22,7 +22,7 @@ build-base:
     - export BASE_IMAGE="$IMAGE_NAME:base-$LOCK_VERSION"
     - docker pull "$BASE_IMAGE" || ( docker build --pull -f docker/Dockerfile.base -t "$BASE_IMAGE" . && docker push "$BASE_IMAGE" && docker tag "$BASE_IMAGE" "$IMAGE_NAME:base-latest" && docker push "$IMAGE_NAME:base-latest" )
   only:
-    - /^\d+\.\d+\.\d+(-test)?$/
+    - /^\d+\.\d+\.\d+((-dev)|(-test))?$/
     
 build-app:
   stage: app
@@ -31,7 +31,7 @@ build-app:
     - docker push "$IMAGE_NAME:$IMAGE_TAG"
     - docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:latest" && docker push "$IMAGE_NAME:latest"
   only:
-    - /^\d+\.\d+\.\d+/
+    - /^\d+\.\d+\.\d+$/
 
 build-dev:
   stage: app-dev
@@ -40,7 +40,7 @@ build-dev:
     - docker push "$IMAGE_NAME:$IMAGE_TAG"
     - docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:dev" && docker push "$IMAGE_NAME:dev"
   only:
-    - /^\d+\.\d+\.\d+-test$/
+    - /^\d+\.\d+\.\d+-(dev|test)$/
 
 deploy-dev:
   stage: deploy-dev
@@ -48,4 +48,4 @@ deploy-dev:
     - apk add -U curl
     - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_BBA&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
   only:
-    - /^\d+\.\d+\.\d+-test$/
+    - /^\d+\.\d+\.\d+-(dev|test)$/
