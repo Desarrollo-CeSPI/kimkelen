@@ -435,6 +435,25 @@ class CareerStudent extends BaseCareerStudent
         return $this->getCareer()->getAraucanoCode();
     }      
   }
+  
+  public function getCourseInYear($year)
+  {
+      
+      $c = new Criteria(); 
+      $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+      $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+  
+      $c->add(StudentCareerSchoolYear::STUDENT_ID,$this->getStudent()->getId());
+      $c->add(SchoolYearPeer::YEAR,$year);
+      $c->add(CareerSchoolYearPeer::CAREER_ID,$this->getCareer()->getId());
+      
+      $scsy  = StudentCareerSchoolYearPeer::doSelectOne($c);
+      
+      return (count($scsy) > 0) ? TRUE: FALSE;
+          
+  }
+  
+  
 
 }
 sfPropelBehavior::add('CareerStudent', array('studentCareerSchoolYear'));

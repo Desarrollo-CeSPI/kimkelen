@@ -25,6 +25,9 @@
         <?php if ($analytical->is_approved_subject()):?>
         <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
         <?php endif;?>
+        <?php if($career_student->getCourseInYear(2020)):?>
+        shdkjsdhk
+        <?php endif;?>
    <?php echo $form ?>
     </div>       
     <div class="analytical-observations">
