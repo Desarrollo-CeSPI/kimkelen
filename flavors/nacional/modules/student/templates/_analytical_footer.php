@@ -25,11 +25,18 @@
         <?php if ($analytical->is_approved_subject()):?>
         <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
         <?php endif;?>
+        <?php if($career_student->getCourseInYear(2020)):?>
+         Año 2020, valoraciones de acuerdo a R.N°190/2020. 
+        <?php endif;?>
    <?php echo $form ?>
     </div>       
     <div class="analytical-observations">
        
-        Observaciones: <?php echo ($analytical->is_approved_subject()) ? 'Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-' : '' ?> <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> 
+        Observaciones: <?php echo ($analytical->is_approved_subject()) ? 'Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-' : '' ?> 
+            <?php if($career_student->getCourseInYear(2020)):?>
+            Año 2020, valoraciones de acuerdo a R.N°190/2020. 
+           <?php endif;?>
+            <?php echo (isset($analytic) && $analytic->getObservations()) ? $analytic->getObservations() : '' ?> 
  
     </div>   
     <?php include_partial('analytical_footer_signatures', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?> 

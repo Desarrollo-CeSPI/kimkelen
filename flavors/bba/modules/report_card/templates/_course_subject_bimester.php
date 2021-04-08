@@ -39,7 +39,23 @@
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject()  ?></td>
       <?php endif; ?>
 
-      <td> <?php echo $student->getPromDef($course_result) ?></td>
+      <td> 
+          
+         
+          <?php if( !is_null($course_result) && $course_result->getCourseSubjectStudent()->getIsNotAverageable() && ! is_null($course_result->getCourseSubjectStudent()->getNotAverageableCalification())): ?>
+            <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+              <?php echo __("Trayectoria completa"); ?>
+            <?php else: ?>  
+                <?php echo __("Trayectoria en curso"); ?>
+            <?php endif; ?>
+          
+          <?php else: ?> 
+          <?php echo $student->getPromDef($course_result) ?>
+          <?php endif ?>
+       
+      
+      
+      </td>
 
     </tr>
   <?php endforeach; ?>
@@ -67,7 +83,19 @@
         <td><?php #echo $course_subject_student->getLastStudentDisapprovedCourseSubject()  ?></td>
       <?php endif; ?>
 
-      <td> <?php echo $student->getPromDef($course_result) ?></td>
+      <td> 
+      
+            <?php if( !is_null($course_result) && $course_result->getCourseSubjectStudent()->getIsNotAverageable() && ! is_null($course_result->getCourseSubjectStudent()->getNotAverageableCalification())): ?>
+            <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
+              <?php echo __("Trayectoria completa"); ?>
+            <?php else: ?>  
+                <?php echo __("Trayectoria en curso"); ?>
+            <?php endif; ?>
+          
+          <?php else: ?> 
+          <?php echo $student->getPromDef($course_result) ?>
+          <?php endif ?>
+      </td>
 
     </tr>
   <?php endforeach; ?>

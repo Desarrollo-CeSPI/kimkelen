@@ -713,7 +713,17 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
     else
     {
-      return $this->getMarksAverage();
+        if($this->getIsNotAverageable() && ! is_null($this->getNotAverageableCalification()))
+        {
+            if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+            {
+               return  "T. Completa";
+            }else
+            {
+                return "T. en Curso";
+            }
+        }
+        return $this->getMarksAverage();
     }
   }
   

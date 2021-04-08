@@ -9343,6 +9343,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Evaluation date</source>
                         <target>Fecha de examen</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Not averageable califications</source>
+                        <target>Calificaciones no promediables</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>

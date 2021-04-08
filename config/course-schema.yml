@@ -200,6 +200,10 @@ classes:
         type:              integer
         required:          false
         default:  null
+      not_averageable_calification:
+        type:              integer
+        required:          false
+        default:  null
       _uniques:
         course_subject_student_unique: [ course_subject_id, student_id ]
       _indexes:

@@ -39,8 +39,13 @@
 
 
       <?php foreach ($course->getNonOptionalCourseSubjects() as $course_subject):?>
-        <?php include_partial('shared_course/course_subject_students', array('course_subject' => $course_subject))?>
-      <?php endforeach ?>
+        <?php if ($course_subject->isNotAverageable()):?>
+                   <?php include_partial('shared_course/course_subject_students_not_averageable', array('course_subject' => $course_subject))?>
+
+          <?php else: ?>
+          <?php include_partial('shared_course/course_subject_students', array('course_subject' => $course_subject))?>
+          <?php endif; ?>
+        <?php endforeach ?>
       <ul class="sf_admin_actions">
         <li><?php echo link_to(__('Back'), "@$referer_module", array('class' => 'sf_admin_action_go_back')) ?></li>
         <?php if (!$course->getIsClosed()): ?>
