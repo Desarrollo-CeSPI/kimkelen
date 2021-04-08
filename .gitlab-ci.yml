@@ -47,5 +47,8 @@ deploy-dev:
   script:
     - apk add -U curl
     - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_BBA&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_LVM&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_NACIONAL&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_GRADUADA&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
   only:
     - /^\d+\.\d+\.\d+-(dev|test)$/
