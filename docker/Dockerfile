@@ -6,5 +6,7 @@ ADD . /app
 RUN rm /app/web/*_dev.php
 ENV APACHE_DOCUMENT_ROOT=/app/web/ \
     DB_ENCODING=utf8
+ARG REVISION
+ENV VERSION=$REVISION
 WORKDIR /app
 
