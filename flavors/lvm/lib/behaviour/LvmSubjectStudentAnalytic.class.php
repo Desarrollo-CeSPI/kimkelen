@@ -244,7 +244,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         }else
         {
             if ($this->approved_date)
-            {	
+            {	echo "por aca";
                 return $this->approved_date;
             }
             if ($this->approved)
