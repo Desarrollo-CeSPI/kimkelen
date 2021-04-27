@@ -34,6 +34,7 @@ class StudentApprovedCareerSubjectPeer extends BaseStudentApprovedCareerSubjectP
       $c->addJoin(self::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
       $c->add(SchoolYearPeer::YEAR,$school_year->getYear(), Criteria::GREATER_EQUAL);
     }
+
     return self::doSelectOne($c);
 
   }
