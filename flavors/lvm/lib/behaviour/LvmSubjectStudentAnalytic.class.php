@@ -218,7 +218,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
             
             $approvation_instance= null;
             foreach ($introduccion as $course_subject_student)
-            {
+            { 
                 $course_result = $course_subject_student->getCourseResult();
                 if ($course_result)
                 {
@@ -232,11 +232,22 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
                        }elseif(get_class($course_result) == 'StudentDisapprovedCourseSubject' && 
                                (is_null($approvation_instance) || get_class($approvation_instance) == 'StudentApprovedCourseSubject')) {
                            
-                           $approvation_instance=$course_result;
+                           $srcs = StudentRepprovedCourseSubjectPeer::retrieveByStudentApprovedCareerSubject($course_result->getStudentApprovedCareerSubject());
+                           
+                           if(is_null($srcs))
+                           {
+                               $approvation_instance=$course_result;
+                           }
+                           else
+                           {
+                               $approvation_instance=$srcs;
+                           }
                        }elseif(get_class($course_result) == 'StudentRepprovedCourseSubject')
                        {
                            $approvation_instance=$course_result;
-                       } 
+                       }
+
+                       
                    }     
                 }            
             }
@@ -244,7 +255,7 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         }else
         {
             if ($this->approved_date)
-            {	echo "por aca";
+            {	
                 return $this->approved_date;
             }
             if ($this->approved)
