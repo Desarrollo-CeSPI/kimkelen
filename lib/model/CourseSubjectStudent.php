@@ -703,6 +703,16 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     
     if ($config != null && !$config->isNumericalMark())
     {
+        if($this->getIsNotAverageable() && ! is_null($this->getNotAverageableCalification()))
+        {
+            if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+            {
+               return  "T. Completa";
+            }else
+            {
+                return "T. en Curso";
+            }
+        }
       $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
       
       if(! is_null($letter_average)){
