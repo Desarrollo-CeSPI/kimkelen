@@ -1,0 +1,148 @@
+body {
+ font-family:trebuchet ms,sans-serif;
+ font-size:11px;
+ color:#000;
+ margin:0;
+ padding:0;
+ background:none;
+ background: transparent url(../images/bg_login.jpg) repeat-y center center;
+ background-attachment: fixed;
+ background-color:#003F2D;
+}
+
+#login {
+ border:1px solid #003F2D;
+ position: absolute;
+ width: auto; /* ancho de la capa a centrar */
+ height: auto; /* alto de la capa a centrar */
+ top: 25%;
+ left: 45%;
+ margin-left: -200px; /* mitad del ancho de la capa a centrar */
+ margin-top: -100px; /* mitad del alto de la capa a centrar */
+}
+
+
+#login .left {
+ border-bottom:0px solid #ccc;
+ padding:0px;
+ width: 250px; 
+ height:300px;
+ float:left;
+ padding:5px 0 0 0px;
+ background-color:#003F2D;
+ background-image:url(../images/imglogin.jpg);
+ background-repeat:no-repeat;
+}
+
+
+#login .right {
+ border:0px solid #fff;
+ background-color:#003F2D;
+ width: 250px; 
+ height:300px;
+ padding:5px 0 0 0px;
+ float:left;
+}
+
+#login .logo {
+ font-family:georgia,serif;
+ font-size:14.5px;
+ color:#fff;
+ width: 250px; 
+ height:60px;
+ margin:0px 0px 0px 0px;
+ background-image:url(../images/logo-cespi.png);
+ background-repeat:no-repeat;
+ border:0px solid #fff;
+}
+
+#login .logo_subtitle{
+ font-family:trebuchet ms, serif;
+ font-size:10px;
+ color:#fff;
+ margin:5px 0px 0px 40px;
+ padding-bottom:5px;
+ display: none;
+}
+
+#login .title_login {
+ font-size:18px;
+ font-weight:bold;
+ color:#fff;
+ margin:23px 22px 5px 22px;
+ text-align:left;
+}
+
+#login .form_row {
+ margin:5px 22px 5px 22px;
+ border:0px solid red;
+ text-align:left;
+}
+
+#login .name {
+ font-size:12px;
+ color:#fff;
+ margin-top:5px;
+}
+
+#login .password {
+ font-size:12px;
+ color:#fff;
+
+}
+
+#login .remember { 
+ font-size:12px;
+ color:#fff;
+ margin-top:5px;
+
+}
+
+#signin_password, #signin_username {
+ border:0px solid #fff;
+ margin:0px;
+ padding:2px;
+ height:18px;
+ width:180px;
+ font-family:trebuchet ms,sans-serif;
+ font-size:11px;
+}
+
+#login .link_login {
+ font-size:12px;
+ font-weight:bold;
+ color:#fff;
+}
+
+#login .button {
+ margin-top:10px;
+ border:0px solid red;
+ font-weight:bold;
+ font-size:12px;
+ color:#fff;
+ height:auto;
+ width:auto;
+ text-decoration:none;
+ outline:none;
+ background:none;
+ padding:0;
+}
+
+
+#login .form_footer {
+ margin:5px 0px 5px 0px;
+ border-bottom:2px solid #003F2D;
+ text-align:left;
+ color:#ccc;
+ clear:both;
+ width:500px;
+ 
+}
+
+#login .error_list {
+  color:red;
+  list-style:none;
+  padding:0;
+  margin:0;
+  font-size: 10px;
+}

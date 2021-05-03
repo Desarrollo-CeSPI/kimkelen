@@ -1,0 +1,74 @@
+.error-container
+{
+  margin: 24px auto;
+  width: 50%;
+}
+
+/**
+ * error body
+ */
+
+.error-container .error
+{
+  -moz-border-radius: 4px;
+  border: 2px solid #aaa;
+  background: url('../images/error-alert.png') no-repeat 3px 3px #ffc;
+  padding: 12px;
+  color: #333;
+}
+
+.error-container .error h1
+{
+  margin: 6px 48px;
+  color: #a90036;
+}
+
+.error-container .error h2
+{
+  margin-top: 12px;
+  color: #660011;
+}
+
+.error-container .error ul
+{
+  list-style: none;
+  padding-left: 12px;
+}
+
+.error-container .error .emphasized
+{
+  font-weight: bold;
+  color: #111;
+}
+
+/**
+ * error footer
+ */
+
+.error-container .error-footer
+{
+  -moz-border-radius: 4px;
+  border: 2px solid #aaa;
+  background-color: #ffc;
+  padding: 6px;
+  margin-top: 6px;
+  color: #333;
+}
+
+.error-container .error-footer a
+{
+  color: #a90036;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.error-container .error-footer a:hover
+{
+  text-decoration: underline;
+}
+
+.error-container a.go-home
+{
+  padding: 2px 3px 2px 24px;
+  background: url('../images/home.png') no-repeat left center transparent;
+}

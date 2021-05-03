@@ -1,0 +1,202 @@
+body {
+  text-align:center;
+  font-family:Trebuchet MS, sans-serif;
+  font-size:13px;
+  color:#333;
+}
+
+/* wrapper */
+
+.record-wrapper{
+  text-align:left;
+  width:900px;
+  margin:30px auto;
+}
+
+.record-header {
+  float:left;
+  width:100%;
+}
+
+.record-header .logo
+{
+  float:left !important;
+}
+
+.record-header .logo_fvet
+{
+  float:right !important;
+}
+
+.header_row {
+  border-bottom:1px solid #ccc;
+  float:left;
+  width:100%;
+  padding:5px 0px;
+}
+
+.header_row .header_right
+{
+  float:right;
+}
+
+.header_row .name
+{
+  float:left;
+  font-size:16px;
+}
+
+.record-content {
+  float:left;
+  width:100%;
+}
+
+.record-content .title {
+  font-size: 15px;
+  font-weight: bold;
+  padding:5px;
+  text-transform: uppercase;
+  background:#f2f2f2;
+  border-bottom:1px solid #ccc;
+}
+
+.row {
+  border-bottom:1px solid #ccc;
+  text-align:left;
+  width:100%;
+  float:left;
+  padding:2px 0px;
+}
+
+
+.row .txt {
+  padding: 10px;
+  border-left:1px solid #999;
+}
+
+/***table***/
+
+table.gridtable {
+  font-family:arial,sans-serif;
+  font-size:11px;
+  color:#333333;
+  border:none;
+  border-collapse: collapse;
+  width:100%;
+  text-align:center;
+}
+
+table.gridtable th {
+  padding: 3px;
+  border-bottom:1px solid #ccc;
+  font-size:13px;
+    background:#f2f2f2;
+}
+
+.th-subject-name {
+  width:25%;
+}
+
+table.gridtable td {
+  padding: 3px;
+  border-bottom:1px solid #ccc;
+  background-color: #ffffff;
+}
+
+table.gridtable tr {
+  border-bottom:1px solid #ccc;
+  background-color: #ffffff;
+  text-align:center;
+}
+
+.subject_name
+{
+  text-align: left !important;
+}
+
+/***table***/
+
+table.lefttable {
+  font-family:arial,sans-serif;
+  font-size:11px;
+  color:#333333;
+  border:none;
+  border-collapse: collapse;
+  width:100%;
+  text-align:left;
+}
+
+table.lefttable tr {
+  border-top:1px solid #ccc;
+  background-color: #ffffff;
+}
+
+.right{
+  float:right;
+}
+
+.signature-right{
+  float:right;
+  margin-right: 280px;
+}
+
+.signature {
+      padding: 0 70px;
+  border-bottom-style: dotted;
+  border-bottom-width: thin;
+}
+
+.signature-left{
+  float:left;
+  margin-left: 280px;
+
+}
+
+.signature-center{
+  float:center;
+    margin: 0px 535px;
+}
+
+.signature-text {
+  padding-bottom: 50px;
+}
+
+
+
+.record-header .school-name
+{
+    text-align:center;
+    padding:5px 0px;
+    margin-right: 15%;
+    font-size: medium;
+}
+
+.gray-background{
+  background:#f2f2f2;
+  padding: 4px;
+}
+
+h2 {
+  margin-top: 5px;
+}
+
+.article-div {
+  margin: 20px 0;
+}
+
+.observation-box {
+  padding: 2px 0 0 5px;
+  border:1px solid #ccc;
+  min-height: 70px;
+}
+
+.sub {
+  text-decoration: underline;
+}
+
+.little-box {
+  border:1px solid #ccc;
+  padding: 1px 13px;
+  margin-right: 4px;
+}
+

@@ -1,0 +1,38 @@
+.sf_admin_actions, #header, #menu-div, #screen_header, #footer {
+    display: none;
+}
+
+.misma_pagina {
+    page-break-inside: avoid;
+}
+
+.table {
+    margin-bottom: 1em;
+    /*    page-break-inside: avoid; */
+}
+.table tr
+{
+    page-break-inside: avoid;
+}
+
+.table thead th{
+    font-size: 10px;
+    padding-top: 1px !important;
+    padding-bottom: 0 !important;
+}
+
+.table td {
+    font-size: 8px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.table tbody th {
+    font-size: 10px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.analytical_body_table {
+    font-size: 13px;
+}

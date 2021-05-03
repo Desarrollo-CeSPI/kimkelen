@@ -1,0 +1,61 @@
+.search_results_container
+{
+}
+
+.search_results_container form
+{
+  text-align: center;
+}
+
+.search_results_container form input#search_query
+{
+  font-size: 16px;
+  width: 30em;
+  padding: 3px;
+}
+
+.search_results_container form input#search_submit
+{
+  font-size: 16px;
+  padding: 3px 12px;
+  border: 1px solid #aaa;
+  background-color: #ddd;
+}
+
+.search_results_container h3
+{
+  text-align: center;
+}
+
+.search_results_container #Pagination
+{
+  text-align: center;
+}
+
+.search_results_container .result
+{
+  border: 1px solid #ddd;
+  padding: 6px;
+  margin: 1px;
+}
+
+.search_results_container .result:hover
+{
+  background-color: #eee;
+}
+
+.search_results_container .result a
+{
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #0066cc;
+  display: block;
+}
+
+.search_results_container .result .info_text_div
+{
+  font-style: normal;
+  font-size: 12px;
+  color: #777;
+}

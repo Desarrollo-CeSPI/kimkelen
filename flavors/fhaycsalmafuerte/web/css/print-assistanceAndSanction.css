@@ -1,0 +1,231 @@
+#sfWebDebug,
+.non-printable
+{
+  display: none !important;
+}
+
+.print_page {
+  page-break-after: always;
+}
+
+body {
+    text-align:center;
+    font-family:Trebuchet MS, sans-serif;
+    font-size:15px;
+    color:#333;
+    background-color: #FFF !important;
+}
+
+/* wrapper */
+
+.report-wrapper
+{
+    background-color: white !important;
+    text-align:left;
+    width:1000px;
+    margin:30px auto;
+}
+
+.report-header {
+    float:left;
+    width:100%;
+}
+
+.report-date {
+    float:right;
+}
+
+
+.rowfirm_authority
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-right: 5px;
+    padding:0px 40px !important;
+    height:150px !important;
+}
+
+.colsbottom
+{
+    float: left;
+    width: 50%;
+}
+
+.rowfirm_responsible
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-left:5px;
+    padding:0px 15px;
+    height:150px !important;
+}
+
+.cols
+{
+    width: 25%;
+    float: left;
+    margin-left: 10px;
+}
+
+.print_table
+{
+    width:100% !important;
+    font-size: 16px;
+}
+
+.print_table thead th
+{
+    text-align: center !important;
+    border:1px solid #ccc !important;
+}
+
+.header_row {
+    border-bottom:1px solid #ccc;
+    float:left;
+    width:100%;
+    padding:5px 0px;
+}
+
+.header_row .header_right
+{
+    float:right;
+}
+
+.header_row .title
+{
+    float:left;
+    font-weight:bold;
+    font-size:17px;
+    padding-top:3px;
+    padding-right:5px;
+    margin-left: 3px;
+}
+
+.header_row .name
+{
+    float:left;
+    font-size:20px;
+}
+
+.header_row .course
+{
+    float:left;
+    font-size:16px;
+    padding:3px;
+    width:20px;
+}
+
+.header_row .school_year
+{
+    float:left;
+    font-size:15px;
+    padding:3px;
+    width:120px;
+}
+
+.header_row .division
+{
+    float:left;
+    font-size:16px;
+    padding:3px;
+    width:100px;
+
+}
+
+.report-title
+{
+    font-size: 15px;
+    font-weight: bold;
+    padding:5px;
+    text-transform: uppercase;
+    background:#f2f2f2;
+    border:1px solid #ccc !important;
+}
+
+.report-total
+{
+  text-transform: uppercase;
+   padding:5px;
+   text-align: right !important;
+   border-bottom:1px solid #ccc;
+}
+
+
+.titletable {
+    font-size:15px;
+    font-weight:bold;
+    display:block;
+    padding:3px;
+}
+
+.print_table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border:1px solid #ccc;
+}
+
+.rowfirm_authority
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-right: 5px;
+    padding:0px 15px;
+    height:80px;
+    float: right;
+}
+
+.colsbottom
+{
+    float: left;
+    width: 50%;
+}
+
+.rowfirm_responsible
+{
+    border:1px solid #ccc;
+    margin-top:10px;
+    margin-left:5px;
+    padding:0px 15px;
+    height:150px !important;
+    float: right;
+}
+
+.cols
+{
+    width: 25%;
+    float: left;
+    margin-left: 10px;
+}
+
+.print_table *
+{
+    text-align: center;
+}
+
+
+.print_table thead th,
+.print_table tbody th
+{
+    color: black;
+    padding: 3px;
+    text-align: left;
+}
+
+.print_table tbody td
+{
+    border: 1px solid #ccc;
+}
+
+.colsright{
+    float:right;
+    padding-top: 70px !important;
+}
+
+.report-notice {
+    float: left;
+    margin-left: 5px;
+}
+
+.print_sanctions {
+    float: left;
+}
