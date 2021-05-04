@@ -104,7 +104,7 @@ class BaseAnalyticalBehaviour
     
     public function get_year_average($year)
     {
-      return ($this->objects[$year]) ? $this->objects[$year]['average'] : NULL;
+      return ($this->objects[$year] && isset($this->objects[$year]['average'])) ? $this->objects[$year]['average'] : NULL;
     }
     
     public function get_year_status($year)
@@ -382,12 +382,14 @@ class BaseAnalyticalBehaviour
                 }
 
                 // Cálculo del promedio por año
-                foreach ($this->objects as $year => $data)
+                if($school_year->getYear() != 2020)
                 {
-                    $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
-                }
-                $this->process_total_average($avg_mark_for_year);
-                
+                  foreach ($this->objects as $year => $data)
+                  {
+                      $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
+                  }
+                  $this->process_total_average($avg_mark_for_year);
+                }               
             }            
         }
     }
