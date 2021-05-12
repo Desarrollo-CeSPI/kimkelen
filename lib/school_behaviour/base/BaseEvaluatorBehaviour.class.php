@@ -893,7 +893,9 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$student->getId());
     $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
     $c->add(CourseSubjectStudentMarkPeer::MARK,NULL, Criteria::NOT_EQUAL);
-    $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
+ $criterion = $c->getNewCriterion(CourseSubjectStudentPeer::NOT_AVERAGEABLE_CALIFICATION,NULL, Criteria::NOT_EQUAL);
+      $c->addOr($criterion); 
+ $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
     $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
     return StudentCareerSchoolYearPeer::doSelectOne($c);
