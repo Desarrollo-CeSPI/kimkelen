@@ -202,7 +202,7 @@ class BaseSubjectStudentAnalytic
             return $this->getNullLabel();
         
         
-        if($this->css->getIsNotAverageable() )
+        if($this->css->getIsNotAverageable() && is_null($this->getMark() ) )
         {
             if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
