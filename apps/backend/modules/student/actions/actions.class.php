@@ -741,7 +741,7 @@ class studentActions extends autoStudentActions
                 $csss = CourseSubjectStudentPeer::retrieveByCareerSchoolYearAndStudent($career_school_year, $student);
                 foreach ($csss as $css)
                 {	    
-                    if ( ! $css->getIsNotAverageable())
+                    if ( ! $css->getIsNotAverageable() || ($css->getIsNotAverageable() && ! is_null($css->getNotAverageableCalification())))
                     {
                         $sacs = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($css, $school_year);
                         
