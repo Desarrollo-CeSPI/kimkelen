@@ -118,17 +118,17 @@ generator:
             credentials: [edit_division_course_califications]
             condition:    canRevertCalificate
 
-          #calificateNonNumericalMarkInCurrentPeriod:
-          #  label: Calificate non numerical mark in current period
-          #  action: calificateNonNumericalMarkInCurrentPeriod
-          #  credentials: [edit_division_course_califications]
-          #  condition:    canCalificate
+          calificateNonNumericalMarkInCurrentPeriod:
+            label: Calificate non numerical mark in current period
+            action: calificateNonNumericalMarkInCurrentPeriod
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate
           
-          #revertCalificateNonNumericalMarkInCurrentPeriod:
-          #  label: Revert calificate non numerical mark in current period
-          #  action: revertCalificateNonNumericalMarkInCurrentPeriod
-          #  credentials: [edit_division_course_califications]
-          #s  condition:    canCalificate          
+          revertCalificateNonNumericalMarkInCurrentPeriod:
+            label: Revert calificate non numerical mark in current period
+            action: revertCalificateNonNumericalMarkInCurrentPeriod
+            credentials: [edit_division_course_califications]
+            condition:    canCalificate          
 
           _delete:
             condition:      canBeDeleted
