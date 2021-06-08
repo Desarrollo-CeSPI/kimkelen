@@ -786,4 +786,19 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
 
   }
 
+   public function getLetterObservationForIsClosed($mark_number, PropelPDO $con = null)
+  {
+    $mark = $this->getMarkFor($mark_number);
+  
+    if ($mark)
+    {
+      return ($mark->getIsClosed() && !is_null($mark->getObservationMark())) ? $mark->getObservationMark()->getLetter() : null;
+    }
+    else
+    {
+      return null;
+    }
+
+  }
+
 }

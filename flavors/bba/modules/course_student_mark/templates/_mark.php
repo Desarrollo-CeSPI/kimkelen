@@ -22,7 +22,8 @@
 <?php $subject_configuration = $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getConfiguration(); ?>
 <?php foreach($marks as $mark): ?>
   <?php $field = $form[$course_subject_student->getId().'_'.$mark->getMarkNumber()]; ?>
-  <?php $request_value = $sf_request->getParameter($form->getName().'['.$course_subject_student->getId().'_'.$mark->getMarkNumber().']'); ?>
+ 
+ <?php $request_value = $sf_request->getParameter($form->getName().'['.$course_subject_student->getId().'_'.$mark->getMarkNumber().']'); ?>
   <div class='mark-container'>
     <?php if(($subject_configuration->getEvaluationMethod() == EvaluationMethod::FINAL_PROM) && ($mark->getMarkNumber() == $subject_configuration->getCourseMarks())): ?>
       <?php echo __('Final mark', array('%d' => $mark->getMarkNumber()));?>:&nbsp;&nbsp;
@@ -34,6 +35,9 @@
     <?php if ($field->hasError()): ?>
       <?php echo $field->renderError(); ?>
     <?php endif; ?>
+    
+               <?php echo $course_subject_student->getLetterObservationForIsClosed($mark->getMarkNumber());
+ ?>
 
      <?php if(!$mark->getIsClosed()):?>
       <?php echo __($mark->getFreeLabel())?>
