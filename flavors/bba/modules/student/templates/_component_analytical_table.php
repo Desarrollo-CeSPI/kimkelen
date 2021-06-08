@@ -49,7 +49,16 @@
                 <tr>
                     <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
                     <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
-                    <td colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td colspan="1">
+                     
+                       <?php if($css->getMark()): ?>
+                            <?php echo $css->getMark() ?> 
+                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                        Aprobado
+                        <?php else: ?> 
+                        <strong><?php echo __('Adeuda') ?></strong>
+                        <?php endif; ?>
+                    </td>
                     <td colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
                     <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
@@ -67,7 +76,15 @@
                 <tr>
                     <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
                     <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1">
+                        <?php if($css->getMark()): ?>
+                            <?php echo $css->getMark() ?> 
+                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                        Aprobado
+                        <?php else: ?> 
+                        <strong><?php echo __('Adeuda') ?></strong>
+                        <?php endif; ?>
+                    </td>
                     <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
                     <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
@@ -86,7 +103,15 @@
                 <tr>
                     <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
                     <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1">
+                        <?php if($css->getMark()): ?>
+                            <?php echo $css->getMark() ?> 
+                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                        Aprobado
+                        <?php else: ?> 
+                        <strong><?php echo __('Adeuda') ?></strong>
+                        <?php endif; ?>
+                    </td>
                     <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
                     <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
@@ -105,7 +130,15 @@
                 <tr>
                     <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
                     <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1">
+                         <?php if($css->getMark()): ?>
+                            <?php echo $css->getMark() ?> 
+                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                        Aprobado
+                        <?php else: ?> 
+                        <strong><?php echo __('Adeuda') ?></strong>
+                        <?php endif; ?>
+                    </td>
                     <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
                     <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
@@ -123,7 +156,15 @@
                 <tr>
                     <td width="10%"><?php echo ($css->getApprovedDate() ? $css->getApprovedDate()->format('d/m/Y') : '<hr/>')?></td>
                     <td align="left" colspan="4" width="60%"><?php echo $css->getSubjectName() ?></td>
-                    <td class="" colspan="1"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
+                    <td class="" colspan="1">
+                       <?php if($css->getMark()): ?>
+                            <?php echo $css->getMark() ?> 
+                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                        Aprobado
+                        <?php else: ?> 
+                        <strong><?php echo __('Adeuda') ?></strong>
+                        <?php endif; ?>
+                    </td>
                     <td class="" colspan="1"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
                     <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
                     <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>

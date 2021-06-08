@@ -81,7 +81,7 @@ generator:
           calificateNonNumericalMark:
             label:          Calificate non numerical mark
             action:         calificateNonNumericalMark
-            credentials:    [edit_division_course_califications]
+            credentials:    [calificate_non_numerical_mark]
             condition:      canCalificate
            
           calificateNonNumericalMarkInCurrentPeriod:

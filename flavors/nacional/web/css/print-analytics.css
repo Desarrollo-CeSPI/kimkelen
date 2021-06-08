@@ -98,3 +98,15 @@
 #signature_2{
     margin-left: 30%!important;
 }
+.analytical-header-text {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    padding: 0.5em 0 !important;
+}
+
+.school_logo {
+    width: 8%;
+    margin-bottom: 0em;
+}
