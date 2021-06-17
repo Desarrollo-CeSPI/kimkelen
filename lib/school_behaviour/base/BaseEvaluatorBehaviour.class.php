@@ -933,9 +933,13 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
             }
             else
             {
-                $scsy_c;
+               return  $scsy_c;
             }
             
+        }
+        else
+        {
+            return $scsy_c;
         }
         
     }else
