@@ -376,6 +376,12 @@ class BaseAnalyticalBehaviour
                             $this->add_missing_subject($css);
                         }
                     }
+                    
+                    if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
+                    {
+                        $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+                            $this->add_missing_subject($css);
+                    }
                    
                     $this->add_subject_to_year($year_in_career, $css);
                     $this->check_last_exam_date($css->getApprovedDate(false));
