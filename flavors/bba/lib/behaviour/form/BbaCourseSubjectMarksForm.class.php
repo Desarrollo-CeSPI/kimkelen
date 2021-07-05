@@ -190,6 +190,10 @@ class BbaCourseSubjectMarksForm extends CourseSubjectMarksForm
           { 
              $course_subject_student_mark->setObservationMarkId((int)$observation_mark);
           }
+          else
+          {
+            $course_subject_student_mark->setObservationMarkId(NULL);
+          }
           $course_subject_student_mark->save($con);
         }
       }
@@ -199,6 +203,10 @@ class BbaCourseSubjectMarksForm extends CourseSubjectMarksForm
         { 
            $course_subject_student->setObservationFinal((int)$observation_final);
         }
+        else
+       {
+           $course_subject_student->setObservationFinal(NULL);
+       }
         $course_subject_student->save($con);
 
     }
