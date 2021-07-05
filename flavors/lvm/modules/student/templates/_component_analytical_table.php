@@ -58,8 +58,16 @@
                 <td class="text-center" width="10%">----</td>
                 <td class="text-center"><?php echo __('Sin calificaciones') ?></td>
           <?php else:?>
+               <?php if(($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable())): ?>
+                <td class="text-center" width="10%">Aprobado</td>
+                <td class="text-center">Aprobado</td>
+          <?php elseif( $css->getCourseSubjectStudent()->getIsNotAverageable()  && is_null($css->getCourseSubjectStudent()->getNotAverageableCalification())):?>
+                <td class="text-center" width="10%">----</td>
+                <td class="text-center"><?php echo __('Eximido') ?></td>
+          <?php else:?>
                 <td class="text-center" width="10%"><?php echo ($css->getMark()?$css->getMark():'<strong>'.__('Adeuda').'</strong>') ?></td>
-                <td class="text-center"><?php echo ($css->getMarkAsSymbol()? ucfirst(strtolower($css->getMarkAsSymbol())):'<strong>'.__('Adeuda').'</strong>') ?></td>
+                <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
+          <?php endif;?>
           <?php endif;?>
           <td width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
           <td width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
