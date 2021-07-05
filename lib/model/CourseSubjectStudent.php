@@ -702,7 +702,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     }
     
     if ($config != null && !$config->isNumericalMark())
-    {
+    { 
         if($this->getIsNotAverageable() && ! is_null($this->getNotAverageableCalification()))
         {
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
@@ -724,7 +724,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     else
     {
         if($this->getIsNotAverageable() && ! is_null($this->getNotAverageableCalification()))
-        {
+        { 
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
                return  "T. Completa";
@@ -732,6 +732,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
             {
                 return "T. en Curso";
             }
+        }
+        elseif($this->getIsNotAverageable() && is_null($this->getNotAverageableCalification()))
+        {
+            return "Eximido";
         }
         return $this->getMarksAverage();
     }
