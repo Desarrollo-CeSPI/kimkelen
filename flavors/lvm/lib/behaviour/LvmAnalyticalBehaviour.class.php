@@ -78,12 +78,14 @@ class LvmAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                 }
 
                 // Cálculo del promedio por año
+                if($school_year->getYear() != 2020)
+                {
                 foreach ($this->objects as $year => $data)
                 {
                     $this->process_year_average($year, $avg_mark_for_year[$year]['sum'], $avg_mark_for_year[$year]['count']);
                 }
                 $this->process_total_average($avg_mark_for_year);
-                
+                }
             }            
         }
     }
