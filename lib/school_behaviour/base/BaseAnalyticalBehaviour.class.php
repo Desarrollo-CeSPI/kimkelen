@@ -377,7 +377,7 @@ class BaseAnalyticalBehaviour
                         }
                     }
                     
-                    if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
+                    if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED && !$css->getMark(false))
                     {
                         $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
                             $this->add_missing_subject($css);
