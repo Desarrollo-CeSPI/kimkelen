@@ -31,10 +31,25 @@ class BbaStudentFormFilter extends StudentFormFilter
    parent::configure();
     $this->unsetFields();
     
-	$c_criteria = new Criteria(CareerPeer::DATABASE_NAME);
+	/*$c_criteria = new Criteria(CareerSchoolYearPeer::DATABASE_NAME);
 	$this->setWidget('career', new sfWidgetFormPropelChoice(array('model' => 'Career', 'criteria' => $c_criteria, 'add_empty' => true)));
-    $this->setValidator('career', new sfValidatorPropelChoice(array('model' => 'Career', 'criteria' => $c_criteria, 'required' => false)));
-	
+    $this->setValidator('career', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYear', 'criteria' => $c_criteria, 'required' => false)));
+	*/
+       $c = new sfWidgetFormChoice(array('choices' => array()));
+    $this->setWidget('career', new dcWidgetAjaxDependence(array(
+        'dependant_widget' => $c,
+        'observe_widget_id' => 'student_filters_school_year',
+        'message_with_no_value' => 'Seleccione un año',
+        'get_observed_value_callback' => array(get_class($this), 'getCareers')
+      )));
+
+          $c_criteria = new Criteria(CareerSchoolYearPeer::DATABASE_NAME);
+//        $this->setWidget('career', new sfWidgetFormPropelChoice(array('model' => 'Career', 'criteria' => $c_criter$
+        $this->setValidator('career', new sfValidatorPropelChoice(array('model' => 'CareerSchoolYear', 'criteria' => $c_criteria, 'required' => false)));
+
+
+
+
 	$w = new sfWidgetFormChoice(array('choices' => array()));
     $this->setWidget('year', new dcWidgetAjaxDependence(array(
         'dependant_widget' => $w,
@@ -43,7 +58,7 @@ class BbaStudentFormFilter extends StudentFormFilter
         'get_observed_value_callback' => array(get_class($this), 'getYears')
       )));
       
-    $this->getWidgetSchema()->setHelp('year', 'El año filtra de acuerdo al año lectivo elegido.');
+    //$this->getWidgetSchema()->setHelp('year', 'El año filtra de acuerdo al año lectivo elegido.');
     $this->getWidgetSchema()->moveField('career', sfWidgetFormSchema::BEFORE, 'year');
   }
   
@@ -90,23 +105,42 @@ class BbaStudentFormFilter extends StudentFormFilter
 
   public static function getYears($widget, $values){
 	
-	$career = CareerPeer::retrievebyPk($values);
-	$max = $career->getMaxYear();
+	$career_school_year = CareerSchoolYearPeer::retrievebyPk($values);
+	$max = $career_school_year->getCareer()->getMaxYear();
 
 	$years = array('' => '');
     for ($i = 1; $i <= $max; $i++)
       $years[$i] = $i;
     $widget->setOption('choices', $years);
   }
+
+  public static function getCareers($widget, $values){
+	
+    $criteria =  new Criteria();
+
+    $criteria->add(CareerSchoolYearPeer::SCHOOL_YEAR_ID, $values);
+
+    $careers =  CareerSchoolYearPeer::doSelect($criteria);  
+      	
+
+	$array = array('' => '');
+    foreach($careers as $car)
+    {
+        $array[$car->getId()] = $car->getCareer()->getCareerName();
+    }
+      
+    $widget->setOption('choices', $array);
+  }
   
   public function addCareerColumnCriteria(Criteria $criteria , $field, $values)
   {
     if ($values)
-    {
+    {/*
       $criteria->add(CareerStudentPeer::CAREER_ID, $values);
       $criteria->addJoin(CareerStudentPeer::STUDENT_ID, StudentPeer::ID);
-      $criteria->addJoin(CareerStudentPeer::CAREER_ID,CareerSchoolYearPeer::CAREER_ID);
-      //$criteria->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::retrieveCurrent()->getId());
+      $criteria->addJoin(CareerStudentPeer::CAREER_ID,CareerSchoolYearPeer::CAREER_ID);*/
+      $criteria->addJoin(StudentCareerSchoolYearPeer::STUDENT_ID, StudentPeer::ID);
+       $criteria->add(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID,$values);
     }
   }
 }
