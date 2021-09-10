@@ -908,7 +908,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
     elseif(!is_null($scsy_c) &&  $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() > $scsy_c->getCareerSchoolYear()->getSchoolYear()->getYear() )
     {//si el ultimo año registrado es mayor al cursado me fijo si el último es 2020
         
-        if($last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() == 2020)
+        if($last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() == 2020 || $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() == 2021 )
         {
             
             $c = new Criteria();
@@ -925,8 +925,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
             $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
 
             $scsy_2 = StudentCareerSchoolYearPeer::doSelectOne($c);
-            
-            if(!is_null($scsy_2) && $scsy_2->getCareerSchoolYear()->getSchoolYear()->getYear() == $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() )
+            $years  = array(2020,2021);
+            if(!is_null($scsy_2) && in_array($scsy_2->getCareerSchoolYear()->getSchoolYear()->getYear(), $years)  )
             {
                 
                 return $scsy_2;
@@ -948,7 +948,12 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         return $scsy_c;
        else
        {
-            //tiene ultimo año, pero no tiene ultimo año cursado. Es por las notas no promediables.
+          if ($last_scsy->getYear() == 1)
+          {
+              return $last_scsy;
+          }
+         else
+         {   //tiene ultimo año, pero no tiene ultimo año cursado. Es por las notas no promediables.
           $c = new Criteria();
             $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
             $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
@@ -964,7 +969,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
             $scsy_2 = StudentCareerSchoolYearPeer::doSelectOne($c);
             return $scsy_2;
-
+          }
        }
     }
 
