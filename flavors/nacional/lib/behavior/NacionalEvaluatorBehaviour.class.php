@@ -28,7 +28,7 @@ class NacionalEvaluatorBehaviour extends BaseEvaluatorBehaviour
     const FISICA = 109;
    
     protected $_mandatory_subjects = array(
-        self::ESI,
+       
         self::FISICA,
     );
 
