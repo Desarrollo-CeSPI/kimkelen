@@ -33,11 +33,19 @@ generator:
             action: califications
             credentials: [[edit_examination_repproved_subject_califications, edit_closed_examination]]
             condition: canBeCalificate
+          not_averageable_califications:
+            action:      notAverageableCalifications
+            credentials: [[edit_examination_repproved_subject_califications, edit_closed_examination]]
+            condition:    canBeCalificate
           close:
             action: close
             condition: canBeClosed
             label: Close examination
             credentials: [edit_examination_repproved_subject]
+          close_not_averageable_califications:
+            action: closeNotAverageableCalifications
+            credentials: [edit_examination_repproved_subject]
+            condition: canBeClosedNotAverageableCalifications
           changelog:
             action:         changelogMarks
             label:          Auditoria de notas

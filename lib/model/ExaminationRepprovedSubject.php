@@ -58,7 +58,26 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
         $c->add($criterion);
 
         return StudentExaminationRepprovedSubjectPeer::doCount($c);
-    }
+          
+  }
+   public function canBeClosedNotAverageableCalifications(PropelPDO $con = null)
+    {
+        if ($this->getIsClosed())
+            return false;
+
+        if ($this->countStudentExaminationRepprovedSubjects() == 0)
+            return false;
+
+        $c = new Criteria();
+        $c->add(StudentExaminationRepprovedSubjectPeer::EXAMINATION_REPPROVED_SUBJECT_ID, $this->getId());
+        $criterion= $c->getNewCriterion(StudentExaminationRepprovedSubjectPeer::NOT_AVERAGEABLE_MARK,null,Criteria::ISNOTNULL);
+        $criterion->addOr($c->getNewCriterion(StudentExaminationRepprovedSubjectPeer::IS_ABSENT, true));
+        $c->add($criterion);
+
+        return StudentExaminationRepprovedSubjectPeer::doCount($c);
+
+  }
+
 
     public function getMessageCantBeClosed()
     {
@@ -106,6 +125,31 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
             foreach ($this->getStudentExaminationRepprovedSubjects(null, $con) as $student_examination_repproved_subject)
             {
                 $student_examination_repproved_subject->close($con);
+            }
+
+            $this->setIsClosed(true);
+            $this->save($con);
+
+            $con->commit();
+        }
+        catch (Exception $e)
+        {
+            $con->rollBack();
+            throw $e;
+        }
+    }
+
+  public function closeNotAverageableCalifications(PropelPDO $con = null)
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        try
+        {
+            $con->beginTransaction();
+
+            foreach ($this->getStudentExaminationRepprovedSubjects(null, $con) as $student_examination_repproved_subject)
+            {
+                $student_examination_repproved_subject->closeNotAverageableCalifications($con);
             }
 
             $this->setIsClosed(true);

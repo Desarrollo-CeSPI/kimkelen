@@ -739,6 +739,10 @@ classes:
         description: Número de folio del examen
         type: varchar(20)
         required: false
+      not_averageable_mark :
+        description: Calificacion no promediable
+        type:  integer
+        required: false
         
   Book:
     tableName:            book

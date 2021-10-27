@@ -129,7 +129,17 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         }else{
            
             if($this->approved)
-            {
+            {   
+                $instance = $this->approvationInstance();
+                if(get_class($instance) == 'StudentRepprovedCourseSubject')
+                {
+                    $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($instance);
+                    if(!is_null($sers->getNotAverageableMark()))
+                    {
+                       return BaseCustomOptionsHolder::getInstance('NotAverageableCalificationType')->getStringFor($sers->getNotAverageableMark());
+                          
+                    }
+                }
                 return $this->approved->getMark();
             }
             else
@@ -181,6 +191,18 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
             if (!$this->approved && is_null($this->css->getStudentApprovedCourseSubject()))
                 return $this->getNullLabel();
             
+            $instance = $this->approvationInstance();
+                if(get_class($instance) == 'StudentRepprovedCourseSubject')
+                {
+                    $sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($instance);
+                    if(!is_null($sers->getNotAverageableMark()))
+                    {
+                       return BaseCustomOptionsHolder::getInstance('NotAverageableCalificationType')->getStringFor($sers->getNotAverageableMark());
+
+                    }
+                }
+
+
             if($this->css->getIsNotAverageable() )
             {
                 if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
