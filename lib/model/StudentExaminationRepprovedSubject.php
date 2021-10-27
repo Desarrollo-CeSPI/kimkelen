@@ -47,6 +47,13 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
         SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubject($this, $con);
     }
 
+    public function closeNotAverageableCalifications(PropelPDO $con = null)
+    {
+        $con = is_null($con) ? Propel::getConnection() : $con;
+
+        SchoolBehaviourFactory::getEvaluatorInstance()->closeStudentExaminationRepprovedSubjectNotAverageableCalifications($this, $con);
+    }
+
     public function getValueString()
     {
         return $this->getIsAbsent() ? __('Absence') : $this->getMark();
@@ -93,7 +100,14 @@ class StudentExaminationRepprovedSubject extends BaseStudentExaminationRepproved
 			return $letter_mark->getLetter(); 	   
 		}else
 		{
-			return $this->getMark();
+			if(!is_null($this->getNotAverageableMark()))
+                        {
+                            return BaseCustomOptionsHolder::getInstance('NotAverageableCalificationType')->getStringFor($this->getNotAverageableMark());
+                        }
+                        else
+                        {
+                           return $this->getMark();
+                        }
 		}
 		
     }

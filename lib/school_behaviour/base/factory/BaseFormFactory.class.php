@@ -322,4 +322,8 @@ abstract class BaseFormFactory extends InterfaceFormFactory{
   {
     return 'CourseSubjectNotAverageableMarksForm';
   }
+  public function getStudentExaminationRepprovedSubjectNotAverageableForm() 
+  {
+     return 'StudentExaminationRepprovedSubjectNotAverageableForm';
+  }
 }
