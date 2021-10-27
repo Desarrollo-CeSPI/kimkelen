@@ -9347,6 +9347,10 @@ A PARTIR DE ACA EMPEZAMOS TRADUCCIONES 2.0
                         <source>Not averageable califications</source>
                         <target>Calificaciones no promediables</target>
                     </trans-unit>
+                    <trans-unit>
+                        <source>Close not averageable califications</source>
+                        <target>Cerrar mesa</target>
+                    </trans-unit>
 		</body>
 	</file>
 </xliff>

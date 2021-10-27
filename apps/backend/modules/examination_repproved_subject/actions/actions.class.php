@@ -165,6 +165,15 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
     $this->redirect("@examination_repproved_subject");
   }
 
+  public function executeRealCloseNotAverageableCalifications(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = ExaminationRepprovedSubjectPeer::retrieveByPK($request->getParameter("id"));
+    $this->examination_repproved_subject->closeNotAverageableCalifications();
+
+    $this->getUser()->setFlash("notice", "The examination repproved subject has been successfully closed.");
+    $this->redirect("@examination_repproved_subject");
+  }
+
   public function executeStudents(sfWebRequest $request)
   {
     $this->getUser()->setReferenceFor($this);
@@ -330,6 +339,80 @@ class examination_repproved_subjectActions extends autoExamination_repproved_sub
       $this->setLayout('cleanLayout');
       $this->setTemplate('printRecord','examination_subject');
       
+  }
+
+  public function getFormsNotAverageableCalifications(ExaminationRepprovedSubject $examination_repproved_subject)
+  {
+    $forms = array();
+    
+    //agrego el orden alfabetico para el listado de alumnos.
+    $criteria = new Criteria(ExaminationRepprovedSubjectPeer::DATABASE_NAME);
+    $criteria->addJoin(StudentExaminationRepprovedSubjectPeer::STUDENT_REPPROVED_COURSE_SUBJECT_ID, StudentRepprovedCourseSubjectPeer::ID);
+    $criteria->addJoin(StudentRepprovedCourseSubjectPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $criteria->addJoin(CourseSubjectStudentPeer::STUDENT_ID,  StudentPeer::ID);
+    $criteria->addJoin(StudentPeer::PERSON_ID, PersonPeer::ID);
+    $criteria->addAscendingOrderByColumn(PersonPeer::LASTNAME);
+    
+    foreach ($examination_repproved_subject->getStudentExaminationRepprovedSubjects($criteria) as $student_examination_repproved_subject)
+    {
+      $form_name = SchoolBehaviourFactory::getInstance()->getFormFactory()->getStudentExaminationRepprovedSubjectNotAverageableForm();
+      $form = new $form_name($student_examination_repproved_subject);
+
+      $form->getWidgetSchema()->setNameFormat("student_examination_repproved_subject_{$student_examination_repproved_subject->getId()}[%s]");
+      $forms[$student_examination_repproved_subject->getId()] = $form;
+    }
+
+    return $forms;
+  }
+  
+  public function executeNotAverageableCalifications(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = $this->getRoute()->getObject();
+
+    $this->forms = $this->getFormsNotAverageableCalifications($this->examination_repproved_subject);
+  }
+
+   public function executeUpdateNotAverageableCalifications(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = ExaminationRepprovedSubjectPeer::retrieveByPK($request->getParameter("id"));
+
+    $this->forms = $this->getFormsNotAverageableCalifications($this->examination_repproved_subject);
+
+    if ($request->isMethod("post"))
+    {
+      $valid = count($this->forms);
+
+      foreach ($this->forms as $form)
+      {
+        $form->bind($request->getParameter($form->getName()));
+
+        if ($form->isValid())
+        {
+          $valid--;
+        }
+      }
+
+      if ($valid == 0)
+      {
+        foreach ($this->forms as $form)
+        {
+          $form->save();
+          $this->examination_repproved_subject->saveCalificationsInRecord();
+        }
+
+        $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
+      }
+      else
+      {
+        $this->getUser()->setFlash('error', 'Ocurrieron errores al intentar calificar los alumnos. Por favor, intente nuevamente la operación.');
+      }
+    }
+    $this->setTemplate('notAverageableCalifications');
+  }
+
+  public function executeCloseNotAverageableCalifications(sfWebRequest $request)
+  {
+    $this->examination_repproved_subject = $this->getRoute()->getObject();
   }
 
 }
