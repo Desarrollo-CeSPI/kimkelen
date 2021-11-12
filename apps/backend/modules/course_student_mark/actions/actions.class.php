@@ -155,7 +155,7 @@ class course_student_markActions extends sfActions
       }
 
      //Para el caso de las observaciones finales
-      $course_subjects = $this->getCourse()->getCourseSubjects();
+     /* $course_subjects = $this->getCourse()->getCourseSubjects();
       $all_closed = true;
       foreach ($course_subjects as $cs)
       { $calification_final = 0;
@@ -179,7 +179,7 @@ class course_student_markActions extends sfActions
         $course = $this->getCourse()->setIsClosed(true);
         $course->save(); 
 
-      }
+      }*/
       //FIN para el caso de las observaciones finales
 
       $this->getUser()->setFlash('notice', 'Las calificaciones se guardaron satisfactoriamente.');
