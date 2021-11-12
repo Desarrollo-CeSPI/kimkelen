@@ -74,7 +74,7 @@ class LvmAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                     }
                    
                     
-                    if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
+                    if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED && is_null($css->getCourseSubjectStudent()->getStudentApprovedCareerSubject()))
                     {
                         $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
                             $this->add_missing_subject($css);
