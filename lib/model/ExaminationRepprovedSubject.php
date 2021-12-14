@@ -353,6 +353,7 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
                $rd->setMark($sers->getMark());
                $rd->setIsAbsent($sers->getIsAbsent());
               
+              
                
                if($sers->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
                {
