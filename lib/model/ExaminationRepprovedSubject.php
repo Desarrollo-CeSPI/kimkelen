@@ -349,9 +349,10 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
             {
                $rd = new RecordDetail();
                $rd->setRecordId($record->getId());
-               $rd->setStudent($sers->getStudent());
+               $rd->setStudent($sers->getStudent()); 
                $rd->setMark($sers->getMark());
                $rd->setIsAbsent($sers->getIsAbsent());
+              
               
                
                if($sers->getStudent()->owsCorrelativeFor($this->getCareerSubject()))
@@ -379,6 +380,12 @@ class ExaminationRepprovedSubject extends BaseExaminationRepprovedSubject
                     {
                         $rd->setResult(SchoolBehaviourFactory::getEvaluatorInstance()->getApprovedResult());
                     }
+               }elseif(! is_null($sers->getNotAverageableMark()))
+               {
+                         $rd->setIsNotAverageable(TRUE);                       
+
+                          $rd->setResult($sers->getNotAverageableMark());
+ 
                }
                if ($i >  $record->getLines())
                {
