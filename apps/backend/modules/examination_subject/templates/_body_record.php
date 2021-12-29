@@ -41,7 +41,17 @@
           <td><?php echo $rd->getLine() ?> </td>
           <td class="student"><?php echo $rd->getStudent() ?> <?php if($rd->getOwesCorrelative()): ?> <span class="owes_correlative"><?php echo "(". __('Owes correlative') . ")" ?></span> <?php endif; ?></td>
           <td> <?php echo $rd->getDivision() ?> </td>
-          <td><?php echo ($rd->getMark())? $rd->getMark(): ''; ?></td>
+          <td>
+               <?php if(!$rd->getIsNotAverageable()): ?>
+                  <?php echo ($rd->getMark())? $rd->getMark(): ''; ?>
+               <?php else: ?>
+                  <?php if ($rd->getResult() == NotAverageableCalificationType::APPROVED): ?>
+                       <?php echo "Trayectoria completa"; ?>
+                  <?php else: ?>
+                       <?php echo "Trayectoria en curso"; ?>
+                  <?php endif; ?>
+               <?php endif; ?>
+          </td>
           <td>
             <?php $c = new num2text();?>
             <?php if(!$rd->getIsAbsent()):?>

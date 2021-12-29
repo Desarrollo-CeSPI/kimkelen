@@ -842,6 +842,9 @@ classes:
         description:      Resultado que obtuvo el alumno Aprobado/Desaprobado
         type:             integer
         required:         true
+      is_not_averageable:
+        type:             boolean
+        default:          false
       line:
         description:      representa el renglón
         type:             integer
