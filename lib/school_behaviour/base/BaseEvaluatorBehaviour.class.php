@@ -986,7 +986,7 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
         return $scsy_c;
        else
        {
-          if ($last_scsy->getYear() == 1)
+          if (!is_null($last_scsy) && $last_scsy->getYear() == 1)
           {
               return $last_scsy;
           }
