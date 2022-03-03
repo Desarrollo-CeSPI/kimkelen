@@ -37,8 +37,13 @@ class AnexaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     if (!$course_subject_student->getConfiguration()->isNumericalMark())
     {
       $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($course_subject_student);
-      $average = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
-      $average = $average->getValue();
+      $average = NULL;
+      if(!is_null($letter_average))
+     {
+
+        $average = LetterMarkPeer::getLetterMarkByPk($letter_average->getLetterMarkAverage());
+        $average = $average->getValue();
+     }
     }
     else
     {
