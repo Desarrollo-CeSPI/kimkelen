@@ -710,7 +710,8 @@ class BaseEvaluatorBehaviour extends InterfaceEvaluatorBehaviour
 
       foreach ($students as $student)
       {
-		  if ($student->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
+                 
+		  if (!is_null($student->getLastStudentCareerSchoolYear()) && $student->getLastStudentCareerSchoolYear()->getStatus() != StudentCareerSchoolYearStatus::WITHDRAWN_WITH_RESERVE)
 		  {
 			  $this->stepToNextYear($student, $school_year, $con);
 		  }
