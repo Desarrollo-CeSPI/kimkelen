@@ -150,8 +150,8 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                             $avg_mark_for_year[$year_in_career]['count'] = 0;
                         }
 
-                        if ($this->subject_is_averageable($css))
-                        {
+                        if (!$css->getCourseSubjectStudent()->getIsNotAverageable())
+                        { 
                             $avg_mark_for_year[$year_in_career]['sum'] += $css->getMark();
                             $avg_mark_for_year[$year_in_career]['count'] += ($css->getMark(false) ? 1 : 0);
                             if (!$css->getMark(false))
@@ -162,6 +162,11 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                             }
                         }
                         
+                        if($css->getCourseSubjectStudent()->getIsNotAverageable() && $css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED && !$css->getMark(false))
+                    {
+                        $this->set_year_status($year_in_career, self::YEAR_INCOMPLETE);
+                            $this->add_missing_subject($css);
+                    }
                         $this->add_subject_to_year($year_in_career, $css);
                         if(in_array($css->getSubjectId(), $this->subjectsEOP))
                         {
@@ -220,7 +225,7 @@ class BbaAnalyticalBehaviour extends DefaultAnalyticalBehaviour
                     }
 
                     // Cálculo del promedio por año
-                   if($school_year->getYear() != 2020)
+                   if($school_year->getYear() != 2020 || $school_year->getYear() != 2021)
                 {
                      foreach ($this->objects as $year => $data)
                     {
