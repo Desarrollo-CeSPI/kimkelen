@@ -31,6 +31,7 @@
     <?php foreach ($course->getCourseSubjects() as $subject): ?>
 	    <div style="font-size: 1.2em;">
 	    	<?php echo $subject->getCareerSubjectSchoolYear() ?>
+                <?php echo " - "  .  $subject->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer()->getCareerName() ?>
 	    </div>
 
       <?php if ($subject->countCourseSubjectDays() > 0): ?>
