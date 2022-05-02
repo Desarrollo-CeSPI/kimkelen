@@ -159,6 +159,7 @@
 
           <?php foreach ($form->students as $student): ?>
             <tr>
+              <?php if($student->getPerson()->getIsActive()): ?>
               <td class="<?= $student->getHealthCardStatusAttendanceClass()?>" ><?php echo $student  ?> <?php  if($student->getTheoricClass(date_create($form->days[1]))): ?> <span class="theoric_class">(Clases teóricas)</span><?php endif;?></td>
               <?php foreach ($form->days as $day => $day_i): ?>
                 <td class="day_<?php echo $day .' ' .$student->getClassForJustificatedAbsencesPerSubjectAndDay($career_school_year,$day_i,$course_subject_id)?>">
@@ -187,6 +188,7 @@
 
               <td><?php include_partial("student_attendance/actions", array('student' => $student, 'course_subject' => $course_subject, 'career_school_year' => $career_school_year)) ?></td>
             </tr>
+           <?php endif; ?>
           <?php endforeach ?>
         </tbody>
       </table>
