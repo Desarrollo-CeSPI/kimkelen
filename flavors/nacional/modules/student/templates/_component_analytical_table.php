@@ -68,7 +68,7 @@
                 <td class="text-center"><?php echo ($css->getMarkAsSymbol()?$css->getMarkAsSymbol():'<strong>'.__('Adeuda').'</strong>') ?></td>
           <?php endif;?>
           <td class="text-center" width="10%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getBook(): '' ?></td>
-          <td class="text-center" width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheet(): '' ?></td>
+          <td class="text-center" width="5%"><?php echo (!is_null($css->getBookSheet())) ? $css->getBookSheet()->getPhysicalSheetByStudent($css->getCourseSubjectStudent()->getStudent()): '' ?></td>
         </tr>
       <?php endforeach ?>
       <?php endif; ?>
