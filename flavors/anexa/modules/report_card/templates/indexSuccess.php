@@ -24,9 +24,10 @@
 		<div><a href="<?php echo url_for('@export_report_cards?sf_format=pdf') ?>"><?php echo __('Export') ?></a></div>
 		<div><a href="<?php echo url_for($back_url) ?>"><?php echo __('Go back') ?></a></div>
 	</div>
-
+<?php $count_students = 0; ?>
 <?php foreach ($students as $student): ?>
-	<?php $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear()) ?>
+	<?php $count_students ++; ?>
+        <?php $student_career_school_year = StudentCareerSchoolYearPeer::getCurrentForStudentAndCareerSchoolYear($student, $division->getCareerSchoolYear()) ?>
 	<div class="report-wrapper">
 		<?php include_partial('header', array('student' => $student, 'division' => $division, 'career_id' => $career_id, 'school_year' => $student_career_school_year->getSchoolYear(), 'student_career' => CareerStudentPeer::retrieveByCareerAndStudent($career_id, $student->getId()))); ?>
 		<div class="report-content">
@@ -76,6 +77,8 @@
 
 	</div>
 	<div style="clear:both;"></div>
-	<div style="page-break-before: always;"></div>
-
+	<?php if($count_students == 2): ?>
+            <?php $count_students = 0; ?>
+            <div style="page-break-before: always;"></div>
+        <?php endif; ?>
 <?php endforeach; ?>
