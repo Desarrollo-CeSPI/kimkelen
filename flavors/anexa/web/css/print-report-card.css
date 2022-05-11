@@ -19,7 +19,7 @@ body {
 {
   text-align:left;
   width:900px;
-  margin:30px auto;
+  margin:40px auto;
 }
 
 .report-header
@@ -250,7 +250,7 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 15px;
+  padding:0px 10px;
   height:126px;
 }
 
@@ -259,7 +259,7 @@ table.lefttable tr {
   float:right;
   margin-top:10px;
   margin-left:5px;
-  padding:0px 15px;
+  padding:0px 10px;
   height:126px;
 }
 
@@ -276,8 +276,9 @@ table.lefttable tr {
   border:1px solid #ccc;
   float:left;
   margin-top:10px;
-  padding:0px 15px;
-  height:150px;
+  margin-bottom:10px;
+  padding:0px 10px;
+  height:100px;
   width:869px;
 }
 
