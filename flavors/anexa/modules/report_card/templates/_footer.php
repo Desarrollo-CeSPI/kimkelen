@@ -20,7 +20,7 @@
   <?php if ($division->hasCourseType(CourseType::TRIMESTER)): ?>
     <?php $periods = CareerSchoolYearPeriodPeer::getTrimesterPeriodsSchoolYear($division->getCareerSchoolYearId()); ?>
     <?php if ($division->hasAttendanceForDay()): ?>
-      <?php include_partial('trimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division)); ?>
+      <?php include_partial('trimester_attendance_for_day', array('student' => $student, 'periods' => $periods, 'division' => $division,'has_to_show_repproveds'=> false)); ?>
     <?php endif; ?>
 
     <div class="rowins">

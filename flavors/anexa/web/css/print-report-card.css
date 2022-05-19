@@ -19,7 +19,7 @@ body {
 {
   text-align:left;
   width:900px;
-  margin:40px auto;
+  margin:10px auto;
 }
 
 .report-header
@@ -44,7 +44,7 @@ body {
   border-bottom:1px solid #ccc;
   float:left;
   width:100%;
-  padding:5px 0px;
+  padding:10px 0px;
 }
 
 .header_row .header_right
@@ -115,7 +115,7 @@ body {
 .report-content .title {
   font-size: 12px;
   font-weight: bold;
-  padding:5px;
+  padding:2px;
   text-transform: uppercase;
   background:#f2f2f2;
   border-bottom:1px solid #ccc;
@@ -157,9 +157,9 @@ table.gridtable {
 }
 
 table.gridtable th {
-  padding: 8px;
+  padding: 2px;
   border-bottom:1px solid #ccc;
-  font-size:14px;
+  font-size:12px;
 }
 
 .th-subject-name {
@@ -197,15 +197,18 @@ table.lefttable {
 table.lefttable tr {
   border-top:1px solid #ccc;
   background-color: #ffffff;
+  font-size: 12px;
 }
 
 .colsleft{
   float:left;
   width: 33%;
+  margin-top: -12px;
 }
 
 .colsright{
   float:right;
+  margin-top: -12px;
 }
 
 .row{
@@ -224,7 +227,7 @@ table.lefttable tr {
 
 .rowins{
   border:1px solid #ccc;
-  margin-top:10px;
+  margin-top:8px;
   padding:0px 5px;
 }
 
@@ -251,7 +254,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 10px;
-  height:126px;
+  height:120px;
 }
 
 .rowfirm_responsible{
@@ -260,7 +263,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 10px;
-  height:126px;
+  height:120px;
 }
 
 .rowfirm_teacher{
@@ -269,7 +272,7 @@ table.lefttable tr {
     margin-top:10px;
     margin-left:5px;
     padding:0px 30px;
-    height:126px;
+    height:120px;
 }
 
 .rownotice{
@@ -278,7 +281,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-bottom:10px;
   padding:0px 10px;
-  height:100px;
+  height:80px;
   width:869px;
 }
 
