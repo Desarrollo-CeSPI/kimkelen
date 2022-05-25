@@ -21,11 +21,11 @@
 ?>
 <div id="analytic_signatures">
     <div id="signature_1" class="signature">
-        <div> Prof. María Julia Alba</div>
+        <div> Prof. María Constanza Erbetta</div>
         <?php echo __('analytic_signature_1'); ?>
     </div>
     <div id="signature_2" class="signature">
-        <div>Prof. María Constanza Erbetta</div>
+        <div>Prof. Julieta Miranda</div>
         <?php echo __('analytic_signature_2'); ?>
     </div>
     <div id="signature_4" class="signature signature_4">
