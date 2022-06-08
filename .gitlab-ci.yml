@@ -11,8 +11,8 @@ stages:
 
 before_script:
   - export IMAGE_TAG="$CI_BUILD_REF_NAME"
-  - export IMAGE_NAME="${CI_REGISTRY}/${CI_PROJECT_PATH}"
-  - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+  - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS" $DOCKER_REGISTRY_URL
+  - export IMAGE_NAME="push-registry.desarrollo.unlp.edu.ar/desarrollo-cespi/kimkelen"
   - apk add -U git
 
 build-base:
@@ -52,10 +52,10 @@ deploy-dev:
   stage: deploy-dev
   script:
     - apk add -U curl
-    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_BBA&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
-    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_LVM&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
-    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_NACIONAL&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
-    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_GRADUADA&pid=1a54598&repo=registry.gitlab.com%2Fkimkelen%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_BBA&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_LVM&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_NACIONAL&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_GRADUADA&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
   only:
     - /^\d+\.\d+\.\d+-(dev|test)$/
   tags:
