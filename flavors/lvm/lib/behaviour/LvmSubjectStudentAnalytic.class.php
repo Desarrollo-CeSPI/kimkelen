@@ -210,8 +210,11 @@ class LvmSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
                     return "Aprobado";
                 }
                 else
-                {
+                { 
+                    if (!$this->approved)
+                    {
                     return $this->getNullLabel();
+                    }
                 }
 
 

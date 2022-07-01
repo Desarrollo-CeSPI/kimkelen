@@ -600,10 +600,11 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function getStudentApprovedCareerSubject()
   {
     $career_subject_id = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubjectId();
+    $school_year_id =  $this->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getId();
     $c = new Criteria();
     $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $this->getStudentId());
     $c->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject_id);
-
+    $c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $school_year_id , Criteria::GREATER_EQUAL);
     return StudentApprovedCareerSubjectPeer::doSelectOne($c);
 
   }
