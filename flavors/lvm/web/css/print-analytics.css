@@ -96,3 +96,6 @@
 .analytical_dipregep_info{
     display: none;
 }
+#analytic_signatures .signature {
+   margin-top: 8em;
+}
