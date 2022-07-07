@@ -208,9 +208,17 @@ class BaseSubjectStudentAnalytic
             {
                 return "Aprobado";
             }
+            elseif(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() >= 7)
+            {
+                $c = new num2text();
+        $mark = $this->css->getNotAverageableCalification();
+        $mark_symbol = trim($c->num2str($mark));
+        
+        return $mark_symbol;
+            }
             else
             {
-                return $this->getNullLabel();
+              return $this->getNullLabel();
             }
             
             

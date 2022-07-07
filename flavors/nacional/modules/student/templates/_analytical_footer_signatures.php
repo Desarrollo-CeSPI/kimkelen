@@ -20,6 +20,7 @@
  */ 
 ?>
 <div id="analytic_signatures">
+    <div id="signature_1" class="signature"><?php echo __('analytic_signature_1'); ?></div>
     <div id="signature_2" class="signature"><?php echo __('analytic_signature_2'); ?></div>
     <div id="signature_3" class="signature"><?php echo __('analytic_signature_3'); ?></div>
     <div id="signature_4" class="signature"><?php echo __('analytic_signature_4'); ?></div>

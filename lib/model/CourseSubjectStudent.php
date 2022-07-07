@@ -708,10 +708,14 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
                return  "T. Completa";
-            }else
+            }elseif($this->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
             {
-                return "T. en Curso";
-            }
+ 
+               return "T. en Curso";
+            }else
+             {
+                   return $this->getNotAverageableCalification();
+              }
         }
       $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
       
@@ -728,9 +732,13 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
                return  "T. Completa";
+            }elseif($this->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
+            {
+ 
+               return "T. en Curso";
             }else
             {
-                return "T. en Curso";
+                return $this->getNotAverageableCalification();
             }
         }
         elseif($this->getIsNotAverageable() && is_null($this->getNotAverageableCalification()))
