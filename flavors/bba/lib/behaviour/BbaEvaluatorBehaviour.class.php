@@ -142,4 +142,49 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
     }
 
+    public function closeCourseSubjectStudent($result, PropelPDO $con = null)
+  {
+    if ($result instanceof StudentApprovedCourseSubject)
+    {
+      if (is_null($student_approved_career_subject = $result->getStudentApprovedCareerSubject($con)))
+      {
+        $student_approved_career_subject = new StudentApprovedCareerSubject();
+        $student_approved_career_subject->setCareerSubject($result->getCourseSubject($con)->getCareerSubject($con));
+        $student_approved_career_subject->setStudent($result->getStudent($con));
+        $student_approved_career_subject->setSchoolYear($result->getSchoolYear($con));
+        
+        if ($result->getIsNotAverageable() && $result->getNotAverageableCalification() >= 7)
+        {
+        	$student_approved_career_subject->setMark($result->getNotAverageableCalification());
+        }
+        else
+        {
+             $student_approved_career_subject->setMark($result->getMark());
+        }
+        
+        $result->setStudentApprovedCareerSubject($student_approved_career_subject);
+
+        $student_approved_career_subject->save($con);
+        $result->save($con);
+
+        $student_approved_career_subject->clearAllReferences(true);
+
+        $result->clearAllReferences(true);
+      }
+
+      unset($result);
+      unset($student_approved_career_subject);
+    }
+    else
+    {
+		
+      $c = new Criteria();
+      $c->add(CourseSubjectStudentExaminationPeer::EXAMINATION_NUMBER, $result->getExaminationNumber());
+      $c->add(CourseSubjectStudentExaminationPeer::COURSE_SUBJECT_STUDENT_ID, $result->getCourseSubjectStudent()->getId());
+      if (CourseSubjectStudentExaminationPeer::doCount($c) == 0)
+      {
+        $this->createCourseSubjectStudentExamination($result->getCourseSubjectStudent(null, $con), $con);
+      }
+    }
+  }
 }

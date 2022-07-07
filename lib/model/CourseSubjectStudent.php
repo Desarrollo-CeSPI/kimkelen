@@ -600,11 +600,10 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   public function getStudentApprovedCareerSubject()
   {
     $career_subject_id = $this->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubjectId();
-    $school_year_id =  $this->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getSchoolYear()->getId();
     $c = new Criteria();
     $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $this->getStudentId());
     $c->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject_id);
-    $c->add(StudentApprovedCareerSubjectPeer::SCHOOL_YEAR_ID, $school_year_id , Criteria::GREATER_EQUAL);
+
     return StudentApprovedCareerSubjectPeer::doSelectOne($c);
 
   }
@@ -709,10 +708,14 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
                return  "T. Completa";
-            }else
+            }elseif($this->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
             {
-                return "T. en Curso";
-            }
+ 
+               return "T. en Curso";
+            }else
+             {
+                   return $this->getNotAverageableCalification();
+              }
         }
       $letter_average = LetterMarkAveragePeer::getLetterMarkAverageByCourseSubjectStudent($this);
       
@@ -729,9 +732,13 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
             if($this->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
                return  "T. Completa";
+            }elseif($this->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED)
+            {
+ 
+               return "T. en Curso";
             }else
             {
-                return "T. en Curso";
+                return $this->getNotAverageableCalification();
             }
         }
         elseif($this->getIsNotAverageable() && is_null($this->getNotAverageableCalification()))
@@ -782,10 +789,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
   
     if ($mark)
     {
-       if($mark->getIsFree())
-           return "Libre";
-       else
-         return ($mark->getIsClosed() && !is_null($mark->getObservationMark())) ? $mark->getObservationMark()->getDescription() : null;
+      return ($mark->getIsClosed() && !is_null($mark->getObservationMark())) ? $mark->getObservationMark()->getDescription() : null;
     }
     else
     {
