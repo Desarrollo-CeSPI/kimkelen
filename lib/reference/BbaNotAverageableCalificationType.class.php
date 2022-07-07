@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 /*
  * Kimkëlen - School Management Software
  * Copyright (C) 2013 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
@@ -19,17 +19,23 @@
  */ ?>
 <?php
 
-class NotAverageableCalificationType extends BaseCustomOptionsHolder
+class BbaNotAverageableCalificationType extends BaseCustomOptionsHolder
 {
-const
-    APPROVED     = 1,
+
+  const
+    APPROVED_7     = 7,
+    APPROVED_8     = 8,
+    APPROVED_9     = 9,
+    APPROVED_10     = 10,
     DISAPPROVED   = 2;
 
   protected
     $_options = array(
-        self::APPROVED    => 'Aprobado',
+        self::APPROVED_7   => '7',
+        self::APPROVED_8   => '8',
+        self::APPROVED_9   => '9',
+        self::APPROVED_10   => '10',
         self::DISAPPROVED    => 'En curso'
       );
-
 
 }

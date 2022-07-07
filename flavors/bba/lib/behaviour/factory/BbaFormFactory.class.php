@@ -85,4 +85,10 @@ class BbaFormFactory extends BaseFormFactory
   {
     return 'BbaTutorFormFilter';
   }
+
+  public function getCourseSubjectNotAverageableMarksForm()
+  {
+    return 'BbaCourseSubjectNotAverageableMarksForm';
+  }
+
 }

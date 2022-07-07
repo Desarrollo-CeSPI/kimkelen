@@ -53,8 +53,12 @@
                      
                        <?php if($css->getMark()): ?>
                             <?php echo $css->getMark() ?> 
-                        <?php elseif($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED && $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
-                        Aprobado
+                        <?php elseif( $css->getCourseSubjectStudent()->getIsNotAverageable()): ?>
+                             <?php if ($css->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED):?> 
+                                   <?php echo __('Aprobado');?>
+                             <?php else:?>
+                                   <?php echo __($css->getCourseSubjectStudent()->getNotAverageableCalification()); ?>
+                             <?php endif; ?>
                         <?php else: ?> 
                         <strong><?php echo __('Adeuda') ?></strong>
                         <?php endif; ?>
