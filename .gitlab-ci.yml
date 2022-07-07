@@ -1,11 +1,13 @@
-#
 image: docker:latest
 
 services:
   - docker:dind
 
 stages:
+  - base
   - app
+  - app-dev
+  - deploy-dev
 
 before_script:
   - export IMAGE_TAG="$CI_BUILD_REF_NAME"
@@ -13,18 +15,48 @@ before_script:
   - export IMAGE_NAME="push-registry.desarrollo.unlp.edu.ar/desarrollo-cespi/kimkelen"
   - apk add -U git
 
-
-build-app:
-  stage: app
+build-base:
+  stage: base
   script:
-    - export IMAGE_TAG="$CI_BUILD_REF_NAME"
     - export LOCK_VERSION="$(git log -n 1 --pretty=format:%h -- docker/Dockerfile.base)"
     - export BASE_IMAGE="$IMAGE_NAME:base-$LOCK_VERSION"
     - docker pull "$BASE_IMAGE" || ( docker build --pull -f docker/Dockerfile.base -t "$BASE_IMAGE" . && docker push "$BASE_IMAGE" && docker tag "$BASE_IMAGE" "$IMAGE_NAME:base-latest" && docker push "$IMAGE_NAME:base-latest" )
+  only:
+    - /^\d+\.\d+\.\d+((-dev)|(-test))?$/
+  tags:
+    - unlp
+        
+build-app:
+  stage: app
+  script:
     - docker build --pull -f docker/Dockerfile  --build-arg REVISION=${IMAGE_TAG} -t "$IMAGE_NAME:$IMAGE_TAG" .
     - docker push "$IMAGE_NAME:$IMAGE_TAG"
     - docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:latest" && docker push "$IMAGE_NAME:latest"
   only:
-    - /^\d+\.\d+\.\d+/
+    - /^\d+\.\d+\.\d+$/
   tags:
-    - unlp    
+    - unlp
+    
+build-dev:
+  stage: app-dev
+  script:
+    - docker build --pull -f docker/Dockerfile  --build-arg REVISION=${IMAGE_TAG} -t "$IMAGE_NAME:$IMAGE_TAG" .
+    - docker push "$IMAGE_NAME:$IMAGE_TAG"
+    - docker tag "$IMAGE_NAME:$IMAGE_TAG" "$IMAGE_NAME:dev" && docker push "$IMAGE_NAME:dev"
+  only:
+    - /^\d+\.\d+\.\d+-(dev|test)$/
+  tags:
+    - unlp
+
+deploy-dev:
+  stage: deploy-dev
+  script:
+    - apk add -U curl
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_BBA&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_LVM&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_NACIONAL&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+    - curl -k "https://ci-proxy.testing.unlp.edu.ar?app=APP_KIMKELEN_GRADUADA&pid=1a54598&repo=registry.desarrollo.unlp.edu.ar%2Fdesarrollo-cespi%2Fkimkelen&tag=dev"
+  only:
+    - /^\d+\.\d+\.\d+-(dev|test)$/
+  tags:
+    - unlp
