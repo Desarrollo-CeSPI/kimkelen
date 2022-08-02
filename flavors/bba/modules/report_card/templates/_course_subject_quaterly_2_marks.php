@@ -51,8 +51,10 @@
                             <?php if( !is_null($course_result) && $course_result->getCourseSubjectStudent()->getIsNotAverageable() && ! is_null($course_result->getCourseSubjectStudent()->getNotAverageableCalification())): ?>
                                 <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
                                   <?php echo __("Trayectoria completa"); ?>
-                                <?php else: ?>  
+                                <?php elseif($course_result->getCourseSubjectStudent()->getNotAverageableCalification()  == NotAverageableCalificationType::DISAPPROVED): ?>  
                                     <?php echo __("Trayectoria en curso"); ?>
+                                <?php else: ?>
+                                       <?php echo __($course_result->getCourseSubjectStudent()->getNotAverageableCalification(); ?>
                                 <?php endif; ?>
 
                               <?php else: ?> 

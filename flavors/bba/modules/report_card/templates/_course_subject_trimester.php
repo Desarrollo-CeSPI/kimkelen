@@ -45,6 +45,7 @@
             <?php elseif($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED): ?>  
                 <?php echo __("Trayectoria en curso"); ?>
              <?php else:?>
+                <?php echo __($course_subject_student->getNotAverageableCalification()); ?>
             <?php endif; ?>
         <?php endif ?>
      
