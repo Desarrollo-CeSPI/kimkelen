@@ -116,7 +116,12 @@
         <div class="logo_footer">
           <?php echo link_to(image_tag("logo-kimkelen-footer.png", array('alt' => __('Kimkelen'))), '@homepage', array('title' => __('Ir al inicio'))) ?>
         </div>
-          © <?php echo date('Y'); ?> | CeSPI-UNLP | <?php echo sfConfig::get('app_version_number') ?>
+          © <?php echo date('Y'); ?> | CeSPI-UNLP | 
+          <?php if(isset($_ENV['VERSION']) && $_ENV['VERSION'] != "" ): ?>
+              <?php echo $_ENV['VERSION']; ?>
+              <?php else: ?>
+              <?php echo sfConfig::get('app_version_number') ?>
+              <?php endif;?>
       </div><!-- end footer -->
     </div> <!-- end wrapper -->
   </body>

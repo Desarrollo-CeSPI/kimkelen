@@ -187,4 +187,162 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
       }
     }
   }
+
+  public function closeStudentExaminationRepprovedSubject(StudentExaminationRepprovedSubject $student_examination_repproved_subject, PropelPDO $con)
+	{
+		if ($student_examination_repproved_subject->getMark() >= $this->getExaminationNote())
+		{
+			$student_approved_career_subject = new StudentApprovedCareerSubject();
+                        $car_sub = $student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getCourseSubject()->getCareerSubject();
+                        $student_approved_career_subject->setCareerSubject($car_sub);
+			$student_approved_career_subject->setStudent($student_examination_repproved_subject->getStudent());
+			$student_approved_career_subject->setSchoolYear($student_examination_repproved_subject->getExaminationRepprovedSubject()->getExaminationRepproved()->getSchoolYear());
+
+			if($student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getIsNotAverageable())
+                        {
+                            $average = $student_examination_repproved_subject->getMark();
+                        }
+                        else
+                        {
+
+                           //Final average is the average of the course_subject_student and the mark of student_examination_repproved_subject
+			   $average = (string) (($student_examination_repproved_subject->getStudentRepprovedCourseSubject()->getCourseSubjectStudent()->getMarksAverage() + $student_examination_repproved_subject->getMark()) / 2);
+
+			   $average = sprintf('%.4s', $average);
+			   if ($average < self::MIN_NOTE)
+		   	   {
+				$average = self::MIN_NOTE;
+			   }
+                        }
+			$student_approved_career_subject->setMark($average);
+
+			$student_repproved_course_subject = $student_examination_repproved_subject->getStudentRepprovedCourseSubject();
+			$student_repproved_course_subject->setStudentApprovedCareerSubject($student_approved_career_subject);
+			$student_repproved_course_subject->save($con);
+
+			$career = $student_repproved_course_subject->getCourseSubjectStudent()->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSchoolYear()->getCareer();
+			##se corrobora si la previa es la última y está libre, hay que egresarlo
+			$previous = StudentRepprovedCourseSubjectPeer::countRepprovedForStudentAndCareer($student_repproved_course_subject->getStudent(), $career);
+			if ($student_repproved_course_subject->getStudent()->getCurrentOrLastStudentCareerSchoolYear()->getStatus() == StudentCareerSchoolYearStatus::FREE && $previous == 0)
+			{
+				$career_student = CareerStudentPeer::retrieveByCareerAndStudent($career->getId(), $student_repproved_course_subject->getStudent()->getId());;
+				$career_student->setStatus(CareerStudentStatus::GRADUATE);
+				//se guarda el school_year en que termino esta carrera
+				$career_student->setGraduationSchoolYearId(SchoolYearPeer::retrieveCurrent()->getId());
+				$career_student->save($con);
+				//se guarda el estado en el student_career_school_year
+				$scsy = $student_repproved_course_subject->getCourseSubjectStudent()->getStudent()->getCurrentOrLastStudentCareerSchoolYear();
+				$scsy->setStatus(StudentCareerSchoolYearStatus::APPROVED);
+				$scsy->save();
+			}
+
+			##se agrega el campo en student_disapproved_course_subject a el link del resultado final
+			$student_repproved_course_subject->getCourseSubjectStudent()->getCourseResult()->setStudentApprovedCareerSubject($student_approved_career_subject)->save($con);
+
+			$student_approved_career_subject->save($con);
+		}
+
+	}
+
+  public function closeCourseSubjectStudentExamination(CourseSubjectStudentExamination $course_subject_student_examination, PropelPDO $con = null)
+  {
+    $con = is_null($con) ? Propel::getConnection() : $con;
+
+    $course_subject_student = $course_subject_student_examination->getCourseSubjectStudent();
+    
+    // si aprueba la mesa de examen
+    if ($course_subject_student_examination->getMark() >= $this->getExaminationNote())
+    {
+      $result = StudentApprovedCareerSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student, $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
+
+      if (is_null($result))
+      {
+        $result = new StudentApprovedCareerSubject();
+        $result->setCareerSubject($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getCareerSubject());
+        $result->setStudent($course_subject_student->getStudent());
+        $result->setSchoolYear($course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear());
+
+        //Se busca si había una previa creada para esta materia entonces se debe eliminar ya que ahora está aprobada
+        if ($student_repproved_course_subject = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student))
+        {
+          $sers = $student_repproved_course_subject->getStudentExaminationRepprovedSubjects();
+	        //$sers = StudentExaminationRepprovedSubjectPeer::retrieveByStudentRepprovedCourseSubject($student_repproved_course_subject);
+
+	        if ($sers >= 1) 
+          {
+	          foreach ($sers as $student_examination_repproved_subject) 
+            {
+              $student_examination_repproved_subject->delete($con);
+            }
+          }
+          $student_repproved_course_subject->delete($con);
+          
+        }
+      }
+
+      $examination_subject = $course_subject_student_examination->getExaminationSubject();
+
+      // IF is null, is because the course_subject_student_examination has been created editing student history
+      $school_year = is_null($examination_subject) ? $course_subject_student->getCourseSubject()->getCareerSubjectSchoolYear()->getSchoolYear() : $examination_subject->getExamination()->getSchoolYear();
+
+      $result->setSchoolYearId($school_year->getId());
+      
+      if($course_subject_student->getIsNotAverageable())
+      {
+         $average = $course_subject_student_examination->getMark();
+      }
+      else
+      {
+         $average = $this->getAverage($course_subject_student, $course_subject_student_examination);
+
+         $average = sprintf('%.4s', $average);
+ 
+         if ($average < 4)
+         {
+           $average = 4;
+         }
+      }
+
+      // se guarda la NOTA FINAL de la materia
+      if ($course_subject_student_examination->getExaminationNumber() == self::FEBRUARY)
+      {
+        $this->setFebruaryApprovedResult($result, $average, $course_subject_student_examination->getMark());
+      }
+      else
+      {
+        $result->setMark($average);
+      }
+
+      ##se agrega en la tupla student_disapproved_course_subject el link a al resultado final y el tipo de mesa en el que aprobo
+      $sdcs = $course_subject_student->getCourseResult();
+      $sdcs->setStudentApprovedCareerSubject($result);
+      $sdcs->setExaminationNumber($course_subject_student_examination->getExaminationNumber());
+      $sdcs->save($con);
+
+      $result->save($con);
+
+    }
+    else
+    {
+      // TODO: arreglar esto: pedir a la configuración
+      // Pasa de diciembre a febrero (se copia el course_subject_student_examination con examination_number + 1)
+      if ($course_subject_student_examination->getExaminationNumber() < count($this->_examination_number))
+      {
+        $this->nextCourseSubjectStudentExamination($course_subject_student_examination, $con);
+      }
+      else
+      {
+        // se crea una previa
+        $srcs = StudentRepprovedCourseSubjectPeer::retrieveByCourseSubjectStudent($course_subject_student);
+
+        if (is_null($srcs)) {
+           $student_repproved_course_subject = new StudentRepprovedCourseSubject();
+           $student_repproved_course_subject->setCourseSubjectStudentId($course_subject_student->getId());
+           $student_repproved_course_subject->save($con);
+
+        }
+      }
+    }
+
+  }
 }
