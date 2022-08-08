@@ -580,8 +580,8 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
 
    public function getExaminationNumberFor($average, $is_free = false, $course_subject_student = null)
   {
-    // return (($average >= self::MIN_NOTE)) ? self::DECEMBER : self::FEBRUARY;
-       return self::DECEMBER;
+     return (($average >= self::MIN_NOTE)) ? self::DECEMBER : self::FEBRUARY;
+     //  return self::DECEMBER;
   }
 
   /**
