@@ -83,7 +83,7 @@
   <?php endforeach; ?>
     
   
-  <?php $css_one_q= $student->getCourseSubjectStudentsForFirstQuaterly( $student_career_school_year)?>
+  <?php /*  $css_one_q= $student->getCourseSubjectStudentsForFirstQuaterly( $student_career_school_year)?>
   <?php if(count($css_one_q) > 0):?>
   <?php $count_marks = 0; ?>
   <?php foreach ($css_one_q as $course_subject_student): ?>
@@ -160,7 +160,7 @@
 
     </tr>
   <?php endforeach; ?>
-  <?php endif;?>  
+  <?php endif; */ ?>  
 </table>
 
 
@@ -229,7 +229,7 @@
   <?php endforeach; ?>
     
     
-  <?php $css_two_q= $student->getCourseSubjectStudentsForSecondQuaterly( $student_career_school_year)?>
+  <?php /* $css_two_q= $student->getCourseSubjectStudentsForSecondQuaterly( $student_career_school_year)?>
   <?php if(count($css_two_q) > 0):?>
   <?php $count_marks = 0; ?>
   <?php foreach ($css_two_q as $course_subject_student): ?>
@@ -303,5 +303,5 @@
     </tr>
   <?php endforeach; ?> 
     
-   <?php endif;?> 
+   <?php endif; */ ?> 
 </table>
