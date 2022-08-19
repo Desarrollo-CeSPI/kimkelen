@@ -258,4 +258,11 @@ class BbaSchoolBehaviour extends BaseSchoolBehaviour
         return $ret;
     }
 
+   protected function getClassSubjectStudentAnalytic(){
+
+    return 'BbaSubjectStudentAnalytic';
+
+  }
+
+
 }
