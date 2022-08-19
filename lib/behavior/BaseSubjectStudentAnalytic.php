@@ -181,10 +181,17 @@ class BaseSubjectStudentAnalytic
                 {
                     return "Aprobado";
                 }
-                else
-                {
-                    return $this->getNullLabel();
-                }
+            	elseif(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() >= 7)
+            	{
+             
+        		$mark = $this->css->getNotAverageableCalification();
+        
+       			 return $mark;
+            	}
+            	else
+            	{
+            		  return $this->getNullLabel();
+           	 }
 
 
             }else{
@@ -202,7 +209,7 @@ class BaseSubjectStudentAnalytic
             return $this->getNullLabel();
         
         
-        if($this->css->getIsNotAverageable() && is_null($this->getMark() ) )
+        if($this->css->getIsNotAverageable() )
         {
             if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
             {
@@ -211,10 +218,10 @@ class BaseSubjectStudentAnalytic
             elseif(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() >= 7)
             {
                 $c = new num2text();
-        $mark = $this->css->getNotAverageableCalification();
-        $mark_symbol = trim($c->num2str($mark));
+                $mark = $this->css->getNotAverageableCalification();
+                $mark_symbol = trim($c->num2str($mark));
         
-        return $mark_symbol;
+                return $mark_symbol;
             }
             else
             {
