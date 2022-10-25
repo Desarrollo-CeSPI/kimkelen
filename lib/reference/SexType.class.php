@@ -35,7 +35,7 @@ class SexType extends BaseCustomOptionsHolder
     $_options = array(
         self::MALE      => 'Masculino',
         self::FEMALE    => 'Femenino',
-        self:: NON_BINARY => 'No binario',
+        self:: NON_BINARY => 'No binario'
       );
   
   public function getSexType($sex_type)
