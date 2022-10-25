@@ -28,12 +28,14 @@ class SexType extends BaseCustomOptionsHolder
 {
   const
     MALE   = 1,
-    FEMALE = 2;
+    FEMALE = 2,
+    NON_BINARY = 3;
 
   protected
     $_options = array(
         self::MALE      => 'Masculino',
-        self::FEMALE    => 'Femenino'
+        self::FEMALE    => 'Femenino',
+        self:: NON_BINARY => 'No binario'
       );
   
   public function getSexType($sex_type)
@@ -47,6 +49,9 @@ class SexType extends BaseCustomOptionsHolder
 		case "F":
 			return self::FEMALE;
 		break;
+                case "X":
+                       return self::NON_BINARY;
+                break;
 		default:
 			return null;
 		break;
