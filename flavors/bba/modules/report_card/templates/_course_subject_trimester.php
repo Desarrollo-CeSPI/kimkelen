@@ -40,8 +40,8 @@
         <?php if ($course_subject_student->getCOnfiguration()->isNumericalMark() && !$course_subject_student->getIsNotAverageable() ): ?>
           <?php echo $student->getPromDef($course_result) ?>
         <?php elseif ($course_subject_student->getIsNotAverageable() ): ?> 
-          <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
-              <?php echo __("Trayectoria completa"); ?>
+          <?php if($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED || ! is_null($course_subject_student->getStudentApprovedCareerSubject())): ?>
+              <?php echo (!is_null($course_subject_student->getStudentApprovedCareerSubject()) && ! is_null($course_subject_student->getStudentApprovedCareerSubject()->getMark()) ) ? $course_subject_student->getStudentApprovedCareerSubject()->getMark() : __("Trayectoria completa"); ?>
             <?php elseif($course_subject_student->getNotAverageableCalification() == NotAverageableCalificationType::DISAPPROVED): ?>  
                 <?php echo __("Trayectoria en curso"); ?>
              <?php else:?>
