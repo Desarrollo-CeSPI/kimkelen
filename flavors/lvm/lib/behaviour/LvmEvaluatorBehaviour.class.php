@@ -150,7 +150,7 @@ class LvmEvaluatorBehaviour extends BaseEvaluatorBehaviour
           //Suma menor a 12: mesa de marzo (examen complementario)
           elseif ($sum_marks < 12)
           {
-            $student_disapproved_course_subject->setExaminationNumber(self::FEBRUARY);
+            $student_disapproved_course_subject->setExaminationNumber(self::DECEMBER);
           }
         }
         else
