@@ -49,8 +49,8 @@
 			<td> 
                         
                             <?php if( !is_null($course_result) && $course_result->getCourseSubjectStudent()->getIsNotAverageable() && ! is_null($course_result->getCourseSubjectStudent()->getNotAverageableCalification())): ?>
-                                <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED): ?>
-                                  <?php echo __("Trayectoria completa"); ?>
+                                <?php if($course_result->getCourseSubjectStudent()->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED || ! is_null($course_subject_student->getStudentApprovedCareerSubject()) ): ?>
+                                  <?php echo (!is_null($course_subject_student->getStudentApprovedCareerSubject()) && ! is_null($course_subject_student->getStudentApprovedCareerSubject()->getMark()) ) ? $course_subject_student->getStudentApprovedCareerSubject()->getMark() : __("Trayectoria completa"); ?>
                                 <?php elseif($course_result->getCourseSubjectStudent()->getNotAverageableCalification()  == NotAverageableCalificationType::DISAPPROVED): ?>  
                                     <?php echo __("Trayectoria en curso"); ?>
                                 <?php else: ?>

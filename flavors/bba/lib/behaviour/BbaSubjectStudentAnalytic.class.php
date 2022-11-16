@@ -99,6 +99,12 @@ class BbaSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         
                 return $mark_symbol;
             }
+            elseif(! is_null($this->approved->getMark()))
+            {
+		$c = new num2text();
+                $mark = $this->approved->getMark();
+                $mark_symbol = trim($c->num2str($mark));	
+            }
             else
             {
               return $this->getNullLabel();
