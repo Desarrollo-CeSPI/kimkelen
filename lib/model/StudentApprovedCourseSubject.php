@@ -125,6 +125,18 @@ class StudentApprovedCourseSubject extends BaseStudentApprovedCourseSubject
     }
   }
 
+  public function getNotAverageableCalification()
+  {
+  
+       if($this->getCourseSubjectStudent()->getNotAverageableCalification() >= 7){
+                return $this->getCourseSubjectStudent()->getNotAverageableCalification();
+       }
+        else{
+               return NULL;
+       }
+
+  }
+
 }
 
 sfPropelBehavior::add('StudentApprovedCourseSubject', array('student_approved_course_subject'));
