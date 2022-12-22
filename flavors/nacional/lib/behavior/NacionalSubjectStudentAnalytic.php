@@ -86,4 +86,60 @@ class NacionalSubjectStudentAnalytic extends BaseSubjectStudentAnalytic
         
     }
 
+    public function getMarkAsSymbol()
+    {
+        if (!$this->approved && is_null($this->css->getStudentApprovedCourseSubject()))
+            return $this->getNullLabel();
+        
+        
+        if($this->css->getIsNotAverageable() )
+        {
+            if(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() == NotAverageableCalificationType::APPROVED)
+            {
+                return "Aprobado";
+            }
+            elseif(! is_null($this->css->getNotAverageableCalification()) && $this->css->getNotAverageableCalification() >= 7)
+            {
+                $c = new num2text();
+                $mark = $this->css->getNotAverageableCalification();
+                $mark_symbol = trim($c->num2str($mark));
+        
+                return $mark_symbol;
+            }
+            elseif(! is_null($this->css->getNotAverageableCalification()) && !is_null($this->approved))
+            {
+               if (is_null($this->getMark()))
+               {
+                   return "Aprobado";
+               }
+               else
+               {
+                  $c = new num2text();
+                  $mark = $this->approved->getMark();
+                  $mark_symbol = trim($c->num2str($mark));
+
+                  return $mark_symbol;
+               }
+            }
+            else
+            {
+              return $this->getNullLabel();
+            }
+            
+            
+        }
+        
+        $c = new num2text();
+        $mark = $this->getMark();
+        $mark_parts = explode(',', $mark);
+        if (1 === count($mark_parts))
+        {
+            $mark_parts = explode('.', $mark);
+        }
+        $mark_symbol = trim($c->num2str($mark_parts[0])) . ('00' !== $mark_parts[1]?','.$mark_parts[1]:'');
+        
+        return $mark_symbol;
+    }
+
+
 }
