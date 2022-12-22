@@ -603,6 +603,7 @@ class CourseSubjectStudent extends BaseCourseSubjectStudent
     $c = new Criteria();
     $c->add(StudentApprovedCareerSubjectPeer::STUDENT_ID, $this->getStudentId());
     $c->add(StudentApprovedCareerSubjectPeer::CAREER_SUBJECT_ID, $career_subject_id);
+    $c->addDescendingOrderByColumn(StudentApprovedCareerSubjectPeer::ID);
 
     return StudentApprovedCareerSubjectPeer::doSelectOne($c);
 
