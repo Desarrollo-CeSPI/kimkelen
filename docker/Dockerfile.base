@@ -25,6 +25,4 @@ RUN  apk add -U --no-cache \
       fontconfig \
       dbus \
       libxrender-dev \
-    && apk add --allow-untrusted --no-cache \
-       --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
-       qt5-qtbase
+      qt5-qtbase
