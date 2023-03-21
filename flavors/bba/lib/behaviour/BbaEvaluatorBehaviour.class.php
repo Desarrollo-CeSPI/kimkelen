@@ -365,4 +365,98 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     unset($course_subject_student_examination);
     unset($examination_number);
   }
+
+  public function getLastStudentCareerSchoolYearCoursed($student)
+  {  $last_scsy =  $student->getLastStudentCareerSchoolYear();
+    
+    $c = new Criteria();
+    $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
+    $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+    $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+    $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+    $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+    $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+    $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$student->getId());
+    $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+    $c->add(CourseSubjectStudentMarkPeer::MARK,NULL, Criteria::NOT_EQUAL);
+ /*$criterion = $c->getNewCriterion(CourseSubjectStudentPeer::NOT_AVERAGEABLE_CALIFICATION,NULL, Criteria::NOT_EQUAL);
+      $c->addOr($criterion); */
+ $c->addAnd(CourseSubjectStudentMarkPeer::IS_FREE,FALSE);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+    $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+    
+    $scsy_c= StudentCareerSchoolYearPeer::doSelectOne($c);
+    if(!is_null($scsy_c) && $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() == $scsy_c->getCareerSchoolYear()->getSchoolYear()->getYear())
+    {
+        return $scsy_c;
+    }
+    elseif(!is_null($scsy_c) &&  $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() > $scsy_c->getCareerSchoolYear()->getSchoolYear()->getYear() )
+    {//si el ultimo año registrado es mayor al cursado me fijo si el último es 2020
+        
+        $years  = array(2020,2021,2022);
+        if( in_array($last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear(), $years))
+        {
+            
+            $c = new Criteria();
+            $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
+            $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+            $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+            $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+            $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+            $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+            $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$student->getId());
+            $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+            $c->add(CourseSubjectStudentPeer::NOT_AVERAGEABLE_CALIFICATION,NULL, Criteria::NOT_EQUAL);  
+            $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+            $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+
+            $scsy_2 = StudentCareerSchoolYearPeer::doSelectOne($c);
+
+            if(!is_null($scsy_2) && in_array($scsy_2->getCareerSchoolYear()->getSchoolYear()->getYear(), $years)  )
+            {
+                
+                return $scsy_2;
+            }
+            else
+            {
+               return  $scsy_c;
+            }
+            
+        }
+        else
+        {
+            return $scsy_c;
+        }
+        
+    }else
+    {
+       if(!is_null($scsy_c))
+        return $scsy_c;
+       else
+       {
+          if (!is_null($last_scsy) && $last_scsy->getYear() == 1)
+          {
+              return $last_scsy;
+          }
+         else
+         {   //tiene ultimo año, pero no tiene ultimo año cursado. Es por las notas no promediables.
+          $c = new Criteria();
+            $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);    
+            $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+            $c->addJoin(CareerSubjectSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+            $c->addJoin(CourseSubjectPeer::CAREER_SUBJECT_SCHOOL_YEAR_ID, CareerSubjectSchoolYearPeer::ID);
+            $c->addJoin(CourseSubjectStudentPeer::COURSE_SUBJECT_ID, CourseSubjectPeer::ID);
+            $c->addJoin(CourseSubjectStudentMarkPeer::COURSE_SUBJECT_STUDENT_ID, CourseSubjectStudentPeer::ID);
+            $c->add(StudentCareerSchoolYearPeer::STUDENT_ID,$student->getId());
+            $c->add(CourseSubjectStudentPeer::STUDENT_ID, $student->getId());
+            $c->add(CourseSubjectStudentPeer::NOT_AVERAGEABLE_CALIFICATION,NULL, Criteria::NOT_EQUAL);  
+            $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::CREATED_AT);
+            $c->addDescendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+
+            $scsy_2 = StudentCareerSchoolYearPeer::doSelectOne($c);
+            return $scsy_2;
+          }
+       }
+    }
+  }
 }
