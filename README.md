@@ -61,7 +61,9 @@ services:
       DB_HOST: db
       DB_NAME: kimkelen
       DB_PASSWORD: root
+      DB_PORT: 3306
       DB_USERNAME: root
+      DB_ENCODING: utf8
       DEBUG: 'false'
       FLAVOR: demo
       MEMCACHE_HOST: memcache
@@ -70,7 +72,7 @@ services:
       MAIL_PORT: 25
       MAIL_HOST: localhost
       FACEBOOK_ID: 'demo'
-      FACEBOOK_SECRET= 'demo'
+      FACEBOOK_SECRET: 'demo'
     ports:
     - 80:80
     volumes:
