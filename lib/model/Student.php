@@ -1958,7 +1958,16 @@ class Student extends BaseStudent
     {
         return $this->getIsRegistered();
     }
-  
+ 
+  public function getStudentCareerSchoolYearsOrderByYear()
+   {
+        $c = new Criteria();
+        $c->addJoin(StudentCareerSchoolYearPeer::CAREER_SCHOOL_YEAR_ID, CareerSchoolYearPeer::ID);
+        $c->addJoin(CareerSchoolYearPeer::SCHOOL_YEAR_ID, SchoolYearPeer::ID);
+        $c->addAscendingOrderByColumn(SchoolYearPeer::YEAR);
+        $c->addAscendingOrderByColumn(StudentCareerSchoolYearPeer::YEAR);
+        return $this->getStudentCareerSchoolYears($c);
+   } 
 }
 
 sfPropelBehavior::add('Student', array('person_delete'));
