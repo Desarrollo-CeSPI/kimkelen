@@ -10,7 +10,7 @@ stages:
   - deploy-dev
 
 before_script:
-  - export IMAGE_TAG="$CI_BUILD_REF_NAME"
+  - export IMAGE_TAG="$CI_COMMIT_REF_NAME"
   - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS" $DOCKER_REGISTRY_URL
   - export IMAGE_NAME="push-registry.desarrollo.unlp.edu.ar/desarrollo-cespi/kimkelen"
   - apk add -U git
