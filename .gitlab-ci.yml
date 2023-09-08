@@ -23,6 +23,7 @@ build-base:
     - docker pull "$BASE_IMAGE" || ( docker build --pull -f docker/Dockerfile.base -t "$BASE_IMAGE" . && docker push "$BASE_IMAGE" && docker tag "$BASE_IMAGE" "$IMAGE_NAME:base-latest" && docker push "$IMAGE_NAME:base-latest" )
   only:
     - /^\d+\.\d+\.\d+((-dev)|(-test))?$/
+    - /^\d+\.\d+\.\d+$/
   tags:
     - unlp
         
