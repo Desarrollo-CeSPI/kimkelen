@@ -1,0 +1,112 @@
+/* 
+    Created on : 18-ago-2015, 11:53:20
+    Author     : lucianoc
+*/
+.sf_admin_actions, #header, #menu-div, #screen_header, #footer {
+    display: none;
+}
+
+.misma_pagina {
+    page-break-inside: avoid;
+}
+
+.table {
+    margin-bottom: 1em;
+    page-break-inside: avoid;
+}
+.table tr
+{
+    page-break-inside: avoid;
+}
+
+.table thead th{
+    font-size: 14px;
+    padding-top: 1px !important;
+    padding-bottom: 0 !important;
+    min-width: 80px;
+}
+
+.table td {
+    font-size: 13px;
+    padding-top: 0.5px !important;
+    padding-bottom: 0.5px !important;
+}
+
+.table tbody th {
+    font-size: 14px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.analytical_body_table {
+    font-size: 14px !important;
+}
+
+.header-text{
+    font-size: 14px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+#analytical_footer {
+    margin-top: 3.5em !important;
+}
+
+#analytic_signatures .signature {
+    margin-top: 13em;
+    padding-top: 3px;
+}
+
+.header_row .title {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.report-wrapper {
+    margin: 10px auto;
+}
+
+.footer-text{
+    display: block;
+    margin-bottom: 3px;
+}
+
+#analytical_footer {
+    font-size: 13px;
+}
+
+#header_analytical_data_center h1 {
+    font-size: 20px;
+}
+
+.header_row {
+    padding: 2px 0px;
+}
+.analytical {
+    padding: 1em 2em;
+}
+
+.analytical-observations{
+    display: block;  
+    font-size: 14px;
+}
+
+.analytical-form{
+    display: none;
+}
+
+/*#signature_2{
+    margin-left: 30%!important;
+}*/
+.analytical-header-text {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    padding: 0.5em 0 !important;
+}
+
+.school_logo {
+    width: 8%;
+    margin-bottom: 0em;
+}

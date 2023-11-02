@@ -1,0 +1,269 @@
+/*
+    Document   : print-examination-record
+    Created on : 27/05/2013, 21:00:14
+    Author     : María Emilia Corrons <ecorrons@cespi.unlp.edu.ar>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+  text-align:center;
+  font-family:Trebuchet MS, sans-serif;
+  font-size:12px;
+  color:#333;
+}
+
+/* wrapper */
+
+.record-wrapper{
+  text-align:left;
+  width:900px;
+  margin:30px auto;
+}
+
+.record-header {
+  float:left;
+  width:100%;
+  margin-bottom: 5px;
+}
+
+.record-header .logo
+{
+  float:left !important;
+  width: 100%;
+}
+
+.record-header .logo_fvet
+{
+  float:right !important;
+}
+
+.header_row {
+  border-bottom:1px solid #ccc;
+  float:left;
+  width:100%;
+  padding:5px 0px;
+}
+
+.header_row .header_right
+{
+  float:right;
+}
+
+.header_row .name
+{
+  float:left;
+  font-size:16px;
+}
+
+.record-content {
+  float:left;
+  width:100%;
+}
+
+.record-content .title {
+  font-size: 15px;
+  font-weight: bold;
+  padding:5px;
+  text-transform: uppercase;
+  background:#f2f2f2;
+  border-bottom:1px solid #ccc;
+}
+
+.row {
+  border-bottom:1px solid #ccc;
+  text-align:left;
+  width:100%;
+  float:left;
+  padding:2px 0px;
+}
+
+
+.row .txt {
+  padding: 10px;
+  border-left:1px solid #999;
+}
+
+
+.th-subject-name {
+  width:25%;
+}
+
+.subject_name
+{
+  text-align: left !important;
+}
+
+/***table***/
+
+table.lefttable {
+  font-family:arial,sans-serif;
+  font-size:11px;
+  color:#333333;
+  border:none;
+  border-collapse: collapse;
+  width:100%;
+  text-align:left;
+}
+
+table.lefttable tr {
+  border-top:1px solid #ccc;
+  background-color: #ffffff;
+}
+
+.right{
+  float:right ;
+}
+
+.signature {
+  float:left;
+  margin-top: 70px;
+  margin-right: 90px;
+  border-top-style: dotted;
+  border-top-width: thin;
+  min-width: 200px;
+}
+
+.signature-subtext {
+ font-size: 9px !important;
+ text-align: center;
+}
+
+.signature-text {
+ text-align: center;
+}
+
+.record-header .school-name
+{
+  text-align:center;
+  padding:5px 0px;
+  margin-right: 15%;
+  font-size: medium;
+}
+
+.gray-background{
+  background:#f2f2f2;
+  padding: 4px;
+}
+
+h2 {
+  margin-top: 1px;
+}
+
+#sfWebDebug,
+.non-printable
+{
+  display: none !important;
+}
+
+.article-div {
+  margin: 13px 0;
+}
+
+.observation-box {
+  padding: 2px 0 0 5px;
+  border:1px solid #ccc;
+  min-height: 70px;
+}
+
+.sub {
+  text-decoration: underline;
+}
+
+.little-box {
+  border:1px solid #ccc;
+  padding: 4px 22px;
+  margin-right: 4px;
+}
+
+table.gridtable_bordered {
+    font-family:arial,sans-serif;
+    font-size:12px;
+    color:#333333;
+    border:1px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    text-align:left;
+}
+
+table.gridtable_bordered th {
+    padding: 3px;
+    border:1px solid #ccc;
+    font-size:12px;
+}
+
+table.gridtable_bordered td {
+    padding: 3px;
+    border:1px solid #ccc;
+    background-color: #ffffff;
+}
+
+table.gridtable_bordered tr {
+    border:1px solid #ccc;
+    background-color: #ffffff;
+    text-align:center;
+}
+
+.owes_correlative
+{
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.division_record
+{
+    width: 35px;
+}
+.calification_number
+{
+    width: 40px;
+}
+.calification_letter
+{
+    width: 70px;
+}
+
+.result_record
+{
+    width: 80px;
+}
+
+.box-sheet
+{
+    width: 100%;
+    float: right;
+    margin-top: 10px;
+}
+
+.period_record
+{
+    width: 15px;
+}
+
+.student
+{
+    text-align: left;
+}
+
+.orden
+{
+    width: 15px;
+}
+
+.white-background
+{
+   padding: 4px;
+   font-weight: bold;
+}
+
+.logo_print_record
+{
+    width: 30px;
+}
+
+.sheet-record
+{
+    float:right !important;
+    font-size: 10px;
+    margin-bottom: 0px !important;
+}
