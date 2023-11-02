@@ -1,0 +1,75 @@
+body {
+    font-family:Trebuchet MS, sans-serif;
+    font-size:9px;
+    color:#333;
+    background-color: #FFF !important;
+}
+
+.printColumns th {
+    background-color:  #2e3436;
+    color: #fefefe;
+    width: 15%;
+    font-size: 9px;
+}
+.print_body td {
+    background-color: #fefefe;
+    color: #000;
+    border: 1px solid black !important;
+    text-align: center;
+    font-size: 9px;
+}
+
+.print_title {
+  font-size: 10px;
+}
+
+.print_page {
+  page-break-after: always;
+}
+
+.print_table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.print_table th{
+    border: 1px solid gray !important;
+    padding: 3px;
+    font-weight: bold;
+}
+
+.print_table td{
+    border: 1px solid gray !important;
+    padding: 3px;
+}
+
+#sfWebDebug,
+.non-printable
+{
+  display: none !important;
+}
+
+.free
+{
+  background-color: yellow !important;
+}
+.almost_free
+{
+  background-color: greenyellow !important;
+}
+
+.box_justificated
+{
+  border: 1px;
+  border-style: dashed;
+  padding: 1px;
+  background-color: greenyellow !important;
+}
+
+.date_last {
+ display: block;
+}
+
+.date_separator {
+ display: none;
+}
