@@ -19,7 +19,7 @@ body {
 {
   text-align:left;
   width:900px;
-  margin:10px auto;
+  margin:6px auto;
 }
 
 .report-header
@@ -31,7 +31,16 @@ body {
 .report-header .logo
 {
   float:left;
+  width:30%;
+  padding-bottom: 0px;
 }
+
+.report-header .logo img
+{
+  width:310px;
+  height: 65px;
+}
+
 
 .report-header .date
 {
@@ -44,7 +53,7 @@ body {
   border-bottom:1px solid #ccc;
   float:left;
   width:100%;
-  padding:10px 0px;
+  padding:0px 0px;
 }
 
 .header_row .header_right
@@ -58,8 +67,8 @@ body {
     font-weight:bold;
     font-size:13px;
     padding-top:3px;
-    padding-right:5px;
-    margin-left: 30px;
+    padding-right:3px;
+    margin-left: 5px;
 }
 
 
@@ -74,7 +83,7 @@ body {
 {
     float:left;
     font-size:13px;
-    padding:3px;
+    padding:1px;
     width:35px;
 
 }
@@ -89,9 +98,16 @@ body {
 }
 
 .pair {
+    float: right;
     padding-top: 46px;
+
 }
 
+.pair .name {
+    font-size: 14px;
+    margin-left:0px;
+    float:left;
+}
 
 
 
@@ -113,7 +129,7 @@ body {
 }
 
 .report-content .title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   padding:2px;
   text-transform: uppercase;
@@ -128,6 +144,13 @@ body {
   text-transform: uppercase;
   background:#f2f2f2;
   border-bottom:1px solid #ccc;
+}
+
+.report-average{
+	font-size: 11px;
+        padding-bottom: 1px;
+        padding-top: 1px;
+        margin-top:0px;
 }
 
 .row {
@@ -219,10 +242,10 @@ table.lefttable tr {
 }
 
 .titletable {
-  font-size:14px;
+  font-size:12px;
   font-weight:bold;
   display:block;
-  padding:3px;
+  padding:2px;
 }
 
 .rowins{
@@ -254,7 +277,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 10px;
-  height:120px;
+  height:100px;
 }
 
 .rowfirm_responsible{
@@ -263,7 +286,7 @@ table.lefttable tr {
   margin-top:10px;
   margin-left:5px;
   padding:0px 10px;
-  height:120px;
+  height:100px;
 }
 
 .rowfirm_teacher{
@@ -272,16 +295,16 @@ table.lefttable tr {
     margin-top:10px;
     margin-left:5px;
     padding:0px 30px;
-    height:120px;
+    height:100px;
 }
 
 .rownotice{
   border:1px solid #ccc;
   float:left;
-  margin-top:10px;
+  margin-top:5px;
   margin-bottom:10px;
-  padding:0px 10px;
-  height:80px;
+  padding:0px 5px;
+  height:70px;
   width:869px;
 }
 
@@ -346,9 +369,9 @@ table.gridtable_bordered tr {
 
 .option
 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
-    padding:5px;
+    padding:3px;
     background:#f2f2f2;
     border-bottom:1px solid #ccc;
 }
