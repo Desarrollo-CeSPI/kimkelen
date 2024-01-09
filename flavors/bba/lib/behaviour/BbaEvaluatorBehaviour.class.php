@@ -393,7 +393,7 @@ class BbaEvaluatorBehaviour extends BaseEvaluatorBehaviour
     elseif(!is_null($scsy_c) &&  $last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear() > $scsy_c->getCareerSchoolYear()->getSchoolYear()->getYear() )
     {//si el ultimo año registrado es mayor al cursado me fijo si el último es 2020
         
-        $years  = array(2020,2021,2022);
+        $years  = array(2020,2021,2022,2023);
         if( in_array($last_scsy->getCareerSchoolYear()->getSchoolYear()->getYear(), $years))
         {
             
