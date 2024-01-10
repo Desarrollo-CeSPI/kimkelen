@@ -76,6 +76,11 @@ classes:
         type:               integer
         description:        Nacionalidad de la persona
         required:           false
+      nationality_other_id:
+        type:               integer
+        description:        Otra Nacionalidad de la persona
+        required:           false
+
 
   Personal:
     tableName:            personal

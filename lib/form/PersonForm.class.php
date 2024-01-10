@@ -130,6 +130,12 @@ class PersonForm extends BasePersonForm
     $this->setWidget('nationality_id', new sfWidgetFormChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getOptions(true))));
     $this->setValidator('nationality_id', new sfValidatorChoice(array('choices' => BaseCustomOptionsHolder::getInstance('Nationality')->getKeys(), 'required' => false)));
 
+    $c_criteria = new Criteria(CountryPeer::DATABASE_NAME);
+    $c_criteria->addAscendingOrderByColumn(CountryPeer::NATIONALITY);
+    $this->setWidget('nationality_other_id', new sfWidgetFormPropelChoice(array('model' => 'Country', 'criteria' => $c_criteria, 'add_empty' => true,'method' => 'getNationality')));
+    $this->setValidator('nationality_other_id', new sfValidatorPropelChoice(array('model' => 'Country', 'criteria' => $c_criteria, 'required' => false)));
+   
+
     //field sex widget and validator
     $this->setWidget('sex', new sfWidgetFormSelect(array(
       'choices'  => BaseCustomOptionsHolder::getInstance('SexType')->getOptions()
