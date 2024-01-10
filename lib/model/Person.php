@@ -237,10 +237,19 @@ class Person extends BasePerson
             return $country->getNationality();
         }
         else
-        {
-            $country = CountryPeer::retrieveByPK(Country::ARGENTINA);
-            return $country->getNationality();
-        }
+        {   //nacionalidad otra. Para los casos donde nacieron en un pais, pero tienen otra nacionalidad.
+            if($this->getNationalityId() == Nationality::N_OTHER)
+            {
+                $country = CountryPeer::retrieveByPK($this->getNationalityOtherId());
+                return $country->getNationality();
+
+            }
+            else
+            { 
+                $country = CountryPeer::retrieveByPK(Country::ARGENTINA);
+                return $country->getNationality();
+             }
+         }
       }
   }
   
