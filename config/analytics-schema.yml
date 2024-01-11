@@ -26,3 +26,7 @@ classes:
       observations:
         description:      Observaciones en el certificado
         type: varchar(100)
+      previous_certificate:
+        description:      Certificado anterior del alumno
+        type: varchar(255)
+

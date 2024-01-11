@@ -14,7 +14,8 @@ class NacionalAnalyticForm extends AnalyticForm
       parent::configure();
       $this->unsetFields();
       $this->setWidget('observations', new sfWidgetFormInput());
-  }
+      $this->setWidget('previous_certificate', new sfWidgetFormInput());  
+}
   
   public function unsetFields()
   {

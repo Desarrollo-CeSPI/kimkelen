@@ -26,6 +26,7 @@ class LvmAnalyticForm extends AnalyticForm
       $this['id'],
       $this['career_student_id'],
       $this['certificate'],
+      $this['previous_certificate'],
       $this['created_at']  
          
     );
