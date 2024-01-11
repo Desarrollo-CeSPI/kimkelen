@@ -24,7 +24,7 @@
 
     <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical ,'form' => $form)) ?>
     <?php else:?>
-    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical,  'analytic' => $analytic))) ?>
+    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical, 'analytic' => $analytic)) ?>
     <?php endif;?>
 
     <div class="analytical-form">
