@@ -96,7 +96,11 @@ class NacionalSchoolBehaviour extends BaseSchoolBehaviour
 
         foreach ($division->getDivisionStudents($c) as $ds)
         {
-          $ret[] = $ds->getStudent();
+          if ($ds->getStudent()->getPerson()->getIsActive())
+           {
+              $ret[] = $ds->getStudent();
+           }
+
         }
         return $ret;
     }
