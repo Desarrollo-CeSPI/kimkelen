@@ -4872,6 +4872,10 @@
 		<source>Nationality other id</source>
 		<target>Otra nacionalidad</target>
 	    </trans-unit>
+            <trans-unit>
+                <source>Previous certificate</source>
+                <target>Certificado de:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

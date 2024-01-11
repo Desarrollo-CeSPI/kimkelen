@@ -22,10 +22,13 @@
 
     <div class="header-text">
         <div class="footer-text">
-        <?php if($student->getOriginSchool()):?>
-          Certificado de Educación Primaria expedido por: <?php echo BaseCustomOptionsHolder::getInstance('SectorOriginSchoolType')->getStringFor($student->getOriginSchool()->getSector()) ?>  
-          <?php echo ($student->getOriginSchool()->getSector() != SectorOriginSchoolType::SECTOR_UNLP)? ' - Provincia de ' .  $student->getOriginSchool()->getCity()->getDepartment()->getState() : ''?>
-        <?php endif ?> 
+        <?php if (isset($form)):?>
+
+        <?php echo $form['previous_certificate']->renderRow();  ?>
+       <?php else: ?>
+          Certificado de: <?php echo (isset($analytic) && $analytic->getPreviousCertificate()) ? $analytic->getPreviousCertificate() : '' ?>
+       <?php endif; ?>
+
         </div>
         <?php if ($analytical->has_completed_career() || $student->canPrintGraduateCertificate()): ?>
             <div class="footer-text">Completó sus estudios secundarios. <?php echo $analytical->get_career_student()->getCareer()->getCareerName(); ?>. </div>

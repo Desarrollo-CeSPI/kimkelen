@@ -442,6 +442,7 @@ class studentActions extends autoStudentActions
     $this->analytic->setCertificateNumber($request->getParameter('certificate'));
     $this->analytic->setDescription($this->career_student->getStudent()->getPerson());
     $this->analytic->setObservations($request->getParameter('observations'));
+    $this->analytic->setPreviousCertificate($request->getParameter('previous_certificate'));
     $this->analytic->save();
     
     $this->dipregep_number = $request->getParameter('dipregep');

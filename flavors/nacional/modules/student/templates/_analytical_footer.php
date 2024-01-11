@@ -20,7 +20,13 @@
 
 
 <div id="analytical_footer" class="misma_pagina">
-    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical)) ?>
+    <?php if (isset($form)):?>
+
+    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical ,'form' => $form)) ?>
+    <?php else:?>
+    <?php include_partial('analytical_footer_text', array('student' => $career_student->getStudent(), 'career_student' => $career_student, 'analytical' => $analytical, , 'analytic' => $analytic))) ?>
+    <?php endif;?>
+
     <div class="analytical-form">
         <?php if ($analytical->is_approved_subject()):?>
         <span id="subject_observations">: Taller de Sexualidad: 10 encuentros de 60 minutos-materia sin calificaciones-</span>
@@ -28,7 +34,10 @@
         <?php if($career_student->getCourseInYear(2020)):?>
          Año 2020, valoraciones de acuerdo a R.N°190/2020. 
         <?php endif;?>
-   <?php echo $form ?>
+        <?php if (isset($form)):?>
+              <?php echo $form['observations']->renderRow();  ?>
+        <?php endif;?>
+
     </div>       
     <div class="analytical-observations">
        

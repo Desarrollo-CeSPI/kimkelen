@@ -52,9 +52,19 @@
     window.addEventListener('load', function() {
         document.getElementById("analytic_observations" ).addEventListener('change', function() {
             observations = document.getElementById("analytic_observations" ).value;
+            previous_c = document.getElementById("analytic_previous_certificate" ).value;
             url = document.getElementById('link_print').href;
             if(observations.trim() != ''){
-                 document.getElementById('link_print').href= url + '&observations=' + observations;
+                 document.getElementById('link_print').href= url + '&observations=' + observations + '&previous_certificate=' + previous_c;
+            }      
+        });
+
+        document.getElementById("analytic_previous_certificate").addEventListener('change', function() {
+            observations = document.getElementById("analytic_observations" ).value;
+            previous_c = document.getElementById("analytic_previous_certificate" ).value;
+            url = document.getElementById('link_print').href;
+            if(previous_c.trim() != ''){
+                 document.getElementById('link_print').href= url + '&observations=' + observations + '&previous_certificate=' + previous_c;
             }      
         });
       })
